@@ -597,7 +597,59 @@
 
 
 
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
+<script type="text/javascript">
+    debugger;
+    firebase.initializeApp({
+        apiKey: "AIzaSyCVD6hUSK4zMfG43bMjyjwTFmTz5PJc_qk",
+        authDomain: "society-management-32053.firebaseapp.com",
+        projectId: "society-management-32053",
+        storageBucket: "society-management-32053.appspot.com",
+        messagingSenderId: "303424747645",
+        appId: "1:303424747645:web:a10ad8eceb38c4fe10d914",
+        measurementId: "G-MCRPPNVW38"
+    });
 
+    const messaging = firebase.messaging();
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                .then((registration) => {
+                    console.log('✅ SW registered:', registration);
+
+                    messaging.useServiceWorker(registration); // only works with compat SDK
+
+                    return messaging.getToken({
+                        vapidKey: "BKJDUyImlBxO4O_UewJxcN8Ug0EdqxsmxbwQ8nn2bscwwWBUGPGsuMdlU9IKvuTe60iz59iJC0wBMfGuXRkqj2E",
+                        serviceWorkerRegistration: registration
+                    });
+                })
+                .then(token => {
+                    console.log("✅ Token:", token);
+                    sendTokenToServer(token);
+                })
+                .catch(error => {
+                    console.error("❌ Error getting token:", error);
+                });
+        } else {
+            console.warn("❌ Notification permission denied");
+        }
+    });
+
+    function sendTokenToServer(token) {
+        fetch("login1.aspx", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ token: token })
+        })
+            .then(response => response.json())
+            .then(data => console.log("✅ Token sent to server:", data))
+            .catch(error => console.error("❌ Error sending token:", error));
+    }
+    </script>
 
 </asp:Content>
 
