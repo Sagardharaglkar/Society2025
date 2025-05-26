@@ -1,0 +1,781 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="Society.Site_Mobile" %>
+<%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <%--<meta http-equiv="X-UA-Compatible" content="IE=9" />--%>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <title>Society</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <style>
+        .logout-button {
+            display: inline-block;
+            width: 200px;
+            background-color: transparent;
+            color: white !important;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease-in-out, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropDown {
+            margin-right: 23px;
+        }
+
+        .logout-button:hover {
+            background-color: transparent;
+            transform: scale(1.05);
+        }
+
+        .logout-button:active {
+            background-color: transparent;
+            transform: scale(0.98);
+        }
+
+        .main-Content {
+            height: 100vh;
+        }
+
+        .auto-scroll {
+            height: 100vh;
+            overflow: auto;
+            overflow-x: hidden;
+        }
+
+            .auto-scroll::-webkit-scrollbar {
+                display: none;
+            }
+    </style>
+
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+    <form runat="server" autocomplete="off" class="needs-validation" novalidate>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <!-- Theame-->
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <asp:Panel ID="Panel1" Visible="false" runat="server">
+            <div class="auto-scroll">
+                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+
+                    <!-- Sidebar - Brand -->
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-laugh-wink"></i>
+                        </div>
+                        <div class="sidebar-brand-text mx-3">
+                            <%----------Here welcome text ----------%>
+                        </div>
+                    </a>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+
+                    <!-- Nav Item - Dashboard -->
+                    <%--<li class="nav-item active">
+                <a class="nav-link" href="admin_dashboard.aspx">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Admin Dashboard</span></a>
+                    <a class="collapse-item" href="society_charges.aspx">Society Charges</a>
+                   <a class="collapse-item" href="society_charges_monthwise.aspx">Society Charges Monthwise</a>
+            </li>--%>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSociety"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Admin Dashboard</span>
+                        </a>
+
+                        <div id="collapseSociety" class="collapse" aria-labelledby="headingSociety" data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <a class="collapse-item" href="Admin_dashboard.aspx">Admin Dashboard</a>
+                                <a class="collapse-item" href="society_charges.aspx">Society Charges</a>
+                                <a class="collapse-item" href="society_charges_monthwise.aspx">Society Charges Monthwise</a>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="dashboard.aspx">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span></a>
+                    </li>
+
+
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Interface
+                    </div>
+
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Masters</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Masters:</h6>
+                                <a class="collapse-item" href="society_search.aspx">Society Master</a>
+                                <a class="collapse-item" href="society_member_search.aspx">Society Member Master</a>
+                                <a class="collapse-item" href="building_search.aspx">Buildings</a>
+                                <a class="collapse-item" href="wing_search.aspx">Wing Master</a>
+                                <a class="collapse-item" href="flat_search.aspx">Flat master</a>
+                                <a class="collapse-item" href="owner_search.aspx">Owner Master</a>
+                                <a class="collapse-item" href="rental_search.aspx">Rental Master</a>
+                                <a class="collapse-item" href="visitor_search.aspx">Visitor Master</a>
+                                <a class="collapse-item" href="Facility_master.aspx">facilities</a>
+                                <a class="collapse-item" href="Staff_Master.aspx">Staff Master</a>
+                                <a class="collapse-item" href="staff_role.aspx">Staff Role</a>
+                                <a class="collapse-item" href="maintenance_search.aspx">Maintenance master</a>
+                                <a class="collapse-item" href="event_search.aspx">Event Master</a>
+                                <a class="collapse-item" href="notice_search.aspx">Notice Master</a>
+                                <a class="collapse-item" href="meeting_search.aspx">Meeting Master</a>
+                                <a class="collapse-item" href="usefull_contact.aspx">Contact Master</a>
+                                <a class="collapse-item" href="servent_search.aspx">Servent Master</a>
+                                <a class="collapse-item" href="park_place_search.aspx">Parking Master</a>
+                                <a class="collapse-item" href="doc_search.aspx">Document Master</a>
+                                <a class="collapse-item" href="Terms_and_Condition.aspx">Terms and Condition</a>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Utilities Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                            aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Service Mangement</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                            data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Services:</h6>
+                                <a class="collapse-item" href="parking_allotment_search.aspx">Parking Allotment</a>
+                                <a class="collapse-item" href="facility_booking.aspx">Facility Booking</a>
+
+                                <a class="collapse-item" href="contact_master.aspx">Usefull Contact</a>
+                                <a class="collapse-item" href="meeting_details.aspx">Meeting Details</a>
+                                <a class="collapse-item" href="car_polling.aspx">Car Polling</a>
+                                <a class="collapse-item" href="loan.aspx">Loan & Lien</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Addons
+                    </div>
+
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                            aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Society Management</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Society Management:</h6>
+                                <a class="collapse-item" href="caretaker.aspx">Careteker</a>
+                                <a class="collapse-item" href="upload_doc_search.aspx">Documents Upload </a>
+                                <%-- <a class="collapse-item" href="#">Rules & Regulations</a>--%>
+                                <a class="collapse-item" href="inventory_search.aspx">Inventory</a>
+                                <a class="collapse-item" href="vendor_search.aspx">Vendor</a>
+                                <a class="collapse-item" href="ledger_form.aspx">Ledger</a>
+                                <a class="collapse-item" href="shop_maintenance.aspx">Shop Maintenance</a>
+                                <a class="collapse-item" href="pdc_reminder_search.aspx">PDC Reminder</a>
+                                <a class="collapse-item" href="pdc_clearing.aspx">PDC Clearing</a>
+                                <a class="collapse-item" href="receipt_search_form.aspx">Receipt</a>
+                                <a class="collapse-item" href="society_expense.aspx">Society Expense</a>
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Other Pages:</h6>
+                                <%--<a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>--%>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Charts -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesuggestion"
+                            aria-expanded="true" aria-controls="collapsesuggestion">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Requests/Suggestion</span></a>
+                        <div id="collapsesuggestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Request/Suggestions:</h6>
+                                <a class="collapse-item" href="suggestion_request.aspx">Suggestion</a>
+
+
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsereport"
+                            aria-expanded="true" aria-controls="collapsereport">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Report</span></a>
+                        <div id="collapsereport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Reports:</h6>
+                                <a class="collapse-item" href="printvisitor.aspx">Visitor</a>
+                                <a class="collapse-item" href="printcontact.aspx">Usefull Contact</a>
+                                <a class="collapse-item" href="printshop.aspx">Shop Maintanance</a>
+                                <a class="collapse-item" href="printrental.aspx">Rental</a>
+                                <a class="collapse-item" href="printowner.aspx">Owner</a>
+                                <a class="collapse-item" href="printledger_details.aspx">Ledger</a>
+                                <a class="collapse-item" href="maintenance_search.aspx">Maintanance</a>
+                                <a class="collapse-item" href="receipt_search_form.aspx">Maintanance Receipt</a>
+                                <a class="collapse-item" href="print_expense.aspx">Vendor Bill</a>
+
+                                <a class="collapse-item" href="cashbook.aspx">Cashbook</a>
+                                <a class="collapse-item" href="ownerwise_maintenance.aspx">Ownerwise Maintenance</a>
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </li>
+
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesettings"
+                            aria-expanded="true" aria-controls="collapsesettings">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Settings</span></a>
+                        <div id="collapsesettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Accounts Settings:</h6>
+                                <a class="collapse-item" href="account_setting.aspx">Accounts Settings</a>
+
+
+
+                            </div>
+                        </div>
+
+                    </li>
+                    <hr class="sidebar-divider">
+                    <li>
+                        <div class="text-center d-none d-md-inline">
+                            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <asp:LinkButton ID="logout" runat="server" CssClass="logout-button"
+                            OnClientClick="return confirm('Are you sure you want to log out?');"
+                            OnClick="logout_Click">
+         &nbsp;&nbsp;<i class="fas fa-fw fa-table"></i>Log-Out
+    </asp:LinkButton>
+                    </li>
+
+
+                </ul>
+        </div>
+            </asp:Panel>
+
+        <!-- End of Sidebar -->
+        <!--    =========================================-->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="main-Content d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content" style="background:#EBF0F9;">
+
+                <!-- Topbar -->
+<%--                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+
+                    <marquee direction="left">
+                        <strong>
+                 <asp:Label ID="name_society" runat="server" Font-Size="XX-Large" ForeColor="#0066FF" Font-Bold="True" /></strong></marquee>
+
+
+
+
+                </nav>--%>
+                           
+
+                          <nav
+            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+          >
+            <!-- Sidebar Toggle (Topbar) -->
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Search -->
+                              <marquee direction="left">
+                                  <strong>
+                                      <asp:Label ID="name_society" runat="server" Font-Size="XX-Large" ForeColor="#0066FF" Font-Bold="True" /></strong></marquee>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                  aria-labelledby="searchDropdown"
+                >
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control bg-light border-0 small"
+                        placeholder="Search for..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+
+              <!-- Nav Item - Alerts -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="alertsDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-bell fa-fw"></i>
+                  <!-- Counter - Alerts -->
+                  <span class="badge badge-danger badge-counter">3+</span>
+                </a>
+                <!-- Dropdown - Alerts -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="alertsDropdown"
+                >
+                  <h6 class="dropdown-header">Alerts Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-primary">
+                        <i class="fas fa-file-alt text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">December 12, 2019</div>
+                      <span class="font-weight-bold"
+                        >A new monthly report is ready to download!</span
+                      >
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-success">
+                        <i class="fas fa-donate text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">December 7, 2019</div>
+                      $290.29 has been deposited into your account!
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-exclamation-triangle text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">December 2, 2019</div>
+                      Spending Alert: We've noticed unusually high spending for
+                      your account.
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Show All Alerts</a
+                  >
+                </div>
+              </li>
+
+              <!-- Nav Item - Messages -->
+              <li class="nav-item dropdown no-arrow mx-1">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="messagesDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-envelope fa-fw"></i>
+                  <!-- Counter - Messages -->
+                  <span class="badge badge-danger badge-counter">7</span>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div
+                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="messagesDropdown"
+                >
+                  <h6 class="dropdown-header">Message Center</h6>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="img/undraw_profile_1.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                      <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                      </div>
+                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="img/undraw_profile_2.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        I have the photos that you ordered last month, how would
+                        you like them sent to you?
+                      </div>
+                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="img/undraw_profile_3.svg"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                      </div>
+                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                      <img
+                        class="rounded-circle"
+                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="..."
+                      />
+                      <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                      <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they
+                        aren't good...
+                      </div>
+                      <div class="small text-gray-500">
+                        Chicken the Dog · 2w
+                      </div>
+                    </div>
+                  </a>
+                  <a
+                    class="dropdown-item text-center small text-gray-500"
+                    href="#"
+                    >Read More Messages</a
+                  >
+                </div>
+              </li>
+
+              <div class="topbar-divider d-none d-sm-block"></div>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                    ><asp:Label ID="txt_welcome" runat="server"></asp:Label></span
+                  >
+                  <img
+                    class="img-profile rounded-circle"
+                    src="img/undraw_profile.svg"
+                  />
+                </a>
+                <!-- Dropdown - User Information -->
+                <div
+                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown"
+                >
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                    </a>
+                  <a class="dropdown-item" href="account_setting.aspx">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                  </a>
+             <%--       <a class="dropdown-item" href="#">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                    </a>--%>
+                  <div class="dropdown-divider"></div>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item"
+                        OnClientClick="return confirm('Are you sure you want to log out?');"
+                        OnClick="logout_Click">
+     &nbsp;&nbsp;<i
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                    ></i>Log Out
+                    </asp:LinkButton>
+                </div>
+              </li>
+            </ul>
+          </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid" style="height: 90%;">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        <!-- Page Heading -->
+
+                    </asp:ContentPlaceHolder>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright ">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+        </div>
+
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+
+
+
+
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let collapsibleMenus = document.querySelectorAll(".collapse");
+                let menuItems = document.querySelectorAll(".collapse-item");
+                let dashboardLinks = document.querySelectorAll(".nav-link[href='dashboard.aspx'], .nav-link[href='admin_dashboard.aspx'], .nav-link[href='login1.aspx']"); // Includes Logout
+
+                // Restore last open menu
+                let lastOpenMenu = sessionStorage.getItem("lastOpenMenu");
+                if (lastOpenMenu) {
+                    let openMenu = document.getElementById(lastOpenMenu);
+                    if (openMenu) {
+                        openMenu.classList.add("show");
+                    }
+                }
+
+                // Restore last clicked menu item
+                let lastClickedItem = sessionStorage.getItem("lastClickedItem");
+                if (lastClickedItem) {
+                    menuItems.forEach(item => {
+                        item.classList.remove("active"); // Remove active class from all
+                        if (item.getAttribute("href") === lastClickedItem) {
+                            item.classList.add("active"); // Set active class on last clicked item
+                        }
+                    });
+                }
+
+                // Handle menu open/close behavior
+                collapsibleMenus.forEach(menu => {
+                    let id = menu.id;
+
+                    menu.addEventListener("shown.bs.collapse", function () {
+                        sessionStorage.setItem("lastOpenMenu", id);
+
+                        // Close all other menus
+                        collapsibleMenus.forEach(otherMenu => {
+                            if (otherMenu.id !== id) {
+                                otherMenu.classList.remove("show");
+                                sessionStorage.removeItem(otherMenu.id);
+                            }
+                        });
+                    });
+
+                    menu.addEventListener("hidden.bs.collapse", function () {
+                        if (sessionStorage.getItem("lastOpenMenu") === id) {
+                            sessionStorage.removeItem("lastOpenMenu");
+                        }
+                    });
+                });
+
+                // Handle menu item clicks and allow navigation
+                menuItems.forEach(item => {
+                    item.addEventListener("click", function (event) {
+                        let clickedHref = this.getAttribute("href");
+
+                        // Save last clicked menu item
+                        sessionStorage.setItem("lastClickedItem", clickedHref);
+
+                        let parentCollapse = this.closest(".collapse");
+                        if (parentCollapse) {
+                            sessionStorage.setItem("lastOpenMenu", parentCollapse.id);
+                        }
+
+                        // Highlight the active menu item
+                        menuItems.forEach(i => i.classList.remove("active"));
+                        this.classList.add("active");
+
+                        // **Allow page navigation**
+                        if (clickedHref !== "#" && clickedHref !== "") {
+                            window.location.href = clickedHref;
+                        }
+                    });
+                });
+
+                // **Handle Admin Dashboard & Logout Click: Collapse Master Tab**
+                if (dashboardLinks.length > 0) {
+                    dashboardLinks.forEach(link => {
+                        link.addEventListener("click", function () {
+                            sessionStorage.removeItem("lastOpenMenu"); // Clear stored menu
+                        });
+                    });
+                }
+            });
+        </script>
+
+
+
+   </form>
+</body>
+</html>
+

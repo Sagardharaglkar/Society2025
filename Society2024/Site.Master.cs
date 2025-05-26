@@ -1,0 +1,116 @@
+﻿using BusinessLogic.MasterBL;
+using FirebaseAdmin.Messaging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Utility.DataClass;
+
+namespace Society
+{
+    public partial class SiteMaster : MasterPage
+    {
+        BL_User_Login BL_Login = new BL_User_Login();
+        Login_Details details = new Login_Details();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+
+
+
+            if (Session["Name"] != null)
+            {
+                Panel1.Visible = true;
+                txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
+                name_society.Text = "Welcome To " + Session["society_name"].ToString();
+            }
+
+            if (!IsPostBack)
+            {
+                get_notificatoin();
+            }
+        }
+
+        protected void get_notificatoin()
+        {
+            //Session["UserId"] = result.UserLoginId;
+            details.Sql_Operation = "Notification";
+            details.Society_Id = Session["society_id"].ToString();
+            details.UserLoginId =int.Parse( Session["UserId"].ToString());
+
+            var dt =  BL_Login.get_notification(details);
+            notifCount.Text = (dt.Rows.Count > 99)? "99+" : dt.Rows.Count.ToString();
+            badgePanel.Visible = dt.Rows.Count != 0;
+            noNotif.Visible = dt.Rows.Count == 0;
+            Notification_grid.DataSource = dt;
+            Notification_grid.DataBind();
+
+        }
+        //protected void Notification_grid_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //    int notify = Convert.ToInt32(Notification_grid.SelectedDataKey.Value);
+
+
+        //    details.NoticeId = notify;
+
+        //    details.Society_Id = Session["society_id"].ToString();
+
+        //    details.Sql_Operation = "UpdateStatus"; 
+
+        //    BL_Login.UpdateNotifyStatus(details);
+
+
+        //    get_notificatoin();
+        //}
+
+        protected void Update_Notify_Status(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Redirect")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                 details.NoticeId = id;
+
+                details.Society_Id = Session["society_id"].ToString();
+
+                details.Sql_Operation = "UpdateStatus";
+
+                BL_Login.UpdateNotifyStatus(details);
+
+                get_notificatoin();
+
+                Response.Redirect("support_ticket.aspx");
+            }
+        }
+
+
+
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            //Session.Clear();
+            //Session.Abandon();
+            //Response.Redirect(Request.RawUrl);
+
+            //Response.Redirect("login1.aspx");
+
+
+
+            // Clear session
+            Session.Clear();
+            Session.Abandon();
+
+            // Prevent caching so Back button won't show the previous page
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+
+            // Redirect to login
+            Response.Redirect("login1.aspx", true);
+
+        }
+    }
+}
