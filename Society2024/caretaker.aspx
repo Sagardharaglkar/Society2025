@@ -48,9 +48,7 @@
 
 
 
-<asp:HiddenField ID="caretaker_id" runat="Server"></asp:HiddenField>
-     <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-     <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
+
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -64,10 +62,12 @@
                         </tr>
                     </table>
             
-            <asp:HiddenField ID="HiddenField4" runat="server" />
-             <asp:HiddenField ID="HiddenField1" runat="server" />
+           
               <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
+                        <asp:HiddenField ID="caretaker_id" runat="Server"></asp:HiddenField>
+     <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+     <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
             <div class="form-group">
             <div class="row">
             <div class="col-12">
