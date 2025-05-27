@@ -33,7 +33,9 @@ namespace Society
             society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-
+                txt_poss_date.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
+                txt_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
+                txt_f_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 Owner_Gridbind();
                 fill_drop1();
             }
@@ -52,7 +54,7 @@ namespace Society
             String sql_query3 = "Select *  from types ";
             bL_Owner.fill_drop(ddl_type, sql_query3, "flat_type", "flat_type_id");
 
-            String sql_query4 = "Select * from doc_master where society_id='" + society_id.Value + "'";
+            String sql_query4 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
             bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
         }
         protected void edit_Command(object sender, CommandEventArgs e)
@@ -210,7 +212,9 @@ namespace Society
                     }
 
                     uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
-                }
+               
+            }
+               
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
             }
 
@@ -231,8 +235,8 @@ namespace Society
                     }
 
                     uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (ddl_doc_type.SelectedItem.Text) + "\\" + FileUpload2.FileName);
-
-                }
+                
+            }
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
 
 
@@ -288,17 +292,14 @@ namespace Society
         }
         protected void OwnerGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure want to delete", "delete", buttons);
-            if (result == DialogResult.Yes)
-            {
+           
                 GridViewRow row = (GridViewRow)OwnerGrid.Rows[e.RowIndex];
                 System.Web.UI.WebControls.Label owner_id = (System.Web.UI.WebControls.Label)row.FindControl("owner_id");
                 owner.Sql_Operation = "Delete";
 
                 owner.owner_id = Convert.ToInt32(owner_id.Text);
                 bL_Owner.OwnerDelete(owner);
-            }
+           
             Owner_Gridbind();
         }
 
@@ -329,17 +330,7 @@ namespace Society
 
         }
 
-        protected void txt_pre_mob_TextChanged(object sender, EventArgs e)
-        {
-            //if (owner_id.Value != "")
-            //    owner.owner_id = Convert.ToInt32(owner_id.Value);
-            //owner.Sql_Operation = "cust_sel";
-            //owner.Pre_Mob = txt_pre_mob.Text;
-            //var result = bL_Owner.MobileTextchanged(owner);
-            ////ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
-            //Label16.Text = result.Sql_Result;
-        }
-
+      
       
 
         protected void ddl_type_SelectedIndexChanged(object sender, EventArgs e)
@@ -348,7 +339,7 @@ namespace Society
                 if (ddl_type.Text != "select")
                 {
 
-                    string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + ddl_build_wing.SelectedValue + "' and flat_type_id='" + ddl_type.SelectedValue +"'";
+                    string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + ddl_build_wing.SelectedValue + "' and flat_type_id='" + ddl_type.SelectedValue +"'";
                     bL_Owner.fill_drop(ddl_flat, sql1, "flat_type", "flat_id");
 
                 }

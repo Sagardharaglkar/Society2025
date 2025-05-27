@@ -27,12 +27,10 @@ namespace Society
                 Panel1.Visible = true;
                 txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
                 name_society.Text = "Welcome To " + Session["society_name"].ToString();
-            }
-
-            if (!IsPostBack)
-            {
                 get_notificatoin();
             }
+else
+                Response.Redirect("login1.aspx");
         }
 
         protected void get_notificatoin()

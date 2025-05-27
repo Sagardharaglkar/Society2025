@@ -32,7 +32,7 @@ namespace Society
             }
             society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
-           {
+            {
                fill_drop1();
                 Wing_GridBind();
             
@@ -42,7 +42,7 @@ namespace Society
 
         public void fill_drop1()
         {
-            String sql_query = "Select *  from building_master where society_id='" + society_id.Value + "'";
+            String sql_query = "Select *  from building_master where active_status=0 and society_id='" + society_id.Value + "'";
             bL_Wing.fill_drop(ddl_build_name, sql_query, "name", "build_id");
 
         }

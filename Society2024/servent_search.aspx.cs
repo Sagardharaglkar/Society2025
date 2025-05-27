@@ -35,10 +35,7 @@ namespace Society
                 Response.Redirect("login1.aspx");
             }
             society_id.Value = Session["society_id"].ToString();
-            if (Session["name"] == null)
-            {
-                Response.Redirect("login1.aspx");
-            }
+           
             if (!IsPostBack)
             {
                 ToggleTextboxes();

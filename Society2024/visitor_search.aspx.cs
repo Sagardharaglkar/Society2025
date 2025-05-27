@@ -123,16 +123,14 @@ namespace Society
 
                 foreach (HttpPostedFile file_name in FileUpload1.PostedFiles)
                 {
-                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath(file_name.FileName)));
+                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") +  file_name.FileName));
+
 
                 }
 
-                path = System.IO.Path.Combine(Server.MapPath(FileUpload1.FileName));
-                if (File.Exists(path))
-                {
-                    File.Move(path, "C:\\Users\\Admin\\Desktop\\CHS_APP\\" + FileUpload1.FileName);
-                    path = "C:\\Users\\Admin\\Desktop\\CHS_APP\\" + FileUpload1.FileName;
-                }
+                path = System.IO.Path.Combine(Server.MapPath("~/Documents") + FileUpload1.FileName);
+
+
             }
 
 

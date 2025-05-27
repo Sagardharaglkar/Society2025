@@ -246,8 +246,7 @@ namespace Society
                     file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + file_name.FileName));
                     listofuploadedfiles.Text += file_name.FileName + "<br/>";
                 }
-
-                //Photopath = System.IO.Path.Combine(Server.MapPath("~/Documents"));
+               
                 uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
             }
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
@@ -268,9 +267,7 @@ namespace Society
                     listofuploadedfiles1.Text += file_name.FileName + "<br/>";
 
                 }
-
-                //IDpath = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (ddl_doc_type.SelectedItem.Text) + "\\" + FileUpload2.FileName);
-                uploadidpath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (ddl_doc_type.SelectedItem.Text) + "\\" + FileUpload2.FileName);
+                       uploadidpath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (ddl_doc_type.SelectedItem.Text) + "\\" + FileUpload2.FileName);
 
             }
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);

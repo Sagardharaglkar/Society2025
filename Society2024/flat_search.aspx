@@ -43,10 +43,11 @@
                             </th>
                         </tr>
                     </table>
-                <asp:HiddenField ID="flat_id" runat="server" />
-                <asp:HiddenField ID="society_id" runat="server" />
+               
                   <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
+                         <asp:HiddenField ID="flat_id" runat="server" />
+                <asp:HiddenField ID="society_id" runat="server" />
                 <div class="form-group">
                     <div class="row ">
                        <div class="col-12">
@@ -248,6 +249,9 @@
                                         </div>
 
                                     </ContentTemplate>
+                                    <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+                                            </Triggers>
                                 </asp:UpdatePanel>
 
                             </div>

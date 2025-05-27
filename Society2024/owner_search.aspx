@@ -36,6 +36,10 @@
             }
 
         }
+        $('#edit_model').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        })
+
         function checkLength(el) {
 
             if (el.value.length != 10) {
@@ -46,6 +50,17 @@
             }
         }
     </script>
+    <style>
+        .overflow-div {
+            width: 200px;
+            height: 25px;
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -92,7 +107,7 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="OwnerGrid" runat="server" AllowPaging="true" PageSize="50" OnPageIndexChanging="OwnerGrid_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="OwnerGrid_RowUpdating" OnSorting="OwnerGrid_Sorting" OnRowDeleting="OwnerGrid_RowDeleting" >
+                                <asp:GridView ID="OwnerGrid" runat="server" AllowPaging="true" PageSize="15" OnPageIndexChanging="OwnerGrid_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="OwnerGrid_RowUpdating" OnSorting="OwnerGrid_Sorting" OnRowDeleting="OwnerGrid_RowDeleting" >
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
                                         <asp:TemplateField HeaderText="No" ItemStyle-Width="50">
@@ -162,62 +177,7 @@
                             <div class="modal-header">
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Owner Details</strong></h4>
                             </div>
-                            <%-- <directedgraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
-                            <nodes>
-                                <node id="(@1 Namespace=Society Type=owner_search Member=txt_owner_rel)" category="CodeSchema_Field" codeschemaproperty_isprotected="True" commonlabel="txt_owner_rel" icon="Microsoft.VisualStudio.Field.Protected" isdragsource="True" label="txt_owner_rel : TextBox" sourcelocation="(Assembly=file:///C:/Users/Admin/Desktop/Society_5_jan/Society/owner_search.aspx.designer.cs StartLineNumber=797 StartCharacterOffset=60 EndLineNumber=797 EndCharacterOffset=73)">
-                                </node>
-                                <node id="(@1 Namespace=Society Type=owner_search)" visibility="Hidden">
-                                </node>
-                            </nodes>
-                            <links>
-                                <link category="Contains" source="(@1 Namespace=Society Type=owner_search)" target="(@1 Namespace=Society Type=owner_search Member=txt_owner_rel)">
-                                </link>
-                            </links>
-                            <categories>
-                                <category id="CodeSchema_Field" basedon="CodeSchema_Member" icon="CodeSchema_Field" label="Field">
-                                </category>
-                                <category id="CodeSchema_Member" icon="CodeSchema_Field" label="Member">
-                                </category>
-                                <category id="Contains" description="Whether the source of the link contains the target object" iscontainment="True" label="Contains">
-                                </category>
-                            </categories>
-                            <properties>
-                                <property id="CodeSchemaProperty_IsProtected" datatype="System.Boolean" description="Flag to indicate the scope is Protected" label="Is Protected">
-                                </property>
-                                <property id="CommonLabel" datatype="System.String">
-                                </property>
-                                <property id="Icon" datatype="System.String" label="Icon">
-                                </property>
-                                <property id="IsContainment" datatype="System.Boolean">
-                                </property>
-                                <property id="IsDragSource" datatype="System.Boolean" description="IsDragSource" label="IsDragSource">
-                                </property>
-                                <property id="Label" datatype="System.String" description="Displayable label of an Annotatable object" label="Label">
-                                </property>
-                                <property id="SourceLocation" datatype="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" label="Start Line Number">
-                                </property>
-                                <property id="Visibility" datatype="System.Windows.Visibility" description="Defines whether a node in the graph is visible or not" label="Visibility">
-                                </property>
-                            </properties>
-                            <qualifiednames>
-                                <name id="Assembly" label="Assembly" valuetype="Uri">
-                                </name>
-                                <name id="Member" label="Member" valuetype="System.Object">
-                                </name>
-                                <name id="Namespace" label="Namespace" valuetype="System.String">
-                                </name>
-                                <name id="Type" label="Type" valuetype="System.Object">
-                                </name>
-                            </qualifiednames>
-                            <identifieraliases>
-                                <alias n="1" uri="Assembly=$(4d31b533-4e00-48b4-850b-26ecebdeeafe.OutputPathUri)">
-                                </alias>
-                            </identifieraliases>
-                            <paths>
-                                <path id="4d31b533-4e00-48b4-850b-26ecebdeeafe.OutputPathUri" value="file:///C:/Users/Admin/Desktop/Society_5_jan/Society/bin/Society.dll">
-                                </path>
-                            </paths>
-                        </directedgraph>--%>
+              
                             <div class="modal-body" id="invoice_data">
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
@@ -315,7 +275,7 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_pre_mob" runat="server" MaxLength="10" Height="32px" onkeypress="return digit(event);" onblur="checkLength(this)" Width="200px" placeholder="Enter Mobile No." OnTextChanged="txt_pre_mob_TextChanged" AutoPostBack="true" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pre_mob" runat="server" MaxLength="10" Height="32px" onkeypress="return digit(event);" onblur="checkLength(this)" Width="200px" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
                                                     <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
 
                                                 </div>
@@ -357,8 +317,7 @@
                                         </div>
 
 
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                                  
 
                                 
 
@@ -383,12 +342,13 @@
                                             <asp:CompareValidator ControlToValidate="ddl_doc_type" ID="CompareValidator5" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select ID Proof" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                         </div>
                                         <div class="col-sm-3">
-                                            <asp:FileUpload ID="FileUpload2" runat="server" />
+                                            <asp:FileUpload ID="FileUpload2"  runat="server" />
                                         </div>
 
                                         <div class="col-sm-2">
                                             <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
-                                            <asp:Label ID="listofuploadedfiles1" runat="server" />
+                                            <div class="overflow-div">
+                                            <asp:Label ID="listofuploadedfiles1" runat="server" /> </div>
                                             <asp:Label ID="uploadidproof" runat="server" Visible="false" />
                                        </div>
                                       </div>
@@ -402,11 +362,11 @@
                                             <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                             <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                         </div>
-                                        <div class="col-sm-3">
-                                             <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" /> <br /><br />
+                                        <div class="col-sm-6">
+                                             <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" /> 
                                              <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
-                                       
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
+                                        <div class="overflow-div">
+                                            <asp:Label ID="listofuploadedfiles" runat="server" /> </div>
                                             <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
                                         </div>
                                     </div>
@@ -462,8 +422,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr />
-
+                                
 
 
                                 <div class="box-header">
@@ -562,21 +521,29 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                          </ContentTemplate>
+                                      <Triggers>
+        <asp:PostBackTrigger ControlID="btn_photo_upload" />
+                                          <asp:PostBackTrigger ControlID="btnotice_id_upload" />
+                                          <asp:PostBackTrigger ControlID="add" />
+    </Triggers>
+                                </asp:UpdatePanel>
+                                </div>
+                         
                                 <div class="modal-footer">
                                     <div class="form-group">
                                         <div class="row">
                                             <center>
                                                 <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                                 <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" data-bs-dismiss="modal" UseSubmitBehavior="False" />
                                             </center>
                                             <br />
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>
+                      
                         </div>
 
                     </div>
@@ -584,13 +551,5 @@
             </div>
         </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+   
 </asp:Content>

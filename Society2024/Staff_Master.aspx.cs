@@ -35,7 +35,7 @@ namespace Society2024
 
         public void fill_drop1()
         {
-            String sql_query = "Select *  from staff_role where society_id='" + society_id.Value + "'";
+            String sql_query = "Select *  from staff_role where active_status=0 and society_id='" + society_id.Value + "'";
             bL_Staff.fill_drop(ddl_role, sql_query, "role", "role_id");
 
         }
@@ -53,7 +53,7 @@ namespace Society2024
         protected void btn_save_Click(object sender, EventArgs e)
         {
             runproc_save("Update");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         public void runproc_save(string operation)

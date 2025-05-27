@@ -152,8 +152,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Servent</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
-
+                               
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
                                     </div>
@@ -167,7 +166,7 @@
                                                         <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_p_name" Style="text-transform: capitalize;" runat="server" placeholder="Enter person's Name" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_p_name" Style="text-transform: capitalize;" runat="server" placeholder="Enter Name" required></asp:TextBox>
                                                     </div>
 
                                                     <div class="col-sm-3">
@@ -197,7 +196,7 @@
                                                     <div class="col-sm-3">
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_org_addr2" runat="server" Style="text-transform: capitalize;" MaxLength="250" placeholder="Enter Address" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_org_addr2" runat="server" Style="text-transform: capitalize;" MaxLength="250" placeholder="Enter Address" ></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,10 +206,10 @@
                                                     <div class="col-sm-3">
                                                         <asp:Label ID="Label3" runat="server" Text="Alternate Contact No"></asp:Label>
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                       
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_mobile_no2" runat="server" MaxLength="10" placeholder="Enter Alternate Contact No" required onblur="checkLength(this)" AutoPostBack="True" onkeypress="return digit(event);"></asp:TextBox><br />
+                                                        <asp:TextBox ID="txt_mobile_no2" runat="server" MaxLength="10" placeholder="Enter Alternate Contact No"  onblur="checkLength(this)" AutoPostBack="True" onkeypress="return digit(event);"></asp:TextBox><br />
 
                                                     </div>
                                                     <div class="col-sm-3">
@@ -311,7 +310,7 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
 
-                                </form>
+                               
                             </div>
 
                             <div class="modal-footer">

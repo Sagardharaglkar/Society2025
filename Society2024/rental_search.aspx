@@ -33,16 +33,17 @@
             }
         }  </script>
 
-    <%-- <div class="container">
-        <div class="card card-primary">
-            <div class="card-body" style="background-color: lemonchiffon">
-                <div class="row justify-content-center align-items-center text-center text-white bg-dark">
-                    <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-10">
-
-                        <br />
-                        <br />
-                        <div class="container" style="box-shadow: 2px 1px 35px 6px #000000; box-shadow: 2px 1px 35px 6px #000000;">
-                            <br />--%>
+   <style>
+       .overflow-div {
+            width: 200px;
+            height: 25px;
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+   </style>
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
@@ -314,63 +315,6 @@
                             </asp:UpdatePanel>
 
 
-<%--                            <div class="form-group">
-
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="Label1" runat="server" Text="Photo Proof"></asp:Label>
-                                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                        <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="red" Text="*"></asp:Label>
-
-                                    </div>
-
-                                    <div class="col-sm-3">
-                                        <asp:FileUpload ID="FileUpload1" runat="server" />
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
-                                        <asp:Label ID="listofuploadedfiles" runat="server" />
-                                        <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
-                                    </div>
-
-                                   
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="Label3" runat="server" Text="ID Proof"></asp:Label>
-                                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                        <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:DropDownList ID="ddl_doc_type" Height="32px" Width="100px" runat="server">
-                                            <asp:ListItem>Aadhaar Card</asp:ListItem>
-                                            <asp:ListItem>Pan Card</asp:ListItem>
-                                            <asp:ListItem>Voting Card</asp:ListItem>
-                                            <asp:ListItem>Other</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:FileUpload ID="FileUpload2" runat="server" />
-                                    </div>
-
-                                    <div class="col-sm-3">
-                                        <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
-                                        <asp:Label ID="listofuploadedfiles1" runat="server" />
-                                        <asp:Label ID="uploadidpath" runat="server" Visible="false" />
-                                    </div>
-                                 
-                                </div>
-
-
-                            </div>
-                            <hr />--%>
-
-
-                            
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -392,7 +336,8 @@
 
                                         <div class="col-sm-2">
                                             <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
-                                            <asp:Label ID="listofuploadedfiles1" runat="server" />
+                                             <div class="overflow-div">
+                                            <asp:Label ID="listofuploadedfiles1" runat="server" /> </div>
                                             <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
                                        </div>
                                       </div>
@@ -406,11 +351,11 @@
                                             <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                             <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                         </div>
-                                        <div class="col-sm-3">
-                                             <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" /> <br /><br />
+                                        <div class="col-sm-6">
+                                             <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" /> 
                                              <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
-                                       
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
+                                       <div class="overflow-div">
+                                            <asp:Label ID="listofuploadedfiles" runat="server" /> </div>
                                              <asp:Label ID="uploadidpath" runat="server" Visible="false" />
                                         </div>
                                     </div>

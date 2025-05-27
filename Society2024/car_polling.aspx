@@ -18,7 +18,7 @@
                 Swal.showLoading()
             },
             willClose: () => {
-                window.location.href = 'car_pooling.aspx';
+                window.location.href = 'car_polling.aspx';
             }
         });
     }
@@ -155,7 +155,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Car Polling</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
+                               
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
@@ -272,7 +272,7 @@
 
 
 
-                                </form>
+                               
 
 
                                 <br />

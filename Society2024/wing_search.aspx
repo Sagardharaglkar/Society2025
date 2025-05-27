@@ -54,9 +54,9 @@
                         </tr>
                     </table>
             <asp:HiddenField ID="wing_id" runat="server" />
-            <asp:HiddenField ID="HiddenField4" runat="server" />
+           
             <asp:HiddenField ID="society_id" runat="server" />
-            <asp:UpdatePanel UpdateMode="Always" ID="wings" runat="server">
+            <asp:UpdatePanel UpdateMode="Conditional" ID="wings" runat="server">
                 <ContentTemplate>
 
             <div class="form-group">

@@ -128,7 +128,7 @@ namespace DataAccessLayer.MasterDA
             data_item.Add(st.create_array("operation", member.Sql_Operation));
             data_item.Add(st.create_array("user_id", member.UserId));
 
-            status = st.run_query(data_item, "Delete", "sp_UserLogin", ref sdr);
+            status = st.run_query(data_item, "Select", "sp_UserLogin", ref sdr);
             if (status == "Done")
             {
                 member.Sql_Result = status;

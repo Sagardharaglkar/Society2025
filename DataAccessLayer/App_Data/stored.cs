@@ -174,9 +174,8 @@ namespace Society
                         rowsAffected = SqlHelper.ExecuteNonQuery(con, CommandType.StoredProcedure, stored_proc, parameters.ToArray());
                         break;
                     case "Select":
-                    object  obj =Convert.ToInt32(SqlHelper.ExecuteScalar(con, CommandType.StoredProcedure, stored_proc, parameters.ToArray()));
-                        //       if(sdr.Read())
-                        //       {
+                    object  obj =SqlHelper.ExecuteScalar(con, CommandType.StoredProcedure, stored_proc, parameters.ToArray());
+
                         rowsAffected = 1;
                         sdr = Convert.ToInt32(obj);
                         //       }
