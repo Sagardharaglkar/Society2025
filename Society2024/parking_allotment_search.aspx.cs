@@ -156,7 +156,7 @@ namespace Society
             parking_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void btn_delete_Click(object sender, EventArgs e)
         {
@@ -208,6 +208,12 @@ namespace Society
             parking.Vehicle_No = txt_vehical_no.Text;
             var result = parking_Allotment.Vehicle_No_Textchanged(parking);
             Label8.Text = result.Sql_Result;
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Park_Allotment_GridBind();
         }
     }
 

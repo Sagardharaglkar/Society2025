@@ -50,6 +50,8 @@ namespace Society
             ViewState["dirState"] = dt.Tables[0];
             GridView1.DataBind();
 
+            Button1.Visible = GridView1.Rows.Count > 0;
+
         }
 
         public void save_change()

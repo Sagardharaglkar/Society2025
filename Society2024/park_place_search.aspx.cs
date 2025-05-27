@@ -183,7 +183,7 @@ namespace Society
             place_id.Value = id;
             runproc1("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
@@ -209,6 +209,12 @@ namespace Society
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Parking_Gridbind();
         }
     }
 }

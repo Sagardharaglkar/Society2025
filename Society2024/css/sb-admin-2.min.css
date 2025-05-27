@@ -1986,7 +1986,7 @@ pre {
     opacity: 1
 }
 
-.form-control::-ms-input-placeholder {
+.form-control:-ms-input-placeholder {
     color: #858796;
     opacity: 1
 }

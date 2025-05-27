@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notice_search.aspx.cs" Inherits="Society.notice_search" MasterPageFile="~/Site.Master" Async="true" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notice_search.aspx.cs" Inherits="Society.notice_search" MasterPageFile="~/Site.Master" Async="true" %>
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
