@@ -179,7 +179,7 @@ namespace Society2024
             facility_id.Value = id;
             runproc_facility("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         public void cleardata() 
@@ -233,6 +233,12 @@ namespace Society2024
         protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            facility_gridbind();
         }
     }
 }

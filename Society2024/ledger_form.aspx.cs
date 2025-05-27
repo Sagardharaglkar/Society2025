@@ -34,7 +34,7 @@ namespace Society
             led_id.Value = id;
             runproc("Select");          
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         public void Ledger_GridBind()
@@ -182,6 +182,12 @@ namespace Society
             else
                 txt_search.TextMode = TextBoxMode.SingleLine;
             txt_search.Text = "";
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Ledger_GridBind();
         }
     }    
 }

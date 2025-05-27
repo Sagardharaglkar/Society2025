@@ -20,7 +20,7 @@
                     Swal.showLoading()
                 },
                 willClose: () => {
-                    window.location.href = 'meeting_seaarch.aspx';
+                    window.location.href = 'meeting_search.aspx';
                 }
             });
         }
@@ -44,11 +44,12 @@
                             </th>
                         </tr>
                     </table>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+  <ContentTemplate>
                 <asp:HiddenField ID="meet_id" runat="server" />
                 <asp:HiddenField ID="meet_ex_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
-                  <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
+                  
                 <div class="form-group">
                       <div class="col-12">
                          <div class="d-flex align-items-center">
@@ -74,7 +75,7 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AllowPaging="true" PageSize="20" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+                                <asp:GridView ID="GridView1" runat="server" AllowPaging="true" PageSize="15" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
 
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
@@ -112,14 +113,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Delete" ItemStyle-Width="0">
                                             <ItemTemplate>
-                                                <%--<asp:ImageButton
-                                                    ID="imgDelete"
-                                                    ImageUrl="~/Images/delete_10781634.png"
-                                                    CommandName="Delete"
-                                                    runat="server"
-                                                    Height="25px"
-                                                    ToolTip="Delete this row"
-                                                    OnClientClick="return confirm('Are you sure you want to delete this row?');" />--%>
+                                               
                                                  <asp:LinkButton runat="server" ID="delete" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -190,16 +184,20 @@
 
                                                 </div>
                                             </div>
-                                        
-                    
-            <asp:TextBox ID="editor1" runat="server" TextMode="MultiLine" Width="100%" CssClass="ckeditor" Rows="10"></asp:TextBox>
-       
-               
-                                           
+
+
+                                            <asp:TextBox ID="editor1" runat="server" TextMode="MultiLine" Width="100%" CssClass="ckeditor" Rows="10"></asp:TextBox>
+
+
+
                                         </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        </Triggers>
                                     </asp:UpdatePanel>
 
-                       
+
+
                             </div>
 
                             <div class="modal-footer">

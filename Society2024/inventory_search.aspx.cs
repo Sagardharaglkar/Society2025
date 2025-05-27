@@ -149,7 +149,7 @@ namespace Society
             inventory_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -169,6 +169,11 @@ namespace Society
 
         }
 
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Inventory_Gridbind();
 
+        }
     }
 }

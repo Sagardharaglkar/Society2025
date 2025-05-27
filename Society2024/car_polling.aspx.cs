@@ -154,7 +154,7 @@ namespace Society
             car_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
@@ -232,6 +232,18 @@ namespace Society
             else
                 txt_search.TextMode = TextBoxMode.SingleLine;
             txt_search.Text = "";
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Car_Polling_GridBind();
+        }
+
+        protected void GridView1_PageIndexChanging1(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Car_Polling_GridBind();
         }
     }
 

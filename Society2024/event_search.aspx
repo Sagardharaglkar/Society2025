@@ -34,20 +34,20 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
-  <table width="100%">
-                        <tr>
-                            <th width="100%" class="">
-                                <h1 class=" tex0 font-weight-bold " style="color: #012970;">Events
-                                </h1>
-                            </th>
-                        </tr>
-                    </table>
-               
+                <table width="100%">
+                    <tr>
+                        <th width="100%" class="">
+                            <h1 class=" tex0 font-weight-bold " style="color: #012970;">Events
+                            </h1>
+                        </th>
+                    </tr>
+                </table>
+                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+     <ContentTemplate>
                 <asp:HiddenField ID="event_id" runat="server" />
                 <asp:HiddenField ID="visitor_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
+               
 
 
                         <div class="form-group">
@@ -64,7 +64,7 @@
                                   <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                       
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                        </asp:Panel>
+                              </asp:Panel>
                                         &nbsp;&nbsp;
                         
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
@@ -213,7 +213,11 @@
                                         </div>
 
                                     </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
                                 </asp:UpdatePanel>
+
                             </div>
 
                             <div class="modal-footer">

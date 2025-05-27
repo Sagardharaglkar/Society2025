@@ -569,7 +569,7 @@
                                             <center>
                                                 <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                                 <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close"  UseSubmitBehavior="False" />
                                             </center>
                                             <br />
                                         </div>
@@ -593,4 +593,11 @@
     <br />
     <br />
     <br />
+
+
+        <script>
+            $('#edit_model').on('hidden.bs.modal', function () {
+                $(this).find('form').trigger('reset');
+            })
+        </script>
 </asp:Content>

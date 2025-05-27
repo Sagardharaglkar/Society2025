@@ -169,8 +169,8 @@ namespace Society
             runproc_notice("Select");
             list_fill();
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
-            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
+
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -248,7 +248,11 @@ namespace Society
 
         }
 
-     
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Notice_Gridbind();
+        }
     }
 }
 

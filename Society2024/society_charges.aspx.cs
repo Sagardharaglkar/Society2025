@@ -15,6 +15,7 @@ using Page = System.Web.UI.Page;
 using BusinessLogic.MasterBL;
 using DBCode.DataClass.Master_Dataclass;
 using System.Windows.Forms;
+using DBCode.DataClass;
 //using System.IdentityModel.Metadata;
 
 namespace Society
@@ -178,7 +179,7 @@ namespace Society
             charge_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
 
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
 
@@ -200,7 +201,7 @@ namespace Society
             if (Label4.Text == "")
             {
                 runproc_save("Update");
-                Response.Redirect("society_charges.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);

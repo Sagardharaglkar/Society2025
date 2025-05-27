@@ -57,18 +57,6 @@ namespace Society
             GridView1.DataBind();
         }
 
-        //protected void MoM_Gridbind()
-        //{
-        //    DataSet dt = new DataSet();
-        //    meeting.Sql_Operation = "grid_fill";
-        //    //meeting.Meet_Ex_Id = Convert.ToInt32(meet_ex_id.Value);
-        //    meeting.Society_Id = society_id.Value;
-        //    meeting.Details = txt_details.Text;
-        //    dt = bL_Meeting.MoM_Gridbind(meeting);
-        //    GridView2.DataSource = dt.Tables[0];
-        //    GridView2.DataBind();
-        //}
-
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
@@ -222,7 +210,7 @@ namespace Society
             Meeting_Gridbind();
            
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 

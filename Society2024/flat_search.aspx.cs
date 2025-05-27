@@ -146,7 +146,7 @@ namespace Society
             flat_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void btn_save_Click(object sender, EventArgs e)
         {
