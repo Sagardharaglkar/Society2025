@@ -144,7 +144,7 @@ namespace Society
             flat_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
         }
         protected void btn_save_Click(object sender, EventArgs e)
         {

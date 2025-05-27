@@ -400,7 +400,7 @@
 
 
                     <nav
-                        class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="position:sticky; top:0px; z-index:10; margin-top:3px;">
                         <!-- Sidebar Toggle (Topbar) -->
                         <button
                             id="sidebarToggleTop"
@@ -708,5 +708,46 @@
                 })
         })()
     </script>
+
+        <script>
+            $('#edit_model').on('hidden.bs.modal', function () {
+                console.log("done")
+                $(this).find('form').trigger('reset');
+            })
+        </script>
+
+    <script>
+        $('#edit_model').on('hidden.bs.modal', function () {
+            // Clear all input, textarea, and select fields inside the modal
+            $(this).find('input, textarea, select').each(function () {
+                if (this.type === 'checkbox' || this.type === 'radio') {
+                    this.checked = false;
+                } else {
+                    this.value = '';
+                }
+            });
+            // Optionally, clear ASP.NET validation/error labels
+            $(this).find('span, label').each(function () {
+                if ($(this).hasClass('errormesg') || $(this).hasClass('text-danger')) {
+                    $(this).text('');
+                }
+            });
+        });
+
+
+        $('#edit_model').on('hidden.bs.modal', function () {
+            // Clear all input, textarea, and select fields inside the modal
+            $(this).find('input, textarea, select').each(function () {
+                if (this.type === 'checkbox' || this.type === 'radio') {
+                    this.checked = false;
+                } else {
+                    this.value = '';
+                }
+            });
+            // Optionally, clear validation/error messages
+            $(this).find('.errormesg, .text-danger').text('');
+        });
+</script>
+
 </body>
 </html>

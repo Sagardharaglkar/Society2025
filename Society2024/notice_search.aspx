@@ -2,7 +2,7 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
             Swal.fire({
@@ -34,154 +34,163 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
- <table width="100%">
-                        <tr>
-                            <th width="100%" class="">
-                                <h1 class=" tex0 font-weight-bold " style="color: #012970;">Notices
-                                </h1>
-                            </th>
-                        </tr>
-                    </table>
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                <asp:HiddenField ID="notice_id" runat="server" />
-                  <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                <table width="100%">
+                    <tr>
+                        <th width="100%" class="">
+                            <h1 class=" tex0 font-weight-bold " style="color: #012970;">Notices
+                            </h1>
+                        </th>
+                    </tr>
+                </table>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                <div class="form-group">
-                    <div class="row ">
-                         <div class="col-12">
-            <div class="d-flex align-items-center">
-                   
-                            <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
-                                <asp:ListItem Value="name">Subject</asp:ListItem>
-                                <asp:ListItem Value="date">Date</asp:ListItem>
-                            </asp:DropDownList>&nbsp;&nbsp;
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="notice_id" runat="server" />
+
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+
+                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Value="name">Subject</asp:ListItem>
+                                            <asp:ListItem Value="date">Date</asp:ListItem>
+                                        </asp:DropDownList>&nbsp;&nbsp;
 
                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" /></asp:Panel>&nbsp;&nbsp;
+                                <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
+                            </asp:Panel>
+                                        &nbsp;&nbsp;
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                             
-                       </div>
-                             </div>
-                        </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
-
-                                    <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="No" ItemStyle-Width="50">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="notice_id" ItemStyle-Width="300" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="notice_id" runat="server" Text='<%# Bind("notice_id")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Subject" ItemStyle-Width="300" SortExpression="name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Date" ItemStyle-Width="300" SortExpression="date">
-                                            <ItemTemplate>
-                                                <asp:Label ID="date" runat="server" Text='<%# Bind("date","{0:yyyy-MM-dd}")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        
-                                        <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("notice_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
-                                                <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField  ItemStyle-Width="50" HeaderText="Delete">
-                                        <ItemTemplate >
-                                            <asp:LinkButton runat="server" ID="edit551" CommandName="Delete"  OnClientClick="return confirm('Are you sure want to delete?');" ><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                              </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-                                        <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
-                                    </Columns>
-                                </asp:GridView>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-               </ContentTemplate></asp:UpdatePanel>
-                   
+
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView ID="GridView1" runat="server" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+
+                                            <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="notice_id" ItemStyle-Width="300" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="notice_id" runat="server" Text='<%# Bind("notice_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Subject" ItemStyle-Width="300" SortExpression="name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Date" ItemStyle-Width="300" SortExpression="date">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="date" runat="server" Text='<%# Bind("date","{0:yyyy-MM-dd}")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("notice_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
+                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+
+                                                <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-6">
                         <div class="modal-content" style="height: auto; width: 400px;">
                             <div class="modal-header">
-                                <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Notice</strong></h4>
                             </div>
-                            <div class="modal-body" id="invoice_data">
-                              <%--  <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>--%>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label1" runat="server" Text="Subject"></asp:Label>
-                                                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_sub" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
-                                                    </div>
+                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="modal-body" id="invoice_data">
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-4">
+                                                    <asp:Label ID="Label1" runat="server" Text="Subject"></asp:Label>
+                                                    <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <asp:TextBox ID="txt_sub" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                </div>
 
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-4">
+                                                    <asp:Label ID="lbl_co_name" runat="server" Text="Recipients"></asp:Label>
+                                                    <asp:Label ID="lbl_co_name_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <asp:DropDownList ID="ddl_recipients" Height="32px" Width="200px" runat="server"></asp:DropDownList>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-4">
+                                                    <asp:Label ID="Label7" runat="server" Text=" Valid Date"></asp:Label>
+                                                    <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <asp:TextBox ID="txt_valid_to" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
 
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="lbl_co_name" runat="server" Text="Recipients"></asp:Label>
-                                                        <asp:Label ID="lbl_co_name_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:DropDownList ID="ddl_recipients" Height="32px" Width="200px" runat="server"></asp:DropDownList>
-                                                    </div>
+                                                    <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label7" runat="server" Text=" Valid Date"></asp:Label>
-                                                        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_valid_to" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                        </div>
 
-                                                        <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
-                                                    </div>
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-4">
+                                                    <asp:Label ID="Label4" runat="server" Text="Description"></asp:Label>
+                                                    <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label4" runat="server" Text="Description"></asp:Label>
-                                                        <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_desc" runat="server" TextMode="MultiLine" Rows="6" Height="90px" Width="200px" placeholder="Enter Description" required autofocus></asp:TextBox>
-                                                    </div>
-
+                                                <div class="col-sm-6">
+                                                    <asp:TextBox ID="txt_desc" runat="server" TextMode="MultiLine" Rows="6" Height="90px" Width="200px" placeholder="Enter Description" required autofocus></asp:TextBox>
                                                 </div>
+
                                             </div>
-                                      </div>
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </Triggers>
+                            </asp:UpdatePanel>
 
 
                             <div class="modal-footer">
@@ -192,7 +201,7 @@
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click1" />
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
                                             <%-- <asp:Button ID="btn_email" runat="server" Text="Email" class="btn btn-primary" OnClick="btn_email_Click" />--%>
-                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false"  OnClientClick="return confirm('Are you sure want to delete?');" data-dismiss="#edit_model" />
+                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" data-dismiss="#edit_model" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" ValidationGroup="g1" />
                                         </center>
                                     </div>
@@ -202,7 +211,7 @@
                     </div>
                 </div>
 
-     <div class="modal fade bs-example-modal-sm" id="emailmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                <div class="modal fade bs-example-modal-sm" id="emailmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content" style="height: auto; width: 300px;">
                             <div class="modal-header">
@@ -233,11 +242,14 @@
 
 
                                                     </asp:Panel>
-                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </ContentTemplate>
+
                                 </asp:UpdatePanel>
+
+
 
 
                             </div>
@@ -263,13 +275,13 @@
                         <!-- /.modal-body 
                     </div>
                     <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+
+
                 </div>
-                <!-- /.modal-dialog -->
-
-
             </div>
         </div>
     </div>
-        </div>
-   
+
 </asp:Content>

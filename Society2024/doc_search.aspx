@@ -43,29 +43,29 @@
                         </th>
                     </tr>
                 </table>
-
-                <asp:HiddenField ID="flat_id" runat="server" />
-                <asp:HiddenField ID="doc_id" runat="Server"></asp:HiddenField>
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
+                        <asp:HiddenField ID="flat_id" runat="server" />
+                        <asp:HiddenField ID="doc_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+
 
 
                         <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
                             <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="300px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                                    
                                         <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                        </asp:Panel>
                         &nbsp;&nbsp;
-                                   
                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
+                        </asp:Panel>
+                                   &nbsp;&nbsp;
 
 
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
-                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="10" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating">
+                                        <asp:GridView AllowPaging="true" ID="GridView1" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="10" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating">
 
                                             <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                             <Columns>
@@ -138,7 +138,11 @@
                                             </div>
                                         </div>
                                     </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
                                 </asp:UpdatePanel>
+
 
 
                             </div>

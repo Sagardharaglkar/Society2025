@@ -166,7 +166,7 @@ namespace Society
             runproc("Select");
             btn_delete.Visible = true;
             Panel1.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -209,6 +209,12 @@ namespace Society
             else
                 txt_search.TextMode = TextBoxMode.SingleLine;
             txt_search.Text = "";
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Loan_GridBind();
         }
     }
 }

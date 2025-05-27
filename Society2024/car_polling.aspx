@@ -22,7 +22,7 @@
             }
         });
     }
-            </script>
+</script>
     <script type='text/javascript'>
         function openModal() {
             $('#edit_model').modal('show');
@@ -48,9 +48,7 @@
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Car Pollings</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Car Pooling</h1>
                         </th>
                     </tr>
                 </table>
@@ -58,10 +56,10 @@
 
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
 
-                <asp:HiddenField ID="HiddenField4" runat="server" />
-                <asp:HiddenField ID="HiddenField1" runat="server" />
                   <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
+                <asp:HiddenField ID="HiddenField4" runat="server" />
+                <asp:HiddenField ID="HiddenField1" runat="server" />
                 <div class="form-group">
                     <div class="row ">
                        <div class="col-12">
@@ -90,7 +88,7 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging1" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
 
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
@@ -155,7 +153,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Car Polling</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                               
+                                <form id="owner-socity-add" action="" method="post">
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
@@ -178,8 +176,7 @@
 
                                         </div>
                                     </div>
-                                    <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                        <ContentTemplate>
+                                    
                                             <div class="form-group">
                                                 <div class="row ">
                                                     <div class="col-sm-3">
@@ -197,8 +194,7 @@
 
                                             </div>
 
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                        
                                     <div class="form-group">
                                         <div class="row ">
 
@@ -272,7 +268,8 @@
 
 
 
-                               
+                                </form>
+
 
 
                                 <br />
@@ -288,6 +285,12 @@
                                     </div>
                                 </div>
                                 <br />
+                                </ContentTemplate>
+                                <triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </triggers>
+                                </asp:UpdatePanel>
+
                             </div>
 
                         </div>
@@ -299,17 +302,6 @@
             </div>
         </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
 
 </asp:Content>

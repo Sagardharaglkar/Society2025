@@ -3,43 +3,45 @@
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
- <link href="css/layout.css" rel="stylesheet" />
+    <link href="css/layout.css" rel="stylesheet" />
 
     <style>
         body {
             background: #EBF0F9;
         }
+
         .helpdesk-card {
-    background-color: #ecf0f1;
-    padding: 30px 20px;
-    border-radius: 10px;
-    width: 45%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+            background-color: #ecf0f1;
+            padding: 30px 20px;
+            border-radius: 10px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .helpdesk-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    }
+            .helpdesk-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            }
 
-.helpdesk-card-title {
-    font-size: 18px;
-    color: #34495e;
-    margin-bottom: 15px;
-}
+        .helpdesk-card-title {
+            font-size: 18px;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
 
-.helpdesk-card-number {
-    font-size: 28px;
-    font-weight: bold;
-    color: #2c3e50;
-}
+        .helpdesk-card-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
 
-.helpdesk-cards {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-}
+        .helpdesk-cards {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
         .hov {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -127,25 +129,35 @@
             }
 
         .update-card {
-            overflow: auto;
-            height: 225px;
-            overflow-x: hidden;
+               overflow: auto;
+    width: 100%;
+    padding: 10px 13px;
+    height: 225px;
+    overflow-x: hidden;
         }
 
         .update-grid {
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             padding: 7px;
-            width: 22rem;
+            width: 100%;
             border-radius: 16px;
             border: 2px solid #d6d6d6;
-          
         }
 
-        .inner-div{
-                width: 18rem;
-    justify-content: space-between;
-    display: flex
-;
+        .inner-div {
+            width: 100%;
+            justify-content: space-between;
+            display: flex;
+        }
+
+                .notify-div {
+            width: 245px;
+            height: 25px;
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 
@@ -416,22 +428,9 @@
                     <h6 class="m-0 font-weight-bold text-primary">Weekly Updates</h6>
 
                 </div>
-                <div class="card-body update-card" style="width:100%; overflow: auto; height: 225px; overflow-x: hidden; margin-top: 0px;">
-                    <asp:GridView OnRowCommand="Updates_RowCommand" ID="Updates" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" EmptyDataText="No Updates" SelectedRowStyle-Width="100">
+                <div class="card-body update-card" >
+                    <asp:GridView Width="100%" OnRowCommand="Updates_RowCommand" ID="Updates" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" EmptyDataText="No Updates" SelectedRowStyle-Width="100">
                         <Columns>
-                           <%-- <asp:TemplateField HeaderText="No" ItemStyle-Width="5">
-                                <ItemTemplate>
-                                    <asp:LinkButton
-                                        ID="lnkImage"
-                                        runat="server"
-                                        CommandName="Redirect"
-                                        CommandArgument='<%# Eval("type") %>'>
-            <asp:Image runat="server" Width="32px"
-                ImageUrl='<%# Eval("ImageUrl") %>'
-                AlternateText="Type Image" />
-        </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
 
                             <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
                                 <ItemTemplate>
@@ -441,34 +440,22 @@
                                         CommandName="Redirect"
                                         CommandArgument='<%# Eval("type") %>'
                                         Style="text-decoration: none;">
-                                        <div class="d-flex update-grid hov" style="gap:12px;">
-                                            <asp:Image runat="server" Width="35px" Height="39px" 
+                                        <div class="d-flex update-grid hov" style="gap: 12px;">
+                                            <asp:Image runat="server" Width="35px" Height="39px"
                                                 ImageUrl='<%# Eval("ImageUrl") %>'
                                                 AlternateText="Type Image" />
-                                            <div>
+                                            <div style="width:100%;">
                                                 <div class="inner-div">
                                                     <asp:Label runat="server" ID="Label1" Text='<%# Eval("type") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
                                                     <asp:Label runat="server" Text='<%# Eval("date", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
                                                 </div>
+                                                <div class="notify-div">
                                                 <asp:Label runat="server" ID="name" Text='<%# Eval("name") %>' ForeColor="Black"></asp:Label>
+                                            </div>
+
                                             </div>
                                         </div>
-                                       <%-- <div style="height: 1px; background-color: #d5d5d5; margin-top: 9px;"></div>--%>
-                                        <%--<div class="update-grid hov" style="padding: 11px; width: 100%; border-radius: 16px;">
-                                            <div class="d-flex">
-                                                <asp:Image runat="server" Width="32px"
-                                                    ImageUrl='<%# Eval("ImageUrl") %>'
-                                                    AlternateText="Type Image" />
-                                                <div style="justify-content: space-between; display: flex; margin-bottom: 2px;">
-                                                    <asp:Label runat="server" ID="Label1" Text='<%# Eval("type") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
-                                                <asp:Label runat="server" Text='<%# Eval("date", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
-                                            </div>
-                                            <div>
-                                                <asp:Label runat="server" ID="name" Text='<%# Eval("name") %>' ForeColor="Black"></asp:Label>
-                                            </div>
-                                                </div>
-                                            <div style="height: 1px; background-color: #d5d5d5; margin-top: 9px;"></div>
-                                        </div>--%>
+
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -577,11 +564,13 @@
                         <div class="helpdesk-cards">
                             <div class="helpdesk-card">
                                 <div class="helpdesk-card-title">Open Ticket</div>
-                                <div class="helpdesk-card-number"><asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label></div>
+                                <div class="helpdesk-card-number">
+                                    <asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label></div>
                             </div>
                             <div class="helpdesk-card">
                                 <div class="helpdesk-card-title">Resolve Tickets</div>
-                                <div class="helpdesk-card-number"> <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label></div>
+                                <div class="helpdesk-card-number">
+                                    <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label></div>
                             </div>
                         </div>
                         <br />
@@ -598,57 +587,57 @@
 
 
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
-<script type="text/javascript">
-    debugger;
-    firebase.initializeApp({
-        apiKey: "AIzaSyCVD6hUSK4zMfG43bMjyjwTFmTz5PJc_qk",
-        authDomain: "society-management-32053.firebaseapp.com",
-        projectId: "society-management-32053",
-        storageBucket: "society-management-32053.appspot.com",
-        messagingSenderId: "303424747645",
-        appId: "1:303424747645:web:a10ad8eceb38c4fe10d914",
-        measurementId: "G-MCRPPNVW38"
-    });
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
+    <script type="text/javascript">
+        debugger;
+        firebase.initializeApp({
+            apiKey: "AIzaSyCVD6hUSK4zMfG43bMjyjwTFmTz5PJc_qk",
+            authDomain: "society-management-32053.firebaseapp.com",
+            projectId: "society-management-32053",
+            storageBucket: "society-management-32053.appspot.com",
+            messagingSenderId: "303424747645",
+            appId: "1:303424747645:web:a10ad8eceb38c4fe10d914",
+            measurementId: "G-MCRPPNVW38"
+        });
 
-    const messaging = firebase.messaging();
-    Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js')
-                .then((registration) => {
-                    console.log('✅ SW registered:', registration);
+        const messaging = firebase.messaging();
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                    .then((registration) => {
+                        console.log('✅ SW registered:', registration);
 
-                    messaging.useServiceWorker(registration); // only works with compat SDK
+                        messaging.useServiceWorker(registration); // only works with compat SDK
 
-                    return messaging.getToken({
-                        vapidKey: "BKJDUyImlBxO4O_UewJxcN8Ug0EdqxsmxbwQ8nn2bscwwWBUGPGsuMdlU9IKvuTe60iz59iJC0wBMfGuXRkqj2E",
-                        serviceWorkerRegistration: registration
+                        return messaging.getToken({
+                            vapidKey: "BKJDUyImlBxO4O_UewJxcN8Ug0EdqxsmxbwQ8nn2bscwwWBUGPGsuMdlU9IKvuTe60iz59iJC0wBMfGuXRkqj2E",
+                            serviceWorkerRegistration: registration
+                        });
+                    })
+                    .then(token => {
+                        console.log("✅ Token:", token);
+                        sendTokenToServer(token);
+                    })
+                    .catch(error => {
+                        console.error("❌ Error getting token:", error);
                     });
-                })
-                .then(token => {
-                    console.log("✅ Token:", token);
-                    sendTokenToServer(token);
-                })
-                .catch(error => {
-                    console.error("❌ Error getting token:", error);
-                });
-        } else {
-            console.warn("❌ Notification permission denied");
-        }
-    });
+            } else {
+                console.warn("❌ Notification permission denied");
+            }
+        });
 
-    function sendTokenToServer(token) {
-        fetch("login1.aspx", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ token: token })
-        })
-            .then(response => response.json())
-            .then(data => console.log("✅ Token sent to server:", data))
-            .catch(error => console.error("❌ Error sending token:", error));
-    }
+        function sendTokenToServer(token) {
+            fetch("login1.aspx", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: token })
+            })
+                .then(response => response.json())
+                .then(data => console.log("✅ Token sent to server:", data))
+                .catch(error => console.error("❌ Error sending token:", error));
+        }
     </script>
 
 </asp:Content>

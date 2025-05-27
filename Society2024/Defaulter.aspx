@@ -11,13 +11,13 @@
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Defaulters</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Defaulters</h1>
                         </th>
                     </tr>
                 </table>
 
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
 
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                  <div class="form-group">
@@ -121,6 +121,8 @@
                         
                     </div>
                 </div>
+        </ContentTemplate>
+                    </asp:UpdatePanel>
             </div>
         </div>
     </div>

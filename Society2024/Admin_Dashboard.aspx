@@ -20,7 +20,8 @@
 
     <script type='text/javascript'>
         function openModal() {
-            $('#edit_model').modal('show');        }
+            $('#edit_model').modal('show');
+        }
     </script>
 
     <div class="box box-primary">
@@ -32,9 +33,7 @@
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Admin Dashboard</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Admin Dashboard</h1>
                         </th>
                     </tr>
                 </table>
@@ -43,40 +42,8 @@
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
                 <asp:HiddenField ID="HiddenField4" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
-
-
-               <%-- <div class="form-group">
-                    <div class="row ">
-
-                        <div class="col-sm-2">
-                            <asp:Label ID="society_name" runat="server" Text="Society Name"></asp:Label>
-                        </div>
-
-                        <div class="col-sm-2">
-
-                            <asp:DropDownList ID="drp_society" runat="server" Width="180px" Height="32px" AutoPostBack="true">
-                            </asp:DropDownList>
-                        </div>
-
-                        <div class="col-sm-4">
-
-                            <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Height="32px" placeHolder="Search here" runat="server"></asp:TextBox>
-                        </div>
-
-                       <%-- <div class="col-sm-2">
-                           
-                            <asp:Button ID="btn_filter" runat="server" class="btn btn-primary" Text="Filter" OnClick="btn_filter_Click" UseSubmitBehavior="False" />
-                        </div>--%>
-
-<%--                        <div class="col-sm-2">--%>
-                            <%-- <i class="fas fa-search"></i>--%>
-                           <%-- <asp:Button ID="btn_search" runat="server" class="btn btn-primary" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" />
-                        </div>
-
-
-
-                    </div>
-                </div>--%>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
 
 
                 <div class="form-group">
@@ -135,7 +102,7 @@
             <asp:TextBox ID="txt_pincode" runat="server" Width="180px" Height="32px" placeHolder="Enter Pin Code"></asp:TextBox>
         </div>
     </asp:Panel>
-</div>
+
 
 
 
@@ -204,64 +171,12 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-              <%--  <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 80%; overflow: auto;">
-                                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" EmptyDataText="No Record Found" HeaderStyle-BackColor="lightblue">--%>
-
-                                    <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                    <%--<Columns>
-                                        <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
-                                        <%--<asp:TemplateField HeaderText="" ItemStyle-Width="100"   SortExpression="w_id" Visible="false">
-                                        <ItemTemplate>
-                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("w_id")%>'></asp:Label>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>--%>
-                                        <%--<asp:TemplateField HeaderText="No of Active/Inactive User" ItemStyle-Width="300" SortExpression="name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="society_name" runat="server" Text='<%# Bind("society_name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Locationwise Count" ItemStyle-Width="150" SortExpression="w_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="address" runat="server" Text='<%# Bind("address")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="App Version" ItemStyle-Width="150" SortExpression="w_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="pin_code" runat="server" Text='<%# Bind("pin_code")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ItemStyle-Width="50">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" CommandName="Update" CommandArgument='<%# Bind("w_id")%>'><img src="Images/123.png" /></asp:LinkButton>
-                                               
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:CommandField ButtonType="Image" DeleteImageUrl="~/Images/delete_10781634.png" ShowDeleteButton="True" ControlStyle-Height="25" />
-
-                                    </Columns>
-                                </asp:GridView>
-                            </div>
-                        </div>
-                    </div>
-                </div>--%>
-
-
+            </ContentTemplate>
+</asp:UpdatePanel>
+                </div>
             </div>
-            <!-- /.modal-dialog -->
+           
         </div>
-    </div>
+   
 
 </asp:Content>

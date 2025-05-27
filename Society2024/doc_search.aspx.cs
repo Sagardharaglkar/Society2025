@@ -161,7 +161,7 @@ namespace Society
             doc_id.Value = id;
             runproc_doc_search("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
@@ -187,6 +187,7 @@ namespace Society
             GridView1.PageIndex = e.NewPageIndex;
             Doc_Gridbind();
         }
+
     }
 
 }

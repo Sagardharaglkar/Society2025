@@ -174,29 +174,7 @@ namespace Society
                 ReportViewer1.LocalReport.DataSources.Add(rds);
                 ReportViewer1.LocalReport.Refresh();
 
-               
-
-
-
-
-
-            //using (SqlConnection con = new SqlConnection(st.setsqlconnection()))
-            //{
-
-            //    con.Open();
-            //    SqlCommand c = new SqlCommand("Select * from society_cashbook");
-            //    SqlDataAdapter s = new SqlDataAdapter(c);
-            //    DataTable dt = new DataTable();
-            //    s.Fill(dt);
-
-            //    ReportViewer1.LocalReport.DataSources.Clear();
-            //    ReportDataSource rds = new ReportDataSource("cashbook", dt);
-            //    ReportViewer1.LocalReport.ReportPath = Server.MapPath("Cashbook.rdlc");
-            //    //ReportParameter parameter = new ReportParameter("build", ddl_build.Text);
-            //    //ReportViewer1.LocalReport.SetParameters(parameter);
-            //    ReportViewer1.LocalReport.DataSources.Add(rds);
-            //    ReportViewer1.LocalReport.Refresh();
-            //}
+              
         }
     }
 }

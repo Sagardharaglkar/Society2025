@@ -8,30 +8,30 @@
         <div class="box-header with-border">
             <div class="box-body">
                 <table width="100%">
-                        <tr>
-                            <th width="100%" class="">
-                                <h1 class=" tex0 font-weight-bold " style="color: #012970;">Events
-                                </h1>
-                            </th>
-                        </tr>
-                    </table>
-              <div class="form-group">
-    <div class="row justify-content-center my-3">
+                    <tr>
+                        <th width="100%" class="">
+                            <h1 class=" tex0 font-weight-bold " style="color: #012970;">Meeting Details
+                            </h1>
+                        </th>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <div class="row justify-content-center my-3">
 
-        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2">
 
-            <asp:Label ID="lbl_co_name" runat="server" Text="Meeting Date" CssClass="me-1"></asp:Label> 
+                            <asp:Label ID="lbl_co_name" runat="server" Text="Meeting Date" CssClass="me-1"></asp:Label>
 
-            <asp:Label ID="lbl_co_name_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":" ></asp:Label>&nbsp;&nbsp;
+                            <asp:Label ID="lbl_co_name_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>&nbsp;&nbsp;
 
             <asp:TextBox ID="txt_date" runat="server" TextMode="Date" Width="200px"></asp:TextBox>&nbsp;&nbsp;
 
             <asp:Button ID="btn_search" runat="server" Text="Search Meeting" CssClass="btn btn-primary" OnClick="btn_search_Click" />
 
-        </div>
+                        </div>
 
-    </div>
-</div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="row ">
                         <div style="width: 100%; overflow: auto;">
@@ -85,5 +85,5 @@
 
         </div>
     </div>
- 
+
 </asp:Content>

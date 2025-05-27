@@ -536,7 +536,7 @@
                                             <center>
                                                 <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                                 <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" data-bs-dismiss="modal" UseSubmitBehavior="False" />
+                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
                                             </center>
                                             <br />
                                         </div>
@@ -551,5 +551,13 @@
             </div>
         </div>
     </div>
-   
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 </asp:Content>

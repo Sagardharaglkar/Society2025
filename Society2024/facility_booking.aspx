@@ -19,7 +19,7 @@
                 Swal.showLoading()
             },
             willClose: () => {
-                window.location.href = 'building_search.aspx';
+                window.location.href = 'facility_booking.aspx';
             }
         });
     }
