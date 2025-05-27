@@ -189,201 +189,191 @@
                             <div class="modal-body" id="invoice_data">
 
 
-                                <div class="form-group">
-                                    <div class="alert alert-danger danger" style="display: none;"></div>
-                                </div>
-                                <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
+                                    <div class="form-group">
+                                        <div class="alert alert-danger danger" style="display: none;"></div>
+                                    </div>
+                                    <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
 
-                                        <div class="box-body">
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="lbl_co_name" runat="server" Text="Building No/Name :"></asp:Label>
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="lbl_co_name" runat="server" Text="Building No/Name :"></asp:Label>
 
-                                                        <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name/No" Style="text-transform: capitalize;" required autofocus> </asp:TextBox>
-                                                        <div class="invalid-feedback">
-                                                            Please choose a Name/no .
+                                                            <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name/No" Style="text-transform: capitalize;" required autofocus> </asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please choose a Name/no .
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label1" runat="server" Text="Print Name"></asp:Label>
-                                                        <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_print_name" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Building Name" required autofocus></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label1" runat="server" Text="Print Name"></asp:Label>
+                                                            <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_print_name" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Building Name" required autofocus></asp:TextBox>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label4" runat="server" Text="Registration No"></asp:Label>
-                                                        <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_reg" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Registration No" AutoPostBack="true" required autofocus OnTextChanged="txt_reg_TextChanged" ValidationGroup="g1"></asp:TextBox>
-                                                        <asp:Label ID="Label13" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label4" runat="server" Text="Registration No"></asp:Label>
+                                                            <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_reg" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Registration No" AutoPostBack="true" required autofocus OnTextChanged="txt_reg_TextChanged" ValidationGroup="g1"></asp:TextBox>
+                                                            <asp:Label ID="Label13" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label7" runat="server" Text="Address"></asp:Label>
-                                                        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_add1" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label7" runat="server" Text="Address"></asp:Label>
+                                                            <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_add1" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_add2" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_add2" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label10" runat="server" Text="No of Floors"></asp:Label>
-                                                        <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_floore" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter No. of Floors" onkeypress="return digit(event);" required autofocus></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label10" runat="server" Text="No of Floors"></asp:Label>
+                                                            <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_floore" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter No. of Floors" onkeypress="return digit(event);" required autofocus></asp:TextBox>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <hr />
-                                            <h4>Bank Details</h4>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label14" runat="server" Text="Bank Name"></asp:Label>
-                                                        <asp:Label ID="Label15" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_bank" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Bank name" required autofocus></asp:TextBox>
+                                                <hr />
+                                                <h4>Bank Details</h4>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label14" runat="server" Text="Bank Name"></asp:Label>
+                                                            <asp:Label ID="Label15" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_bank" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Bank name" required autofocus></asp:TextBox>
+
+                                                        </div>
 
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label25" runat="server" Text="Bank Address"></asp:Label>
-                                                        <asp:Label ID="Label26" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label27" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_bank_add" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Full Address" required autofocus></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label25" runat="server" Text="Bank Address"></asp:Label>
+                                                            <asp:Label ID="Label26" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label27" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_bank_add" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Full Address" required autofocus></asp:TextBox>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label17" runat="server" Text="Branch"></asp:Label>
-                                                        <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label31" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_branch" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Branch" required autofocus></asp:TextBox>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label17" runat="server" Text="Branch"></asp:Label>
+                                                            <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label31" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_branch" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Branch" required autofocus></asp:TextBox>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label18" runat="server" Text="IFSC Code"></asp:Label>
-                                                        <asp:Label ID="Label19" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label20" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ClientIDMode="Static" ID="txt_ifsc" runat="server" Height="32px" Width="200px" MaxLength="11" placeholder="Enter IFSC Code" required autofocus></asp:TextBox>
-                                                        <asp:RegularExpressionValidator
-                                                            ID="RegularExpressionValidator1"
-                                                            runat="server"
-                                                            ValidationExpression="^[A-Z]{4}0[A-Z0-9]{6}$"
-                                                            ControlToValidate="txt_ifsc"
-                                                            Font-Bold="True"
-                                                            ForeColor="red"
-                                                            ErrorMessage="Invalid IFSC Format"
-                                                            ValidationGroup="g1"
-                                                            Display="Dynamic"
-                                                            OnClientValidationFunction="ifscClientValidate">
-                                                            </asp:RegularExpressionValidator>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label18" runat="server" Text="IFSC Code"></asp:Label>
+                                                            <asp:Label ID="Label19" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label20" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_ifsc" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="11" placeholder="Enter IFSC Code" required autofocus></asp:TextBox>
+                                                            <br>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Height="32px" Width="200px" runat="server" ValidationExpression="^[A-Z]{4}0[A-Z0-9]{6}$"
+                                                                ControlToValidate="txt_ifsc" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid IFSC Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        </div>
 
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label21" runat="server" Text="Account No"></asp:Label>
-                                                        <asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ClientIDMode="Static" ID="txt_acc_no" runat="server" Height="32px" Width="200px" placeholder="Enter Account No" required autofocus MaxLength="18"></asp:TextBox>
-                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Height="32px" Width="200px" runat="server" ValidationExpression="^\d{9,18}$"
-                                                            ControlToValidate="txt_acc_no" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Account No Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label21" runat="server" Text="Account No"></asp:Label>
+                                                            <asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_acc_no" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Account No" required autofocus MaxLength="18"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Height="32px" Width="200px" runat="server" ValidationExpression="^\d{9,18}$"
+                                                                ControlToValidate="txt_acc_no" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Account No Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-4">
-                                                        <asp:Label ID="Label28" runat="server" Text="Email ID"></asp:Label>
-                                                        <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <asp:TextBox ClientIDMode="Static" CssClass="emailBox form-cotrol" ID="txt_email" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
-                                                        <br>
-                                                        <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <div class="row ">
+                                                        <div class="col-sm-4">
+                                                            <asp:Label ID="Label28" runat="server" Text="Email ID"></asp:Label>
+                                                            <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                            <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                            <br>
+                                                            <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
+
+
                                             </div>
-
-
-                                        </div>
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
                             </div>
 
 
