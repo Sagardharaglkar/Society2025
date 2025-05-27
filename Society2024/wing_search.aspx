@@ -148,43 +148,49 @@
                                     <div class="alert alert-danger danger" style="display: none;"></div>
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-5">
+                                        <ContentTemplate>
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                 
+<asp:Label ID="lbl_co_name" runat="server" Text="Building No/Name :"></asp:Label>
 
-                                                    <asp:Label ID="lbl_co_name" runat="server" Text="Building No/Name :"></asp:Label>
+                    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:DropDownList CssClass="form-select" ID="ddl_build_name" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke">
+                    </asp:DropDownList>
+                    <div class="invalid-feedback">
+                        Please Select Building Name/No
+                    </div>
+                    <br />
+                     <asp:CompareValidator ControlToValidate="ddl_build_name" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Building" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+                </div>
 
-                                                    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <asp:DropDownList ID="ddl_build_name" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke">
-                                                    </asp:DropDownList>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_build_name" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Building" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                </div>
+            </div>
+        </div>
+      
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label1" runat="server" Text="Wing :"></asp:Label>
+                    
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_w_name" CssClass="form-control" parsley-trigger="change" runat="server" class="form-control" Width="200px" Height="32px"  ToolTip="Wing" OnTextChanged="txt_w_name_TextChanged" AutoPostBack="true" placeholder="Enter Wing Name" required autofocus ></asp:TextBox>
+                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                    <div class="invalid-feedback">
+                        Please Enter Wing Name
+                    </div>
+                </div>
 
-                                            </div>
-                                        </div>
+            </div>
+        </div>
+     
 
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-5">
-
-                                                    <asp:Label ID="Label1" runat="server" Text="Wing :"></asp:Label>
-
-                                                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <asp:TextBox ID="txt_w_name" runat="server" class="form-control" Width="200px" Height="32px" ToolTip="Wing" OnTextChanged="txt_w_name_TextChanged" AutoPostBack="true" placeholder="Enter Wing Name" required autofocus></asp:TextBox>
-                                                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                    </ContentTemplate>
+    </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
