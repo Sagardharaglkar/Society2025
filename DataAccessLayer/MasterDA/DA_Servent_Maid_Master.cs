@@ -160,7 +160,7 @@ namespace DataAccessLayer.MasterDA
 
             if (status == "Done")
                 if (sdr.Read())
-                    servent.Sql_Result = "Alredy exist";
+                    servent.Sql_Result = "Already exist";
                 else
                     servent.Sql_Result = "";
             return servent;

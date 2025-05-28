@@ -125,7 +125,7 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_car_polling", ref sdr);
             if (status1 == "Done")
                 if (sdr.Read())
-                    car.Sql_Result = "Alredy exist";
+                    car.Sql_Result = "Already exist";
                 else
                     car.Sql_Result = "";
 

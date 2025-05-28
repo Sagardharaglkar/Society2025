@@ -43,15 +43,7 @@
         }
     </script>
 
-    <script type="text/javascript">
-        function toggleTextbox(chkBox, txtBoxId) {
-            var txtBox = document.getElementById(txtBoxId);
-            if (txtBox) {
-                txtBox.disabled = !chkBox.checked;
-                if (!chkBox.checked) txtBox.value = '';
-            }
-        }
-    </script>
+   
 
 
     <div class="box box-primary">
@@ -94,7 +86,7 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowEditing="GridView1_RowEditing" OnRowDeleting="GridView1_RowDeleting">
 
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
@@ -105,7 +97,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="society_master_id" ItemStyle-Width="200" SortExpression="society_master_id" Visible="false">
                                             <ItemTemplate>
-                                                <asp:Label ID="society_master_id" runat="server" Text='<%# Bind("servent_id")%>'></asp:Label>
+                                                <asp:Label ID="servent_id" runat="server" Text='<%# Bind("servent_id")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Name"  SortExpression="s_name">
@@ -125,7 +117,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
                                             <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("servent_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
+                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Edit" CommandArgument='<%# Bind("servent_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
                                                 <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -166,7 +158,7 @@
                                                         <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_p_name" Style="text-transform: capitalize;" runat="server" placeholder="Enter Name" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_p_name" CssClass="form-control" Style="text-transform: capitalize;" runat="server" placeholder="Enter Name" required></asp:TextBox>
                                                     </div>
 
                                                     <div class="col-sm-3">
@@ -175,7 +167,7 @@
                                                         <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_org_addr1" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_org_addr1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address" required></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,7 +180,7 @@
                                                         <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_mobile_no1" runat="server" MaxLength="10" placeholder="Enter contact No" AutoPostBack="True" onblur="checkLength(this)" onkeypress="return digit(event);" required OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter contact No" AutoPostBack="True" onblur="checkLength(this)" onkeypress="return digit(event);" required OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
                                                         <br />
 
                                                         <asp:Label ID="Label11" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
@@ -196,7 +188,7 @@
                                                     <div class="col-sm-3">
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_org_addr2" runat="server" Style="text-transform: capitalize;" MaxLength="250" placeholder="Enter Address" ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_org_addr2" CssClass="form-control" runat="server" Style="text-transform: capitalize;" MaxLength="250" placeholder="Enter Address" ></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,7 +201,7 @@
                                                        
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_mobile_no2" runat="server" MaxLength="10" placeholder="Enter Alternate Contact No"  onblur="checkLength(this)" AutoPostBack="True" onkeypress="return digit(event);"></asp:TextBox><br />
+                                                        <asp:TextBox ID="txt_mobile_no2" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter Alternate Contact No"  onblur="checkLength(this)" AutoPostBack="True" onkeypress="return digit(event);"></asp:TextBox><br />
 
                                                     </div>
                                                     <div class="col-sm-3">
@@ -217,7 +209,7 @@
                                                         <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_remark" runat="server" Style="text-transform: capitalize;" placeholder="Enter Remark"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_remark" CssClass="form-control" runat="server" Style="text-transform: capitalize;" placeholder="Enter Remark"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,7 +224,7 @@
                                                 <div class="row ">
                                                     <div class="col-sm-4" style="left: 0px; top: 1px"></div>
                                                     <div class="col-sm-3">
-                                                        <asp:Label ID="Label7" runat="server" Text="Nature of Service" Font-Bold="True" Width="184px" BorderColor="Black" BorderWidth="2px"></asp:Label>
+                                                        <asp:Label ID="Label7" runat="server"  Text="Nature of Service" Font-Bold="True" Width="184px" BorderColor="Black" BorderWidth="2px"></asp:Label>
 
                                                         <%--<asp:TextBox ID="txt_col8_name" runat="server" Font-Bold="true"  placeholder="Nature of Service" enabled="false"   ></asp:TextBox>--%>
                                                         <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; border-width: 1px;" font-bold="true" />
@@ -250,11 +242,11 @@
                                                     <div class="col-sm-4"></div>
                                                     <div class="col-sm-3">
                                                         <%--<asp:CheckBox ID="chk_meal" runat="server" Text="Preparing Meal" OnCheckedChanged="chk_meal_CheckedChanged" AutoPostBack="true" />--%>
-                                                        <asp:CheckBox ID="chk_meal" runat="server" Text="Preparing Meal" OnCheckedChanged="chk_meal_CheckedChanged" AutoPostBack="true" onclick="toggleTextbox(this, 'txt_meal')" />
+                                                        <asp:CheckBox ID="chk_meal" runat="server"  OnCheckedChanged="chk_meal_CheckedChanged" AutoPostBack="true"  /><span class="ml-2">Preparing Meal</span>
 
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <asp:TextBox ID="txt_meal" runat="server" placeholder="Enter Amount" autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_meal" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -263,10 +255,10 @@
                                                 <div class="row ">
                                                     <div class="col-sm-4"></div>
                                                     <div class="col-sm-3">
-                                                        <asp:CheckBox ID="chk_c_wash" runat="server" Text="Cloth Washing" OnCheckedChanged="chk_c_wash_CheckedChanged" AutoPostBack="true" onclick="toggleTextbox(this, 'txt_c_wash')" />
+                                                        <asp:CheckBox ID="chk_c_wash" runat="server"  OnCheckedChanged="chk_c_wash_CheckedChanged" AutoPostBack="true" /><span class="ml-2">Cloth Washing</span>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <asp:TextBox ID="txt_c_wash" runat="server" placeholder="Enter Amount" autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_c_wash" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -275,10 +267,10 @@
                                                 <div class="row ">
                                                     <div class="col-sm-4"></div>
                                                     <div class="col-sm-3">
-                                                        <asp:CheckBox ID="chk_p_wash" runat="server" Text="Pot Washing" OnCheckedChanged="chk_p_wash_CheckedChanged" AutoPostBack="true" onclick="toggleTextbox(this, 'txt_p_wash')" />
+                                                        <asp:CheckBox ID="chk_p_wash" runat="server"  OnCheckedChanged="chk_p_wash_CheckedChanged" AutoPostBack="true"  /><span class="ml-2">Pot Washing</span>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <asp:TextBox ID="txt_p_wash" runat="server" placeholder="Enter Amount" autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_p_wash" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -287,10 +279,10 @@
                                                 <div class="row ">
                                                     <div class="col-sm-4"></div>
                                                     <div class="col-sm-3">
-                                                        <asp:CheckBox ID="chk_f_wash" runat="server" Text="Floor Washing" OnCheckedChanged="chk_f_wash_CheckedChanged" AutoPostBack="true" onclick="toggleTextbox(this, 'txt_f_wash')" />
+                                                        <asp:CheckBox ID="chk_f_wash" runat="server"  OnCheckedChanged="chk_f_wash_CheckedChanged" AutoPostBack="true" /><span class="ml-2">Floor Washing</span>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <asp:TextBox ID="txt_f_wash" runat="server" placeholder="Enter Amount" autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_f_wash" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,11 +290,11 @@
                                             <div class="form-group">
                                                 <div class="row ">
                                                     <div class="col-sm-4"></div>
-                                                    <div class="col-sm-3">
-                                                        <asp:CheckBox ID="chk_b_set" runat="server" Text="Baby Sitting" OnCheckedChanged="chk_b_set_CheckedChanged" AutoPostBack="true" onclick="toggleTextbox(this, 'txt_b_set')" />
+                                                    <div class="col-sm-3"> 
+                                                        <asp:CheckBox ID="chk_b_set" runat="server"  OnCheckedChanged="chk_b_set_CheckedChanged" AutoPostBack="true"  /><span class="ml-2">Baby Sitting</span>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <asp:TextBox ID="txt_b_set" runat="server" placeholder="Enter Amount" autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_b_set" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>

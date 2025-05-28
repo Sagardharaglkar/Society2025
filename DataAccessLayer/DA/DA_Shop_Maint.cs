@@ -149,7 +149,7 @@ namespace DataAccessLayer.DA
 
             if (status == "Done")
                 if (sdr.Read())
-                    maintenance.Sql_Result = "Alredy exist";
+                    maintenance.Sql_Result = "Already exist";
                 else
                     maintenance.Sql_Result = "";
             return maintenance;

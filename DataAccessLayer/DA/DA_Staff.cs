@@ -145,7 +145,7 @@ namespace DataAccessLayer.DA
 
             if (status == "Done")
                 if (sdr.Read())
-                    Staff.Sql_Result = "Alredy exist";
+                    Staff.Sql_Result = "Already exist";
                 else
                     Staff.Sql_Result = "";
             return Staff;

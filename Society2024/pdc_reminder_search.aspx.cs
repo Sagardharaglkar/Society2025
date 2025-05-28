@@ -141,7 +141,7 @@ namespace Society
             (pdc_rem_id.Value) = result.pdc_rem_id.ToString();
             society_id.Value = result.Society_Id;
             ddl_owner.SelectedValue = result.owner_id.ToString();
-            ddl_owner.SelectedItem.Text = result.O_Name.ToString();
+         
             ddl_build_wing.SelectedItem.Text = result.wing_id.ToString();
             txt_chq_no.Text = result.Chq_No.ToString();
             txt_chq_date.Text = result.Che_Date.ToString("yyyy-MM-dd");

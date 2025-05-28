@@ -114,17 +114,17 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Owner Name" ItemStyle-Width="200" SortExpression="o_name">
                                         <ItemTemplate>
-                                            <asp:Label ID="o_name" runat="server" Text='<%# Bind("o_name")%>'></asp:Label>
+                                            <asp:Label ID="o_name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Building Name" ItemStyle-Width="200" SortExpression="name">
                                         <ItemTemplate>
-                                            <asp:Label ID="b_id" runat="server" Text='<%# Bind("name")%>'></asp:Label>
+                                            <asp:Label ID="b_id" runat="server" Text='<%# Bind("build_name")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Wing Name" ItemStyle-Width="150" SortExpression="w_name">
                                         <ItemTemplate>
-                                            <asp:Label ID="w_name" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>
+                                            <asp:Label ID="w_name" runat="server" Text='<%# Bind("unit")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Cheque No" ItemStyle-Width="120" SortExpression="chqno">

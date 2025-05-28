@@ -141,7 +141,7 @@ namespace DataAccessLayer.MasterDA
 
             if (status1 == "Done")
                 if (sdr.Read())
-                    building.Sql_Result = "Alredy exist";
+                    building.Sql_Result = "Already exist";
                 else
                     building.Sql_Result = "";
             return building;

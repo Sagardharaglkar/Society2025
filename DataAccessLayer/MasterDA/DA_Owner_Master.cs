@@ -451,7 +451,7 @@ namespace DataAccessLayer.MasterDA
 
             if (status1 == "Done")
                 if (sdr.Read())
-                    owner.Sql_Result = "Alredy exist";
+                    owner.Sql_Result = "Already exist";
                 else
                     owner.Sql_Result = "";
             return owner;
@@ -492,7 +492,7 @@ namespace DataAccessLayer.MasterDA
 
         //    if (status1 == "Done")
         //        if (sdr.Read())
-        //            owner.Sql_Result = "Alredy exist";
+        //            owner.Sql_Result = "Already exist";
         //        else
         //            owner.Sql_Result = "";
         //    return owner;

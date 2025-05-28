@@ -130,7 +130,7 @@ namespace DataAccessLayer.DA
 
             if (status1 == "Done")
                 if (sdr.Read())
-                    parking.Sql_Result = "Alredy exist";
+                    parking.Sql_Result = "Already exist";
                 else
                     parking.Sql_Result = "";
             return parking;

@@ -103,7 +103,7 @@ namespace DataAccessLayer.DA
                     {
                         Reminder.Society_Id = sdr["society_id"].ToString();
                         Reminder.owner_id = Convert.ToInt32(sdr["owner_id"].ToString());
-                        Reminder.O_Name = sdr["o_name"].ToString();
+                       
                         Reminder.wing_id = Convert.ToInt32(sdr["wing_id"].ToString());
                         Reminder.Chq_No = Convert.ToInt32(sdr["chqno"].ToString());
                         Reminder.Che_Date = Convert.ToDateTime(sdr["che_date"].ToString());

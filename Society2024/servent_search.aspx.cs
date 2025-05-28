@@ -217,38 +217,21 @@ namespace Society
             txt_b_set.Enabled = chk_b_set.Checked;
         }
 
-        protected void edit_Command(object sender, CommandEventArgs e)
-        {
-            string id = e.CommandArgument.ToString();
-            servent_id.Value = id;
-            runproc("Select");
-            btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
-            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
-        }
+
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-           
-                GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-                System.Web.UI.WebControls.Label servent_id = (System.Web.UI.WebControls.Label)row.FindControl("servent_id");
-                servent.Sql_Operation = "Delete";
 
-                servent.servent_id = Convert.ToInt32(servent_id.Text);
-                bL_Servent.delete(servent);
-          
+            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            System.Web.UI.WebControls.Label servent_id = (System.Web.UI.WebControls.Label)row.FindControl("servent_id");
+            servent.Sql_Operation = "Delete";
+            servent.servent_id = Convert.ToInt32(servent_id.Text);
+            bL_Servent.delete(servent);
+
             Servent_Gridbind();
         }
 
-        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        {
 
-        }
-
-        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-
-        }
 
         protected void txt_mobile_no1_TextChanged(object sender, EventArgs e)
         {
@@ -314,6 +297,21 @@ namespace Society
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+        }
+
+        protected void edit_Command(object sender, CommandEventArgs e)
+        {
+            string id = e.CommandArgument.ToString();
+            servent_id.Value = id;
+            runproc("Select");
+            btn_delete.Visible = true;
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+
+        }
+
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
         }
     }
 }

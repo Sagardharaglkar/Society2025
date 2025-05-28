@@ -165,7 +165,7 @@ namespace DataAccessLayer.MasterDA
 
             if (status1 == "Done")
                 if (sdr.Read())
-                    vendor.Sql_Result = "Alredy exist";
+                    vendor.Sql_Result = "Already exist";
                 else
                     vendor.Sql_Result = "";
             return vendor;

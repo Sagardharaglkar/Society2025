@@ -146,7 +146,7 @@
                                                         <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_number" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter No" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_number" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" OnTextChanged="txt_number_TextChanged" AutoPostBack="true" placeholder="Enter No" required autofocus></asp:TextBox>
                                                         <asp:Label ID="Label3" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
 
                                                     </div>
@@ -158,16 +158,14 @@
                                                         <asp:Label ID="Label1" runat="server" Text="Parking For :"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:DropDownList ID="ddl_park_for" Height="32px" Width="200px" runat="server" parsley-trigger="change" AutoPostBack="true" OnSelectedIndexChanged="ddl_park_for_SelectedIndexChanged" required>
+                                                        <asp:DropDownList ID="ddl_park_for" Height="32px" Width="200px" runat="server"   required>
                                                             <asp:ListItem Value="select">Select</asp:ListItem>
                                                             <asp:ListItem Value="1">2 Wheeler</asp:ListItem>
                                                             <asp:ListItem Value="2">3 Wheeler</asp:ListItem>
                                                             <asp:ListItem Value="3">4 Wheeler</asp:ListItem>
                                                         </asp:DropDownList>
                                                         <asp:CompareValidator ControlToValidate="ddl_park_for" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select parking vehical" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                        <asp:Label ID="Label2" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                                                        <%--<asp:CompareValidator ID="re1" runat="Server" ValueToCompare="0"  ControlToValidate="ddl_park_for" ErrorMessage="Please" Operator="Equal" />--%>
-                                                    </div>
+                                                         </div>
 
                                                 </div>
                                             </div>
