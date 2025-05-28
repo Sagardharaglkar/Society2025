@@ -29,8 +29,9 @@ namespace Society
                 name_society.Text = "Welcome To " + Session["society_name"].ToString();
                 get_notificatoin();
             }
-else
-                Response.Redirect("login1.aspx");
+            else
+                Panel1.Visible = false;
+            
         }
 
         protected void get_notificatoin()

@@ -164,7 +164,6 @@
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <asp:Label ID="Label1" runat="server" Text="Parking For"></asp:Label>
-                                                    <%--<asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <asp:DropDownList ID="ddl_park_for" runat="server" Height="32px" Width="200px" parsely-trigger="change" OnSelectedIndexChanged="ddl_park_for_SelectedIndexChanged">

@@ -258,7 +258,7 @@
                                                     <div class="col-sm-4">
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_address2" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address2" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_address2" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address2"  autofocus></asp:TextBox>
                                                     </div>
 
                                                 </div>
