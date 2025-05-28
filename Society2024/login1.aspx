@@ -202,7 +202,7 @@ body {
         <div class="right">
             <h2>Welcome to login</h2>
             <span>Don't have an account?</span>
-            <asp:Button ID="Button3" runat="server" CssClass="btn-signup" Text="Sign Up"  OnClick="Button1_Click" />
+            <asp:Button ID="Button3" runat="server" CssClass="btn-signup" Text="Sign Up" UseSubmitBehavior="false"  OnClick="Button1_Click" />
         </div>
     </div>
     <asp:Label ID="lbl" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>

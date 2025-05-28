@@ -249,7 +249,9 @@
                                             </div>
 
                                         </asp:Panel>
-
+                                            </ContentTemplate>
+</asp:UpdatePanel>
+                                </div>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-12">
@@ -265,9 +267,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
+                                   
+                           
                         </div>
                     </div>
                 </div>

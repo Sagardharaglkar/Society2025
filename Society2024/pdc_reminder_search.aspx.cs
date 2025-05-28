@@ -181,7 +181,6 @@ namespace Society
             txt_pre_addr1.Enabled = false;
             txt_pre_addr2.Enabled = false;
             txt_pre_mob.Enabled = false;
-
             txt_add_mob.Enabled = false;
             txt_email.Enabled = false;
 

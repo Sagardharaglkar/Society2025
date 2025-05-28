@@ -29,7 +29,7 @@
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
-                text: 'Society Created Successfully </br> You Can Now Login to your Society',
+                text: 'Society Created Successfully  You Can Now Login to your Society',
                 icon: 'success',
                 showConfirmButton: true,
                 confirmButtonColor: '#3085d6',

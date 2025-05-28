@@ -65,7 +65,7 @@ namespace Society2024
             Details.City = txt_city.Text;
             Details.State_Id = 1;// Convert.ToInt32(ddl_state.SelectedValue);
             Details.Pincode = txt_pincode.Text;
-            Details.Home_No = Convert.ToInt32(txt_street.Text);
+          //  Details.Home_No = Convert.ToInt32(txt_street.Text);
             Details.Division = ddl_division.SelectedValue;
             Details.District_Id = Convert.ToInt32(ddl_district.SelectedValue);
             new_Registration.Update_Society(Details);
