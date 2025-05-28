@@ -11,6 +11,7 @@ using System.Web.Configuration;
 using BusinessLogic.MasterBL;
 using DBCode.DataClass;
 using System.Windows.Forms;
+using System.Security.Principal;
 
 namespace Society
 {
@@ -30,6 +31,10 @@ namespace Society
             if (!IsPostBack)
             {
                 Building_Gridbind();
+                txt_email.Attributes.Add("onclientclick", "handleTyping('txt_email', /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/)");
+                txt_ifsc.Attributes.Add("onkeyup", "handleTyping('txt_ifsc', /^[A-Z]{4}0[A-Z0-9]{6}$/)");
+                txt_acc_no.Attributes.Add("onkeyup", "handleTyping('txt_acc_no', /^\\d{9,18}$/)");
+
             }
 
         }
@@ -126,6 +131,7 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
+            txt_email.Attributes.Add("onkeyup", "validateEmail(this)");
             if (Label13.Text == "")
             {
                 runproc_save("Update");

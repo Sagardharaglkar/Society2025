@@ -214,6 +214,12 @@ namespace Society
                 Label3.Text = result.Sql_Result;
             }
         }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Parking_Gridbind();
+        }
     }
 }
 

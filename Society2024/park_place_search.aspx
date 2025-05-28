@@ -44,12 +44,13 @@
                             </th>
                         </tr>
                     </table>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+  <ContentTemplate>
                 <asp:HiddenField ID="meet_id" runat="server" />
                 <asp:HiddenField ID="place_id" runat="Server"></asp:HiddenField>
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                 <asp:HiddenField ID="status" runat="Server"></asp:HiddenField>
-                  <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
+                  
                 <div class="form-group">
                    <div class="row ">
                          <div class="col-12">
@@ -77,7 +78,7 @@
                         <div class="col-sm-12">
 
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
 
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
@@ -130,7 +131,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Park Place</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
+                                
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
@@ -169,10 +170,12 @@
 
                                                 </div>
                                             </div>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                           </ContentTemplate>
+<Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
+</asp:UpdatePanel>
 
-                                </form>
                             </div>
                             <div class="modal-footer">
 
