@@ -10,7 +10,7 @@
                 <th width="100%" class="">
                     <h1 class=" font-weight-bold " style="color: #012970;">Expense Report</h1>
                 </th>
-                
+
             </tr>
         </table>
         <div class="form-group">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-sm-3">
 
-                    <asp:DropDownList ID="ddl_expense" width="130px" runat="server" OnSelectedIndexChanged="ddl_expense_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    <asp:DropDownList ID="ddl_expense" Width="130px" runat="server" OnSelectedIndexChanged="ddl_expense_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                 </div>
                 <div class="col-sm-1">
                     <asp:Label ID="Label2" runat="server" Text="Date:"></asp:Label>
@@ -39,10 +39,9 @@
                 <div class="col-sm-3">
                     <asp:TextBox ID="txt_to" TextMode="Date" runat="server" OnTextChanged="txt_to_TextChanged" AutoPostBack="true"></asp:TextBox>
                 </div>
-                <div >
-                    
-                    </div>
-                                
+                <div>
+                </div>
+
 
             </div>
 

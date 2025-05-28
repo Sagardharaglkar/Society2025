@@ -33,15 +33,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label lbl_date;
 
         /// <summary>
-        /// lbl_date_sep control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_date_sep;
-
-        /// <summary>
         /// txt_from control.
         /// </summary>
         /// <remarks>
@@ -51,22 +42,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.TextBox txt_from;
 
         /// <summary>
-        /// Label12 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
-
-        /// <summary>
-        /// Label13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// txt_to control.
