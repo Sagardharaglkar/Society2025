@@ -244,7 +244,7 @@
                                     <a class="collapse-item" href="parking_allotment_search.aspx">Parking Allotment</a>
                                     <a class="collapse-item" href="facility_booking.aspx">Facility Booking</a>
 
-                                    <a class="collapse-item" href="contact_master.aspx">Usefull Contact</a>
+                                    <a class="collapse-item" href="contact_master.aspx">Helper Contact</a>
                                     <a class="collapse-item" href="meeting_details.aspx">Meeting Details</a>
                                     <a class="collapse-item" href="car_polling.aspx">Car Polling</a>
                                     <a class="collapse-item" href="loan.aspx">Loan & Lien</a>

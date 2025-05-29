@@ -125,7 +125,7 @@ namespace Society
         protected void btn_save_Click(object sender, EventArgs e)
         {
             runproc("Update");
-            Response.Redirect("suggestion_request.aspx");
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)
@@ -148,7 +148,7 @@ namespace Society
             sug_id.Value = id;
             runproc_suggestion_request("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
         
@@ -172,6 +172,12 @@ namespace Society
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Suggestion_Gridbind();
         }
     }
 }

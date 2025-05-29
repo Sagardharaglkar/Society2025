@@ -228,7 +228,7 @@ namespace Society
           
             btn_add.Visible = false;
             getapprovallist();
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         private void getapprovallist()
@@ -251,7 +251,7 @@ namespace Society
 
 
                 runproc_save("Update");
-                Response.Redirect("society_expense.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Add at least one Approver.')", true);
@@ -572,6 +572,12 @@ namespace Society
             bL_Society.update_status(society);
             getapprovallist();
            
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Society_Expense_Gridbind();
         }
     }
 }

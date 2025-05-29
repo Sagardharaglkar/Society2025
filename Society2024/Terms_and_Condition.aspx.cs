@@ -33,7 +33,7 @@ namespace Society2024
 
         public void save_ckdata(string terms)
         {
-            
+
         }
 
         public void terms_Gridbind()
@@ -53,7 +53,7 @@ namespace Society2024
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-           // string terms = Request.Form["editor2"].ToString();
+            // string terms = Request.Form["editor2"].ToString();
             if (term_id.Value != "")
                 Terms.term_id = Convert.ToInt32(term_id.Value);
             Terms.Sql_Operation = "Update";
@@ -66,10 +66,10 @@ namespace Society2024
         public void runproc(string operation)
         {
             if (term_id.Value != "")
-               Terms.term_id = Convert.ToInt32(term_id.Value);
+                Terms.term_id = Convert.ToInt32(term_id.Value);
             Terms.Sql_Operation = operation;
             var result = bL_Terms.getupdate_details(Terms);
-           editor1.Text= result.Terms.ToString();
+            editor1.Text = result.Terms.ToString();
 
 
 
@@ -82,11 +82,11 @@ namespace Society2024
         }
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-                if (term_id.Value != "")
-                    Terms.term_id = Convert.ToInt32(term_id.Value);
-                Terms.Sql_Operation = "Delete";
-                bL_Terms.delete(Terms);
-            
+            if (term_id.Value != "")
+                Terms.term_id = Convert.ToInt32(term_id.Value);
+            Terms.Sql_Operation = "Delete";
+            bL_Terms.delete(Terms);
+
             Response.Redirect("Terms_and_Condition.aspx");
         }
 
@@ -102,15 +102,15 @@ namespace Society2024
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-       
-                GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-                System.Web.UI.WebControls.Label term_id = (System.Web.UI.WebControls.Label)row.FindControl("t_id");
-                Terms.Sql_Operation = "Delete";
 
-                Terms.term_id = Convert.ToInt32(term_id.Text);
-                bL_Terms.delete(Terms);
-                //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
-          
+            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            System.Web.UI.WebControls.Label term_id = (System.Web.UI.WebControls.Label)row.FindControl("t_id");
+            Terms.Sql_Operation = "Delete";
+
+            Terms.term_id = Convert.ToInt32(term_id.Text);
+            bL_Terms.delete(Terms);
+            //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
+
             terms_Gridbind();
         }
 
@@ -127,6 +127,12 @@ namespace Society2024
         protected void add_new_Click(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            terms_Gridbind();
         }
     }
 }

@@ -110,7 +110,7 @@ namespace Society
             txt_no.Visible = true;
             ddl_flatno.Visible = false;
             Label2.Visible = false;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         public void runproc_save(string operation)
         {
@@ -240,19 +240,23 @@ namespace Society
 
         protected void ddl_flatno_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (file_id.Value != "")
-                doc.File_Id = Convert.ToInt32(file_id.Value);
-            doc.Sql_Operation = "check_no";
-            //owner.owner_id = Convert.ToInt32(owner_id.Value);
-            doc.Society_Id = society_id.Value;
-            doc.doc_id = Convert.ToInt32(ddl_doc_type.SelectedValue.ToString());
-            doc.flat_id = Convert.ToInt32(ddl_flatno.SelectedValue.ToString());
-          
+            if (ddl_flatno.Text.Trim() != "")
+            {
+                if (file_id.Value != "")
+                {
+                    doc.File_Id = Convert.ToInt32(file_id.Value);
+                    doc.Sql_Operation = "check_no";
+                    //owner.owner_id = Convert.ToInt32(owner_id.Value);
+                    doc.Society_Id = society_id.Value;
+                    doc.doc_id = Convert.ToInt32(ddl_doc_type.SelectedValue.ToString());
+                    doc.flat_id = Convert.ToInt32(ddl_flatno.SelectedValue.ToString());
 
-            var result = BL_Upload.flat_no_selectedIndexChanged(doc);
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
-            Label7.Text = result.Sql_Result;
 
+                    var result = BL_Upload.flat_no_selectedIndexChanged(doc);
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                    Label7.Text = result.Sql_Result;
+                }
+            }
         }
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)
@@ -277,6 +281,12 @@ namespace Society
                 BL_Upload.fill_drop(ddl_flatno, sql1, "flat_no", "flat_id");
 
             }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            upload_doc_gridbind();
         }
     }
 }

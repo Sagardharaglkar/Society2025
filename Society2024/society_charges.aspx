@@ -103,14 +103,14 @@
                                                     <asp:Label ID="Amount" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-Width="50">
+                                            <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
                                                 <ItemTemplate>
                                                     <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("charge_id")%>'><img src="Images/123.png" /></asp:LinkButton>
                                                     <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField ItemStyle-Width="50">
+                                            <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
                                                 <ItemTemplate>
                                                     <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                 </ItemTemplate>

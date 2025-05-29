@@ -112,7 +112,7 @@ namespace Society
         {
 
             runproc_save("Update");
-            Response.Redirect("contact_master.aspx");
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)

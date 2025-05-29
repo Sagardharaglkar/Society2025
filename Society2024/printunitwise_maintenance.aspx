@@ -38,7 +38,7 @@
                     class="btn btn-primary" Font-Bold="True" />
                 <br />
                 <br />
-                <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="61%" ShowRefreshButton="true" ShowPrintButton="True" PromptAreaCollapsed="True" SizeToReportContent="True"></rsweb:ReportViewer>
+                <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="59%"></rsweb:ReportViewer>
             </div>
 
         </ContentTemplate>

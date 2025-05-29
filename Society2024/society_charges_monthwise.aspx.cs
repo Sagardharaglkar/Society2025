@@ -27,12 +27,9 @@ namespace Society2024
             {
                
                 monthwise_charges_Gridbind();
-                remaining_due();
+           
 
-                if (string.IsNullOrEmpty(Label10.Text))
-                {
-                    ClearFormFields();
-                }
+              
 
                 //fetch_defaulter();
                 //lblDateRange.Text = (new DateTime(DateTime.Now.Year, 1, 1).ToShortDateString() + " to " + DateTime.Now.ToShortDateString()).ToString();
@@ -129,7 +126,8 @@ namespace Society2024
             if (Label10.Text == "")
             {
                 runproc_save("Update");
-                Response.Redirect("society_charges_monthwise.aspx");
+                ClearFormFields();
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
@@ -158,7 +156,7 @@ namespace Society2024
             mon_charge_id.Value = chargesociety_master_id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -177,6 +175,18 @@ namespace Society2024
                 bL_Maintenance.Monthwise_Charges_delete(Maintenance1);
            
             monthwise_charges_Gridbind();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            monthwise_charges_Gridbind();
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            remaining_due();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
     }
 }

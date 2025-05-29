@@ -164,8 +164,8 @@ namespace Society
             {
                 btn_save.Visible = false;
                 runproc_save("Update");
-               
-                Response.Redirect("society_member_search.aspx");
+
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
             {
@@ -208,7 +208,7 @@ namespace Society
             user_id.Value = id;
             runproc_edit_society_member("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
@@ -240,13 +240,16 @@ namespace Society
 
         protected void txt_contact_no_TextChanged(object sender, EventArgs e)
         {
-            if (user_id.Value != "")
-                member.UserId = Convert.ToInt32(user_id.Value);
-            member.Contact_No = txt_contact_no.Text;
-            member.Society_Id = society_id.Value;
-            member.Sql_Operation = "chk_name";
-            var result = bL_Society.SocietyMemberTextChange(member);
-            Label25.Text = result.Sql_Result;
+            if (txt_contact_no.Text.Trim() != "")
+            {
+                if (user_id.Value != "")
+                    member.UserId = Convert.ToInt32(user_id.Value);
+                member.Contact_No = txt_contact_no.Text;
+                member.Society_Id = society_id.Value;
+                member.Sql_Operation = "chk_name";
+                var result = bL_Society.SocietyMemberTextChange(member);
+                Label25.Text = result.Sql_Result;
+            }
         }
 
         protected void txt_email_TextChanged(object sender, EventArgs e)
@@ -255,6 +258,11 @@ namespace Society
             txt_username.Text = txt_email.Text;
         }
 
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Society_Member_Gridbind();
+        }
     }
 }
 

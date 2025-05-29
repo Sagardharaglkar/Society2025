@@ -123,14 +123,14 @@ namespace Society
             vendor_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void btn_save_Click(object sender, EventArgs e)
         {
             if (Label10.Text == "" && Label12.Text=="" )
             {
                 runproc_save("Update");
-                Response.Redirect("vendor_search.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
             {
@@ -242,7 +242,14 @@ namespace Society
                 btn_save.Enabled = true;
 
         }
-     }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+
+            Vendor_GridBind();
+        }
+    }
 }
 
     

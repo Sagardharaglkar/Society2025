@@ -46,7 +46,7 @@ namespace Society
             runproc("Select");
             Family_Details_Gridbind();
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true); ;
         }
 
         public void Rental_Gridbind()
@@ -220,8 +220,9 @@ namespace Society
         {
             if (Label11.Text == "" )
             {
-                runproc_save("Update");            
-               Response.Redirect("rental_search.aspx");
+                runproc_save("Update");
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+               
             }
             else
             {
@@ -401,7 +402,6 @@ namespace Society
             owner.Sql_Operation = "cust_sel";
             owner.Pre_Mob = txt_pre_mob.Text;
             var result = bL_Owner.MobileTextchanged(owner);
-            //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
             Label31.Text = result.Sql_Result;
         }
 

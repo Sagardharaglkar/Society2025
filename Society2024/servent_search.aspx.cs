@@ -129,7 +129,7 @@ namespace Society
             if (Label11.Text == "")
             {
                 runproc_save("Update");
-                Response.Redirect("servent_search.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
             {
@@ -235,7 +235,9 @@ namespace Society
 
         protected void txt_mobile_no1_TextChanged(object sender, EventArgs e)
         {
-            if (servent_id.Value != "")
+          
+            
+                if (servent_id.Value != "")
                 servent.servent_id = Convert.ToInt32(servent_id.Value);
             servent.Sql_Operation = "check_no";
             servent.Mobile_No1 = txt_mobile_no1.Text;
@@ -305,13 +307,19 @@ namespace Society
             servent_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
 
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
 
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Servent_Gridbind();
         }
     }
 }

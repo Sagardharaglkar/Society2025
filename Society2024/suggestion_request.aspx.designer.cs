@@ -15,6 +15,15 @@ namespace Society
     {
 
         /// <summary>
+        /// society_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField society_id;
+
+        /// <summary>
         /// th_id control.
         /// </summary>
         /// <remarks>
@@ -31,15 +40,6 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField sug_id;
-
-        /// <summary>
-        /// society_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
         /// search_field control.

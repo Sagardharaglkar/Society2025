@@ -34,8 +34,8 @@ namespace Society2024
         {
                 runproc_save("Role_Update");
                 Response.Redirect("staff_role.aspx");
-          
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         public void Role_GridBind()
@@ -122,7 +122,7 @@ namespace Society2024
             role_id.Value = id;
             runproc("Role_Select");
             //btn_delete.Visible = false;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -140,13 +140,22 @@ namespace Society2024
 
         protected void txt_role_TextChanged(object sender, EventArgs e)
         {
-            if (role_id.Value != "")
-                getstaff.role_id = Convert.ToInt32(role_id.Value);
-            getstaff.Sql_Operation = "check_role";
-            getstaff.role = txt_role.Text;
-            getstaff.Society_Id = society_id.Value;
-            var result = bL_Staff.RoleTextChanged(getstaff);
-            Label4.Text = result.Sql_Result;
+            if (txt_role.Text.Trim() != "")
+            {
+                if (role_id.Value != "")
+                    getstaff.role_id = Convert.ToInt32(role_id.Value);
+                getstaff.Sql_Operation = "check_role";
+                getstaff.role = txt_role.Text;
+                getstaff.Society_Id = society_id.Value;
+                var result = bL_Staff.RoleTextChanged(getstaff);
+                Label4.Text = result.Sql_Result;
+            }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Role_GridBind();
         }
     }
 }

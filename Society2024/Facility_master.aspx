@@ -3,10 +3,6 @@
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
 
-        function openModal() {
-            $('#edit_model').modal('show');
-        }
-
 
         function digit(evt) {
             if (evt.keyCode < 48 || evt.keyCode > 57) {
@@ -38,7 +34,11 @@
             });
         }
     </script>
-
+        <script type='text/javascript'>
+            function openModal() {
+                $('#edit_model').modal('show');
+            }
+        </script>
 
     <div class="box box-primary">
         <div class="box-header with-border">

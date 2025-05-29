@@ -187,7 +187,7 @@ namespace Society
             if (Label22.Text == "")
             {
                 runproc_save("Update");
-                Response.Redirect("society_search.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
             {
@@ -218,7 +218,7 @@ namespace Society
             society_master_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
@@ -254,18 +254,20 @@ namespace Society
 
         protected void txt_registration_TextChanged(object sender, EventArgs e)
         {
-
-                if(society_master_id.Value!="")
-                society.society_master_id = Convert.ToInt32(society_master_id.Value);
+            if (txt_name.Text.Trim() != "")
+            {
+                if (society_master_id.Value != "")
+                    society.society_master_id = Convert.ToInt32(society_master_id.Value);
                 society.Sql_Operation = "check_no";
                 society.Name = txt_name.Text;
                 society.Registration_No = txt_registration.Text;
-              
+
 
                 var result = bL_Society.SelectTextChanged(society);
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
                 Label22.Text = result.Sql_Result;
             }
+        }
         //public void document()
         //{
 
@@ -719,8 +721,12 @@ namespace Society
             else return 0;
 
         }
-       
 
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Society_Gridbind();
+        }
     }
 
 }
