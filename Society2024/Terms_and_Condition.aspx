@@ -8,27 +8,26 @@
             $('#edit_model').modal('show');
         }
 
-    function SuccessEntry() {
-        Swal.fire({
-            title: '✅ Success!',
-            text: 'Saved Successfully',
-            icon: 'success',
-            showConfirmButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK',
-            timer: 3000,
-            timerProgressBar: true,
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true,
 
-            didOpen: () => {
-                Swal.showLoading()
-            },
-            willClose: () => {
-                window.location.href = 'society_charges.aspx';
-            }
-        });
-    }
-</script>
-
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'Terms_and_Condition.aspx';
+                }
+            });
+        }
+    </script>
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -50,10 +49,7 @@
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
-                                    <div class="col-sm-12 d-flex justify-content-center my-3">
-                                        <asp:Button ID="add_new" runat="server" Text="Add Terms and Conditions" CssClass="btn btn-primary btn-lg px-5" OnClick="add_new_Click" UseSubmitBehavior="False" />
-                                    </div>
-
+                                    <asp:Button ID="add_new" runat="server" Text="Add Terms and Conditions" CssClass="btn btn-primary btn-lg px-5" data-toggle="modal" data-target="#edit_model" UseSubmitBehavior="False" />
                                 </div>
                             </div>
                         </div>
@@ -62,7 +58,6 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 70%; overflow: auto;">
-
                                         <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" OnRowDeleting="GridView1_RowDeleting" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" HeaderStyle-BackColor="lightblue">
 
                                             <Columns>
@@ -88,11 +83,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField ItemStyle-Width="50">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+                                           
 
                                             </Columns>
                                         </asp:GridView>
@@ -111,6 +102,9 @@
 
                             </div>
                             <div class="modal-body" id="invoice_data">
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+
                                 <div class="form-group">
                                     <div class="row ">
                                         <div class="col-sm-12">
@@ -123,6 +117,14 @@
 
                                     </div>
                                 </div>
+            </ContentTemplate>
+<Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
+</asp:UpdatePanel>
+
+                            </div>
+                            <div class="modal-footer">
 
                             </div>
                         </div>
