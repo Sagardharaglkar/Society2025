@@ -1,12 +1,28 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="society_expense.aspx.cs" Inherits="Society.society_expense" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true,
 
-    <asp:HiddenField ID="expense_id" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-    <script>
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'society_charges.aspx';
+                }
+            });
+        }
+
         function openModal() {
             $('#edit_model').modal('show');
         }
@@ -25,123 +41,132 @@
             <div class="box-body">
 
                 <table width="100%">
-                        <tr>
-                            <th width="100%" class="">
-                                <h1 class=" tex0 font-weight-bold " style="color: #012970;">Expenses
-                                </h1>
-                            </th>
-                        </tr>
-                    </table>
+                    <tr>
+                        <th width="100%" class="">
+                            <h1 class=" tex0 font-weight-bold " style="color: #012970;">Expenses
+                            </h1>
+                        </th>
+                    </tr>
+                </table>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
 
-                <div class="form-group">
-                    <div class="row ">
-                     <div class="col-12">
-                        <div class="d-flex align-items-center">
+                        <asp:HiddenField ID="expense_id" runat="server"></asp:HiddenField>
+                        <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
+                        <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
 
-                            <asp:DropDownList ID="search_field" runat="server" AutoPostBack="true" Width="200px" Height="32px">
-                                <asp:ListItem Value="ex_name">Vendor Name</asp:ListItem>
-                                <%-- <asp:ListItem Value="invoice_no">Invoice No</asp:ListItem>--%>
-                                <asp:ListItem Value="amount">Amount</asp:ListItem>
+                                        <asp:DropDownList ID="search_field" runat="server" AutoPostBack="true" Width="200px" Height="32px">
+                                            <asp:ListItem Value="ex_name">Vendor Name</asp:ListItem>
+                                            <%-- <asp:ListItem Value="invoice_no">Invoice No</asp:ListItem>--%>
+                                            <asp:ListItem Value="amount">Amount</asp:ListItem>
 
-                            </asp:DropDownList>&nbsp;&nbsp;
+                                        </asp:DropDownList>&nbsp;&nbsp;
 
                      
                              <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                 <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                       
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" /></asp:Panel>&nbsp;&nbsp;
+                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
+                             </asp:Panel>
+                                        &nbsp;&nbsp;
                      
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">New Entry</button>&nbsp;&nbsp;
                                                        
                            
                         <asp:CheckBox ID="CheckBox1" runat="server" Text="Regular Expense" OnCheckedChanged="CheckBox1_CheckedChanged" AutoPostBack="true" Width="200px" />
 
-                             </div> 
-                          </div>
-                       </div>
-                    </div>
-
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
-
-                        <Columns>
-                            <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="expense_id" SortExpression="expense_id" Visible="false">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="expense_id" Text='<%# Bind("expense_id")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Vendor Name" SortExpression="ex_name">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="v_name" Text='<%# Bind("ex_name")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Expense Details" SortExpression="ex_details">
-                                <ItemTemplate>
-                                    <asp:Label ID="ex_details" runat="server" Text='<%# Bind("ex_details")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Building Name" SortExpression="build_name">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="b_id" Text='<%# Bind("build_name")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Date" SortExpression="date" ItemStyle-Width="150">
-                                <ItemTemplate>
-                                    <asp:Label ID="date" runat="server" Text='<%# Bind("date", "{0:dd-MM-yyy}")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Amount" SortExpression="amount">
-                                <ItemTemplate>
-                                    <asp:Label ID="amount" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Final Amount" SortExpression="f_amount">
-                                <ItemTemplate>
-                                    <asp:Label ID="f_amount" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Status" SortExpression="expense_status">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="invoice" Text='<%# Bind("expense_status")%>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField  HeaderText="Edit" ItemStyle-Width="50">
-                                <ItemTemplate>
-                                    <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
-                                <ItemTemplate>
-                                    <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-
-                        </Columns>
-                    </asp:GridView>
-                      </div>
-                        </div>
-                    </div>
-                </div>
-
-                    <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                        <div class="modal-dialog modal-sm-4" style="right: 80px">
-                            <div class="modal-content" style="height: auto; width: 950px;">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="gridSystemModalLabel"><strong>Society Expense</strong></h4>
+                                    </div>
                                 </div>
-                                <div class="modal-body" id="invoice_data">
-                                    <asp:Panel ID="expense_panel" runat="server">
+                            </div>
+                        </div>
 
-                                    <asp:UpdatePanel runat="server"  UpdateMode="Conditional">
-                                        <ContentTemplate>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
+
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="expense_id" SortExpression="expense_id" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="expense_id" Text='<%# Bind("expense_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Vendor Name" SortExpression="ex_name">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="v_name" Text='<%# Bind("ex_name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Expense Details" SortExpression="ex_details">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="ex_details" runat="server" Text='<%# Bind("ex_details")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Building Name" SortExpression="build_name">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="b_id" Text='<%# Bind("build_name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Date" SortExpression="date" ItemStyle-Width="150">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="date" runat="server" Text='<%# Bind("date", "{0:dd-MM-yyy}")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Amount" SortExpression="amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="amount" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Final Amount" SortExpression="f_amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="f_amount" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Status" SortExpression="expense_status">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="invoice" Text='<%# Bind("expense_status")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                    <div class="modal-dialog modal-sm-4" style="right: 80px">
+                        <div class="modal-content" style="height: auto; width: 950px;">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="gridSystemModalLabel"><strong>Society Expense</strong></h4>
+                            </div>
+                            <div class="modal-body" id="invoice_data">
+
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <asp:Panel ID="expense_panel" runat="server">
 
 
                                             <div class="form-group">
@@ -289,7 +314,7 @@
 
 
                                                     <div class="col-sm-3">
-                                                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="false"  OnRowDeleting="GridView3_RowDeleting" OnRowDataBound="GridView3_RowDataBound" GridLines="None">
+                                                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="false" OnRowDeleting="GridView3_RowDeleting" OnRowDataBound="GridView3_RowDataBound" GridLines="None">
 
                                                             <Columns>
 
@@ -306,15 +331,15 @@
                                                                 <asp:TemplateField HeaderText="Action" Visible="False">
                                                                     <ItemTemplate>
                                                                         <asp:Label runat="server" ID="status" Text='<%#  Eval("status").ToString()=="0"?"No Action":"Approved <br/>" +Eval("date","{0:dd-MMM-yyyy}")%>'></asp:Label>
-                                                                   <asp:Button runat="server" ID="btn_approved" OnClick="btn_approved_Click" OnClientClick="return confirm('Are you sure want to approve this expense?');" Text="Not Approved" /> 
-                                                                        </ItemTemplate>
+                                                                        <asp:Button runat="server" ID="btn_approved" OnClick="btn_approved_Click" OnClientClick="return confirm('Are you sure want to approve this expense?');" Text="Not Approved" />
+                                                                    </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField ItemStyle-Width="20">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                
+
                                                             </Columns>
                                                         </asp:GridView>
 
@@ -335,108 +360,110 @@
                                             </div>
 
 
-
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
                                         </asp:Panel>
+                                    </ContentTemplate>
 
-                                </div>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
 
 
-                                <div class="modal-footer">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <center>
-                                                <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
-                                                <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-                                            </center>
-                                            <br />
-                                        </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <center>
+                                            <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
+                                            <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
+                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                        </center>
+                                        <br />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
-                    <div class="modal fade bs-example-modal-sm" id="emailmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content" style="height: auto; width: 300px;">
-                                <div class="modal-header">
+                <div class="modal fade bs-example-modal-sm" id="emailmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content" style="height: auto; width: 300px;">
+                            <div class="modal-header">
 
-                                    <h4 class="modal-title" id="gridSystemModalLabel1"><strong>Select Customer</strong></h4>
-                                </div>
-                                <asp:UpdatePanel ID="assd" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <div class="modal-body">
+                                <h4 class="modal-title" id="gridSystemModalLabel1"><strong>Select Customer</strong></h4>
+                            </div>
+                            <asp:UpdatePanel ID="assd" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="modal-body">
 
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <label>
-                                                            Select all</label>
-                                                        <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll_CheckedChanged"></asp:CheckBox>
-                                                    </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <label>
+                                                        Select all</label>
+                                                    <asp:CheckBox ID="CheckAll" runat="server" AutoPostBack="true" OnCheckedChanged="CheckAll_CheckedChanged"></asp:CheckBox>
                                                 </div>
                                             </div>
+                                        </div>
 
 
-                                            <div class="col-sm-12">
-                                                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" OnRowDataBound="GridView2_RowDataBound" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" ShowHeader="false" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" GridLines="None">
+                                        <div class="col-sm-12">
+                                            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" OnRowDataBound="GridView2_RowDataBound" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" ShowHeader="false" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" GridLines="None">
 
-                                                    <Columns>
+                                                <Columns>
 
-                                                        <asp:TemplateField HeaderText="user_id" Visible="false">
-                                                            <ItemTemplate>
-                                                                <asp:Label runat="server" ID="user_id" Text='<%# Bind("user_id")%>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:Label runat="server" ID="name" Text='<%# Bind("name")%>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField>
-                                                            <ItemTemplate>
-                                                                <asp:CheckBox runat="server" ID="chk" AutoPostBack="true" OnCheckedChanged="name_CheckedChanged"></asp:CheckBox>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                    </Columns>
-                                                </asp:GridView>
-
-                                            </div>
-
+                                                    <asp:TemplateField HeaderText="user_id" Visible="false">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" ID="user_id" Text='<%# Bind("user_id")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" ID="name" Text='<%# Bind("name")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <asp:CheckBox runat="server" ID="chk" AutoPostBack="true" OnCheckedChanged="name_CheckedChanged"></asp:CheckBox>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
 
                                         </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
 
-                                <div class="modal-footer">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="pull-left">
-                                                <asp:Button ID="Button1" runat="server" Text="Close" class="btn btn-default" data-dismiss="modal" />
-                                            </div>
+
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="pull-left">
+                                            <asp:Button ID="Button1" runat="server" Text="Close" class="btn btn-default" data-dismiss="modal" />
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="pull-right">
-                                                <asp:Button ID="btn_confirm" runat="server" Text="Confirm" OnClick="btn_confirm_Click" UseSubmitBehavior="false" class="btn btn-primary" />
-                                            </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="pull-right">
+                                            <asp:Button ID="btn_confirm" runat="server" Text="Confirm" OnClick="btn_confirm_Click" UseSubmitBehavior="false" class="btn btn-primary" />
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <!-- /.modal-body -->
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
 
+                        </div>
+                        <!-- /.modal-body -->
+                    </div>
+                    <!-- /.modal-content -->
                 </div>
+
             </div>
         </div>
-   
+    </div>
+
 </asp:Content>
 
 

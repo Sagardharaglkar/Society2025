@@ -313,7 +313,6 @@
     <Content Include="suggestion_request.aspx" />
     <Content Include="Terms_and_Condition.aspx" />
     <Content Include="upload_doc_search.aspx" />
-    <Content Include="usefull_contact.aspx" />
     <Content Include="vendor_search.aspx" />
     <Content Include="visitor_search.aspx" />
     <Content Include="wing_search.aspx" />
@@ -2646,13 +2645,6 @@
     </Compile>
     <Compile Include="upload_doc_search.aspx.designer.cs">
       <DependentUpon>upload_doc_search.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="usefull_contact.aspx.cs">
-      <DependentUpon>usefull_contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usefull_contact.aspx.designer.cs">
-      <DependentUpon>usefull_contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="usefull_contact.Designer.cs">
       <AutoGen>True</AutoGen>

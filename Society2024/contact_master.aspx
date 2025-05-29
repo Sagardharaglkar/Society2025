@@ -2,21 +2,28 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <script type="text/javascript">
-        function SuccessEntry() {
-            Swal.fire(
-                'SUCCESS!',
-                'Quotation Entry Successfully Registered!',
-                'success'
-            )
-        }
-        function Fail() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'You Missed Something Empty!',
-            })
-        }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function SuccessEntry() {
+        Swal.fire({
+            title: '✅ Success!',
+            text: 'Saved Successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 3000,
+            timerProgressBar: true,
+
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                window.location.href = 'society_charges.aspx';
+            }
+        });
+    }
+
         function openModal() {
             $('#edit_model').modal('show');
         }

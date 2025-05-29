@@ -45,7 +45,7 @@ namespace Society
 
                 pdc_reminder_Gridbind();
 
-                due_this_month_Click(sender, e);
+                due_this_year_Click(sender, e);
                 GetDataForChart1();
                 get_ticket();
 

@@ -103,14 +103,14 @@
                                                     <asp:Label ID="Amount" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-Width="50">
+                                            <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
                                                 <ItemTemplate>
                                                     <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("charge_id")%>'><img src="Images/123.png" /></asp:LinkButton>
                                                     <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
 
-                                            <asp:TemplateField ItemStyle-Width="50">
+                                            <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
                                                 <ItemTemplate>
                                                     <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                 </ItemTemplate>
@@ -133,7 +133,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Society Charges</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
+                              
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
@@ -182,7 +182,7 @@
                                         </Triggers>
                                     </asp:UpdatePanel>
 
-                                </form>
+                                
                             </div><div class="modal-footer">
     
             <div class="form-group">

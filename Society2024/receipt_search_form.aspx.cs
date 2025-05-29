@@ -296,9 +296,9 @@ namespace Society
             }
             
             runproc_save("Update");
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             pending();
-            // allsub.case_log_save(Session.Item("UserID"), "Insert Update In Receipt For " & receipt_no_txt.Text, "Receipt")
-            Response.Redirect("receipt_search_form.aspx");
+            
         }
 
         protected void btn_delete_Click(object sender, System.EventArgs e)
@@ -366,7 +366,7 @@ namespace Society
             ddl_owner_SelectedIndexChanged(sender, e);
             paystatus_check();
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
@@ -426,13 +426,15 @@ namespace Society
 
         protected void ddl_wing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_wing.Text != "select")
+            if (ddl_wing.Text.Trim() != "")
             {
-                string sql1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + ddl_wing.SelectedValue + "' and  build_id='" + ddl_build.SelectedValue + "' ";
-                bL_Receipt.fill_drop(ddl_owner, sql1, "name", "owner_id");
-                ddl_owner_SelectedIndexChanged(sender, e);
+                if (ddl_wing.Text != "select")
+                {
+                    string sql1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + ddl_wing.SelectedValue + "' and  build_id='" + ddl_build.SelectedValue + "' ";
+                    bL_Receipt.fill_drop(ddl_owner, sql1, "name", "owner_id");
+                    ddl_owner_SelectedIndexChanged(sender, e);
+                }
             }
-           
         }
 
       

@@ -15,18 +15,42 @@
         }
 
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function SuccessEntry() {
+        Swal.fire({
+            title: '✅ Success!',
+            text: 'Saved Successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 3000,
+            timerProgressBar: true,
+
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                window.location.href = 'shop_maintenance.aspx';
+            }
+        });
+    }
+</script>
+
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Search Shop Maintenance</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Shop Maintenance</h1>
                         </th>
                     </tr>
                 </table>
+                          <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+<ContentTemplate>
                 <asp:HiddenField ID="shop_maint_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
@@ -57,7 +81,7 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" EmptyDataText="No Records found" ShowHeaderWhenEmpty="true">
+                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" EmptyDataText="No Records found" ShowHeaderWhenEmpty="true">
 
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
@@ -107,6 +131,9 @@
                         </div>
                     </div>
                 </div>
+
+    </ContentTemplate>
+                              </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit" role="form" aria-labelledby="mymodel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
                         <div class="modal-content" style="height: auto; width: 800px;">
@@ -231,8 +258,12 @@
                                             </div>
                                         </div>
 
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                                     </ContentTemplate>
+<Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
+</asp:UpdatePanel>
+
 
 
                                 <div class="form-group">
@@ -253,11 +284,4 @@
           </div>
         </div>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 </asp:Content>

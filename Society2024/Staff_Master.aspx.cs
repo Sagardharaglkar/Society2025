@@ -62,13 +62,13 @@ namespace Society2024
                 Staff.staff_id = Convert.ToInt32(staff_id.Value);
             Staff.Sql_Operation = operation;
             Staff.Society_Id = society_id.Value;
-            
+
             Staff.Name = txt_name.Text;
             Staff.Address = txt_address.Text;
             Staff.Contact_No = txt_contact.Text;
             Staff.Email = txt_email.Text;
             Staff.Date_Of_Join = Convert.ToDateTime(txt_doj.Text);
-            
+
             Staff.role_id = Convert.ToInt32(ddl_role.SelectedValue);
             bL_Staff.update_staff(Staff);
             staff_Gridbind();
@@ -98,28 +98,28 @@ namespace Society2024
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-           
-                if (staff_id.Value != "")
-                    Staff.staff_id = Convert.ToInt32(staff_id.Value);
-                Staff.Sql_Operation = "Delete";
-                bL_Staff.delete(Staff);
-           
+
+            if (staff_id.Value != "")
+                Staff.staff_id = Convert.ToInt32(staff_id.Value);
+            Staff.Sql_Operation = "Delete";
+            bL_Staff.delete(Staff);
+
             Response.Redirect("Staff_Master.aspx");
 
         }
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-           
-                GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-                System.Web.UI.WebControls.Label notice_id = (System.Web.UI.WebControls.Label)row.FindControl("staff_id");
-                Staff.Sql_Operation = "Delete";
 
-                Staff.staff_id = Convert.ToInt32(notice_id.Text);
-                bL_Staff.delete(Staff);
-          
-              staff_Gridbind();
+            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            System.Web.UI.WebControls.Label notice_id = (System.Web.UI.WebControls.Label)row.FindControl("staff_id");
+            Staff.Sql_Operation = "Delete";
 
-            
+            Staff.staff_id = Convert.ToInt32(notice_id.Text);
+            bL_Staff.delete(Staff);
+
+            staff_Gridbind();
+
+
 
         }
 
@@ -139,7 +139,7 @@ namespace Society2024
             staff_id.Value = id;
             runproc_staff("Select");
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         private void runproc_staff(string operation)
@@ -152,7 +152,7 @@ namespace Society2024
 
             (staff_id.Value) = result.staff_id.ToString();
             society_id.Value = result.Society_Id;
-           
+
             txt_name.Text = result.Name;
             txt_address.Text = result.Address;
             txt_contact.Text = result.Contact_No;
@@ -179,13 +179,24 @@ namespace Society2024
 
         protected void txt_contact_TextChanged(object sender, EventArgs e)
         {
-            if (staff_id.Value != "")
-                Staff.staff_id = Convert.ToInt32(staff_id.Value);
-            Staff.Sql_Operation = "check_no";
-            Staff.Contact_No =txt_contact.Text;
-            var result = bL_Staff.contact_textchanged(Staff);
-            //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
-            Label19.Text = result.Sql_Result;
+            if (txt_contact.Text.Trim() != "")
+            {
+                if (staff_id.Value != "")
+                {
+                    Staff.staff_id = Convert.ToInt32(staff_id.Value);
+                    Staff.Sql_Operation = "check_no";
+                    Staff.Contact_No = txt_contact.Text;
+                    var result = bL_Staff.contact_textchanged(Staff);
+                    //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
+                    Label19.Text = result.Sql_Result;
+                }
+            }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            staff_Gridbind();
         }
     }
 }

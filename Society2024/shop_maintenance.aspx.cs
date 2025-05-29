@@ -45,7 +45,7 @@ namespace Society
             shop_maint_id.Value = id;
             runproc("Select");
             ddl_method_SelectedIndexChanged(sender, e);
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         public void shop_maintenance_GridBind()
         {
@@ -113,7 +113,7 @@ namespace Society
         {
 
             runproc_save("Update");
-            Response.Redirect("shop_maintenance.aspx");
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)
@@ -223,15 +223,18 @@ namespace Society
 
         protected void txt_recipt_TextChanged(object sender, EventArgs e)
         {
-            if (shop_maint_id.Value != "")
-                maintenance.shop_maint_id = Convert.ToInt32(shop_maint_id.Value);
-            maintenance.Sql_Operation = "check_no";
-            maintenance.Society_Id = society_id.Value;
-            maintenance.Mrep_No = txt_recipt.Text;
-            var result = bL_Shop.receipt_textchanged(maintenance);
-            //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
-            Label14.Text = result.Sql_Result;
+            if (txt_recipt.Text.Trim() != "")
+            {
+                if (shop_maint_id.Value != "")
+                    maintenance.shop_maint_id = Convert.ToInt32(shop_maint_id.Value);
+                maintenance.Sql_Operation = "check_no";
+                maintenance.Society_Id = society_id.Value;
+                maintenance.Mrep_No = txt_recipt.Text;
+                var result = bL_Shop.receipt_textchanged(maintenance);
+                //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
+                Label14.Text = result.Sql_Result;
 
+            }
         }
 
 
@@ -249,6 +252,12 @@ namespace Society
             else
                 txt_search.TextMode = TextBoxMode.SingleLine;
             txt_search.Text = "";
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            shop_maintenance_GridBind();
         }
     }
 }

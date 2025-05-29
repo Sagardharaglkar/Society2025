@@ -41,5 +41,11 @@ namespace Society
             //GridView1.Visible = dt.Rows.Count >= 1;
             //lblNoDataFound3.Visible = dt.Rows.Count == 0;
         }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+
+        }
     }
 }

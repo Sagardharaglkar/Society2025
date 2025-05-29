@@ -1,21 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Staff_Master.aspx.cs" Inherits="Society2024.Staff_Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script type="text/javascript">
-        function SuccessEntry() {
-            Swal.fire(
-                'SUCCESS!',
-                'Quotation Entry Successfully Registered!',
-                'success'
-            )
-        }
-        function Fail() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'You Missed Something Empty!',
-            })
-        }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function SuccessEntry() {
+        Swal.fire({
+            title: '✅ Success!',
+            text: 'Saved Successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 3000,
+            timerProgressBar: true,
+
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                window.location.href = 'Staff_Master.aspx';
+            }
+        });
+    }
 
         function digit(evt) {
             if (evt.keyCode < 48 || evt.keyCode > 57) {
@@ -34,12 +40,10 @@
             }
         }
 
-    </script>
-    <script type='text/javascript'>
         function openModal() {
             $('#edit_model').modal('show');
         }
-    </script>
+</script>
 
 
     <div class="box box-primary">
@@ -49,15 +53,15 @@
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Search Staff</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Staff</h1>
                         </th>
                     </tr>
                 </table>
                 <br />
 
-                <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                 <asp:HiddenField ID="staff_id" runat="Server"></asp:HiddenField>
                 <asp:HiddenField ID="build_id" runat="server" />
@@ -89,7 +93,7 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating">
+                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating">
 
                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                     <Columns>
@@ -153,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-
+        </ContentTemplate></asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-6">
                         <div class="modal-content" style="height: auto; width: 400px;">
@@ -162,7 +166,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Staff_Search</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
+                          
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
@@ -261,10 +265,14 @@
                                                 </div>
                                             </div>
 
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                        <    </ContentTemplate>
+<Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
+</asp:UpdatePanel>
 
-                                </form>
+
+                                
                             </div>
 
                             <div class="modal-footer">
@@ -293,11 +301,4 @@
         </div>
     </div>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 </asp:Content>

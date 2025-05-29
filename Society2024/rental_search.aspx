@@ -2,21 +2,30 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function SuccessEntry() {
+        Swal.fire({
+            title: '✅ Success!',
+            text: 'Saved Successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 3000,
+            timerProgressBar: true,
+
+            didOpen: () => {
+                Swal.showLoading()
+            },
+            willClose: () => {
+                window.location.href = 'rental_search.aspx';
+            }
+        });
+    }
+</script>
+
     <script type="text/javascript">
-        function SuccessEntry() {
-            Swal.fire(
-                'SUCCESS!',
-                'Quotation Entry Successfully Registered!',
-                'success'
-            )
-        }
-        function Fail() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'You Missed Something Empty!',
-            })
-        }
         function digit(evt) {
 
             if (evt.keyCode < 48 || evt.keyCode > 57) {
@@ -33,8 +42,8 @@
             }
         }  </script>
 
-   <style>
-       .overflow-div {
+    <style>
+        .overflow-div {
             width: 200px;
             height: 25px;
             word-wrap: break-word;
@@ -43,7 +52,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-   </style>
+    </style>
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
@@ -51,9 +60,7 @@
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Search Tenant</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Tenant</h1>
                         </th>
                     </tr>
                 </table>
@@ -67,24 +74,26 @@
                 <div class="form-group">
                     <div class="row ">
                         <div class="col-12">
-                           <div class="d-flex align-items-center">
-                       
-                            <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                <asp:ListItem Value="name">Name</asp:ListItem>
-                                <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
-                                <asp:ListItem Value="build_name">Building</asp:ListItem>
-                                <asp:ListItem Value="w_name">Wing</asp:ListItem>
-                                <asp:ListItem Value="flat_type">Flat Type</asp:ListItem>
+                            <div class="d-flex align-items-center">
 
-                            </asp:DropDownList>&nbsp;&nbsp;
+                                <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
+                                    <asp:ListItem Value="name">Name</asp:ListItem>
+                                    <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
+                                    <asp:ListItem Value="build_name">Building</asp:ListItem>
+                                    <asp:ListItem Value="w_name">Wing</asp:ListItem>
+                                    <asp:ListItem Value="flat_type">Flat Type</asp:ListItem>
+
+                                </asp:DropDownList>&nbsp;&nbsp;
                        
                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" /></asp:Panel>&nbsp;&nbsp;
+                                <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
+                                </asp:Panel>
+                                &nbsp;&nbsp;
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">New Entry</button>
 
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
 
@@ -93,74 +102,79 @@
                     <div class="row ">
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" AllowPaging="true" PageSize="50" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowDeleting="GridView1_RowDeleting">
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
 
-                                    <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                        <asp:GridView ID="GridView1" runat="server" AllowPaging="true" PageSize="15" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowDeleting="GridView1_RowDeleting">
 
-                                         <asp:TemplateField HeaderText="owner_id" Visible="false" SortExpression="owner_id">
-                                            <ItemTemplate>
-                                                <asp:Label ID="owner_id" runat="server" Text='<%# Bind("owner_id")%>'></asp:Label>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="owner_id" Visible="false" SortExpression="owner_id">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="owner_id" runat="server" Text='<%# Bind("owner_id")%>'></asp:Label>
 
-                                        <asp:TemplateField HeaderText="Name" Visible="true" SortExpression="name">
-                                            <ItemTemplate>
-                                               <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                          <asp:TemplateField HeaderText="Building" Visible="true" SortExpression="build_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="addr3" runat="server" Text='<%# Bind("build_name")%>'></asp:Label>
+                                                <asp:TemplateField HeaderText="Name" Visible="true" SortExpression="name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                          <asp:TemplateField HeaderText="Flat No" Visible="true" SortExpression="flat_no">
-                                            <ItemTemplate>
-                                                <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_no")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Building" Visible="true" SortExpression="build_name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="addr3" runat="server" Text='<%# Bind("build_name")%>'></asp:Label>
 
-                                        <asp:TemplateField HeaderText="wing" Visible="true" SortExpression="w_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="addr2" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Flat No" Visible="true" SortExpression="flat_no">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_no")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Flat Type" Visible="true" SortExpression="flat_type">
-                                            <ItemTemplate>
-                                                <asp:Label ID="addr1" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>
+                                                <asp:TemplateField HeaderText="wing" Visible="true" SortExpression="w_name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="addr2" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>
 
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("owner_id")%>'><img src="Images/123.png"/></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Flat Type" Visible="true" SortExpression="flat_type">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="addr1" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>
 
-                                        <asp:TemplateField HeaderText="Delete" ItemStyle-Width="60">
-    <ItemTemplate>
-        <asp:ImageButton
-            ID="imgDelete" 
-            ImageUrl="~/Images/delete_10781634.png" 
-            CommandName="Delete" 
-            runat="server" 
-            Height="25px"
-            ToolTip="Delete this row"
-            OnClientClick="return confirm('Are you sure you want to delete this row?');" />
-    </ItemTemplate>
-</asp:TemplateField>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("owner_id")%>'><img src="Images/123.png"/></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                    </Columns>
-                                </asp:GridView>
+                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="60">
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton
+                                                            ID="imgDelete"
+                                                            ImageUrl="~/Images/delete_10781634.png"
+                                                            CommandName="Delete"
+                                                            runat="server"
+                                                            Height="25px"
+                                                            ToolTip="Delete this row"
+                                                            OnClientClick="return confirm('Are you sure you want to delete this row?');" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                            </Columns>
+                                        </asp:GridView>
+
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
@@ -312,55 +326,57 @@
 
 
                                 </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </Triggers>
                             </asp:UpdatePanel>
 
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <asp:Label ID="Label3" runat="server" Text="ID Proof"></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <asp:DropDownList ID="ddl_doc_type" Height="32px" Width="200px" runat="server" parsely-trigger="change">
+                                        </asp:DropDownList>
+                                        <br />
+                                        <asp:CompareValidator ControlToValidate="ddl_doc_type" ID="CompareValidator5" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select ID Proof" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <asp:FileUpload ID="FileUpload2" runat="server" />
+                                    </div>
 
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <asp:Label ID="Label3" runat="server" Text="ID Proof"></asp:Label>
-                                            <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                            <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                    <div class="col-sm-2">
+                                        <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
+                                        <div class="overflow-div">
+                                            <asp:Label ID="listofuploadedfiles1" runat="server" />
                                         </div>
-                                        <div class="col-sm-3">
-                                            <asp:DropDownList ID="ddl_doc_type" Height="32px" Width="200px" runat="server" parsely-trigger="change" >
-                                               
-                                               
-                                            </asp:DropDownList>
-                                            <br />
-                                            <asp:CompareValidator ControlToValidate="ddl_doc_type" ID="CompareValidator5" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select ID Proof" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <asp:FileUpload ID="FileUpload2" runat="server" />
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
-                                             <div class="overflow-div">
-                                            <asp:Label ID="listofuploadedfiles1" runat="server" /> </div>
-                                            <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
-                                       </div>
-                                      </div>
-
-
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <asp:Label ID="Label2" runat="server" Text="Photo Proof"></asp:Label>
-                                            <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                            <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                             <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" /> 
-                                             <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
-                                       <div class="overflow-div">
-                                            <asp:Label ID="listofuploadedfiles" runat="server" /> </div>
-                                             <asp:Label ID="uploadidpath" runat="server" Visible="false" />
-                                        </div>
+                                        <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
                                     </div>
                                 </div>
-                                <hr />
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <asp:Label ID="Label2" runat="server" Text="Photo Proof"></asp:Label>
+                                        <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                        <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
+                                        <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
+                                        <div class="overflow-div">
+                                            <asp:Label ID="listofuploadedfiles" runat="server" />
+                                        </div>
+                                        <asp:Label ID="uploadidpath" runat="server" Visible="false" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
 
                             <div class="box-header">
                                 <div class="row ">
@@ -515,7 +531,7 @@
                             <div class="form-group">
                                 <div class="row ">
                                     <div class="col-sm-12">
-                                        <asp:GridView ID="GridView2" runat="server" Width="100%"  AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView2_RowDeleting" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" OnSorting="GridView2_Sorting" EmptyDataText="No Record Found" AllowSorting="True">
+                                        <asp:GridView ID="GridView2" runat="server" Width="100%" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView2_RowDeleting" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" OnSorting="GridView2_Sorting" EmptyDataText="No Record Found" AllowSorting="True">
 
                                             <Columns>
                                                 <asp:TemplateField HeaderText="detail_id" Visible="false">
@@ -582,13 +598,5 @@
 
         </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
 </asp:Content>
