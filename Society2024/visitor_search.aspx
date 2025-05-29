@@ -215,7 +215,10 @@
                                                     <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_v_name" runat="server" Style="text-transform: capitalize;" required placeholder="Enter Visitor's Name" Width="192px" Height="32px"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_v_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" required placeholder="Enter Visitor's Name" Width="192px" Height="32px"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Visitors Name
+                                                    </div>
                                                 </div>
 
 
@@ -225,7 +228,10 @@
                                                     <asp:Label ID="Label36" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_contact" runat="server" MaxLength="10" placeholder="Enter No" onkeypress="return digit(event);" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter No" onkeypress="return digit(event);" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Contact No
+                                                    </div>
                                                     <br />
                                                     <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txt_org_tel" ErrorMessage="Numbers Only" Font-Bold="True" ForeColor="Red" ValidationExpression="^\d+" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>--%>
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid Phone number" Font-Bold="True" ForeColor="Red" ControlToValidate="txt_contact" ValidationExpression="[0-9]{10}" ValidationGroup="g1" Display="Dynamic"> </asp:RegularExpressionValidator>
@@ -331,7 +337,10 @@
                                                     <asp:Label ID="Label21" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_visiting_purpose" runat="server" Style="text-transform: capitalize;" MaxLength="250" Width="192px" Height="32px" placeholder="Enter Visiting Purpose" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_visiting_purpose" CssClass="form-control" runat="server" Style="text-transform: capitalize;" MaxLength="250" Width="192px" Height="32px" placeholder="Enter Visiting Purpose" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Visiting Purpose
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -348,6 +357,9 @@
 
 
                                     </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>

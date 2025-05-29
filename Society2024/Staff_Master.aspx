@@ -182,7 +182,10 @@
                                                         <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_name" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Name
+                                                        </div>
                                                         <br />
 
 
@@ -198,8 +201,11 @@
                                                         <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                       <asp:DropDownList ID="ddl_role" AutoPostBack="true" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke">
+                                                       <asp:DropDownList CssClass="form-select" ID="ddl_role" AutoPostBack="true" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke">
                                                         </asp:DropDownList>
+                                                        <div class="invalid-feedback">
+                                                            Please select Role
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -213,7 +219,10 @@
                                                         <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_address" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Address" Width="200px" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_address" CssClass="form-control" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Address" Width="200px" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Adress
+                                                        </div>
 
                                                         <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                     </div>
@@ -228,7 +237,10 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_contact" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" OnTextChanged="txt_contact_TextChanged" onkeypress="return digit(event);" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" OnTextChanged="txt_contact_TextChanged" onkeypress="return digit(event);" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Contact No
+                                                        </div>
                                                         <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txt_contact" ErrorMessage="Numbers Only" Font-Bold="True" ForeColor="Red" ValidationExpression="^\d+" Display="Dynamic" ValidationGroup="g1"></asp:RegularExpressionValidator>--%>
                                                         <asp:Label ID="Label19" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                     </div>
@@ -244,7 +256,10 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_email" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Email
+                                                        </div>
                                                         <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="true" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
                                                     </div>
 
@@ -258,21 +273,25 @@
                                                         <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_doj" runat="server" Height="32px" placeholder="Enter Address" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_doj" CssClass="form-control" runat="server" Height="32px" placeholder="Enter Address" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Date
+                                                        </div>
 
                                                         <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                        <    </ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-</asp:UpdatePanel>
+                                            </ContentTemplate>
+       
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
 
 
-                                
+
                             </div>
 
                             <div class="modal-footer">

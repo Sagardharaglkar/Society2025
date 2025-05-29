@@ -122,6 +122,7 @@ namespace Society2024
             role_id.Value = id;
             runproc("Role_Select");
             //btn_delete.Visible = false;
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 

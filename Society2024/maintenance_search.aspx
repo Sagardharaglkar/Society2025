@@ -165,7 +165,10 @@
                                                         <asp:Label ID="Label40" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:DropDownList ID="drp_build" runat="server" Width="100px" parsely-trigger="change" OnSelectedIndexChanged="drp_build_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                        <asp:DropDownList CssClass="form-select" ID="drp_build" runat="server" Width="100px" parsely-trigger="change" OnSelectedIndexChanged="drp_build_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                        <div class="invalid-feedback">
+                                                            Please select Building Name
+                                                        </div>
                                                         <br />
                                                         <asp:CompareValidator ControlToValidate="drp_build" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Building Name" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                     </div>
@@ -175,7 +178,10 @@
                                                         <asp:Label ID="Label44" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox ID="txt_date" runat="server" placeholder="Enter Date" required TextMode="Date"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" placeholder="Enter Date" required TextMode="Date"></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Date
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,7 +193,10 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:DropDownList ID="drp_wing" runat="server" Width="100px" parsely-trigger="change" OnSelectedIndexChanged="drp_wing_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                        <asp:DropDownList CssClass="form-select" ID="drp_wing" runat="server" Width="100px" parsely-trigger="change" OnSelectedIndexChanged="drp_wing_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                        <div class="invalid-feedback">
+                                                            Please select Wing
+                                                        </div>
                                                         <br />
 
 
