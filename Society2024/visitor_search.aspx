@@ -2,21 +2,28 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
-            Swal.fire(
-                'SUCCESS!',
-                'Quotation Entry Successfully Registered!',
-                'success'
-            )
-        }
-        function Fail() {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'You Missed Something Empty!',
-            })
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'visitor_search.aspx';
+                }
+            });
         }
+
         function digit(evt) {
             if (evt.keyCode < 48 || evt.keyCode > 57) {
 
@@ -37,162 +44,126 @@
                 <table width="100%">
                     <tr>
                         <th width="100%">
-                            <h1 class="bg-primary text-white">
-                                <center>Search Visitors</center>
-                            </h1>
+                            <h1 class=" font-weight-bold " style="color: #012970;">Visitors</h1>
                         </th>
                     </tr>
                 </table>
                 <br />
 
 
-                <asp:HiddenField ID="visitor_id" runat="server"></asp:HiddenField>
-                <asp:HiddenField ID="society_id" runat="server" />
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+
+                        <asp:HiddenField ID="visitor_id" runat="server"></asp:HiddenField>
+                        <asp:HiddenField ID="society_id" runat="server" />
 
 
-            <%--   <div class="form-group">
-    <div class="row">
-        <!-- Visitor Type -->
-         <div>
-            <asp:Label ID="lbl_acc_no" runat="server" Text="Visitor Type"></asp:Label><br />&nbsp;&nbsp;
-            <asp:DropDownList ID="drp_visiting_type" runat="server" >
-                <asp:ListItem>--Select--</asp:ListItem>
-                <asp:ListItem Value="Cab">Cab</asp:ListItem>
-                <asp:ListItem Value="Service">Home service</asp:ListItem>
-                <asp:ListItem Value="Delivery">Delivery</asp:ListItem>
-                <asp:ListItem Value="Guest">Guest & Others</asp:ListItem>
-            </asp:DropDownList>
-        </div>
+                        <div class="form-group">
+                            <div class="row align-items-end">
 
-        <!-- From Date -->
-        <div>
-            <asp:Label ID="Label1" runat="server" Text="From Date"></asp:Label><br />&nbsp;&nbsp;
-            <asp:TextBox ID="txt_from" runat="server" TextMode="Date"></asp:TextBox>&nbsp;&nbsp;
-        </div>
+                                <!-- Visitor Type -->
+                                <div class="col-sm-2">
+                                    <asp:Label ID="lbl_acc_no" runat="server" ForeColor="Black" Text="Visitor Type"></asp:Label>
+                                    <asp:DropDownList ID="drp_visiting_type" runat="server" ForeColor="Gray">
+                                        <asp:ListItem>--Select--</asp:ListItem>
+                                        <asp:ListItem Value="Cab">Cab</asp:ListItem>
+                                        <asp:ListItem Value="Service">Home service</asp:ListItem>
+                                        <asp:ListItem Value="Delivery">Delivery</asp:ListItem>
+                                        <asp:ListItem Value="Guest">Guest & Others</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
 
-        <!-- To Date -->
-        <div>
-            <asp:Label ID="Label2" runat="server" Text="To Date"></asp:Label><br />&nbsp;&nbsp;
-            <asp:TextBox ID="txt_to" runat="server" TextMode="Date"></asp:TextBox>&nbsp;&nbsp;
-        </div>
+                                <!-- From Date -->
+                                <div class="col-sm-2">
+                                    <asp:Label ID="Label1" runat="server" ForeColor="Black" Text="From Date"></asp:Label>
+                                    <asp:TextBox ID="txt_from" runat="server" ForeColor="Gray" TextMode="Date"></asp:TextBox>
+                                </div>
 
-        <!-- Buttons -->
-        <div>
-            <asp:Button ID="btn_search" runat="server" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-            &nbsp;
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
-            &nbsp;
-            <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-        </div>
-    </div>
-</div>--%>
+                                <!-- To Date -->
+                                <div class="col-sm-2">
+                                    <asp:Label ID="Label2" runat="server" ForeColor="Black" Text="To Date"></asp:Label>
+                                    <asp:TextBox ID="txt_to" runat="server" ForeColor="Gray" TextMode="Date"></asp:TextBox>
+                                </div>
 
+                                <!-- Buttons -->
+                                <div class="col-sm-6">
+                                    <asp:Button ID="btn_search" runat="server" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" CssClass="btn btn-primary me-2" />
+                                    <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
+                                    <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
+                                </div>
 
-<div class="form-group">
-    <div class="row align-items-end">
-
-        <!-- Visitor Type -->
-        <div class="col-sm-2">
-            <asp:Label ID="lbl_acc_no" runat="server" ForeColor="Black" Text="Visitor Type"></asp:Label>
-            <asp:DropDownList ID="drp_visiting_type" runat="server" ForeColor="Gray">
-                <asp:ListItem>--Select--</asp:ListItem>
-                <asp:ListItem Value="Cab">Cab</asp:ListItem>
-                <asp:ListItem Value="Service">Home service</asp:ListItem>
-                <asp:ListItem Value="Delivery">Delivery</asp:ListItem>
-                <asp:ListItem Value="Guest">Guest & Others</asp:ListItem>
-            </asp:DropDownList>
-        </div>
-
-        <!-- From Date -->
-        <div class="col-sm-2">
-            <asp:Label ID="Label1" runat="server" ForeColor="Black" Text="From Date"></asp:Label>
-            <asp:TextBox ID="txt_from" runat="server" ForeColor="Gray" TextMode="Date"></asp:TextBox>
-        </div>
-
-        <!-- To Date -->
-        <div class="col-sm-2">
-            <asp:Label ID="Label2" runat="server" ForeColor="Black" Text="To Date"></asp:Label>
-            <asp:TextBox ID="txt_to" runat="server" ForeColor="Gray" TextMode="Date"></asp:TextBox>
-        </div>
-
-        <!-- Buttons -->
-        <div class="col-sm-6">
-            <asp:Button ID="btn_search" runat="server" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" CssClass="btn btn-primary me-2" />
-            <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
-            <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-        </div>
-
-    </div>
-</div>
-
-
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                                <asp:GridView ID="GridView1" runat="server" PageSize="50" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" AutoGenerateColumns="false" OnRowDeleting="GridView1_RowDeleting">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="No" Visible="true">
-                                            <ItemTemplate>
-                                                <asp:Label ID="No" runat="server" Text='<%#Container.DataItemIndex+1 %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="visitor_id" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="visitor_id" runat="server" Text='<%#Bind("visitor_id")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Name" SortExpression="v_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="ID1" runat="server" Text='<%#Bind("v_name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Visitor Type" SortExpression="type">
-                                            <ItemTemplate>
-                                                <asp:Label ID="v_type" runat="server" Text='<%# Bind("type")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="In Date" SortExpression="in_date">
-                                            <ItemTemplate>
-                                                <asp:Label ID="in_date" runat="server" Text='<%# Bind("in_date", "{0:dd-MM-yyyy}")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="IN Time" SortExpression="in_time">
-                                            <ItemTemplate>
-                                                <asp:Label ID="in_time" runat="server" Text='<%# Bind("in_time")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Out Date" SortExpression="out_date">
-                                            <ItemTemplate>
-                                                <asp:Label ID="out_date" runat="server" Text='<%# Bind("out_date", "{0:dd-MM-yyyy}")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Out Time" SortExpression="out_time">
-                                            <ItemTemplate>
-                                                <asp:Label ID="out_time" runat="server" Text='<%# Bind("out_time")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("visitor_id")%>'><img src="Images/123.png"/></asp:LinkButton>
-
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                       <asp:TemplateField  ItemStyle-Width="50">
-                                        <ItemTemplate >
-                                            <asp:LinkButton runat="server" ID="edit551" CommandName="Delete"  OnClientClick="return confirm('Are you sure want to delete?');" ><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                              </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    </Columns>
-                                </asp:GridView>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView ID="GridView1" runat="server" PageSize="15" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" AutoGenerateColumns="false" OnRowDeleting="GridView1_RowDeleting">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" Visible="true">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="No" runat="server" Text='<%#Container.DataItemIndex+1 %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="visitor_id" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="visitor_id" runat="server" Text='<%#Bind("visitor_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Name" SortExpression="v_name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="ID1" runat="server" Text='<%#Bind("v_name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Visitor Type" SortExpression="type">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="v_type" runat="server" Text='<%# Bind("type")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="In Date" SortExpression="in_date">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="in_date" runat="server" Text='<%# Bind("in_date", "{0:dd-MM-yyyy}")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="IN Time" SortExpression="in_time">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="in_time" runat="server" Text='<%# Bind("in_time")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Out Date" SortExpression="out_date">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="out_date" runat="server" Text='<%# Bind("out_date", "{0:dd-MM-yyyy}")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Out Time" SortExpression="out_time">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="out_time" runat="server" Text='<%# Bind("out_time")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("visitor_id")%>'><img src="Images/123.png"/></asp:LinkButton>
+
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ContentTemplate>
+                </asp:UpdatePanel>
 
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4" style="right: 80px">
@@ -205,38 +176,38 @@
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
 
-                                          <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_date" runat="server" Text="In Date"></asp:Label>
-                                        <asp:Label ID="lbl_date_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_in_date" Width="192px" Height="32px" TextMode="Date" runat="server" Enabled="false"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="Label32" runat="server" Text="Out Date"></asp:Label>
-                                        <asp:Label ID="Label33" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_out_date"  Width="192px" Height="32px"  TextMode="Date" runat="server" ValidationGroup="g1"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row ">
-                                     <div class="col-sm-3"></div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_in_time" runat="server"  Width="192px" Height="32px"  Enabled="false"></asp:TextBox>
-                                    </div>
-                                     <div class="col-sm-3"></div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_out_time"  Width="192px" Height="32px"  TextMode="Time" runat="server" ValidationGroup="g1"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-3">
+                                                    <asp:Label ID="lbl_date" runat="server" Text="In Date"></asp:Label>
+                                                    <asp:Label ID="lbl_date_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <asp:TextBox ID="txt_in_date" Width="192px" Height="32px" TextMode="Date" runat="server" Enabled="false"></asp:TextBox>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <asp:Label ID="Label32" runat="server" Text="Out Date"></asp:Label>
+                                                    <asp:Label ID="Label33" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <asp:TextBox ID="txt_out_date" Width="192px" Height="32px" TextMode="Date" runat="server" ValidationGroup="g1"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-3">
+                                                    <asp:TextBox ID="txt_in_time" runat="server" Width="192px" Height="32px" Enabled="false"></asp:TextBox>
+                                                </div>
+                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-3">
+                                                    <asp:TextBox ID="txt_out_time" Width="192px" Height="32px" TextMode="Time" runat="server" ValidationGroup="g1"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label3" runat="server" Text="Visitor's name:"></asp:Label>
@@ -244,10 +215,10 @@
                                                     <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_v_name" runat="server" Style="text-transform: capitalize;" required placeholder="Enter Visitor's Name"  Width="192px" Height="32px" ></asp:TextBox>
+                                                    <asp:TextBox ID="txt_v_name" runat="server" Style="text-transform: capitalize;" required placeholder="Enter Visitor's Name" Width="192px" Height="32px"></asp:TextBox>
                                                 </div>
 
-                                               
+
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label34" runat="server" Text="Contact No"></asp:Label>
                                                     <asp:Label ID="Label35" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
@@ -261,12 +232,12 @@
                                                     <asp:Label ID="Label37" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
 
-                                              
+
                                             </div>
-                                              </div>
-                                                 
-                                                <div class="form-group">
-                                                <div class="row ">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row ">
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label29" runat="server" Text="Building"></asp:Label>
                                                     <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
@@ -279,8 +250,8 @@
                                                         InitialValue="select" runat="server" Display="Dynamic">
                                                     </asp:RequiredFieldValidator>
                                                 </div>
-                              
-                                               <div class="col-sm-3">
+
+                                                <div class="col-sm-3">
                                                     <asp:Label ID="Label6" runat="server" Text="Visiting Flat No"></asp:Label>
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
@@ -295,13 +266,13 @@
 
 
                                             </div>
-                                           </div>
-                                        
+                                        </div>
 
-                                       
-                                           <div class="form-group">
+
+
+                                        <div class="form-group">
                                             <div class="row ">
-     
+
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label7" runat="server" Text="Visiting Type"></asp:Label>
                                                     <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
@@ -325,59 +296,63 @@
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label12" runat="server" Text="Vehical No"></asp:Label>
                                                     <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                   
+
                                                 </div>
                                                 <div class="col-sm-3">
-                                                   <asp:TextBox ID="txt_vehical_no" runat="server" Style="text-transform: capitalize;" MaxLength="250" placeholder="Enter Vehical No."  Width="192px" Height="32px" ></asp:TextBox>
-                                                    
+                                                    <asp:TextBox ID="txt_vehical_no" runat="server" Style="text-transform: capitalize;" MaxLength="250" placeholder="Enter Vehical No." Width="192px" Height="32px"></asp:TextBox>
+
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <asp:panel ID="delivary" runat="server" Visible="false">
-                                         <div class="form-group">
-                                            <div class="row ">
+                                        <asp:Panel ID="delivary" runat="server" Visible="false">
+                                            <div class="form-group">
+                                                <div class="row ">
 
-                                                  <div class="col-sm-3">
-                                                    <asp:Label ID="Label4" runat="server" Text="Preference"></asp:Label>
-                                                    <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Leave At Gate" Checked="true" GroupName="led_status" />
-                                                   &nbsp;&nbsp;
-                                                     <asp:RadioButton ID="RadioButton2" runat="server" Text="Doorstep" GroupName="led_status"/>
+                                                    <div class="col-sm-3">
+                                                        <asp:Label ID="Label4" runat="server" Text="Preference"></asp:Label>
+                                                        <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                        <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <asp:RadioButton ID="RadioButton1" runat="server" Text="Leave At Gate" Checked="true" GroupName="led_status" />
+                                                        &nbsp;&nbsp;
+                                                     <asp:RadioButton ID="RadioButton2" runat="server" Text="Doorstep" GroupName="led_status" />
+                                                    </div>
                                                 </div>
-                                              </div>
-                                             </asp:panel>
+                                        </asp:Panel>
 
-                                         <div class="form-group">
+                                        <div class="form-group">
                                             <div class="row ">
 
-                                                  <div class="col-sm-3">
+                                                <div class="col-sm-3">
                                                     <asp:Label ID="Label19" runat="server" Text="Visiting Purpose"></asp:Label>
                                                     <asp:Label ID="Label20" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="Label21" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_visiting_purpose" runat="server" Style="text-transform: capitalize;" MaxLength="250"  Width="192px" Height="32px"  placeholder="Enter Visiting Purpose" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_visiting_purpose" runat="server" Style="text-transform: capitalize;" MaxLength="250" Width="192px" Height="32px" placeholder="Enter Visiting Purpose" required></asp:TextBox>
                                                 </div>
-                                               
+
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label26" runat="server" Text="Image"></asp:Label>
                                                     <asp:Label ID="Label27" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="Label28" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
-                                                     <asp:Label ID="image" runat="server" ></asp:Label>
-                                               </div>
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
+                                                    <asp:Label ID="image" runat="server"></asp:Label>
+                                                </div>
                                             </div>
                                         </div>
-                                         
+
 
                                     </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
                                 </asp:UpdatePanel>
+
 
                                 <div class="form-group">
                                     <div class="row ">
@@ -397,15 +372,7 @@
             </div>
         </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
 </asp:Content>
 
 

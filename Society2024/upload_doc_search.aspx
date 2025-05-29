@@ -35,7 +35,7 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
-                
+
                 <table width="100%">
                     <tr>
                         <th width="100%">
@@ -45,95 +45,95 @@
                 </table>
                 <br />
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-    <ContentTemplate>
+                    <ContentTemplate>
 
-                <asp:HiddenField ID="file_id" runat="server" />
-<asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
+                        <asp:HiddenField ID="file_id" runat="server" />
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
 
-                                <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                    <asp:ListItem Value="name">Building name</asp:ListItem>
-                                    <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
-                                    <asp:ListItem Value="doc_name">Document</asp:ListItem>
-                                </asp:DropDownList>&nbsp;&nbsp;
+                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
+                                            <asp:ListItem Value="name">Building name</asp:ListItem>
+                                            <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
+                                            <asp:ListItem Value="doc_name">Document</asp:ListItem>
+                                        </asp:DropDownList>&nbsp;&nbsp;
 
                               <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
                                   <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                </asp:Panel>
-                                &nbsp;&nbsp;
+                              </asp:Panel>
+                                        &nbsp;&nbsp;
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">New Entry</button>
+                                    </div>
+
+                                </div>
                             </div>
-
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
 
-                                    <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <%--<asp:CommandField ShowSelectButton="false" ControlStyle-ForeColor="blue" />--%>
-                                        <%--<asp:TemplateField HeaderText="ID" Visible="true" SortExpression="facility_id">
+                                            <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <%--<asp:CommandField ShowSelectButton="false" ControlStyle-ForeColor="blue" />--%>
+                                                <%--<asp:TemplateField HeaderText="ID" Visible="true" SortExpression="facility_id">
                                                         <ItemTemplate>
 
                                                             <asp:HyperLink runat="server" ID="HyperLink1" NavigateUrl='<%# "flat.aspx?facility_id=" + Eval("facility_id")%>' Text='<%# Bind("facility_id")%>'></asp:HyperLink>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>--%>
-                                        <asp:TemplateField HeaderText="file_id" SortExpression="file_id" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="file_id" runat="server" Text='<%# Bind("file_id")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="file_id" SortExpression="file_id" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="file_id" runat="server" Text='<%# Bind("file_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="Building Name" Visible="true" SortExpression="name">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" ID="HyperLink1" Text='<%# Bind("name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Unit" SortExpression="flat_no">
-                                            <ItemTemplate>
-                                                <asp:Label ID="w_name" runat="server" Text='<%# Eval("w_name")+":" +Eval("flat_no")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Document" SortExpression="doc_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="flat_type" runat="server" Text='<%# Bind("doc_name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Building Name" Visible="true" SortExpression="name">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="HyperLink1" Text='<%# Bind("name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Unit" SortExpression="flat_no">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="w_name" runat="server" Text='<%# Eval("w_name")+":" +Eval("flat_no")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Document" SortExpression="doc_name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="flat_type" runat="server" Text='<%# Bind("doc_name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("file_id")%>'><img src="Images/123.png"/></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ItemStyle-Width="50">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("file_id")%>'><img src="Images/123.png"/></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
-                                    </Columns>
-                                </asp:GridView>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-        </ContentTemplate>
+                    </ContentTemplate>
 
-</asp:UpdatePanel>
+                </asp:UpdatePanel>
 
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
@@ -219,11 +219,11 @@
                                         </div>
 
 
-</ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-</asp:UpdatePanel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
 
 
                                 <div class="form-group">

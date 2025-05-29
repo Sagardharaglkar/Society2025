@@ -213,7 +213,7 @@ namespace Society
             }
             txt_out_date.Enabled = true;
             txt_out_time.Enabled = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
 

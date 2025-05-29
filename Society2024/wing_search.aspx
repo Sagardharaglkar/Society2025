@@ -53,11 +53,11 @@
                             </th>
                         </tr>
                     </table>
+            <asp:UpdatePanel UpdateMode="Always" ID="wings" runat="server">
+                <ContentTemplate>
             <asp:HiddenField ID="wing_id" runat="server" />
             <asp:HiddenField ID="HiddenField4" runat="server" />
             <asp:HiddenField ID="society_id" runat="server" />
-            <asp:UpdatePanel UpdateMode="Always" ID="wings" runat="server">
-                <ContentTemplate>
 
                         <div class="form-group">
                             <div class="row ">

@@ -74,8 +74,8 @@ namespace Society
                 }
 
                 path = Path.Combine(Server.MapPath(("~/Documents") + "/" + ddl_build.SelectedItem.Text + "/" + ddl_wing.SelectedItem.Text + "/"  + ddl_flatno.SelectedItem.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/" + file_name.FileName));
-            }
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            }
         }
 
 
@@ -151,7 +151,7 @@ namespace Society
                 uplaod_doc();
                 runproc_save("Update");
                 Response.Redirect("upload_doc_search.aspx");
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
 
             }
             else
