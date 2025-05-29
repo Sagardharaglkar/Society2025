@@ -278,7 +278,9 @@
          </div>
      </div>
 
- </ContentTemplate>
+ </ContentTemplate><Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
                                 </asp:UpdatePanel>
 
 

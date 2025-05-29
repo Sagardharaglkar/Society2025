@@ -50,11 +50,13 @@
                 <br />
 
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
+                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+     <ContentTemplate>
                 <asp:HiddenField ID="mon_charge_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
                 <div class="form-group">
-                    <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
+                   
+
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -75,6 +77,7 @@
                                     </div>
                                 </div>
                             </div>
+                    </div>
 
                             <div class="form-group">
                                 <div class="row ">
@@ -129,7 +132,7 @@
                     </div>
                 </div>
             </div>
-       
+       </ContentTemplate></asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content" style="height: auto; width: 500px;">
@@ -138,7 +141,7 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Charges Monthwise</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
+
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
@@ -198,10 +201,13 @@
             </div>
         </div>
     </ContentTemplate>
+                                        <Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
                                     </asp:UpdatePanel>
 
 
-
+                                </div>
 
 
                                     <div class="modal-footer">
@@ -214,9 +220,8 @@
                                                 </center>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                
+                            
                         </div>
                         <!-- /.modal-body -->
                     </div>
@@ -227,4 +232,5 @@
             </div>
         </div>
     </div>
+
 </asp:Content>

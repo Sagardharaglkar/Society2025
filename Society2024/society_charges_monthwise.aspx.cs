@@ -29,11 +29,6 @@ namespace Society2024
                 monthwise_charges_Gridbind();
            
 
-              
-
-                //fetch_defaulter();
-                //lblDateRange.Text = (new DateTime(DateTime.Now.Year, 1, 1).ToShortDateString() + " to " + DateTime.Now.ToShortDateString()).ToString();
-
             }
 
         }
