@@ -119,7 +119,7 @@
        
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
-                        <div class="modal-content" style="height: 320px; width: 500px;">
+                        <div class="modal-content" style="height: auto; width: 500px;">
                             <div class="modal-header">
                               
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Charges Monthwise</strong></h4>
@@ -131,56 +131,60 @@
                                         <div class="alert alert-danger danger" style="display: none;"></div>
                                     </div>
                                     <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                        <ContentTemplate>
-                                                                                     
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-                                                       
-                                    <asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
-                                                        
-                                                        <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox ID="txt_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus ></asp:TextBox>
-                                                        <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
+                                         <ContentTemplate>
+                                                 
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
+                    
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus ></asp:TextBox>
+                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                </div>
 
-                                                </div>
-                                            </div>
+            </div>
+        </div>
 
-                                             <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-                                                       
-                                    <asp:Label ID="Label5" runat="server" Text="Due Amount :"></asp:Label>
-                                                        
-                                                        <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox ID="txt_pen_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter pending Amount" required autofocus ></asp:TextBox>
-                                                        <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
+         <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label5" runat="server" Text="Due Amount :"></asp:Label>
+                    
+                    <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_pen_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter pending Amount" required autofocus ></asp:TextBox>
+                    <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                </div>
 
-                                                </div>
-                                            </div>
+            </div>
+        </div>
 
-                                             <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-                                                       
-                                    <asp:Label ID="Label8" runat="server" Text="Total Amount  :"></asp:Label>
-                                                        
-                                                        <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox ID="txt_total"  runat="server" class="form-control" Width="200px" Height="32px"  required ></asp:TextBox>
-                                                        <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
+         <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label8" runat="server" Text="Total Amount  :"></asp:Label>
+                    
+                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_total" CssClass="Form-control"  runat="server" class="form-control" Width="200px" Height="32px"  required ></asp:TextBox>
+                    <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                    <div class="invalid-feedback">
+                        Please Enter Total Amount
+                    </div>
+                    
+                </div>
 
-                                                </div>
-                                            </div>
-                                        </ContentTemplate>
+            </div>
+        </div>
+    </ContentTemplate>
                                     </asp:UpdatePanel>
 
                                 </form>

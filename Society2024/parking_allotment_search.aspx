@@ -166,7 +166,7 @@
                                                     <asp:Label ID="Label1" runat="server" Text="Parking For"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:DropDownList ID="ddl_park_for" runat="server" Height="32px" Width="200px" parsely-trigger="change" OnSelectedIndexChanged="ddl_park_for_SelectedIndexChanged">
+                                                    <asp:DropDownList ID="ddl_park_for" runat="server" Height="32px" Width="200px" parsely-trigger="change" AutoPostBack="true" OnSelectedIndexChanged="ddl_park_for_SelectedIndexChanged">
                                                         <asp:ListItem Value="select">Select</asp:ListItem>
                                                         <asp:ListItem>2 Wheeler</asp:ListItem>
                                                         <asp:ListItem>3 Wheeler</asp:ListItem>
@@ -205,7 +205,7 @@
                                             </div>
                                         </div>
 
-                                        <asp:Panel ID="Panel1" Visible="false" runat="server">
+                                        <asp:Panel ID="Panel1"  runat="server">
                                             <div class="form-group">
                                                 <div class="row ">
 

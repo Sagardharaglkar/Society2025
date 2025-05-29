@@ -32,10 +32,11 @@ namespace Society
             society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
+                Panel1.Visible = false;
                 Park_Allotment_GridBind();
                 fill_drop1();
             }
-            Panel1.Visible = false;
+            
         }
         public void fill_drop1()
         {

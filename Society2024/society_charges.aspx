@@ -127,62 +127,67 @@
             </asp:UpdatePanel>
             <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                 <div class="modal-dialog modal-sm">
-                    <div class="modal-content" style="height: 300px; width: 500px;">
+                    <div class="modal-content" style="height: auto; width: 500px;">
                             <div class="modal-header">
                               
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Society Charges</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                                <form id="owner-socity-add" action="" method="post">
-
+                              
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
                                     </div>
                                     <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                        <ContentTemplate>
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-                                                     
-                                    <asp:Label ID="lbl_co_name" runat="server" Text="Society Name :"></asp:Label>
+                                         <ContentTemplate>
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                 
+<asp:Label ID="lbl_co_name" runat="server" Text="Society Name :"></asp:Label>
 
-                                                        <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:DropDownList ID="ddl_society" AutoPostBack="true" parsley-trigger="change" runat="server" OnSelectedIndexChanged="ddl_society_SelectedIndexChanged" Width="200px" Height="32px" BackColor="WhiteSmoke">
-                                                        </asp:DropDownList>
-                                                        <br />
-                                                         <asp:CompareValidator ControlToValidate="ddl_society" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select society" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                        <asp:Label ID="Label2" runat="server" ForeColor="Red"></asp:Label>
-                                                      
-                                                    </div>
+                    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:DropDownList CssClass="Form-select" ID="ddl_society" AutoPostBack="true" parsley-trigger="change" runat="server" OnSelectedIndexChanged="ddl_society_SelectedIndexChanged" Width="200px" Height="32px" BackColor="WhiteSmoke">
+                    </asp:DropDownList>
+                    <div class="invalid-feedback">
+                        Please select society Name  
+                    </div>
+                    <br />
+                     <asp:CompareValidator ControlToValidate="ddl_society" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select society" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+                    <asp:Label ID="Label2" runat="server" ForeColor="Red"></asp:Label>
+                  
+                </div>
 
-                                                </div>
-                                            </div>
-                                          
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-                                                       
-                                    <asp:Label ID="Label1" runat="server" Text="amount :"></asp:Label>
-                                                        
-                                                        <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox CssClass ID="txt_amount" parsley-trigger="change" runat="server" class="form-control" Width="200px" Height="32px" placeholder="Enter Amount" required autofocus ></asp:TextBox>
-                                                        <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
+            </div>
+        </div>
+      
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label1" runat="server" Text="amount :"></asp:Label>
+                    
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_amount" CssClass="form-control" parsley-trigger="change" runat="server" class="form-control" Width="200px" Height="32px" placeholder="Enter Amount" required autofocus ></asp:TextBox>
+                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                    <div class="invalid-feedback">
+                        Please Enter Amount 
+                    </div>
+                </div>
 
-                                                </div>
-                                            </div>
-                                        </ContentTemplate>
+            </div>
+        </div>
+    </ContentTemplate>
 
                                         <Triggers>
                                             <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                         </Triggers>
                                     </asp:UpdatePanel>
 
-                                </form>
+                              
                             </div><div class="modal-footer">
     
             <div class="form-group">

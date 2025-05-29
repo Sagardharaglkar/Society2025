@@ -65,7 +65,7 @@ namespace Society
             //runproc_Family("Select_Family");
             Family_Details_Gridbind();
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         public void Owner_Gridbind()

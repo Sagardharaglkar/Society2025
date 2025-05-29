@@ -42,6 +42,7 @@ namespace Society
                 Visitor_Gridbind();
                 txt_in_date.Text = DateTime.Now.Date.ToString("yyyy-MM-dd");
                 txt_in_time.Text = DateTime.Now.ToShortTimeString().ToString();
+                txt_out_date.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_out_date.Enabled = false;
                 txt_out_time.Enabled = false;
             }
