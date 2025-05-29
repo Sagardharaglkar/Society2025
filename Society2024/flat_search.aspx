@@ -149,139 +149,138 @@
                             <div class="modal-body" id="invoice_data">
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label5" runat="server" Text="Building & Wing :"></asp:Label>
+                               <ContentTemplate>
+     <div class="form-group">
+         <div class="row ">
+             <div class="col-sm-2">
+                 <asp:Label ID="Label5" runat="server" Text="Building & Wing :"></asp:Label>
 
-                                                    <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_build_wing" Width="150px" Height="30px" runat="server"></asp:DropDownList>
-                                                    <div class="invalid-feedback">
-                                                        Please Select Building & Wing
-                                                    </div>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_build_wing" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Building & Wing" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                </div>
-
-
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="lbl_co_name" runat="server" Text="Flat Type :"></asp:Label>
-
-                                                    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_type" Width="150px" Height="30px" runat="server"></asp:DropDownList>
-                                                    <div class="invalid-feedback">
-                                                        Please Select Flat Type 
-                                                    </div>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_type" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select a type" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row ">
-
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label11" runat="server" Text="Flat No "></asp:Label>
-                                                    <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_no" CssClass="form-control" Width="150px" Height="30px" Style="text-transform: capitalize;" parsely="trigger" AutoPostBack="true" required OnTextChanged="txt_no_TextChanged" PlaceHolder="Enter Flat Number" runat="server"></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Flat No
-                                                    </div>
-                                                    <br />
-                                                    <asp:Label ID="Label20" ForeColor="Red" Font-Bold="true" runat="server"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label2" runat="server" Text="Usage"></asp:Label>
-                                                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_usage" Width="150px" Height="30px" runat="server"></asp:DropDownList>
-                                                    <div class="invalid-feedback">
-                                                        Please select Usage
-                                                    </div>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_usage" ID="CompareValidator3" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select a Usege" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label1" runat="server" Text="Bedrooms"></asp:Label>
-                                                    <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label17" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-4">
-
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_bed" Width="150px" Height="30px" runat="server"></asp:DropDownList>
-                                                    <div class="invalid-feedback">
-                                                        Please Select Bedrooms
-                                                    </div>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_bed" ID="CompareValidator4" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Bedrooms" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label6" runat="server" Text="Size(Sq.Ft)"></asp:Label>
-                                                    <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_feet" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter size" required></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Size
-                                                    </div>
+                 <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+             </div>
+             <div class="col-sm-4">
+                 <asp:DropDownList CssClass="form-select" ID="ddl_build_wing" Width="150px" Height="30px" runat="server"></asp:DropDownList>
+                 <div class="invalid-feedback">
+                     Please Select Building & Wing
+                 </div>
+                 <br />
+                 <asp:CompareValidator ControlToValidate="ddl_build_wing" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Building & Wing" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+             </div>
 
 
+             <div class="col-sm-2">
+                 <asp:Label ID="lbl_co_name" runat="server" Text="Flat Type :"></asp:Label>
+
+                 <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+             </div>
+             <div class="col-sm-4">
+                 <asp:DropDownList CssClass="form-select" ID="ddl_type" Width="150px" Height="30px" runat="server"></asp:DropDownList>
+                 <div class="invalid-feedback">
+                     Please Select Flat Type 
+                 </div>
+                 <br />
+                 <asp:CompareValidator ControlToValidate="ddl_type" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select a type" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+             </div>
+
+         </div>
+     </div>
+     <div class="form-group">
+         <div class="row ">
+
+             <div class="col-sm-2">
+                 <asp:Label ID="Label11" runat="server" Text="Flat No "></asp:Label>
+                 <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                 <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+
+             </div>
+             <div class="col-sm-4">
+                 <asp:TextBox ID="txt_no" CssClass="form-control" Width="150px" Height="30px" Style="text-transform: capitalize;" parsely="trigger" AutoPostBack="true" required OnTextChanged="txt_no_TextChanged" PlaceHolder="Enter Flat Number" runat="server"></asp:TextBox>
+                 <div class="invalid-feedback">
+                     Please Enter Flat No
+                 </div>
+                 <br />
+                 <asp:Label ID="Label20" ForeColor="Red" Font-Bold="true" runat="server"></asp:Label>
+             </div>
+             <div class="col-sm-2">
+                 <asp:Label ID="Label2" runat="server" Text="Usage"></asp:Label>
+                 <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                 <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+             </div>
+             <div class="col-sm-4">
+                 <asp:DropDownList CssClass="form-select" ID="ddl_usage" Width="150px" Height="30px" runat="server"></asp:DropDownList>
+                 <div class="invalid-feedback">
+                     Please select Usage
+                 </div>
+                 <br />
+                 <asp:CompareValidator ControlToValidate="ddl_usage" ID="CompareValidator3" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select a Usege" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+             </div>
+         </div>
+     </div>
+     <div class="form-group">
+         <div class="row ">
+             <div class="col-sm-2">
+                 <asp:Label ID="Label1" runat="server" Text="Bedrooms"></asp:Label>
+                 <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                 <asp:Label ID="Label17" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+             </div>
+             <div class="col-sm-4">
+
+                 <asp:DropDownList CssClass="form-select" ID="ddl_bed" Width="150px" Height="30px" runat="server"></asp:DropDownList>
+                 <div class="invalid-feedback">
+                     Please Select Bedrooms
+                 </div>
+                 <br />
+                 <asp:CompareValidator ControlToValidate="ddl_bed" ID="CompareValidator4" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Bedrooms" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+             </div>
+             <div class="col-sm-2">
+                 <asp:Label ID="Label6" runat="server" Text="Size(Sq.Ft)"></asp:Label>
+                 <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                 <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+             </div>
+             <div class="col-sm-4">
+                 <asp:TextBox ID="txt_feet" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter size" required></asp:TextBox>
+                 <div class="invalid-feedback">
+                     Please Enter Size
+                 </div>
 
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label14" runat="server" Text="Open Terraced(Sq.Ft)"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_terrace" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter size" required></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Size
-                                                    </div>
-
-                                                </div>
 
 
-                                                <div class="col-sm-2">
-                                                    <asp:Label ID="Label18" runat="server" Text="InterCom No"></asp:Label>
-                                                    <asp:Label ID="Label19" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+             </div>
+         </div>
+     </div>
+     <div class="form-group">
+         <div class="row ">
+             <div class="col-sm-2">
+                 <asp:Label ID="Label14" runat="server" Text="Open Terraced(Sq.Ft)"></asp:Label>
+             </div>
+             <div class="col-sm-4">
+                 <asp:TextBox ID="txt_terrace" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter size" required></asp:TextBox>
+                 <div class="invalid-feedback">
+                     Please Enter Size
+                 </div>
 
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_intercom" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter Number" required></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter No 
-                                                    </div>
+             </div>
 
-                                                </div>
 
-                                            </div>
-                                        </div>
+             <div class="col-sm-2">
+                 <asp:Label ID="Label18" runat="server" Text="InterCom No"></asp:Label>
+                 <asp:Label ID="Label19" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
 
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                    </Triggers>
+             </div>
+             <div class="col-sm-4">
+                 <asp:TextBox ID="txt_intercom" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter Number" required></asp:TextBox>
+                 <div class="invalid-feedback">
+                     Please Enter No 
+                 </div>
+
+             </div>
+
+         </div>
+     </div>
+
+ </ContentTemplate><Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
                                 </asp:UpdatePanel>
 
 

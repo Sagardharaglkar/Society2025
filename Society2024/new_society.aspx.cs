@@ -30,8 +30,8 @@ namespace Society2024
             {
                 fill_drop1();
                 //gvbind1();
+                txt_es_date.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
 
-               
             }
 
         }

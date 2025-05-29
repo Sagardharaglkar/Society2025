@@ -173,7 +173,7 @@ namespace Society2024
         protected void GridView8_Sorting(object sender, GridViewSortEventArgs e)
         {
             DataTable dtrslt = (DataTable)ViewState["dirState"];
-            if (dtrslt.Rows.Count > 0)
+            if (dtrslt!= null && dtrslt.Rows.Count > 0)
             {
                 if (Convert.ToString(ViewState["sortdr"]) == "Asc")
                 {

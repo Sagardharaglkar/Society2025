@@ -36,11 +36,12 @@ namespace Society
 
 
                 txt_from_date.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                txt_to_date.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 txt_to_date.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_from_date.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_from_date.Attributes["max"] = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
                 from_time.Text = DateTime.Now.ToLocalTime().ToString("hh:mm");
-                to_time.Text = DateTime.Now.ToLocalTime().ToString("hh:mm");
+                to_time.Text = DateTime.Now.ToLocalTime().AddHours(1).ToString("hh:mm");
                 txt_date.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_date.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_date.Attributes["max"] = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
@@ -274,6 +275,8 @@ namespace Society
             Label34.Visible = true;
             txt_date.Visible = true;
             GridView2.Visible = true;
+            from_time.Text = DateTime.Now.ToLocalTime().ToString("hh:mm");
+            to_time.Text = DateTime.Now.ToLocalTime().AddHours(1).ToString("hh:mm");
             if (ddl_facility.SelectedValue != "select")
             {
                 DataSet dt = new DataSet();

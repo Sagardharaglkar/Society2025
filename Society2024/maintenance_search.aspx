@@ -250,7 +250,9 @@
 
                                         </asp:Panel>
                                             </ContentTemplate>
-</asp:UpdatePanel>
+<Triggers>
+    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+</Triggers></asp:UpdatePanel>
                                 </div>
                                         <div class="form-group">
                                             <div class="row ">

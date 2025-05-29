@@ -50,11 +50,13 @@
                 <br />
 
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
+                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+     <ContentTemplate>
                 <asp:HiddenField ID="mon_charge_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
                 <div class="form-group">
-                    <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
+                   
+
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -75,6 +77,7 @@
                                     </div>
                                 </div>
                             </div>
+                    </div>
 
                             <div class="form-group">
                                 <div class="row ">
@@ -122,86 +125,89 @@
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
 
-                                                    <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
-                                                </Columns>
-                                            </asp:GridView>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </ContentTemplate></asp:UpdatePanel>
+                <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content" style="height: auto; width: 500px;">
+                            <div class="modal-header">
+                              
+                                <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Charges Monthwise</strong></h4>
                             </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content" style="height: 320px; width: 500px;">
-                                <div class="modal-header">
-
-                                    <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Charges Monthwise</strong></h4>
-                                </div>
-                                <div class="modal-body" id="invoice_data">
+                            <div class="modal-body" id="invoice_data">
 
 
                                     <div class="form-group">
                                         <div class="alert alert-danger danger" style="display: none;"></div>
                                     </div>
                                     <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                        <ContentTemplate>
+                                         <ContentTemplate>
+                                                 
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
+                    
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus ></asp:TextBox>
+                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                </div>
 
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
+            </div>
+        </div>
 
-                                                        <asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
+         <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label5" runat="server" Text="Due Amount :"></asp:Label>
+                    
+                    <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_pen_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter pending Amount" required autofocus ></asp:TextBox>
+                    <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                </div>
 
-                                                        <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox ID="txt_amt" runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus></asp:TextBox>
-                                                        <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
+            </div>
+        </div>
 
-                                                </div>
-                                            </div>
+         <div class="form-group">
+            <div class="row ">
+                <div class="col-sm-5">
+                   
+<asp:Label ID="Label8" runat="server" Text="Total Amount  :"></asp:Label>
+                    
+                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                </div>
+                <div class="col-sm-7">
+                    <asp:TextBox ID="txt_total" CssClass="Form-control"  runat="server" class="form-control" Width="200px" Height="32px"  required ></asp:TextBox>
+                    <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                    <div class="invalid-feedback">
+                        Please Enter Total Amount
+                    </div>
+                    
+                </div>
 
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-
-                                                        <asp:Label ID="Label5" runat="server" Text="Due Amount :"></asp:Label>
-
-                                                        <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox ID="txt_pen_amt" runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter pending Amount" required autofocus></asp:TextBox>
-                                                        <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-5">
-
-                                                        <asp:Label ID="Label8" runat="server" Text="Total Amount  :"></asp:Label>
-
-                                                        <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-7">
-                                                        <asp:TextBox ID="txt_total" runat="server" class="form-control" Width="200px" Height="32px" required></asp:TextBox>
-                                                        <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </ContentTemplate>
+            </div>
+        </div>
+    </ContentTemplate>
                                         <Triggers>
-                                            <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                        </Triggers>
+<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
+</Triggers>
                                     </asp:UpdatePanel>
 
 
-
+                                </div>
 
 
                                     <div class="modal-footer">
@@ -214,9 +220,8 @@
                                                 </center>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                
+                            
                         </div>
                         <!-- /.modal-body -->
                     </div>
@@ -227,4 +232,5 @@
             </div>
         </div>
     </div>
+
 </asp:Content>
