@@ -34,7 +34,7 @@ namespace Society
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int count = 1;
+          
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 

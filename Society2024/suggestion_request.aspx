@@ -146,11 +146,7 @@
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
 
-                                        <div class="form-group">
-                                            <div class="alert alert-danger danger" style="display: none;"></div>
-                                        </div>
-
-
+                                      
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-5">
@@ -159,7 +155,7 @@
                                                     <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_sub" runat="server" Height="35px" Width="250px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_sub" runat="server" Height="35px" CssClass="form-control" Width="250px" placeholder="Enter Subject" required autofocus></asp:TextBox>
 
                                                 </div>
                                             </div>
@@ -171,7 +167,7 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_details" runat="server" Height="35px" Width="250px" placeholder="Enter Suggestion/Request" required autofocus TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_details" runat="server" Height="35px" CssClass="form-control" Width="250px" placeholder="Enter Suggestion/Request" required autofocus TextMode="MultiLine"></asp:TextBox>
 
                                                 </div>
                                             </div>
@@ -183,11 +179,11 @@
                                     </Triggers>
                                 </asp:UpdatePanel>
 
-                                <div class="form-group">
+                                <div class="modal-footer">
                                     <div class="row ">
                                         <div class="pull-right">
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
-                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure you want to log out?');" OnClick="btn_delete_Click" Visible="false" />
+                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure you want delete?');" OnClick="btn_delete_Click" Visible="false" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" />
                                         </div>
                                     </div>

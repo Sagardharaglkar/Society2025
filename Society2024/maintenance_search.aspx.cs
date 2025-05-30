@@ -24,7 +24,7 @@ namespace Society
         DataTable dt1 = new DataTable();
 
 
-        static int flag = 0, flat = 0;
+   
 
         protected void Page_Load(object sender, EventArgs e)
         {
