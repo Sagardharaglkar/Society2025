@@ -116,7 +116,8 @@ namespace Society
             runproc("Select");
             ddl_facility_SelectedIndexChanged(sender, e);
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         public void runproc_save(String operation)

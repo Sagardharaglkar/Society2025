@@ -152,7 +152,10 @@
                                                     <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_date" runat="server" Height="32px" Width="200px" placeholder="Enter Date" TextMode="Date" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Date" TextMode="Date" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,7 +167,10 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:DropDownList ID="ddl_doc_type" Height="32px" Width="200px" runat="server" required></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_doc_type" Height="32px" Width="200px" runat="server" required></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Document Name
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -177,7 +183,10 @@
                                                     <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:DropDownList ID="ddl_build" Height="32px" Width="200px" runat="server" parsley-trigger="change" OnSelectedIndexChanged="ddl_build_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_build" Height="32px" Width="200px" runat="server" parsley-trigger="change" OnSelectedIndexChanged="ddl_build_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Building Name
+                                                    </div>
                                                     <asp:CompareValidator ControlToValidate="ddl_build" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Building Name" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                 </div>
                                             </div>
@@ -189,7 +198,10 @@
                                                     <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:DropDownList ID="ddl_wing" Height="32px" Width="200px" runat="server" parsley-trigger="change" OnSelectedIndexChanged="ddl_wing_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_wing" Height="32px" Width="200px" runat="server" parsley-trigger="change" OnSelectedIndexChanged="ddl_wing_SelectedIndexChanged" AutoPostBack="true" required></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Wing Name
+                                                    </div>
 
                                                     <asp:CompareValidator ControlToValidate="ddl_wing" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Wing Name" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                     <asp:TextBox ID="txt_wing" runat="server" Height="32px" Width="200px" Visible="false"></asp:TextBox>
@@ -208,7 +220,10 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:DropDownList ID="ddl_flatno" Height="32px" Width="200px" runat="server" AutoPostBack="true" parsly-trigger="change" OnSelectedIndexChanged="ddl_flatno_SelectedIndexChanged" required></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_flatno" Height="32px" Width="200px" runat="server" AutoPostBack="true" parsly-trigger="change" OnSelectedIndexChanged="ddl_flatno_SelectedIndexChanged" required></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Flat No
+                                                    </div>
                                                     <asp:Label ID="Label7" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
 
                                                     <asp:CompareValidator ControlToValidate="ddl_flatno" ID="CompareValidator4" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Flat No" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
@@ -217,39 +232,36 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="col-sm-4">
+                                            <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
+                                            <br />
+                                            <asp:Label ID="listofuploadedfiles" runat="server" />
+                                            <asp:Label ID="Label2" runat="server" Height="32px" Width="200px" />
+                                        </div>
 
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
                                 </asp:UpdatePanel>
+                            </div>
 
-
-                                <div class="form-group">
-                                    <div class="row ">
-                                        <div class="col-sm-4">
-                                            <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
-                                            <br />
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
-                                            <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
-
-                                            <asp:Button ID="upload" Text="Upload" runat="server" OnClick="upload_Click" class="btn btn-primary" Font-Bold="True" ValidationGroup="g1" />
-                                            <br />
-                                            <br />
-                                            <asp:Label ID="Label2" runat="server" Height="32px" Width="200px"></asp:Label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <div class="pull-center">
-                                                <asp:Button ID="btn_close" runat="server" Text="Back" class="btn btn-primary" OnClick="btn_close_Click" OnClientClick="if (confirm('Are you sure you want to Close?')) { __doPostBack('<%= btn_close.UniqueID %>', ''); } return false;" />
-                                            </div>
-                                        </div>
+                            <div class="modal-footer">
+                                
+                                    <div class="row" >
+                                        <center>
+ <asp:Button ID="upload" Text="Upload" runat="server" OnClick="upload_Click" class="btn btn-primary" Font-Bold="True" ValidationGroup="g1" />
+ <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
+                                        </center>
+                                       
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </div>

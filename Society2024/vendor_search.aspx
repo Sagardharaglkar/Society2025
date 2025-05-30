@@ -159,7 +159,10 @@
                                                     <asp:Label ID="lbl_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_name" runat="server" Style="text-transform: capitalize;" MaxLength="50" placeholder="Enter Name" OnTextChanged="txt_name_TextChanged" AutoPostBack="true" required> </asp:TextBox>
+                                                    <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" MaxLength="50" placeholder="Enter Name" OnTextChanged="txt_name_TextChanged" AutoPostBack="true" required> </asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Name
+                                                    </div>
                                                     <br />
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
@@ -169,7 +172,10 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_org_name" runat="server" Style="text-transform: capitalize;" OnTextChanged="txt_org_name_TextChanged" placeholder="Enter Name" AutoPostBack="true" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_org_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" OnTextChanged="txt_org_name_TextChanged" placeholder="Enter Name" AutoPostBack="true" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Office Name
+                                                    </div>
                                                     <asp:Label ID="Label8" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
 
@@ -184,7 +190,10 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_mob" runat="server" MaxLength="10" onblur="checkLength(this)" placeholder="Enter Mobile No." onkeypress="return digit(event);" AutoPostBack="True" required OnTextChanged="txt_mob_TextChanged"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_mob" CssClass="form-control" runat="server" MaxLength="10" onblur="checkLength(this)" placeholder="Enter Mobile No." onkeypress="return digit(event);" AutoPostBack="True" required OnTextChanged="txt_mob_TextChanged"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Mobile No
+                                                    </div>
                                                     <br />
                                                     <asp:Label ID="Label17" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                     <asp:Label ID="Label12" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
@@ -197,7 +206,10 @@
                                                     <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_org_mob" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" placeholder="Enter Office Contact" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_org_mob" CssClass="form-control" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" placeholder="Enter Office Contact" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Office Contact No
+                                                    </div>
                                                     <br />
 
                                                 </div>
@@ -211,7 +223,10 @@
                                                     <asp:Label ID="lbl_pre_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_add1" Style="text-transform: capitalize;" runat="server" MaxLength="250" required placeholder="Enter Persent Address"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_add1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" MaxLength="250" required placeholder="Enter Persent Address"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Address
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label14" runat="server" Text="Permanent Address"></asp:Label>
@@ -219,7 +234,10 @@
                                                     <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_add2" runat="server" MaxLength="250" placeholder="Enter Permanent Address" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_add2" CssClass="form-control" runat="server" MaxLength="250" placeholder="Enter Permanent Address" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Addres
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -231,7 +249,10 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_mail" runat="server" MaxLength="50" placeholder="Enter Email" AutoPostBack="True" required OnTextChanged="txt_mail_TextChanged"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_mail" CssClass="form-control" runat="server" MaxLength="50" placeholder="Enter Email" AutoPostBack="True" required OnTextChanged="txt_mail_TextChanged"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Email
+                                                    </div>
                                                     <br />
                                                     <asp:Label ID="Label13" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                     <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_mail" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
@@ -252,8 +273,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-                                        </center>
+                                       <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" /> </center>
                                         <br />
                                     </div>
                                 </div>

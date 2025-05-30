@@ -167,6 +167,9 @@
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <asp:TextBox ID="txt_p_name" CssClass="form-control" Style="text-transform: capitalize;" runat="server" placeholder="Enter Name" required></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Name
+                                                            </div>
                                                         </div>
 
                                                         <div class="col-sm-3">
@@ -176,6 +179,9 @@
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <asp:TextBox ID="txt_org_addr1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address" required></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Address
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,6 +195,9 @@
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter contact No" AutoPostBack="True" onblur="checkLength(this)" onkeypress="return digit(event);" required OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Contact No
+                                                            </div>
                                                             <br />
 
                                                             <asp:Label ID="Label11" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>

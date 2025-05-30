@@ -136,7 +136,10 @@
                                                     <asp:Label ID="Label2" runat="server" Text="*" ForeColor="Red" Font-Bold="true"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_des" Width="200px" Height="32px" placeholder="Enter Description" runat="server" TextMode="MultiLine" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_des" CssClass="form-control" Width="200px" Height="32px" placeholder="Enter Description" runat="server" TextMode="MultiLine" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Description
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +160,8 @@
                                                 <center>
                                                     <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" />
                                                     <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" runat="server" Text="Delete" OnClick="btn_delete_Click" />
-                                                    <asp:Button ID="btn_close" class="btn btn-primary" runat="server" Text="Close" UseSubmitBehavior="False" OnClick="btn_close_Click" />
+                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+
                                                 </center>
                                                 <br />
                                             </div>

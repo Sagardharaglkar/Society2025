@@ -169,7 +169,10 @@
                                                 <asp:Label ID="lbl_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_c_name" runat="server" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Name" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_c_name" CssClass="form-control" runat="server" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Name" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Customer Name
+                                                </div>
 
                                             </div>
 
@@ -185,7 +188,10 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_vehical_no" Width="200px" Height="32px" runat="server" placeholder="Enter Vehical No" Style="text-transform: uppercase;" required autofous OnTextChanged="txt_vehical_no_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_vehical_no" CssClass="form-control" Width="200px" Height="32px" runat="server" placeholder="Enter Vehical No" Style="text-transform: uppercase;" required autofous OnTextChanged="txt_vehical_no_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Vehical No
+                                                        </div>
                                                         <br />
                                                         <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                     </div>
@@ -204,7 +210,10 @@
                                                 <asp:Label ID="Label15" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_seat" runat="server" Width="200px" Height="32px" required placeholder="Enter seat"></asp:TextBox>
+                                                <asp:TextBox ID="txt_seat" CssClass="form-control" runat="server" Width="200px" Height="32px" required placeholder="Enter Seat Count"></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Seats
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -216,7 +225,10 @@
                                                 <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_time" runat="server" TextMode="Time" Width="200px" Height="32px" placeholder="Enter Time" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_time" CssClass="form-control" runat="server" TextMode="Time" Width="200px" Height="32px" placeholder="Enter Time" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Time
+                                                </div>
 
                                             </div>
                                         </div>
@@ -230,7 +242,10 @@
                                                 <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_date" runat="server" TextMode="Date" Width="200px" Height="32px" placeholder="Enter Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" TextMode="Date" Width="200px" Height="32px" placeholder="Enter Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Date
+                                                </div>
 
                                             </div>
                                         </div>
@@ -244,7 +259,10 @@
                                                 <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_destination" runat="server" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Destination" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_destination" CssClass="form-control" runat="server" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Destination" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Destination
+                                                </div>
 
 
                                             </div>
@@ -259,7 +277,10 @@
                                                 <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_charges" runat="server" Width="200px" Height="32px" onkeypress="return digit(event);" placeholder="Enter Charges" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_charges" CssClass="form-control" runat="server" Width="200px" Height="32px" onkeypress="return digit(event);" placeholder="Enter Charges" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Charges
+                                                </div>
 
 
                                             </div>
@@ -280,7 +301,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" Visible="false" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </center>
                                     </div>
                                 </div>

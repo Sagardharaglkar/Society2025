@@ -108,7 +108,7 @@
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" tabindex="-1" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
-                        <div class="modal-content" style="height: 250px; width: 400px;">
+                        <div class="modal-content" style="height: auto; width: 400px;">
                             <div class="modal-header">
                                 <%--  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Document Type</strong></h4>
@@ -131,7 +131,10 @@
 
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_doc_name" runat="server" Style="text-transform: capitalize;" placeholder="Enter Document Type" required autofocus OnTextChanged="txt_doc_name_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_doc_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" placeholder="Enter Document Type" required autofocus OnTextChanged="txt_doc_name_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Document 
+                                                    </div>
                                                     <asp:Label ID="Label1" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
                                                 </div>
 

@@ -13,7 +13,7 @@
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK',
                 timer: 3000,
-                timerProgressBar: true,
+                timerProgressBar: true
 
                 didOpen: () => {
                     Swal.showLoading()

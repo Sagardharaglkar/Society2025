@@ -147,7 +147,10 @@
                                                         <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_number" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" OnTextChanged="txt_number_TextChanged" AutoPostBack="true" placeholder="Enter No" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_number" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" OnTextChanged="txt_number_TextChanged" AutoPostBack="true" placeholder="Enter No" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Parking No
+                                                        </div>
                                                         <asp:Label ID="Label3" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
 
                                                     </div>
@@ -170,11 +173,11 @@
 
                                                 </div>
                                             </div>
-                                           </ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-</asp:UpdatePanel>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
 
                             </div>
                             <div class="modal-footer">

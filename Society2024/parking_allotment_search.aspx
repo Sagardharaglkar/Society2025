@@ -160,7 +160,10 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_name" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Name" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Name" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Name
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <asp:Label ID="Label1" runat="server" Text="Parking For"></asp:Label>
@@ -237,7 +240,10 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_contact_no" runat="server" Height="32px" Width="200px" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Contact No" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Contact No" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Contact No
+                                                    </div>
 
                                                 </div>
                                                 <div class="col-sm-2">
@@ -245,7 +251,10 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_vehical_no" runat="server" Height="32px" Width="200px" Style="text-transform: uppercase" placeholder="Enter Vehical No" AutoPostBack="true" required autofocus OnTextChanged="txt_vehical_no_TextChanged"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_vehical_no" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: uppercase" placeholder="Enter Vehical No" AutoPostBack="true" required autofocus OnTextChanged="txt_vehical_no_TextChanged"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Vehical No
+                                                    </div>
                                                     <asp:Label ID="Label8" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
                                             </div>
@@ -264,7 +273,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" />
-                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </center>
                                         <br />
                                     </div>

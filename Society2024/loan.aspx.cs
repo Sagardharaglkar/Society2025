@@ -166,6 +166,7 @@ namespace Society
             runproc("Select");
             btn_delete.Visible = true;
             Panel1.Visible = true;
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
