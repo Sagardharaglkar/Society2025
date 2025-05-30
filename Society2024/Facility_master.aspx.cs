@@ -20,8 +20,8 @@ namespace Society2024
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
 
 
             if (!IsPostBack)

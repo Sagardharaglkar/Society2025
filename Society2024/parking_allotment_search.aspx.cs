@@ -21,15 +21,14 @@ namespace Society
         Parking parking = new Parking();
         BL_Parking_Allotment parking_Allotment = new BL_Parking_Allotment();
       
-      
-
+    
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
                 Panel1.Visible = false;

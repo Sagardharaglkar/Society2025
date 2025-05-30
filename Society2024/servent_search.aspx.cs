@@ -161,7 +161,7 @@ namespace Society
             servent.Sql_Operation = operation;
 
             var result = bL_Servent.runproc(servent);
-            string type = "Owner";
+       
 
             (servent_id.Value) = result.servent_id.ToString();
             society_id.Value = result.Society_Id;

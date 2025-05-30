@@ -12,7 +12,7 @@
 
             <br />
             <br />
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="887px"></rsweb:ReportViewer>
+            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="65%"></rsweb:ReportViewer>
         </div>
     </div>
 

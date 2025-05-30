@@ -276,15 +276,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.TextBox txt_no;
 
         /// <summary>
-        /// file_name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload file_name;
-
-        /// <summary>
         /// listofuploadedfiles control.
         /// </summary>
         /// <remarks>
@@ -292,6 +283,24 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label listofuploadedfiles;
+
+        /// <summary>
+        /// Label15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label15;
+
+        /// <summary>
+        /// file_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload file_name;
 
         /// <summary>
         /// Label2 control.
@@ -312,12 +321,12 @@ namespace Society
         protected global::System.Web.UI.WebControls.Button upload;
 
         /// <summary>
-        /// btn_close control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

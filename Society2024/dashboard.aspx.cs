@@ -79,15 +79,15 @@ namespace Society
                 switch (type)
                 {
                     case "notice":
-                        row["ImageUrl"] = "img/temp/notice.gif";
+                        row["ImageUrl"] = "img/notice.gif";
                     
                         break;
                     case "meeting":
-                        row["ImageUrl"] = "img/temp/meet.gif";
+                        row["ImageUrl"] = "img/meet.gif";
                        
                         break;
                     case "event":
-                        row["ImageUrl"] = "img/temp/eve.gif";
+                        row["ImageUrl"] = "img/eve.gif";
                         
                         break;
                     // Add more cases as needed

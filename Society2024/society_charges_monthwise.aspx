@@ -49,13 +49,12 @@
                 </table>
                 <br />
 
-                <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
-                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-     <ContentTemplate>
-                <asp:HiddenField ID="mon_charge_id" runat="server" />
-                <asp:HiddenField ID="society_id" runat="server" />
-                <div class="form-group">
-                   
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:HiddenField ID="mon_charge_id" runat="server" />
+                        <asp:HiddenField ID="society_id" runat="server" />
+                        <div class="form-group">
+
 
                             <div class="row ">
                                 <div class="col-12">
@@ -72,165 +71,158 @@
                         <asp:Button ID="btn_search" runat="server" class="btn btn-primary" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" />
                         </asp:Panel>
                                         &nbsp;&nbsp;
-                        <%--<asp:Button runat="server" type="button" class="btn btn-primary" OnClick="Unnamed_Click">New Entry</asp:Button>--%>
                                         <asp:Button runat="server" OnClick="Unnamed_Click" CssClass="btn btn-primary" Text="Add" />
                                     </div>
                                 </div>
                             </div>
-                    </div>
-
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-12">
-                                        <div style="width: 80%; overflow: auto;">
-                                            <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting">
-
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="id" ItemStyle-Width="100" SortExpression="id" Visible="false">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="mon_charge_id" runat="server" Text='<%# Bind("mon_charge_id")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Amount" ItemStyle-Width="300" SortExpression="amount">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="name" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField HeaderText="Pending Amount" ItemStyle-Width="150" SortExpression="pending_amount">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="pending_amount" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Date" ItemStyle-Width="150" SortExpression="date">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="date" runat="server" Text='<%# Bind("date","{0:dd-MMM-yyyy}")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("mon_charge_id")%>'><img src="Images/123.png" /></asp:LinkButton>
-                                                            <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-
-                                                    <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-
-                                    <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
-                                </Columns>
-                            </asp:GridView>
                         </div>
-                    </div>
-                </div>
-            </div>
-       </ContentTemplate></asp:UpdatePanel>
+
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 80%; overflow: auto;">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting">
+
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="id" ItemStyle-Width="100" SortExpression="id" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="mon_charge_id" runat="server" Text='<%# Bind("mon_charge_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Amount" ItemStyle-Width="300" SortExpression="amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="name" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Pending Amount" ItemStyle-Width="150" SortExpression="pending_amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="pending_amount" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Date" ItemStyle-Width="150" SortExpression="date">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="date" runat="server" Text='<%# Bind("date","{0:dd-MMM-yyyy}")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("mon_charge_id")%>'><img src="Images/123.png" /></asp:LinkButton>
+                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content" style="height: auto; width: 500px;">
                             <div class="modal-header">
-                              
-                                <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Charges Monthwise</strong></h4>
+
+                                <h4 class="modal-title" ><strong>New Charges Monthwise</strong></h4>
                             </div>
-                            <div class="modal-body" id="invoice_data">
-
-
-                                    <div class="form-group">
-                                        <div class="alert alert-danger danger" style="display: none;"></div>
-                                    </div>
-                                    <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                         <ContentTemplate>
-                                                 
-        <div class="form-group">
-            <div class="row ">
-                <div class="col-sm-5">
-                   
-<asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
-                    
-                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                </div>
-                <div class="col-sm-7">
-                    <asp:TextBox ID="txt_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus ></asp:TextBox>
-                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                </div>
-
-            </div>
-        </div>
-
-         <div class="form-group">
-            <div class="row ">
-                <div class="col-sm-5">
-                   
-<asp:Label ID="Label5" runat="server" Text="Due Amount :"></asp:Label>
-                    
-                    <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                </div>
-                <div class="col-sm-7">
-                    <asp:TextBox ID="txt_pen_amt"  runat="server" class="form-control" Width="200px" Height="32px" Enabled="false" placeholder="Enter pending Amount" required autofocus ></asp:TextBox>
-                    <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                </div>
-
-            </div>
-        </div>
-
-         <div class="form-group">
-            <div class="row ">
-                <div class="col-sm-5">
-                   
-<asp:Label ID="Label8" runat="server" Text="Total Amount  :"></asp:Label>
-                    
-                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                </div>
-                <div class="col-sm-7">
-                    <asp:TextBox ID="txt_total" CssClass="Form-control"  runat="server" class="form-control" Width="200px" Height="32px"  required ></asp:TextBox>
-                    <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
-                    <div class="invalid-feedback">
-                        Please Enter Total Amount
-                    </div>
-                    
-                </div>
-
-            </div>
-        </div>
-    </ContentTemplate>
-                                        <Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-                                    </asp:UpdatePanel>
-
-
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="alert alert-danger danger" style="display: none;"></div>
                                 </div>
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
 
-
-                                    <div class="modal-footer">
                                         <div class="form-group">
                                             <div class="row ">
-                                                <center>
-                                                    <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
-                                                    <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" Text="Delete" />
-                                                    <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-                                                </center>
+                                                <div class="col-sm-5">
+
+                                                    <asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
+
+                                                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <asp:TextBox ID="txt_amt" runat="server" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus></asp:TextBox>
+                                                    <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                </div>
+
                                             </div>
                                         </div>
-                                
-                            
-                        </div>
-                        <!-- /.modal-body -->
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
 
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-5">
+
+                                                    <asp:Label ID="Label5" runat="server" Text="Due Amount :"></asp:Label>
+
+                                                    <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <asp:TextBox ID="txt_pen_amt" runat="server" Width="200px" Height="32px" Enabled="false" placeholder="Enter pending Amount" required autofocus></asp:TextBox>
+                                                    <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-5">
+
+                                                    <asp:Label ID="Label8" runat="server" Text="Total Amount  :"></asp:Label>
+
+                                                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <asp:TextBox ID="txt_total" CssClass="form-control" runat="server" Width="200px" Height="32px" required autofocus></asp:TextBox>
+                                                    <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Total Amount
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+
+
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <div class="row ">
+                                        <center>
+                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" Text="Delete" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </asp:Content>

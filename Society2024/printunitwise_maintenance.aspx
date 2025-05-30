@@ -6,7 +6,7 @@
 
 
     <div style="padding: 15px">
-        <h1 class=" font-weight-bold " style="color: #012970;">Unitwise Maintenance Report</h1>
+        <h1 class=" font-weight-bold " style="color: #012970;">Unit wise Maintenance Report</h1>
         <br />
 
     </div>
@@ -38,7 +38,7 @@
                     class="btn btn-primary" Font-Bold="True" />
                 <br />
                 <br />
-                <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="59%"></rsweb:ReportViewer>
+                <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="60%"></rsweb:ReportViewer>
             </div>
 
         </ContentTemplate>

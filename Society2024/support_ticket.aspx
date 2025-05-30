@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="support_ticket.aspx.cs" Inherits="Society.support_ticket" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="fa-box box-primary">
+    <div class=" box-primary">
 
 
         <table width="100%">
@@ -33,12 +33,13 @@
                             </asp:Panel>
                                 &nbsp;&nbsp;
                             </div>
-
+                            <br />
+                            <br />
                             <div class="form-group">
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <div style="width: 100%; overflow: auto;">
-                                            <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found">
+                                            <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found">
 
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="No" ItemStyle-Width="30">

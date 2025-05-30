@@ -21,8 +21,8 @@ namespace Society2024
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
 
 
             if (!IsPostBack)
@@ -60,7 +60,8 @@ namespace Society2024
             Terms.Society_Id = society_id.Value;
             Terms.Terms = editor1.Text;
             bL_Terms.getupdate_details(Terms);
-            terms_Gridbind();
+
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         public void runproc(string operation)
@@ -92,12 +93,12 @@ namespace Society2024
 
 
 
-        protected void edit1_Command(object sender, CommandEventArgs e)
+        protected void edit_Command(object sender, CommandEventArgs e)
         {
             string id = e.CommandArgument.ToString();
             term_id.Value = id;
             runproc("Select");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -124,10 +125,7 @@ namespace Society2024
 
         }
 
-        protected void add_new_Click(object sender, EventArgs e)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
-        }
+      
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

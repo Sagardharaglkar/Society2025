@@ -20,15 +20,12 @@ namespace Society2024
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
 
             if (!IsPostBack)
-            {
-               
+            {               
                 monthwise_charges_Gridbind();
-           
-
             }
 
         }
@@ -121,7 +118,7 @@ namespace Society2024
             if (Label10.Text == "")
             {
                 runproc_save("Update");
-                ClearFormFields();
+                //ClearFormFields();
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else

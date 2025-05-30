@@ -50,7 +50,7 @@
                           
                         <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto; height: 263px">
-                                <asp:GridView ID="GridView8" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table_dark" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="Record not found" AllowSorting="true" OnSorting="GridView8_Sorting">
+                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView8_PageIndexChanging" PageSize="15" ID="GridView8" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table_dark" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="Record not found" AllowSorting="true" OnSorting="GridView8_Sorting">
                                    
                                     <Columns>
                                         <asp:TemplateField HeaderText="No" ItemStyle-Width="30">
@@ -112,7 +112,8 @@
                             <asp:Button ID="btn_send_email" runat="server" Text="Send Email" Class="btn btn-primary" OnClick="btn_send_email_Click" UseSubmitBehavior="False" />
                         </div>
                         <div class="col-sm-4">
-                            <asp:TextBox ID="txt_email" runat="server" Width="200px" placeholder="Enter Email" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox CssClass="form-control" ID="txt_email" runat="server" Width="200px" placeholder="Enter Email" TextMode="MultiLine"></asp:TextBox>
+                            <div class="invalid-feedback"> invalid </div>
                         </div>
                         <br />
                         <div class="col-sm-4">

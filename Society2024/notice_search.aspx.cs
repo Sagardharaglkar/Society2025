@@ -22,7 +22,11 @@ namespace Society
             {
                 Response.Redirect("login1.aspx");
             }
-            society_id.Value = Session["society_id"].ToString();
+            else
+            {
+                society_id.Value = Session["society_id"].ToString();
+
+            }
 
 
             if (!IsPostBack)
@@ -141,19 +145,19 @@ namespace Society
 
         protected void btn_save_Click1(object sender, EventArgs e)
         {
-           
-                runproc_save("Update");
+
+            runproc_save("Update");
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-            
-                if (notice_id.Value != "")
-                    notice.notice_id = Convert.ToInt32(notice_id.Value);
-                notice.Sql_Operation = "Delete";
-                bL_Notice.delete(notice);
-          
+
+            if (notice_id.Value != "")
+                notice.notice_id = Convert.ToInt32(notice_id.Value);
+            notice.Sql_Operation = "Delete";
+            bL_Notice.delete(notice);
+
             Response.Redirect("notice_search.aspx");
         }
 
@@ -170,7 +174,6 @@ namespace Society
             list_fill();
             btn_delete.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
-
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -184,7 +187,7 @@ namespace Society
                 bL_Notice.delete(notice);
                 //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
           
-            Notice_Gridbind();
+                Notice_Gridbind();
 
         }
 

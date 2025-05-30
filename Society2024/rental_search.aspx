@@ -3,27 +3,27 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-    function SuccessEntry() {
-        Swal.fire({
-            title: '✅ Success!',
-            text: 'Saved Successfully',
-            icon: 'success',
-            showConfirmButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK',
-            timer: 3000,
-            timerProgressBar: true,
+    <script type="text/javascript">
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true,
 
-            didOpen: () => {
-                Swal.showLoading()
-            },
-            willClose: () => {
-                window.location.href = 'rental_search.aspx';
-            }
-        });
-    }
-</script>
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'rental_search.aspx';
+                }
+            });
+        }
+    </script>
 
     <script type="text/javascript">
         function digit(evt) {
@@ -67,43 +67,44 @@
                 <br />
 
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
-                <asp:HiddenField ID="owner_id" runat="server" />
-                <asp:HiddenField ID="o_ex_id" runat="server"></asp:HiddenField>
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                <asp:HiddenField ID="flat_id" runat="server" />
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:HiddenField ID="owner_id" runat="server" />
+                        <asp:HiddenField ID="o_ex_id" runat="server"></asp:HiddenField>
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="flat_id" runat="server" />
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
 
-                                <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                    <asp:ListItem Value="name">Name</asp:ListItem>
-                                    <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
-                                    <asp:ListItem Value="build_name">Building</asp:ListItem>
-                                    <asp:ListItem Value="w_name">Wing</asp:ListItem>
-                                    <asp:ListItem Value="flat_type">Flat Type</asp:ListItem>
+                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
+                                            <asp:ListItem Value="name">Name</asp:ListItem>
+                                            <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
+                                            <asp:ListItem Value="build_name">Building</asp:ListItem>
+                                            <asp:ListItem Value="w_name">Wing</asp:ListItem>
+                                            <asp:ListItem Value="flat_type">Flat Type</asp:ListItem>
 
-                                </asp:DropDownList>&nbsp;&nbsp;
+                                        </asp:DropDownList>&nbsp;&nbsp;
                        
                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
                                 <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                </asp:Panel>
-                                &nbsp;&nbsp;
+                            </asp:Panel>
+                                        &nbsp;&nbsp;
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">New Entry</button>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+
 
                                         <asp:GridView ID="GridView1" runat="server" AllowPaging="true" PageSize="15" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowDeleting="GridView1_RowDeleting">
 
@@ -173,14 +174,14 @@
                                             </Columns>
                                         </asp:GridView>
 
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
 
             <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">

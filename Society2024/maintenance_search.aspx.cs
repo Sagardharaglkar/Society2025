@@ -24,15 +24,15 @@ namespace Society
         DataTable dt1 = new DataTable();
 
 
-        static int flag = 0, flat = 0;
+   
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
 
 
             if (!IsPostBack)

@@ -29,23 +29,22 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
-           
+            }else
+                society_id.Value = Session["society_id"].ToString();
+            gvbind1();
+            gvbind2();
+            gvbind3();
+            gvbind4();
+            gvbind5();
+            gvbind6();
+            gvbind7();
+            gvbind8();
+            gvbind9();
+            gvbind10();
+            gvbind11();
+            filldrop();
             if (!IsPostBack)
             {
-                gvbind1();
-                gvbind2();
-                gvbind3();
-                gvbind4();
-                gvbind5();
-                gvbind6();
-                gvbind7();
-                gvbind8();
-                gvbind9();
-                gvbind10();
-                gvbind11();
-                filldrop();
                 if (Request.QueryString["usefull_contact_id"] != null)
                 {
                     usefull_contact_id.Value = Request.QueryString["usefull_contact_id"];

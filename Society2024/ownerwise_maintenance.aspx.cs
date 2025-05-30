@@ -34,8 +34,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
            
 
             if (!IsPostBack)
@@ -61,7 +61,7 @@ namespace Society
 
         protected void ownerwise_maintenance_GridBind()
         {
-            int count = 0;
+            
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append("exec sp_dashboard @operation= 'ownerwise_maintenance', @date1='"+ txt_from.Text+"',@date2= '" + txt_to.Text +"' , @build_id= '" + ddl_build.SelectedValue + "', @owner_id= " + ddl_owner.SelectedValue);
 
@@ -175,6 +175,12 @@ namespace Society
                 bL_Maintenance.fill_drop(ddl_owner, sql1, "name", "owner_id");
                
             }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            btn_search_Click(sender, e);
         }
     }
 }

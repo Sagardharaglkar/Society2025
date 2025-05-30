@@ -23,14 +23,14 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
-            
+            }else
+                society_id.Value = Session["society_id"].ToString();
+
             if (!IsPostBack)
             {
                 pdc_reminder_Gridbind();
-                fill_drop();                 
-                btn_delete.Visible = false;           
+                fill_drop();
+                btn_delete.Visible = false;
             }
 
         }
@@ -86,13 +86,16 @@ namespace Society
         }
         protected void txt_chq_no_TextChanged(object sender, EventArgs e)
         {
-            if (pdc_rem_id.Value != "")
-                Reminder.pdc_rem_id = Convert.ToInt32(pdc_rem_id.Value);
-            Reminder.Sql_Operation = "check_chq_no_exists";
-            Reminder.Chq_No = Convert.ToInt32(txt_chq_no.Text);
-            var result = BL_Pdc.chqno_textchanged(Reminder);
-            Label2.Text = result.Sql_Result;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            if (txt_chq_no.Text.Trim() != "")
+            {
+                if (pdc_rem_id.Value != "")
+                    Reminder.pdc_rem_id = Convert.ToInt32(pdc_rem_id.Value);
+                Reminder.Sql_Operation = "check_chq_no_exists";
+                Reminder.Chq_No = Convert.ToInt32(txt_chq_no.Text);
+                var result = BL_Pdc.chqno_textchanged(Reminder);
+                Label2.Text = result.Sql_Result;
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            }
         }
         protected void btn_search_Click(object sender, EventArgs e)
         {
@@ -109,7 +112,7 @@ namespace Society
             GridView1.DataBind();
         }
 
-        
+
 
         public void runproc_save(string operation1)
         {
@@ -137,11 +140,11 @@ namespace Society
             Reminder.Sql_Operation = operation;
 
             var result = BL_Pdc.updatePdcReminder(Reminder);
-           
+
             (pdc_rem_id.Value) = result.pdc_rem_id.ToString();
             society_id.Value = result.Society_Id;
             ddl_owner.SelectedValue = result.owner_id.ToString();
-         
+
             ddl_build_wing.SelectedItem.Text = result.wing_id.ToString();
             txt_chq_no.Text = result.Chq_No.ToString();
             txt_chq_date.Text = result.Che_Date.ToString("yyyy-MM-dd");
@@ -166,7 +169,7 @@ namespace Society
 
         protected void ddl_owner_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             Reminder.owner_id = Convert.ToInt32(ddl_owner.SelectedValue);
             Reminder.Sql_Operation = "owner_select";
 
@@ -191,7 +194,7 @@ namespace Society
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             //SqlDataReader sdr = null;
-            
+
             Label acc_no = new Label(), chq_no = new Label(), pdc_id = new Label(), che_date = new Label(), che_amt = new Label();
             CheckBox depo_chk = new CheckBox(), ret_chk = new CheckBox(), bou_chk = new CheckBox();
 
@@ -211,7 +214,7 @@ namespace Society
                 BL_Pdc.save_changes(Reminder);
 
             }
-    }
+        }
 
 
         public void grid_show()
@@ -243,23 +246,23 @@ namespace Society
             Reminder.Sql_Operation = "Delete";
             BL_Pdc.delete(Reminder);
             if (status == "Done")
-            { 
+            {
                 if (sdr.Read())
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Record Is In Use. Cant Delete!!!');", true);
-                return;
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Record Is In Use. Cant Delete!!!');", true);
+                    return;
+                }
+                else
+                {
+                    runproc_save("Delete");
+                    Response.Redirect("pdc_reminder_search.aspx");
+                }
             }
-            else
-            {
-                runproc_save("Delete");
-                Response.Redirect("pdc_reminder_search.aspx");
-            }
-        }
 
             else
-                
+
                 Response.Write(status);
-       
+
         }
 
         protected void btn_close_Click(object sender, System.EventArgs e)
@@ -267,7 +270,7 @@ namespace Society
             Response.Redirect("pdc_reminder_search.aspx");
         }
 
-       
+
         protected void btn_next_Click(object sender, EventArgs e)
         {
             if (txt_chq_no.Text.Trim() == "")
@@ -290,7 +293,7 @@ namespace Society
                 Reminder.pdc_rem_id = Convert.ToInt32(pdc_rem_id.Value);
             Reminder.Chq_No = Convert.ToInt32(txt_chq_no.Text);
             Reminder.Sql_Operation = "chq_no_exist";
-            
+
             var result = BL_Pdc.next_click(Reminder);
 
             if (result.Sql_Result == "Exist")
@@ -299,22 +302,23 @@ namespace Society
                 return;
             }
             else
-            runproc_save("Update");
+                runproc_save("Update");
             clear();
             grid_show();
 
         }
 
-       
+
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
             runproc_save("Update");
             save_change();
-            Response.Redirect("pdc_reminder_search.aspx?view_id=" + Request.QueryString["view_id"]);
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+           
         }
 
-           
+
         protected void edit_Command(object sender, CommandEventArgs e)
         {
             string id = e.CommandArgument.ToString();
@@ -323,11 +327,11 @@ namespace Society
             ddl_owner_SelectedIndexChanged(sender, e);
             grid_show();
             btn_delete.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
-       
+
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
@@ -348,11 +352,20 @@ namespace Society
 
         protected void drp_build_wing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(drp_build_wing.SelectedItem.Text!="select")
+            if (drp_build_wing.SelectedItem.Text.Trim() != "")
             {
-                string sql2 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "' and build_wing='"+ drp_build_wing.SelectedItem.Text+"'";
-                BL_Pdc.fill_drop(drop_owner, sql2, "name", "owner_id");
+                if (drp_build_wing.SelectedItem.Text != "select")
+                {
+                    string sql2 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "' and build_wing='" + drp_build_wing.SelectedItem.Text + "'";
+                    BL_Pdc.fill_drop(drop_owner, sql2, "name", "owner_id");
+                }
             }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            pdc_reminder_Gridbind();
         }
     }
 }

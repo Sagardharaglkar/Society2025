@@ -29,8 +29,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
                fill_drop1();
@@ -167,7 +167,7 @@ namespace Society
             }
         }
 
-
+      
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -216,7 +216,8 @@ namespace Society
 
         protected void btn_close_Click(object sender, EventArgs e)
         {
-            Response.Redirect("wing_search.aspx");
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "resetForm();", true);
+
         }
 
        

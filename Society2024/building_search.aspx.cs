@@ -25,8 +25,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
 
             if (!IsPostBack)
             {
@@ -207,6 +207,12 @@ namespace Society
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Building_Gridbind();
         }
 
         protected void txt_reg_TextChanged(object sender, EventArgs e)
