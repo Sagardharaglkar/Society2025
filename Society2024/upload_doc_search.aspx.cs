@@ -29,8 +29,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
@@ -74,7 +74,7 @@ namespace Society
                 }
 
                 path = Path.Combine(Server.MapPath(("~/Documents") + "/" + ddl_build.SelectedItem.Text + "/" + ddl_wing.SelectedItem.Text + "/"  + ddl_flatno.SelectedItem.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/" + file_name.FileName));
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            
             }
         }
 
@@ -150,7 +150,7 @@ namespace Society
             {
                 uplaod_doc();
                 runproc_save("Update");
-                Response.Redirect("upload_doc_search.aspx");
+                
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
 
             }

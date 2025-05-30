@@ -8,17 +8,17 @@
 
 
     <div style="padding: 15px">
-        <div align="center" style="font-size: 30px;">Receipt Report</div>
+  
 
-
+        <h1 class=" font-weight-bold " style="color: #012970;">Receipt Report</h1>
 
         <div align="center">
             <asp:Button ID="Button1" runat="server" Text="Load Report" OnClick="Button1_Click" Visible="false"
                 class="btn btn-primary" Font-Bold="True" />
             <br />
-            <br />
+     
 
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="887px"></rsweb:ReportViewer>
+            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="61%"></rsweb:ReportViewer>
         </div>
     </div>
 

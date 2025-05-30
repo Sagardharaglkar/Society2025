@@ -32,12 +32,12 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
-            if (Session["name"] == null)
-            {
-                Response.Redirect("login1.aspx");
-            }
+            }else
+                society_id.Value = Session["society_id"].ToString();
+            //if (Session["name"] == null)
+            //{
+            //    Response.Redirect("login1.aspx");
+            //}
 
 
             if (!IsPostBack)
@@ -175,6 +175,12 @@ namespace Society
                 ReportViewer1.LocalReport.Refresh();
 
               
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Cashbook_GridBind();
         }
     }
 }

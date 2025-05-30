@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <div class="row ">
                         <div style="width: 100%; overflow: auto;">
-                            <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-hover table-striped" HeaderStyle-BackColor="LightBlue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" SkinID="gvSkin" AutoGenerateColumns="false" OnRowDeleting="GridView1_RowDeleting">
+                            <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" CssClass="table table-bordered table-hover table-striped" HeaderStyle-BackColor="LightBlue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" SkinID="gvSkin" AutoGenerateColumns="false" OnRowDeleting="GridView1_RowDeleting">
 
                                 <Columns>
                                     <asp:TemplateField HeaderText="No" ItemStyle-Width="50">

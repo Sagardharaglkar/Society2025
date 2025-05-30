@@ -29,8 +29,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
                 txt_poss_date.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");

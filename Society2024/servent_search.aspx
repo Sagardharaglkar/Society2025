@@ -63,12 +63,13 @@
 
 
 
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                <asp:HiddenField ID="servent_id" runat="Server"></asp:HiddenField>
+
                 <div class="form-group">
                     <div class="col-12">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
+                                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                                <asp:HiddenField ID="servent_id" runat="Server"></asp:HiddenField>
                                 <div class="d-flex align-items-center">
                                     <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
                                         <asp:ListItem Value="s_name"> Name</asp:ListItem>
@@ -93,7 +94,7 @@
                                     <div class="row ">
                                         <div class="col-sm-12">
                                             <div style="width: 100%; overflow: auto;">
-                                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowEditing="GridView1_RowEditing" OnRowDeleting="GridView1_RowDeleting">
+                                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowEditing="GridView1_RowEditing" OnRowDeleting="GridView1_RowDeleting">
 
                                                     <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                                     <Columns>

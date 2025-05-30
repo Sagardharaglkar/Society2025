@@ -16,9 +16,9 @@
                         </th>
                     </tr>
                 </table>
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
+                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
                         <div class="form-group">
                             <div class="row ">
@@ -80,7 +80,7 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
-                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating">
+                                        <asp:GridView PageSize="15" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating">
 
                                             <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                             <Columns>

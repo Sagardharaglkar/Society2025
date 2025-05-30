@@ -33,7 +33,7 @@ namespace Society2024
         protected void btn_save_Click(object sender, EventArgs e)
         {
                 runproc_save("Role_Update");
-                Response.Redirect("staff_role.aspx");
+             
 
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
@@ -121,7 +121,6 @@ namespace Society2024
             string id = e.CommandArgument.ToString();
             role_id.Value = id;
             runproc("Role_Select");
-            //btn_delete.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 

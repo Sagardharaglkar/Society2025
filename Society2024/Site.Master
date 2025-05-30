@@ -104,7 +104,7 @@
 </head>
 <body id="page-top">
 
-    <form runat="server" autocomplete="off" class="needs-validation" novalidate>
+    <form runat="server" autocomplete="off" id="myForm" class="needs-validation" novalidate>
 
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -692,21 +692,100 @@
 
     </form>
     <script>
+
         // Bootstrap custom validation script
+        //(function () {
+        //    'use strict'
+        //    var forms = document.querySelectorAll('.needs-validation')
+        //    Array.prototype.slice.call(forms)
+        //        .forEach(function (form) {
+        //            form.addEventListener('submit', function (event) {
+        //                if (!form.checkValidity()) {
+        //                    event.preventDefault()
+        //                    event.stopPropagation()
+        //                }
+        //                form.classList.add('was-validated')
+        //            }, false)
+        //        })
+        //})()
+
         (function () {
-            'use strict'
-            var forms = document.querySelectorAll('.needs-validation')
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    let hasWhitespaceError = false;
+
+                    // Custom whitespace validation
+                    form.querySelectorAll('input, textarea').forEach(function (input) {
+                        const typesToCheck = ['text', 'email', 'password', 'number', 'search', 'tel', 'url', 'date'];
+                        const tag = input.tagName.toLowerCase();
+
+                        if (typesToCheck.includes(input.type) || tag === 'textarea') {
+                            if (!input.value.trim()) {
+                                input.classList.add('is-invalid');
+                                input.classList.remove('is-valid'); // remove green if invalid
+                            } else {
+                                input.classList.remove('is-invalid');
+                                input.classList.add('is-valid'); // only apply green if valid
+                            }
                         }
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
+                    });
+
+
+                    if (!form.checkValidity() || hasWhitespaceError) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+        function resetForm2() {
+            console.log("Site master function")
+            document.getElementById("myForm").reset();
+            // OR
+            document.getElementById("myForm").querySelectorAll("input[type='text'], input[type='email'], input[type='password']").forEach(input => input.value = "");
+        }
+
+        function resetForm() {
+            console.log("Site master function");
+
+            const form = document.getElementById("myForm");
+
+            // Reset the entire form (works for most input types)
+            form.reset();
+
+            // Additionally, manually clear all input fields to ensure complete reset
+            form.querySelectorAll("input, textarea, select").forEach(input => {
+                switch (input.type) {
+                    case 'text':
+                    case 'email':
+                    case 'password':
+                    case 'number':
+                    case 'date':
+                    case 'search':
+                    case 'tel':
+                    case 'url':
+                    case 'textarea':
+                        input.value = '';
+                        break;
+                    case 'checkbox':
+                    case 'radio':
+                        input.checked = false;
+                        break;
+                    case 'select-one':
+                    case 'select-multiple':
+                        input.selectedIndex = -1;
+                        break;
+                }
+            });
+        }
+
     </script>
 
 </body>

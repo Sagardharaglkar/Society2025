@@ -224,6 +224,12 @@ namespace Society
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
 
         }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            Society_charges_GridBind();
+        }
     }
 }
 

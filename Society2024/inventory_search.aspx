@@ -69,13 +69,13 @@
                         <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />&nbsp;&nbsp
                                     </asp:Panel>
 
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Adds</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                 </div>
                             </div>
                         </div>
 
 
-                        <asp:GridView ID="GridView1" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" runat="server" AutoGenerateColumns="false" OnRowUpdating="GridView1_RowUpdating" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
+                        <asp:GridView ID="GridView1" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" runat="server" AutoGenerateColumns="false" OnRowUpdating="GridView1_RowUpdating" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
                             <Columns>
                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
                                     <ItemTemplate>

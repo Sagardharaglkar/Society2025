@@ -25,8 +25,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
 
             if (!IsPostBack)
             {
@@ -67,6 +67,12 @@ namespace Society
             search_meeting();
             //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
 
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            btn_search_Click(sender, e);
         }
     }
 }

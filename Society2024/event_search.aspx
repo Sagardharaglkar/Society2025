@@ -191,7 +191,8 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_to_date" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <asp:TextBox CssClass="form-control" ID="txt_to_date" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <div class="invalid-feedback"> invalid </div>
                                                     <br />
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
@@ -227,7 +228,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" Visible="false" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClientClick="resetForm(); return false;" OnClick="btn_close_Click" UseSubmitBehavior="False" data-dismiss ="modal" />
                                         </center>
                                     </div>
                                 </div>

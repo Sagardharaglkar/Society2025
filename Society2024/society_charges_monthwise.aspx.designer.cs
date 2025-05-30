@@ -78,15 +78,6 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// upnlCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upnlCountry;
-
-        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>

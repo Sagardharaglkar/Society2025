@@ -1,4 +1,4 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notice_search.aspx.cs" Inherits="Society.notice_search" MasterPageFile="~/Site.Master" Async="true" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notice_search.aspx.cs" Inherits="Society.notice_search" MasterPageFile="~/Site.Master" Async="true" %>
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -73,7 +73,7 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
-                                        <asp:GridView ID="GridView1" runat="server" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
+                                        <asp:GridView ID="GridView1" runat="server" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
 
                                             <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                             <Columns>
@@ -101,7 +101,6 @@
                                                 <asp:TemplateField ItemStyle-Width="50" HeaderText="Edit">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("notice_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
-                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
@@ -128,9 +127,10 @@
 
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Notice</strong></h4>
                             </div>
-                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <div class="modal-body" id="invoice_data">
+
+                            <div class="modal-body" id="invoice_data">
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">
@@ -185,13 +185,13 @@
 
                                             </div>
                                         </div>
-                                    </div>
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                </Triggers>
-                            </asp:UpdatePanel>
 
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
 
                             <div class="modal-footer">
 
@@ -246,8 +246,11 @@
                                             </div>
                                         </div>
                                     </ContentTemplate>
-
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
                                 </asp:UpdatePanel>
+
 
 
 

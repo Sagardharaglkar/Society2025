@@ -145,7 +145,6 @@ namespace Society
                 society.expense_id = Convert.ToInt32(expense_id.Value);
                 society.User_Id = Convert.ToInt32(dataRow["user_id"].ToString());
                 bL_Society.updateApprover(society);
-
             }
         }
 
@@ -247,9 +246,6 @@ namespace Society
             
             if (GridView3.Rows.Count > 0)
             {
-
-
-
                 runproc_save("Update");
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }

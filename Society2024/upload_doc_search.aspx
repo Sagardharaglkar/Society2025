@@ -75,7 +75,7 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
-                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
 
                                             <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
                                             <Columns>
@@ -218,18 +218,40 @@
                                             </div>
                                         </div>
 
-
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-4">
+                                                     <asp:Label ID="listofuploadedfiles" runat="server" />
+ <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
+                                                    <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
+                                                    <asp:Label ID="Label2" runat="server" Height="32px" Width="200px"></asp:Label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
                                 </asp:UpdatePanel>
+                                <div class="modal-footer">
 
+                                    <div class="form-group">
+                                        <div class="row ">
 
-                                <div class="form-group">
+                                            <center>
+                                                <asp:Button ID="upload" runat="server" Text="Upload" OnClick="upload_Click" class="btn btn-primary" ValidationGroup="g1" />
+                                                <%-- <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />--%>
+                                                <asp:Button ID="Button1" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+                                            </center>
+                                            </>
+                                        </div>
+                                </div>
+                            </div>
+
+                                <%--<div class="form-group">
                                     <div class="row ">
                                         <div class="col-sm-4">
-                                            <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
+                                           
                                             <br />
                                             <asp:Label ID="listofuploadedfiles" runat="server" />
                                             <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
@@ -245,7 +267,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
                     </div>

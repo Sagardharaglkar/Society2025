@@ -26,8 +26,8 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
+            }else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
                 if (Request.QueryString["id"] != null)
@@ -80,32 +80,6 @@ namespace Society
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
 
 
-
-
-
-
-
-
-
-
-            //foreach (GridViewRow row in GridView1.Rows)
-            //{
-            //    data_item.Add(st.create_array("operation", "save_change_rem"));
-            //    if (row.RowType == DataControlRowType.DataRow)
-            //    {
-            //        CheckBox chk_deposit = (CheckBox)row.Cells[4].FindControl("chk_depo");
-            //        CheckBox chk_return = (CheckBox)row.Cells[5].FindControl("chk_ret");
-            //        CheckBox chk_cancel = (CheckBox)row.Cells[6].FindControl("chk_can");
-            //        System.Web.UI.WebControls.Label pid = (System.Web.UI.WebControls.Label)row.Cells[1].FindControl("parking_id");    
-            //        data_item.Add(st.create_array("parking_id", string.IsNullOrWhiteSpace(pid.Text) ? (object)DBNull.Value : pid.Text));                    
-            //        data_item.Add(st.create_array("che_dep", chk_deposit.Checked == true ? 1 : 0));
-            //        data_item.Add(st.create_array("che_ret", chk_return.Checked == true ? 1 : 0));
-            //        data_item.Add(st.create_array("che_can", chk_cancel.Checked == true ? 1 : 0));
-
-            //    }
-            //    status1 = st.run_query(data_item, "Update", "sp_pdc_reminder", ref sdr);
-            //    data_item.Clear();
-            //}
 
         }
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -193,6 +167,12 @@ namespace Society
                     chk_cancel.Checked = true;
                 }
             }
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            runproc_save("pdc_clear_grid_show");
         }
     }
 }

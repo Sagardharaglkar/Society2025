@@ -12,7 +12,8 @@
             <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="Load Report" OnClick="Button1_Click"
                 Font-Bold="True" />
             <br />
-            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="887px"></rsweb:ReportViewer>
+            <br />
+            <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="49%"></rsweb:ReportViewer>
         </div>
     </div>
 

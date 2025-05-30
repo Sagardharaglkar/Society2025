@@ -77,7 +77,7 @@
 
 
                 <div>
-                    <asp:GridView ID="GridView1" Width="100%" runat="server" HeaderStyle-BackColor="LightBlue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" AllowSorting="true" AutoGenerateColumns="False">
+                    <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" Width="100%" runat="server" HeaderStyle-BackColor="LightBlue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" AllowSorting="true" AutoGenerateColumns="False">
                         <Columns>
                             <asp:TemplateField HeaderText="No" SortExpression="no">
                                 <ItemTemplate>

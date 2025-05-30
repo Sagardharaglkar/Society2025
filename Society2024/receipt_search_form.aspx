@@ -137,13 +137,13 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
+                                                <asp:TemplateField HeaderText="Print" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:Button runat="server" ID="save" OnCommand="print_save_Command" Text="Print" Visible="true" UseSubmitBehavior="false" CommandName="Update" CommandArgument='<%# Bind("receipt_id")%>'></asp:Button>
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
+                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("receipt_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
                                                         <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>

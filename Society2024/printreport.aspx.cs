@@ -21,11 +21,13 @@ namespace Society
         protected void Page_Load(object sender, EventArgs e)
         {
             society_id.Value = Session["society_id"].ToString();
-            if(Request.QueryString["n_m_id"]!= null)
-            Session["n_m_id"]=Request.QueryString["n_m_id"];
+           
+            //Session["n_m_id"]=Request.QueryString["n_m_id"];
             if (!IsPostBack)
             {
-                Button1_Click(sender, e);
+                if (Session["n_m_id"] != null)
+                    Button1_Click(sender, e);
+
             }
         }
 
