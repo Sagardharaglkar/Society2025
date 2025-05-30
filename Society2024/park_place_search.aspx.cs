@@ -171,8 +171,8 @@ namespace Society
             place_id.Value = id;
             runproc1("Select");
             btn_delete.Visible = true;
-            
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "ShowModal", "openModal();", true);
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)

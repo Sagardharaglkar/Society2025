@@ -159,7 +159,10 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_sub" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_sub" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Event" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Event Name
+                                                    </div>
                                                     <asp:Label ID="Label12" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
 
@@ -174,7 +177,12 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_from_date" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_from_date" CssClass="form-control" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
+
+
                                                     <br />
                                                     <asp:Label ID="Label11" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
 
@@ -191,8 +199,10 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox CssClass="form-control" ID="txt_to_date" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
-                                                    <div class="invalid-feedback"> invalid </div>
+                                                    <asp:TextBox ID="txt_to_date" CssClass="form-control" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
                                                     <br />
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
@@ -214,6 +224,7 @@
                                         </div>
 
                                     </ContentTemplate>
+
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>

@@ -153,7 +153,10 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_facility" runat="server" Height="32px" Width="200px" placeholder="Enter Facility Name" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_facility" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Facility Name" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Facility Name
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -162,7 +165,10 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_cost" runat="server" Height="32px" Width="200px" placeholder="Enter Facility Cost" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_cost" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Facility Cost" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Facility Cost
+                                                    </div>
 
                                                     <%--                        <asp:CalendarExtender ID="txt_from_dt_CalendarExtender" runat="server" Enabled="True" TargetControlID="txt_date" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                 </div>
@@ -279,6 +285,9 @@
 
                                     </div>
                                 </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </Triggers>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                 </Triggers>

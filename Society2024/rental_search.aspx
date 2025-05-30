@@ -201,7 +201,11 @@
                                                 <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:DropDownList ID="ddl_build_wing" Height="32px" Width="200px" runat="server" parsely-trigger="change" AutoPostBack="true"></asp:DropDownList>
+                                                <asp:DropDownList CssClass="form-select" ID="ddl_build_wing" Height="32px" Width="200px" runat="server" parsely-trigger="change" AutoPostBack="true"></asp:DropDownList>
+                                                <div class="invalid-feedback">
+                                                    Please select Build & Wing
+                                                </div>
+
                                                 </br>
                                         <asp:CompareValidator ControlToValidate="ddl_build_wing" ID="CompareValidator3" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Build & Wing" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                             </div>
@@ -212,7 +216,11 @@
                                                 <asp:Label ID="lbl_date_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_poss_date" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_poss_date" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Select Date
+                                                </div>
+
                                                 <%--                        <asp:CalendarExtender ID="CalendarExtender3" runat="server" Enabled="True" TargetControlID="txt_poss_date" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                             </div>
                                         </div>
@@ -227,7 +235,11 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <%--                      <asp:TextBox ID="txt_build_name" runat="server"  placeholder="Enter Building No" AutoPostBack="true" required></asp:TextBox>--%>
-                                                <asp:DropDownList ID="ddl_type" Height="32px" Width="200px" AutoPostBack="true" parsely-trigger="change" OnSelectedIndexChanged="ddl_type_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddl_type" CssClass="form-select" Height="32px" Width="200px" AutoPostBack="true" parsely-trigger="change" OnSelectedIndexChanged="ddl_type_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                                <div class="invalid-feedback">
+                                                    Please Select Type
+                                                </div>
+
                                                 <br />
                                                 <asp:CompareValidator ControlToValidate="ddl_type" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Type" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                             </div>
@@ -238,7 +250,11 @@
                                                 <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:DropDownList ID="ddl_flat" Height="32px" Width="200px" runat="server" AutoPostBack="true" parsely-trigger="change" OnSelectedIndexChanged="ddl_flat_SelectedIndexChanged"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddl_flat" CssClass="form-select" Height="32px" Width="200px" runat="server" AutoPostBack="true" parsely-trigger="change" OnSelectedIndexChanged="ddl_flat_SelectedIndexChanged"></asp:DropDownList>
+                                                <div class="invalid-feedback">
+                                                    Please Select Flat No
+                                                </div>
+
 
                                                 <asp:CompareValidator ControlToValidate="ddl_flat" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Flat No" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                 <asp:Label ID="Label11" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
@@ -255,7 +271,11 @@
                                                 <asp:Label ID="lbl_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_name" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Name" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Name" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Name
+                                                </div>
+
 
                                             </div>
 
@@ -266,7 +286,11 @@
 
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_email" Height="32px" Width="200px" placeholder="Enter Email" required runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" required runat="server"></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Email ID
+                                                </div>
+
                                                 <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
 
                                             </div>
@@ -282,7 +306,11 @@
                                                 <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_pre_mob" runat="server" OnTextChanged="txt_pre_mob_TextChanged" MaxLength="10" Height="32px" Width="200px" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" OnTextChanged="txt_pre_mob_TextChanged" MaxLength="10" Height="32px" Width="200px" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Mobile No
+                                                </div>
+
                                                 <asp:Label ID="Label31" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                             </div>
 
@@ -319,7 +347,11 @@
                                                 <asp:Label ID="Label17" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_dob" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_dob" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Select Date
+                                                </div>
+
 
                                             </div>
                                         </div>
@@ -327,6 +359,9 @@
 
 
                                 </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </Triggers>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                 </Triggers>
@@ -442,7 +477,11 @@
                                                 <asp:Label ID="Label15" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_aggrement_date" runat="server" Height="32px" Width="200px" MaxLength="8" TextMode="Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_aggrement_date" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="8" TextMode="Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Select Date
+                                                </div>
+
                                             </div>
                                             <div class="col-sm-3">
                                                 <asp:Label ID="Label25" runat="server" Text="Police Verification Date "></asp:Label>
@@ -450,7 +489,12 @@
                                                 <asp:Label ID="Label20" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_police_verification" runat="server" Height="32px" Width="200px" MaxLength="8" TextMode="Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_police_verification" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="8" TextMode="Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Select Date
+                                                </div>
+
+
                                             </div>
 
                                         </div>
@@ -464,7 +508,11 @@
                                                 <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_period_from" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_period_from" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Select Date
+                                                </div>
+
                                             </div>
                                             <div class="col-sm-3">
                                                 <asp:Label ID="Label21" runat="server" Text="Agreement Period To"></asp:Label>
@@ -472,7 +520,11 @@
                                                 <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_period_to" runat="server" Height="32px" Width="200px" MaxLength="8" TextMode="Date" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_period_to" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="8" TextMode="Date" required></asp:TextBox>
+                                                <div class="invalid-feedback">
+                                                    Please Select Date
+                                                </div>
+
                                             </div>
 
                                         </div>

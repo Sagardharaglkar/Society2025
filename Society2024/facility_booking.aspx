@@ -161,7 +161,10 @@
                                                     <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*" required></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:DropDownList ID="ddl_facility" OnSelectedIndexChanged="ddl_facility_SelectedIndexChanged" runat="server" Height="32px" Width="200px" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_facility" OnSelectedIndexChanged="ddl_facility_SelectedIndexChanged" runat="server" Height="32px" Width="200px" AutoPostBack="true"></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Facility 
+                                                    </div>
                                                     <%-- <asp:RequiredFieldValidator ControlToValidate=" ForeColor="Red" ID="RequiredFieldValidator1"
                                                         ValidationGroup="valid" CssClass="errormesg" ErrorMessage="Please select a type"
                                                         InitialValue="Select" runat="server" Display="Dynamic">
@@ -175,7 +178,10 @@
                                                     <asp:Label ID="Label34" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_date" runat="server" TextMode="Date" OnTextChanged="txt_date_TextChanged" Height="32px" Width="200px" AutoPostBack="true" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" TextMode="Date" OnTextChanged="txt_date_TextChanged" Height="32px" Width="200px" AutoPostBack="true" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
 
                                                 </div>
 
@@ -245,7 +251,10 @@
                                                         <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:DropDownList ID="ddl_name" runat="server" OnSelectedIndexChanged="ddl_name_SelectedIndexChanged" parsley-trigger="change" AutoPostBack="true" Height="32px" Width="200px"></asp:DropDownList>
+                                                        <asp:DropDownList CssClass="form-select" ID="ddl_name" runat="server" OnSelectedIndexChanged="ddl_name_SelectedIndexChanged" parsley-trigger="change" AutoPostBack="true" Height="32px" Width="200px"></asp:DropDownList>
+                                                        <div class="invalid-feedback">
+                                                            Please Select Name
+                                                        </div>
 
                                                         <br></br>
                                                         <asp:CompareValidator ControlToValidate="ddl_name" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Name" Font-Bold="true" Height="32px" Width="200px" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
@@ -256,7 +265,10 @@
                                                         <asp:Label ID="Label15" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox ID="txt_flat" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" AutoPostBack="true" placeholder="Enter Flat No" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_flat" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" AutoPostBack="true" placeholder="Enter Flat No" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Flat No
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -280,7 +292,10 @@
                                                         <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox ID="txt_add" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_add" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Address
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -293,7 +308,10 @@
                                                         <asp:Label ID="Label27" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox ID="txt_contact" runat="server" MaxLength="10" Height="32px" Width="200px" placeholder="Enter Mobile no" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" placeholder="Enter Mobile no" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Contact No
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -360,7 +378,10 @@
                                                     <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_amount" runat="server" Height="50px" Width="200px" Enabled="false" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_amount" CssClass="form-control" runat="server" Height="50px" Width="200px" Enabled="false" TextMode="MultiLine"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Charges
+                                                    </div>
 
                                                 </div>
 
@@ -383,6 +404,9 @@
 
                                         </div>
                                     </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
                                 </asp:UpdatePanel>
 
                             </div>
@@ -392,7 +416,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </center>
                                         <br />
                                     </div>

@@ -13,7 +13,7 @@
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK',
                 timer: 3000,
-                timerProgressBar: true,
+                timerProgressBar: true
 
                 didOpen: () => {
                     Swal.showLoading()
@@ -139,7 +139,10 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_sub" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_sub" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Subject Name
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -153,7 +156,10 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:DropDownList ID="ddl_recipients" Height="32px" Width="200px" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_recipients" Height="32px" Width="200px" runat="server"></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please select Recipient
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +171,10 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_valid_to" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_valid_to" CssClass="form-control" runat="server" Height="32px" Width="200px" required TextMode="Date"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
 
                                                     <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                 </div>
@@ -180,7 +189,10 @@
                                                     <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_desc" runat="server" TextMode="MultiLine" Rows="6" Height="90px" Width="200px" placeholder="Enter Description" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_desc" CssClass="form-control" runat="server" TextMode="MultiLine" Rows="6" Height="90px" Width="200px" placeholder="Enter Description" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Description
+                                                    </div>
                                                 </div>
 
                                             </div>

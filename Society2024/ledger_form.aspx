@@ -141,7 +141,10 @@
                                                     <asp:Label ID="Label2" runat="server" Text="*" ForeColor="Red" Font-Bold="true"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_des" Width="200px" Height="32px" placeholder="Enter Description" runat="server" TextMode="MultiLine" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_des" CssClass="form-control" Width="200px" Height="32px" placeholder="Enter Description" runat="server" TextMode="MultiLine" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Description
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

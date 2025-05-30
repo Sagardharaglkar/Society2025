@@ -142,7 +142,10 @@
                                                     <asp:Label ID="lbl_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_name" runat="server" MaxLength="50" Style="text-transform: capitalize;" placeholder="Enter Name" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" MaxLength="50" Style="text-transform: capitalize;" placeholder="Enter Name" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Inventory Name
+                                                    </div>
                                                     <asp:Label ID="Label7" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-2">
@@ -151,7 +154,10 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_quantity" runat="server" MaxLength="50" onkeypress="return digit(event);" placeholder="Enter Quantity" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_quantity" CssClass="form-control" runat="server" MaxLength="50" onkeypress="return digit(event);" placeholder="Enter Quantity" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Quantity
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -165,7 +171,10 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_slot" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Slot No" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_slot" CssClass="form-control" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Slot No" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Slot No
+                                                    </div>
 
                                                 </div>
                                                 <div class="col-sm-2">
@@ -174,7 +183,10 @@
                                                     <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_charges" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Charges" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_charges" CssClass="form-control" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Charges" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Charges
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -192,8 +204,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-                                        </center>
+                                       <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                            </center>
                                         <br />
                                     </div>
                                 </div>

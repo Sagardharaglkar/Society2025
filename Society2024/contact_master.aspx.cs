@@ -134,21 +134,23 @@ namespace Society
 
         protected void drp_per_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (usefull_contact_id.Value != "")
-                contact.usefull_contact_id = Convert.ToInt32(usefull_contact_id.Value);
-            contact.Sql_Operation = "p_name_already_exist";
-            contact.P_Name = txt_p_name.Text;
-            contact.P_Type = Convert.ToInt32(drp_per_type.SelectedValue.ToString());
-            var result = bL_Contact.Per_Type_SelectIndexChanged(contact);
+            if (drp_per_type.SelectedItem.Text != "select")
+            {
+                if (usefull_contact_id.Value != "")
+                    contact.usefull_contact_id = Convert.ToInt32(usefull_contact_id.Value);
+                contact.Sql_Operation = "p_name_already_exist";
+                contact.P_Name = txt_p_name.Text;
+                contact.P_Type = Convert.ToInt32(drp_per_type.SelectedValue.ToString());
+                var result = bL_Contact.Per_Type_SelectIndexChanged(contact);
 
-            Label10.Text = result.Sql_Result;
+                Label10.Text = result.Sql_Result;
 
-            if (Label10.Text != "")
-                btn_save.Enabled = false;
-            else
-                btn_save.Enabled = true;
+                if (Label10.Text != "")
+                    btn_save.Enabled = false;
+                else
+                    btn_save.Enabled = true;
 
-
+            }
         }
         
 

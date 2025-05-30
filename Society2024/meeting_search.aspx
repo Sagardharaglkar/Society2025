@@ -151,7 +151,10 @@
                                                         <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_sub" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_sub" CssClass="form-control" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Subject 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,7 +167,10 @@
                                                         <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_date" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus ></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Meeting Date
+                                                        </div>
                                                         <br />
                                                         <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                     </div>
@@ -179,7 +185,10 @@
                                                         <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_time" runat="server" Height="32px" Width="200px" TextMode="Time" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_time" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Time" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Meeting Time
+                                                        </div>
                                                     </div>
 
                                                 </div>

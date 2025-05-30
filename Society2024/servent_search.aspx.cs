@@ -307,6 +307,7 @@ namespace Society
             servent_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
 
         }

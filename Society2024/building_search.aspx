@@ -222,6 +222,9 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_print_name" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Building Name" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Building Name
+                                                            </div>
                                                         </div>
 
                                                     </div>
@@ -235,6 +238,9 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_reg" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Registration No" AutoPostBack="true" required autofocus OnTextChanged="txt_reg_TextChanged" ValidationGroup="g1"></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Registration No
+                                                            </div>
                                                             <asp:Label ID="Label13" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
                                                         </div>
 
@@ -249,6 +255,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_add1" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Adress
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
@@ -260,6 +270,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_add2" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Adress
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
@@ -274,6 +288,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_floore" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter No. of Floors" onkeypress="return digit(event);" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter No Of Floors
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
@@ -289,6 +307,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_bank" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Bank name" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Bank Name
+                                                            </div>
+
 
                                                         </div>
 
@@ -303,6 +325,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_bank_add" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Full Address" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Bank Adress
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
@@ -316,6 +342,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_branch" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Branch" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Branch
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
@@ -329,6 +359,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_ifsc" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="11" placeholder="Enter IFSC Code" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter IFSC Code
+                                                            </div>
+
                                                             <br>
                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Height="32px" Width="200px" runat="server" ValidationExpression="^[A-Z]{4}0[A-Z0-9]{6}$"
                                                                 ControlToValidate="txt_ifsc" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid IFSC Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
@@ -345,6 +379,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_acc_no" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Account No" required autofocus MaxLength="18"></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Account No
+                                                            </div>
+
                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Height="32px" Width="200px" runat="server" ValidationExpression="^\d{9,18}$"
                                                                 ControlToValidate="txt_acc_no" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Account No Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
                                                         </div>
@@ -360,6 +398,10 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                            <div class="invalid-feedback">
+                                                                Please Enter Email 
+                                                            </div>
+
                                                             <br>
                                                             <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
                                                         </div>

@@ -129,7 +129,10 @@
                                                     <asp:Label ID="Label3" runat="server" Text="*" ForeColor="Red" Font-Bold="true"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_role" Width="200px" Height="32px" Style="text-transform: capitalize;" OnTextChanged="txt_role_TextChanged" placeholder="Enter Role" AutoPostBack="true" runat="server" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_role" CssClass="form-control" Width="200px" Height="32px" Style="text-transform: capitalize;" OnTextChanged="txt_role_TextChanged" placeholder="Enter Role" AutoPostBack="true" runat="server" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Role
+                                                    </div>
                                                     <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
                                                 </div>
                                             </div>

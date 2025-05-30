@@ -156,6 +156,7 @@ namespace Society
             parking_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void btn_delete_Click(object sender, EventArgs e)

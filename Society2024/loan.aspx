@@ -141,7 +141,10 @@
 
                                         <label>Name of the Bank:<asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label></label>
                                         <div class="form-group">
-                                            <asp:TextBox ID="txt_bank" Font-Bold="true" Style="text-transform: capitalize;" placeholder="Enter Bank Name" runat="server" required class="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="txt_bank" CssClass="form-control" Font-Bold="true" Style="text-transform: capitalize;" placeholder="Enter Bank Name" runat="server" required class="form-control"></asp:TextBox>
+                                            <div class="invalid-feedback">
+                                                Please Enter Bank Name
+                                            </div>
                                         </div>
 
                                         <label>Type of Loan:<asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label></label>
@@ -169,7 +172,10 @@
 
                                         <label>Society NOC Date:<asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label></label>
                                         <div class="form-group">
-                                            <asp:TextBox ID="txt_noc_society" Font-Bold="true" runat="server" TextMode="Date" class="form-control" required></asp:TextBox>
+                                            <asp:TextBox ID="txt_noc_society" CssClass="form-control" Font-Bold="true" runat="server" TextMode="Date" class="form-control" required></asp:TextBox>
+                                            <div class="invalid-feedback">
+                                                Please Enter Date
+                                            </div>
                                         </div>
 
                                         <asp:Panel ID="Panel1" Visible="false" runat="server">
@@ -200,7 +206,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="close_Click" UseSubmitBehavior="False" />
+                                          <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </center>
                                     </div>
                                 </div>
