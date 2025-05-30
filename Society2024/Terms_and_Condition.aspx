@@ -28,6 +28,19 @@
             });
         }
     </script>
+    <script>
+    function initCKEditor() {
+        if (CKEDITOR.instances['<%= editor1.ClientID %>']) {
+            CKEDITOR.instances['<%= editor1.ClientID %>'].destroy(true);
+        }
+        CKEDITOR.replace('<%= editor1.ClientID %>');
+    }
+
+    // Re-initialize after UpdatePanel updates
+    Sys.Application.add_load(function () {
+        initCKEditor();
+    });
+    </script>
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -58,7 +71,7 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 70%; overflow: auto;">
-                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" OnRowDeleting="GridView1_RowDeleting" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" HeaderStyle-BackColor="lightblue">
+                                        <asp:GridView ID="GridView1" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15"  runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" OnRowDeleting="GridView1_RowDeleting" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" HeaderStyle-BackColor="lightblue">
 
                                             <Columns>
                                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
@@ -79,7 +92,7 @@
 
                                                 <asp:TemplateField ItemStyle-Width="50">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit1" OnCommand="edit1_Command" CommandName="Update" CommandArgument='<%# Bind("term_id")%>'><img src="Images/123.png" /></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" ID="edit1" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("term_id")%>'><img src="Images/123.png" /></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
@@ -112,9 +125,6 @@
                                         </div>
 
 
-                                        <asp:Button type="submit" runat="server" class="btn btn-primary" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Submit" />&nbsp;&nbsp;
-                                  <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-
                                     </div>
                                 </div>
             </ContentTemplate>
@@ -125,6 +135,9 @@
 
                             </div>
                             <div class="modal-footer">
+
+                                        <asp:Button type="submit" runat="server" class="btn btn-primary" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Submit" />&nbsp;&nbsp;
+                                  <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
 
                             </div>
                         </div>

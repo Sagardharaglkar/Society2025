@@ -139,11 +139,13 @@ namespace Society
             society.Regular = Convert.ToInt32(regular_chk.Checked == true ? 1 : 0).ToString();
             var result = bL_Society.UpdateExpense(society);
             expense_id.Value = result.expense_id.ToString();
+
             DataTable dt = (DataTable)ViewState["user_data"];
             foreach (DataRow dataRow in dt.Rows)
             {
                 society.expense_id = Convert.ToInt32(expense_id.Value);
                 society.User_Id = Convert.ToInt32(dataRow["user_id"].ToString());
+                if(dataRow["type"].ToString()!="get")
                 bL_Society.updateApprover(society);
             }
         }

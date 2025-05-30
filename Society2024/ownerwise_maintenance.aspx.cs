@@ -61,7 +61,7 @@ namespace Society
 
         protected void ownerwise_maintenance_GridBind()
         {
-            int count = 0;
+            
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append("exec sp_dashboard @operation= 'ownerwise_maintenance', @date1='"+ txt_from.Text+"',@date2= '" + txt_to.Text +"' , @build_id= '" + ddl_build.SelectedValue + "', @owner_id= " + ddl_owner.SelectedValue);
 
