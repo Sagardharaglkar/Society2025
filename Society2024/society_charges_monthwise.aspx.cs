@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -36,7 +37,7 @@ namespace Society2024
             txt_total.Text = "";
             txt_total.Text = "";
 
-            Label10.Text = "";
+          
         }
         public void monthwise_charges_Gridbind()
         {
@@ -115,14 +116,12 @@ namespace Society2024
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            if (Label10.Text == "")
-            {
+         
                 runproc_save("Update");
                 //ClearFormFields();
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            }
-            else
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            
+            
 
         }
 

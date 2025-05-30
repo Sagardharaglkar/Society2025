@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="society_charges_monthwise.aspx.cs" Inherits="Society2024.society_charges" MasterPageFile="~/Site.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind=" .aspx.cs" Inherits="Society2024.society_charges" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -188,7 +188,7 @@
                                                 </div>
                                                 <div class="col-sm-7">
                                                     <asp:TextBox ID="txt_total" CssClass="form-control" runat="server" Width="200px" Height="32px" required autofocus></asp:TextBox>
-                                                    <asp:Label ID="Label10" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                                   
                                                     <div class="invalid-feedback">
                                                         Please Enter Total Amount
                                                     </div>
