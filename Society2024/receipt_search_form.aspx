@@ -202,7 +202,10 @@
                                                     <asp:Label ID="Label20" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_date" runat="server" Height="32px" Width="150px" TextMode="Date" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" Height="32px" Width="150px" TextMode="Date" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
 
 
                                                 </div>
@@ -218,7 +221,10 @@
 
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="ddl_wing" Height="32px" Width="150px" runat="server" parsely_trigger="change" required OnSelectedIndexChanged="ddl_wing_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_wing" Height="32px" Width="150px" runat="server" parsely_trigger="change" required OnSelectedIndexChanged="ddl_wing_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Wing
+                                                    </div>
                                                     <br />
                                                     <asp:CompareValidator ControlToValidate="ddl_wing" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Wing Name" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                 </div>
@@ -228,7 +234,10 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="ddl_owner" Height="32px" Width="150px" runat="server" parsely-trigger="change" required OnSelectedIndexChanged="ddl_owner_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_owner" Height="32px" Width="150px" runat="server" parsely-trigger="change" required OnSelectedIndexChanged="ddl_owner_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please Select Owner Name
+                                                    </div>
                                                     <br />
                                                     <asp:CompareValidator ControlToValidate="ddl_owner" ID="CompareValidator4" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Owner Name" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                 </div>
@@ -274,7 +283,10 @@
                                                         <asp:Label ID="Label22" runat="server" Text="*" ForeColor="Red"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox ID="txt_upi" required Width="200px" Height="32px" runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_upi" CssClass="form-control" required Width="200px" Height="32px" runat="server"></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter UPI
+                                                        </div>
                                                     </div>
 
                                                     <asp:Button ID="Button2" runat="server" Height="30px" CssClass="btn btn-primary" Text="Verify & Proceed" />
@@ -334,7 +346,10 @@
                                                         <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_received_amt" Height="32px" Width="150px" runat="server" MaxLength="50" placeholder="Received Amount" onkeypress="return digit(event);" required OnTextChanged="txt_received_amt_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_received_amt" CssClass="form-control" Height="32px" Width="150px" runat="server" MaxLength="50" placeholder="Received Amount" onkeypress="return digit(event);" required OnTextChanged="txt_received_amt_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Received Amount
+                                                        </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <asp:Label ID="Label9" runat="server" Text="Balance"></asp:Label>
@@ -378,7 +393,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" CausesValidation="false" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" CausesValidation="false" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                             <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" CausesValidation="false" />
                                             <asp:Button ID="btn_email" runat="server" Text="Email" class="btn btn-primary" OnClick="btn_email_Click" CausesValidation="false" />
                                         </center>

@@ -238,14 +238,20 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_pre_mob" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Mobile No
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <asp:Label ID="lbl_pre_addr1" runat="server" Text="Present Address"></asp:Label>
                                                     <asp:Label ID="lbl_pre_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_pre_addr1" runat="server" MaxLength="250" Height="32px" Width="200px" placeholder="Enter Present Address" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pre_addr1" CssClass="form-control" runat="server" MaxLength="250" Height="32px" Width="200px" placeholder="Enter Present Address" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Address
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,7 +282,10 @@
                                                     <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="Black" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_email" Height="32px" Width="200px" placeholder="Enter Email" runat="server" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" runat="server" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Email
+                                                    </div>
                                                     </br>
                                                     <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
 
@@ -294,7 +303,10 @@
                                                     <asp:Label ID="lbl_chq_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_chq_no" runat="server" Height="30px" Width="150px" MaxLength="50" onkeypress="return digit(event);" OnTextChanged="txt_chq_no_TextChanged" placeholder="Cheque No"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_chq_no" CssClass="form-control" runat="server" Height="30px" Width="150px" MaxLength="50" onkeypress="return digit(event);" OnTextChanged="txt_chq_no_TextChanged" placeholder="Cheque No"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Cheque No
+                                                    </div>
                                                     <asp:Label ID="Label2" runat="server"></asp:Label>
                                                 </div>
 
@@ -304,7 +316,10 @@
                                                     <asp:Label ID="lbl_chq_date_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_chq_date" Height="30px" Width="150px" runat="server" TextMode="Date"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_chq_date" CssClass="form-control" Height="30px" Width="150px" runat="server" TextMode="Date"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Date
+                                                    </div>
                                                 </div>
 
 
@@ -314,7 +329,10 @@
                                                     <asp:Label ID="lbl_chq_amount_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_chq_amount" runat="server" Height="30px" Width="150px" onkeypress="return digit(event);" placeholder="Cheque Amount" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_chq_amount" CssClass="form-control" runat="server" Height="30px" Width="150px" onkeypress="return digit(event);" placeholder="Cheque Amount" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Amount
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -354,11 +372,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            </ContentTemplate>
-    <Triggers>
-        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-    </Triggers>
-</asp:UpdatePanel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-12">
@@ -435,7 +453,8 @@
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
-                                        </center>
+ 
+                                       </center>
                                     </div>
                                 </div>
 

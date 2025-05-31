@@ -177,7 +177,10 @@
                                                         <asp:Label ID="lbl_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_no" runat="server" Height="32px" Width="200px" placeholder="Enter Invoice No" Enabled="false" required> </asp:TextBox>
+                                                        <asp:TextBox ID="txt_no" CssClass="from-control" runat="server" Height="32px" Width="200px" placeholder="Enter Invoice No" Enabled="false" required> </asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Invoice No
+                                                        </div>
                                                         <br />
 
                                                     </div>
@@ -187,7 +190,10 @@
                                                         <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_date" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_date" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Date
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -213,7 +219,10 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_name" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Name
+                                                        </div>
                                                         <asp:DropDownList ID="ddl_vendor" Height="32px" Width="200px" runat="server" parsely-trigger="change" Visible="false"></asp:DropDownList>
                                                         <br />
                                                         <asp:CompareValidator ControlToValidate="ddl_vendor" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Vendor" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
@@ -240,7 +249,10 @@
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_details" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter details" TextMode="MultiLine" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_details" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter details" TextMode="MultiLine" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Expense Details
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -261,7 +273,10 @@
                                                         <asp:Label ID="Label17" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_amount" runat="server" Height="32px" Width="200px" placeholder="Enter Amount" onkeypress="return digit(event);" OnTextChanged="txt_amount_TextChanged" AutoPostBack="True" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_amount" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Amount" onkeypress="return digit(event);" OnTextChanged="txt_amount_TextChanged" AutoPostBack="True" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Amount
+                                                        </div>
                                                         <br />
 
                                                     </div>
@@ -278,7 +293,10 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_tax" runat="server" Height="32px" Width="200px" placeholder="Tax" onkeypress="return digit(event);" OnTextChanged="txt_tax_TextChanged" AutoPostBack="true" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_tax" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Tax" onkeypress="return digit(event);" OnTextChanged="txt_tax_TextChanged" AutoPostBack="true" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Tax
+                                                        </div>
 
                                                     </div>
 
@@ -298,7 +316,10 @@
                                                         <asp:Label ID="Label28" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_tds" runat="server" Height="32px" Width="200px" onkeypress="return digit(event);" placeholder="TDS"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_tds" CssClass="form-control" runat="server" Height="32px" Width="200px" onkeypress="return digit(event);" placeholder="TDS"></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter TDS
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -351,7 +372,10 @@
                                                         <asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_famount" runat="server" Height="32px" Width="200px" onkeypress="return digit(event);" placeholder="Final Amount" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_famount" CssClass="form-control" runat="server" Height="32px" Width="200px" onkeypress="return digit(event);" placeholder="Final Amount" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Final Amount
+                                                        </div>
 
                                                     </div>
 
@@ -376,7 +400,8 @@
                                         <center>
                                             <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </center>
                                         <br />
                                     </div>
