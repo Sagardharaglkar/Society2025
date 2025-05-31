@@ -586,7 +586,7 @@ namespace Society
             }
 
             txt_amount.Text = total.ToString();
-            flag = 1;
+            int flag = 1;
             if(dt1.Rows.Count==0)
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Expense are Not Approved by Members');", true);
         }
