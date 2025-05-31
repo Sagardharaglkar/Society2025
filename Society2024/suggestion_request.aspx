@@ -156,6 +156,9 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <asp:TextBox ID="txt_sub" runat="server" Height="35px" CssClass="form-control" Width="250px" placeholder="Enter Subject" required autofocus></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Subject
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -168,6 +171,9 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <asp:TextBox ID="txt_details" runat="server" Height="35px" CssClass="form-control" Width="250px" placeholder="Enter Suggestion/Request" required autofocus TextMode="MultiLine"></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Suggestions/Requests
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -184,7 +190,8 @@
                                         <div class="pull-right">
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure you want delete?');" OnClick="btn_delete_Click" Visible="false" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </div>
                                     </div>
                                 </div>

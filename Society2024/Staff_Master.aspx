@@ -2,26 +2,26 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-    function SuccessEntry() {
-        Swal.fire({
-            title: '✅ Success!',
-            text: 'Saved Successfully',
-            icon: 'success',
-            showConfirmButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK',
-            timer: 3000,
-            timerProgressBar: true,
+    <script type="text/javascript">
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true,
 
-            didOpen: () => {
-                Swal.showLoading()
-            },
-            willClose: () => {
-                window.location.href = 'Staff_Master.aspx';
-            }
-        });
-    }
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'Staff_Master.aspx';
+                }
+            });
+        }
 
         function digit(evt) {
             if (evt.keyCode < 48 || evt.keyCode > 57) {
@@ -43,7 +43,7 @@
         function openModal() {
             $('#edit_model').modal('show');
         }
-</script>
+    </script>
 
 
     <div class="box box-primary">
@@ -60,104 +60,107 @@
                 <br />
 
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-    <ContentTemplate>
+                    <ContentTemplate>
 
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                <asp:HiddenField ID="staff_id" runat="Server"></asp:HiddenField>
-                <asp:HiddenField ID="build_id" runat="server" />
-                <asp:HiddenField ID="role_id" runat="server" />
-                <div class="form-group">
-                    <div class="col-12">
-                           <div class="d-flex align-items-center">
-                   
-                            <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                <%--<asp:ListItem Value="build_name">Building Name</asp:ListItem>--%>
-                                <asp:ListItem Value="name">Name</asp:ListItem>
-                                <asp:ListItem Value="contact_no">Contact No</asp:ListItem>
-                                <asp:ListItem Value="Role">Role</asp:ListItem>
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="staff_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="build_id" runat="server" />
+                        <asp:HiddenField ID="role_id" runat="server" />
+                        <div class="form-group">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
 
-                            </asp:DropDownList>&nbsp;&nbsp;
+                                    <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
+                                        <%--<asp:ListItem Value="build_name">Building Name</asp:ListItem>--%>
+                                        <asp:ListItem Value="name">Name</asp:ListItem>
+                                        <asp:ListItem Value="contact_no">Contact No</asp:ListItem>
+                                        <asp:ListItem Value="Role">Role</asp:ListItem>
+
+                                    </asp:DropDownList>&nbsp;&nbsp;
                        
                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                                <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                        
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" /></asp:Panel>&nbsp;&nbsp;
+                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
+                                    </asp:Panel>
+                                    &nbsp;&nbsp;
                       
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
 
-                       </div>
-                   </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating">
-
-                                    <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ID" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="staff_id" runat="server" Text='<%# Bind("staff_id")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Name" ItemStyle-Width="400" SortExpression="name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Address" ItemStyle-Width="200" SortExpression="address">
-                                            <ItemTemplate>
-                                                <asp:Label ID="address" runat="server" Text='<%# Bind("address")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Contact No" ItemStyle-Width="200" SortExpression="contact_no">
-                                            <ItemTemplate>
-                                                <asp:Label ID="contact_no" runat="server" Text='<%# Bind("contact_no")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Email" ItemStyle-Width="200" SortExpression="email">
-                                            <ItemTemplate>
-                                                <asp:Label ID="email" runat="server" Text='<%# Bind("email")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Date of Join" ItemStyle-Width="400" SortExpression="date_of_join">
-                                            <ItemTemplate>
-                                                <asp:Label ID="date_of_join" runat="server" Text='<%# Bind("date_of_join","{0:dd-MM-yyyy}")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Role" ItemStyle-Width="200" SortExpression="role">
-                                            <ItemTemplate>
-                                                <asp:Label ID="role" runat="server" Text='<%# Bind("Role")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-
-                                        <asp:TemplateField ItemStyle-Width="100" HeaderText="Edit">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("staff_id")%>'> <img src="Images/123.png"  /></asp:LinkButton>
-                                                <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                    </Columns>
-                                </asp:GridView>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-        </ContentTemplate></asp:UpdatePanel>
+
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating">
+
+                                            <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="ID" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="staff_id" runat="server" Text='<%# Bind("staff_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Name" ItemStyle-Width="400" SortExpression="name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Address" ItemStyle-Width="200" SortExpression="address">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="address" runat="server" Text='<%# Bind("address")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Contact No" ItemStyle-Width="200" SortExpression="contact_no">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="contact_no" runat="server" Text='<%# Bind("contact_no")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Email" ItemStyle-Width="200" SortExpression="email">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="email" runat="server" Text='<%# Bind("email")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Date of Join" ItemStyle-Width="400" SortExpression="date_of_join">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="date_of_join" runat="server" Text='<%# Bind("date_of_join","{0:dd-MM-yyyy}")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Role" ItemStyle-Width="200" SortExpression="role">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="role" runat="server" Text='<%# Bind("Role")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+
+                                                <asp:TemplateField ItemStyle-Width="100" HeaderText="Edit">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("staff_id")%>'> <img src="Images/123.png"  /></asp:LinkButton>
+                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-6">
                         <div class="modal-content" style="height: auto; width: 400px;">
@@ -166,13 +169,13 @@
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Staff_Search</strong></h4>
                             </div>
                             <div class="modal-body" id="invoice_data">
-                          
 
-                                    <div class="form-group">
-                                        <div class="alert alert-danger danger" style="display: none;"></div>
-                                    </div>
-                                    <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                        <ContentTemplate>
+
+                                <div class="form-group">
+                                    <div class="alert alert-danger danger" style="display: none;"></div>
+                                </div>
+                                <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
 
                                             <div class="form-group">
                                                 <div class="row ">
@@ -189,9 +192,9 @@
                                                         <br />
 
 
-                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
 
                                             <div class="form-group">
                                                 <div class="row ">
@@ -208,8 +211,8 @@
                                                         </div>
                                                     </div>
 
-                                                </div>
                                             </div>
+                                        </div>
 
                                             <div class="form-group">
                                                 <div class="row ">
@@ -224,10 +227,10 @@
                                                             Please Enter Adress
                                                         </div>
 
-                                                        <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
-                                                    </div>
+                                                    <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                 </div>
                                             </div>
+                                        </div>
 
                                             <div class="form-group">
                                                 <div class="row ">
@@ -245,8 +248,8 @@
                                                         <asp:Label ID="Label19" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                     </div>
 
-                                                </div>
                                             </div>
+                                        </div>
 
                                             <div class="form-group">
                                                 <div class="row ">
