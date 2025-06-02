@@ -195,7 +195,7 @@
                                                             <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter contact No" AutoPostBack="True" onblur="checkLength(this)" onkeypress="return digit(event);" required OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
+                                                            <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter contact No" AutoPostBack="True" onblur="checkLength(this)" required OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
                                                             <div class="invalid-feedback">
                                                                 Please Enter Contact No
                                                             </div>

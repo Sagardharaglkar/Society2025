@@ -269,10 +269,8 @@
                                                         <div class="col-sm-4">
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <asp:TextBox ID="txt_add2" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
-                                                            <div class="invalid-feedback">
-                                                                Please Enter Adress
-                                                            </div>
+                                                            <asp:TextBox ID="txt_add2" CssClass="not-required" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                            
 
                                                         </div>
 
@@ -397,14 +395,11 @@
                                                             <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                            <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Email" placeholder="Enter Email" required autofocus></asp:TextBox>
                                                             <div class="invalid-feedback">
                                                                 Please Enter Email 
                                                             </div>
-
-                                                            <br>
-                                                            <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                        </div>
+         </div>
 
                                                     </div>
                                                 </div>

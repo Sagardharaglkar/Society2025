@@ -510,15 +510,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.TextBox txt_email;
 
         /// <summary>
-        /// regexEmailValid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexEmailValid;
-
-        /// <summary>
         /// btn_save control.
         /// </summary>
         /// <remarks>

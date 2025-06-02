@@ -286,12 +286,12 @@
 
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" required runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" TextMode="Email" placeholder="Enter Email" required runat="server"></asp:TextBox>
                                                 <div class="invalid-feedback">
-                                                    Please Enter Email ID
+                                                    Please Enter valid Email ID
                                                 </div>
 
-                                                <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
+                                               
 
                                             </div>
 
@@ -306,7 +306,7 @@
                                                 <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" OnTextChanged="txt_pre_mob_TextChanged" MaxLength="10" Height="32px" Width="200px" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" OnTextChanged="txt_pre_mob_TextChanged" MaxLength="10" Height="32px" Width="200px" TextMode="Phone" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
                                                 <div class="invalid-feedback">
                                                     Please Enter Mobile No
                                                 </div>
@@ -319,7 +319,7 @@
                                                 <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_add_mob" Height="32px" Width="200px" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Mobile No."></asp:TextBox>
+                                                <asp:TextBox ID="txt_add_mob" Height="32px" Width="200px" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter Mobile No."></asp:TextBox>
 
                                             </div>
 
