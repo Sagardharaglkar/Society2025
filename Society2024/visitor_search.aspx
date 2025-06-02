@@ -228,7 +228,7 @@
                                                     <asp:Label ID="Label36" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter No" onkeypress="return digit(event);" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter No" onkeypress="return digit(event);" required></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Contact No
                                                     </div>

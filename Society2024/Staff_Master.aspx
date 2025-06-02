@@ -240,7 +240,7 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" OnTextChanged="txt_contact_TextChanged" onkeypress="return digit(event);" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" TextMode="Phone" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Contact No
                                                         </div>
@@ -259,12 +259,11 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" TextMode="Email" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
                                                         <div class="invalid-feedback">
-                                                            Please Enter Email
+                                                            Please Enter Valid Email
                                                         </div>
-                                                        <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="true" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    </div>
+                                                       </div>
 
                                                 </div>
                                             </div>
