@@ -233,10 +233,10 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
+                                            <asp:FileUpload ID="file_name2" runat="server" Font-Bold="False" />
                                             <br />
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
-                                            <asp:Label ID="Label2" runat="server" Height="32px" Width="200px" />
+                                            <asp:Label ID="listofuploadedfiless" runat="server" />
+                                            <asp:Label ID="Label22" runat="server" Height="32px" Width="200px" />
                                         </div>
 
                                         <div class="form-group">

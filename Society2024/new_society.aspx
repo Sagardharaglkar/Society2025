@@ -78,7 +78,7 @@
 
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_name" runat="server" placeholder="Enter Name" required autofocus Width="200px"></asp:TextBox>
+                                    <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" placeholder="Enter Name" required autofocus Width="200px"></asp:TextBox>
                                     <br />
 
                                 </div>
@@ -104,7 +104,7 @@
                                     <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_registration" runat="server" Width="200px" AutoPostBack="true" placeholder="Enter Registration No" required Autofocus OnTextChanged="txt_registration_TextChanged"></asp:TextBox>
+                                    <asp:TextBox ID="txt_registration" CssClass="form-control" runat="server" Width="200px" AutoPostBack="true" placeholder="Enter Registration No" required Autofocus OnTextChanged="txt_registration_TextChanged"></asp:TextBox>
                                     <br />
                                     <asp:Label ID="Label22" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                 </div>
@@ -125,7 +125,7 @@
                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_off_address1" runat="server" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                    <asp:TextBox ID="txt_off_address1" CssClass="form-control" runat="server" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
                                 </div>
 
                                 <div class="col-sm-3">
@@ -133,7 +133,7 @@
                                     <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_off_address2" runat="server" Width="200px" placeholder="Enter Address" autofocus></asp:TextBox>
+                                    <asp:TextBox ID="txt_off_address2" CssClass="not-required" runat="server" Width="200px" placeholder="Enter Address" autofocus></asp:TextBox>
                                 </div>
 
                             </div>
@@ -147,7 +147,7 @@
                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_contact_no1" runat="server" MaxLength="10" Width="200px" ValidationGroup="g1" placeholder="Enter Contact No." onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" required></asp:TextBox>
+                                    <asp:TextBox ID="txt_contact_no1" CssClass="form-control" runat="server" MaxLength="10" Width="200px" ValidationGroup="g1" placeholder="Enter Contact No." onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" required></asp:TextBox>
                                     <br />
 
                                 </div>
@@ -159,7 +159,7 @@
 
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_email" Width="200px" placeholder="Enter Email" runat="server" required></asp:TextBox>
+                                    <asp:TextBox ID="txt_email" CssClass="form-control" Width="200px" placeholder="Enter Email" runat="server" required></asp:TextBox>
                                     <br />
                                     <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
 
@@ -213,7 +213,7 @@
                                   
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_city" runat="server" Width="200px" MaxLength="10" placeholder="Enter City" required autofocus></asp:TextBox>
+                                    <asp:TextBox ID="txt_city" CssClass="form-control" runat="server" Width="200px" MaxLength="10" placeholder="Enter City" required autofocus></asp:TextBox>
 
                                 </div>
 
@@ -230,7 +230,7 @@
                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_street" runat="server" Width="200px" MaxLength="10" placeholder="Enter Home No" required autofocus></asp:TextBox>
+                                    <asp:TextBox ID="txt_street" CssClass="form-control" runat="server" Width="200px" MaxLength="10" placeholder="Enter Home No" required autofocus></asp:TextBox>
 
                                 </div>
 
@@ -240,7 +240,7 @@
                                     <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_pincode" runat="server" Width="200px" MaxLength="6" onkeypress="return digit(event);" placeholder="Enter Pin" required autofocus></asp:TextBox>
+                                    <asp:TextBox ID="txt_pincode" CssClass="form-control" runat="server" Width="200px" MaxLength="6" onkeypress="return digit(event);" placeholder="Enter Pin" required autofocus></asp:TextBox>
                                     <br />
 
                                     <asp:RegularExpressionValidator ID="regularExp" ControlToValidate="txt_pincode" runat="server" ValidationExpression="[0-9]{6}" ErrorMessage="Invalid Pin Code." Font-Bold="True" ForeColor="red" ValidationGroup="g1"></asp:RegularExpressionValidator>

@@ -201,7 +201,7 @@
 
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_desc" runat="server" Height="50px" placeholder="Enter Description" Width="200px" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_desc" CssClass="not-required" runat="server" Height="50px" placeholder="Enter Description" Width="200px" TextMode="MultiLine"></asp:TextBox>
 
                                                     <%--<asp:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="txt_valid_to" Format="dd/MM/yyyy"></asp:CalendarExtender>--%>
                                                 </div>

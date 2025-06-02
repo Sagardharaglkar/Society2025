@@ -217,7 +217,7 @@
                                                     <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_desc" runat="server" TextMode="MultiLine" Rows="3" Height="100px" Width="200px" placeholder="Enter Description"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_desc" CssClass="not-required" runat="server" TextMode="MultiLine" Rows="3" Height="100px" Width="200px" placeholder="Enter Description"></asp:TextBox>
                                                 </div>
 
                                             </div>

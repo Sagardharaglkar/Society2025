@@ -2,7 +2,9 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
 
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -163,7 +165,8 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-7">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_build_name" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke">
+                                                    <asp:DropDownList CssClass="form-select" ID="ddl_build_name" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke" EnableViewState="True">
+                                                        <asp:ListItem Text="select" Value="0" >Select</asp:ListItem>
                                                     </asp:DropDownList>
                                                     <div class="invalid-feedback">
                                                         Please Select Building Name/No

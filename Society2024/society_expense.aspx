@@ -265,7 +265,7 @@
                                                         <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_comment" runat="server" Height="32px" Width="200px" placeholder="Enter comments" Style="text-transform: capitalize;" TextMode="MultiLine"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_comment"  CssClass="not-required" runat="server" Height="32px" Width="200px" placeholder="Enter comments" Style="text-transform: capitalize;" TextMode="MultiLine"></asp:TextBox>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <asp:Label ID="Label15" runat="server" Text="Amount"></asp:Label>

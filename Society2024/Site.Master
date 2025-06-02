@@ -1053,6 +1053,114 @@
         //    });
         //})();
 
+        //(function () {
+        //    'use strict';
+
+        //    const forms = document.querySelectorAll('.needs-validation');
+
+        //    Array.prototype.slice.call(forms).forEach(function (form) {
+        //        let submittedOnce = false;
+
+        //        function validateField(input) {
+        //            const tag = input.tagName.toLowerCase();
+        //            const type = input.type.toLowerCase();
+        //            const value = input.value.trim();
+        //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+        //            // Common whitespace check
+        //            if ((validTypes.includes(type) || tag === 'textarea') && input.required) {
+        //                if (value === '') {
+        //                    input.setCustomValidity('Whitespace is not allowed');
+        //                    showInvalid(input);
+        //                    return;
+        //                } else {
+        //                    input.setCustomValidity('');
+        //                }
+        //            }
+
+        //            // Additional type-based validations
+        //            if (type === 'email' && value !== '') {
+        //                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        //                if (!emailRegex.test(value)) {
+        //                    input.setCustomValidity('Please enter a valid email address');
+        //                    showInvalid(input);
+        //                    return;
+        //                } else {
+        //                    input.setCustomValidity('');
+        //                }
+        //            }
+
+        //            if (type === 'url' && value !== '') {
+        //                try {
+        //                    new URL(value); // throws if invalid
+        //                    input.setCustomValidity('');
+        //                } catch {
+        //                    input.setCustomValidity('Please enter a valid URL');
+        //                    showInvalid(input);
+        //                    return;
+        //                }
+        //            }
+
+        //            if (type === 'tel' && value !== '') {
+        //                const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
+        //                if (!phoneRegex.test(value)) {
+        //                    input.setCustomValidity('Phone number must be exactly 10 digits');
+        //                    showInvalid(input);
+        //                    return;
+        //                } else {
+        //                    input.setCustomValidity('');
+        //                }
+        //            }
+
+
+        //            // Final validation state
+        //            if (!input.checkValidity()) {
+        //                showInvalid(input);
+        //            } else {
+        //                showValid(input);
+        //            }
+        //        }
+
+        //        function showInvalid(input) {
+        //            input.classList.remove('is-valid');
+        //            input.classList.add('is-invalid');
+        //        }
+
+        //        function showValid(input) {
+        //            input.classList.remove('is-invalid');
+        //            input.classList.add('is-valid');
+        //        }
+
+        //        form.addEventListener('submit', function (event) {
+        //            submittedOnce = true;
+        //            let hasCustomError = false;
+
+        //            form.querySelectorAll('input, textarea').forEach(function (input) {
+        //                validateField(input);
+        //                if (!input.checkValidity()) {
+        //                    hasCustomError = true;
+        //                }
+        //            });
+
+        //            if (hasCustomError) {
+        //                event.preventDefault();
+        //                event.stopPropagation();
+        //            }
+
+        //            form.classList.add('was-validated');
+        //        }, false);
+
+        //        // Live validation
+        //        form.querySelectorAll('input, textarea').forEach(function (input) {
+        //            input.addEventListener('input', function () {
+        //                if (submittedOnce) {
+        //                    validateField(input);
+        //                }
+        //            });
+        //        });
+        //    });
+        //})();
+
         (function () {
             'use strict';
 
@@ -1099,7 +1207,7 @@
                             showInvalid(input);
                             return;
                         }
-                    }
+                    }   
 
                     if (type === 'tel' && value !== '') {
                         const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
@@ -1112,6 +1220,16 @@
                         }
                     }
 
+                    // Dropdown (select) validation
+                    if (tag === 'select' && input.required) {
+                        if (input.value === '0') {
+                            input.setCustomValidity('Please select a valid option');
+                            showInvalid(input);
+                            return;
+                        } else {
+                            input.setCustomValidity('');
+                        }
+                    }
 
                     // Final validation state
                     if (!input.checkValidity()) {
@@ -1135,7 +1253,7 @@
                     submittedOnce = true;
                     let hasCustomError = false;
 
-                    form.querySelectorAll('input, textarea').forEach(function (input) {
+                    form.querySelectorAll('input, textarea, select').forEach(function (input) {
                         validateField(input);
                         if (!input.checkValidity()) {
                             hasCustomError = true;
@@ -1151,7 +1269,7 @@
                 }, false);
 
                 // Live validation
-                form.querySelectorAll('input, textarea').forEach(function (input) {
+                form.querySelectorAll('input, textarea, select').forEach(function (input) {
                     input.addEventListener('input', function () {
                         if (submittedOnce) {
                             validateField(input);

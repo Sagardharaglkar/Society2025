@@ -70,7 +70,7 @@ namespace Society
                 drp_down.DataTextField = text;
                 drp_down.DataValueField = value;
                 drp_down.DataBind();
-                drp_down.Items.Insert(0, new ListItem("select"));
+                drp_down.Items.Insert(0, new ListItem("select" ,"0"));
         }
 
         public ArrayList create_array(string field_name,object field_value)

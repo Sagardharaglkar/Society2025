@@ -390,7 +390,7 @@
                                                     <asp:Label ID="Label31" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_note" runat="server" Height="50px" Width="200px" placeholder="Enter Note" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_note" CssClass="not-required" runat="server" Height="50px" Width="200px" placeholder="Enter Note" TextMode="MultiLine"></asp:TextBox>
 
                                                 </div>
 

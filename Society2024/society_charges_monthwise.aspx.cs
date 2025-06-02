@@ -10,9 +10,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
-namespace Society2024
+namespace Society
 {
-    public partial class society_charges : System.Web.UI.Page
+    public partial class society_charges_monthwise : System.Web.UI.Page
     {
         maintenance_cal Maintenance1 = new maintenance_cal();
         BL_Maintenance_Master bL_Maintenance = new BL_Maintenance_Master();
@@ -177,7 +177,7 @@ namespace Society2024
         protected void Unnamed_Click(object sender, EventArgs e)
         {
             remaining_due();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
+           
         }
     }
 }

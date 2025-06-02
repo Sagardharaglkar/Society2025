@@ -254,7 +254,7 @@
                  <asp:Label ID="Label14" runat="server" Text="Open Terraced(Sq.Ft)"></asp:Label>
              </div>
              <div class="col-sm-4">
-                 <asp:TextBox ID="txt_terrace" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter size" required></asp:TextBox>
+                 <asp:TextBox ID="txt_terrace" CssClass="not-required" runat="server" Width="150px" Height="30px" placeholder="Enter size" ></asp:TextBox>
                  <div class="invalid-feedback">
                      Please Enter Size
                  </div>
@@ -268,7 +268,7 @@
 
              </div>
              <div class="col-sm-4">
-                 <asp:TextBox ID="txt_intercom" CssClass="form-control" runat="server" Width="150px" Height="30px" placeholder="Enter Number" required></asp:TextBox>
+                 <asp:TextBox ID="txt_intercom" CssClass="not-required" runat="server" Width="150px" Height="30px" placeholder="Enter Number" ></asp:TextBox>
                  <div class="invalid-feedback">
                      Please Enter No 
                  </div>
