@@ -3,7 +3,6 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -56,7 +55,7 @@
                     </tr>
                 </table>
                 <asp:UpdatePanel UpdateMode="Always" ID="wings" runat="server">
-                    <contenttemplate>
+                    <ContentTemplate>
                         <asp:HiddenField ID="wing_id" runat="server" />
                         <asp:HiddenField ID="HiddenField4" runat="server" />
                         <asp:HiddenField ID="society_id" runat="server" />
@@ -94,53 +93,53 @@
                                             PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging">
 
                                             <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                            <columns>
+                                            <Columns>
                                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="30">
-                                                    <itemtemplate>
+                                                    <ItemTemplate>
                                                         <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                                    </itemtemplate>
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="w_id" SortExpression="wing_id" Visible="false">
-                                                    <itemtemplate>
+                                                    <ItemTemplate>
                                                         <asp:Label ID="wing_id" runat="server" Text='<%# Bind("wing_id")%>'></asp:Label>
-                                                    </itemtemplate>
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Building" SortExpression="name">
-                                                    <itemtemplate>
+                                                    <ItemTemplate>
                                                         <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
-                                                    </itemtemplate>
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Wing Name" SortExpression="w_name">
-                                                    <itemtemplate>
+                                                    <ItemTemplate>
                                                         <asp:Label ID="w_name" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>
-                                                    </itemtemplate>
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="30">
-                                                    <itemtemplate>
+                                                    <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("wing_id")%>'>
                                                             <img src="Images/123.png" /></asp:LinkButton>
                                                         <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
-                                                    </itemtemplate>
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="Delete" ItemStyle-Width="30">
-                                                    <itemtemplate>
+                                                    <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');">
                                                             <img src="Images/delete_10781634.png" height="25" width="25" />
                                                         </asp:LinkButton>
-                                                    </itemtemplate>
+                                                    </ItemTemplate>
                                                 </asp:TemplateField>
 
                                                 <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
-                                            </columns>
+                                            </Columns>
                                         </asp:GridView>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    </contenttemplate>
+                    </ContentTemplate>
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
@@ -155,7 +154,7 @@
                                     <div class="alert alert-danger danger" style="display: none;"></div>
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                    <contenttemplate>
+                                    <ContentTemplate>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-5">
@@ -166,7 +165,7 @@
                                                 </div>
                                                 <div class="col-sm-7">
                                                     <asp:DropDownList CssClass="form-select" ID="ddl_build_name" runat="server" Width="200px" Height="32px" BackColor="WhiteSmoke" EnableViewState="True">
-                                                        <asp:ListItem Text="select" Value="0" >Select</asp:ListItem>
+                                                        <asp:ListItem Text="select" Value="0">Select</asp:ListItem>
                                                     </asp:DropDownList>
                                                     <div class="invalid-feedback">
                                                         Please Select Building Name/No
@@ -198,10 +197,10 @@
                                         </div>
 
 
-                                    </contenttemplate>
-                                    <triggers>
+                                    </ContentTemplate>
+                                    <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                    </triggers>
+                                    </Triggers>
                                 </asp:UpdatePanel>
 
                             </div>
@@ -211,9 +210,9 @@
                                     <div class="row ">
 
                                         <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
+                                            <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_save" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" UseSubmitBehavior="True" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" OnClientClick="resetForm(); return false;" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" data-dismiss ="modal" />
+                                            <asp:Button ID="btn_close" runat="server" OnClientClick="resetForm(); return false;" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" data-dismiss="modal" />
                                         </center>
                                         </>
                                     </div>
@@ -231,46 +230,31 @@
     </div>
 
     <script>
-        //$('#edit_model').on('hidden.bs.modal', function () {
-        //    $(this).find('form').trigger('reset');
-        //})
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
 
 
-        //function resetForm() {
-        //    console.log("wing search funtion call")
-        //    $('#edit_model').modal('hide');
-        //    document.getElementById("myForm").reset();
-        //    // OR
-        //    document.getElementById("myForm").querySelectorAll("input[type='text'], input[type='email'], input[type='password']" ,input[type='Dropdown']).forEach(input => input.value = "");
-        //}
+                __doPostBack('<%= btn_save.UniqueID %>', '');
 
-        //function resetForm3() {
-        //    // Hide the modal
-        //    $('#edit_model').modal('hide');
+                return false; // prevent default to avoid double postback
+            }
 
-        //    // Get the modal content
-        //    var modal = document.getElementById('edit_model');
-
-        //    // Reset all text, email, and password inputs
-        //    modal.querySelectorAll("input[type='text'], input[type='email'], input[type='password']").forEach(function (input) {
-        //        input.value = "";
-        //    });
-
-        //    // Reset all dropdowns (select elements)
-        //    modal.querySelectorAll("select").forEach(function (select) {
-        //        select.selectedIndex = 0;
-        //    });
-
-        //    // Reset all radio buttons
-        //    modal.querySelectorAll("input[type='radio']").forEach(function (radio) {
-        //        radio.checked = false;
-        //    });
-
-        //    // Reset all checkboxes
-        //    modal.querySelectorAll("input[type='checkbox']").forEach(function (checkbox) {
-        //        checkbox.checked = false;
-        //    });
-        //}
+            return false; // prevent postback if not valid
+        }
 
     </script>
 </asp:Content>

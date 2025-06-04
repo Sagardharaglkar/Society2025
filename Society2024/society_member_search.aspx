@@ -5,24 +5,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
 
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-        }
-
-        function checkLength(el) {
-
-            if (el.value.length != 10) {
-
-                alert("length must be exactly 10 digits")
-
-                return false;
-            }
-        }
-
-
         function openModal() {
             $('#edit_model').modal('show');
         }
@@ -278,7 +260,7 @@
                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                 </div>
                 <div class="col-sm-6">
-                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat="server" MaxLength="10" Width="200px" onblur="checkLength(this)" placeholder="Enter contact No." onkeypress="return digit(event);" OnTextChanged="txt_contact_no_TextChanged" AutoPostBack="true" required></asp:TextBox>
+                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat="server" MaxLength="10" Width="200px" placeholder="Enter contact No."  OnTextChanged="txt_contact_no_TextChanged" AutoPostBack="true" required TextMode="Phone"></asp:TextBox>
                       <asp:Label ID="Label25" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
                     <div class="invalid-feedback">
                         Please Enter Contact No

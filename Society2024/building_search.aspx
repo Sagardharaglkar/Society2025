@@ -424,7 +424,7 @@
                                     <div class="row ">
 
                                         <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" OnClientClick="return handleSubmit();" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_save" OnClientClick="if(handleSubmit()){disableSaveButton(); return true;}else{return false;}" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" Visible="false" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
                                         </center>
@@ -460,6 +460,15 @@
                 input.classList.add("invalid");
             }
         }
+
+        function disableSaveButton() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            if (btn) {
+                btn.disabled = true;
+                btn.value = "Processing...";
+            }
+        }
+
     </script>
 
      <script>

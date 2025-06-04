@@ -129,11 +129,11 @@
             }
 
         .update-card {
-               overflow: auto;
-    width: 100%;
-    padding: 10px 13px;
-    height: 225px;
-    overflow-x: hidden;
+            overflow: auto;
+            width: 100%;
+            padding: 10px 13px;
+            height: 225px;
+            overflow-x: hidden;
         }
 
         .update-grid {
@@ -150,7 +150,7 @@
             display: flex;
         }
 
-                .notify-div {
+        .notify-div {
             width: 245px;
             height: 25px;
             word-wrap: break-word;
@@ -164,9 +164,6 @@
 
 
     <%--  <h4 style="color: Navy">Purchase Entry</h4>--%>
-    <asp:HiddenField ID="society_id" runat="server" />
-    <asp:HiddenField ID="notice_id" runat="server" />
-    <asp:HiddenField ID="HiddenField4" runat="server" />
 
 
 
@@ -190,6 +187,10 @@
 
                         <asp:UpdatePanel runat="server" ID="updatePanelDue" UpdateMode="Conditional">
                             <ContentTemplate>
+                                <asp:HiddenField ID="society_id" runat="server" />
+                                <asp:HiddenField ID="notice_id" runat="server" />
+                                <asp:HiddenField ID="HiddenField4" runat="server" />
+
                                 <div
                                     class="d-flex justify-content-between align-items-center">
                                     <img src="img/cash.png" width="76px" />
@@ -428,7 +429,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Weekly Updates</h6>
 
                 </div>
-                <div class="card-body update-card" >
+                <div class="card-body update-card">
                     <asp:GridView Width="100%" OnRowCommand="Updates_RowCommand" ID="Updates" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" EmptyDataText="No Updates" SelectedRowStyle-Width="100">
                         <Columns>
 
@@ -444,14 +445,14 @@
                                             <asp:Image runat="server" Width="35px" Height="39px"
                                                 ImageUrl='<%# Eval("ImageUrl") %>'
                                                 AlternateText="Type Image" />
-                                            <div style="width:100%;">
+                                            <div style="width: 100%;">
                                                 <div class="inner-div">
                                                     <asp:Label runat="server" ID="Label1" Text='<%# Eval("type") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
                                                     <asp:Label runat="server" Text='<%# Eval("date", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
                                                 </div>
                                                 <div class="notify-div">
-                                                <asp:Label runat="server" ID="name" Text='<%# Eval("name") %>' ForeColor="Black"></asp:Label>
-                                            </div>
+                                                    <asp:Label runat="server" ID="name" Text='<%# Eval("name") %>' ForeColor="Black"></asp:Label>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -532,53 +533,35 @@
                 <a href="support_ticket.aspx" style="text-decoration: none;">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">HELPDESK TICKETS</h6>
-                        <%--<div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>--%>
+
                     </div>
 
                     <div class="card-body form-group">
 
-                        <%--<div class="col-sm-9">
-                        <asp:Label ID="Label3" runat="server" Text="Open Requests" ForeColor="Black"></asp:Label>
-                    </div>
-                    <br />--%>
-                        <%--<div class="row ">
-                            <div class="col-sm-6">
-                                <asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label>
-
-                            </div>
-                            <div class="col-sm-6">
-                                <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label>
-                            </div>
-                        </div>--%>
                         <div class="helpdesk-cards">
                             <div class="helpdesk-card">
                                 <div class="helpdesk-card-title">Open Ticket</div>
                                 <div class="helpdesk-card-number">
-                                    <asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label></div>
+                                    <asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label>
+                                </div>
                             </div>
                             <div class="helpdesk-card">
                                 <div class="helpdesk-card-title">Resolve Tickets</div>
                                 <div class="helpdesk-card-number">
-                                    <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label></div>
+                                    <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label>
+                                </div>
+
                             </div>
+                            <asp:Label ID="lblToken" runat="server" Text=""></asp:Label>
+
                         </div>
                         <br />
 
+                        <asp:HiddenField ID="hdnToken" runat="server" />
                     </div>
                 </a>
             </div>
-            <%--<div class="layout-box layout-small-right layout-cyan">Small</div>--%>
+            
         </div>
     </div>
 
@@ -602,12 +585,14 @@
 
         const messaging = firebase.messaging();
         Notification.requestPermission().then(permission => {
+
             if (permission === "granted") {
+                console.log("permission Granted");
                 navigator.serviceWorker.register('/firebase-messaging-sw.js')
                     .then((registration) => {
                         console.log('✅ SW registered:', registration);
 
-                        messaging.useServiceWorker(registration); // only works with compat SDK
+                        //messaging.useServiceWorker(registration); // only works with compat SDK
 
                         return messaging.getToken({
                             vapidKey: "BKJDUyImlBxO4O_UewJxcN8Ug0EdqxsmxbwQ8nn2bscwwWBUGPGsuMdlU9IKvuTe60iz59iJC0wBMfGuXRkqj2E",
@@ -616,6 +601,8 @@
                     })
                     .then(token => {
                         console.log("✅ Token:", token);
+                        document.getElementById('<%= hdnToken.ClientID %>').value = token;
+
                         sendTokenToServer(token);
                     })
                     .catch(error => {
@@ -627,17 +614,24 @@
         });
 
         function sendTokenToServer(token) {
-            fetch("login1.aspx", {
-                method: "POST",
+            fetch('TokenService.asmx/SaveToken', {
+                method: 'POST',
+                credentials: 'include',
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ token: token })
             })
                 .then(response => response.json())
-                .then(data => console.log("✅ Token sent to server:", data))
-                .catch(error => console.error("❌ Error sending token:", error));
+                .then(data => {
+                    console.log("Response:", data);
+
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
         }
+
     </script>
 
 </asp:Content>

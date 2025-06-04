@@ -308,10 +308,8 @@
                                                     <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_add_mob" CssClass="form-control" Height="32px" Width="200px" runat="server" MaxLength="10" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Enter Alternate Mobile No."></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Alternate Adress
-                                                    </div>
+                                                    <asp:TextBox ID="txt_add_mob" CssClass="not-required" Height="32px" Width="200px" runat="server" MaxLength="10" placeholder="Enter Alternate Mobile No."></asp:TextBox>
+                                                 
 
 
 
@@ -577,7 +575,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <center>
-                                            <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
+                                            <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
                                         </center>
@@ -595,5 +593,30 @@
         </div>
     </div>
 
+    <script>
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+    var modal = document.getElementById('edit_model');
+    var inputs = modal.querySelectorAll('input[required], select[required]');
+    var allValid = true;
 
+    inputs.forEach(function (input) {
+        if (!input.checkValidity()) {
+            allValid = false;
+        }
+    });
+
+    if (allValid && btn) {
+        btn.disabled = true;
+        btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
+        }
+    </script>
 </asp:Content>
