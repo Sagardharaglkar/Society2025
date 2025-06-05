@@ -200,7 +200,7 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_society_master", ref sdr);
 
             if (status1 == "Done")
-                if (sdr.Read())
+                if (sdr.HasRows)
                     dt.Load(sdr);
             return dt;
         }
