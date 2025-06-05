@@ -15,17 +15,42 @@
                 timer: 3000,
                 timerProgressBar: true,
 
-            didOpen: () => {
-                Swal.showLoading()
-            },
-            willClose: () => {
-                window.location.href = 'contact_master.aspx';
-            }
-        });
-    }
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'contact_master.aspx';
+                }
+            });
+        }
 
         function openModal() {
             $('#edit_model').modal('show');
+        }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
         }
     </script>
 
@@ -696,152 +721,152 @@
                             </div>
                         </div>
 
-</ContentTemplate>
-      </asp:UpdatePanel>
-              <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-      <div class="modal-dialog modal-sm-4">
-          <div class="modal-content" style="height: auto; width: 800px">
-              <div class="modal-header">
-                  <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
-                  <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Helper</strong></h4>
-              </div>
-              <div class="modal-body" id="invoice_data">
-                
-                  <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                      <ContentTemplate>
-                   
-                  <div class="form-group">
-    <div class="row ">
-        <div class="col-sm-2">
-            <asp:Label ID="lbl_acc_no" runat="server" Text="Person's name"></asp:Label>
-            <asp:Label ID="lbl_acc_no_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-            <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-        </div>
-        <div class="col-sm-4">
-            <asp:TextBox ID="txt_p_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" placeholder="Enter person's Name" required></asp:TextBox>
-            <div class="invalid-feedback">
-                Please Enter Persons Name
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <asp:Label ID="Label7" runat="server" Text="Person's Type"></asp:Label>
-            <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-            <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-        </div>
-        <div class="col-sm-4">
-            <asp:DropDownList CssClass="form-select" ID="drp_per_type" runat="server" OnSelectedIndexChanged="drp_per_type_SelectedIndexChanged" AutoPostBack="True" Width="200px"></asp:DropDownList>
-            <div class="invalid-feedback">
-                Please select Persons Type
-            </div>
-            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="drp_per_type" ErrorMessage="Required" Font-Bold="True" ForeColor="Red" ValidationGroup="g1" ValueToCompare="select" Type="String" Operator="NotEqual"></asp:CompareValidator>
-            <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-        </div>
-    </div>
-</div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                    <div class="modal-dialog modal-sm-4">
+                        <div class="modal-content" style="height: auto; width: 800px">
+                            <div class="modal-header">
+                                <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+                                <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Helper</strong></h4>
+                            </div>
+                            <div class="modal-body" id="invoice_data">
 
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
 
-
-<div class="form-group">
-    <div class="row ">
-        <div class="col-sm-2">
-            <asp:Label ID="lbl_name" runat="server" Text="Organization Name"></asp:Label>
-            <asp:Label ID="lbl_name_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-            <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-        </div>
-        <div class="col-sm-4">
-            <asp:TextBox ID="txt_org_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" MaxLength="50" placeholder="Enter Oraganization Name" required></asp:TextBox>
-            <div class="invalid-feedback">
-                Please Enter Organization Name
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <asp:Label ID="lbl_pre_addr1" runat="server" Text="Address"></asp:Label>
-            <asp:Label ID="lbl_pre_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-            <asp:Label ID="Label12" runat="server" ForeColor="Red" Font-Bold="True" Font-Size="Medium" Text="*"></asp:Label>
-        </div>
-        <div class="col-sm-4">
-            <asp:TextBox ID="txt_org_addr1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Oragnization Address" required></asp:TextBox>
-            <div class="invalid-feedback">
-                Please Enter Address
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="row ">
-        <div class="col-sm-2">
-            <asp:Label ID="Label1" runat="server" Text="Contact No"></asp:Label>
-            <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-            <asp:Label ID="Label13" runat="server" ForeColor="Red" Font-Bold="True" Font-Size="Medium" Text="*"></asp:Label>
-        </div>
-        <div class="col-sm-4">
-            <asp:TextBox ID="txt_org_tel" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter Mobile No" onkeypress="return digit(event);" onblur="checkLength(this)" AutoPostBack="true" required></asp:TextBox>
-            <div class="invalid-feedback">
-                Please Enter Mobile No
-            </div>
-
-                                        </div>
-                                        <div class="col-sm-2">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <asp:TextBox ID="txt_org_addr2" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address" required></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-
-<div class="form-group">
-    <div class="row ">
-        <div class="col-sm-2">
-            <asp:Label ID="Label3" runat="server" Text="Email Address"></asp:Label>
-            <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-            <asp:Label ID="Label14" runat="server" ForeColor="Red" Font-Bold="True" Font-Size="Medium" Text="*"></asp:Label>
-           
-        </div>
-        <div class="col-sm-4">
-            <asp:TextBox ID="txt_email" CssClass="form-control" Style="text-transform: lowercase;" runat="server" placeholder="Enter Email Address" required></asp:TextBox>
-            <div class="invalid-feedback">
-                Please Enter Email Address
-            </div>
-            <br />
-            <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_Email" ForeColor="Red" ErrorMessage="Invalid Email Format" Visible="True" ValidationGroup="g1"></asp:RegularExpressionValidator>
-        </div>
-        <div class="col-sm-2">
-            <asp:Label ID="Label4" runat="server" Text="Remark"></asp:Label>
-            <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <asp:TextBox ID="txt_remark" Style="text-transform: capitalize;" runat="server" placeholder="Enter Remark"></asp:TextBox>
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="lbl_acc_no" runat="server" Text="Person's name"></asp:Label>
+                                                    <asp:Label ID="lbl_acc_no_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_p_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" placeholder="Enter person's Name" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Persons Name
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="Label7" runat="server" Text="Person's Type"></asp:Label>
+                                                    <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:DropDownList CssClass="form-select" ID="drp_per_type" runat="server" OnSelectedIndexChanged="drp_per_type_SelectedIndexChanged" AutoPostBack="True" Width="200px"></asp:DropDownList>
+                                                    <div class="invalid-feedback">
+                                                        Please select Persons Type
+                                                    </div>
+                                                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="drp_per_type" ErrorMessage="Required" Font-Bold="True" ForeColor="Red" ValidationGroup="g1" ValueToCompare="select" Type="String" Operator="NotEqual"></asp:CompareValidator>
+                                                    <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                                </div>
+                                            </div>
                                         </div>
 
-    </div>
-</div>
-                          </ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView3" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView4" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView5" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView6" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView7" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView8" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView9" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView10" EventName="RowCommand" />
-<asp:AsyncPostBackTrigger ControlID="GridView11" EventName="RowCommand" />
-</Triggers>
-</asp:UpdatePanel>
 
-                  </div>
-               <div class="modal-footer">
-                <div class="form-group">
-      <div class="row ">
-          <div class="col-sm-12 text-center">
-                  <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
-                  <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                  <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
- 
+
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="lbl_name" runat="server" Text="Organization Name"></asp:Label>
+                                                    <asp:Label ID="lbl_name_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_org_name" CssClass="form-control" runat="server" Style="text-transform: capitalize;" MaxLength="50" placeholder="Enter Oraganization Name" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Organization Name
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="lbl_pre_addr1" runat="server" Text="Address"></asp:Label>
+                                                    <asp:Label ID="lbl_pre_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label12" runat="server" ForeColor="Red" Font-Bold="True" Font-Size="Medium" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_org_addr1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Oragnization Address" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Address
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="Label1" runat="server" Text="Contact No"></asp:Label>
+                                                    <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label13" runat="server" ForeColor="Red" Font-Bold="True" Font-Size="Medium" Text="*"></asp:Label>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_org_tel" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter Mobile No" onkeypress="return digit(event);" onblur="checkLength(this)" AutoPostBack="true" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Mobile No
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_org_addr2" CssClass="not-required" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="Label3" runat="server" Text="Email Address"></asp:Label>
+                                                    <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                    <asp:Label ID="Label14" runat="server" ForeColor="Red" Font-Bold="True" Font-Size="Medium" Text="*"></asp:Label>
+
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox ID="txt_email" CssClass="form-control" Style="text-transform: lowercase;" runat="server" placeholder="Enter Email Address" required></asp:TextBox>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Email Address
+                                                    </div>
+                                                    <br />
+                                                    <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_Email" ForeColor="Red" ErrorMessage="Invalid Email Format" Visible="True" ValidationGroup="g1"></asp:RegularExpressionValidator>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <asp:Label ID="Label4" runat="server" Text="Remark"></asp:Label>
+                                                    <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <asp:TextBox CssClass="not-required" ID="txt_remark" Style="text-transform: capitalize;" runat="server" placeholder="Enter Remark"></asp:TextBox>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView3" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView4" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView5" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView6" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView7" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView8" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView9" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView10" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView11" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <div class="row ">
+                                        <div class="col-sm-12 text-center">
+                                            <asp:Button ID="btn_save" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+
 
                                         </div>
                                     </div>

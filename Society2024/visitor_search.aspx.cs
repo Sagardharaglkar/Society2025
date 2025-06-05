@@ -193,7 +193,6 @@ namespace Society
 
         protected void btn_out_Click(object sender, EventArgs e)
         {
-
             runproc_save("Update");
             Response.Redirect("visitor_search.aspx");
         }

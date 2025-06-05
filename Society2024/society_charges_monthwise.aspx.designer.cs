@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Society2024
+namespace Society
 {
 
 
-    public partial class society_charges
+    public partial class society_charges_monthwise
     {
 
         /// <summary>

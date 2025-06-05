@@ -108,7 +108,7 @@ namespace Society
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
 
         }
 
@@ -132,8 +132,6 @@ namespace Society
             wing_id.Value = result.wing_id.ToString();
             ddl_build_name.SelectedValue = result.build_id.ToString();
             txt_w_name.Text = result.W_Name;
-           
-            
 
         }
 
@@ -163,7 +161,7 @@ namespace Society
                 wing.Society_Id = society_id.Value;
                 var result = bL_Wing.WingTextChanged(wing);
                 Label4.Text = result.Sql_Result;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
+
             }
         }
 

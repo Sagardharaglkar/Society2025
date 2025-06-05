@@ -311,7 +311,9 @@
     <Content Include="Staff_Master.aspx" />
     <Content Include="staff_role.aspx" />
     <Content Include="suggestion_request.aspx" />
+    <Content Include="tempForm.aspx" />
     <Content Include="Terms_and_Condition.aspx" />
+    <Content Include="TokenService.asmx" />
     <Content Include="upload_doc_search.aspx" />
     <Content Include="vendor_search.aspx" />
     <Content Include="visitor_search.aspx" />
@@ -2632,12 +2634,23 @@
     <Compile Include="suggestion_request.aspx.designer.cs">
       <DependentUpon>suggestion_request.aspx</DependentUpon>
     </Compile>
+    <Compile Include="tempForm.aspx.cs">
+      <DependentUpon>tempForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tempForm.aspx.designer.cs">
+      <DependentUpon>tempForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Terms_and_Condition.aspx.cs">
       <DependentUpon>Terms_and_Condition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Terms_and_Condition.aspx.designer.cs">
       <DependentUpon>Terms_and_Condition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TokenService.asmx.cs">
+      <DependentUpon>TokenService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="upload_doc_search.aspx.cs">
       <DependentUpon>upload_doc_search.aspx</DependentUpon>

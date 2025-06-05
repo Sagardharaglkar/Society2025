@@ -30,18 +30,33 @@
             }
         }
 
-        function checkLength(el) {
-
-            if (el.value.length != 10) {
-
-                alert("length must be exactly 10 digits")
-
-                return false;
-            }
-        }
-
         function openModal() {
             $('#edit_model').modal('show');
+        }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+        var modal = document.getElementById('edit_model');
+        var inputs = modal.querySelectorAll('input[required], select[required]');
+        var allValid = true;
+
+        inputs.forEach(function (input) {
+            if (!input.checkValidity()) {
+                allValid = false;
+            }
+        });
+
+        if (allValid && btn) {
+            btn.disabled = true;
+            btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
         }
     </script>
 
@@ -240,7 +255,7 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" OnTextChanged="txt_contact_TextChanged" onkeypress="return digit(event);" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" TextMode="Phone" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Contact No
                                                         </div>
@@ -259,12 +274,11 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" TextMode="Email" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
                                                         <div class="invalid-feedback">
-                                                            Please Enter Email
+                                                            Please Enter Valid Email
                                                         </div>
-                                                        <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="true" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                    </div>
+                                                       </div>
 
                                                 </div>
                                             </div>
@@ -302,9 +316,9 @@
                                 <div class="form-group">
                                     <div class="row ">
                                         <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" class="btn btn-primary" Visible="False" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" OnClick="btn_close_Click" class="btn btn-primary" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                         </center>
                                     </div>
                                 </div>

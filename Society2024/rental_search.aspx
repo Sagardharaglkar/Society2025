@@ -23,24 +23,38 @@
                 }
             });
         }
-    </script>
 
-    <script type="text/javascript">
-        function digit(evt) {
-
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-        }
         function openModal() {
             $('#edit_model').modal('show');
         }
-        function checkLength(el) {
-            if (el.value.length != 10) {
-                alert("length must be exactly 10 characters")
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false;
             }
-        }  </script>
+
+            return false;
+        }
+
+    </script>
 
     <style>
         .overflow-div {
@@ -286,12 +300,12 @@
 
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" required runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" TextMode="Email" placeholder="Enter Email" required runat="server"></asp:TextBox>
                                                 <div class="invalid-feedback">
-                                                    Please Enter Email ID
+                                                    Please Enter valid Email ID
                                                 </div>
 
-                                                <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
+
 
                                             </div>
 
@@ -306,7 +320,7 @@
                                                 <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" OnTextChanged="txt_pre_mob_TextChanged" MaxLength="10" Height="32px" Width="200px" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" OnTextChanged="txt_pre_mob_TextChanged" MaxLength="10" Height="32px" Width="200px" TextMode="Phone" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
                                                 <div class="invalid-feedback">
                                                     Please Enter Mobile No
                                                 </div>
@@ -319,7 +333,7 @@
                                                 <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                             </div>
                                             <div class="col-sm-3">
-                                                <asp:TextBox ID="txt_add_mob" Height="32px" Width="200px" runat="server" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Mobile No."></asp:TextBox>
+                                                <asp:TextBox ID="txt_add_mob" Height="32px" Width="200px" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter Mobile No."></asp:TextBox>
 
                                             </div>
 
@@ -635,11 +649,9 @@
                             <div class="form-group">
                                 <div class="row">
                                     <center>
-                                        <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
+                                        <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                         <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                        <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-
-
+                                        <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                     </center>
                                     <br />
                                 </div>

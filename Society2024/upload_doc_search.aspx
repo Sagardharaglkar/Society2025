@@ -28,6 +28,31 @@
         function openModal() {
             $('#edit_model').modal('show');
         }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= upload.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= upload.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
+        }
     </script>
 
 
@@ -233,17 +258,17 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
+                                            <asp:FileUpload ID="file_name2" runat="server" Font-Bold="False" />
                                             <br />
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
-                                            <asp:Label ID="Label2" runat="server" Height="32px" Width="200px" />
+                                            <asp:Label ID="listofuploadedfiless" runat="server" />
+                                            <asp:Label ID="Label22" runat="server" Height="32px" Width="200px" />
                                         </div>
 
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">
-                                                     <asp:Label ID="listofuploadedfiles" runat="server" />
- <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
+                                                    <asp:Label ID="listofuploadedfiles" runat="server" />
+                                                    <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
                                                     <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
                                                     <asp:Label ID="Label2" runat="server" Height="32px" Width="200px"></asp:Label>
                                                 </div>
@@ -260,35 +285,15 @@
                                         <div class="row ">
 
                                             <center>
-                                                <asp:Button ID="upload" runat="server" Text="Upload" OnClick="upload_Click" class="btn btn-primary" ValidationGroup="g1" />
+                                                <asp:Button ID="upload" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Upload" OnClick="upload_Click" class="btn btn-primary" ValidationGroup="g1" />
                                                 <%-- <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />--%>
                                                 <asp:Button ID="Button1" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                             </center>
                                             </>
                                         </div>
-                                </div>
-                            </div>
-
-                                <%--<div class="form-group">
-                                    <div class="row ">
-                                        <div class="col-sm-4">
-                                           
-                                            <br />
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
-                                            <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
-
-                                            <asp:Button ID="upload" Text="Upload" runat="server" OnClick="upload_Click" class="btn btn-primary" Font-Bold="True" ValidationGroup="g1" />
-                                            <br />
-                                            <br />
-                                            <asp:Label ID="Label2" runat="server" Height="32px" Width="200px"></asp:Label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <div class="pull-center">
-                                                <asp:Button ID="btn_close" runat="server" Text="Back" class="btn btn-primary" OnClick="btn_close_Click" OnClientClick="if (confirm('Are you sure you want to Close?')) { __doPostBack('<%= btn_close.UniqueID %>', ''); } return false;" />
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>--%>
+                                </div>
+
                             </div>
                         </div>
                     </div>

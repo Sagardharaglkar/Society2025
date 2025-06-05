@@ -24,15 +24,33 @@
             });
         }
 
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-
-        }
         function openModal() {
             $('#edit_model').modal('show');
+        }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_in.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_in.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
         }
     </script>
 
@@ -228,7 +246,7 @@
                                                     <asp:Label ID="Label36" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter No" onkeypress="return digit(event);" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter No" required="required"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Contact No
                                                     </div>
@@ -370,9 +388,9 @@
                                     <div class="row ">
                                         <div class="col-sm-12">
                                             <div class="pull-center">
-                                                <asp:Button ID="btn_in" runat="server" Text="In" class="btn btn-primary" BackColor="red" ValidationGroup="valid" OnClick="btn_in_Click" />
+                                                <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_in" runat="server" Text="In" class="btn btn-primary" BackColor="red" ValidationGroup="valid" OnClick="btn_in_Click" />
                                                 <asp:Button ID="btn_out" runat="server" Text="Out" class="btn btn-primary" BackColor="red" ValidationGroup="g1" OnClick="btn_out_Click" Visible="false" />
-                                                <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" />
+                                                <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                             </div>
                                         </div>
                                     </div>

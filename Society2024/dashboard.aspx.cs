@@ -36,12 +36,12 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            society_id.Value = Session["society_id"].ToString();
-
+            }else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
 
+               
 
                 pdc_reminder_Gridbind();
 
@@ -52,7 +52,9 @@ namespace Society
                 fetch_defaulter();
                 dashUpdates();
                 getResidents();
+                
 
+                
             }
 
 
@@ -60,13 +62,31 @@ namespace Society
 
         }
 
-        //protected void btnChartAsyncLoad_Click(object sender, EventArgs e)
+        protected void TimerNotif_Tick(object sender, EventArgs e)
+        {
+            get_ticket();
+        }
+
+        //    [System.Web.Services.WebMethod(EnableSession = true)]
+        //public string getToken(string token)
         //{
-        //    GetDataForChart1();
+        //    System.Diagnostics.Debug.WriteLine("Received token: " + token);
+        //    // Now you can access HttpContext.Current.Session
+        //    if (HttpContext.Current.Session["name"] == null)
+        //        throw new Exception("Not authenticated");
+
+        //    lblToken.Text = token;
+           
+        //    HttpContext.Current.Session["lastToken"] = token;
+        //    return "OK";
         //}
+
         protected void dashUpdates()
         {
+            
+
             details.Sql_Operation = "Updates";
+            
             details.Society_Id = society_id.Value;
             var dt = BL_Login.dashUpdates(details);
 
@@ -101,6 +121,7 @@ namespace Society
             Updates.DataSource = dt;
             Updates.DataBind();
         }
+
 
         protected void Updates_RowCommand(object sender, GridViewCommandEventArgs e)
         {

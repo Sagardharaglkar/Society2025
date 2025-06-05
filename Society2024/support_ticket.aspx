@@ -1,6 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="support_ticket.aspx.cs" Inherits="Society.support_ticket" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function openModal() {
+            console.log("clicked")
+            $('#commentsModal').modal('show');
+
+        }
+    </script>
     <div class=" box-primary">
 
 
@@ -39,7 +46,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <div style="width: 100%; overflow: auto;">
-                                            <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found">
+                                            <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowCommand="GridView1_RowCommand" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found">
 
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="No" ItemStyle-Width="30">
@@ -66,7 +73,7 @@
                                                     <asp:TemplateField HeaderText="Type" ItemStyle-Width="200" SortExpression="print_name">
                                                         <ItemTemplate>
 
-                                                            <asp:Label ID="address1" runat="server" Text="p_type_name"></asp:Label>
+                                                            <asp:Label ID="address1" runat="server" Text='<%# Bind("p_type_name") %>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Query" ItemStyle-Width="100" SortExpression="no_of_floore">
@@ -84,11 +91,13 @@
                                                             <asp:Label ID="status" runat="server" Text='<%# Bind("status") %>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Comments" ItemStyle-Width="200" SortExpression="address1">
+                                                    <asp:TemplateField HeaderText="Comments" ItemStyle-Width="80">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="comments" runat="server" Text='<%# Bind("status") %>'></asp:Label>
+                                                            <asp:Button ID="btnComments" runat="server" Text="View" CssClass="btn btn-info btn-sm"
+                                                                CommandName="ShowComments" OnClientclick="openModal();" CommandArgument='<%# Eval("helpdesk_id") %>' />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+
                                                     <asp:TemplateField HeaderText="Urgency" ItemStyle-Width="200" SortExpression="address1">
                                                         <ItemTemplate>
                                                             <asp:Label ID="urgency" runat="server" Text='<%# (Eval("urgency").ToString() == "0" ? "Minor" : "Urgent") %>'></asp:Label>
@@ -106,5 +115,44 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+
+        <!-- Comments Modal -->
+       <%-- <div class="modal fade" id="commentsModal" tabindex="-1" role="dialog" aria-labelledby="commentsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="commentsModalLabel">Comments</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <asp:UpdatePanel runat="server" ID="upComments">
+                            <ContentTemplate>
+                                <asp:HiddenField ID="hfHelpdeskId" runat="server" />
+                                <div id="chatBox" style="max-height: 300px; overflow-y: auto;">
+                                    <asp:Repeater ID="rptComments" runat="server">
+                                        <ItemTemplate>
+                                            <div class="mb-2">
+                                                <span class="badge badge-secondary"><%# Eval("UserName") %></span>
+                                                <span class="text-muted" style="font-size: smaller;"><%# Eval("CommentDate", "{0:yyyy-MM-dd HH:mm}") %></span>
+                                                <div><%# Eval("CommentText") %></div>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <asp:TextBox ID="txtNewComment" runat="server" CssClass="form-control" placeholder="Type your comment..."></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <asp:Button ID="btnAddComment" runat="server" Text="Send" CssClass="btn btn-primary" OnClick="btnAddComment_Click" />
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+            </div>
+        </div>--%>
+
     </div>
 </asp:Content>

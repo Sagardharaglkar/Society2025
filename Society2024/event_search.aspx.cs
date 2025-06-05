@@ -173,10 +173,7 @@ namespace Society
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure want to delete", "delete", buttons);
-            if (result == DialogResult.Yes)
-            {
+   
                 GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
                 System.Web.UI.WebControls.Label event_id = (System.Web.UI.WebControls.Label)row.FindControl("event_id");
                 evt.Sql_Operation = "Delete";
@@ -184,7 +181,7 @@ namespace Society
                 evt.Event_Id = Convert.ToInt32(event_id.Text);
                 bL_Event.delete(evt);
                 //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
-            }
+            
             Event_Gridbind();
 
         }

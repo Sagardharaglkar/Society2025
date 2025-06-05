@@ -23,32 +23,42 @@
                 }
             });
         }
-    </script>
-    <script type="text/javascript">
 
         function openModal() {
             $('#edit_model').modal('show');
         }
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
 
-                return false;
-            }
-
-        }
         $('#edit_model').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
         })
 
-        function checkLength(el) {
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
 
-            if (el.value.length != 10) {
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
 
-                alert("length must be exactly 10 digits")
+
+            if (allValid && btn ) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
 
                 return false;
             }
+
+            return false;
         }
+
+
     </script>
     <style>
         .overflow-div {
@@ -277,12 +287,11 @@
 
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" required runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" TextMode="Email" placeholder="Enter Email" required runat="server"></asp:TextBox>
                                                     <div class="invalid-feedback">
-                                                        Please Enter Email ID
+                                                        Please Enter Valid Email ID
                                                     </div>
-                                                    <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
-
+                                                    
                                                 </div>
 
 
@@ -297,7 +306,7 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" MaxLength="10" Height="32px" onkeypress="return digit(event);" onblur="checkLength(this)" Width="200px" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" MaxLength="15" Height="32px" TextMode="Phone"  Width="200px" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Mobile No
                                                     </div>
@@ -309,10 +318,9 @@
                                                     <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_add_mob" CssClass="form-control" Height="32px" Width="200px" runat="server" MaxLength="10" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Enter Alternate Mobile No."></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Alternate Adress
-                                                    </div>
+                                                    <asp:TextBox ID="txt_add_mob" CssClass="not-required" Height="32px" Width="200px" runat="server" MaxLength="10" placeholder="Enter Alternate Mobile No."></asp:TextBox>
+                                                 
+
 
 
 
@@ -428,7 +436,7 @@
                                                     <asp:Label ID="lbl_occup_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_occup" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Occupation"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_occup" CssClass="not-required" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Occupation"></asp:TextBox>
 
                                                 </div>
                                                 <div class="col-sm-3">
@@ -436,7 +444,7 @@
                                                     <asp:Label ID="lbl_mon_inc_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_monthly_income" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Monthly Income"></asp:TextBox>
+                                                    <asp:TextBox  CssClass="not-required" ID="txt_monthly_income" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Monthly Income"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -449,14 +457,14 @@
                                                     <asp:Label ID="lbl_off_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_off_addr1" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Office Address"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_off_addr1"  CssClass="not-required" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Office Address"></asp:TextBox>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="lbl_off_tel" runat="server" Text="Office Tel."></asp:Label>
                                                     <asp:Label ID="lbl_off_tel_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_off_tel" runat="server" Height="32px" Width="200px" MaxLength="10" onkeypress="return digit(event);" placeholder="Enter Office Tel."></asp:TextBox>
+                                                    <asp:TextBox  CssClass="not-required" ID="txt_off_tel" runat="server" Height="32px" Width="200px" MaxLength="10" onkeypress="return digit(event);" placeholder="Enter Office Tel."></asp:TextBox>
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txt_off_tel" ErrorMessage="Numbers Only" Font-Bold="True" ForeColor="Red" ValidationExpression="^\d+" Display="Dynamic" ValidationGroup="g1"></asp:RegularExpressionValidator>
 
                                                 </div>
@@ -478,14 +486,14 @@
                                                     <asp:Label ID="lbl_tof_acc" runat="server" Text="Family Member"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_fam_mem_name" Style="text-transform: capitalize;" runat="server" Height="32px" Width="200px" placeholder="Enter family member"></asp:TextBox>
+                                                    <asp:TextBox  CssClass="not-required" ID="txt_fam_mem_name" Style="text-transform: capitalize;" runat="server" Height="32px" Width="200px" placeholder="Enter family member"></asp:TextBox>
                                                     <asp:Label ID="Label17" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="Medium"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="lbl_bank_acc" runat="server" Text="Relation"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_owner_rel" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Relation"></asp:TextBox>
+                                                    <asp:TextBox  CssClass="not-required" ID="txt_owner_rel" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Relation"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -495,13 +503,13 @@
                                                     <asp:Label ID="lbl_bank" runat="server" Text="Occupaation"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_f_occu" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Occupation"></asp:TextBox>
+                                                    <asp:TextBox  CssClass="not-required" ID="txt_f_occu" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Occupation"></asp:TextBox>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="lbl_bank_addr1" runat="server" Text="DOB"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_f_dob" runat="server" MaxLength="50" Height="32px" Width="200px" placeholder="Enter Dob" TextMode="Date"></asp:TextBox>
+                                                    <asp:TextBox  CssClass="not-required" ID="txt_f_dob" runat="server" MaxLength="50" Height="32px" Width="200px" placeholder="Enter Dob" TextMode="Date"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -577,9 +585,9 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <center>
-                                            <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
+                                            <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                         </center>
                                         <br />
                                     </div>
@@ -594,6 +602,5 @@
             </div>
         </div>
     </div>
-
 
 </asp:Content>

@@ -35,14 +35,29 @@
 
         }
 
-        function checkLength(el) {
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
 
-            if (el.value.length != 10) {
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
 
-                alert("length must be exactly 10 digits")
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
 
-                return false;
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
             }
+
+            return false; // prevent postback if not valid
         }
     </script>
 
@@ -195,7 +210,7 @@
                                                             <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" placeholder="Enter contact No" AutoPostBack="True" onblur="checkLength(this)" onkeypress="return digit(event);" required OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
+                                                            <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter contact No" AutoPostBack="True" required="required" OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
                                                             <div class="invalid-feedback">
                                                                 Please Enter Contact No
                                                             </div>
@@ -332,9 +347,9 @@
                                         <div class="form-group">
                                             <div class="row ">
                                                 <center>
-                                                    <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
+                                                    <asp:Button ID="btn_save" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
                                                     <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                                    <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                                    <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                                 </center>
                                             </div>
                                         </div>

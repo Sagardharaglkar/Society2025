@@ -140,23 +140,6 @@ namespace Society
         }
 
 
-        //protected void txt_w_name_TextChanged(object sender, EventArgs e)
-        //{
-
-        //    if (charge_id.Value != "")
-        //        society.charge_id = Convert.ToInt32(charge_id.Value);
-        //    society.W_Name = txt_w_name.Text;
-        //    society.build_id = Convert.ToInt32(ddl_build_name.SelectedValue);
-        //    society.Sql_Operation = "check_name";
-        //    society.Society_Id = society_id.Value;
-        //    var result = bL_society.WingTextChanged(society);
-        //    Label4.Text = result.Sql_Result;
-
-
-        //}
-
-
-
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 

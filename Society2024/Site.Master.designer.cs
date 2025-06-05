@@ -51,6 +51,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label name_society;
 
         /// <summary>
+        /// SharedTimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer SharedTimer;
+
+        /// <summary>
         /// badgePanel control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,24 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel badgePanel;
+
+        /// <summary>
+        /// upNotifCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upNotifCount;
+
+        /// <summary>
+        /// TimerNotif control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer TimerNotif;
 
         /// <summary>
         /// notifCount control.
@@ -76,6 +103,15 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label noNotif;
+
+        /// <summary>
+        /// upNotifList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upNotifList;
 
         /// <summary>
         /// Notification_grid control.

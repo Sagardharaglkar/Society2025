@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind=" .aspx.cs" Inherits="Society2024.society_charges" MasterPageFile="~/Site.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="society_charges_monthwise.aspx.cs" Inherits="Society.society_charges_monthwise" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -22,13 +22,11 @@
                 }
             });
         }
-    </script>
 
-
-    <script type='text/javascript'>
         function openModal() {
             $('#edit_model').modal('show');
         }
+
     </script>
 
     <div class="box box-primary">
@@ -65,13 +63,13 @@
                                             <asp:ListItem Value="pending_amount">Pending Amount</asp:ListItem>
                                             <asp:ListItem Value="date">Date</asp:ListItem>
                                         </asp:DropDownList>&nbsp;&nbsp;
-                    
-                        <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                        <asp:Button ID="btn_search" runat="server" class="btn btn-primary" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" />
-                        </asp:Panel>
+                 
+                     <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
+                         <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                     <asp:Button ID="btn_search" runat="server" class="btn btn-primary" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" />
+                     </asp:Panel>
                                         &nbsp;&nbsp;
-                                        <asp:Button runat="server" OnClick="Unnamed_Click" CssClass="btn btn-primary" Text="Add" />
+                                     <asp:Button runat="server" CssClass="btn btn-primary" data-toggle="modal" data-target="#edit_model" Text="Add" />
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +135,7 @@
                         <div class="modal-content" style="height: auto; width: 500px;">
                             <div class="modal-header">
 
-                                <h4 class="modal-title" ><strong>New Charges Monthwise</strong></h4>
+                                <h4 class="modal-title"><strong>New Charges Monthwise</strong></h4>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
@@ -188,7 +186,7 @@
                                                 </div>
                                                 <div class="col-sm-7">
                                                     <asp:TextBox ID="txt_total" CssClass="form-control" runat="server" Width="200px" Height="32px" required autofocus></asp:TextBox>
-                                                   
+
                                                     <div class="invalid-feedback">
                                                         Please Enter Total Amount
                                                     </div>
@@ -197,7 +195,7 @@
 
                                             </div>
                                         </div>
-                                    
+
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
@@ -212,9 +210,10 @@
                                 <div class="form-group">
                                     <div class="row ">
                                         <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" Text="Delete" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+ 
                                         </center>
                                     </div>
                                 </div>
@@ -225,4 +224,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        function disableSaveButtonIfValid() {
+            console.log("Button Clicked");
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+        var modal = document.getElementById('edit_model');
+        var inputs = modal.querySelectorAll('input[required], select[required]');
+        var allValid = true;
+
+        inputs.forEach(function (input) {
+            if (!input.checkValidity()) {
+                allValid = false;
+            }
+        });
+
+        if (allValid && btn) {
+            btn.disabled = true;
+            btn.value = "Saving...";
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return true;
+            }
+
+            return false;
+        }
+    </script>
 </asp:Content>

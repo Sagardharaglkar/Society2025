@@ -110,7 +110,6 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-
             runproc_save("Update");
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
