@@ -62,24 +62,24 @@ namespace Society
 
         }
 
-        //protected void btnChartAsyncLoad_Click(object sender, EventArgs e)
-        //{
-        //    GetDataForChart1();
-        //}
-
-        [System.Web.Services.WebMethod(EnableSession = true)]
-        public string getToken(string token)
+        protected void TimerNotif_Tick(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Received token: " + token);
-            // Now you can access HttpContext.Current.Session
-            if (HttpContext.Current.Session["name"] == null)
-                throw new Exception("Not authenticated");
-
-            lblToken.Text = token;
-           
-            HttpContext.Current.Session["lastToken"] = token;
-            return "OK";
+            get_ticket();
         }
+
+        //    [System.Web.Services.WebMethod(EnableSession = true)]
+        //public string getToken(string token)
+        //{
+        //    System.Diagnostics.Debug.WriteLine("Received token: " + token);
+        //    // Now you can access HttpContext.Current.Session
+        //    if (HttpContext.Current.Session["name"] == null)
+        //        throw new Exception("Not authenticated");
+
+        //    lblToken.Text = token;
+           
+        //    HttpContext.Current.Session["lastToken"] = token;
+        //    return "OK";
+        //}
 
         protected void dashUpdates()
         {

@@ -528,7 +528,7 @@
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
-
+            <asp:Timer ID="SharedTimer" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
             <div class="card layout-box layout-small-right layout-cyan">
                 <a href="support_ticket.aspx" style="text-decoration: none;">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -537,24 +537,31 @@
                     </div>
 
                     <div class="card-body form-group">
+                        <asp:UpdatePanel ID="upNotifCount" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="helpdesk-cards">
+                                    <div class="helpdesk-card">
+                                        <div class="helpdesk-card-title">Open Ticket</div>
+                                        <div class="helpdesk-card-number">
+                                            <asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label>
+                                        </div>
+                                    </div>
+                                    <div class="helpdesk-card">
+                                        <div class="helpdesk-card-title">Resolve Tickets</div>
+                                        <div class="helpdesk-card-number">
+                                            <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label>
+                                        </div>
 
-                        <div class="helpdesk-cards">
-                            <div class="helpdesk-card">
-                                <div class="helpdesk-card-title">Open Ticket</div>
-                                <div class="helpdesk-card-number">
-                                    <asp:Label ID="open" runat="server" Text="Open" ForeColor="Black"></asp:Label>
+                                    </div>
+                                    <asp:Label ID="lblToken" runat="server" Text=""></asp:Label>
+
                                 </div>
-                            </div>
-                            <div class="helpdesk-card">
-                                <div class="helpdesk-card-title">Resolve Tickets</div>
-                                <div class="helpdesk-card-number">
-                                    <asp:Label ID="resolved" runat="server" Text="Resolved" ForeColor="Black"></asp:Label>
-                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="SharedTimer" EventName="Tick" />
+                            </Triggers>
 
-                            </div>
-                            <asp:Label ID="lblToken" runat="server" Text=""></asp:Label>
-
-                        </div>
+                        </asp:UpdatePanel>
                         <br />
 
                         <asp:HiddenField ID="hdnToken" runat="server" />

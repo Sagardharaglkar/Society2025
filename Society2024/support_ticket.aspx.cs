@@ -31,6 +31,30 @@ namespace Society
             }
         }
 
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            //if (e.CommandName == "ShowComments")
+            //{
+            //    int helpdeskId = Convert.ToInt32(e.CommandArgument);
+            //    hfHelpdeskId.Value = helpdeskId.ToString();
+            //    BindComments(helpdeskId);
+            //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
+            //}
+        }
+
+        private void BindComments(int helpdeskId)
+        {
+            // Fetch comments from DB for this helpdeskId
+            // Example: var comments = YourDataAccess.GetComments(helpdeskId);
+            // rptComments.DataSource = comments;
+            // rptComments.DataBind();
+        }
+        //protected void btnAddComment_Click(object sender, EventArgs e)
+        //{
+
+        //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
+        //}
+
         protected void getTicket()
         {
             support.Sql_Operation = "SupportTicket";
