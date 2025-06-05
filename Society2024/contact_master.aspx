@@ -27,6 +27,31 @@
         function openModal() {
             $('#edit_model').modal('show');
         }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
+        }
     </script>
 
     <div class="box box-primary">
@@ -785,7 +810,7 @@
                                                 <div class="col-sm-2">
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_org_addr2" CssClass="not-required" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address" ></asp:TextBox>
+                                                    <asp:TextBox ID="txt_org_addr2" CssClass="not-required" Style="text-transform: capitalize;" runat="server" MaxLength="250" placeholder="Enter Address"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -838,7 +863,7 @@
                                 <div class="form-group">
                                     <div class="row ">
                                         <div class="col-sm-12 text-center">
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_save" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
 

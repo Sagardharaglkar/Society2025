@@ -118,7 +118,7 @@ namespace Society
         {
          
                 runproc_save("Update");
-                //ClearFormFields();
+                   
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             
             

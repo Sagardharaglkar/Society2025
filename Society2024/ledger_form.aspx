@@ -2,14 +2,13 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type='text/javascript'>
-        
+
         function openModal() {
             $('#edit').modal('show');
         }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
+
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -28,6 +27,31 @@
                     window.location.href = 'ledger_form.aspx';
                 }
             });
+        }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
         }
     </script>
 
@@ -60,7 +84,7 @@
                                 <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" runat="server" Style="text-transform: capitalize;" placeholder="Search Here"></asp:TextBox>&nbsp;&nbsp
                    
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                    </asp:Panel>
+                            </asp:Panel>
                                     &nbsp;&nbsp
                         
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">Add</button>
@@ -129,11 +153,11 @@
                             <div class="modal-header">
                                 <h4 class="modal-title" id="gridSystem"><strong>New Ledger</strong></h4>
                             </div>
-                            
 
-                                    <div class="modal-body" id="invoice_data">
-                                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-    <ContentTemplate>
+
+                            <div class="modal-body" id="invoice_data">
+                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">
@@ -160,20 +184,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                </Triggers>
-                            </asp:UpdatePanel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
 
-                            <div class="modal-footer">
-                                <div class="row">
-                                    <center>
-                                        <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" />
-                                        <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" runat="server" Text="Delete" OnClick="btn_delete_Click" />
-                                        <asp:Button ID="btn_close" class="btn btn-primary" runat="server" OnClientClick="resetForm(); return false;"  Text="Close" UseSubmitBehavior="False" OnClick="btn_close_Click" data-dismiss ="modal" />
-                                    </center>
-                                    <br />
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <center>
+                                            <asp:Button ID="btn_save" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" />
+                                            <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" runat="server" Text="Delete" OnClick="btn_delete_Click" />
+                                            <asp:Button ID="btn_close" class="btn btn-primary" runat="server" OnClientClick="resetForm(); return false;" Text="Close" UseSubmitBehavior="False" OnClick="btn_close_Click" data-dismiss="modal" />
+                                        </center>
+                                        <br />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -199,7 +224,7 @@
         //function resetForm2() {
         //    // Hide the modal
         //    console.log("hello");
-        //    $('#edit').modal('hide');   
+        //    $('#edit').modal('hide');
 
         //    // Get the modal content
         //    var modal = document.getElementById('edit');

@@ -197,7 +197,7 @@ namespace DataAccessLayer.MasterDA
             data_item.Add(st.create_array("operation", society.Sql_Operation));
             data_item.Add(st.create_array("society_id", society.Society_Id));
 
-            status1 = st.run_query(data_item, "Select", "sp_society_master", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_helpdesk", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.Read())

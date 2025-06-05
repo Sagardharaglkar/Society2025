@@ -2,6 +2,7 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
 
         function openModal() {
@@ -15,18 +16,6 @@
             }
         }
 
-        function checkLength(el) {
-
-            if (el.value.length != 10) {
-
-                alert("length must be exactly 10 digits")
-
-                return false;
-            }
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -46,6 +35,31 @@
                 }
             });
         }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
+        }
     </script>
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -61,8 +75,8 @@
                 </table>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                <asp:HiddenField ID="parking_id" runat="server" />
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="parking_id" runat="server" />
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -208,7 +222,7 @@
                                             </div>
                                         </div>
 
-                                        <asp:Panel ID="Panel1"  runat="server">
+                                        <asp:Panel ID="Panel1" runat="server">
                                             <div class="form-group">
                                                 <div class="row ">
 
@@ -240,7 +254,7 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="10" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Contact No" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" TextMode="Phone"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Contact No
                                                     </div>
@@ -260,21 +274,21 @@
                                             </div>
                                         </div>
 
-                                       </ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-</asp:UpdatePanel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
 
                             </div>
                             <div class="modal-footer">
                                 <div class="form-group">
                                     <div class="row">
                                         <center>
-                                            <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
+                                            <asp:Button ID="btn_save" type="button-submit" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClick="btn_delete_Click" OnClientClick="return confirm('Are you sure want to delete?');" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
- 
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+
                                         </center>
                                         <br />
                                     </div>

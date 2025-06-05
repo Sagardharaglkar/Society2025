@@ -186,7 +186,7 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-7">
-                                                    <asp:TextBox ID="txt_w_name" CssClass="form-control" parsley-trigger="change" runat="server" class="form-control" Width="200px" Height="32px" ToolTip="Wing" OnTextChanged="txt_w_name_TextChanged" AutoPostBack="true" placeholder="Enter Wing Name" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_w_name" CssClass="form-control" parsley-trigger="change" runat="server" class="form-control" Width="200px" Height="32px" ToolTip="Wing" OnTextChanged="txt_w_name_TextChanged" AutoPostBack="true" placeholder="Enter Wing Name" required="required" autofocus></asp:TextBox>
                                                     <asp:Label ID="Label4" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
                                                     <div class="invalid-feedback">
                                                         Please Enter Wing Name
@@ -243,17 +243,18 @@
                 }
             });
 
-            if (allValid && btn) {
+
+            if (allValid && btn ) {
                 btn.disabled = true;
                 btn.value = "Saving...";
 
 
                 __doPostBack('<%= btn_save.UniqueID %>', '');
 
-                return false; // prevent default to avoid double postback
+                return false;
             }
 
-            return false; // prevent postback if not valid
+            return false; 
         }
 
     </script>
