@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="shop_maintenance.aspx.cs" Inherits="Society.shop_maintenance" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type='text/javascript'>
         function openModal() {
@@ -14,30 +15,51 @@
             }
         }
 
-    </script>
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 3000,
+                timerProgressBar: true,
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-    function SuccessEntry() {
-        Swal.fire({
-            title: '✅ Success!',
-            text: 'Saved Successfully',
-            icon: 'success',
-            showConfirmButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK',
-            timer: 3000,
-            timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'shop_maintenance.aspx';
+                }
+            });
+        }
 
-            didOpen: () => {
-                Swal.showLoading()
-            },
-            willClose: () => {
-                window.location.href = 'shop_maintenance.aspx';
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
             }
-        });
-    }
-</script>
+
+            return false; // prevent postback if not valid
+        }
+    </script>
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -49,91 +71,93 @@
                         </th>
                     </tr>
                 </table>
-                          <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-<ContentTemplate>
-                <asp:HiddenField ID="shop_maint_id" runat="server" />
-                <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:HiddenField ID="shop_maint_id" runat="server" />
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-                <div class="form-group">
-                    <div class="row ">
-                         <div class="col-12">
-                        <div class="d-flex align-items-center">
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
 
-                            <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
-                                <asp:ListItem Value="mrep_no">Recipt No</asp:ListItem>
-                                <asp:ListItem Value="m_date"> Date</asp:ListItem>
-                                <asp:ListItem Value="led_description">Ledger</asp:ListItem>
-                            </asp:DropDownList>&nbsp;&nbsp; 
+                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Value="mrep_no">Recipt No</asp:ListItem>
+                                            <asp:ListItem Value="m_date"> Date</asp:ListItem>
+                                            <asp:ListItem Value="led_description">Ledger</asp:ListItem>
+                                        </asp:DropDownList>&nbsp;&nbsp; 
                       
                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp; 
+                                <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp; 
                         
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" /></asp:Panel>&nbsp;&nbsp;
+                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
+                                        </asp:Panel>
+                                        &nbsp;&nbsp;
                        
                         
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">New Entry</button>
-                       </div>
-                       </div>
-                    </div>
-                  </div>
-               
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div style="width: 100%; overflow: auto;">
-                                <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" EmptyDataText="No Records found" ShowHeaderWhenEmpty="true">
-
-                                    <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="No" ItemStyle-Width="50">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="m_id" SortExpression="name" Visible="false">
-                                            <ItemTemplate>
-                                                <asp:Label ID="shop_maint_id" runat="server" Text='<%# Bind("shop_maint_id")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Recipt No" Visible="true" SortExpression="mrep_no">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" ID="mrep_no" Text='<%# Bind("mrep_no")%>'></asp:Label>
-                                                <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>--%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Date" Visible="true" SortExpression="m_date">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" ID="m_date" Text='<%# Bind("m_date","{0:yyyy-MM-dd}")%>'></asp:Label>
-                                                <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>--%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ledger" Visible="true" SortExpression="led_id">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" ID="led_id" Text='<%# Bind("led_description")%>'></asp:Label>
-                                                <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>--%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-
-                                        <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
-                                            <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="edit1" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("shop_maint_id")%>'><img src="Images/123.png" /></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
-                                        <ItemTemplate >
-                                            <asp:LinkButton runat="server" ID="edit551" CommandName="Delete"  OnClientClick="return confirm('Are you sure want to delete?');" ><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                              </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    </Columns>
-                                </asp:GridView>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-    </ContentTemplate>
-                              </asp:UpdatePanel>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" EmptyDataText="No Records found" ShowHeaderWhenEmpty="true">
+
+                                            <%--                                            <asp:GridView ID="grid_cust" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table-dark">--%>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="m_id" SortExpression="name" Visible="false">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="shop_maint_id" runat="server" Text='<%# Bind("shop_maint_id")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Recipt No" Visible="true" SortExpression="mrep_no">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="mrep_no" Text='<%# Bind("mrep_no")%>'></asp:Label>
+                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>--%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Date" Visible="true" SortExpression="m_date">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="m_date" Text='<%# Bind("m_date","{0:yyyy-MM-dd}")%>'></asp:Label>
+                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>--%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="ledger" Visible="true" SortExpression="led_id">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="led_id" Text='<%# Bind("led_description")%>'></asp:Label>
+                                                        <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>--%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit1" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("shop_maint_id")%>'><img src="Images/123.png" /></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit" role="form" aria-labelledby="mymodel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
                         <div class="modal-content" style="height: auto; width: 800px;">
@@ -276,21 +300,22 @@
                                             </div>
                                         </div>
 
-                                     </ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-</asp:UpdatePanel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
 
 
 
                                 <div class="form-group">
                                     <div class="row">
                                         <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
-                                            <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete"  OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
+                                            <asp:Button ID="btn_save" runat="server" OnClientClick="disableSaveButtonIfValid();" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
+                                            <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
-                                       <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" /> </center>
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+                                        </center>
                                         <br />
                                     </div>
                                 </div>
@@ -298,7 +323,7 @@
                     </div>
                 </div>
             </div>
-          </div>
         </div>
+    </div>
 
 </asp:Content>

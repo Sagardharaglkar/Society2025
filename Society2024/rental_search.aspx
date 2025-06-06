@@ -23,24 +23,38 @@
                 }
             });
         }
-    </script>
 
-    <script type="text/javascript">
-        function digit(evt) {
-
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-        }
         function openModal() {
             $('#edit_model').modal('show');
         }
-        function checkLength(el) {
-            if (el.value.length != 10) {
-                alert("length must be exactly 10 characters")
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false;
             }
-        }  </script>
+
+            return false;
+        }
+
+    </script>
 
     <style>
         .overflow-div {
@@ -291,7 +305,7 @@
                                                     Please Enter valid Email ID
                                                 </div>
 
-                                               
+
 
                                             </div>
 
@@ -635,11 +649,9 @@
                             <div class="form-group">
                                 <div class="row">
                                     <center>
-                                        <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
+                                        <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                         <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                        <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" OnClick="btn_close_Click" UseSubmitBehavior="False" />
-
-
+                                        <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                     </center>
                                     <br />
                                 </div>

@@ -35,7 +35,7 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
 
-               .not-required:focus {
+    .not-required:focus {
     color: #6e707e;
     background-color: #fff;
     border-color: #bac8f3;
@@ -242,7 +242,7 @@
                                     <a class="collapse-item" href="event_search.aspx">Event Master</a>
                                     <a class="collapse-item" href="notice_search.aspx">Notice Master</a>
                                     <a class="collapse-item" href="meeting_search.aspx">Meeting Master</a>
-                                    <a class="collapse-item" href="usefull_contact.aspx">Contact Master</a>
+                                    <a class="collapse-item" href="contact_master.aspx">Contact Master</a>
                                     <a class="collapse-item" href="servent_search.aspx">Servent Master</a>
                                     <a class="collapse-item" href="park_place_search.aspx">Parking Master</a>
                                     <a class="collapse-item" href="doc_search.aspx">Document Master</a>
@@ -456,8 +456,8 @@
                             </li>
 
                             <!-- Nav Item - Alerts -->
-                            <asp:UpdatePanel runat="server">
-                                <ContentTemplate>
+                      
+                            <asp:Timer ID="SharedTimer" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
 
 
                                     <li class="nav-item dropdown no-arrow mx-1">
@@ -474,7 +474,18 @@
                                             <asp:Panel runat="server" ID="badgePanel">
 
                                                 <span class="badge badge-danger badge-counter">
-                                                    <asp:Label runat="server" ID="notifCount"></asp:Label></span>
+                                                    <asp:UpdatePanel ID="upNotifCount" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:Timer ID="TimerNotif" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
+
+                                                            <asp:Label runat="server" ID="notifCount"></asp:Label>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="SharedTimer" EventName="Tick" />
+                                                        </Triggers>
+
+                                                    </asp:UpdatePanel>
+                                                </span>
                                             </asp:Panel>
                                         </a>
                                         <!-- Dropdown - Alerts -->
@@ -482,44 +493,52 @@
                                             class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                             aria-labelledby="alertsDropdown">
                                             <h6 class="dropdown-header">Alerts Center</h6>
-                                            <div  style="width:100%;">
+                                            <div style="width: 100%;">
                                                 <asp:Label ID="noNotif" runat="server" CssClass="dropdown-item"> No Notification Found </asp:Label>
-                                                <asp:GridView  ID="Notification_grid" Width="100%" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" OnRowCommand="Update_Notify_Status" DataKeyNames="notify_status_id">
-                                                    <Columns>
-                                                        <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton
-                                                                    ID="lnkDetails2"
-                                                                    runat="server"
-                                                                    CommandName="Redirect"
-                                                                    CommandArgument='<%# Eval("notify_status_id") %>'
-                                                                    Style="text-decoration: none;">
-                                                                    <div class="hov" style="display: flex; align-items: center; width: 20rem; padding: 0 11px;">
-                                                                        <img src="img/bell.png" width="25px" height="28px" style="margin-right: 11px;" />
-                                                                        <div>
-                                                                            <div style="justify-content: space-between; display: flex; margin-bottom: 2px;">
-                                                                                <asp:Label runat="server" ID="Label1" Text='<%# Eval("title") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
-                                                                                <asp:Label runat="server" Text='<%# Eval("timestamp", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
-                                                                            </div>
-                                                                            <div>
-                                                                                <div class="notify-div">
-                                                                                    <asp:Label runat="server" ID="name" Text='<%# Eval("body") %>' ForeColor="Black"></asp:Label>
+                                                <asp:UpdatePanel ID="upNotifList" runat="server" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="Notification_grid" Width="100%" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" OnRowCommand="Update_Notify_Status" DataKeyNames="notify_status_id">
+                                                            <Columns>
+                                                                <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton
+                                                                            ID="lnkDetails2"
+                                                                            runat="server"
+                                                                            CommandName="Redirect"
+                                                                            CommandArgument='<%# Eval("notify_status_id") %>'
+                                                                            Style="text-decoration: none;"
+                                                                            >
+                                                                            <div class="hov" style="display: flex; align-items: center; width: 20rem; padding: 0 11px;">
+                                                                                <img src="img/bell.png" width="25px" height="28px" style="margin-right: 11px;" />
+                                                                                <div>
+                                                                                    <div style="justify-content: space-between; display: flex; margin-bottom: 2px;">
+                                                                                        <asp:Label runat="server" ID="Label1" Text='<%# Eval("title") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
+                                                                                        <asp:Label runat="server" Text='<%# Eval("timestamp", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <div class="notify-div">
+                                                                                            <asp:Label runat="server" ID="name" Text='<%# Eval("body") %>' ForeColor="Black"></asp:Label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div style="height: 1px; background-color: #d5d5d5; margin-top: 9px;"></div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div style="height: 1px; background-color: #d5d5d5; margin-top: 9px;"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </asp:LinkButton>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                    </Columns>
-                                                </asp:GridView>
+                                                                        </asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
+
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="SharedTimer" EventName="Tick" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
                                             </div>
                                         </div>
                                     </li>
 
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+          
                             <!-- Nav Item - Messages -->
 
                             <div class="topbar-divider d-none d-sm-block"></div>

@@ -34,6 +34,20 @@ namespace Society
             
         }
 
+        protected void TimerNotif_Tick(object sender, EventArgs e)
+        {
+            // Only update notifCount label
+            //details.Sql_Operation = "Notification";
+            //details.Society_Id = Session["society_id"].ToString();
+            //details.UserLoginId = int.Parse(Session["UserId"].ToString());
+            //var dt = BL_Login.get_notification(details);
+            //notifCount.Text = (dt.Rows.Count > 99) ? "99+" : dt.Rows.Count.ToString();
+            get_notificatoin();
+            upNotifList.Update();
+        }
+
+
+
         protected void get_notificatoin()
         {
             //Session["UserId"] = result.UserLoginId;
@@ -110,6 +124,11 @@ namespace Society
             // Redirect to login
             Response.Redirect("login1.aspx", true);
 
+        }
+
+        protected void lnkDetails2_Click(object sender, EventArgs e)
+        {
+            get_notificatoin();
         }
     }
 }

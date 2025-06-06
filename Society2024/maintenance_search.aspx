@@ -3,14 +3,13 @@
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
 
         function openModal() {
             $('#edit_model').modal('show');
         }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
+
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -30,6 +29,31 @@
                 }
             });
         }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
+        }
     </script>
 
     <div class="box box-primary">
@@ -48,7 +72,7 @@
                         <asp:HiddenField ID="n_m_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="m_bill_status" runat="Server"></asp:HiddenField>
-                
+
                         <div class="form-group">
                             <div class="col-12">
                                 <div class="d-flex align-items-center">
@@ -203,7 +227,7 @@
                                                         <asp:CompareValidator ControlToValidate="drp_wing" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Wing" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
                                                     </div>
                                                     <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
-                                            
+
                                                 </div>
                                             </div>
 
@@ -258,30 +282,31 @@
                                             </div>
 
                                         </asp:Panel>
-                                            </ContentTemplate>
-<Triggers>
-    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-</Triggers></asp:UpdatePanel>
-                                </div>
-                            
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-12">
-                                                    <div class="pull-center">
-                                                        <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
-                                                        <asp:Button ID="btn_bill" runat="server" Text="Generate Bill" class="btn btn-primary" OnClick="btn_bill_Click" />
-                                                        <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" Visible="False" />
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
-                                                        <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
-                                                        <asp:Button ID="btn_close" runat="server" Text="Close" UseSubmitBehavior="false" class="btn btn-primary" OnClick="btn_close_Click" />
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
 
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="form-group">
+                                <div class="row ">
+                                    <div class="col-sm-12">
+                                        <div class="pull-center">
+                                            <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
+                                            <asp:Button ID="btn_bill" runat="server" Text="Generate Bill" class="btn btn-primary" OnClick="btn_bill_Click" />
+                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" Visible="False" />
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
+                                            <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+
                                         </div>
-                                   
-                           </div>
-                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -349,7 +374,7 @@
 
                 </div>
             </div>
-       
+
         </div>
         <!-- /.modal-dialog -->
 

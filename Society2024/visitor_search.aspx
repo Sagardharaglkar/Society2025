@@ -24,15 +24,33 @@
             });
         }
 
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-
-        }
         function openModal() {
             $('#edit_model').modal('show');
+        }
+
+        function disableSaveButtonIfValid() {
+            var btn = document.getElementById('<%= btn_in.ClientID %>');
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
+
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
+
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_in.UniqueID %>', '');
+
+                return false; // prevent default to avoid double postback
+            }
+
+            return false; // prevent postback if not valid
         }
     </script>
 
@@ -372,7 +390,7 @@
                                             <div class="pull-center">
                                                 <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_in" runat="server" Text="In" class="btn btn-primary" BackColor="red" ValidationGroup="valid" OnClick="btn_in_Click" />
                                                 <asp:Button ID="btn_out" runat="server" Text="Out" class="btn btn-primary" BackColor="red" ValidationGroup="g1" OnClick="btn_out_Click" Visible="false" />
-                                                <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" />
+                                                <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                             </div>
                                         </div>
                                     </div>
@@ -384,32 +402,7 @@
             </div>
         </div>
     </div>
-    <script>
-        function disableSaveButtonIfValid() {
-            var btn = document.getElementById('<%= btn_in.ClientID %>');
-                var modal = document.getElementById('edit_model');
-                var inputs = modal.querySelectorAll('input[required], select[required]');
-                var allValid = true;
 
-                inputs.forEach(function (input) {
-                    if (!input.checkValidity()) {
-                        allValid = false;
-                    }
-                });
-
-                if (allValid && btn) {
-                    btn.disabled = true;
-                    btn.value = "Saving...";
-
-
-                    __doPostBack('<%= btn_in.UniqueID %>', '');
-
-                return false; // prevent default to avoid double postback
-            }
-
-            return false; // prevent postback if not valid
-        }
-    </script>
 </asp:Content>
 
 
