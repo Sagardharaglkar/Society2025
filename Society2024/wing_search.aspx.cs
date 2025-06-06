@@ -163,7 +163,7 @@ namespace Society
                 wing.Society_Id = society_id.Value;
                 var result = bL_Wing.WingTextChanged(wing);
                 Label4.Text = result.Sql_Result;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
+               // ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
             }
         }
 
