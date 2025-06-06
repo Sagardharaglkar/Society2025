@@ -42,8 +42,8 @@ namespace Society
             // SqlCommand cmd = new SqlCommand(sqlstring, con);
 
             SqlDataReader sdr = SqlHelper.ExecuteReader(con, CommandType.Text, sqlstring);
-
-            drp_down.DataSource = sdr;
+            
+            drp_down.DataSource = sdr; 
             drp_down.DataTextField = text;
             drp_down.DataValueField = value;
             drp_down.DataBind();

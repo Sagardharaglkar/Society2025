@@ -608,7 +608,7 @@
                     })
                     .then(token => {
                         console.log("✅ Token:", token);
-                        document.getElementById('<%= hdnToken.ClientID %>').value = token;
+                        
 
                         sendTokenToServer(token);
                     })
