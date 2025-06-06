@@ -155,30 +155,6 @@ body {
 
 <body>
 
- <%--       <form id="form1" runat="server" novalidate>
-        <div class="container">
-            <div class="left">
-                <h2>Sign In</h2>
-                <div class="container2">
-                    <asp:TextBox ID="txt_Username" runat="server" CssClass="form-control" placeholder="Username"></asp:TextBox>
-                    <asp:TextBox ID="txt_password" runat="server" CssClass="form-control" TextMode="Password" placeholder="Password"></asp:TextBox>
-
-                    <asp:Button ID="btn_Login" runat="server" Text="Sign In" CssClass="btn-signin" OnClick="btn_Login_Click" />
-                </div>
-                <div class="options">
-                    
-                    <asp:HyperLink ID="forgot_password" runat="server" NavigateUrl="~/forgot_password.aspx">Forgot Password</asp:HyperLink>
-                </div>
-            </div>
-            <div class="right">
-                <h2>Welcome to login</h2>
-                <span>Don't have an account?</span>
-                <asp:Button ID="Button1" runat="server" CssClass="btn-signup" Text="Sign Up" OnClick="Button1_Click" />
-            </div>
-        </div>
-        <asp:Label ID="lbl" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>--%>
-
-           <%-- ____________________________________________________________--%>
             <form id="form2" runat="server" class="needs-validation" novalidate>
        <div class="container">
         <div class="left">

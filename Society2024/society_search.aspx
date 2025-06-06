@@ -2,6 +2,25 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .not-required.valid-field {
+    border-color: #1cc88a !important;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.not-required.invalid-field {
+    border-color: #e74a3b !important;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e74a3b' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23e74a3b' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -76,7 +95,7 @@
                         <asp:HiddenField ID="society_id" runat="server" />
                         <div class="form-group">
                             <div class="row ">
-
+                                &nbsp;&nbsp;
                                 <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
                                     <asp:ListItem Value="name">Name</asp:ListItem>
                                     <asp:ListItem Value="establish_date">Establish Date</asp:ListItem>
@@ -199,7 +218,7 @@
 
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_name" runat="server" placeholder="Enter Name" required autofocus Width="200px"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" placeholder="Enter Name" required autofocus Width="200px"></asp:TextBox>
                                                     <br />
 
                                                 </div>
@@ -212,7 +231,7 @@
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_es_date" TextMode="Date" runat="server" Width="200px" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_es_date" CssClass="form-control" TextMode="Date" runat="server" Width="200px" required></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -225,7 +244,7 @@
                                                     <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_registration" runat="server" Width="200px" AutoPostBack="true" placeholder="Enter Registration No" required Autofocus OnTextChanged="txt_registration_TextChanged"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_registration" CssClass="form-control" runat="server" Width="200px" AutoPostBack="true" placeholder="Enter Registration No" required Autofocus OnTextChanged="txt_registration_TextChanged"></asp:TextBox>
                                                     <br />
                                                     <asp:Label ID="Label22" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
@@ -246,7 +265,7 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_off_address1" runat="server" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_off_address1" CssClass="form-control" runat="server" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -254,7 +273,7 @@
                                                     <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_off_address2" runat="server" Width="200px" placeholder="Enter Address" autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_off_address2" CssClass="not-required" runat="server" Width="200px" placeholder="Enter Address" autofocus></asp:TextBox>
                                                 </div>
 
                                             </div>
@@ -268,7 +287,7 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_contact_no1" runat="server" MaxLength="10" Width="200px" placeholder="Enter Contact No." onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact_no1" runat="server" CssClass="form-control" MaxLength="10" Width="200px" placeholder="Enter Contact No." onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" required></asp:TextBox>
                                                     <br />
 
                                                 </div>
@@ -280,7 +299,7 @@
 
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_email" Width="200px" placeholder="Enter Email Id" runat="server" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_email" Width="200px" CssClass="form-control" placeholder="Enter Email Id" runat="server" required></asp:TextBox>
                                                     <br />
                                                     <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
 
@@ -293,10 +312,10 @@
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label17" runat="server" Text="State"></asp:Label>
                                                     <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label31" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                    <asp:Label ID="Label31" runat="server"  Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="ddl_state" Height="32px" Width="200px" OnSelectedIndexChanged="ddl_state_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList ID="ddl_state" Height="32px" CssClass="form-control" Width="200px" OnSelectedIndexChanged="ddl_state_SelectedIndexChanged" runat="server"></asp:DropDownList>
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -306,7 +325,7 @@
                                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="ddl_district" Height="32px" Width="200px" OnSelectedIndexChanged="ddl_district_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList ID="ddl_district" Height="32px" CssClass="form-control" Width="200px" OnSelectedIndexChanged="ddl_district_SelectedIndexChanged" runat="server"></asp:DropDownList>
                                                 </div>
 
 
@@ -324,7 +343,7 @@
                                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="ddl_division" Height="32px" Width="200px" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList ID="ddl_division" Height="32px" CssClass="form-control" Width="200px" runat="server"></asp:DropDownList>
 
                                                 </div>
 
@@ -334,10 +353,10 @@
                                                 <div class="col-sm-3">
                                                     <asp:Label ID="Label14" runat="server" Text="City"></asp:Label>
                                                     <asp:Label ID="Label15" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                                    <asp:Label ID="Label16" runat="server" Font-Bold="True"  Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_city" runat="server" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_city" runat="server" Width="200px" CssClass="form-control" placeholder="Enter Address" required autofocus></asp:TextBox>
                                                 </div>
 
                                             </div>
@@ -352,7 +371,7 @@
                                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_street" runat="server" Width="200px" MaxLength="10" placeholder="Enter Home No" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_street" runat="server" Width="200px" CssClass="form-control" MaxLength="10" placeholder="Enter Home No" required autofocus></asp:TextBox>
 
                                                 </div>
 
@@ -363,7 +382,7 @@
                                                     <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_pincode" runat="server" Width="200px" MaxLength="6" onkeypress="return digit(event);" placeholder="Enter Pin" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pincode" runat="server" Width="200px" CssClass="form-control" MaxLength="6" onkeypress="return digit(event);" placeholder="Enter Pin" required autofocus></asp:TextBox>
                                                     <br />
 
                                                     <asp:RegularExpressionValidator ID="regularExp" ControlToValidate="txt_pincode" runat="server" ValidationExpression="[0-9]{6}" ErrorMessage="Invalid Pin Code." Font-Bold="True" ForeColor="red" ValidationGroup="g1"></asp:RegularExpressionValidator>
@@ -386,7 +405,7 @@
                                                     <%-- <asp:Label ID="Label25" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_tan_no" runat="server" Width="200px" MaxLength="10" placeholder="Enter TAN NO" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_tan_no" runat="server" Width="200px" CssClass="form-control" MaxLength="10" placeholder="Enter TAN NO" required autofocus></asp:TextBox>
                                                     <br />
 
                                                 </div>
@@ -398,7 +417,7 @@
                                                     <%--<asp:Label ID="Label32" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_gstin_no" runat="server" Width="200px" MaxLength="15" placeholder="Enter GSTIN REG.NO" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_gstin_no" runat="server" Width="200px" CssClass="form-control" MaxLength="15" placeholder="Enter GSTIN REG.NO" required autofocus></asp:TextBox>
                                                 </div>
 
                                             </div>
@@ -412,7 +431,7 @@
                                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_pan_no" runat="server" Width="200px" MaxLength="10" placeholder="Enter PAN NO" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pan_no" runat="server" Width="200px" CssClass="form-control" MaxLength="10" placeholder="Enter PAN NO" required autofocus></asp:TextBox>
 
                                                 </div>
                                             </div>
@@ -438,7 +457,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                         </center>
                                     </div>
                                 </div>
@@ -501,7 +520,7 @@
                                     <div class="row ">
                                         <center>
                                             <asp:Button ID="btn_photo_upload" runat="server" Text="Import" Class="btn btn-primary" UseSubmitBehavior="false" OnClick="btn_photo_upload_Click" />
-                                            <asp:Button ID="btn_close1" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close1_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="Button1" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
 
                                         </center>
                                     </div>

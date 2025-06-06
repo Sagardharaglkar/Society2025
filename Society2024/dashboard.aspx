@@ -564,7 +564,6 @@
                         </asp:UpdatePanel>
                         <br />
 
-                        <asp:HiddenField ID="hdnToken" runat="server" />
                     </div>
                 </a>
             </div>
@@ -608,7 +607,7 @@
                     })
                     .then(token => {
                         console.log("✅ Token:", token);
-                        document.getElementById('<%= hdnToken.ClientID %>').value = token;
+
 
                         sendTokenToServer(token);
                     })
