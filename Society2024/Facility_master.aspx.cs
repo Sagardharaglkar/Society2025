@@ -178,7 +178,7 @@ namespace Society2024
             string id = e.CommandArgument.ToString();
             facility_id.Value = id;
             runproc_facility("Select");
-            btn_delete.Visible = true;
+            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 

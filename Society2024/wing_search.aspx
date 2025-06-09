@@ -140,13 +140,13 @@
                                                  </ItemTemplate>
                                              </asp:TemplateField>
 
-                                             <asp:TemplateField HeaderText="Delete" ItemStyle-Width="30">
-                                                 <ItemTemplate>
-                                                     <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');">
-                                                         <img src="Images/delete_10781634.png" height="25" width="25" />
-                                                     </asp:LinkButton>
-                                                 </ItemTemplate>
-                                             </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="30">
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');">
+                                                            <img src="Images/delete_10781634.png" height="25" width="25" />
+                                                        </asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
 
                                              <%--                                    <asp:LinkButton  ButtonType="Button" data-toggle="modal" data-target=".bs-example-modal-sm" SelectText="Edit" ControlStyle-ForeColor="blue" />--%>
                                          </Columns>
@@ -240,16 +240,16 @@
                              <div class="form-group">
                                  <div class="row ">
 
-                                     <center>
-                                         <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_save" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" UseSubmitBehavior="True" />
-                                         <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                         <asp:Button ID="btn_close" runat="server" OnClientClick="resetForm(); return false;" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" data-dismiss="modal" />
-                                     </center>
-                                     </>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
+                                        <center>
+                                            <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_save" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" UseSubmitBehavior="True" />
+                                            <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
+                                           <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                        </center>
+                                        </>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                  </div>
                  <!-- /.modal-body -->

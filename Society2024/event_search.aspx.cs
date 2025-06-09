@@ -166,7 +166,7 @@ namespace Society
             string id = e.CommandArgument.ToString();
             event_id.Value = id;
             runproc("Select");
-            btn_delete.Visible = true;
+            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }

@@ -443,7 +443,7 @@ namespace DataAccessLayer.MasterDA
             status = st.run_query(data_item, "Select", "sp_new_maintenance", ref sdr);
             if (status == "Done")
             {
-                if (sdr.Read())
+                if (sdr.HasRows)
                 {
                     
                         dt.Load(sdr);

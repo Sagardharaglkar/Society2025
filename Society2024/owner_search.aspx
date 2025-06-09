@@ -171,7 +171,7 @@
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("owner_id")%>'><img src="Images/123.png"/></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
+                                                <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                     </ItemTemplate>
@@ -306,7 +306,7 @@
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" MaxLength="15" Height="32px" TextMode="Phone"  Width="200px" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pre_mob" CssClass="form-control" runat="server" MaxLength="10" Height="32px" TextMode="Phone"  Width="200px" placeholder="Enter Mobile No." AutoPostBack="true" required></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Mobile No
                                                     </div>

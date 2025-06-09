@@ -44,7 +44,6 @@ namespace Society
                 fill_dropdowns();
                 fetch_receipt();
                 panel2.Visible = false;
-                btn_delete.Visible = true;
 
             }
 

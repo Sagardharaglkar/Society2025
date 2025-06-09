@@ -169,7 +169,7 @@
                                                         <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="60">
+                                                <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="60">
                                                     <ItemTemplate>
                                                         <asp:ImageButton
                                                             ID="imgDelete"

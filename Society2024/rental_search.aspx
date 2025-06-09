@@ -172,7 +172,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="60">
+                                                <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="60">
                                                     <ItemTemplate>
                                                         <asp:ImageButton
                                                             ID="imgDelete"

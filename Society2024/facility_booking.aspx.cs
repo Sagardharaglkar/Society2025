@@ -115,7 +115,7 @@ namespace Society
             facility_book_id.Value = id;
             runproc("Select");
             ddl_facility_SelectedIndexChanged(sender, e);
-            btn_delete.Visible = true;
+           
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }

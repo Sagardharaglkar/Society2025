@@ -70,7 +70,7 @@ namespace Society
             runproc("Select");
             //runproc_Family("Select_Family");
             Family_Details_Gridbind();
-            btn_delete.Visible = true;
+             
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 

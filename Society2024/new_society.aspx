@@ -79,6 +79,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" placeholder="Enter Name" required autofocus Width="200px"></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Society Name
+                                    </div>
                                     <br />
 
                                 </div>
@@ -91,7 +94,10 @@
                                     <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_es_date" TextMode="Date" runat="server" Width="200px" required></asp:TextBox>
+                                    <asp:TextBox ID="txt_es_date" CssClass="form-control" TextMode="Date" runat="server" Width="200px" required></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Date
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,6 +111,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txt_registration" CssClass="form-control" runat="server" Width="200px" AutoPostBack="true" placeholder="Enter Registration No" required Autofocus OnTextChanged="txt_registration_TextChanged"></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Registration No
+                                    </div>
                                     <br />
                                     <asp:Label ID="Label22" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                 </div>
@@ -126,6 +135,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txt_off_address1" CssClass="form-control" runat="server" Width="200px" placeholder="Enter Address" required autofocus></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Adress
+                                    </div>
                                 </div>
 
                                 <div class="col-sm-3">
@@ -147,7 +159,11 @@
                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_contact_no1" CssClass="form-control" runat="server" MaxLength="10" Width="200px" ValidationGroup="g1" placeholder="Enter Contact No." onblur="checkLength(this)" onkeypress="return digit(event);" AutoPostBack="true" required></asp:TextBox>
+                                    <asp:TextBox ID="txt_contact_no1" CssClass="form-control" runat="server" MaxLength="10" Width="200px" ValidationGroup="g1" placeholder="Enter Contact No." TextMode="Phone" required></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Contact No
+                                    </div>
+
                                     <br />
 
                                 </div>
@@ -159,7 +175,10 @@
 
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txt_email" CssClass="form-control" Width="200px" placeholder="Enter Email" runat="server" required></asp:TextBox>
+                                    <asp:TextBox ID="txt_email" CssClass="form-control" Width="200px" placeholder="Enter Email" runat="server" required TextMode="Email"></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Email
+                                    </div>
                                     <br />
                                     <asp:RegularExpressionValidator ID="regexEmailValid" Height="32px" Width="200px" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_email" Font-Bold="True" ForeColor="red" ErrorMessage="Invalid Email Format" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>
 
@@ -177,7 +196,11 @@
                                     <asp:Label ID="Label31" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:DropDownList ID="ddl_state" Height="32px" Width="200px" OnSelectedIndexChanged="ddl_state_SelectedIndexChanged" AutoPostBack="true" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList CssClass="form-select" ID="ddl_state" Height="32px" Width="200px" OnSelectedIndexChanged="ddl_state_SelectedIndexChanged" AutoPostBack="true" runat="server"></asp:DropDownList>
+                                    <div class="invalid-feedback">
+                                        Please Select State
+                                    </div>
+
                                 </div>
 
                                 <div class="col-sm-3">
@@ -187,7 +210,10 @@
                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                 </div>
                                 <div class="col-sm-3">
-                                    <asp:DropDownList ID="ddl_district" Height="32px" OnSelectedIndexChanged="ddl_district_SelectedIndexChanged" AutoPostBack="true" Width="200px" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList CssClass="form-select" ID="ddl_district" Height="32px" OnSelectedIndexChanged="ddl_district_SelectedIndexChanged" AutoPostBack="true" Width="200px" runat="server"></asp:DropDownList>
+                                    <div class="invalid-feedback">
+                                        Please Select District 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +228,10 @@
                                     <%--<asp:Label ID="Label22" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>--%>
                                 </div>
                                 <div class="col-sm-3">
-                                       <asp:DropDownList ID="ddl_division" Height="32px"  Width="200px" runat="server"></asp:DropDownList>
+                                       <asp:DropDownList CssClass="form-select" ID="ddl_division" Height="32px"  Width="200px" runat="server"></asp:DropDownList>
+                                    <div class="invalid-feedback">
+                                        Please Select Division
+                                    </div>
 
                                 </div>
 
@@ -214,6 +243,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txt_city" CssClass="form-control" runat="server" Width="200px" MaxLength="10" placeholder="Enter City" required autofocus></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter City
+                                    </div>
 
                                 </div>
 
@@ -231,6 +263,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txt_street" CssClass="form-control" runat="server" Width="200px" MaxLength="10" placeholder="Enter Home No" required autofocus></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Street/Home No
+                                    </div>
 
                                 </div>
 
@@ -241,6 +276,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <asp:TextBox ID="txt_pincode" CssClass="form-control" runat="server" Width="200px" MaxLength="6" onkeypress="return digit(event);" placeholder="Enter Pin" required autofocus></asp:TextBox>
+                                    <div class="invalid-feedback">
+                                        Please Enter Pincode
+                                    </div>
                                     <br />
 
                                     <asp:RegularExpressionValidator ID="regularExp" ControlToValidate="txt_pincode" runat="server" ValidationExpression="[0-9]{6}" ErrorMessage="Invalid Pin Code." Font-Bold="True" ForeColor="red" ValidationGroup="g1"></asp:RegularExpressionValidator>
