@@ -167,7 +167,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField ItemStyle-Width="50">
+                                                <asp:TemplateField ItemStyle-Width="50" Visible="False">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                     </ItemTemplate>
@@ -251,10 +251,7 @@
                                                         Please Enter Contact No
                                                     </div>
                                                     <br />
-                                                    <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txt_org_tel" ErrorMessage="Numbers Only" Font-Bold="True" ForeColor="Red" ValidationExpression="^\d+" ValidationGroup="g1" Display="Dynamic"></asp:RegularExpressionValidator>--%>
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter valid Phone number" Font-Bold="True" ForeColor="Red" ControlToValidate="txt_contact" ValidationExpression="[0-9]{10}" ValidationGroup="g1" Display="Dynamic"> </asp:RegularExpressionValidator>
-                                                    <asp:Label ID="Label37" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                                                </div>
+                                                                  </div>
 
 
                                             </div>
@@ -367,8 +364,10 @@
                                                     <asp:Label ID="Label28" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
+                                                    <div class="d-flex flex-column">
                                                     <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
                                                     <asp:Label ID="image" runat="server"></asp:Label>
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -378,12 +377,10 @@
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                    </Triggers>
+                                  
                                 </asp:UpdatePanel>
 
-
+</div>
                                 <div class="form-group">
                                     <div class="row ">
                                         <div class="col-sm-12">
@@ -401,7 +398,7 @@
                 </div>
             </div>
         </div>
-    </div>
+   
 
 </asp:Content>
 

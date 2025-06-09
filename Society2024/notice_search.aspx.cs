@@ -33,18 +33,12 @@ namespace Society
             {
              
                 Notice_Gridbind();
-                fill_drop();
 
                 //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
             }
            
         }
-        public void fill_drop()
-        {
-            list_fill();
-            String sql_query = "Select *  from notice_recipients ";
-            bL_Notice.fill_drop(ddl_recipients, sql_query, "recipients", "recipients_id");
-        }
+
         public void Notice_Gridbind()
         {
             DataSet dt = new DataSet();
@@ -106,7 +100,7 @@ namespace Society
             notice.Sql_Operation = operation;
             notice.Society_Id = society_id.Value;
             notice.Name = txt_sub.Text;
-            notice.Recipients_id = Convert.ToInt32(ddl_recipients.SelectedValue);
+            notice.Recipients_id = Convert.ToInt32(Recipient_id.Value);
             notice.Description = txt_desc.Text;
             notice.Valid_To = Convert.ToDateTime(txt_valid_to.Text.ToString());
             var result=bL_Notice.updateNoticeDetails(notice);
@@ -137,7 +131,7 @@ namespace Society
             (notice_id.Value) = result.notice_id.ToString();
             society_id.Value = result.Society_Id;
             txt_sub.Text = result.Name;
-           ddl_recipients.SelectedValue = result.Recipients_id.ToString();
+            Recipient_id.Value = result.Recipients_id.ToString();
             txt_desc.Text = result.Description;
             txt_valid_to.Text = result.Valid_To.ToString("yyyy-MM-dd");
             
@@ -172,7 +166,6 @@ namespace Society
             notice_id.Value = id;
             runproc_notice("Select");
             list_fill();
-            btn_delete.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 

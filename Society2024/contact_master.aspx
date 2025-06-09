@@ -77,6 +77,7 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="usefull_contact_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="contact_type_id" runat="Server"></asp:HiddenField>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
                         <br />
                         <br />
@@ -754,11 +755,30 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:DropDownList CssClass="form-select" ID="drp_per_type" runat="server" OnSelectedIndexChanged="drp_per_type_SelectedIndexChanged" AutoPostBack="True" Width="200px"></asp:DropDownList>
-                                                    <div class="invalid-feedback">
-                                                        Please select Persons Type
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                        <div id="categoryRepeaterContainer" class="suggestion-list">
+                                                            <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("flat_type") %>'
+                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setCategoryBox(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
                                                     </div>
-                                                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="drp_per_type" ErrorMessage="Required" Font-Bold="True" ForeColor="Red" ValidationGroup="g1" ValueToCompare="select" Type="String" Operator="NotEqual"></asp:CompareValidator>
+
+
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
                                             </div>
@@ -879,7 +899,101 @@
             </div>
         </div>
     </div>
+<script>
 
+    function initDropdownEvents() {
+
+        const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
+
+        const categorySuggestions = document.getElementById("categoryRepeaterContainer");
+
+        categoryBox.addEventListener("focus", function () {
+
+            categorySuggestions.style.display = "block";
+
+            itemSuggestions.style.display = "none";
+
+        });
+
+        categoryBox.addEventListener("input", function () {
+
+            const input = categoryBox.value.toLowerCase();
+
+            filterSuggestions("category-link", input);
+
+        });
+
+
+    }
+
+
+    function filterSuggestions(className, value) {
+
+        const items = document.querySelectorAll("." + className);
+
+        let matchFound = false;
+
+        items.forEach(item => {
+
+            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                item.style.display = "block";
+
+                matchFound = true;
+
+            } else {
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+        let noMatchMessage = document.getElementById("no-match-message");
+
+        if (!matchFound) {
+
+            if (!noMatchMessage) {
+
+                noMatchMessage = document.createElement("div");
+
+                noMatchMessage.id = "no-match-message";
+
+                noMatchMessage.innerText = "No matching suggestions.";
+
+                items[0]?.parentNode?.appendChild(noMatchMessage);
+
+            }
+
+            noMatchMessage.style.display = "block";
+
+        } else {
+
+            if (noMatchMessage) {
+
+                noMatchMessage.style.display = "none";
+
+            }
+
+        }
+
+    }
+
+
+    function setCategoryBox(value) {
+
+        document.getElementById("<%= categoryBox.ClientID %>").value = value;
+
+        document.getElementById("categoryRepeaterContainer").style.display = "none";
+
+    }
+
+
+    Sys.Application.add_load(initDropdownEvents);
+
+
+    </script>
+ 
 </asp:Content>
 
 

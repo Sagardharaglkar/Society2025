@@ -192,7 +192,7 @@ namespace Society
             drp_build_SelectedIndexChanged(sender, e);
             btnAdd_Click(sender, e);
             list_fill();
-            btn_delete.Visible = true;
+            
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
 

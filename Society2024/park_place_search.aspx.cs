@@ -170,7 +170,7 @@ namespace Society
             string id = e.CommandArgument.ToString();
             place_id.Value = id;
             runproc1("Select");
-            btn_delete.Visible = true;
+            
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }

@@ -148,7 +148,7 @@ namespace Society
             string id = e.CommandArgument.ToString();
             inventory_id.Value = id;
             runproc("Select");
-            btn_delete.Visible = true;
+            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)

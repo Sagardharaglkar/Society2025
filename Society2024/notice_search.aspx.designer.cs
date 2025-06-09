@@ -33,6 +33,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField notice_id;
 
         /// <summary>
+        /// Recipient_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Recipient_id;
+
+        /// <summary>
         /// search_field control.
         /// </summary>
         /// <remarks>
@@ -141,13 +150,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label lbl_co_name_mandatory;
 
         /// <summary>
-        /// ddl_recipients control.
+        /// categoryBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_recipients;
+        protected global::System.Web.UI.WebControls.TextBox categoryBox;
+
+        /// <summary>
+        /// categoryRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
 
         /// <summary>
         /// Label7 control.

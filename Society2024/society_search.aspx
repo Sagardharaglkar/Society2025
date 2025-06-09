@@ -150,7 +150,7 @@
                                                         <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="60">
+                                                <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="60">
                                                     <ItemTemplate>
                                                         <asp:ImageButton
                                                             ID="imgDelete"
@@ -501,7 +501,7 @@
                                     <div class="row ">
                                         <center>
                                             <asp:Button ID="btn_photo_upload" runat="server" Text="Import" Class="btn btn-primary" UseSubmitBehavior="false" OnClick="btn_photo_upload_Click" />
-                                            <asp:Button ID="btn_close1" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close1_Click" UseSubmitBehavior="False" />
+                                           <asp:Button ID="Button1" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
 
                                         </center>
                                     </div>

@@ -27,18 +27,17 @@ namespace Society2024
 
             if (!IsPostBack)
             {
-                fill_drop1();
                 staff_Gridbind();
             }
 
         }
 
-        public void fill_drop1()
-        {
-            String sql_query = "Select *  from staff_role where active_status=0 and society_id='" + society_id.Value + "'";
-            bL_Staff.fill_drop(ddl_role, sql_query, "role", "role_id");
+        //public void fill_drop1()
+        //{
+        //    String sql_query = "Select *  from staff_role where active_status=0 and society_id='" + society_id.Value + "'";
+        //    bL_Staff.fill_drop(ddl_role, sql_query, "role", "role_id");
 
-        }
+        //}
         public void staff_Gridbind()
         {
             DataSet dt = new DataSet();
@@ -69,7 +68,7 @@ namespace Society2024
             Staff.Email = txt_email.Text;
             Staff.Date_Of_Join = Convert.ToDateTime(txt_doj.Text);
 
-            Staff.role_id = Convert.ToInt32(ddl_role.SelectedValue);
+            Staff.role_id = Convert.ToInt32(role_id.Value);
             bL_Staff.update_staff(Staff);
             staff_Gridbind();
         }
@@ -158,7 +157,7 @@ namespace Society2024
             txt_contact.Text = result.Contact_No;
             txt_email.Text = result.Email;
             txt_doj.Text = result.Date_Of_Join.ToString("yyyy-MM-dd");
-            ddl_role.SelectedValue = result.role_id.ToString();
+            role_id.Value = result.role_id.ToString();
 
         }
 

@@ -289,7 +289,7 @@
                                                                         <asp:Label ID="end_time" runat="server" Text='<%# Bind("end_time")%>'></asp:Label>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField ItemStyle-Width="50">
+                                                                <asp:TemplateField ItemStyle-Width="50" Visible="false">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                                     </ItemTemplate>

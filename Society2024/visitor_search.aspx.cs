@@ -37,9 +37,9 @@ namespace Society
             if (!IsPostBack)
             {
 
-                btn_in.Visible = true;
                 filldrop();
                 Visitor_Gridbind();
+                btn_in.Visible = true;
                 txt_in_date.Text = DateTime.Now.Date.ToString("yyyy-MM-dd");
                 txt_in_time.Text = DateTime.Now.ToShortTimeString().ToString();
                 txt_out_date.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");

@@ -150,13 +150,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// ddl_usertype control.
+        /// categoryBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_usertype;
+        protected global::System.Web.UI.WebControls.TextBox categoryBox;
+
+        /// <summary>
+        /// categoryRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
 
         /// <summary>
         /// Label7 control.
