@@ -15,12 +15,14 @@ using Page = System.Web.UI.Page;
 using BusinessLogic.MasterBL;
 using DBCode.DataClass.Master_Dataclass;
 using System.Windows.Forms;
+using BusinessLogic.BL;
 //using System.IdentityModel.Metadata;
 
 namespace Society
 {
     public partial class wing_search : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Wing wing = new Wing();
         BL_Wing_Master bL_Wing = new BL_Wing_Master();
 
@@ -33,21 +35,23 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-               fill_drop1();
+
+                String str = "Select build_id,name from building_master where active_status=0 and society_id='" + society_id.Value + "'";
+                repeater.fill_list(categoryRepeater, str);
                 Wing_GridBind();
             
             }
 
         }
 
-        public void fill_drop1()
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            String sql_query = "Select *  from building_master where active_status=0 and society_id='" + society_id.Value + "'";
-            bL_Wing.fill_drop(ddl_build_name, sql_query, "name", "build_id");
+            if (e.CommandName == "SelectCategory")
+            {
+                ddl_build_name.Value = e.CommandArgument.ToString();
 
+            }
         }
-
-
         public void Wing_GridBind()
         {
             DataSet dt = new DataSet();
@@ -118,7 +122,7 @@ namespace Society
                 wing.wing_id = Convert.ToInt32(wing_id.Value);
             wing.Sql_Operation = operation;
             wing.Society_Id = society_id.Value;
-            wing.build_id = Convert.ToInt32(ddl_build_name.SelectedValue);
+            wing.build_id = Convert.ToInt32(ddl_build_name.Value);
             wing.W_Name = txt_w_name.Text;
             bL_Wing.updateWingDetails(wing);
         }
@@ -130,7 +134,7 @@ namespace Society
             wing.Sql_Operation = operation;
             var result = bL_Wing.updateWingDetails(wing);
             wing_id.Value = result.wing_id.ToString();
-            ddl_build_name.SelectedValue = result.build_id.ToString();
+            ddl_build_name.Value = result.build_id.ToString();
             txt_w_name.Text = result.W_Name;
 
         }
@@ -156,7 +160,7 @@ namespace Society
                 if (wing_id.Value != "")
                     wing.wing_id = Convert.ToInt32(wing_id.Value);
                 wing.W_Name = txt_w_name.Text;
-                wing.build_id = Convert.ToInt32(ddl_build_name.SelectedValue);
+                wing.build_id = Convert.ToInt32(ddl_build_name.Value);
                 wing.Sql_Operation = "check_name";
                 wing.Society_Id = society_id.Value;
                 var result = bL_Wing.WingTextChanged(wing);

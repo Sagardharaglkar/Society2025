@@ -17,6 +17,11 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
+
+        public void fill_list(Repeater list_box, string sqlstring)
+        {
+            st.fill_list(list_box, sqlstring);
+        }
         public DataSet getOwnerDetails(Owner owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();

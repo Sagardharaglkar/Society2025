@@ -156,7 +156,7 @@ body {
 <body>
 
             <form id="form2" runat="server" class="needs-validation" novalidate>
-       <div class="container">
+       <div class="container" style="padding:0;">
         <div class="left">
             <h2>Sign In</h2>
             <div class="container2">

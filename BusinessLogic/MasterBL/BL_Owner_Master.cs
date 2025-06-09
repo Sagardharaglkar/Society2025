@@ -56,6 +56,11 @@ namespace BusinessLogic.MasterBL
             DA_Owner.fill_drop(drp_down, sqlstring, text, value);
         }
 
+        public void fill_list(Repeater drp_down, string sqlstring)
+        {
+            DA_Owner.fill_list(drp_down, sqlstring);
+        }
+
         public Owner OwnerDelete(Owner owner)
         {
             

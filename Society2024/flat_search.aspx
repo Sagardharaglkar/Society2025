@@ -2,6 +2,23 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+        <style>
+        .not-required.valid-field {
+            border-color: #1cc88a !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(.375em + .1875rem) center;
+            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+        }
+
+        .not-required.invalid-field {
+            border-color: #e74a3b !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e74a3b' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23e74a3b' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(.375em + .1875rem) center;
+            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function openModal() {
@@ -28,6 +45,7 @@
         }
 
         function disableSaveButtonIfValid() {
+            validateIFSC();
             var btn = document.getElementById('<%= btn_save.ClientID %>');
             var modal = document.getElementById('edit_model');
             var inputs = modal.querySelectorAll('input[required], select[required]');
@@ -183,7 +201,7 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_build_wing" Width="150px" Height="30px" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="not-required" ID="ddl_build_wing" Width="150px" Height="30px" runat="server"></asp:DropDownList>
                                                     <div class="invalid-feedback">
                                                         Please Select Building & Wing
                                                     </div>
@@ -198,7 +216,7 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_type" Width="150px" Height="30px" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList CssClass="not-required" ID="ddl_type" Width="150px" Height="30px" runat="server"></asp:DropDownList>
                                                     <div class="invalid-feedback">
                                                         Please Select Flat Type 
                                                     </div>
@@ -318,7 +336,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                         </center>
                                         <br />
                                     </div>
@@ -338,5 +356,56 @@
 
     <br />
 
+    <script>
+        let formSubmitted = false;
 
+        function validateIFSC() {
+            formSubmitted = true;
+
+            // Array of dropdown IDs (replace with your actual IDs)
+            const dropdownIds = [
+        '<%= ddl_build_wing.ClientID %>',
+        '<%= ddl_type.ClientID %>',
+        '<%= ddl_usage.ClientID %>'
+            ];
+
+            dropdownIds.forEach(function (id) {
+                const select = document.getElementById(id);
+                if (select) {
+                    validateSelect(select, select.value);
+                }
+            });
+        }
+
+        function validateSelect(select, value) {
+            select.classList.remove('valid-field', 'invalid-field');
+
+            if (value === "0") {
+                select.classList.add('invalid-field');
+            } else {
+                select.classList.add('valid-field');
+            }
+        }
+
+        // Set up live validation for all dropdowns after first submit
+        window.addEventListener('DOMContentLoaded', function () {
+            const dropdownIds = [
+        '<%= ddl_build_wing.ClientID %>',
+        '<%= ddl_type.ClientID %>',
+        '<%= ddl_usage.ClientID %>'
+    ];
+
+    dropdownIds.forEach(function (id) {
+        const select = document.getElementById(id);
+        if (select) {
+            select.addEventListener('change', function () {
+                if (formSubmitted) {
+                    validateSelect(select, select.value);
+                }
+            });
+        }
+    });
+});
+
+    </script>
 </asp:Content>

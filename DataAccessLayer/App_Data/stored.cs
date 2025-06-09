@@ -11,6 +11,7 @@ using System.Web.Configuration;
 using System.Configuration;
 using Microsoft.ApplicationBlocks.Data;
 using System.Collections;
+using static System.Net.Mime.MediaTypeNames;
 
 
 
@@ -19,6 +20,18 @@ namespace Society
     public partial class stored : System.Web.UI.Page
     {
         String  sqlconn, server_name, db_name;
+
+        public void fill_list(Repeater repeater, string sqlstring)
+        {
+            SqlConnection con = new SqlConnection(setsqlconnection());
+
+            SqlDataReader sdr = SqlHelper.ExecuteReader(con, CommandType.Text, sqlstring);
+
+            repeater.DataSource = sdr;
+            repeater.DataBind();
+        }
+
+
         public string setsqlconnection()
         {
             sqlconn =ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -70,8 +83,11 @@ namespace Society
                 drp_down.DataTextField = text;
                 drp_down.DataValueField = value;
                 drp_down.DataBind();
-                drp_down.Items.Insert(0, new ListItem("select" ,"0"));
+            //drp_down.Items.Add(0,new ListItem("Select1", "select1"));
+            drp_down.Items.Insert(0, new ListItem("select" ,"0"));
         }
+
+
 
         public ArrayList create_array(string field_name,object field_value)
         {

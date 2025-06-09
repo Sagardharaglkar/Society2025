@@ -291,7 +291,7 @@
                                                             <asp:CheckBox ID="chk_c_wash" runat="server" OnCheckedChanged="chk_c_wash_CheckedChanged" AutoPostBack="true" /><span class="ml-2">Cloth Washing</span>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <asp:TextBox ID="txt_c_wash" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus></asp:TextBox>
+                                                            <asp:TextBox ID="txt_c_wash" required CssClass="form-control" runat="server" Width="184px" placeholder="Enter Amount" autofocus="autofocus"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>

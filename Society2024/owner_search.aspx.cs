@@ -57,6 +57,12 @@ namespace Society
             String sql_query4 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
             bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
         }
+
+        //public void fill_list()
+        //{
+        //    String sql_query3 = "Select *  from types ";
+        //    bL_Owner.fill_list(ddl_type, sql_query3, "flat_type", "flat_type_id");
+        //}
         protected void edit_Command(object sender, CommandEventArgs e)
         {
             string id = e.CommandArgument.ToString();
@@ -338,7 +344,6 @@ namespace Society
            
                 if (ddl_type.Text != "select")
                 {
-
                     string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + ddl_build_wing.SelectedValue + "' and flat_type_id='" + ddl_type.SelectedValue +"'";
                     bL_Owner.fill_drop(ddl_flat, sql1, "flat_type", "flat_id");
 

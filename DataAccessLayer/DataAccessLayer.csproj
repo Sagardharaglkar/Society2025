@@ -88,6 +88,7 @@
     <Compile Include="DA\DA_Shop_Maint.cs" />
     <Compile Include="DA\DA_Society_Expense.cs" />
     <Compile Include="DA\DA_Staff.cs" />
+    <Compile Include="DA\DA_FillRepeater.cs" />
     <Compile Include="DA\DA_Terms.cs" />
     <Compile Include="DA\DA_Upload_Doc.cs" />
     <Compile Include="DA\DA_Usefull_Contact.cs" />

@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>--%>
 
     <style>
         body {
@@ -119,37 +119,11 @@
         }
     </style>
 
-    <script type="text/javascript">
-        function digit(evt) {
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            return (charCode >= 48 && charCode <= 57);
-        }
-
-        function checkLength(el) {
-            if (el.value.length != 10) {
-                alert("Length must be exactly 10 digits");
-                return false;
-            }
-        }
-
-        // Bootstrap 5 validation
-        window.addEventListener('load', function () {
-            var forms = document.getElementsByClassName('needs-validation');
-            Array.prototype.forEach.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    </script>
+  
 </head>
 
 <body>
-    <form id="form1" runat="server" class="needs-validation" novalidate>
+    <form id="myForm" runat="server" class="needs-validation" novalidate>
         <div class="form-container">
             <div class="left-panel">
                 <h2>Welcome Back!</h2>
@@ -175,24 +149,29 @@
 
                 <div class="mb-3">
                     <div class="d-flex align-items-center gap-2">
-                    <asp:TextBox ID="txt_Mobile" Style="margin-bottom:0px;" CssClass="form-control" MaxLength="10" runat="server" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Contact No." required></asp:TextBox>
-                    <asp:TextBox Style="display:none; margin-bottom:0px;" CssClass="form-control" ID="Contact_OTP" runat="server" placeholder="Enter Verify OTP"></asp:TextBox>
+                        <div style="width:100%;"> 
+                    <asp:TextBox ID="txt_Mobile" Style="margin-bottom:0px;" CssClass="form-control" MaxLength="10" runat="server" placeholder="Enter Contact No." required TextMode="Phone"></asp:TextBox>
+                    <div class="invalid-feedback">Enter a valid mobile number.</div>
+                    <asp:TextBox Style="display:none; margin-bottom:0px;" CssClass="form-control" ID="Contact_OTP" runat="server" placeholder="Enter Verify OTP" ></asp:TextBox>
+                            </div>
                     <asp:Button ID="btn_verify1" CssClass="btn-verify" runat="server" Text="Verify" OnClick="btn_verify1_Click" UseSubmitBehavior="False" />
 
                     </div>
-                    <div class="invalid-feedback">Please enter a valid 10-digit mobile number.</div>
                     <asp:Panel ID="Panel1" runat="server" Visible="false">
                         <asp:LinkButton ID="LinkButton1" runat="server">Resend OTP</asp:LinkButton>
                     </asp:Panel>
                 </div>
 
                 <div class="mb-3">
-                    <div class="d-flex align-items-center gap-2">
-                    <asp:TextBox ID="txt_Emailid" Style="margin-bottom:0px;" CssClass="form-control" runat="server" AutoPostBack="true" OnTextChanged="txt_Emailid_TextChanged" placeholder="Enter Email" required></asp:TextBox>
-                    <asp:TextBox ID="Email_OTP" Style="margin-bottom:0px; display:none;" CssClass="form-control" runat="server" placeholder="Enter Verify OTP"></asp:TextBox>
+                    <div class="d-flex align-items-center gap-2 w-100">
+                        <div style="width:100%;"> 
+                    <asp:TextBox ID="txt_Emailid" Style="margin-bottom:0px;" CssClass="form-control" runat="server" AutoPostBack="true" OnTextChanged="txt_Emailid_TextChanged" placeholder="Enter Email" required TextMode="Email"></asp:TextBox>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                    <asp:TextBox ID="Email_OTP" Style="margin-bottom:0px; display:none;" CssClass="form-control" runat="server" placeholder="Enter Verify OTP" ></asp:TextBox>
+
+                        </div>
                     <asp:Button ID="btn_verify2" CssClass="btn-verify" runat="server" Text="Verify" OnClick="btn_verify2_Click" UseSubmitBehavior="False" />
                         </div>
-                    <div class="invalid-feedback">Please enter a valid email address.</div>
                     <asp:Label ID="Label10" ForeColor="Red" Font-Bold="true" runat="server"></asp:Label>
                     <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" Font-Bold="True" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txt_Emailid" ForeColor="red" ErrorMessage="Invalid Email Format" Display="Dynamic"></asp:RegularExpressionValidator>
                     <asp:Panel ID="Panel2" runat="server" Visible="false">
@@ -201,7 +180,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <asp:TextBox ID="txt_user" CssClass="form-control" runat="server" placeholder="Enter Username" Enabled="false"></asp:TextBox>
+                    <asp:TextBox ID="txt_user" CssClass="form-control" runat="server" placeholder="Username" Enabled="false"></asp:TextBox>
                 </div>
 
                 <div class="mb-3">
@@ -210,8 +189,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <asp:TextBox ID="txt_re_password" CssClass="form-control-repass" runat="server" TextMode="Password" placeholder="Re-enter Password" required></asp:TextBox>
-                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="txt_new_pass" ControlToValidate="txt_re_password" ErrorMessage="*Passwords do not match" ForeColor="Red"></asp:CompareValidator>
+                    <asp:TextBox ID="txt_re_password" CssClass="form-control" runat="server" TextMode="Password" placeholder="Re-enter Password" required></asp:TextBox>
+                   <%-- <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="txt_new_pass" ControlToValidate="txt_re_password" ErrorMessage="*Passwords do not match" ForeColor="Red"></asp:CompareValidator>--%>
                     <div class="invalid-feedback">Please re-enter the same password.</div>
                 </div>
 
@@ -221,5 +200,126 @@
             </div>
         </div>
     </form>
+
+
+      <script type="text/javascript">
+          (function () {
+              'use strict';
+
+              const forms = document.querySelectorAll('.needs-validation');
+
+              Array.prototype.slice.call(forms).forEach(function (form) {
+                  let submittedOnce = false;
+
+                  function validateField(input) {
+                      const tag = input.tagName.toLowerCase();
+                      const type = input.type.toLowerCase();
+                      const value = input.value.trim();
+                      const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+                      // Common whitespace check
+                      if ((validTypes.includes(type) || tag === 'textarea') && input.required) {
+                          if (value === '') {
+                              input.setCustomValidity('Whitespace is not allowed');
+                              showInvalid(input);
+                              return;
+                          } else {
+                              input.setCustomValidity('');
+                          }
+                      }
+
+                      // Additional type-based validations
+                      if (type === 'email' && value !== '') {
+                          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                          if (!emailRegex.test(value)) {
+                              input.setCustomValidity('Please enter a valid email address');
+                              showInvalid(input);
+                              return;
+                          } else {
+                              input.setCustomValidity('');
+                          }
+                      }
+
+                      if (type === 'url' && value !== '') {
+                          try {
+                              new URL(value); // throws if invalid
+                              input.setCustomValidity('');
+                          } catch {
+                              input.setCustomValidity('Please enter a valid URL');
+                              showInvalid(input);
+                              return;
+                          }
+                      }
+
+                      if (type === 'tel' && value !== '') {
+                          const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
+                          if (!phoneRegex.test(value)) {
+                              input.setCustomValidity('Phone number must be exactly 10 digits');
+                              showInvalid(input);
+                              return;
+                          } else {
+                              input.setCustomValidity('');
+                          }
+                      }
+
+                      // Dropdown (select) validation
+                      if (tag === 'select' && input.required) {
+                          if (input.value === '0') {
+                              input.setCustomValidity('Please select a valid option');
+                              showInvalid(input);
+                              return;
+                          } else {
+                              input.setCustomValidity('');
+                          }
+                      }
+
+                      // Final validation state
+                      if (!input.checkValidity()) {
+                          showInvalid(input);
+                      } else {
+                          showValid(input);
+                      }
+                  }
+
+                  function showInvalid(input) {
+                      input.classList.remove('is-valid');
+                      input.classList.add('is-invalid');
+                  }
+
+                  function showValid(input) {
+                      input.classList.remove('is-invalid');
+                      input.classList.add('is-valid');
+                  }
+
+                  form.addEventListener('submit', function (event) {
+                      submittedOnce = true;
+                      let hasCustomError = false;
+
+                      form.querySelectorAll('input, textarea, select').forEach(function (input) {
+                          validateField(input);
+                          if (!input.checkValidity()) {
+                              hasCustomError = true;
+                          }
+                      });
+                      console.log(submittedOnce);
+                      if (hasCustomError) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                      }
+
+                      form.classList.add('was-validated');
+                  }, false);
+
+                  // Live validation
+                  form.querySelectorAll('input, textarea, select').forEach(function (input) {
+                      input.addEventListener('input', function () {
+                          if (submittedOnce) {
+                              validateField(input);
+                          }
+                      });
+                  });
+              });
+          })();
+      </script>
 </body>
 </html>

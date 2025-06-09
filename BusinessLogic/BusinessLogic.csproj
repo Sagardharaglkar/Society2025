@@ -74,6 +74,7 @@
     <Compile Include="BL\BL_PrintContact.cs" />
     <Compile Include="BL\BL_PrintVisitor.cs" />
     <Compile Include="BL\BL_Staff.cs" />
+    <Compile Include="BL\BL_FillRepeater.cs" />
     <Compile Include="BL\BL_Terms.cs" />
     <Compile Include="MasterBL\BL_Contact_Master.cs" />
     <Compile Include="BL\BL_Ledger.cs" />
