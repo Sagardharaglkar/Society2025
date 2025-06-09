@@ -1,5 +1,7 @@
 ﻿importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js');
+
+// Initialize Firebase
 firebase.initializeApp({
     apiKey: "AIzaSyCVD6hUSK4zMfG43bMjyjwTFmTz5PJc_qk",
     authDomain: "society-management-32053.firebaseapp.com",
@@ -11,15 +13,43 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-messaging.onBackgroundMessage(payload => {
-    console.log("Background message: ", payload);
-    const title = payload.notification.title;
-    const options = {
-        body: payload.notification.body
 
+// Handle background messages
+messaging.onBackgroundMessage(function (payload) {
+    console.log('[firebase-messaging-sw.js] Received background message ', payload);
+
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+        body: payload.notification.body,
+        icon: 'img/building.png', // optional icon
+        data: {
+            click_action: payload.notification.click_action || 'https://localhost:44309/support_ticket'
+        }
     };
-    self.registration.showNotification(title, options);
+
+    self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+// Handle notification click
+//self.addEventListener('notificationclick', function (event) {
+//    event.notification.close();
+
+//    const clickAction = event.notification.data?.click_action || 'https://localhost:44309/support_ticket'
+
+//    event.waitUntil(
+//        clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
+//            for (const client of clientList) {
+//                if (client.url === clickAction && 'focus' in client) {
+//                    return client.focus();
+//                }
+//            }
+//            if (clients.openWindow) {
+//                return clients.openWindow(clickAction);
+//            }
+//        })
+//    );
+//});
+
 
 //importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js');
 //importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js');

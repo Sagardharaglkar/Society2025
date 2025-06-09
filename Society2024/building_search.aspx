@@ -21,47 +21,23 @@
             outline: none;
         }
 
-        .invalid-field {
-            border-color: #e74a3b;
-            padding-right: calc(1.5em + .75rem);
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e74a3b' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23e74a3b' stroke='none'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right calc(.375em + .1875rem) center;
-            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-        }
+.not-required.valid-field {
+    border-color: #1cc88a !important;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
 
-        .valid-field {
-            border-color: #1cc88a;
-            padding-right: calc(1.5em + .75rem);
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right calc(.375em + .1875rem) center;
-            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-        }
-
-        .not-required {
-            display: block;
-            width: 100%;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #6e707e;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid;
-            border-radius: .35rem;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
-        }
-
-            .not-required:focus {
-                color: #6e707e;
-                background-color: #fff;
-                border-color: #bac8f3;
-                outline: 0;
-                box-shadow: 0 0 0 .2rem rgba(78,115,223,.25)
-            }
+.not-required.invalid-field {
+    border-color: #e74a3b !important;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e74a3b' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23e74a3b' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
     </style>
 
 
@@ -125,6 +101,7 @@
 
             return false;
         }
+
 
     </script>
 
@@ -443,7 +420,7 @@
                                                         <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_acc_no" CssClass="not-required" runat="server" Height="32px" Width="200px" placeholder="Enter Account No" required autofocus MaxLength="18"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_acc_no" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Account No" required autofocus MaxLength="18"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Account No
                                                         </div>
@@ -520,25 +497,26 @@
         let formSubmitted = false;
 
         function validateIFSC() {
-            const input = document.getElementById('ifscInput');
-            const pattern = /^[A-Z]{4}0[A-Z0-9]{6}$/;
-            formSubmitted = true;
+            const input = document.getElementById('<%= txt_ifsc.ClientID %>');
+    const pattern = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+    formSubmitted = true;
 
-            input.classList.remove('valid-field', 'invalid-field', 'is-valid', 'is-invalid');
+    input.classList.remove('valid-field', 'invalid-field',);
 
-            if (pattern.test(input.value)) {
-                input.classList.add('valid-field', 'is-valid');
-            } else {
-                input.classList.add('invalid-field', 'is-invalid');
-            }
-        }
+    if (pattern.test(input.value)) {
+        input.classList.add('valid-field');
+    } else {
+        input.classList.add('invalid-field');
+    }
+}
 
-        document.getElementById('ifscInput').addEventListener('input', function () {
-            if (formSubmitted) validateIFSC();
-        });
-    </script>
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById('<%= txt_ifsc.ClientID %>');
+    input.addEventListener('input', function () {
+        if (formSubmitted) validateIFSC();
+    });
+});
 
-    <script>
 
         function validateEmail1(input) {
             var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
