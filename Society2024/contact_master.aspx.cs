@@ -62,7 +62,7 @@ namespace Society
         public void filldrop()
         {
             String sql_query = "Select *  from person_type";
-            bL_Contact.fill_drop(drp_per_type, sql_query, "p_type_name", "p_type_id");
+            bL_Contact.fill_drop(contactRepeater, sql_query);
         }
 
 
@@ -74,7 +74,7 @@ namespace Society
             contact.Sql_Operation = operation;
             contact.Society_Id = society_id.Value;
             contact.P_Name = txt_p_name.Text;
-            contact.P_Type = Convert.ToInt32(drp_per_type.SelectedValue);
+            contact.P_Type = Convert.ToInt32(contact_type_id);
             contact.Org_Name = txt_org_name.Text;
             contact.Contact_Address = txt_org_addr1.Text;
             contact.Address2 = txt_org_addr2.Text;
@@ -97,7 +97,7 @@ namespace Society
             usefull_contact_id.Value = result.usefull_contact_id.ToString();
             society_id.Value = result.Society_Id;
             txt_p_name.Text = result.P_Name;
-            drp_per_type.SelectedValue = result.P_Type.ToString();
+            contact_type_id.Value = result.P_Type.ToString();
             txt_org_name.Text = result.Org_Name;
             txt_org_addr1.Text = result.Contact_Address;
             txt_org_addr2.Text = result.Address2;
@@ -133,13 +133,13 @@ namespace Society
 
         protected void drp_per_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (drp_per_type.SelectedItem.Text != "select")
+           // if (drp_per_type.SelectedItem.Text != "select")
             {
                 if (usefull_contact_id.Value != "")
                     contact.usefull_contact_id = Convert.ToInt32(usefull_contact_id.Value);
                 contact.Sql_Operation = "p_name_already_exist";
                 contact.P_Name = txt_p_name.Text;
-                contact.P_Type = Convert.ToInt32(drp_per_type.SelectedValue.ToString());
+                contact.P_Type = Convert.ToInt32(contact_type_id.ToString());
                 var result = bL_Contact.Per_Type_SelectIndexChanged(contact);
 
                 Label10.Text = result.Sql_Result;

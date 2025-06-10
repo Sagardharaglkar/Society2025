@@ -150,7 +150,7 @@ if (allValid && btn) {
                                                 <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("parking_id")%>'><img src="Images/123.png"/></asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>--%>
-                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
+                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50" Visible="false">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                     </ItemTemplate>

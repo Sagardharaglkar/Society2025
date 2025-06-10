@@ -105,22 +105,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label lbl_co_name_mandatory;
 
         /// <summary>
-        /// ddl_society control.
+        /// categoryBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_society;
+        protected global::System.Web.UI.WebControls.TextBox categoryBox;
 
         /// <summary>
-        /// CompareValidator1 control.
+        /// categoryRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
 
         /// <summary>
         /// Label2 control.

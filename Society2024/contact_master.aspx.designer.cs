@@ -33,6 +33,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
+        /// contact_type_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField contact_type_id;
+
+        /// <summary>
         /// GridView2 control.
         /// </summary>
         /// <remarks>
@@ -195,22 +204,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
-        /// drp_per_type control.
+        /// categoryBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_per_type;
+        protected global::System.Web.UI.WebControls.TextBox categoryBox;
 
         /// <summary>
-        /// CompareValidator1 control.
+        /// categoryRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
 
         /// <summary>
         /// Label10 control.

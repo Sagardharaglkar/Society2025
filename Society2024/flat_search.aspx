@@ -151,7 +151,7 @@
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("flat_id")%>'><img src="Images/123.png"/></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
+                                                <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="delete" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                     </ItemTemplate>

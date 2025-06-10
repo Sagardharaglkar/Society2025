@@ -70,6 +70,7 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="notice_id" runat="server" />
+                        <asp:HiddenField ID="Recipient_id" runat="server" />
 
                         <div class="form-group">
                             <div class="row ">
@@ -127,7 +128,7 @@
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("notice_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete">
+                                                <asp:TemplateField ItemStyle-Width="50" HeaderText="Delete" Visible="false">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                     </ItemTemplate>
@@ -180,10 +181,29 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:DropDownList CssClass="form-select" ID="ddl_recipients" Height="32px" Width="200px" runat="server"></asp:DropDownList>
-                                                    <div class="invalid-feedback">
-                                                        Please select Recipient
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                        <div id="categoryRepeaterContainer" class="suggestion-list">
+                                                            <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("flat_type") %>'
+                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setCategoryBox(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
                                                     </div>
+ 
                                                 </div>
                                             </div>
                                         </div>
@@ -322,5 +342,99 @@
             </div>
         </div>
     </div>
+<script>
 
+    function initDropdownEvents() {
+
+        const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
+
+        const categorySuggestions = document.getElementById("categoryRepeaterContainer");
+
+        categoryBox.addEventListener("focus", function () {
+
+            categorySuggestions.style.display = "block";
+
+            itemSuggestions.style.display = "none";
+
+        });
+
+        categoryBox.addEventListener("input", function () {
+
+            const input = categoryBox.value.toLowerCase();
+
+            filterSuggestions("category-link", input);
+
+        });
+
+
+    }
+
+
+    function filterSuggestions(className, value) {
+
+        const items = document.querySelectorAll("." + className);
+
+        let matchFound = false;
+
+        items.forEach(item => {
+
+            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                item.style.display = "block";
+
+                matchFound = true;
+
+            } else {
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+        let noMatchMessage = document.getElementById("no-match-message");
+
+        if (!matchFound) {
+
+            if (!noMatchMessage) {
+
+                noMatchMessage = document.createElement("div");
+
+                noMatchMessage.id = "no-match-message";
+
+                noMatchMessage.innerText = "No matching suggestions.";
+
+                items[0]?.parentNode?.appendChild(noMatchMessage);
+
+            }
+
+            noMatchMessage.style.display = "block";
+
+        } else {
+
+            if (noMatchMessage) {
+
+                noMatchMessage.style.display = "none";
+
+            }
+
+        }
+
+    }
+
+
+    function setCategoryBox(value) {
+
+        document.getElementById("<%= categoryBox.ClientID %>").value = value;
+
+        document.getElementById("categoryRepeaterContainer").style.display = "none";
+
+    }
+
+
+    Sys.Application.add_load(initDropdownEvents);
+
+
+    </script>
+ 
 </asp:Content>
