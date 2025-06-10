@@ -564,7 +564,6 @@
                         </asp:UpdatePanel>
                         <br />
 
-                        <asp:HiddenField ID="hdnToken" runat="server" />
                     </div>
                 </a>
             </div>

@@ -491,7 +491,7 @@
                                         <!-- Dropdown - Alerts -->
                                         <div
                                             class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                            aria-labelledby="alertsDropdown">
+                                            aria-labelledby="alertsDropdown" style="overflow-y: auto; max-height: 508px;">
                                             <h6 class="dropdown-header">Alerts Center</h6>
                                             <div style="width: 100%;">
                                                 <asp:Label ID="noNotif" runat="server" CssClass="dropdown-item"> No Notification Found </asp:Label>
