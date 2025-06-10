@@ -16,7 +16,7 @@ namespace Society
 {
     public partial class contact_master : Page
     {
-
+        BL_FillRepeater repeater = new BL_FillRepeater();
         usefull_Contact contact = new usefull_Contact();
         BL_Contact_Master bL_Contact = new BL_Contact_Master();
 
@@ -42,9 +42,12 @@ namespace Society
             gvbind9();
             gvbind10();
             gvbind11();
-            filldrop();
+            
             if (!IsPostBack)
             {
+                String str = "Select *  from person_type";
+                repeater.fill_list(categoryRepeater, str);
+
                 if (Request.QueryString["usefull_contact_id"] != null)
                 {
                     usefull_contact_id.Value = Request.QueryString["usefull_contact_id"];
@@ -55,15 +58,23 @@ namespace Society
 
         }
 
-      
+
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                contact_type_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
 
         //stored st = new stored();
-       
-        public void filldrop()
-        {
-            String sql_query = "Select *  from person_type";
-            bL_Contact.fill_drop(contactRepeater, sql_query);
-        }
+
+        //public void filldrop()
+        //{
+        //    String sql_query = "Select *  from person_type";
+        //    bL_Contact.fill_drop(contactRepeater, sql_query);
+        //}
 
 
         public void runproc_save(string operation)
@@ -74,7 +85,7 @@ namespace Society
             contact.Sql_Operation = operation;
             contact.Society_Id = society_id.Value;
             contact.P_Name = txt_p_name.Text;
-            contact.P_Type = Convert.ToInt32(contact_type_id);
+            contact.P_Type = Convert.ToInt32(contact_type_id.Value);
             contact.Org_Name = txt_org_name.Text;
             contact.Contact_Address = txt_org_addr1.Text;
             contact.Address2 = txt_org_addr2.Text;
@@ -139,7 +150,7 @@ namespace Society
                     contact.usefull_contact_id = Convert.ToInt32(usefull_contact_id.Value);
                 contact.Sql_Operation = "p_name_already_exist";
                 contact.P_Name = txt_p_name.Text;
-                contact.P_Type = Convert.ToInt32(contact_type_id.ToString());
+                contact.P_Type = Convert.ToInt32(contact_type_id.Value.ToString());
                 var result = bL_Contact.Per_Type_SelectIndexChanged(contact);
 
                 Label10.Text = result.Sql_Result;

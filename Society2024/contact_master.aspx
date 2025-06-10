@@ -77,7 +77,8 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="usefull_contact_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="contact_type_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="contact_type_id" runat="Server"/>
+
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
                         <br />
                         <br />
@@ -758,15 +759,15 @@
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
-                                                        <div id="categoryRepeaterContainer" class="suggestion-list">
+                                                        <div id="categoryRepeaterContainer" style="width:239px;" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("p_type_name") %>'
+                                                                        CommandArgument='<%# Eval("p_type_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setCategoryBox(this.innerText);" />
                                                                 </ItemTemplate>
@@ -992,7 +993,7 @@
     Sys.Application.add_load(initDropdownEvents);
 
 
-    </script>
+</script>
  
 </asp:Content>
 

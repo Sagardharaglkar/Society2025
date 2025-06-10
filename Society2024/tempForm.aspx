@@ -2,17 +2,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
-
-
     <asp:UpdatePanel ID="updatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
 
             <!-- First Dropdown (Category Selection) -->
             <div class="dropdown-container">
-                <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                     placeholder="Select category (Animal or Bird)" autocomplete="off"/>
-                <div id="categoryRepeaterContainer" class="suggestion-list">
-                    <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                <div id="RepeaterContainer1" class="suggestion-list">
+                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                         <ItemTemplate>
                             <asp:LinkButton
                                 ID="lnkCategory"
@@ -21,7 +19,7 @@
                                 Text='<%# Eval("flat_type") %>'
                                 CommandArgument='<%# Eval("flat_type_id") %>'
                                 CommandName="SelectCategory"
-                                OnClientClick="setCategoryBox(this.innerText);" />
+                                OnClientClick="setTextBox1(this.innerText);" />
                         </ItemTemplate>
                         <FooterTemplate>
                             <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -33,9 +31,9 @@
 
             <!-- Second Dropdown (Items based on category) -->
             <div class="dropdown-container">
-                <asp:TextBox ID="itemBox" runat="server" CssClass="input-box form-control" placeholder="Select item" autocomplete="off" />
-                <div id="itemRepeaterContainer" class="suggestion-list">
-                    <asp:Repeater ID="Repeater1" runat="server">
+                <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control" placeholder="Select item" autocomplete="off" />
+                <div id="RepeaterContainer2" class="suggestion-list">
+                    <asp:Repeater ID="Repeater2" runat="server">
                         <ItemTemplate>
                             <asp:LinkButton
                                 ID="lnkCategory"
@@ -44,7 +42,7 @@
                                 Text='<%# Eval("flat_no") %>'
                                 CommandArgument='<%# Eval("flat_id") %>'
                                 CommandName="SelectCategory"
-                                OnClientClick='setItemBox(this.innerText);' />
+                                OnClientClick='setTextBox2(this.innerText);' />
                         </ItemTemplate>
                         <FooterTemplate>
                             <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -57,45 +55,33 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-
     <script type="text/javascript">
-        //Sys.Application.add_load(initDropdownEvents);
 
         function initDropdownEvents() {
-            const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
-            const categorySuggestions = document.getElementById("categoryRepeaterContainer");
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-            const itemBox = document.getElementById("<%= itemBox.ClientID %>");
-            const itemSuggestions = document.getElementById("itemRepeaterContainer");
+            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-            categoryBox.addEventListener("focus", function () {
-                categorySuggestions.style.display = "block";
-                itemSuggestions.style.display = "none";
+            textBox1.addEventListener("focus", function () {
+                repeaterContainer1.style.display = "block";
+                repeaterContainer2.style.display = "none";
             });
 
-            categoryBox.addEventListener("input", function () {
-                const input = categoryBox.value.toLowerCase();
+            textBox1.addEventListener("input", function () {
+                const input = textBox1.value.toLowerCase();
                 filterSuggestions("category-link", input);
             });
 
-            itemBox.addEventListener("focus", function () {
-                itemSuggestions.style.display = "block";
+            textBox2.addEventListener("focus", function () {
+                repeaterContainer2.style.display = "block";
             });
 
-            itemBox.addEventListener("input", function () {
-                const input = itemBox.value.toLowerCase();
+            textBox2.addEventListener("input", function () {
+                const input = textBox2.value.toLowerCase();
                 filterSuggestions("item-option", input);
             });
-
-            // Handle clicks outside dropdowns
-            //document.addEventListener("click", function (e) {
-            //    if (!categoryBox.contains(e.target) && !categorySuggestions.contains(e.target)) {
-            //        categorySuggestions.style.display = "none";
-            //    }
-            //    if (!itemBox.contains(e.target) && !itemSuggestions.contains(e.target)) {
-            //        itemSuggestions.style.display = "none";
-            //    }
-            //});
         }
 
         function filterSuggestions(className, value) {
@@ -129,21 +115,18 @@
             }
         }
 
-
-        function setCategoryBox(value) {
-            document.getElementById("<%= categoryBox.ClientID %>").value = value;
-            document.getElementById("categoryRepeaterContainer").style.display = "none";
-
-            document.getElementById("<%= itemBox.ClientID %>").value = "";
-
-        }
-        function setItemBox(value) {
-            document.getElementById("<%= itemBox.ClientID %>").value = value;
-            document.getElementById("itemRepeaterContainer").style.display = "none";
+        function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+            document.getElementById("<%= TextBox2.ClientID %>").value = "";
         }
 
+        function setTextBox2(value) {
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer2").style.display = "none";
+        }
 
-        // Attach after partial postback
         Sys.Application.add_load(initDropdownEvents);
     </script>
+
 </asp:Content>

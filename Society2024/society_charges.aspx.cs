@@ -16,12 +16,14 @@ using BusinessLogic.MasterBL;
 using DBCode.DataClass.Master_Dataclass;
 using System.Windows.Forms;
 using DBCode.DataClass;
+using BusinessLogic.BL;
 //using System.IdentityModel.Metadata;
 
 namespace Society
 {
     public partial class society_charges : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         private BL_Society_Master bL_society = new BL_Society_Master();
         private Search_Society society = new Search_Society();
        
@@ -35,20 +37,27 @@ namespace Society
           
             if (!IsPostBack)
             {
-                fill_drop1();
                 Society_charges_GridBind();
-
+                String str = "Select *  from society_master";
+                repeater.fill_list(categoryRepeater, str);
             }
 
         }
 
-        public void fill_drop1()
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            String sql_query = "Select *  from society_master";
-            bL_society.fill_drop(ddl_society, sql_query, "name", "society_id");
+            if (e.CommandName == "SelectCategory")
+            {
+                society_name_id.Value = e.CommandArgument.ToString();
 
+            }
         }
+        //public void fill_drop1()
+        //{
+        //    String sql_query = "Select *  from society_master";
+        //    bL_society.fill_drop(ddl_society, sql_query, "name", "society_id");
 
+        //}
 
         public void Society_charges_GridBind()
         {
@@ -61,9 +70,6 @@ namespace Society
             GridView1.DataSource = dt.Tables[0];
             GridView1.DataBind();
         }
-
-
-
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
@@ -109,7 +115,7 @@ namespace Society
                 society.Charge_Id = Convert.ToInt32(charge_id.Value);
                 society.Sql_Operation = operation;
             society.Amount = txt_amount.Text;
-            society.Society_Id = ddl_society.SelectedValue;
+            society.Society_Id = society_name_id.Value;
             bL_society.updatecharges(society);
         }
 
@@ -123,7 +129,7 @@ namespace Society
             var result = bL_society.updatecharges(society);
             charge_id.Value = result.Charge_Id.ToString();
             txt_amount.Text = result.Amount.ToString();
-            ddl_society.SelectedValue = result.Society_Id.ToString();
+            society_name_id.Value = result.Society_Id.ToString();
 
         }
 
@@ -199,7 +205,7 @@ namespace Society
         {
             if (charge_id.Value != "")
                 society.Charge_Id = Convert.ToInt32(charge_id.Value);
-            society.Society_Id = ddl_society.SelectedValue;
+            society.Society_Id = society_name_id.Value;
             society.Sql_Operation = "society_exist";
             
             var result=bL_society.check_society(society);

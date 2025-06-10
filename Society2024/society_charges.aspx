@@ -49,10 +49,9 @@
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
                 <asp:HiddenField ID="charge_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
+                <asp:HiddenField ID="society_name_id" runat="server" />
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-
-
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -150,8 +149,8 @@
                                                 </div>
                                                 <div class="col-sm-7">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                        <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select Society" autocomplete="off" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
@@ -159,8 +158,8 @@
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("society_master_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setCategoryBox(this.innerText);" />
                                                                 </ItemTemplate>
@@ -216,7 +215,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
                                         </center>
                                         </>
                                     </div>

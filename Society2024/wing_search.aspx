@@ -183,7 +183,7 @@
                                              <div class="col-sm-7">
                                                  <div class="dropdown-container">
                                                      <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass=" form-control"
-                                                         placeholder="Select category (Animal or Bird)" autocomplete="off" />
+                                                         placeholder="Select Building/Wing" autocomplete="off" />
                                                      <div id="categoryRepeaterContainer" class="suggestion-list">
                                                          <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                              <ItemTemplate>

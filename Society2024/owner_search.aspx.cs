@@ -14,12 +14,14 @@ using System.Web.Services.Description;
 using System.EnterpriseServices;
 using System.IO;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Bibliography;
+using BusinessLogic.BL;
 
 namespace Society
 {
     public partial class owner_search : System.Web.UI.Page
     {
-
+        BL_FillRepeater repeater = new BL_FillRepeater();
         BL_Owner_Master bL_Owner = new BL_Owner_Master();
         Owner owner = new Owner();
 
@@ -37,25 +39,89 @@ namespace Society
                 txt_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_f_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 Owner_Gridbind();
-                fill_drop1();
+
+
+                String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "Select *  from types ";
+                repeater.fill_list(Repeater2, str2);
+
+                String str3 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater3, str3);
+
+                String str4 = "Select *  from married_status ";
+                repeater.fill_list(Repeater4, str4);
+
+                String str5 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater5, str5);
+
             }
+        }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                Buildling_wing_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                type_id.Value = e.CommandArgument.ToString();
+                string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + Buildling_wing_id.Value + "' and flat_type_id='" + e.CommandArgument.ToString() + "'";
+                repeater.fill_list(Repeater3, sql1);
+            }
+
+        }
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                flat_no_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+        protected void CategoryRepeater_ItemCommand4(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                married_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+        protected void CategoryRepeater_ItemCommand5(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                doc_id_id.Value = e.CommandArgument.ToString();
+
+            }
+
         }
         public void fill_drop1()
         {
-            String sql_query = "Select *  from married_status ";
-            bL_Owner.fill_drop(drp_married, sql_query, "married_name", "married_id");
+            //String sql_query = "Select *  from married_status ";
+            //bL_Owner.fill_drop(drp_married, sql_query, "married_name", "married_id");
 
-            String sql_query1 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
-            bL_Owner.fill_drop(ddl_flat, sql_query1, "flat_type", "flat_id");
+            //String sql_query1 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
+            //bL_Owner.fill_drop(ddl_flat, sql_query1, "flat_type", "flat_id");
 
-            String sql_query2 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
-            bL_Owner.fill_drop(ddl_build_wing, sql_query2, "name", "wing_id");
+            //String sql_query2 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            //bL_Owner.fill_drop(ddl_build_wing, sql_query2, "name", "wing_id");
 
-            String sql_query3 = "Select *  from types ";
-            bL_Owner.fill_drop(ddl_type, sql_query3, "flat_type", "flat_type_id");
+            //String sql_query3 = "Select *  from types ";
+            //bL_Owner.fill_drop(ddl_type, sql_query3, "flat_type", "flat_type_id");
 
-            String sql_query4 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
-            bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
+            //String sql_query4 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
+            //bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
         }
 
         //public void fill_list()
@@ -122,20 +188,20 @@ namespace Society
                 owner.owner_id = Convert.ToInt32(owner_id.Value);
             owner.Sql_Operation = operation;
             owner.Society_Id = society_id.Value;
-            owner.wing_id = Convert.ToInt32(ddl_build_wing.SelectedValue.ToString());
+            owner.wing_id = Convert.ToInt32(Buildling_wing_id.Value.ToString());
             owner.Poss_Date = Convert.ToDateTime(txt_poss_date.Text.ToString());
             owner.Name = txt_name.Text;
             owner.Pre_Mob = txt_pre_mob.Text;
             owner.Dob = Convert.ToDateTime(txt_dob.Text);
-            owner.married_id = Convert.ToInt32(drp_married.SelectedValue.ToString());
+            owner.married_id = Convert.ToInt32(married_id.Value.ToString());
             owner.Occup = txt_occup.Text;
             owner.Monthly_Income = txt_monthly_income.Text;
             owner.Off_Addr1 = txt_off_addr1.Text;
             owner.Off_Tel = txt_off_tel.Text;
             owner.Email = txt_email.Text;
             owner.Alter_Mob = txt_add_mob.Text;
-            owner.flat_id = Convert.ToInt32(ddl_flat.SelectedValue.ToString());
-            owner.Flat_type_Id = Convert.ToInt32(ddl_type.SelectedValue.ToString());
+            owner.flat_id = Convert.ToInt32(flat_no_id.Value.ToString());
+            owner.Flat_type_Id = Convert.ToInt32(flat_no_id.Value.ToString());
             owner.Photo_Name =uploadphotopath.Text;
             owner.Id_Proof = uploadidproof.Text;
             owner.Type = type;
@@ -173,20 +239,20 @@ namespace Society
 
                 (owner_id.Value) = result.owner_id.ToString();
                 society_id.Value = result.Society_Id;
-                ddl_build_wing.SelectedValue = result.wing_id.ToString();
+                Buildling_wing_id.Value = result.wing_id.ToString();
                 txt_poss_date.Text = result.Poss_Date.ToString("yyyy-MM-dd");
                 txt_name.Text = result.Name;
                 txt_pre_mob.Text = result.Pre_Mob;
                 txt_dob.Text = result.Dob.ToString("yyyy-MM-dd");
-                drp_married.SelectedValue = result.married_id.ToString();
+                married_id.Value = result.married_id.ToString();
                 txt_occup.Text = result.Occup;
                 txt_monthly_income.Text = result.Monthly_Income;
                 txt_off_addr1.Text = result.Off_Addr1;
                 txt_off_tel.Text = result.Off_Tel;
                 txt_email.Text = result.Email;
                 txt_add_mob.Text = result.Alter_Mob;
-                ddl_flat.SelectedValue = result.flat_id.ToString();
-                ddl_type.SelectedValue = result.Flat_type_Id.ToString();
+                flat_no_id.Value = result.flat_id.ToString();
+                flat_no_id.Value = result.Flat_type_Id.ToString();
                 listofuploadedfiles.Text = Path.GetFileName(result.Photo_Name);
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
                
@@ -226,7 +292,7 @@ namespace Society
 
             protected void btnotice_id_upload_Click(object sender, EventArgs e)
             {
-                string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/";
+                string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/";
 
                 System.IO.Directory.CreateDirectory(createfolder);
 
@@ -235,12 +301,12 @@ namespace Society
 
                     foreach (HttpPostedFile file_name in FileUpload2.PostedFiles)
                     {
-                        file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/" + file_name.FileName));
+                        file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/" + file_name.FileName));
                         listofuploadedfiles1.Text += file_name.FileName + "<br/>";
 
                     }
 
-                    uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (ddl_doc_type.SelectedItem.Text) + "\\" + FileUpload2.FileName);
+                    uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (doc_id_id.Value.ToString()) + "\\" + FileUpload2.FileName);
                 
             }
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
@@ -339,17 +405,17 @@ namespace Society
       
       
 
-        protected void ddl_type_SelectedIndexChanged(object sender, EventArgs e)
-         {
+        //protected void ddl_type_SelectedIndexChanged(object sender, EventArgs e)
+        // {
            
-                if (ddl_type.Text != "select")
-                {
-                    string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + ddl_build_wing.SelectedValue + "' and flat_type_id='" + ddl_type.SelectedValue +"'";
-                    bL_Owner.fill_drop(ddl_flat, sql1, "flat_type", "flat_id");
+        //        if (flat_no_id.Value.ToString() != "select")
+        //        {
+        //            string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + ddl_build_wing.SelectedValue + "' and flat_type_id='" + ddl_type.SelectedValue +"'";
+        //            bL_Owner.fill_drop(ddl_flat, sql1, "flat_type", "flat_id");
 
-                }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
-        }
+        //        }
+        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
+        //}
 
         protected void FamilyGrid_Sorting(object sender, GridViewSortEventArgs e)
         {

@@ -159,22 +159,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// categoryBox control.
+        /// ddl_park_for control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox categoryBox;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_park_for;
 
         /// <summary>
-        /// categoryRepeater control.
+        /// CompareValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
 
         /// <summary>
         /// btn_save control.

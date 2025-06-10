@@ -13,6 +13,7 @@ namespace Society2024
 {
     public partial class Staff_Master : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         staff Staff = new staff();
         BL_Staff bL_Staff = new BL_Staff();
         DataTable dt = new DataTable();
@@ -27,11 +28,21 @@ namespace Society2024
 
             if (!IsPostBack)
             {
+                String str = "Select *  from staff_role where active_status=0 and society_id='" + society_id.Value + "'";
+                repeater.fill_list(categoryRepeater, str);
                 staff_Gridbind();
             }
 
         }
 
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                role_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
         //public void fill_drop1()
         //{
         //    String sql_query = "Select *  from staff_role where active_status=0 and society_id='" + society_id.Value + "'";

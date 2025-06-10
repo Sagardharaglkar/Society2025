@@ -18,18 +18,19 @@ namespace Society
     {
         Parking_1 parking = new Parking_1();
         BL_Parking_Master bL_Parking = new BL_Parking_Master();
-       
-     
+
+
 
         protected void Page_Load(object sender, EventArgs e)
-        
+
         {
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }else
+            }
+            else
                 society_id.Value = Session["society_id"].ToString();
-           
+
             if (!IsPostBack)
             {
                 runproc("Select");
@@ -40,8 +41,8 @@ namespace Society
                 if (Request.QueryString["id"] != null)
                 {
                     //cust_id.Value = Request.QueryString["id"].ToString();
-                   
-                }                  
+
+                }
 
             }
 
@@ -91,7 +92,7 @@ namespace Society
         protected void btn_search_Click(object sender, EventArgs e)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" Select * from parking  where active_status=0 and society_id='" + society_id.Value+ "'");
+            sb.Append(" Select * from parking  where active_status=0 and society_id='" + society_id.Value + "'");
             if (txt_search.Text != "")
             {
                 sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
@@ -125,14 +126,14 @@ namespace Society
             society_id.Value = result.Society_Id;
             txt_number.Text = result.Parking_No;
             ddl_park_for.SelectedItem.Text = result.Park_For;
-          
+
         }
 
 
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            
+
             if (Label3.Text == "")
             {
                 runproc("Update");
@@ -153,38 +154,38 @@ namespace Society
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-          
-                if (place_id.Value != "")
-                    parking.place_id = Convert.ToInt32(place_id.Value);
-                parking.Sql_Operation = "Delete";
-                bL_Parking.delete(parking);
-                //park_drop();
-           
+
+            if (place_id.Value != "")
+                parking.place_id = Convert.ToInt32(place_id.Value);
+            parking.Sql_Operation = "Delete";
+            bL_Parking.delete(parking);
+            //park_drop();
+
             Response.Redirect("park_place_search.aspx");
         }
 
-    
+
 
         protected void edit_Command(object sender, CommandEventArgs e)
         {
             string id = e.CommandArgument.ToString();
             place_id.Value = id;
             runproc1("Select");
-            
+            btn_delete.Visible = true;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-           
-                GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-                System.Web.UI.WebControls.Label place_id = (System.Web.UI.WebControls.Label)row.FindControl("place_id");
-                parking.Sql_Operation = "Delete";
 
-                parking.place_id = Convert.ToInt32(place_id.Text);
-                bL_Parking.delete(parking);
-           
+            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            System.Web.UI.WebControls.Label place_id = (System.Web.UI.WebControls.Label)row.FindControl("place_id");
+            parking.Sql_Operation = "Delete";
+
+            parking.place_id = Convert.ToInt32(place_id.Text);
+            bL_Parking.delete(parking);
+
             Parking_Gridbind();
 
         }
@@ -210,7 +211,7 @@ namespace Society
                 parking.Parking_No = txt_number.Text;
 
                 var result = bL_Parking.numbertextchanged(parking);
-               
+
                 Label3.Text = result.Sql_Result;
             }
         }
@@ -223,4 +224,3 @@ namespace Society
     }
 }
 
-    

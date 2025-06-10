@@ -241,7 +241,7 @@
                                     <a class="collapse-item" href="event_search.aspx">Event Master</a>
                                     <a class="collapse-item" href="notice_search.aspx">Notice Master</a>
                                     <a class="collapse-item" href="meeting_search.aspx">Meeting Master</a>
-                                    <a class="collapse-item" href="contact_master.aspx">Contact Master</a>
+             
                                     <a class="collapse-item" href="servent_search.aspx">Servent Master</a>
                                     <a class="collapse-item" href="park_place_search.aspx">Parking Master</a>
                                     <a class="collapse-item" href="doc_search.aspx">Document Master</a>

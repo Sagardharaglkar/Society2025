@@ -15,6 +15,7 @@ using Page = System.Web.UI.Page;
 using DBCode.DataClass.Master_Dataclass;
 using BusinessLogic.MasterBL;
 using System.Windows.Forms;
+using BusinessLogic.BL;
 //using System.IdentityModel.Metadata;
 
 
@@ -24,7 +25,7 @@ namespace Society
 {
     public partial class society_member_search : System.Web.UI.Page
     {
-       
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Society_Member member = new Society_Member();
         BL_Society_Member_Master bL_Society = new BL_Society_Member_Master();
 
@@ -37,21 +38,28 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-
+                String str = "Select *  from UserType";
+                repeater.fill_list(categoryRepeater, str);
                 Society_Member_Gridbind();
-                filldrop();
-
 
             }
 
         }
 
-        public void filldrop()
-        {
-            String sql_query1 = "Select *  from UserType";
-            bL_Society.fill_drop(ddl_usertype, sql_query1, "UserTypeName", "UserTypeId");
+        //public void filldrop()
+        //{
+        //    String sql_query1 = "Select *  from UserType";
+        //    bL_Society.fill_drop(ddl_usertype, sql_query1, "UserTypeName", "UserTypeId");
 
-         
+
+        //}
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                Designation_id.Value = e.CommandArgument.ToString();
+
+            }
         }
 
         protected void Society_Member_Gridbind()
@@ -120,7 +128,7 @@ namespace Society
             member.Sql_Operation = operation;
             member.Society_Id = society_id.Value;
             member.Name = txt_name.Text;
-            member.Designation = Convert.ToInt32(ddl_usertype.SelectedValue);
+            member.Designation = Convert.ToInt32(Designation_id.Value);
             member.Address1 = txt_address1.Text;
             member.Address2 = txt_address2.Text;
             member.Contact_No = txt_contact_no.Text;
@@ -145,7 +153,7 @@ namespace Society
             (user_id.Value) = result.UserId.ToString();
             society_id.Value = result.Society_Id;
             txt_name.Text = result.Name.ToString();
-            ddl_usertype.Text = result.Designation.ToString();
+            Designation_id.Value = result.Designation.ToString();
             txt_name.Text = result.Name;
             txt_address1.Text = result.Address1.ToString();
             txt_address2.Text = result.Address2.ToString();
@@ -181,7 +189,7 @@ namespace Society
                     member.UserId = Convert.ToInt32(user_id.Value);
                 member.Sql_Operation = "Delete";
                 member.Name = txt_name.Text;
-                member.Designation = Convert.ToInt32(ddl_usertype.Text);
+                member.Designation = Convert.ToInt32(Designation_id.Value);
                 member.Address1 = txt_address1.Text;
                 member.Address2 = txt_address2.Text;
                 member.Contact_No = txt_contact_no.Text;

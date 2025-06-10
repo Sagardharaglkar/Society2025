@@ -10,7 +10,7 @@
         }
 
 
-        function SuccessEntry() { 
+        function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
                 text: 'Saved Successfully',
@@ -69,46 +69,13 @@
                 </table>
                 <br />
 
-                <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
                 <asp:HiddenField ID="user_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
+                <asp:HiddenField ID="Designation_id" runat="server" />
 
 
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-
-                        <%--<asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                       
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />&nbsp;&nbsp;--%>
-
-                        <%-- <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search"> 
-                   
-    <div class="form-inline">
-        <asp:TextBox ID="txt_search" 
-                     Style="text-transform: capitalize;" 
-                     Font-Bold="true" 
-                     Width="200px" 
-                     Height="32px" 
-                     placeholder="Search here" 
-                     runat="server">
-                     </asp:TextBox>&nbsp;&nbsp;
-        <asp:Button ID="btn_search" 
-                    runat="server" 
-                    CssClass="btn btn-primary" 
-                    OnClick="btn_search_Click" 
-                    Text="Search" 
-                    UseSubmitBehavior="False" />&nbsp;&nbsp;
-    </div>
-                        </asp:Panel>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
-
-                      
-
-                    </div>
-                </div>--%>
-
-
-
 
                         <div class="form-group">
                             <div class="row">
@@ -239,8 +206,8 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                        <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select Designation" autocomplete="off" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
@@ -248,8 +215,8 @@
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("UserTypeName") %>'
+                                                                        CommandArgument='<%# Eval("UserTypeId") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setCategoryBox(this.innerText);" />
                                                                 </ItemTemplate>
@@ -260,7 +227,7 @@
                                                             </asp:Repeater>
                                                         </div>
                                                     </div>
- 
+
 
                                                 </div>
 
@@ -275,9 +242,9 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <asp:TextBox ID="txt_address1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address1" required autofocus></asp:TextBox>
-                                                <div class="invalid-feedback">
-                                                    Please Enter Adress
-                                                </div>
+                                                    <div class="invalid-feedback">
+                                                        Please Enter Adress
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -288,8 +255,8 @@
                                                 <div class="col-sm-4">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_address2" CssClass="not-required" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address2" ></asp:TextBox>
-                                                    
+                                                    <asp:TextBox ID="txt_address2" CssClass="not-required" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address2"></asp:TextBox>
+
                                                 </div>
 
                                             </div>
@@ -381,7 +348,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClientClick="disableSaveButtonIfValid();" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
 
                                         </center>
                                     </div>
@@ -407,99 +374,99 @@
     <br />
     <br />
 
-<script>
+    <script>
 
-    function initDropdownEvents() {
+        function initDropdownEvents() {
 
-        const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
+            const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
 
-        const categorySuggestions = document.getElementById("categoryRepeaterContainer");
+            const categorySuggestions = document.getElementById("categoryRepeaterContainer");
 
-        categoryBox.addEventListener("focus", function () {
+            categoryBox.addEventListener("focus", function () {
 
-            categorySuggestions.style.display = "block";
+                categorySuggestions.style.display = "block";
 
-            itemSuggestions.style.display = "none";
+                itemSuggestions.style.display = "none";
 
-        });
+            });
 
-        categoryBox.addEventListener("input", function () {
+            categoryBox.addEventListener("input", function () {
 
-            const input = categoryBox.value.toLowerCase();
+                const input = categoryBox.value.toLowerCase();
 
-            filterSuggestions("category-link", input);
+                filterSuggestions("category-link", input);
 
-        });
-
-
-    }
+            });
 
 
-    function filterSuggestions(className, value) {
+        }
 
-        const items = document.querySelectorAll("." + className);
 
-        let matchFound = false;
+        function filterSuggestions(className, value) {
 
-        items.forEach(item => {
+            const items = document.querySelectorAll("." + className);
 
-            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+            let matchFound = false;
 
-                item.style.display = "block";
+            items.forEach(item => {
 
-                matchFound = true;
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                    item.style.display = "block";
+
+                    matchFound = true;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+
+                if (!noMatchMessage) {
+
+                    noMatchMessage = document.createElement("div");
+
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+
+                }
+
+                noMatchMessage.style.display = "block";
 
             } else {
 
-                item.style.display = "none";
+                if (noMatchMessage) {
 
-            }
+                    noMatchMessage.style.display = "none";
 
-        });
-
-        let noMatchMessage = document.getElementById("no-match-message");
-
-        if (!matchFound) {
-
-            if (!noMatchMessage) {
-
-                noMatchMessage = document.createElement("div");
-
-                noMatchMessage.id = "no-match-message";
-
-                noMatchMessage.innerText = "No matching suggestions.";
-
-                items[0]?.parentNode?.appendChild(noMatchMessage);
-
-            }
-
-            noMatchMessage.style.display = "block";
-
-        } else {
-
-            if (noMatchMessage) {
-
-                noMatchMessage.style.display = "none";
+                }
 
             }
 
         }
 
-    }
+
+        function setCategoryBox(value) {
+
+            document.getElementById("<%= categoryBox.ClientID %>").value = value;
+
+            document.getElementById("categoryRepeaterContainer").style.display = "none";
+
+        }
 
 
-    function setCategoryBox(value) {
-
-        document.getElementById("<%= categoryBox.ClientID %>").value = value;
-
-        document.getElementById("categoryRepeaterContainer").style.display = "none";
-
-    }
-
-
-    Sys.Application.add_load(initDropdownEvents);
+        Sys.Application.add_load(initDropdownEvents);
 
 
     </script>
- 
+
 </asp:Content>

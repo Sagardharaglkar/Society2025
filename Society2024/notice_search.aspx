@@ -182,8 +182,8 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                        <asp:TextBox ID="categoryBox" runat="server" Style="width:200px;" CssClass="form-control"
+                                                            placeholder="Select Recipients" autocomplete="off" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
@@ -191,8 +191,8 @@
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("recipients") %>'
+                                                                        CommandArgument='<%# Eval("recipients_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setCategoryBox(this.innerText);" />
                                                                 </ItemTemplate>
@@ -435,6 +435,6 @@
     Sys.Application.add_load(initDropdownEvents);
 
 
-    </script>
+</script>
  
 </asp:Content>

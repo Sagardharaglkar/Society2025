@@ -33,7 +33,7 @@ namespace Society2024
             if (!IsPostBack)
             {
                 String str = "select * from types;";
-                bl.fill_list(categoryRepeater, str);
+                bl.fill_list(Repeater1, str);
                 //categoryRepeater.DataSource = categories;
                 //categoryRepeater.DataBind();
             }
@@ -46,7 +46,7 @@ namespace Society2024
             {
                 int id = Convert.ToInt32(e.CommandArgument);
                 string str = "select flat_id, flat_no from flat_master where flat_type_id =" + id + ";";
-                bl.fill_list(Repeater1, str);
+                bl.fill_list(Repeater2, str);
             }
         }
 

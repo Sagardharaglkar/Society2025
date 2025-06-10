@@ -36,19 +36,19 @@
 
         function disableSaveButtonIfValid() {
             var btn = document.getElementById('<%= btn_save.ClientID %>');
-        var modal = document.getElementById('edit_model');
-        var inputs = modal.querySelectorAll('input[required], select[required]');
-        var allValid = true;
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
 
-        inputs.forEach(function (input) {
-            if (!input.checkValidity()) {
-                allValid = false;
-            }
-        });
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
 
-        if (allValid && btn) {
-            btn.disabled = true;
-            btn.value = "Saving...";
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
 
 
                 __doPostBack('<%= btn_save.UniqueID %>', '');
@@ -221,7 +221,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="dropdown-container">
-                                                            <asp:TextBox ID="categoryBox" runat="server" CssClass="input-box form-control"
+                                                            <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select category (Select Item)" autocomplete="off" />
                                                             <div id="categoryRepeaterContainer" class="suggestion-list">
                                                                 <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
@@ -230,8 +230,8 @@
                                                                             ID="lnkCategory"
                                                                             runat="server"
                                                                             CssClass="suggestion-item link-button category-link"
-                                                                            Text='<%# Eval("flat_type") %>'
-                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            Text='<%# Eval("role") %>'
+                                                                            CommandArgument='<%# Eval("role_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setCategoryBox(this.innerText);" />
                                                                     </ItemTemplate>
@@ -448,6 +448,6 @@
     Sys.Application.add_load(initDropdownEvents);
 
 
-    </script>
+</script>
  
 </asp:Content>

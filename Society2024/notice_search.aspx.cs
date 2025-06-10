@@ -7,12 +7,14 @@ using System.Web.UI;
 using System.Windows.Forms;
 using Society2024;
 using System.Threading.Tasks;
+using BusinessLogic.BL;
 //using System.IdentityModel.Metadata;
 
 namespace Society
 {
     public partial class notice_search : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         BL_Notice_Master bL_Notice = new BL_Notice_Master();
         Notice notice = new Notice();
 
@@ -24,6 +26,7 @@ namespace Society
             }
             else
             {
+
                 society_id.Value = Session["society_id"].ToString();
 
             }
@@ -31,12 +34,22 @@ namespace Society
 
             if (!IsPostBack)
             {
-             
+                String str = "Select * from notice_recipients;";
+                repeater.fill_list(categoryRepeater, str);
                 Notice_Gridbind();
 
                 //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
             }
            
+        }
+
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                Recipient_id.Value = e.CommandArgument.ToString();
+
+            }
         }
 
         public void Notice_Gridbind()
