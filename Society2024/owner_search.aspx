@@ -33,7 +33,7 @@
         })
 
         function disableSaveButtonIfValid() {
-            var btn = document.getElementById('<%= btn_save.ClientID %>');
+            var btn = document.getElementById('<%= PagerMode.cleardata(); %>');
             var modal = document.getElementById('edit_model');
             var inputs = modal.querySelectorAll('input[required], select[required]');
             var allValid = true;

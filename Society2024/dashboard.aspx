@@ -607,7 +607,7 @@
                     })
                     .then(token => {
                         console.log("✅ Token:", token);
-
+                        
 
                         sendTokenToServer(token);
                     })
