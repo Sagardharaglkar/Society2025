@@ -58,7 +58,7 @@ namespace Society
             var dt =  BL_Login.get_notification(details);
             notifCount.Text = (dt.Rows.Count > 99)? "99+" : dt.Rows.Count.ToString();
             badgePanel.Visible = dt.Rows.Count != 0;
-            noNotif.Visible = dt.Rows.Count == 0;
+            noNotif.Visible = dt.Rows.Count == 0;   
             Notification_grid.DataSource = dt;
             Notification_grid.DataBind();
 
