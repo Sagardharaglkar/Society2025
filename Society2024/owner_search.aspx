@@ -32,8 +32,10 @@
             $(this).find('form').trigger('reset');
         })
 
+        
         function disableSaveButtonIfValid() {
-            var btn = document.getElementById('<%= PagerMode.cleardata(); %>');
+            validateIFSC();
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
             var modal = document.getElementById('edit_model');
             var inputs = modal.querySelectorAll('input[required], select[required]');
             var allValid = true;
@@ -782,11 +784,14 @@
         function setTextBox1(value) {
             document.getElementById("<%= TextBox1.ClientID %>").value = value;
             document.getElementById("RepeaterContainer1").style.display = "none";
+            document.getElementById("<%= TextBox2.ClientID %>").value = "";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox2(value) {
             document.getElementById("<%= TextBox2.ClientID %>").value = value;
             document.getElementById("RepeaterContainer2").style.display = "none";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox3(value) {

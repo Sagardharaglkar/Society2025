@@ -10,6 +10,7 @@ using System.Data;
 using System.Web.Configuration;
 using DBCode.DataClass;
 using BusinessLogic.MasterBL;
+using DocumentFormat.OpenXml.Bibliography;
 
 //using CrystalDecisions.CrystalReports.Engine;
 //using CrystalDecisions.Windows.Forms;
@@ -39,9 +40,15 @@ namespace Society
             {
                 //runproc("Select");
 
-                filldrop();
+                //filldrop();
                 maintenance_Gridbind();
 
+
+                String str1 = "SELECT  * FROM  dbo.building_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "SELECT * from wing_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater2, str2);
 
 
                 if (Request.QueryString["id"] != null)
@@ -55,6 +62,25 @@ namespace Society
 
         }
 
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                Buildling_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                wing_id.Value = e.CommandArgument.ToString();
+               
+            }
+
+        }
         public void filldrop()
         {
 

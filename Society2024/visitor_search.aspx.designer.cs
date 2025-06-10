@@ -33,6 +33,33 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
+        /// building_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField building_id;
+
+        /// <summary>
+        /// wing_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField wing_id;
+
+        /// <summary>
+        /// visitor_type_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField visitor_type_id;
+
+        /// <summary>
         /// lbl_acc_no control.
         /// </summary>
         /// <remarks>
@@ -373,24 +400,6 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddl_visiting_type;
-
-        /// <summary>
-        /// TextBox3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
-
-        /// <summary>
-        /// Repeater3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater3;
 
         /// <summary>
         /// Label12 control.
