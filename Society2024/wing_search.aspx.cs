@@ -133,6 +133,7 @@ namespace Society
               wing.wing_id = Convert.ToInt32(wing_id.Value);
             wing.Sql_Operation = operation;
             var result = bL_Wing.updateWingDetails(wing);
+            categoryBox.Text = result.B_Name;
             wing_id.Value = result.wing_id.ToString();
             ddl_build_name.Value = result.build_id.ToString();
             txt_w_name.Text = result.W_Name;

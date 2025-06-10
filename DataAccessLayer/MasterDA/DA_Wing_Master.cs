@@ -81,7 +81,7 @@ namespace DataAccessLayer.MasterDA
                 {
                     while (sdr.Read())
                     {
-                        //  build_id.Value = sdr["build_id"].ToString();
+                        wing.B_Name = sdr["name"].ToString();
                         wing.build_id = Convert.ToInt32(sdr["build_id"].ToString());
                         wing.W_Name = sdr["w_name"].ToString();
                     }
