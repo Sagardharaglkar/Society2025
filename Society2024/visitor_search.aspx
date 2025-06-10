@@ -345,7 +345,7 @@
 
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
-                                                                placeholder="Select category (Animal or Bird)" autocomplete="off" />
+                                                                placeholder="Select category (Select Item)" autocomplete="off" />
                                                             <div id="RepeaterContainer3" class="suggestion-list">
                                                                 <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                     <ItemTemplate>
