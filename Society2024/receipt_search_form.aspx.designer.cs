@@ -168,22 +168,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label15;
 
         /// <summary>
-        /// ddl_build control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_build;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
-        /// CompareValidator2 control.
+        /// Repeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
 
         /// <summary>
         /// lbl_date control.
@@ -240,22 +240,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label18;
 
         /// <summary>
-        /// ddl_wing control.
+        /// TextBox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_wing;
+        protected global::System.Web.UI.WebControls.TextBox TextBox2;
 
         /// <summary>
-        /// CompareValidator1 control.
+        /// Repeater2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.WebControls.Repeater Repeater2;
 
         /// <summary>
         /// lbl_cust_name control.
@@ -285,22 +285,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label10;
 
         /// <summary>
-        /// ddl_owner control.
+        /// TextBox3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_owner;
+        protected global::System.Web.UI.WebControls.TextBox TextBox3;
 
         /// <summary>
-        /// CompareValidator4 control.
+        /// Repeater3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator4;
+        protected global::System.Web.UI.WebControls.Repeater Repeater3;
 
         /// <summary>
         /// Label6 control.
@@ -366,22 +366,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label11;
 
         /// <summary>
-        /// drp_pay_status control.
+        /// TextBox4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_pay_status;
+        protected global::System.Web.UI.WebControls.TextBox TextBox4;
 
         /// <summary>
-        /// CompareValidator3 control.
+        /// Repeater4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator3;
+        protected global::System.Web.UI.WebControls.Repeater Repeater4;
 
         /// <summary>
         /// panel3 control.
