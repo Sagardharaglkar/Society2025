@@ -195,22 +195,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label10;
 
         /// <summary>
-        /// TextBox1 control.
+        /// ddl_owner control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_owner;
 
         /// <summary>
-        /// Repeater1 control.
+        /// CompareValidator3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator3;
 
         /// <summary>
         /// Label16 control.
@@ -240,22 +240,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// TextBox2 control.
+        /// ddl_build_wing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_build_wing;
 
         /// <summary>
-        /// Repeater2 control.
+        /// CompareValidator4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater2;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator4;
 
         /// <summary>
         /// lbl_pre_mob control.
