@@ -10,6 +10,8 @@ using System.Data;
 using System.Web.Configuration;
 using DBCode.DataClass;
 using BusinessLogic.MasterBL;
+using DocumentFormat.OpenXml.Bibliography;
+using BusinessLogic.BL;
 
 //using CrystalDecisions.CrystalReports.Engine;
 //using CrystalDecisions.Windows.Forms;
@@ -18,6 +20,7 @@ namespace Society
 {
     public partial class maintenance_search : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         maintenance Maintenance1 = new maintenance();
         BL_Maintenance_Master bL_Maintenance = new BL_Maintenance_Master();
 
@@ -39,9 +42,15 @@ namespace Society
             {
                 //runproc("Select");
 
-                filldrop();
+                //filldrop();
                 maintenance_Gridbind();
 
+
+                String str1 = "SELECT  * FROM  dbo.building_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "SELECT * from wing_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater2, str2);
 
 
                 if (Request.QueryString["id"] != null)
@@ -55,17 +64,37 @@ namespace Society
 
         }
 
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+                string str1 = "Select distinct wing_id,w_name from wing_master where society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "'";
+                repeater.fill_list(Repeater2, str1);
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                wing_id.Value = e.CommandArgument.ToString();
+               
+            }
+
+        }
         public void filldrop()
         {
 
-            string sql = "SELECT  * FROM  dbo.building_master where society_id='" + society_id.Value + "'";
-            bL_Maintenance.fill_drop(drop_build, sql, "name", "build_id");
+            //string sql = "SELECT  * FROM  dbo.building_master where society_id='" + society_id.Value + "'";
+            //bL_Maintenance.fill_drop(drop_build, sql, "name", "build_id");
 
-            string sql2 = "SELECT * from wing_master where society_id='" + society_id.Value + "'";
-            bL_Maintenance.fill_drop(drp_wing, sql2, "w_name", "wing_id");
+            //string sql2 = "SELECT * from wing_master where society_id='" + society_id.Value + "'";
+            //bL_Maintenance.fill_drop(drp_wing, sql2, "w_name", "wing_id");
 
-            string sql3 = "SELECT distinct  build_id, name FROM  dbo.building_master  where society_id='" + society_id.Value + "' order by name";
-            bL_Maintenance.fill_drop(drp_build, sql3, "name", "build_id");
+            //string sql3 = "SELECT distinct  build_id, name FROM  dbo.building_master  where society_id='" + society_id.Value + "' order by name";
+            //bL_Maintenance.fill_drop(drp_build, sql3, "name", "build_id");
 
 
 
@@ -120,20 +149,20 @@ namespace Society
         {
 
             Maintenance1.Sql_Operation = "exfetch";
-            Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
             Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
             bL_Maintenance.Add_Click(Maintenance1);
 
 
             Maintenance1.Sql_Operation = operation;
             Maintenance1.Society_Id = society_id.Value;
-            Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
             Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
             var flat = Label4.Text.Split(':');
 
 
             Maintenance1.Flat = Convert.ToInt32(flat[1]);
-            Maintenance1.wing_id = Convert.ToInt32(drp_wing.SelectedValue);
+            Maintenance1.wing_id = Convert.ToInt32(wing_id.Value);
 
             Maintenance1.M_Total = Convert.ToDecimal(txt_amount.Text);
             //Maintenance1.Total_Amount = decimal.Parse(txt_total_amt.Text);
@@ -155,10 +184,10 @@ namespace Society
             var result = bL_Maintenance.select_maintenance_details(Maintenance1);
 
             n_m_id.Value = result.n_m_id.ToString();
-            drp_build.SelectedValue = result.build_id.ToString();
+            building_id.Value = result.build_id.ToString();
             txt_date.Text = result.M_Date.ToString("yyyy-MM-dd");
             if (result.wing_id.ToString() != "0")
-                drp_wing.SelectedValue = result.wing_id.ToString();
+                wing_id.Value = result.wing_id.ToString();
             txt_amount.Text = result.M_Total.ToString();
 
             m_bill_status.Value = result.Status.ToString();
@@ -205,7 +234,7 @@ namespace Society
             if (txt_amount.Text != "0")
             {
                 Maintenance1.Sql_Operation = "check_already";
-                Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+                Maintenance1.build_id = Convert.ToInt32(building_id.Value);
                 Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
                 var result = bL_Maintenance.check_already(Maintenance1);
                 if (result.Sql_Result == "Exist")
@@ -255,7 +284,7 @@ namespace Society
         protected void btn_bill_Click(object sender, EventArgs e)
         {
             Maintenance1.Sql_Operation = "check_date";
-            Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
             Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
             var result = bL_Maintenance.check_date(Maintenance1);
             n_m_id.Value = result.n_m_id.ToString();
@@ -270,7 +299,7 @@ namespace Society
                 if (txt_amount.Text != "0")
                 {
                     Maintenance1.Sql_Operation = "check_already";
-                    Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+                    Maintenance1.build_id = Convert.ToInt32(building_id.Value);
                     Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
                     var data = bL_Maintenance.check_already(Maintenance1);
                     n_m_id.Value = data.n_m_id.ToString();
@@ -285,7 +314,7 @@ namespace Society
 
                 Maintenance1.Sql_Operation = "generate";
                 Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
-                Maintenance1.wing_id = Convert.ToInt32(drp_wing.SelectedValue);
+                Maintenance1.wing_id = Convert.ToInt32(wing_id.Value);
                 Maintenance1.n_m_id = Convert.ToInt32(n_m_id.Value);
                 var result3 = bL_Maintenance.genrate_bill(Maintenance1);
 
@@ -302,7 +331,7 @@ namespace Society
         {
 
             Maintenance1.Sql_Operation = "owner_select";
-            Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
             var result4 = bL_Maintenance.list_Fill(Maintenance1);
 
 
@@ -493,15 +522,15 @@ namespace Society
         protected void drp_build_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (drp_build.Text != "select")
-            {
-                list_fill();
-                string sql1 = "Select distinct wing_id,w_name from wing_master where society_id='" + society_id.Value + "' and  build_id='" + drp_build.SelectedValue + "'";
-                bL_Maintenance.fill_drop_1(drp_wing, sql1, "w_name", "wing_id");
-                // drp_wing_SelectedIndexChanged(sender, e);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
+            //if (building_id.Value != "")
+            //{
+            //    list_fill();
+            //    string sql1 = "Select distinct wing_id,w_name from wing_master where society_id='" + society_id.Value + "' and  build_id='" + drp_build.SelectedValue + "'";
+            //    bL_Maintenance.fill_drop_1(drp_wing, sql1, "w_name", "wing_id");
+            //    // drp_wing_SelectedIndexChanged(sender, e);
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$('#edit_model').modal('show');", true);
 
-            }
+            //}
 
         }
 
@@ -523,22 +552,22 @@ namespace Society
             float total = 0;
             Maintenance1.Sql_Operation = "exfetch";
             Maintenance1.Society_Id = society_id.Value;
-            Maintenance1.build_id = Convert.ToInt32(drp_build.SelectedValue);
+            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
             Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
             var result = bL_Maintenance.Add_Click(Maintenance1);
             dt1 = result;
-            if (drp_wing.SelectedItem.Text == "ALL")
+            if (TextBox1.Text == "ALL")
             {
                 Maintenance1.Sql_Operation = "check_count";
-                Maintenance1.Name = drp_build.SelectedValue;
-                Maintenance1.W_Name = drp_wing.SelectedItem.Text;
+                Maintenance1.Name = building_id.Value;
+                Maintenance1.W_Name = wing_id.Value.ToString();
             }
             else
 
             {
                 Maintenance1.Sql_Operation = "check_wing";
-                Maintenance1.W_Name = drp_wing.SelectedItem.Text;
-                Maintenance1.Name = drp_build.SelectedValue;
+                Maintenance1.W_Name = wing_id.Value.ToString();
+                Maintenance1.Name = building_id.Value;
 
             }
             var flat = bL_Maintenance.getflat(Maintenance1);

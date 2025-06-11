@@ -32,8 +32,10 @@
             $(this).find('form').trigger('reset');
         })
 
+        
         function disableSaveButtonIfValid() {
-            var btn = document.getElementById('<%= PagerMode.cleardata(); %>');
+           
+            var btn = document.getElementById('<%= btn_save.ClientID %>');
             var modal = document.getElementById('edit_model');
             var inputs = modal.querySelectorAll('input[required], select[required]');
             var allValid = true;
@@ -50,7 +52,7 @@
                 btn.value = "Saving...";
 
 
-                __doPostBack('<%= btn_save.UniqueID %>', '');
+                      __doPostBack('<%= btn_save.UniqueID %>', '');
 
                 return false;
             }
@@ -110,11 +112,11 @@
                                             <%-- <asp:ListItem Value="usage">Flat Type</asp:ListItem>--%>
                                         </asp:DropDownList>&nbsp;&nbsp;
                        
-                               <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
+                               
                                    <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                        
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                               </asp:Panel>
+                            
                                         &nbsp;&nbsp;
                         
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">New Entry</button>
@@ -782,11 +784,14 @@
         function setTextBox1(value) {
             document.getElementById("<%= TextBox1.ClientID %>").value = value;
             document.getElementById("RepeaterContainer1").style.display = "none";
+            document.getElementById("<%= TextBox2.ClientID %>").value = "";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox2(value) {
             document.getElementById("<%= TextBox2.ClientID %>").value = value;
             document.getElementById("RepeaterContainer2").style.display = "none";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox3(value) {

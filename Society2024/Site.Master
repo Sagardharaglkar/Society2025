@@ -456,7 +456,7 @@
 
                             <!-- Nav Item - Alerts -->
                       
-                            <asp:Timer ID="SharedTimer" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
+                            <asp:Timer ID="SharedTimer" runat="server" Interval="1000"  />
 
 
                                     <li class="nav-item dropdown no-arrow mx-1">

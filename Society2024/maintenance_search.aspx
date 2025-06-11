@@ -73,6 +73,9 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="m_bill_status" runat="Server"></asp:HiddenField>
 
+                        <asp:HiddenField ID="building_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
+
                         <div class="form-group">
                             <div class="col-12">
                                 <div class="d-flex align-items-center">
@@ -192,15 +195,15 @@
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select category (Select Item)" autocomplete="off" />
-                                                            <div id="RepeaterContainer1" class="suggestion-list">
-                                                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <div id="RepeaterContainer1" class="suggestion-list" style="width:306px">
+                                                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton
                                                                             ID="lnkCategory"
                                                                             runat="server"
                                                                             CssClass="suggestion-item link-button category-link"
-                                                                            Text='<%# Eval("flat_type") %>'
-                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            Text='<%# Eval("name") %>'
+                                                                            CommandArgument='<%# Eval("build_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setTextBox1(this.innerText);" />
                                                                     </ItemTemplate>
@@ -236,15 +239,15 @@
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox6" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select category (Select Item)" autocomplete="off" />
-                                                            <div id="RepeaterContainer2" class="suggestion-list">
-                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <div id="RepeaterContainer2" class="suggestion-list" style="width:306px">
+                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton
                                                                             ID="lnkCategory"
                                                                             runat="server"
                                                                             CssClass="suggestion-item link-button category-link"
-                                                                            Text='<%# Eval("flat_type") %>'
-                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            Text='<%# Eval("w_name") %>'
+                                                                            CommandArgument='<%# Eval("wing_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setTextBox2(this.innerText);" />
                                                                     </ItemTemplate>
@@ -328,7 +331,7 @@
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" Visible="False" />
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
                                             <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
 
                                         </div>
                                     </div>
@@ -412,121 +415,121 @@
     </div>
 
 
-<script>
+    <script>
 
-    function initDropdownEvents() {
+        function initDropdownEvents() {
 
-        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+            const textBox1 = document.getElementById("<%= TextBox5.ClientID %>");
 
-    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
- 
-    textBox1.addEventListener("focus", function () {
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-        repeaterContainer1.style.display = "block";
+        textBox1.addEventListener("focus", function () {
 
-    });
- 
-    textBox1.addEventListener("input", function () {
+            repeaterContainer1.style.display = "block";
+            repeaterContainer2.style.display = "none";
 
-        const input = textBox1.value.toLowerCase();
+        });
 
-        filterSuggestions("category-link", input);
+        textBox1.addEventListener("input", function () {
 
-    });
-        const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+            const input = textBox1.value.toLowerCase();
 
-    const repeaterContainer2 = document.getElementById("RepeaterContainer2");
- 
-    textBox2.addEventListener("focus", function () {
+            filterSuggestions("category-link", input);
 
-        repeaterContainer2.style.display = "block";
+        });
+        const textBox2 = document.getElementById("<%= TextBox6.ClientID %>");
 
-    });
- 
-    textBox2.addEventListener("input", function () {
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-        const input = textBox2.value.toLowerCase();
+            textBox2.addEventListener("focus", function () {
 
-        filterSuggestions("category-link", input);
+                repeaterContainer2.style.display = "block";
 
-    });
+            });
 
-}
- 
- 
- 
- 
-function filterSuggestions(className, value) {
+            textBox2.addEventListener("input", function () {
 
-    const items = document.querySelectorAll("." + className);
+                const input = textBox2.value.toLowerCase();
 
-    let matchFound = false;
- 
-    items.forEach(item => {
+                filterSuggestions("category-link", input);
 
-        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-
-            item.style.display = "block";
-
-            matchFound = true;
-
-        } else {
-
-            item.style.display = "none";
+            });
 
         }
 
-    });
- 
-    let noMatchMessage = document.getElementById("no-match-message");
- 
-    if (!matchFound) {
 
-        if (!noMatchMessage) {
 
-            noMatchMessage = document.createElement("div");
 
-            noMatchMessage.id = "no-match-message";
- 
-            noMatchMessage.innerText = "No matching suggestions.";
+        function filterSuggestions(className, value) {
 
-            items[0]?.parentNode?.appendChild(noMatchMessage);
+            const items = document.querySelectorAll("." + className);
+
+            let matchFound = false;
+
+            items.forEach(item => {
+
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                    item.style.display = "block";
+
+                    matchFound = true;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+
+                if (!noMatchMessage) {
+
+                    noMatchMessage = document.createElement("div");
+
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+
+                }
+
+                noMatchMessage.style.display = "block";
+
+            } else {
+
+                if (noMatchMessage) {
+
+                    noMatchMessage.style.display = "none";
+
+                }
+
+            }
 
         }
 
-        noMatchMessage.style.display = "block";
+        function setTextBox1(value) {
 
-    } else {
+            document.getElementById("<%= TextBox5.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+            document.getElementById("<%= TextBox6.ClientID %>").value = "";
 
-        if (noMatchMessage) {
+        }
+        function setTextBox2(value) {
 
-            noMatchMessage.style.display = "none";
+            document.getElementById("<%= TextBox6.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer2").style.display = "none";
 
         }
 
-    }
 
-}
- 
-function setTextBox1(value) {
-
-    document.getElementById("<%= TextBox1.ClientID %>").value = value;
-
-        document.getElementById("RepeaterContainer1").style.display = "none";
-
-    }
-function setTextBox2(value) {
-
-    document.getElementById("<%= TextBox2.ClientID %>").value = value;
-
-        document.getElementById("RepeaterContainer2").style.display = "none";
-
-    }
+        Sys.Application.add_load(initDropdownEvents);
 
 
-    Sys.Application.add_load(initDropdownEvents);
+    </script>
 
-
-</script>
- 
 </asp:Content>

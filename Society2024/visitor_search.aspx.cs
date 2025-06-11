@@ -18,11 +18,14 @@ using System.Security.Cryptography;
 using System.Web;
 using System.IO;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Bibliography;
+using BusinessLogic.BL;
 
 namespace Society
 {
     partial class visitor_search : Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Visitor visitor = new Visitor();
         BL_Visitor_Master BL_Visitor = new BL_Visitor_Master();
         string path = null;
@@ -32,12 +35,13 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }else
+            }
+            else
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
 
-                filldrop();
+                //filldrop();
                 Visitor_Gridbind();
                 btn_in.Visible = true;
                 txt_in_date.Text = DateTime.Now.Date.ToString("yyyy-MM-dd");
@@ -45,18 +49,54 @@ namespace Society
                 txt_out_date.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_out_date.Enabled = false;
                 txt_out_time.Enabled = false;
+
+
+                String str1 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
+                repeater.fill_list(Repeater2, str2);
+
             }
 
+
+        }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+                String str = "Select unit, flat_id from owner_search_vw where  society_id='" + society_id.Value + "'and  build_id=" + building_id.Value;
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                wing_id.Value = e.CommandArgument.ToString();
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                visitor_type_id.Value = e.CommandArgument.ToString();
+            }
 
         }
         public void filldrop()
         {
 
-            String sql_query2 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
-            BL_Visitor.fill_drop(ddl_build, sql_query2, "name", "build_id");
+            //String sql_query2 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
+            //BL_Visitor.fill_drop(ddl_build, sql_query2, "name", "build_id");
 
-            String sql_query4 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
-            BL_Visitor.fill_drop(ddl_flat, sql_query4, "unit", "flat_id");
+            //String sql_query4 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
+            //BL_Visitor.fill_drop(ddl_flat, sql_query4, "unit", "flat_id");
         }
 
 
@@ -109,7 +149,7 @@ namespace Society
             {
                 sb.Append(" And in_date BETWEEN cast('" + txt_from.Text + "' as smalldatetime) AND cast('" + txt_to.Text + "' as smalldatetime)");
             }
-            
+
             visitor.Sql_Operation = sb.ToString();
             var result = BL_Visitor.search_visitor(visitor);
             GridView1.DataSource = result;
@@ -124,7 +164,7 @@ namespace Society
 
                 foreach (HttpPostedFile file_name in FileUpload1.PostedFiles)
                 {
-                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") +  file_name.FileName));
+                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + file_name.FileName));
 
 
                 }
@@ -150,8 +190,8 @@ namespace Society
             if (txt_out_time.Text != "")
                 visitor.Out_Time = Convert.ToDateTime(txt_out_time.Text);
             visitor.Contact_No = txt_contact.Text;
-            visitor.build_id = Convert.ToInt32(ddl_build.SelectedValue);
-            visitor.flat_id = Convert.ToInt32(ddl_flat.SelectedValue);
+            visitor.build_id = Convert.ToInt32(building_id.Value);
+            visitor.flat_id = Convert.ToInt32(wing_id.Value);
             visitor.Vehical_No = txt_vehical_no.Text;
             visitor.Visiting_Purpose = txt_visiting_purpose.Text;
             visitor.Image = path;
@@ -176,8 +216,8 @@ namespace Society
             txt_in_time.Text = result.In_Time.ToString("hh:mm tt");
             if (result.Out_Time != DateTime.MinValue)
                 txt_out_time.Text = result.Out_Time.ToString("hh:mm:ss");
-            ddl_build.SelectedValue = result.build_id.ToString();
-            ddl_flat.SelectedValue = result.flat_id.ToString();
+            building_id.Value = result.build_id.ToString();
+            wing_id.Value = result.flat_id.ToString();
             txt_contact.Text = result.Contact_No;
             txt_vehical_no.Text = result.Vehical_No;
             txt_visiting_purpose.Text = result.Visiting_Purpose;
@@ -250,11 +290,11 @@ namespace Society
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_build.SelectedValue != "select")
-            {
-                string sql1 = "Select unit, flat_id from owner_search_vw where  society_id='" + society_id.Value + "'and  build_id=" + ddl_build.SelectedValue;
-                BL_Visitor.fill_drop(ddl_flat, sql1, "unit", "flat_id");
-            }
+            //if (ddl_build.SelectedValue != "select")
+            //{
+            //    string sql1 = "Select unit, flat_id from owner_search_vw where  society_id='" + society_id.Value + "'and  build_id=" + ddl_build.SelectedValue;
+            //    BL_Visitor.fill_drop(ddl_flat, sql1, "unit", "flat_id");
+            //}
         }
 
         protected void ddl_visiting_type_SelectedIndexChanged(object sender, EventArgs e)
