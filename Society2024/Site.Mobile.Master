@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="Society.Site_Mobile" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="Society.Site_Mobile" %>
 <%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
 
 
@@ -21,6 +21,29 @@
     </asp:PlaceHolder>
 
     <style>
+               .not-required {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+    .not-required:focus {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #bac8f3;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(78,115,223,.25)
+}
         .logout-button {
             display: inline-block;
             width: 200px;
@@ -65,8 +88,32 @@
             .auto-scroll::-webkit-scrollbar {
                 display: none;
             }
-    </style>
 
+        .bg-gray-white {
+            /*                background: linear-gradient(to top, #b5b5b5, #ffffff);*/
+            background: linear-gradient(to bottom, white 0%, white 60%, #cecece 100%);
+        }
+
+                .zoom {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .zoom:hover {
+                transform: scale(1.01); 
+                box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            }
+
+        .notify-div {
+            width: 245px;
+            height: 25px;
+            word-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    </style>
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -76,10 +123,13 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <link href="css/layout.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
-    <form runat="server" autocomplete="off" class="needs-validation" novalidate>
+
+    <form runat="server" autocomplete="off" id="myForm" class="needs-validation" novalidate>
+
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -102,26 +152,32 @@
         <!-- Theame-->
         <div id="wrapper">
             <!-- Sidebar -->
-            <asp:Panel ID="Panel1" Visible="false" runat="server">
-            <div class="auto-scroll">
-                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 
-                    <!-- Sidebar - Brand -->
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                        <div class="sidebar-brand-icon rotate-n-15">
-                            <i class="fas fa-laugh-wink"></i>
-                        </div>
-                        <div class="sidebar-brand-text mx-3">
-                            <%----------Here welcome text ----------%>
-                        </div>
-                    </a>
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider my-0">
 
-                    <!-- Nav Item - Dashboard -->
-                    <%--<li class="nav-item active">
+            <%--                    <asp:UpdatePanel runat="server">
+<ContentTemplate>--%>
+            <asp:Panel ID="Panel1" runat="server">
+                <div class="auto-scroll">
+                    <ul class=" navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+
+                        <!-- Sidebar - Brand -->
+                        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                            <div class="sidebar-brand-icon rotate-n-15">
+                                <i class="fas fa-laugh-wink"></i>
+                            </div>
+                            <div class="sidebar-brand-text mx-3">
+                                <%----------Here welcome text ----------%>
+                            </div>
+                        </a>
+
+                        <!-- Divider -->
+                        <hr class="sidebar-divider my-0">
+
+                        <!-- Nav Item - Dashboard -->
+                        <%--<li class="nav-item active">
                 <a class="nav-link" href="admin_dashboard.aspx">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Admin Dashboard</span></a>
@@ -130,193 +186,190 @@
             </li>--%>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSociety"
-                            aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Admin Dashboard</span>
-                        </a>
+                        <li class="nav-item zoom">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSociety"
+                                aria-expanded="true" aria-controls="collapseTwo">
+                                <i class="fas fa-fw fa-tachometer-alt"></i>
+                                <span>Admin Dashboard</span>
+                            </a>
 
-                        <div id="collapseSociety" class="collapse" aria-labelledby="headingSociety" data-parent="#accordionSidebar" style="width: 210px;">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <a class="collapse-item" href="Admin_dashboard.aspx">Admin Dashboard</a>
-                                <a class="collapse-item" href="society_charges.aspx">Society Charges</a>
-                                <a class="collapse-item" href="society_charges_monthwise.aspx">Society Charges Monthwise</a>
+                            <div id="collapseSociety" class="collapse" aria-labelledby="headingSociety" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <a class="collapse-item" href="Admin_dashboard.aspx">Admin Dashboard</a>
+                                    <a class="collapse-item" href="society_charges.aspx">Society Charges</a>
+                                    <a class="collapse-item" href="society_charges_monthwise.aspx">Society Charges Monthwise</a>
+                                </div>
                             </div>
+                        </li>
+
+                        <li class="nav-item zoom active">
+                            <a class="nav-link" href="dashboard.aspx">
+                                <i class="fas fa-fw fa-tachometer-alt"></i>
+                                <span>Dashboard</span></a>
+                        </li>
+
+
+
+                        <!-- Divider -->
+                        <hr class="sidebar-divider">
+
+                        <!-- Heading -->
+                        <div class="sidebar-heading">
+                            Interface
                         </div>
-                    </li>
 
+                        <!-- Nav Item - Pages Collapse Menu -->
+                        <li class="nav-item zoom">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="true" aria-controls="collapseTwo">
+                                <i class="fas fa-fw fa-cog"></i>
+                                <span>Masters</span>
+                            </a>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Masters:</h6>
+                                    <a class="collapse-item" href="society_search.aspx">Society Master</a>
+                                    <a class="collapse-item" href="society_member_search.aspx">Society Member Master</a>
+                                    <a class="collapse-item" href="building_search.aspx">Buildings</a>
+                                    <a class="collapse-item" href="wing_search.aspx">Wing Master</a>
+                                    <a class="collapse-item" href="flat_search.aspx">Flat master</a>
+                                    <a class="collapse-item" href="owner_search.aspx">Owner Master</a>
+                                    <a class="collapse-item" href="rental_search.aspx">Rental Master</a>
+                                    <a class="collapse-item" href="visitor_search.aspx">Visitor Master</a>
+                                    <a class="collapse-item" href="Facility_master.aspx">facilities</a>
+                                    <a class="collapse-item" href="Staff_Master.aspx">Staff Master</a>
+                                    <a class="collapse-item" href="staff_role.aspx">Staff Role</a>
+                                    <a class="collapse-item" href="maintenance_search.aspx">Maintenance master</a>
+                                    <a class="collapse-item" href="event_search.aspx">Event Master</a>
+                                    <a class="collapse-item" href="notice_search.aspx">Notice Master</a>
+                                    <a class="collapse-item" href="meeting_search.aspx">Meeting Master</a>
+             
+                                    <a class="collapse-item" href="servent_search.aspx">Servent Master</a>
+                                    <a class="collapse-item" href="park_place_search.aspx">Parking Master</a>
+                                    <a class="collapse-item" href="doc_search.aspx">Document Master</a>
+                                    <a class="collapse-item" href="Terms_and_Condition.aspx">Terms and Condition</a>
+                                    <a class="collapse-item" href="About.aspx">About</a>
 
-
-
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="dashboard.aspx">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Dashboard</span></a>
-                    </li>
-
-
-
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Interface
-                    </div>
-
-                    <!-- Nav Item - Pages Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Masters</span>
-                        </a>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="width: 210px;">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Masters:</h6>
-                                <a class="collapse-item" href="society_search.aspx">Society Master</a>
-                                <a class="collapse-item" href="society_member_search.aspx">Society Member Master</a>
-                                <a class="collapse-item" href="building_search.aspx">Buildings</a>
-                                <a class="collapse-item" href="wing_search.aspx">Wing Master</a>
-                                <a class="collapse-item" href="flat_search.aspx">Flat master</a>
-                                <a class="collapse-item" href="owner_search.aspx">Owner Master</a>
-                                <a class="collapse-item" href="rental_search.aspx">Rental Master</a>
-                                <a class="collapse-item" href="visitor_search.aspx">Visitor Master</a>
-                                <a class="collapse-item" href="Facility_master.aspx">facilities</a>
-                                <a class="collapse-item" href="Staff_Master.aspx">Staff Master</a>
-                                <a class="collapse-item" href="staff_role.aspx">Staff Role</a>
-                                <a class="collapse-item" href="maintenance_search.aspx">Maintenance master</a>
-                                <a class="collapse-item" href="event_search.aspx">Event Master</a>
-                                <a class="collapse-item" href="notice_search.aspx">Notice Master</a>
-                                <a class="collapse-item" href="meeting_search.aspx">Meeting Master</a>
-                                <a class="collapse-item" href="usefull_contact.aspx">Contact Master</a>
-                                <a class="collapse-item" href="servent_search.aspx">Servent Master</a>
-                                <a class="collapse-item" href="park_place_search.aspx">Parking Master</a>
-                                <a class="collapse-item" href="doc_search.aspx">Document Master</a>
-                                <a class="collapse-item" href="Terms_and_Condition.aspx">Terms and Condition</a>
-
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
 
-                    <!-- Nav Item - Utilities Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                            aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>Service Mangement</span>
-                        </a>
-                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                            data-parent="#accordionSidebar" style="width: 210px;">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Services:</h6>
-                                <a class="collapse-item" href="parking_allotment_search.aspx">Parking Allotment</a>
-                                <a class="collapse-item" href="facility_booking.aspx">Facility Booking</a>
+                        <!-- Nav Item - Utilities Collapse Menu -->
+                        <li class="nav-item zoom">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                                aria-expanded="true" aria-controls="collapseUtilities">
+                                <i class="fas fa-fw fa-wrench"></i>
+                                <span>Service Mangement</span>
+                            </a>
+                            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                                data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Services:</h6>
+                                    <a class="collapse-item" href="parking_allotment_search.aspx">Parking Allotment</a>
+                                    <a class="collapse-item" href="facility_booking.aspx">Facility Booking</a>
 
-                                <a class="collapse-item" href="contact_master.aspx">Usefull Contact</a>
-                                <a class="collapse-item" href="meeting_details.aspx">Meeting Details</a>
-                                <a class="collapse-item" href="car_polling.aspx">Car Polling</a>
-                                <a class="collapse-item" href="loan.aspx">Loan & Lien</a>
+                                    <a class="collapse-item" href="contact_master.aspx">Helper Contact</a>
+                                    <a class="collapse-item" href="meeting_details.aspx">Meeting Details</a>
+                                    <a class="collapse-item" href="car_polling.aspx">Car Polling</a>
+                                    <a class="collapse-item" href="loan.aspx">Loan & Lien</a>
+                                </div>
                             </div>
+                        </li>
+
+                        <!-- Divider -->
+                        <hr class="sidebar-divider">
+
+                        <!-- Heading -->
+                        <div class="sidebar-heading">
+                            Addons
                         </div>
-                    </li>
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Addons
-                    </div>
-
-                    <!-- Nav Item - Pages Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                            aria-expanded="true" aria-controls="collapsePages">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Society Management</span>
-                        </a>
-                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Society Management:</h6>
-                                <a class="collapse-item" href="caretaker.aspx">Careteker</a>
-                                <a class="collapse-item" href="upload_doc_search.aspx">Documents Upload </a>
-                                <%-- <a class="collapse-item" href="#">Rules & Regulations</a>--%>
-                                <a class="collapse-item" href="inventory_search.aspx">Inventory</a>
-                                <a class="collapse-item" href="vendor_search.aspx">Vendor</a>
-                                <a class="collapse-item" href="ledger_form.aspx">Ledger</a>
-                                <a class="collapse-item" href="shop_maintenance.aspx">Shop Maintenance</a>
-                                <a class="collapse-item" href="pdc_reminder_search.aspx">PDC Reminder</a>
-                                <a class="collapse-item" href="pdc_clearing.aspx">PDC Clearing</a>
-                                <a class="collapse-item" href="receipt_search_form.aspx">Receipt</a>
-                                <a class="collapse-item" href="society_expense.aspx">Society Expense</a>
-                                <div class="collapse-divider"></div>
-                                <h6 class="collapse-header">Other Pages:</h6>
-                                <%--<a class="collapse-item" href="404.html">404 Page</a>
+                        <!-- Nav Item - Pages Collapse Menu -->
+                        <li class="nav-item zoom">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                                aria-expanded="true" aria-controls="collapsePages">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>Society Management</span>
+                            </a>
+                            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Society Management:</h6>
+                                    <a class="collapse-item" href="caretaker.aspx">Careteker</a>
+                                    <a class="collapse-item" href="upload_doc_search.aspx">Documents Upload </a>
+                                    <%-- <a class="collapse-item" href="#">Rules & Regulations</a>--%>
+                                    <a class="collapse-item" href="inventory_search.aspx">Inventory</a>
+                                    <a class="collapse-item" href="vendor_search.aspx">Vendor</a>
+                                    <a class="collapse-item" href="ledger_form.aspx">Ledger</a>
+                                    <a class="collapse-item" href="shop_maintenance.aspx">Shop Maintenance</a>
+                                    <a class="collapse-item" href="pdc_reminder_search.aspx">PDC Reminder</a>
+                                    <a class="collapse-item" href="pdc_clearing.aspx">PDC Clearing</a>
+                                    <a class="collapse-item" href="receipt_search_form.aspx">Receipt</a>
+                                    <a class="collapse-item" href="society_expense.aspx">Society Expense</a>
+                                    <div class="collapse-divider"></div>
+                                    <h6 class="collapse-header">Other Pages:</h6>
+                                    <%--<a class="collapse-item" href="404.html">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>--%>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
 
-                    <!-- Nav Item - Charts -->
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesuggestion"
-                            aria-expanded="true" aria-controls="collapsesuggestion">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Requests/Suggestion</span></a>
-                        <div id="collapsesuggestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Request/Suggestions:</h6>
-                                <a class="collapse-item" href="suggestion_request.aspx">Suggestion</a>
+                        <!-- Nav Item - Charts -->
+                        <li class="nav-item zoom">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesuggestion"
+                                aria-expanded="true" aria-controls="collapsesuggestion">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>Requests/Suggestion</span></a>
+                            <div id="collapsesuggestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Request/Suggestions:</h6>
+                                    <a class="collapse-item" href="suggestion_request.aspx">Suggestion</a>
 
 
+                                </div>
                             </div>
-                        </div>
 
-                    </li>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsereport"
-                            aria-expanded="true" aria-controls="collapsereport">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Report</span></a>
-                        <div id="collapsereport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Reports:</h6>
-                                <a class="collapse-item" href="printvisitor.aspx">Visitor</a>
-                                <a class="collapse-item" href="printcontact.aspx">Usefull Contact</a>
-                                <a class="collapse-item" href="printshop.aspx">Shop Maintanance</a>
-                                <a class="collapse-item" href="printrental.aspx">Rental</a>
-                                <a class="collapse-item" href="printowner.aspx">Owner</a>
-                                <a class="collapse-item" href="printledger_details.aspx">Ledger</a>
-                                <a class="collapse-item" href="maintenance_search.aspx">Maintanance</a>
-                                <a class="collapse-item" href="receipt_search_form.aspx">Maintanance Receipt</a>
-                                <a class="collapse-item" href="print_expense.aspx">Vendor Bill</a>
+                        <li class="nav-item zoom">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsereport"
+                                aria-expanded="true" aria-controls="collapsereport">
+                                <i class="fas fa-fw fa-folder"></i>
+                                <span>Report</span></a>
+                            <div id="collapsereport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">Reports:</h6>
+                                    <a class="collapse-item" href="printvisitor.aspx">Visitor</a>
+                                    <a class="collapse-item" href="printcontact.aspx">Usefull Contact</a>
+                                    <a class="collapse-item" href="printshop.aspx">Shop Maintanance</a>
+                                    <a class="collapse-item" href="printrental.aspx">Rental</a>
+                                    <a class="collapse-item" href="printowner.aspx">Owner</a>
+                                    <a class="collapse-item" href="printledger_details.aspx">Ledger</a>
+                                    <a class="collapse-item" href="maintenance_search.aspx">Maintanance</a>
+                                    <a class="collapse-item" href="receipt_search_form.aspx">Maintanance Receipt</a>
+                                    <a class="collapse-item" href="print_expense.aspx">Vendor Bill</a>
 
-                                <a class="collapse-item" href="cashbook.aspx">Cashbook</a>
-                                <a class="collapse-item" href="ownerwise_maintenance.aspx">Ownerwise Maintenance</a>
-
+                                    <a class="collapse-item" href="cashbook.aspx">Cashbook</a>
+                                    <a class="collapse-item" href="ownerwise_maintenance.aspx">Ownerwise Maintenance</a>
 
 
 
 
 
+
+                                </div>
                             </div>
-                        </div>
 
-                    </li>
-
+                        </li>
 
 
 
-                    <li class="nav-item">
+
+                        <%--      <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesettings"
                             aria-expanded="true" aria-controls="collapsesettings">
                             <i class="fas fa-fw fa-folder"></i>
                             <span>Settings</span></a>
-                        <div id="collapsesettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="width: 210px;">
+                        <div id="collapsesettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Accounts Settings:</h6>
                                 <a class="collapse-item" href="account_setting.aspx">Accounts Settings</a>
@@ -326,36 +379,38 @@
                             </div>
                         </div>
 
-                    </li>
-                    <hr class="sidebar-divider">
-                    <li>
-                        <div class="text-center d-none d-md-inline">
-                            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <asp:LinkButton ID="logout" runat="server" CssClass="logout-button"
-                            OnClientClick="return confirm('Are you sure you want to log out?');"
-                            OnClick="logout_Click">
+                    </li>--%>
+                        <hr class="sidebar-divider">
+                        <li>
+                            <div class="text-center d-none d-md-inline">
+                                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                            </div>
+                        </li>
+                        <li class="nav-item zoom">
+                            <asp:LinkButton Visible="false" ID="logout" runat="server" CssClass="logout-button"
+                                OnClientClick="return confirm('Are you sure you want to log out?');"
+                                OnClick="logout_Click">
          &nbsp;&nbsp;<i class="fas fa-fw fa-table"></i>Log-Out
-    </asp:LinkButton>
-                    </li>
+                            </asp:LinkButton>
+                        </li>
 
 
-                </ul>
-        </div>
+                    </ul>
+                </div>
             </asp:Panel>
 
-        <!-- End of Sidebar -->
-        <!--    =========================================-->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="main-Content d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content" style="background:#EBF0F9;">
 
-                <!-- Topbar -->
-<%--                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <!-- End of Sidebar -->
+            <!--    =========================================-->
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="main-Content d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content" style="background: #EBF0F9;">
+
+                    <!-- Topbar -->
+                    <%--                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
 
                     <marquee direction="left">
@@ -366,304 +421,199 @@
 
 
                 </nav>--%>
-                           
 
-                          <nav
-            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
-          >
-            <!-- Sidebar Toggle (Topbar) -->
-            <button
-              id="sidebarToggleTop"
-              class="btn btn-link d-md-none rounded-circle mr-3"
-            >
-              <i class="fa fa-bars"></i>
-            </button>
 
-            <!-- Topbar Search -->
-                              <marquee direction="left">
-                                  <strong>
-                                      <asp:Label ID="name_society" runat="server" Font-Size="XX-Large" ForeColor="#0066FF" Font-Bold="True" /></strong></marquee>
-
-            <!-- Topbar Navbar -->
-            <ul class="navbar-nav ml-auto">
-              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-              <li class="nav-item dropdown no-arrow d-sm-none">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="searchDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-search fa-fw"></i>
-                </a>
-                <!-- Dropdown - Messages -->
-                <div
-                  class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                  aria-labelledby="searchDropdown"
-                >
-                  <form class="form-inline mr-auto w-100 navbar-search">
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        class="form-control bg-light border-0 small"
-                        placeholder="Search for..."
-                        aria-label="Search"
-                        aria-describedby="basic-addon2"
-                      />
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                          <i class="fas fa-search fa-sm"></i>
+                    <nav
+                        class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="position:sticky; top:0px; z-index:10; margin-top:3px;">
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button
+                            id="sidebarToggleTop"
+                            class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
                         </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </li>
 
-              <!-- Nav Item - Alerts -->
-              <li class="nav-item dropdown no-arrow mx-1">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="alertsDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-bell fa-fw"></i>
-                  <!-- Counter - Alerts -->
-                  <span class="badge badge-danger badge-counter">3+</span>
-                </a>
-                <!-- Dropdown - Alerts -->
-                <div
-                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                  aria-labelledby="alertsDropdown"
-                >
-                  <h6 class="dropdown-header">Alerts Center</h6>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-primary">
-                        <i class="fas fa-file-alt text-white"></i>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="small text-gray-500">December 12, 2019</div>
-                      <span class="font-weight-bold"
-                        >A new monthly report is ready to download!</span
-                      >
-                    </div>
-                  </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-success">
-                        <i class="fas fa-donate text-white"></i>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="small text-gray-500">December 7, 2019</div>
-                      $290.29 has been deposited into your account!
-                    </div>
-                  </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-warning">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="small text-gray-500">December 2, 2019</div>
-                      Spending Alert: We've noticed unusually high spending for
-                      your account.
-                    </div>
-                  </a>
-                  <a
-                    class="dropdown-item text-center small text-gray-500"
-                    href="#"
-                    >Show All Alerts</a
-                  >
-                </div>
-              </li>
+                        <!-- Topbar Search -->
+                        <marquee direction="left">
+                            <strong>
+                                <asp:Label ID="name_society" runat="server" Font-Size="XX-Large" ForeColor="#0066FF" Font-Bold="True" /></strong></marquee>
 
-              <!-- Nav Item - Messages -->
-              <li class="nav-item dropdown no-arrow mx-1">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="messagesDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-envelope fa-fw"></i>
-                  <!-- Counter - Messages -->
-                  <span class="badge badge-danger badge-counter">7</span>
-                </a>
-                <!-- Dropdown - Messages -->
-                <div
-                  class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                  aria-labelledby="messagesDropdown"
-                >
-                  <h6 class="dropdown-header">Message Center</h6>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="dropdown-list-image mr-3">
-                      <img
-                        class="rounded-circle"
-                        src="img/undraw_profile_1.svg"
-                        alt="..."
-                      />
-                      <div class="status-indicator bg-success"></div>
-                    </div>
-                    <div class="font-weight-bold">
-                      <div class="text-truncate">
-                        Hi there! I am wondering if you can help me with a
-                        problem I've been having.
-                      </div>
-                      <div class="small text-gray-500">Emily Fowler · 58m</div>
-                    </div>
-                  </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="dropdown-list-image mr-3">
-                      <img
-                        class="rounded-circle"
-                        src="img/undraw_profile_2.svg"
-                        alt="..."
-                      />
-                      <div class="status-indicator"></div>
-                    </div>
-                    <div>
-                      <div class="text-truncate">
-                        I have the photos that you ordered last month, how would
-                        you like them sent to you?
-                      </div>
-                      <div class="small text-gray-500">Jae Chun · 1d</div>
-                    </div>
-                  </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="dropdown-list-image mr-3">
-                      <img
-                        class="rounded-circle"
-                        src="img/undraw_profile_3.svg"
-                        alt="..."
-                      />
-                      <div class="status-indicator bg-warning"></div>
-                    </div>
-                    <div>
-                      <div class="text-truncate">
-                        Last month's report looks great, I am very happy with
-                        the progress so far, keep up the good work!
-                      </div>
-                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                    </div>
-                  </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="dropdown-list-image mr-3">
-                      <img
-                        class="rounded-circle"
-                        src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                        alt="..."
-                      />
-                      <div class="status-indicator bg-success"></div>
-                    </div>
-                    <div>
-                      <div class="text-truncate">
-                        Am I a good boy? The reason I ask is because someone
-                        told me that people say this to all dogs, even if they
-                        aren't good...
-                      </div>
-                      <div class="small text-gray-500">
-                        Chicken the Dog · 2w
-                      </div>
-                    </div>
-                  </a>
-                  <a
-                    class="dropdown-item text-center small text-gray-500"
-                    href="#"
-                    >Read More Messages</a
-                  >
-                </div>
-              </li>
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="searchDropdown"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
 
-              <div class="topbar-divider d-none d-sm-block"></div>
+                            </li>
 
-              <!-- Nav Item - User Information -->
-              <li class="nav-item dropdown no-arrow">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="userDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    ><asp:Label ID="txt_welcome" runat="server"></asp:Label></span
-                  >
-                  <img
-                    class="img-profile rounded-circle"
-                    src="img/undraw_profile.svg"
-                  />
-                </a>
-                <!-- Dropdown - User Information -->
-                <div
-                  class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                  aria-labelledby="userDropdown"
-                >
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                    </a>
-                  <a class="dropdown-item" href="account_setting.aspx">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
-                  </a>
-             <%--       <a class="dropdown-item" href="#">
+                            <!-- Nav Item - Alerts -->
+                      
+                            <asp:Timer ID="SharedTimer" runat="server" Interval="1000"  />
+
+
+                                    <li class="nav-item dropdown no-arrow mx-1">
+                                        <a
+                                            class="nav-link dropdown-toggle"
+                                            href="#"
+                                            id="alertsDropdown"
+                                            role="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <img src="img/bell.png" width="26px" />
+                                            <!-- Counter - Alerts -->
+                                            <asp:Panel runat="server" ID="badgePanel">
+
+                                                <span class="badge badge-danger badge-counter">
+                                                    <asp:UpdatePanel ID="upNotifCount" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:Timer ID="TimerNotif" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
+
+                                                            <asp:Label runat="server" ID="notifCount"></asp:Label>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="SharedTimer" EventName="Tick" />
+                                                        </Triggers>
+
+                                                    </asp:UpdatePanel>
+                                                </span>
+                                            </asp:Panel>
+                                        </a>
+                                        <!-- Dropdown - Alerts -->
+                                        <div
+                                            class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                            aria-labelledby="alertsDropdown" style="overflow-y: auto; max-height: 508px;">
+                                            <h6 class="dropdown-header">Alerts Center</h6>
+                                            <div style="width: 100%;">
+                                                <asp:Label ID="noNotif" runat="server" CssClass="dropdown-item"> No Notification Found </asp:Label>
+                                                <asp:UpdatePanel ID="upNotifList" runat="server" UpdateMode="Conditional">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="Notification_grid" Width="100%" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" OnRowCommand="Update_Notify_Status" DataKeyNames="notify_status_id">
+                                                            <Columns>
+                                                                <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton
+                                                                            ID="lnkDetails2"
+                                                                            runat="server"
+                                                                            CommandName="Redirect"
+                                                                            CommandArgument='<%# Eval("notify_status_id") %>'
+                                                                            Style="text-decoration: none;"
+                                                                            >
+                                                                            <div class="hov" style="display: flex; align-items: center; width: 20rem; padding: 0 11px;">
+                                                                                <img src="img/bell.png" width="25px" height="28px" style="margin-right: 11px;" />
+                                                                                <div>
+                                                                                    <div style="justify-content: space-between; display: flex; margin-bottom: 2px;">
+                                                                                        <asp:Label runat="server" ID="Label1" Text='<%# Eval("title") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
+                                                                                        <asp:Label runat="server" Text='<%# Eval("timestamp", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <div class="notify-div">
+                                                                                            <asp:Label runat="server" ID="name" Text='<%# Eval("body") %>' ForeColor="Black"></asp:Label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div style="height: 1px; background-color: #d5d5d5; margin-top: 9px;"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
+
+                                                    </ContentTemplate>
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="SharedTimer" EventName="Tick" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                    </li>
+
+          
+                            <!-- Nav Item - Messages -->
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="userDropdown"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                        <asp:Label ID="txt_welcome" runat="server"></asp:Label></span>
+                                    <img
+                                        class="img-profile rounded-circle"
+                                        src="img/undraw_profile.svg" />
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div
+                                    class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="account_setting.aspx">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <%--       <a class="dropdown-item" href="#">
                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                         Activity Log
                     </a>--%>
-                  <div class="dropdown-divider"></div>
-                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item"
-                        OnClientClick="return confirm('Are you sure you want to log out?');"
-                        OnClick="logout_Click">
+                                    <div class="dropdown-divider"></div>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item"
+                                        OnClientClick="return confirm('Are you sure you want to log out?');"
+                                        OnClick="logout_Click">
      &nbsp;&nbsp;<i
                       class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                     ></i>Log Out
-                    </asp:LinkButton>
-                </div>
-              </li>
-            </ul>
-          </nav>
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                <div class="container-fluid" style="height: 90%;">
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                        <!-- Page Heading -->
+                                    </asp:LinkButton>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- End of Topbar -->
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid" style="height: 90%;">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                            <!-- Page Heading -->
 
-                    </asp:ContentPlaceHolder>
+                        </asp:ContentPlaceHolder>
+
+                    </div>
 
                 </div>
+
+
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright ">
+                            <span>Copyright &copy; Your Website 2021</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-
-
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright ">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
+            <!-- End of Content Wrapper -->
         </div>
 
         <!-- End of Page Wrapper -->
@@ -672,7 +622,7 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
+        </form>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -685,11 +635,20 @@
 
 
 
+         <%-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>--%>
 
 
 
 
         <script>
+            function toggleSidebar() {
+                var sidebar = document.getElementById("accordionSidebar");
+                if (sidebar) {
+                    sidebar.classList.toggle("toggled");
+                }
+                console.log("clicked toggle button")
+            }
+
             document.addEventListener("DOMContentLoaded", function () {
                 let collapsibleMenus = document.querySelectorAll(".collapse");
                 let menuItems = document.querySelectorAll(".collapse-item");
@@ -771,11 +730,552 @@
                     });
                 }
             });
+
+
+            function resetForm() {
+                console.log("Site master function");
+
+                const form = document.getElementById("myForm");
+
+                // Reset the entire form (works for most input types)
+                form.reset();
+
+                // Additionally, manually clear all input fields to ensure complete reset
+                form.querySelectorAll("input, textarea, select").forEach(input => {
+                    switch (input.type) {
+                        case 'text':
+                        case 'email':
+                        case 'password':
+                        case 'number':
+                        case 'date':
+                        case 'search':
+                        case 'tel':
+                        case 'url':
+                        case 'textarea':
+                            input.value = '';
+                            break;
+                        case 'checkbox':
+                        case 'radio':
+                            input.checked = false;
+                            break;
+                        case 'select-one':
+                        case 'select-multiple':
+                            input.selectedIndex = -1;
+                            break;
+                    }
+                });
+            }
+
+
+            //(function () {
+            //    'use strict';
+
+            //    const forms = document.querySelectorAll('.needs-validation');
+
+            //    Array.prototype.slice.call(forms).forEach(function (form) {
+            //        function validateField(input) {
+            //            const tag = input.tagName.toLowerCase();
+            //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+            //            if ((validTypes.includes(input.type) || tag === 'textarea') && input.required) {
+            //                const trimmed = input.value.trim();
+            //                if (trimmed === '') {
+            //                    input.setCustomValidity('Whitespace is not allowed');
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            } else {
+            //                input.setCustomValidity('');
+            //            }
+
+            //            if (!input.checkValidity()) {
+            //                input.classList.remove('is-valid');
+            //                input.classList.add('is-invalid');
+            //            } else {
+            //                input.classList.remove('is-invalid');
+            //                input.classList.add('is-valid');
+            //            }
+            //        }
+
+            //        form.addEventListener('submit', function (event) {
+            //            let hasCustomError = false;
+
+            //            form.querySelectorAll('input, textarea').forEach(function (input) {
+            //                validateField(input);
+            //                if (!input.checkValidity()) {
+            //                    hasCustomError = true;
+            //                }
+            //            });
+
+            //            if (hasCustomError) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            }
+
+            //            form.classList.add('was-validated');
+            //        }, false);
+
+            //        // Live validation for all inputs (without waiting for submit)
+            //        form.querySelectorAll('input, textarea').forEach(function (input) {
+            //            input.addEventListener('input', function () {
+            //                validateField(input);
+            //            });
+
+            //            // Optional: validate on blur too
+            //            input.addEventListener('blur', function () {
+            //                validateField(input);
+            //            });
+            //        });
+            //    });
+            //})();
+
+            //(function () {
+            //    'use strict';
+
+            //    const forms = document.querySelectorAll('.needs-validation');
+
+            //    Array.prototype.slice.call(forms).forEach(function (form) {
+            //        let submittedOnce = false;
+
+            //        function validateField(input) {
+            //            const tag = input.tagName.toLowerCase();
+            //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+            //            if ((validTypes.includes(input.type) || tag === 'textarea')) {
+            //                const trimmed = input.value.trim();
+
+            //                if (input.required && trimmed === '') {
+            //                    input.setCustomValidity('Whitespace is not allowed');
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            } else {
+            //                input.setCustomValidity('');
+            //            }
+
+            //            if (!input.checkValidity()) {
+            //                input.classList.remove('is-valid');
+            //                input.classList.add('is-invalid');
+            //            } else {
+            //                input.classList.remove('is-invalid');
+            //                input.classList.add('is-valid');
+            //            }
+            //        }
+
+            //        // On form submission
+            //        form.addEventListener('submit', function (event) {
+            //            submittedOnce = true;
+            //            let hasErrors = false;
+
+            //            form.querySelectorAll('input, textarea, select').forEach(function (input) {
+            //                validateField(input);
+            //                if (!input.checkValidity()) {
+            //                    hasErrors = true;
+            //                }
+            //            });
+
+            //            if (hasErrors) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            }
+
+            //            form.classList.add('was-validated');
+            //        }, false);
+
+            //        // Live validation only after first submission
+            //        form.querySelectorAll('input, textarea, select').forEach(function (input) {
+            //            input.addEventListener('input', function () {
+            //                if (submittedOnce) {
+            //                    validateField(input);
+            //                }
+            //            });
+
+            //            input.addEventListener('blur', function () {
+            //                if (submittedOnce) {
+            //                    validateField(input);
+            //                }
+            //            });
+            //        });
+            //    });
+            //})();
+
+            //(function () {
+            //    'use strict';
+
+            //    const forms = document.querySelectorAll('.needs-validation');
+
+            //    Array.prototype.slice.call(forms).forEach(function (form) {
+            //        let submittedOnce = false;
+
+            //        // Utility function to debounce rapid input events
+            //        function debounce(fn, delay) {
+            //            let timer;
+            //            return function (...args) {
+            //                clearTimeout(timer);
+            //                timer = setTimeout(() => fn.apply(this, args), delay);
+            //            };
+            //        }
+
+            //        // Field validation function
+            //        function validateField(input) {
+            //            const tag = input.tagName.toLowerCase();
+            //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+            //            const needsValidation = (validTypes.includes(input.type) || tag === 'textarea');
+
+            //            if (needsValidation && input.required) {
+            //                const trimmed = input.value.trim();
+            //                if (trimmed === '') {
+            //                    input.setCustomValidity('Whitespace is not allowed');
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            } else {
+            //                input.setCustomValidity('');
+            //            }
+
+            //            if (!input.checkValidity()) {
+            //                input.classList.remove('is-valid');
+            //                input.classList.add('is-invalid');
+            //            } else {
+            //                input.classList.remove('is-invalid');
+            //                input.classList.add('is-valid');
+            //            }
+            //        }
+
+            //        // On submit: validate all, enable live validation
+            //        form.addEventListener('submit', function (event) {
+            //            submittedOnce = true;
+            //            let hasErrors = false;
+
+            //            form.querySelectorAll('input, textarea').forEach(function (input) {
+            //                validateField(input);
+            //                if (!input.checkValidity()) {
+            //                    hasErrors = true;
+            //                }
+            //            });
+
+            //            if (hasErrors) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            }
+
+            //            form.classList.add('was-validated');
+            //        }, false);
+
+            //        // Add live validation only after submit
+            //        const debouncedValidate = debounce(function (input) {
+            //            if (submittedOnce) {
+            //                validateField(input);
+            //            }
+            //        }, 200); // slight delay to prevent flickering
+
+            //        form.querySelectorAll('input, textarea').forEach(function (input) {
+            //            input.addEventListener('input', function () {
+            //                debouncedValidate(input);
+            //            });
+
+            //            input.addEventListener('blur', function () {
+            //                if (submittedOnce) {
+            //                    validateField(input);
+            //                }
+            //            });
+            //        });
+            //    });
+            //})();
+
+            //(function () {
+            //    'use strict';
+
+            //    const forms = document.querySelectorAll('.needs-validation');
+
+            //    Array.prototype.slice.call(forms).forEach(function (form) {
+            //        let submittedOnce = false;
+
+            //        function validateField(input) {
+            //            const tag = input.tagName.toLowerCase();
+            //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+            //            if ((validTypes.includes(input.type) || tag === 'textarea') && input.required) {
+            //                const trimmed = input.value.trim();
+
+            //                if (trimmed === '') {
+            //                    input.setCustomValidity('Whitespace is not allowed');
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            } else {
+            //                input.setCustomValidity('');
+            //            }
+
+
+            //            if (!input.checkValidity()) {
+            //                input.classList.remove('is-valid');
+            //                input.classList.add('is-invalid');
+            //            } else {
+            //                input.classList.remove('is-invalid');
+            //                input.classList.add('is-valid');
+            //            }
+            //        }
+
+            //        form.addEventListener('submit', function (event) {
+            //            submittedOnce = true;
+            //            let hasCustomError = false;
+
+            //            form.querySelectorAll('input, textarea').forEach(function (input) {
+            //                validateField(input);
+            //                if (!input.checkValidity()) {
+            //                    hasCustomError = true;
+            //                }
+            //            });
+
+            //            if (hasCustomError) {
+            //                event.preventDefault();  // Only prevent if errors exist
+            //                event.stopPropagation();
+            //            }
+
+            //            form.classList.add('was-validated');
+            //        }, false);
+
+            //        // Live validation after submit clicked
+            //        form.querySelectorAll('input, textarea').forEach(function (input) {
+            //            input.addEventListener('input', function () {
+            //                if (submittedOnce) {
+            //                    validateField(input);
+            //                }
+            //            });
+            //        });
+            //    });
+            //})();
+
+            //(function () {
+            //    'use strict';
+
+            //    const forms = document.querySelectorAll('.needs-validation');
+
+            //    Array.prototype.slice.call(forms).forEach(function (form) {
+            //        let submittedOnce = false;
+
+            //        function validateField(input) {
+            //            const tag = input.tagName.toLowerCase();
+            //            const type = input.type.toLowerCase();
+            //            const value = input.value.trim();
+            //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+            //            // Common whitespace check
+            //            if ((validTypes.includes(type) || tag === 'textarea') && input.required) {
+            //                if (value === '') {
+            //                    input.setCustomValidity('Whitespace is not allowed');
+            //                    showInvalid(input);
+            //                    return;
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            }
+
+            //            // Additional type-based validations
+            //            if (type === 'email' && value !== '') {
+            //                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            //                if (!emailRegex.test(value)) {
+            //                    input.setCustomValidity('Please enter a valid email address');
+            //                    showInvalid(input);
+            //                    return;
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            }
+
+            //            if (type === 'url' && value !== '') {
+            //                try {
+            //                    new URL(value); // throws if invalid
+            //                    input.setCustomValidity('');
+            //                } catch {
+            //                    input.setCustomValidity('Please enter a valid URL');
+            //                    showInvalid(input);
+            //                    return;
+            //                }
+            //            }
+
+            //            if (type === 'tel' && value !== '') {
+            //                const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
+            //                if (!phoneRegex.test(value)) {
+            //                    input.setCustomValidity('Phone number must be exactly 10 digits');
+            //                    showInvalid(input);
+            //                    return;
+            //                } else {
+            //                    input.setCustomValidity('');
+            //                }
+            //            }
+
+
+            //            // Final validation state
+            //            if (!input.checkValidity()) {
+            //                showInvalid(input);
+            //            } else {
+            //                showValid(input);
+            //            }
+            //        }
+
+            //        function showInvalid(input) {
+            //            input.classList.remove('is-valid');
+            //            input.classList.add('is-invalid');
+            //        }
+
+            //        function showValid(input) {
+            //            input.classList.remove('is-invalid');
+            //            input.classList.add('is-valid');
+            //        }
+
+            //        form.addEventListener('submit', function (event) {
+            //            submittedOnce = true;
+            //            let hasCustomError = false;
+
+            //            form.querySelectorAll('input, textarea').forEach(function (input) {
+            //                validateField(input);
+            //                if (!input.checkValidity()) {
+            //                    hasCustomError = true;
+            //                }
+            //            });
+
+            //            if (hasCustomError) {
+            //                event.preventDefault();
+            //                event.stopPropagation();
+            //            }
+
+            //            form.classList.add('was-validated');
+            //        }, false);
+
+            //        // Live validation
+            //        form.querySelectorAll('input, textarea').forEach(function (input) {
+            //            input.addEventListener('input', function () {
+            //                if (submittedOnce) {
+            //                    validateField(input);
+            //                }
+            //            });
+            //        });
+            //    });
+            //})();
+
+            (function () {
+                'use strict';
+
+                const forms = document.querySelectorAll('.needs-validation');
+
+                Array.prototype.slice.call(forms).forEach(function (form) {
+                    let submittedOnce = false;
+
+                    function validateField(input) {
+                        const tag = input.tagName.toLowerCase();
+                        const type = input.type.toLowerCase();
+                        const value = input.value.trim();
+                        const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
+
+                        // Common whitespace check
+                        if ((validTypes.includes(type) || tag === 'textarea') && input.required) {
+                            if (value === '') {
+                                input.setCustomValidity('Whitespace is not allowed');
+                                showInvalid(input);
+                                return;
+                            } else {
+                                input.setCustomValidity('');
+                            }
+                        }
+
+                        // Additional type-based validations
+                        if (type === 'email' && value !== '') {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(value)) {
+                                input.setCustomValidity('Please enter a valid email address');
+                                showInvalid(input);
+                                return;
+                            } else {
+                                input.setCustomValidity('');
+                            }
+                        }
+
+                        if (type === 'url' && value !== '') {
+                            try {
+                                new URL(value); // throws if invalid
+                                input.setCustomValidity('');
+                            } catch {
+                                input.setCustomValidity('Please enter a valid URL');
+                                showInvalid(input);
+                                return;
+                            }
+                        }
+
+                        if (type === 'tel' && value !== '') {
+                            const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
+                            if (!phoneRegex.test(value)) {
+                                input.setCustomValidity('Phone number must be exactly 10 digits');
+                                showInvalid(input);
+                                return;
+                            } else {
+                                input.setCustomValidity('');
+                            }
+                        }
+
+                        // Dropdown (select) validation
+                        if (tag === 'select' && input.required) {
+                            if (input.value === '0') {
+                                input.setCustomValidity('Please select a valid option');
+                                showInvalid(input);
+                                return;
+                            } else {
+                                input.setCustomValidity('');
+                            }
+                        }
+
+                        // Final validation state
+                        if (!input.checkValidity()) {
+                            showInvalid(input);
+                        } else {
+                            showValid(input);
+                        }
+                    }
+
+                    function showInvalid(input) {
+                        input.classList.remove('is-valid');
+                        input.classList.add('is-invalid');
+                    }
+
+                    function showValid(input) {
+                        input.classList.remove('is-invalid');
+                        input.classList.add('is-valid');
+                    }
+
+                    form.addEventListener('submit', function (event) {
+                        submittedOnce = true;
+                        let hasCustomError = false;
+
+                        form.querySelectorAll('input, textarea, select').forEach(function (input) {
+                            validateField(input);
+                            if (!input.checkValidity()) {
+                                hasCustomError = true;
+                            }
+                        });
+
+                        if (hasCustomError) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+
+                    // Live validation
+                    form.querySelectorAll('input, textarea, select').forEach(function (input) {
+                        input.addEventListener('input', function () {
+                            if (submittedOnce) {
+                                validateField(input);
+                            }
+                        });
+                    });
+                });
+            })();
+
         </script>
 
 
-
-   </form>
 </body>
 </html>
-

@@ -118,6 +118,9 @@ namespace Society
                 }
             }
 
+            Updates.Visible = dt.Rows.Count >= 1;
+            noUpdates4.Visible = dt.Rows.Count == 0;
+
             Updates.DataSource = dt;
             Updates.DataBind();
         }

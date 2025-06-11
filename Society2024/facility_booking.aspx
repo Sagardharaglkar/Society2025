@@ -75,6 +75,10 @@ if (allValid && btn) {
                         <asp:HiddenField ID="owner_id" runat="server" />
                         <asp:HiddenField ID="slot_id" runat="server" />
                         <asp:HiddenField ID="hidden_total_amount" runat="server" />
+
+                        <asp:HiddenField ID="facility_id" runat="server" />
+                        <asp:HiddenField ID="name_id" runat="server" />
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -194,8 +198,8 @@ if (allValid && btn) {
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("facility_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>
@@ -299,8 +303,8 @@ if (allValid && btn) {
                                                                             ID="lnkCategory"
                                                                             runat="server"
                                                                             CssClass="suggestion-item link-button category-link"
-                                                                            Text='<%# Eval("flat_type") %>'
-                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            Text='<%# Eval("name") %>'
+                                                                            CommandArgument='<%# Eval("owner_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setTextBox2(this.innerText);" />
                                                                     </ItemTemplate>
