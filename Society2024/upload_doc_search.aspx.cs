@@ -17,7 +17,7 @@ namespace Society
 {
     public partial class upload_doc_search : System.Web.UI.Page
     {
-
+        BL_FillRepeater repeater = new BL_FillRepeater();
         upload_doc doc = new upload_doc();
         BL_Upload_Doc BL_Upload = new BL_Upload_Doc();
 
@@ -37,8 +37,56 @@ namespace Society
             }
             if (!IsPostBack)
             {
-                fill_drop1();
+                //fill_drop1();
+
+                String str1 = "Select *  from doc_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "Select *  from building_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater2, str2);
+
                 upload_doc_gridbind();                
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                doc_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory1")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+                lbl_building.Text = e.CommandArgument.ToString();
+                string sql1 = "Select distinct w_name,wing_id from dbo.flat_types where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
+                repeater.fill_list(Repeater3, sql1);
+            }
+
+        }
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory2")
+            {
+                wing_id.Value = e.CommandArgument.ToString();
+                String str = "Select distinct flat_no,flat_id from dbo.flat_types where  society_id='" + society_id.Value + "' and build_id=" + lbl_building.Text + " and wing_id=" + wing_id.Value;
+                repeater.fill_list(Repeater4, str);
+            }
+
+        }
+        protected void CategoryRepeater_ItemCommand4(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                flat_no_id.Value = e.CommandArgument.ToString();
+
             }
 
         }
@@ -50,18 +98,18 @@ namespace Society
             //String sql_query1 = "Select *  from bedroom ";
             //st.fill_drop(ddl_type, sql_query1, "bed", "bed_id");
 
-            String sql_query2 = "Select *  from building_master where society_id='" + society_id.Value + "'";
-            BL_Upload.fill_drop(ddl_build, sql_query2, "name", "build_id");
+            //String sql_query2 = "Select *  from building_master where society_id='" + society_id.Value + "'";
+            //BL_Upload.fill_drop(ddl_build, sql_query2, "name", "build_id");
 
-            //String sql_query3 = "Select *  from wing_master where society_id='" + society_id.Value + "'";
-            //st.fill_drop(ddl_wing, sql_query3, "w_name", "w_id");
+            ////String sql_query3 = "Select *  from wing_master where society_id='" + society_id.Value + "'";
+            ////st.fill_drop(ddl_wing, sql_query3, "w_name", "w_id");
 
-            String sql_query4 = "Select *  from doc_master where society_id='" + society_id.Value + "'";
-            BL_Upload.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
+            //String sql_query4 = "Select *  from doc_master where society_id='" + society_id.Value + "'";
+            //BL_Upload.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
         }
         public void uplaod_doc()
         {
-            string createfolder = Server.MapPath("~/Documents") + "/" + ddl_build.SelectedItem.Text + "/" + ddl_wing.SelectedItem.Text + "/" + ddl_flatno.SelectedItem.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/";
+            string createfolder = Server.MapPath("~/Documents") + "/" + TextBox2.Text + "/" + TextBox3.Text + "/" + TextBox4.Text + "/" + (TextBox1.Text) + "/";
             Directory.CreateDirectory(createfolder);
 
             if (file_name.HasFiles)
@@ -69,11 +117,11 @@ namespace Society
 
                 foreach (HttpPostedFile file_name in file_name.PostedFiles)
                 {
-                    file_name.SaveAs(Path.Combine(Server.MapPath(("~/Documents") + "/" + ddl_build.SelectedItem.Text + "/" + ddl_wing.SelectedItem.Text + "/"+ ddl_flatno.SelectedItem.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/" + file_name.FileName)));
+                    file_name.SaveAs(Path.Combine(Server.MapPath(("~/Documents") + "/" + TextBox2.Text + "/" +TextBox3.Text + "/"+ TextBox4.Text + "/" + (TextBox1.Text) + "/" + file_name.FileName)));
                     listofuploadedfiles.Text += file_name.FileName + "<br/>";
                 }
 
-                path = Path.Combine(Server.MapPath(("~/Documents") + "/" + ddl_build.SelectedItem.Text + "/" + ddl_wing.SelectedItem.Text + "/"  + ddl_flatno.SelectedItem.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/" + file_name.FileName));
+                path = Path.Combine(Server.MapPath(("~/Documents") + "/" + TextBox2.Text + "/" + TextBox3.Text + "/"  + TextBox4.Text + "/" + (TextBox1.Text) + "/" + file_name.FileName));
             
             }
         }
@@ -91,10 +139,10 @@ namespace Society
             //(parking_id.Value) = result.parking_id.ToString();
             society_id.Value = result.Society_Id;
             listofuploadedfiles.Text = Path.GetFileName(result.File_Save_Path);
-            ddl_doc_type.SelectedValue = result.doc_id.ToString();
-            ddl_build.SelectedValue = result.build_id.ToString();
-            txt_wing.Text = result.W_Name.ToString();
-            txt_no.Text = result.Flat_No.ToString();
+            doc_id.Value = result.doc_id.ToString();
+            building_id.Value = result.build_id.ToString();
+            wing_id.Value = result.W_Name.ToString();
+            flat_no_id.Value = result.Flat_No.ToString();
             
             txt_date.Text = result.Date.ToString("yyyy-MM-dd");
             
@@ -104,11 +152,11 @@ namespace Society
             string id = e.CommandArgument.ToString();
             file_id.Value = id;
             runproc("Select");
-            txt_wing.Visible = true;
-            ddl_wing.Visible = false;
+            //txt_wing.Visible = true;
+            //ddl_wing.Visible = false;
             
-            txt_no.Visible = true;
-            ddl_flatno.Visible = false;
+            //txt_no.Visible = true;
+            //ddl_flatno.Visible = false;
             Label2.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
@@ -119,11 +167,11 @@ namespace Society
             doc.Sql_Operation = operation;
             doc.Society_Id = society_id.Value;
             doc.File_Save_Path = path;
-            doc.doc_id = Convert.ToInt32(ddl_doc_type.SelectedValue.ToString());
-            doc.build_id = Convert.ToInt32(ddl_build.SelectedValue.ToString());
-            doc.wing_id = Convert.ToInt32(ddl_wing.SelectedValue.ToString());
+            doc.doc_id = Convert.ToInt32(doc_id.Value.ToString());
+            doc.build_id = Convert.ToInt32(building_id.Value.ToString());
+            doc.wing_id = Convert.ToInt32(wing_id.Value.ToString());
           
-            doc.flat_id = Convert.ToInt32(ddl_flatno.SelectedValue.ToString());
+            doc.flat_id = Convert.ToInt32(flat_no_id.Value.ToString());
             doc.Date = Convert.ToDateTime(txt_date.Text);
             BL_Upload.updatedocsearch(doc);
    
@@ -146,19 +194,19 @@ namespace Society
                 return;
             }
 
-            if (Label7.Text == "")
-            {
+            //if (Label7.Text == "")
+            //{
                 uplaod_doc();
                 runproc_save("Update");
                 
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
 
-            }
+            //}
         }
 
         protected void upload_doc_gridbind()
@@ -240,7 +288,7 @@ namespace Society
 
         protected void ddl_flatno_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_flatno.Text.Trim() != "")
+            if (flat_no_id.Value != "")
             {
                 if (file_id.Value != "")
                 {
@@ -248,39 +296,39 @@ namespace Society
                     doc.Sql_Operation = "check_no";
                     //owner.owner_id = Convert.ToInt32(owner_id.Value);
                     doc.Society_Id = society_id.Value;
-                    doc.doc_id = Convert.ToInt32(ddl_doc_type.SelectedValue.ToString());
-                    doc.flat_id = Convert.ToInt32(ddl_flatno.SelectedValue.ToString());
+                    doc.doc_id = Convert.ToInt32(doc_id.Value.ToString());
+                    doc.flat_id = Convert.ToInt32(flat_no_id.Value.ToString());
 
 
                     var result = BL_Upload.flat_no_selectedIndexChanged(doc);
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
-                    Label7.Text = result.Sql_Result;
+                    //Label7.Text = result.Sql_Result;
                 }
             }
         }
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_build.Text != "select")
-            {
+            //if (ddl_build.Text != "select")
+            //{
 
-                string sql1 = "Select distinct w_name,wing_id from dbo.flat_types where  society_id='" + society_id.Value + "' and  name='" + ddl_build.SelectedItem.Text + "' ";
-                BL_Upload.fill_drop(ddl_wing, sql1, "w_name", "wing_id");
-                ddl_wing_SelectedIndexChanged(sender, e);
+            //    string sql1 = "Select distinct w_name,wing_id from dbo.flat_types where  society_id='" + society_id.Value + "' and  name='" + ddl_build.SelectedItem.Text + "' ";
+            //    BL_Upload.fill_drop(ddl_wing, sql1, "w_name", "wing_id");
+            //    ddl_wing_SelectedIndexChanged(sender, e);
 
-            }
+            //}
 
         }
 
         protected void ddl_wing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_wing.Text != "select")
-            {
+            //if (ddl_wing.Text != "select")
+            //{
 
-                string sql1 = "Select distinct flat_no,flat_id from dbo.flat_types where  society_id='" + society_id.Value + "' and build_id=" + ddl_build.SelectedValue + " and wing_id=" + ddl_wing.SelectedValue;
-                BL_Upload.fill_drop(ddl_flatno, sql1, "flat_no", "flat_id");
+            //    string sql1 = "Select distinct flat_no,flat_id from dbo.flat_types where  society_id='" + society_id.Value + "' and build_id=" + ddl_build.SelectedValue + " and wing_id=" + ddl_wing.SelectedValue;
+            //    BL_Upload.fill_drop(ddl_flatno, sql1, "flat_no", "flat_id");
 
-            }
+            //}
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

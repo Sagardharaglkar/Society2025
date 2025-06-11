@@ -65,6 +65,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 Buildling_wing_id.Value = e.CommandArgument.ToString();
+                lbl_Building.Text = e.CommandArgument.ToString();
 
                 if (!(type_id.Value == ""))
                 {
@@ -80,7 +81,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 type_id.Value = e.CommandArgument.ToString();
-                string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + Buildling_wing_id.Value + "' and flat_type_id='" + type_id.Value + "'";
+                string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + lbl_Building.Text + "' and flat_type_id='" + type_id.Value + "'";
                 repeater.fill_list(Repeater3, sql1);
             }
 

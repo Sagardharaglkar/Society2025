@@ -11,11 +11,13 @@ using System.Web.Configuration;
 using DBCode.DataClass;
 using BusinessLogic.BL;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace Society
 {
     public partial class facility_booking : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         facility party = new facility();
         BL_facility bL_Facility = new BL_facility();
         //stored st = new stored();
@@ -30,10 +32,14 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                filldrop();
+                //filldrop();
                 Party_GridBind();
 
+                String str1 = "Select * from facilities where active_status=0 and society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
 
+                String str2 = "Select * from owner_master where active_status=0 and society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater2, str2);
 
                 txt_from_date.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_to_date.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
@@ -49,12 +55,32 @@ namespace Society
             Panel2.Visible = true;
             Panel1.Visible = false;
         }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                facility_id.Value = e.CommandArgument.ToString();
+              
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                name_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
         public void filldrop()
         {
-            String sql_query1 = "Select * from facilities where active_status=0 and society_id='" + society_id.Value + "'";
-            bL_Facility.fill_drop(ddl_facility, sql_query1, "name", "facility_id");
-            String sql_query = "Select * from owner_master where active_status=0 and society_id='" + society_id.Value + "'";
-            bL_Facility.fill_drop(ddl_name, sql_query, "name", "owner_id");
+            //String sql_query1 = "Select * from facilities where active_status=0 and society_id='" + society_id.Value + "'";
+            //bL_Facility.fill_drop(ddl_facility, sql_query1, "name", "facility_id");
+            //String sql_query = "Select * from owner_master where active_status=0 and society_id='" + society_id.Value + "'";
+            //bL_Facility.fill_drop(ddl_name, sql_query, "name", "owner_id");
 
         }
         public void Party_GridBind()
@@ -132,7 +158,7 @@ namespace Society
                 party.To_Date = Convert.ToDateTime(txt_to_date.Text);
             if (society_in.Checked == true)
             {
-                party.Name = ddl_name.SelectedItem.Text;
+                party.Name = name_id.Value.ToString();
                 party.Flat_No = Convert.ToInt32(txt_flat.Text);
             }
             else
@@ -150,7 +176,7 @@ namespace Society
                 party.Cost = Convert.ToDecimal(hidden_total_amount.Value);
             }
 
-            party.facility_id = Convert.ToInt32(ddl_facility.SelectedValue);
+            party.facility_id = Convert.ToInt32(facility_id.Value);
             party.From_Time = Convert.ToDateTime(from_time.Text.ToString());
             party.To_Time = Convert.ToDateTime(to_time.Text.ToString());
             party.Society_In = society_in.Checked == true ? 1 : 0;
@@ -178,8 +204,8 @@ namespace Society
             from_time.Text = result.From_Time.ToString("hh:mm");
             to_time.Text = result.To_Time.ToString("hh:mm");
             txt_amount.Text = result.Cost.ToString();
-            ddl_facility.SelectedValue = result.facility_id.ToString();
-            ddl_name.SelectedItem.Text = result.Name;
+            facility_id.Value = result.facility_id.ToString();
+            name_id.Value = result.Name;
             if (result.Society_In == 1)
             {
                 society_in.Checked = true;
@@ -247,9 +273,9 @@ namespace Society
 
         protected void ddl_name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_name.SelectedValue != "select")
+            if (name_id.Value != "")
             {
-                party.owner_id = Convert.ToInt32(ddl_name.SelectedValue);
+                party.owner_id = Convert.ToInt32(name_id.Value);
                 party.Sql_Operation = "GetFlat";
                 var result = bL_Facility.getflatno(party);
                 txt_flat.Text = result.Flat_No.ToString();
@@ -278,13 +304,13 @@ namespace Society
             GridView2.Visible = true;
             from_time.Text = DateTime.Now.ToLocalTime().ToString("hh:mm");
             to_time.Text = DateTime.Now.ToLocalTime().AddHours(1).ToString("hh:mm");
-            if (ddl_facility.SelectedValue != "select")
+            if (facility_id.Value != "")
             {
                 DataSet dt = new DataSet();
                 party.Sql_Operation = "Get_Slot";
                 party.Society_Id = society_id.Value;
                 party.From_Date = Convert.ToDateTime(txt_date.Text.ToString());
-                party.facility_id = Convert.ToInt32(ddl_facility.SelectedValue);
+                party.facility_id = Convert.ToInt32(facility_id.Value);
                 dt = bL_Facility.getslot(party);
                 if (dt.Tables[0].Rows.Count > 0)
                 {
@@ -302,7 +328,7 @@ namespace Society
                     txt_date.Visible = false;
                 }
 
-                party.facility_id = Convert.ToInt32(ddl_facility.SelectedValue);
+                party.facility_id = Convert.ToInt32(facility_id.Value);
                 party.Sql_Operation = "GetCharge";
                 var result = bL_Facility.get_charges(party);
                 if (result.Cost == 0)
@@ -394,10 +420,10 @@ namespace Society
         protected void txt_to_date_TextChanged(object sender, EventArgs e)
         {
             if(txt_to_date.Text!="")
-            if (ddl_facility.SelectedValue != "select")
+            if (facility_id.Value != "")
             {
 
-                party.facility_id = Convert.ToInt32(ddl_facility.SelectedValue);
+                party.facility_id = Convert.ToInt32(facility_id.Value);
                 party.Sql_Operation = "GetCharge";
                 var result = bL_Facility.get_charges(party);
 
@@ -434,9 +460,9 @@ namespace Society
         protected void to_time_TextChanged(object sender, EventArgs e)
         {
             if(to_time.Text!="")
-            if (ddl_facility.SelectedValue != "select")
+            if (facility_id.Value != "")
             {
-                party.facility_id = Convert.ToInt32(ddl_facility.SelectedValue);
+                party.facility_id = Convert.ToInt32(facility_id.Value);
                 party.Sql_Operation = "GetCharge";
                 var result = bL_Facility.get_charges(party);
 
