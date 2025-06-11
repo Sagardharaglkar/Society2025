@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="parking_allotment_search.aspx.cs" Inherits="Society.parking_allotment_search" MasterPageFile="~/Site.Master" %>
+﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="parking_allotment_search.aspx.cs" Inherits="Society.parking_allotment_search" MasterPageFile="~/Site.Master" %>
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">

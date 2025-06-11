@@ -462,6 +462,10 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
+                    <asp:Panel ID="noUpdates4" runat="server" Style="margin:auto;">
+                        <img style="width: 285px; margin-left:70px;"
+                            src="img/noUpdates.jpg" />
+                    </asp:Panel>
                 </div>
             </div>
 

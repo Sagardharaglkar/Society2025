@@ -647,6 +647,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <asp:Label runat="server" ID="lbl_Building" Visible="false"></asp:Label>
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="OwnerGrid" EventName="RowCommand" />

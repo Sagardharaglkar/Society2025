@@ -8,12 +8,14 @@ using BusinessLogic.MasterBL;
 using DBCode.DataClass;
 using System.Windows.Forms;
 using System.Web.UI;
+using BusinessLogic.BL;
 //using System.IdentityModel.Metadata;
 
 namespace Society
 {
     public partial class caretaker : Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         BL_CareTaker_Master bL_Caretaker = new BL_CareTaker_Master();
         Caretaker care = new Caretaker();
 
@@ -27,24 +29,59 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                
+                String str1 = "Select wing_id,(name + w_name) as name from global_society_view";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "Select *  from doc_master";
+                repeater.fill_list(Repeater2, str2);
+
+                String str3 = "Select *  from state";
+                repeater.fill_list(Repeater3, str3);
+
                 Caretaker_Gridbind();
-                fill_drop1();
+                //fill_drop1();
             }
         }
 
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_wing_id.Value = e.CommandArgument.ToString();
+            }
 
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                doc_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+
+
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                state_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
         public void fill_drop1()
         {
 
-            String sql_query = "Select *  from doc_master";
-            bL_Caretaker.fill_drop(ddl_doc_name, sql_query, "doc_name", "doc_id");
+            //String sql_query = "Select *  from doc_master";
+            //bL_Caretaker.fill_drop(ddl_doc_name, sql_query, "doc_name", "doc_id");
 
-            String sql_query1 = "Select *  from state";
-            bL_Caretaker.fill_drop(ddl_state, sql_query1, "state", "state_id");
+            //String sql_query1 = "Select *  from state";
+            //bL_Caretaker.fill_drop(ddl_state, sql_query1, "state", "state_id");
 
-            String sql_query2 = "Select wing_id,(name + w_name) as name from global_society_view";
-            bL_Caretaker.fill_drop(ddl_build_wing1, sql_query2, "name", "wing_id");
+            //String sql_query2 = "Select wing_id,(name + w_name) as name from global_society_view";
+            //bL_Caretaker.fill_drop(ddl_build_wing1, sql_query2, "name", "wing_id");
         }
 
         public void Caretaker_Gridbind()
@@ -105,16 +142,16 @@ namespace Society
                 care.Caretaker_Id = Convert.ToInt32(caretaker_id.Value);
             care.Sql_Operation = operation;
             care.Society_Id = society_id.Value;
-            care.Wing_Id = Convert.ToInt32(ddl_build_wing1.SelectedValue.ToString());
+            care.Wing_Id = Convert.ToInt32(building_wing_id.Value.ToString());
             care.Flat_No = txt_flat_no.Text;
             care.C_Name = txt_c_name.Text;
-            care.doc_id = Convert.ToInt32(ddl_doc_name.SelectedValue.ToString());
+            care.doc_id = Convert.ToInt32(doc_id.Value.ToString());
             care.C_Address = txt_c_address.Text;
             care.Area = txt_area.Text;
             care.Mobile_No = txt_mobile_no.Text;
             care.Email = txt_email.Text;
             care.City = txt_city.Text;
-            care.State_Id = Convert.ToInt32(ddl_state.SelectedValue.ToString());
+            care.State_Id = Convert.ToInt32(state_id.Value.ToString());
             care.Pincode = txt_pincode.Text;
             //care.Doc_Executed = txt_doc_executed.Text;
             bL_Caretaker.updateCareTakerDetails(care);
@@ -132,13 +169,13 @@ namespace Society
             wing_id.Value = result.Wing_Id.ToString();
             txt_flat_no.Text = result.Flat_No;
             txt_c_name.Text = result.C_Name;
-            ddl_doc_name.SelectedValue = result.doc_id.ToString();
+            doc_id.Value = result.doc_id.ToString();
             txt_c_address.Text = result.C_Address;
             txt_area.Text = result.Area;
             txt_mobile_no.Text = result.Mobile_No;
             txt_email.Text = result.Email;
             txt_city.Text = result.City;
-            ddl_state.SelectedValue = result.State_Id.ToString();
+            state_id.Value = result.State_Id.ToString();
             txt_pincode.Text = result.Pincode;
             //txt_doc_executed.Text = result.Doc_Executed;
 
@@ -147,16 +184,16 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            if (Label13.Text == "")
-            {
+            //if (Label13.Text == "")
+            //{
                 runproc_save("Update");
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            //}
+            //else
+            //{
+            //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
 
-            }
+            //}
         }
 
         protected void btn_close_Click(object sender, EventArgs e)

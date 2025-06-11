@@ -94,6 +94,7 @@
                         <asp:HiddenField ID="married_id" runat="server" />
                         <asp:HiddenField ID="doc_id_id" runat="server" />
                         <asp:Label runat="server" Visible="false" ID="Label11"></asp:Label>
+                       
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -439,7 +440,7 @@
                                         </div>
                                     </div>
 
-
+                                     <asp:Label runat="server" Visible="false" ID="building_lbl"></asp:Label>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
@@ -632,7 +633,7 @@
                                     <hr />
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            '
+                           
 
                             <div class="box-header">
                                 <div class="row ">
