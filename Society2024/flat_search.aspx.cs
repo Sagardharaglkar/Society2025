@@ -32,12 +32,13 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                allBinds();
+
+                Allbound();
+
                 Flat_Gridbind();
             }
         }
-
-        protected void allBinds()
+        protected void Allbound()
         {
             String str = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater1, str);
@@ -51,7 +52,6 @@ namespace Society
             String str4 = "Select *  from bedroom";
             repeater.fill_list(Repeater4, str4);
         }
-
         protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -191,6 +191,7 @@ namespace Society
             txt_feet.Text = result1.Sq_Ft;
             txt_terrace.Text = result1.Terrace_Sq_Ft;
             txt_intercom.Text = result1.Intercom_No;
+            Allbound();
         }
 
 
@@ -276,6 +277,58 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Flat_Gridbind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (Building_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == Building_id.Value)
+                        TextBox11.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (flat_type_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == flat_type_id.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater3_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (usage_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == usage_id.Value)
+                        TextBox3.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater4_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (Bedroom_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == Bedroom_id.Value)
+                        TextBox4.Text = link.Text;
+                }
+            }
         }
     }
 }

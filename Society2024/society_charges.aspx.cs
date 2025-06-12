@@ -130,6 +130,8 @@ namespace Society
             charge_id.Value = result.Charge_Id.ToString();
             txt_amount.Text = result.Amount.ToString();
             society_name_id.Value = result.Society_Id.ToString();
+            String str = "Select *  from society_master";
+            repeater.fill_list(categoryRepeater, str);
 
             String str = "Select *  from society_master";
             repeater.fill_list(categoryRepeater, str);

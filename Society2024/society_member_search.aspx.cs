@@ -161,7 +161,10 @@ namespace Society
             txt_email.Text = result.Email.ToString();
             txt_username.Text = result.UserName.ToString();
             txt_password.Text = result.Password.ToString();
-            
+
+            String str = "Select *  from UserType";
+            repeater.fill_list(categoryRepeater, str);
+
         }   
 
 
@@ -270,6 +273,19 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Society_Member_Gridbind();
+        }
+
+        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (Designation_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == Designation_id.Value)
+                        categoryBox.Text = link.Text;
+                }
+            }
         }
     }
 }

@@ -281,6 +281,7 @@ namespace Society
                 txt_period_from.Text = result.Aggrement_Period_From.ToString("yyyy-MM-dd");
                 txt_period_to.Text = result.Aggrement_Period_To.ToString("yyyy-MM-dd");
                 txt_police_verification.Text = result.Police_Verification_Date.ToString("yyyy-MM-dd");
+                Rental_Gridbind();
             }
 
         }
@@ -480,6 +481,73 @@ namespace Society
             GridView1.PageIndex = e.NewPageIndex;
             Rental_Gridbind();
         }
+
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (Buildling_wing_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == Buildling_wing_id.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
+        }
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (type_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == type_id.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater3_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (flat_no_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == flat_no_id.Value)
+                        TextBox3.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater4_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (married_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == married_id.Value)
+                        TextBox4.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater5_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (doc_id_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == doc_id_id.Value)
+                        TextBox5.Text = link.Text;
+                }
+            }
+        }
+
+       
     }
 }
 

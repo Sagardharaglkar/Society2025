@@ -269,7 +269,7 @@ namespace Society
                 flat_no_id.Value = result.Flat_type_Id.ToString();
                 listofuploadedfiles.Text = Path.GetFileName(result.Photo_Name);
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
-
+               
             }
             AllRepeater();
             String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
@@ -474,10 +474,10 @@ namespace Society
             // Match item index
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (lbl_Building.Text != "")
+                if (Buildling_wing_id.Value != "")
                 {
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == lbl_Building.Text)
+                    if (link.CommandArgument == Buildling_wing_id.Value)
                         TextBox1.Text = link.Text;
                 }
             }
@@ -509,7 +509,31 @@ namespace Society
             }
         }
 
+        protected void Repeater4_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (married_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == married_id.Value)
+                        TextBox4.Text = link.Text;
+                }
+            }
+        }
 
+        protected void Repeater5_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (doc_id_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == doc_id_id.Value)
+                        TextBox5.Text = link.Text;
+                }
+            }
+        }
     }
 
 

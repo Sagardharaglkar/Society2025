@@ -157,6 +157,9 @@
                      </div>
 
                  </ContentTemplate>
+                 <Triggers>
+                     <asp:AsyncPostBackTrigger ControlID="btn_close" EventName="Click" />
+                 </Triggers>
              </asp:UpdatePanel>
              <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                  <div class="modal-dialog modal-sm">
