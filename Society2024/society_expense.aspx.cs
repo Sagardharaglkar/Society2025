@@ -146,9 +146,10 @@ namespace Society
             society.build_id = building_id.Value;
 
             if (cash.Checked == true)
+
             {
                 society.Ex_Type = Convert.ToInt32(cash.Checked == true ? 1 : 0).ToString();
-                society.Ex_Name = txt_name.Text;
+                society.Ex_Name = TextBox1.Text;
             }
 
             if (vendor.Checked == true)
@@ -156,6 +157,7 @@ namespace Society
                 society.Ex_Type = Convert.ToInt32(vendor.Checked == true ? 0 : 1).ToString();
                 society.Ex_Name = TextBox1.Text.ToString();
             }
+
             society.Ex_Details = txt_details.Text;
             society.Comments = txt_comment.Text;
             society.Add_Maintanance = Convert.ToInt32(add_chk.Checked == true ? 1 : 0).ToString();
@@ -196,9 +198,9 @@ namespace Society
             if (result.Ex_Type == "1")
             {
                 cash.Checked = true;
-                txt_name.Text = result.Ex_Name;
+                TextBox1.Text = result.Ex_Name;
                 drp_Container.Visible = false;
-                txt_name.Visible = true;
+                
             }
             else
 
@@ -207,7 +209,7 @@ namespace Society
                 vendor.Checked = true;
                 //ddl_vendor.SelectedValue = ddl_vendor.Items.FindByText(result.Ex_Name).Value;
                 drp_Container.Visible = true;
-                txt_name.Visible = false;
+
             }
             txt_details.Text = result.Ex_Details;
             txt_comment.Text = result.Comments;
@@ -329,17 +331,21 @@ namespace Society
         {
             if (vendor.Checked == true)
             {
+                TextBox1.Text = "";
                 drp_Container.Visible = true;
-                txt_name.Visible = false;
+                //txt_name.Visible = false;
             }
         }
 
         protected void cash_CheckedChanged(object sender, EventArgs e)
         {
             if (cash.Checked == true)
-                txt_name.Visible = true;
-            txt_name.Text = "Cash";
-            drp_Container.Visible = false;
+            {
+                //txt_name.Visible = true;
+                TextBox1.Text = "Cash";
+                drp_Container.Visible = false;
+
+            }
         }
 
         protected void txt_tax_TextChanged(object sender, EventArgs e)

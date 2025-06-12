@@ -222,7 +222,7 @@
                                                     <div class="col-sm-6">
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
-                                                                placeholder="Select category (Select Item)" autocomplete="off" />
+                                                                placeholder="Select" autocomplete="off" required="required" />
                                                             <div id="categoryRepeaterContainer" class="suggestion-list">
                                                                 <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                     <ItemTemplate>

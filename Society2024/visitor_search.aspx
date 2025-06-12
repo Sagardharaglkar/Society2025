@@ -255,9 +255,7 @@
                                                         Please Enter Contact No
                                                     </div>
                                                     <br />
-                                                                  </div>
-
-
+                                                </div>
                                             </div>
                                         </div>
 
@@ -271,7 +269,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
@@ -302,7 +300,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" required="required"/>
                                                         <div id="RepeaterContainer2" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>

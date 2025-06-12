@@ -152,7 +152,7 @@
                                                         <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select Society" autocomplete="off" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
-                                                            <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="categoryRepeater_ItemDataBound">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"

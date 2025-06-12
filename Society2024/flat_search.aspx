@@ -207,9 +207,9 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select Building/Wing" autocomplete="off" />
-                                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                                        <asp:TextBox ID="TextBox1" Style="width:150px" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select" required="required" autocomplete="off" />
+                                                        <div id="RepeaterContainer1" style="width:150px;" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -239,7 +239,7 @@
                                                 <div class="col-sm-4">
                                                         <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" Style="width:150px" CssClass="input-box form-control"
-                                                            placeholder="Select Building" autocomplete="off" />
+                                                            placeholder="Select " required="required" autocomplete="off" />
                                                         <div id="RepeaterContainer2" class="suggestion-list" style="width:150px;">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
@@ -288,7 +288,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox3" runat="server" Style="width: 150px" CssClass="input-box form-control"
-                                                            placeholder="Select Bedroom" autocomplete="off" />
+                                                            placeholder="Select Bedroom" required="required" autocomplete="off" />
                                                         <div id="RepeaterContainer3" class="suggestion-list" style="width: 150px;">
                                                             <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
@@ -321,8 +321,8 @@
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox4" runat="server" Style="width: 150px" CssClass="input-box form-control"
-                                                            placeholder="Select Usage" autocomplete="off" />
-                                                        <div id="RepeaterContainer4" class="suggestion-list" style="width: 150px;">
+                                                            placeholder="Select Usage" required="required" autocomplete="off" />
+                                                        <div id="RepeaterContainer4" class="suggestion-list" >
                                                             <asp:Repeater ID="Repeater4" runat="server" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton

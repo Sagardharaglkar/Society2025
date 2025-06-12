@@ -16,6 +16,7 @@ namespace Society
 {
     public partial class loan : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Loan GetLoan = new Loan();
         BL_Loan l_Loan = new BL_Loan();
        
@@ -30,21 +31,63 @@ namespace Society
             if (!IsPostBack)
             {
                 Loan_GridBind();
-                fill_drop();
+                //fill_drop();
+                allBinds();
                 
             }
 
         }
+
+        protected void allBinds()
+        {
+            String str = "Select *  from flat_master where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str);
+
+            String str2 = "Select *  from loan_type";
+            repeater.fill_list(Repeater2, str2);
+
+            String str3 = "Select *  from certificate";
+            repeater.fill_list(Repeater3, str3);
+
+        }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                flat_no_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                loan_type_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
+
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                share_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
         public void fill_drop()
         {
-            String sql_query = "Select *  from flat_master where society_id='" + society_id.Value + "'";
-            l_Loan.fill_drop(ddl_flat, sql_query, "flat_no", "flat_id");
+            //String sql_query = "Select *  from flat_master where society_id='" + society_id.Value + "'";
+            //l_Loan.fill_drop(ddl_flat, sql_query, "flat_no", "flat_id");
 
-            String sql_query1 = "Select *  from loan_type";
-            l_Loan.fill_drop(ddl_loan, sql_query1, "loan_type", "type_id");
+            //String sql_query1 = "Select *  from loan_type";
+            //l_Loan.fill_drop(ddl_loan, sql_query1, "loan_type", "type_id");
 
-            String sql_query2 = "Select *  from certificate";
-            l_Loan.fill_drop(ddl_certificate, sql_query2, "c_name", "cert_id");
+            //String sql_query2 = "Select *  from certificate";
+            //l_Loan.fill_drop(ddl_certificate, sql_query2, "c_name", "cert_id");
         }
 
 
@@ -90,11 +133,11 @@ namespace Society
                 GetLoan.loan_id = Convert.ToInt32(loan_id.Value);
             GetLoan.Sql_Operation = operation;
             GetLoan.Society_Id = society_id.Value;
-            GetLoan.flat_id = Convert.ToInt32(ddl_flat.SelectedValue);
+            GetLoan.flat_id = Convert.ToInt32(flat_no_id.Value);
             GetLoan.Bank = txt_bank.Text;
-            GetLoan.Type_Id = Convert.ToInt32(ddl_loan.SelectedValue);
+            GetLoan.Type_Id = Convert.ToInt32(loan_type_id.Value);
             GetLoan.Noc_Issued = ddl_noc.SelectedValue;
-            GetLoan.cert_id = Convert.ToInt32(ddl_certificate.SelectedValue);
+            GetLoan.cert_id = Convert.ToInt32(share_id.Value);
             GetLoan.Society_Noc = Convert.ToDateTime(txt_noc_society.Text);
             if(txt_loan_clear.Text != "")
             GetLoan.Loan_Clearance = Convert.ToDateTime(txt_loan_clear.Text);
@@ -115,10 +158,10 @@ namespace Society
             //loan_id.Value = result1.Loanotice_id.ToString();
             society_id.Value = result1.Society_Id;
             txt_bank.Text = result1.Bank;
-            ddl_flat.SelectedValue = result1.flat_id.ToString();
-            ddl_loan.SelectedValue = result1.Type_Id.ToString();
+            flat_no_id.Value = result1.flat_id.ToString();
+            loan_type_id.Value = result1.Type_Id.ToString();
             ddl_noc.SelectedValue = result1.Noc_Issued.ToString();
-            ddl_certificate.SelectedValue = result1.cert_id.ToString();
+            share_id.Value = result1.cert_id.ToString();
             txt_noc_society.Text = result1.Society_Noc.ToString("yyyy-MM-dd");
             txt_loan_clear.Text = result1.Loan_Clearance.ToString("yyyy-MM-dd");
            
@@ -181,7 +224,7 @@ namespace Society
 
         protected void ddl_loan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_loan.SelectedItem.Text == "Other")
+            if (TextBox2.Text == "Other")
                 Panel2.Visible = true;
             else
                 Panel2.Visible = false;

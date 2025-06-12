@@ -32,21 +32,24 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                String str = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater1, str);
-
-                String str2 = "Select *  from types";
-                repeater.fill_list(Repeater2, str2);
-
-                String str3 = "Select *  from flat_usage";
-                repeater.fill_list(Repeater3, str3);
-
-                String str4 = "Select *  from bedroom";
-                repeater.fill_list(Repeater4, str4);
-
-
+                allBinds();
                 Flat_Gridbind();
             }
+        }
+
+        protected void allBinds()
+        {
+            String str = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str);
+
+            String str2 = "Select *  from types";
+            repeater.fill_list(Repeater2, str2);
+
+            String str3 = "Select *  from flat_usage";
+            repeater.fill_list(Repeater3, str3);
+
+            String str4 = "Select *  from bedroom";
+            repeater.fill_list(Repeater4, str4);
         }
 
         protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)

@@ -271,6 +271,7 @@ namespace Society
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
 
             }
+            AllRepeater();
             String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater1, str1);
         }
@@ -480,9 +481,38 @@ namespace Society
                         TextBox1.Text = link.Text;
                 }
             }
-        } 
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (type_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == type_id.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater3_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (flat_no_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == flat_no_id.Value)
+                        TextBox3.Text = link.Text;
+                }
+            }
+        }
+
 
     }
+
+
     
 }
 

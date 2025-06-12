@@ -194,7 +194,7 @@
                                                     <div class="col-sm-4">
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
-                                                                placeholder="Select category (Select Item)" autocomplete="off" />
+                                                                placeholder="Select" autocomplete="off" required="required" />
                                                             <div id="RepeaterContainer1" class="suggestion-list" style="width:306px">
                                                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                     <ItemTemplate>
@@ -238,7 +238,7 @@
                                                     <div class="col-sm-4">
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox6" runat="server" CssClass="input-box form-control"
-                                                                placeholder="Select category (Select Item)" autocomplete="off" />
+                                                                placeholder="Select" autocomplete="off" required="required"/>
                                                             <div id="RepeaterContainer2" class="suggestion-list" style="width:306px">
                                                                 <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                     <ItemTemplate>

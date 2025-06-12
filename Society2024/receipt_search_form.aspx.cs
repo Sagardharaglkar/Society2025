@@ -61,7 +61,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 building_id.Value = e.CommandArgument.ToString();
-
+                building_lbl.Text = e.CommandArgument.ToString();
                 String str1 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
                 repeater.fill_list(Repeater2, str1);
             }
@@ -73,7 +73,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 wing_name_id.Value = e.CommandArgument.ToString();
-                string str1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_id.Value + "' ";
+                string str1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_lbl.Text + "' ";
                 repeater.fill_list(Repeater3, str1);
             }
 

@@ -200,7 +200,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" required="required" Style="width:200px"/>
                                                         <div id="RepeaterContainer1" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
@@ -234,7 +234,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" required="required" Style="width:200px"/>
                                                         <div id="RepeaterContainer2" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
@@ -266,7 +266,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" required="required" Style="width:200px"/>
                                                         <div id="RepeaterContainer3" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
@@ -303,7 +303,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" required="required" Style="width:200px" />
                                                         <div id="RepeaterContainer4" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater4" runat="server" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
@@ -391,6 +391,9 @@
             textBox1.addEventListener("focus", function () {
 
                 repeaterContainer1.style.display = "block";
+                repeaterContainer2.style.display = "none";
+                repeaterContainer3.style.display = "none";
+                repeaterContainer4.style.display = "none";
 
             });
 
@@ -408,6 +411,8 @@
         textBox2.addEventListener("focus", function () {
 
             repeaterContainer2.style.display = "block";
+            repeaterContainer3.style.display = "none";
+            repeaterContainer4.style.display = "none";
 
         });
 
@@ -425,7 +430,7 @@
         textBox3.addEventListener("focus", function () {
 
             repeaterContainer3.style.display = "block";
-            console.log("clicking")
+            repeaterContainer4.style.display = "none";
 
         });
 

@@ -198,7 +198,6 @@ namespace Society
 
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
 
-
         }
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -223,7 +222,18 @@ namespace Society
 
         }
 
-       
+        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (ddl_build_name.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == ddl_build_name.Value)
+                        categoryBox.Text = link.Text;
+                }
+            }
+        }
     } 
 }
 
