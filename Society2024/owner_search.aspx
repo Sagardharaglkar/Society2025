@@ -214,7 +214,7 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -692,6 +692,8 @@
 
             textBox1.addEventListener("focus", function () {
                 repeaterContainer1.style.display = "block";
+                repeaterContainer2.style.display = "none";
+                repeaterContainer3.style.display = "none";
             });
 
             textBox1.addEventListener("input", function () {

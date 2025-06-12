@@ -41,23 +41,28 @@ namespace Society
                 txt_f_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 Owner_Gridbind();
 
-
-                String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater1, str1);
-
-                String str2 = "Select *  from types ";
-                repeater.fill_list(Repeater2, str2);
-
-                String str3 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater3, str3);
-
-                String str4 = "Select *  from married_status ";
-                repeater.fill_list(Repeater4, str4);
-
-                String str5 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater5, str5);
+                AllRepeater();
+               
 
             }
+        }
+
+        protected void AllRepeater()
+        {
+            String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
+
+            String str2 = "Select *  from types ";
+            repeater.fill_list(Repeater2, str2);
+
+            String str3 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater3, str3);
+
+            String str4 = "Select *  from married_status ";
+            repeater.fill_list(Repeater4, str4);
+
+            String str5 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater5, str5);
         }
 
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
@@ -208,7 +213,7 @@ namespace Society
             owner.Email = txt_email.Text;
             owner.Alter_Mob = txt_add_mob.Text;
             owner.flat_id = Convert.ToInt32(flat_no_id.Value.ToString());
-            owner.Flat_type_Id = Convert.ToInt32(flat_no_id.Value.ToString());
+            owner.Flat_type_Id = Convert.ToInt32(type_id.Value.ToString());
             owner.Photo_Name =uploadphotopath.Text;
             owner.Id_Proof = uploadidproof.Text;
             owner.Type = type;
@@ -264,6 +269,8 @@ namespace Society
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
                
             }
+
+            AllRepeater();
         }
 
 
@@ -455,6 +462,21 @@ namespace Society
         {
             OwnerGrid.PageIndex = e.NewPageIndex;
             Owner_Gridbind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+            // Match item index
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (lbl_Building.Text != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == lbl_Building.Text)
+                        TextBox1.Text = link.Text;
+                }
+            }
         }
     }
 }

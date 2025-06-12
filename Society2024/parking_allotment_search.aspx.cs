@@ -149,6 +149,10 @@ namespace Society
             {
                 Panel1.Visible = true;
             }
+            else
+            {
+                Panel1.Visible = false;
+            }
         }
         protected void edit_Command(object sender, CommandEventArgs e)
         {

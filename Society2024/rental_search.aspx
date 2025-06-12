@@ -441,14 +441,7 @@
                                     </div>
 
                                      <asp:Label runat="server" Visible="false" ID="building_lbl"></asp:Label>
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                </Triggers>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                </Triggers>
-                            </asp:UpdatePanel>
+
 
                             <div class="form-group">
                                 <div class="row">
@@ -561,8 +554,7 @@
                                 </div>
                             </div>
                             <hr />
-                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
+                            
                                     <div class="box-header">
                                         <div class="row ">
                                             <div class="col-sm-12">
@@ -631,7 +623,11 @@
                                         </div>
                                     </div>
                                     <hr />
-                                </ContentTemplate>
+                                                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </Triggers>
+                       
                             </asp:UpdatePanel>
                            
 
@@ -760,6 +756,8 @@
 
             textBox1.addEventListener("focus", function () {
                 repeaterContainer1.style.display = "block";
+                repeaterContainer2.style.display = "none";
+                repeaterContainer3.style.display = "none";
             });
 
             textBox1.addEventListener("input", function () {
@@ -853,11 +851,14 @@
         function setTextBox1(value) {
             document.getElementById("<%= TextBox1.ClientID %>").value = value;
             document.getElementById("RepeaterContainer1").style.display = "none";
+            document.getElementById("<%= TextBox2.ClientID %>").value = "";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox2(value) {
             document.getElementById("<%= TextBox2.ClientID %>").value = value;
-             document.getElementById("RepeaterContainer2").style.display = "none";
+            document.getElementById("RepeaterContainer2").style.display = "none";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox3(value) {
@@ -879,5 +880,5 @@
         Sys.Application.add_load(initDropdownEvents);
 
 
-</script>
+    </script>
 </asp:Content>

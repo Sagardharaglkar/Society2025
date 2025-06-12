@@ -753,12 +753,13 @@
                         input.value = '';
                         break;
                     case 'checkbox':
+
                     case 'radio':
                         input.checked = false;
                         break;
                     case 'select-one':
                     case 'select-multiple':
-                        input.selectedIndex = -1;
+                        input.selectedIndex = 0;
                         break;
                 }
             });
