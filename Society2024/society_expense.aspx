@@ -55,6 +55,10 @@
                         <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+
+                        <asp:HiddenField runat="server" ID="vendor_name_id" />
+                        <asp:HiddenField runat="server" ID="building_id" />
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -219,14 +223,29 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required></asp:TextBox>
-                                                        <div class="invalid-feedback">
-                                                            Please Enter Name
+                                                        <div class="dropdown-container">
+                                                            <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                                                placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            <div id="RepeaterContainer1" class="suggestion-list">
+                                                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton
+                                                                            ID="lnkCategory"
+                                                                            runat="server"
+                                                                            CssClass="suggestion-item link-button category-link"
+                                                                            Text='<%# Eval("flat_type") %>'
+                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            CommandName="SelectCategory"
+                                                                            OnClientClick="setTextBox1(this.innerText);" />
+                                                                    </ItemTemplate>
+                                                                    <FooterTemplate>
+                                                                        <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                            Text="No items found." />
+                                                                    </FooterTemplate>
+                                                                </asp:Repeater>
+                                                            </div>
                                                         </div>
-                                                        <asp:DropDownList ID="ddl_vendor" Height="32px" Width="200px" runat="server" parsely-trigger="change" Visible="false"></asp:DropDownList>
-                                                        <br />
-                                                        <asp:CompareValidator ControlToValidate="ddl_vendor" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Vendor" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-
+ 
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,8 +257,28 @@
                                                         <asp:Label ID="Label25" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <asp:DropDownList ID="ddl_build" Height="32px" Width="200px" parsely-trigger="change" runat="server"></asp:DropDownList>
-                                                        <asp:CompareValidator ControlToValidate="ddl_build" ID="CompareValidator3" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Building Name" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+                                                        <div class="dropdown-container">
+                                                            <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
+                                                                placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            <div id="RepeaterContainer2" class="suggestion-list">
+                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton
+                                                                            ID="lnkCategory"
+                                                                            runat="server"
+                                                                            CssClass="suggestion-item link-button category-link"
+                                                                            Text='<%# Eval("flat_type") %>'
+                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            CommandName="SelectCategory"
+                                                                            OnClientClick="setTextBox2(this.innerText);" />
+                                                                    </ItemTemplate>
+                                                                    <FooterTemplate>
+                                                                        <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                            Text="No items found." />
+                                                                    </FooterTemplate>
+                                                                </asp:Repeater>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-sm-3">

@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.BL;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,6 +17,7 @@ namespace Society
 {
     public partial class shop_maintenance : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Shop_Maintenance maintenance = new Shop_Maintenance();
         BL_Shop_Maint bL_Shop = new BL_Shop_Maint();
 
@@ -28,16 +30,30 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                filldrop();
+                //filldrop();
+
+                String str1 = "SELECT  * FROM  ledger";
+                repeater.fill_list(Repeater1, str1);
+
                 shop_maintenance_GridBind();
                 panel2.Visible = false;
                 panel3.Visible = false;
             }
         }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                ledger_id.Value = e.CommandArgument.ToString();
+            }
+
+        }
+
         public void filldrop()
         {
-            string sql1 = "SELECT  * FROM  ledger";
-            bL_Shop.fill_drop(ddl_ledger, sql1, "led_description", "led_id");
+            //string sql1 = "SELECT  * FROM  ledger";
+            //bL_Shop.fill_drop(ddl_ledger, sql1, "led_description", "led_id");
         }
         protected void edit_Command(object sender, CommandEventArgs e)
         {
@@ -136,7 +152,7 @@ namespace Society
             maintenance.Mrep_No = txt_recipt.Text;
             if (txt_date.Text != "")
                 maintenance.M_Date = Convert.ToDateTime(txt_date.Text);
-            maintenance.led_id = Convert.ToInt32(ddl_ledger.SelectedValue);
+            maintenance.led_id = Convert.ToInt32(ledger_id.Value);
             maintenance.Amt = Convert.ToInt32(txt_amt.Text);
             maintenance.Other_Details = txt_details.Text;
             maintenance.Pay_Method = ddl_method.SelectedValue;
@@ -162,7 +178,7 @@ namespace Society
             society_id.Value = result.Society_Id;
             txt_recipt.Text = result.Mrep_No;
             txt_date.Text = result.M_Date.ToString("yyyy-MM-dd");
-            ddl_ledger.SelectedValue = result.led_id.ToString();
+            ledger_id.Value = result.led_id.ToString();
             txt_amt.Text = result.Amt.ToString();
             txt_details.Text = result.Other_Details;
             ddl_method.SelectedValue = result.Pay_Method;

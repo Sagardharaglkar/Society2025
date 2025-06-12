@@ -21,6 +21,7 @@ namespace Society
 {
     partial class society_expense : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Society_Expense society = new Society_Expense();
         Society_Member member = new Society_Member();
         BL_Society_Expense bL_Society = new BL_Society_Expense();
@@ -36,21 +37,47 @@ namespace Society
             society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                filldrop();
+                //filldrop();
                 Society_Expense_Gridbind();
                 fetch_expense();
                 list_fill();
                 ViewState["user_data"] = approverdt;
+
+
+                String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "Select *  from types ";
+                repeater.fill_list(Repeater2, str2);
+
             }
 
+        }
 
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                vendor_name_id.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+            }
         }
         public void filldrop()
         {
-            String sql_query1 = "Select * from vendor_master where society_id='" + society_id.Value + "'";
-            bL_Society.fill_drop(ddl_vendor, sql_query1, "v_name", "vendor_id");
-            String sql_query2 = "Select * from building_master where society_id='" + society_id.Value + "'";
-            bL_Society.fill_drop(ddl_build, sql_query2, "name", "build_id");
+            //String sql_query1 = "Select * from vendor_master where society_id='" + society_id.Value + "'";
+            //bL_Society.fill_drop(ddl_vendor, sql_query1, "v_name", "vendor_id");
+
+            //String sql_query2 = "Select * from building_master where society_id='" + society_id.Value + "'";
+            //bL_Society.fill_drop(ddl_build, sql_query2, "name", "build_id");
 
 
         }
@@ -116,17 +143,18 @@ namespace Society
             society.Invoice_No = txt_no.Text;
             society.Date = Convert.ToDateTime(txt_date.Text);
             society.Sql_Operation = operation;
-            society.build_id = ddl_build.SelectedValue;
+            society.build_id = building_id.Value;
 
             if (cash.Checked == true)
             {
                 society.Ex_Type = Convert.ToInt32(cash.Checked == true ? 1 : 0).ToString();
                 society.Ex_Name = txt_name.Text;
             }
+
             if (vendor.Checked == true)
             {
                 society.Ex_Type = Convert.ToInt32(vendor.Checked == true ? 0 : 1).ToString();
-                society.Ex_Name = ddl_vendor.SelectedItem.ToString();
+                society.Ex_Name = TextBox1.Text.ToString();
             }
             society.Ex_Details = txt_details.Text;
             society.Comments = txt_comment.Text;
@@ -164,21 +192,21 @@ namespace Society
             txt_no.Text = result.Invoice_No;
 
             txt_date.Text = result.Date.ToString("yyyy-MM-dd");
-            ddl_build.SelectedValue = result.build_id;
+            building_id.Value = result.build_id;
             if (result.Ex_Type == "1")
             {
                 cash.Checked = true;
                 txt_name.Text = result.Ex_Name;
-                ddl_vendor.Visible = false;
+                drp_Container.Visible = false;
                 txt_name.Visible = true;
             }
             else
 
             {
-                var a = ddl_vendor.SelectedValue;
+                var a = vendor_name_id.Value;
                 vendor.Checked = true;
-                ddl_vendor.SelectedValue = ddl_vendor.Items.FindByText(result.Ex_Name).Value;
-                ddl_vendor.Visible = true;
+                //ddl_vendor.SelectedValue = ddl_vendor.Items.FindByText(result.Ex_Name).Value;
+                drp_Container.Visible = true;
                 txt_name.Visible = false;
             }
             txt_details.Text = result.Ex_Details;
@@ -301,7 +329,7 @@ namespace Society
         {
             if (vendor.Checked == true)
             {
-                ddl_vendor.Visible = true;
+                drp_Container.Visible = true;
                 txt_name.Visible = false;
             }
         }
@@ -311,7 +339,7 @@ namespace Society
             if (cash.Checked == true)
                 txt_name.Visible = true;
             txt_name.Text = "Cash";
-            ddl_vendor.Visible = false;
+            drp_Container.Visible = false;
         }
 
         protected void txt_tax_TextChanged(object sender, EventArgs e)

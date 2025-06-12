@@ -78,6 +78,42 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField owner_id;
 
         /// <summary>
+        /// building_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField building_id;
+
+        /// <summary>
+        /// wing_name_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField wing_name_id;
+
+        /// <summary>
+        /// owner_name_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField owner_name_id;
+
+        /// <summary>
+        /// pay_mode_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField pay_mode_id;
+
+        /// <summary>
         /// search_field control.
         /// </summary>
         /// <remarks>

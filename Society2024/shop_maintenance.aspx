@@ -76,6 +76,8 @@
                         <asp:HiddenField ID="shop_maint_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
+                        <asp:HiddenField ID="ledger_id" runat="server" />
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -91,7 +93,7 @@
                                 <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp; 
                         
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                        </asp:Panel>
+                            </asp:Panel>
                                         &nbsp;&nbsp;
                        
                         
@@ -202,9 +204,28 @@
                                                     <asp:Label ID="Label5" runat="server" Text="*" ForeColor="Red"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:DropDownList ID="ddl_ledger" Width="200px" Height="32px" parsely-trigger="change" runat="server"></asp:DropDownList>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_ledger" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select The Ledger" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("flat_type") %>'
+                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setTextBox1(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <asp:Label ID="Label8" runat="server" Text="Payment Method"></asp:Label>
@@ -326,4 +347,66 @@
         </div>
     </div>
 
+
+
+<script>
+
+    function initDropdownEvents() {
+        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+ 
+    textBox1.addEventListener("focus", function () {
+        repeaterContainer1.style.display = "block";
+    });
+ 
+    textBox1.addEventListener("input", function () {
+        const input = textBox1.value.toLowerCase();
+        filterSuggestions("category-link", input);
+    });
+}
+ 
+ 
+ 
+ 
+function filterSuggestions(className, value) {
+    const items = document.querySelectorAll("." + className);
+    let matchFound = false;
+ 
+    items.forEach(item => {
+        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+            item.style.display = "block";
+            matchFound = true;
+        } else {
+            item.style.display = "none";
+        }
+    });
+ 
+    let noMatchMessage = document.getElementById("no-match-message");
+ 
+    if (!matchFound) {
+        if (!noMatchMessage) {
+            noMatchMessage = document.createElement("div");
+            noMatchMessage.id = "no-match-message";
+ 
+            noMatchMessage.innerText = "No matching suggestions.";
+            items[0]?.parentNode?.appendChild(noMatchMessage);
+        }
+        noMatchMessage.style.display = "block";
+    } else {
+        if (noMatchMessage) {
+            noMatchMessage.style.display = "none";
+        }
+    }
+}
+ 
+function setTextBox1(value) {
+    document.getElementById("<%= TextBox1.ClientID %>").value = value;
+        document.getElementById("RepeaterContainer1").style.display = "none";
+    }
+
+
+    Sys.Application.add_load(initDropdownEvents);
+
+
+</script>
 </asp:Content>
