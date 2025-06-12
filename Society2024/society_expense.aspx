@@ -232,14 +232,14 @@
                                                             <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select category (Select Item)" autocomplete="off" />
                                                             <div id="RepeaterContainer1" class="suggestion-list">
-                                                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton
                                                                             ID="lnkCategory"
                                                                             runat="server"
-                                                                            CssClass="suggestion-item link-button category-link"
-                                                                            Text='<%# Eval("flat_type") %>'
-                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                             CssClass="suggestion-item link-button category-link"
+                                                                            Text='<%# Eval("name") %>'
+                                                                            CommandArgument='<%# Eval("wing_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setTextBox1(this.innerText);" />
                                                                     </ItemTemplate>
@@ -250,7 +250,7 @@
                                                                 </asp:Repeater>
                                                             </div>
                                                         </div>
-                                                            </asp:Panel>
+                                                            </asp:Panel> 
  
                                                     </div>
                                                 </div>
@@ -267,7 +267,7 @@
                                                             <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select category (Select Item)" autocomplete="off" />
                                                             <div id="RepeaterContainer2" class="suggestion-list">
-                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton
                                                                             ID="lnkCategory"
@@ -533,7 +533,123 @@
             </div>
         </div>
     </div>
+<script>
 
+    function initDropdownEvents() {
+
+        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+
+    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+ 
+    textBox1.addEventListener("focus", function () {
+
+        repeaterContainer1.style.display = "block";
+
+    });
+ 
+    textBox1.addEventListener("input", function () {
+
+        const input = textBox1.value.toLowerCase();
+
+        filterSuggestions("category-link", input);
+
+    });
+        const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+
+    const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+ 
+    textBox2.addEventListener("focus", function () {
+
+        repeaterContainer2.style.display = "block";
+
+    });
+ 
+    textBox2.addEventListener("input", function () {
+
+        const input = textBox2.value.toLowerCase();
+
+        filterSuggestions("category-link", input);
+
+    });
+
+}
+ 
+ 
+ 
+ 
+function filterSuggestions(className, value) {
+
+    const items = document.querySelectorAll("." + className);
+
+    let matchFound = false;
+ 
+    items.forEach(item => {
+
+        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+            item.style.display = "block";
+
+            matchFound = true;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+ 
+    let noMatchMessage = document.getElementById("no-match-message");
+ 
+    if (!matchFound) {
+
+        if (!noMatchMessage) {
+
+            noMatchMessage = document.createElement("div");
+
+            noMatchMessage.id = "no-match-message";
+ 
+            noMatchMessage.innerText = "No matching suggestions.";
+
+            items[0]?.parentNode?.appendChild(noMatchMessage);
+
+        }
+
+        noMatchMessage.style.display = "block";
+
+    } else {
+
+        if (noMatchMessage) {
+
+            noMatchMessage.style.display = "none";
+
+        }
+
+    }
+
+}
+ 
+function setTextBox1(value) {
+
+    document.getElementById("<%= TextBox1.ClientID %>").value = value;
+
+        document.getElementById("RepeaterContainer1").style.display = "none";
+
+    }
+function setTextBox2(value) {
+
+    document.getElementById("<%= TextBox2.ClientID %>").value = value;
+
+        document.getElementById("RepeaterContainer2").style.display = "none";
+
+    }
+
+
+    Sys.Application.add_load(initDropdownEvents);
+
+
+</script>
+ 
 </asp:Content>
 
 

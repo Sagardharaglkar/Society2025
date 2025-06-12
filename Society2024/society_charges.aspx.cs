@@ -130,6 +130,8 @@ namespace Society
             charge_id.Value = result.Charge_Id.ToString();
             txt_amount.Text = result.Amount.ToString();
             society_name_id.Value = result.Society_Id.ToString();
+            String str = "Select *  from society_master";
+            repeater.fill_list(categoryRepeater, str);
 
         }
 
@@ -218,6 +220,20 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Society_charges_GridBind();
+        }
+
+        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (society_name_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == society_name_id.Value)
+                        categoryBox.Text = link.Text;
+                }
+            }
+
         }
     }
 }

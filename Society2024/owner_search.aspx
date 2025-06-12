@@ -212,7 +212,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound" >
                                                                 <ItemTemplate>
@@ -260,9 +260,9 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" />
                                                         <div id="RepeaterContainer2" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -291,9 +291,9 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Select Item)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" />
                                                         <div id="RepeaterContainer3" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
+                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemDataBound="Repeater3_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -388,9 +388,9 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Animal or Bird)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" />
                                                         <div id="RepeaterContainer4" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater4" runat="server" OnItemCommand="CategoryRepeater_ItemCommand4">
+                                                            <asp:Repeater ID="Repeater4" runat="server" OnItemDataBound="Repeater4_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -445,9 +445,9 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select category (Animal or Bird)" autocomplete="off" />
+                                                            placeholder="Select" autocomplete="off" />
                                                         <div id="RepeaterContainer5" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater5" runat="server" OnItemCommand="CategoryRepeater_ItemCommand5">
+                                                            <asp:Repeater ID="Repeater5" runat="server" OnItemDataBound="Repeater5_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand5">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"

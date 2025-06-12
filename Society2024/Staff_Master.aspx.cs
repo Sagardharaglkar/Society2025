@@ -169,6 +169,8 @@ namespace Society2024
             txt_email.Text = result.Email;
             txt_doj.Text = result.Date_Of_Join.ToString("yyyy-MM-dd");
             role_id.Value = result.role_id.ToString();
+            String str = "Select *  from staff_role where active_status=0 and society_id='" + society_id.Value + "'";
+            repeater.fill_list(categoryRepeater, str);
 
         }
 
@@ -207,6 +209,28 @@ namespace Society2024
         {
             GridView1.PageIndex = e.NewPageIndex;
             staff_Gridbind();
+        }
+
+        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (role_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == role_id.Value)
+
+                        categoryBox.Text = link.Text;
+
+                }
+
+            }
+
         }
     }
 }

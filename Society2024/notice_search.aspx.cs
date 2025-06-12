@@ -36,6 +36,7 @@ namespace Society
             {
                 String str = "Select * from notice_recipients;";
                 repeater.fill_list(categoryRepeater, str);
+
                 Notice_Gridbind();
 
                 //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
@@ -147,7 +148,12 @@ namespace Society
             Recipient_id.Value = result.Recipients_id.ToString();
             txt_desc.Text = result.Description;
             txt_valid_to.Text = result.Valid_To.ToString("yyyy-MM-dd");
+            String str = "Select * from notice_recipients;";
+            repeater.fill_list(categoryRepeater, str);
             
+
+
+
         }
 
         protected void btn_save_Click1(object sender, EventArgs e)
@@ -261,6 +267,28 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Notice_Gridbind();
+        }
+
+        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (Recipient_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == Recipient_id.Value)
+
+                        categoryBox. Text = link.Text;
+
+                }
+
+            }
+
         }
     }
 }
