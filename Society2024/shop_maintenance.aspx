@@ -353,54 +353,54 @@
 
     function initDropdownEvents() {
         const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
-    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
- 
-    textBox1.addEventListener("focus", function () {
-        repeaterContainer1.style.display = "block";
-    });
- 
-    textBox1.addEventListener("input", function () {
-        const input = textBox1.value.toLowerCase();
-        filterSuggestions("category-link", input);
-    });
-}
- 
- 
- 
- 
-function filterSuggestions(className, value) {
-    const items = document.querySelectorAll("." + className);
-    let matchFound = false;
- 
-    items.forEach(item => {
-        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-            item.style.display = "block";
-            matchFound = true;
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+
+        textBox1.addEventListener("focus", function () {
+            repeaterContainer1.style.display = "block";
+        });
+
+        textBox1.addEventListener("input", function () {
+            const input = textBox1.value.toLowerCase();
+            filterSuggestions("category-link", input);
+        });
+    }
+
+
+
+
+    function filterSuggestions(className, value) {
+        const items = document.querySelectorAll("." + className);
+        let matchFound = false;
+
+        items.forEach(item => {
+            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                item.style.display = "block";
+                matchFound = true;
+            } else {
+                item.style.display = "none";
+            }
+        });
+
+        let noMatchMessage = document.getElementById("no-match-message");
+
+        if (!matchFound) {
+            if (!noMatchMessage) {
+                noMatchMessage = document.createElement("div");
+                noMatchMessage.id = "no-match-message";
+
+                noMatchMessage.innerText = "No matching suggestions.";
+                items[0]?.parentNode?.appendChild(noMatchMessage);
+            }
+            noMatchMessage.style.display = "block";
         } else {
-            item.style.display = "none";
-        }
-    });
- 
-    let noMatchMessage = document.getElementById("no-match-message");
- 
-    if (!matchFound) {
-        if (!noMatchMessage) {
-            noMatchMessage = document.createElement("div");
-            noMatchMessage.id = "no-match-message";
- 
-            noMatchMessage.innerText = "No matching suggestions.";
-            items[0]?.parentNode?.appendChild(noMatchMessage);
-        }
-        noMatchMessage.style.display = "block";
-    } else {
-        if (noMatchMessage) {
-            noMatchMessage.style.display = "none";
+            if (noMatchMessage) {
+                noMatchMessage.style.display = "none";
+            }
         }
     }
-}
- 
-function setTextBox1(value) {
-    document.getElementById("<%= TextBox1.ClientID %>").value = value;
+
+    function setTextBox1(value) {
+        document.getElementById("<%= TextBox1.ClientID %>").value = value;
         document.getElementById("RepeaterContainer1").style.display = "none";
     }
 

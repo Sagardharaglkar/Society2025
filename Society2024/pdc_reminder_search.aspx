@@ -524,107 +524,107 @@
 
         const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
 
-    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
- 
-    textBox1.addEventListener("focus", function () {
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-        repeaterContainer1.style.display = "block";
+        textBox1.addEventListener("focus", function () {
 
-    });
- 
-    textBox1.addEventListener("input", function () {
+            repeaterContainer1.style.display = "block";
 
-        const input = textBox1.value.toLowerCase();
+        });
 
-        filterSuggestions("category-link", input);
+        textBox1.addEventListener("input", function () {
 
-    });
+            const input = textBox1.value.toLowerCase();
+
+            filterSuggestions("category-link", input);
+
+        });
 
         const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
 
-    const repeaterContainer2 = document.getElementById("RepeaterContainer2");
- 
-    textBox2.addEventListener("focus", function () {
+        const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-        repeaterContainer2.style.display = "block";
+        textBox2.addEventListener("focus", function () {
 
-    });
- 
-    textBox2.addEventListener("input", function () {
+            repeaterContainer2.style.display = "block";
 
-        const input = textBox2.value.toLowerCase();
+        });
 
-        filterSuggestions("category-link", input);
+        textBox2.addEventListener("input", function () {
 
-    });
+            const input = textBox2.value.toLowerCase();
 
-}
- 
- 
- 
- 
-function filterSuggestions(className, value) {
+            filterSuggestions("category-link", input);
 
-    const items = document.querySelectorAll("." + className);
+        });
 
-    let matchFound = false;
- 
-    items.forEach(item => {
+    }
 
-        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
 
-            item.style.display = "block";
 
-            matchFound = true;
+
+    function filterSuggestions(className, value) {
+
+        const items = document.querySelectorAll("." + className);
+
+        let matchFound = false;
+
+        items.forEach(item => {
+
+            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                item.style.display = "block";
+
+                matchFound = true;
+
+            } else {
+
+                item.style.display = "none";
+
+            }
+
+        });
+
+        let noMatchMessage = document.getElementById("no-match-message");
+
+        if (!matchFound) {
+
+            if (!noMatchMessage) {
+
+                noMatchMessage = document.createElement("div");
+
+                noMatchMessage.id = "no-match-message";
+
+                noMatchMessage.innerText = "No matching suggestions.";
+
+                items[0]?.parentNode?.appendChild(noMatchMessage);
+
+            }
+
+            noMatchMessage.style.display = "block";
 
         } else {
 
-            item.style.display = "none";
+            if (noMatchMessage) {
 
-        }
+                noMatchMessage.style.display = "none";
 
-    });
- 
-    let noMatchMessage = document.getElementById("no-match-message");
- 
-    if (!matchFound) {
-
-        if (!noMatchMessage) {
-
-            noMatchMessage = document.createElement("div");
-
-            noMatchMessage.id = "no-match-message";
- 
-            noMatchMessage.innerText = "No matching suggestions.";
-
-            items[0]?.parentNode?.appendChild(noMatchMessage);
-
-        }
-
-        noMatchMessage.style.display = "block";
-
-    } else {
-
-        if (noMatchMessage) {
-
-            noMatchMessage.style.display = "none";
+            }
 
         }
 
     }
 
-}
- 
-function setTextBox1(value) {
+    function setTextBox1(value) {
 
-    document.getElementById("<%= TextBox1.ClientID %>").value = value;
+        document.getElementById("<%= TextBox1.ClientID %>").value = value;
 
         document.getElementById("RepeaterContainer1").style.display = "none";
 
     }
-function setTextBox2(value) {
+    function setTextBox2(value) {
 
-    document.getElementById("<%= TextBox2.ClientID %>").value = value;
+        document.getElementById("<%= TextBox2.ClientID %>").value = value;
 
         document.getElementById("RepeaterContainer2").style.display = "none";
 

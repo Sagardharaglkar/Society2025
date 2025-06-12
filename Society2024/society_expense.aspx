@@ -223,6 +223,11 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
+                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required></asp:TextBox>
+                                                        <div class="invalid-feedback">
+                                                            Please Enter Name
+                                                        </div>
+                                                        <asp:Panel ID="drp_Container" runat="server">
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select category (Select Item)" autocomplete="off" />
@@ -245,6 +250,7 @@
                                                                 </asp:Repeater>
                                                             </div>
                                                         </div>
+                                                            </asp:Panel>
  
                                                     </div>
                                                 </div>
