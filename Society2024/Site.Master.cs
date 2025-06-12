@@ -20,18 +20,18 @@ namespace Society
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
             Response.Cache.SetNoStore();
 
-
-
-            if (Session["Name"] != null)
+            if (!IsPostBack)
             {
-                Panel1.Visible = true;
-                txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
-                name_society.Text = "Welcome To " + Session["society_name"].ToString();
-                get_notificatoin();
+                if (Session["Name"] != null)
+                {
+                    Panel1.Visible = true;
+                    txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
+                    name_society.Text = "Welcome To " + Session["society_name"].ToString();
+                    get_notificatoin();
+                }
+                else
+                    Panel1.Visible = false;
             }
-            else
-                Panel1.Visible = false;
-            
         }
 
         protected void TimerNotif_Tick(object sender, EventArgs e)

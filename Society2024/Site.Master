@@ -456,7 +456,7 @@
 
                             <!-- Nav Item - Alerts -->
                       
-                            <asp:Timer ID="SharedTimer" runat="server" Interval="1000"  />
+                            <asp:Timer ID="SharedTimer" runat="server" Interval="5000"  />
 
 
                                     <li class="nav-item dropdown no-arrow mx-1">
@@ -475,7 +475,7 @@
                                                 <span class="badge badge-danger badge-counter">
                                                     <asp:UpdatePanel ID="upNotifCount" runat="server" UpdateMode="Conditional">
                                                         <ContentTemplate>
-                                                            <asp:Timer ID="TimerNotif" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
+                                                            <asp:Timer ID="TimerNotif" runat="server" Interval="5000" OnTick="TimerNotif_Tick" />
 
                                                             <asp:Label runat="server" ID="notifCount"></asp:Label>
                                                         </ContentTemplate>
@@ -1214,15 +1214,15 @@
                     }
 
                     // Dropdown (select) validation
-                    if (tag === 'select' && input.required) {
-                        if (input.value === '0') {
-                            input.setCustomValidity('Please select a valid option');
-                            showInvalid(input);
-                            return;
-                        } else {
-                            input.setCustomValidity('');
-                        }
-                    }
+                    //if (tag === 'select' && input.required) {
+                    //    if (input.value === '0') {
+                    //        input.setCustomValidity('Please select a valid option');
+                    //        showInvalid(input);
+                    //        return;
+                    //    } else {
+                    //        input.setCustomValidity('');
+                    //    }
+                    //}
 
                     // Final validation state
                     if (!input.checkValidity()) {
@@ -1240,13 +1240,13 @@
                 function showValid(input) {
                     input.classList.remove('is-invalid');
                     input.classList.add('is-valid');
-                }
+                } 
 
                 form.addEventListener('submit', function (event) {
                     submittedOnce = true;
                     let hasCustomError = false;
 
-                    form.querySelectorAll('input, textarea, select').forEach(function (input) {
+                    form.querySelectorAll('input, textarea').forEach(function (input) {
                         validateField(input);
                         if (!input.checkValidity()) {
                             hasCustomError = true;
@@ -1262,7 +1262,7 @@
                 }, false);
 
                 // Live validation
-                form.querySelectorAll('input, textarea, select').forEach(function (input) {
+                form.querySelectorAll('input, textarea').forEach(function (input) {
                     input.addEventListener('input', function () {
                         if (submittedOnce) {
                             validateField(input);
@@ -1272,7 +1272,7 @@
             });
         })();
 
-    </script>
+        </script>
 
 
 </body>

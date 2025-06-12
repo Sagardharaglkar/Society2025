@@ -36,9 +36,10 @@ namespace Society2024
                 bl.fill_list(Repeater1, str);
                 //categoryRepeater.DataSource = categories;
                 //categoryRepeater.DataBind();
+               
             }
         }
-
+       
         // When a category is selected
         protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -50,7 +51,9 @@ namespace Society2024
             }
         }
 
-
-        
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            
+        }
     }
 }

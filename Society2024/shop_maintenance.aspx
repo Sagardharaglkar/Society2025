@@ -52,7 +52,7 @@
                 btn.value = "Saving...";
 
 
-                __doPostBack('<%= btn_save.UniqueID %>', '');
+                <%--__doPostBack('<%= btn_save.UniqueID %>', '');--%>
 
                 return false; // prevent default to avoid double postback
             }
@@ -165,7 +165,7 @@
                                 <h4 class="modal-title" id="gridSystem"><strong>Shop Maintenance</strong></h4>
                             </div>
                             <d class="modal-body" id="invoice_data">
-                                <asp:UpdatePanel ID="updatepnl" runat="server">
+                                <asp:UpdatePanel ID="updatepnl" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <div class="form-group">
                                             <div class="row ">

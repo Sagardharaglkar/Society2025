@@ -1,16 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="tempForm.aspx.cs" MasterPageFile="~/Site.Master" Inherits="Society2024.tempForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-
+                           
     <asp:UpdatePanel ID="updatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-
+                                       
             <!-- First Dropdown (Category Selection) -->
             <div class="dropdown-container">
                 <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                     placeholder="Select category (Animal or Bird)" autocomplete="off"/>
                 <div id="RepeaterContainer1" class="suggestion-list">
-                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="Repeater1_ItemDataBound">
                         <ItemTemplate>
                             <asp:LinkButton
                                 ID="lnkCategory"
@@ -42,7 +42,7 @@
                                 Text='<%# Eval("flat_no") %>'
                                 CommandArgument='<%# Eval("flat_id") %>'
                                 CommandName="SelectCategory"
-                                OnClientClick='setTextBox2(this.innerText);' />
+                                 />
                         </ItemTemplate>
                         <FooterTemplate>
                             <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
