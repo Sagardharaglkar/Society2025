@@ -93,6 +93,10 @@
                         <asp:HiddenField ID="build_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="pdc_rem_id" runat="Server"></asp:HiddenField>
+
+                        <asp:HiddenField runat="server" ID="owner_name_id" />
+                        <asp:HiddenField runat="server" ID="building_name_id" />
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -214,14 +218,14 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("owner_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>
@@ -244,14 +248,14 @@
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer2" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("wing_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox2(this.innerText);" />
                                                                 </ItemTemplate>
@@ -415,69 +419,69 @@
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
                                 </asp:UpdatePanel>
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-12">
-                                                    <div style="width: 800px; overflow: auto;">
-                                                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue">
+                                <div class="form-group">
+                                    <div class="row ">
+                                        <div class="col-sm-12">
+                                            <div style="width: 800px; overflow: auto;">
+                                                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue">
 
-                                                            <Columns>
-                                                                <asp:TemplateField HeaderText="No." ItemStyle-Width="30">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="id" runat="server" Text='<%#Container.DisplayIndex + 1 %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="pdc_id" Visible="false">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="pdc_rem_id" runat="server" Text='<%#Bind("pdc_rem_id")%>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Cheque No" ItemStyle-Width="100">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="cheque_no" runat="server" Text='<%#Bind("chqno")%>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="No." ItemStyle-Width="30">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="id" runat="server" Text='<%#Container.DisplayIndex + 1 %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="pdc_id" Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="pdc_rem_id" runat="server" Text='<%#Bind("pdc_rem_id")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Cheque No" ItemStyle-Width="100">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="cheque_no" runat="server" Text='<%#Bind("chqno")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
 
-                                                                <asp:TemplateField HeaderText="Cheque Date" ItemStyle-Width="100">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="chq_date" runat="server" Text='<%#Bind("che_date", "{0:dd/MM/yyyy}")%>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Cheque Date" ItemStyle-Width="100">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="chq_date" runat="server" Text='<%#Bind("che_date", "{0:dd/MM/yyyy}")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
 
-                                                                <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="chq_amount" runat="server" Text='<%#Bind("che_amount")%>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Deposited">
-                                                                    <ItemTemplate>
-                                                                        <asp:CheckBox ID="chk_deposited" runat="server" Enabled="false" Checked='<%# Eval("che_dep").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
+                                                        <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="chq_amount" runat="server" Text='<%#Bind("che_amount")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Deposited">
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="chk_deposited" runat="server" Enabled="false" Checked='<%# Eval("che_dep").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
 
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Returned">
-                                                                    <ItemTemplate>
-                                                                        <asp:CheckBox ID="chk_returned" runat="server" Enabled="false" Checked='<%# Eval("che_ret").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Returned">
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="chk_returned" runat="server" Enabled="false" Checked='<%# Eval("che_ret").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
 
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Bounced">
-                                                                    <ItemTemplate>
-                                                                        <asp:CheckBox ID="chk_bounced" runat="server" Enabled="false" Checked='<%# Eval("che_can").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Bounced">
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="chk_bounced" runat="server" Enabled="false" Checked='<%# Eval("che_can").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
 
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                            </Columns>
-                                                        </asp:GridView>
-                                                    </div>
-                                                </div>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
 
 
 
-                                   
+
 
 
 
@@ -490,9 +494,9 @@
                                         <center>
                                             <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
- 
-                                       </center>
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+
+                                        </center>
                                     </div>
                                 </div>
 
@@ -514,124 +518,124 @@
 
 
 
-<script>
+    <script>
 
-    function initDropdownEvents() {
+        function initDropdownEvents() {
 
-        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
 
-    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
- 
-    textBox1.addEventListener("focus", function () {
+            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-        repeaterContainer1.style.display = "block";
+            textBox1.addEventListener("focus", function () {
 
-    });
- 
-    textBox1.addEventListener("input", function () {
+                repeaterContainer1.style.display = "block";
 
-        const input = textBox1.value.toLowerCase();
+            });
 
-        filterSuggestions("category-link", input);
+            textBox1.addEventListener("input", function () {
 
-    });
+                const input = textBox1.value.toLowerCase();
 
-        const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+                filterSuggestions("category-link", input);
 
-    const repeaterContainer2 = document.getElementById("RepeaterContainer2");
- 
-    textBox2.addEventListener("focus", function () {
+            });
 
-        repeaterContainer2.style.display = "block";
+            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
 
-    });
- 
-    textBox2.addEventListener("input", function () {
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-        const input = textBox2.value.toLowerCase();
+            textBox2.addEventListener("focus", function () {
 
-        filterSuggestions("category-link", input);
+                repeaterContainer2.style.display = "block";
 
-    });
+            });
 
-}
- 
- 
- 
- 
-function filterSuggestions(className, value) {
+            textBox2.addEventListener("input", function () {
 
-    const items = document.querySelectorAll("." + className);
+                const input = textBox2.value.toLowerCase();
 
-    let matchFound = false;
- 
-    items.forEach(item => {
+                filterSuggestions("category-link", input);
 
-        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-
-            item.style.display = "block";
-
-            matchFound = true;
-
-        } else {
-
-            item.style.display = "none";
+            });
 
         }
 
-    });
- 
-    let noMatchMessage = document.getElementById("no-match-message");
- 
-    if (!matchFound) {
 
-        if (!noMatchMessage) {
 
-            noMatchMessage = document.createElement("div");
 
-            noMatchMessage.id = "no-match-message";
- 
-            noMatchMessage.innerText = "No matching suggestions.";
+        function filterSuggestions(className, value) {
 
-            items[0]?.parentNode?.appendChild(noMatchMessage);
+            const items = document.querySelectorAll("." + className);
+
+            let matchFound = false;
+
+            items.forEach(item => {
+
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        
+                    item.style.display = "block";
+
+                    matchFound = true;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+
+                if (!noMatchMessage) {
+
+                    noMatchMessage = document.createElement("div");
+
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+
+                }
+
+                noMatchMessage.style.display = "block";
+
+            } else {
+
+                if (noMatchMessage) {
+
+                    noMatchMessage.style.display = "none";
+
+                }
+
+            }
 
         }
 
-        noMatchMessage.style.display = "block";
+        function setTextBox1(value) {
 
-    } else {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
 
-        if (noMatchMessage) {
+            document.getElementById("RepeaterContainer1").style.display = "none";
 
-            noMatchMessage.style.display = "none";
+        }
+        function setTextBox2(value) {
+
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
+
+            document.getElementById("RepeaterContainer2").style.display = "none";
 
         }
 
-    }
 
-}
- 
-function setTextBox1(value) {
-
-    document.getElementById("<%= TextBox1.ClientID %>").value = value;
-
-        document.getElementById("RepeaterContainer1").style.display = "none";
-
-    }
-function setTextBox2(value) {
-
-    document.getElementById("<%= TextBox2.ClientID %>").value = value;
-
-        document.getElementById("RepeaterContainer2").style.display = "none";
-
-    }
+        Sys.Application.add_load(initDropdownEvents);
 
 
-    Sys.Application.add_load(initDropdownEvents);
+    </script>
 
-
-</script>
- 
 </asp:Content>
 
 

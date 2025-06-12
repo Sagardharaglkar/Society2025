@@ -76,6 +76,8 @@
                         <asp:HiddenField ID="shop_maint_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
+                        <asp:HiddenField ID="ledger_id" runat="server" />
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -91,7 +93,7 @@
                                 <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" Style="text-transform: capitalize;" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp; 
                         
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                        </asp:Panel>
+                            </asp:Panel>
                                         &nbsp;&nbsp;
                        
                         
@@ -165,7 +167,7 @@
                                 <h4 class="modal-title" id="gridSystem"><strong>Shop Maintenance</strong></h4>
                             </div>
                             <d class="modal-body" id="invoice_data">
-                                <asp:UpdatePanel ID="updatepnl" runat="server">
+                                <asp:UpdatePanel ID="updatepnl" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <div class="form-group">
                                             <div class="row ">
@@ -206,14 +208,14 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("led_description") %>'
+                                                                        CommandArgument='<%# Eval("led_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>
@@ -351,16 +353,16 @@
 
     function initDropdownEvents() {
         const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
-    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
  
-    textBox1.addEventListener("focus", function () {
-        repeaterContainer1.style.display = "block";
-    });
+        textBox1.addEventListener("focus", function () {
+            repeaterContainer1.style.display = "block";
+        });
  
-    textBox1.addEventListener("input", function () {
-        const input = textBox1.value.toLowerCase();
-        filterSuggestions("category-link", input);
-    });
+        textBox1.addEventListener("input", function () {
+            const input = textBox1.value.toLowerCase();
+            filterSuggestions("category-link", input);
+        });
 }
  
  

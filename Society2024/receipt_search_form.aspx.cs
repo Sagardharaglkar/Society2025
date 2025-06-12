@@ -15,6 +15,7 @@ using Page = System.Web.UI.Page;
 using Utility.DataClass;
 using BusinessLogic.BL;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Wordprocessing;
 //using System.IdentityModel.Metadata
 
 
@@ -22,7 +23,7 @@ namespace Society
 {
     public partial class receipt_search_form : System.Web.UI.Page
     {
-
+        BL_FillRepeater repeater = new BL_FillRepeater();
         receipt Receipt = new receipt();
         BL_Receipt bL_Receipt = new BL_Receipt();
 
@@ -41,9 +42,57 @@ namespace Society
                 //runproc("Select");
                 txt_date.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 Receipt_Gridbind();
-                fill_dropdowns();
+                //fill_dropdowns();
                 fetch_receipt();
                 panel2.Visible = false;
+
+                String str1 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "SELECT * FROM dbo.pay_mode";
+                repeater.fill_list(Repeater4, str2);
+
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+
+                String str1 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
+                repeater.fill_list(Repeater2, str1);
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                wing_name_id.Value = e.CommandArgument.ToString();
+                string str1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_id.Value + "' ";
+                repeater.fill_list(Repeater3, str1);
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                owner_name_id.Value = e.CommandArgument.ToString();
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand4(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                pay_mode_id.Value = e.CommandArgument.ToString();
 
             }
 
@@ -57,14 +106,15 @@ namespace Society
             //string sql2 = "SELECT * FROM dbo.owner_master where society_id='" + society_id.Value + "'";
             //st.fill_drop(ddl_owner, sql2, "name", "owner_id");
 
-            string sql3 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
-            bL_Receipt.fill_drop(ddl_build, sql3, "name", "build_id");
+            //string sql3 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
+            //bL_Receipt.fill_drop(ddl_build, sql3, "name", "build_id");
+
             //string sql1 = "SELECT distinct building_name  FROM  maintainance";
             //st.fill_drop(ddl_build, sql1, "building_name", "building_name");
 
 
-            string sql4 = "SELECT * FROM dbo.pay_mode";
-            bL_Receipt.fill_drop(drp_pay_status, sql4, "pay_mode", "pay_id");
+            //string sql4 = "SELECT * FROM dbo.pay_mode";
+            //bL_Receipt.fill_drop(drp_pay_status, sql4, "pay_mode", "pay_id");
 
 
         }
@@ -139,20 +189,20 @@ namespace Society
             Receipt.Sql_Operation = operation;
             Receipt.Society_Id = society_id.Value;
             //Receipt.Receipt_No = Convert.ToInt32(receipt_no_txt.Text);
-            Receipt.Pay_Mode = Convert.ToInt32(drp_pay_status.SelectedValue);
+            Receipt.Pay_Mode = Convert.ToInt32(pay_mode_id.Value);
             Receipt.Date = Convert.ToDateTime(txt_date.Text);
-            Receipt.Owner_Id = Convert.ToInt32(ddl_owner.SelectedValue);
+            Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             Receipt.Recivable_Amt = float.Parse(txt_amount.Text);
            
-            Receipt.build_id = Convert.ToInt32(ddl_build.SelectedValue);
-            Receipt.Owner_Name = ddl_owner.SelectedItem.ToString();
-            Receipt.Wing_Id = Convert.ToInt32(ddl_wing.SelectedValue);
-            if (drp_pay_status.SelectedValue == "3")
+            Receipt.build_id = Convert.ToInt32(building_id.Value);
+            Receipt.Owner_Name = TextBox3.Text.ToString();
+            Receipt.Wing_Id = Convert.ToInt32(wing_name_id.Value);
+            if (pay_mode_id.Value == "3")
             {
                 Receipt.Chqno = ddl_chq.SelectedValue;
                 Receipt.Chqdate = Convert.ToDateTime(txt_chqdate.Text);
             }
-            if (drp_pay_status.SelectedValue == "2")
+            if (pay_mode_id.Value == "2")
             {
                 Receipt.Chqdate = Convert.ToDateTime(txt_chqdate.Text);
                 Receipt.Chqno = txt_chqno.Text;
@@ -176,11 +226,11 @@ namespace Society
 
             receipt_id.Value = result.receipt_id.ToString();
             society_id.Value = result.Society_Id.ToString();
-            drp_pay_status.SelectedValue = result.Pay_Mode.ToString();
+            pay_mode_id.Value = result.Pay_Mode.ToString();
             txt_date.Text = result.Date.ToString("yyyy-MM-dd");
 
             txt_amount.Text = result.Recivable_Amt.ToString();
-            ddl_build.SelectedValue = result.build_id.ToString();
+            building_id.Value = result.build_id.ToString();
             owner_id.Value = result.Owner_Id.ToString();
             wing_id.Value = result.Wing_Id.ToString();
             //ddl_bill.SelectedValue = result.Bill_No.ToString();
@@ -206,13 +256,13 @@ namespace Society
 
         public void paystatus_check()
         {
-            if (Decimal.Parse(drp_pay_status.SelectedValue) == 1)
+            if (Decimal.Parse(pay_mode_id.Value) == 1)
             {
                 panel2.Visible = false;
                 panel3.Visible = false;
                 // adv_pay_settlement();
             }
-            else if (Decimal.Parse(drp_pay_status.SelectedValue) == 2)
+            else if (Decimal.Parse(pay_mode_id.Value) == 2)
             {
                 // panel1.Visible = False
                 panel2.Visible = true;
@@ -224,7 +274,7 @@ namespace Society
 
 
             }
-            else if (Decimal.Parse(drp_pay_status.SelectedValue) == 3)
+            else if (Decimal.Parse(pay_mode_id.Value) == 3)
             {
                 // panel1.Visible = True
                 panel2.Visible = true;
@@ -236,7 +286,7 @@ namespace Society
 
 
             }
-            else if (Decimal.Parse(drp_pay_status.SelectedValue) == 4)
+            else if (Decimal.Parse(pay_mode_id.Value) == 4)
             {
                 panel2.Visible = false;
                 panel3.Visible = true;
@@ -247,7 +297,7 @@ namespace Society
         {
 
             Receipt.Sql_Operation = "pending_dues";
-            Receipt.Owner_Id = Convert.ToInt32(ddl_owner.SelectedValue);
+            Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             Receipt.Balance = txt_pdc_balance.Text;
             Receipt.Received_Amount = float.Parse(txt_received_amt.Text);
             bL_Receipt.Pending_Receipt(Receipt);
@@ -256,7 +306,7 @@ namespace Society
         public void adv_pay_settlement()
         {
             Receipt.Sql_Operation = "Settlement";
-            Receipt.Owner_Id = Convert.ToInt32(ddl_owner.SelectedValue);
+            Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             var result = bL_Receipt.Advance_Pay_Settlement(Receipt);
 
 
@@ -284,7 +334,7 @@ namespace Society
 
 
 
-            if ((Decimal.Parse(drp_pay_status.SelectedValue) == 2))
+            if ((Decimal.Parse(pay_mode_id.Value) == 2))
             {
                 if (txt_chqno.Text == "")
                 {
@@ -359,9 +409,9 @@ namespace Society
             Session["receipt_no"] = receipt_id.Value;
             runproc("Select");
             ddl_build_SelectedIndexChanged(sender, e);
-            ddl_wing.SelectedValue = wing_id.Value;
+            wing_name_id.Value = wing_id.Value;
             ddl_wing_SelectedIndexChanged(sender, e);
-            ddl_owner.SelectedValue = owner_id.Value;
+            owner_name_id.Value = owner_id.Value;
             ddl_owner_SelectedIndexChanged(sender, e);
             paystatus_check();
             btn_delete.Visible = true;
@@ -393,14 +443,14 @@ namespace Society
 
         protected void ddl_owner_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_owner.SelectedValue != "select")
+            if (owner_name_id.Value != "")
             {
-                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + ddl_owner.SelectedValue + "' ";
+                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
                 bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
 
                 Receipt.Sql_Operation = "pending_balance";
-                Receipt.Owner_Id = Convert.ToInt32(ddl_owner.SelectedValue);
-                shop_maint_id.Value = ddl_owner.SelectedValue;
+                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                shop_maint_id.Value = owner_name_id.Value;
                 var result = bL_Receipt.Owner_Pending_Balance(Receipt);
 
                
@@ -412,12 +462,12 @@ namespace Society
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_build.Text != "select")
+            if (TextBox1.Text != "select")
             {
 
-                string sql1 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + ddl_build.SelectedValue + "' ";
-                bL_Receipt.fill_drop(ddl_wing, sql1, "w_name", "wing_id");
-                ddl_wing_SelectedIndexChanged(sender, e);
+                //string sql1 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + ddl_build.SelectedValue + "' ";
+                //bL_Receipt.fill_drop(ddl_wing, sql1, "w_name", "wing_id");
+                //ddl_wing_SelectedIndexChanged(sender, e);
 
             }
            
@@ -425,14 +475,14 @@ namespace Society
 
         protected void ddl_wing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_wing.Text.Trim() != "")
+            if (TextBox2.Text.Trim() != "")
             {
-                if (ddl_wing.Text != "select")
-                {
-                    string sql1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + ddl_wing.SelectedValue + "' and  build_id='" + ddl_build.SelectedValue + "' ";
-                    bL_Receipt.fill_drop(ddl_owner, sql1, "name", "owner_id");
-                    ddl_owner_SelectedIndexChanged(sender, e);
-                }
+                //if (ddl_wing.Text != "select")
+                //{
+                //    string sql1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + ddl_wing.SelectedValue + "' and  build_id='" + ddl_build.SelectedValue + "' ";
+                //    bL_Receipt.fill_drop(ddl_owner, sql1, "name", "owner_id");
+                //    ddl_owner_SelectedIndexChanged(sender, e);
+                //}
             }
         }
 
@@ -441,7 +491,7 @@ namespace Society
         {
             Receipt.Sql_Operation = "cheque_select";
             Receipt.Chqno = ddl_chq.SelectedValue;
-            Receipt.Owner_Id = Convert.ToInt32(ddl_owner.SelectedValue);
+            Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             var result = bL_Receipt.Cheque_Select(Receipt);
 
             txt_chqdate.Text = result.Chqdate.ToString("yyyy-MM-dd");

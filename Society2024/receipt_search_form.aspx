@@ -56,6 +56,11 @@
                         <asp:HiddenField ID="wing_id" runat="server" />
                         <asp:HiddenField ID="owner_id" runat="server" />
 
+                        <asp:HiddenField ID="building_id" runat="server" />
+                        <asp:HiddenField ID="wing_name_id" runat="server" />
+                        <asp:HiddenField ID="owner_name_id" runat="server" />
+                        <asp:HiddenField ID="pay_mode_id" runat="server" />
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -197,14 +202,14 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("build_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>
@@ -244,14 +249,14 @@
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer2" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("w_name") %>'
+                                                                        CommandArgument='<%# Eval("wing_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox2(this.innerText);" />
                                                                 </ItemTemplate>
@@ -273,14 +278,14 @@
                                                         <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer3" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("owner_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox3(this.innerText);" />
                                                                 </ItemTemplate>
@@ -318,14 +323,14 @@
                                                         <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Animal or Bird)" autocomplete="off" />
                                                         <div id="RepeaterContainer4" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater4" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                            <asp:Repeater ID="Repeater4" runat="server" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_type") %>'
-                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                        Text='<%# Eval("pay_mode") %>'
+                                                                        CommandArgument='<%# Eval("pay_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox4(this.innerText);" />
                                                                 </ItemTemplate>

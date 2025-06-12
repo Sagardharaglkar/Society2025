@@ -10,11 +10,13 @@ using System.Web.Configuration;
 using System.Configuration;
 using DBCode.DataClass;
 using BusinessLogic.BL;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Society
 {
     partial class pdc_reminder_search : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         pdc_reminder Reminder = new pdc_reminder();
         BL_Pdc_Reminder BL_Pdc = new BL_Pdc_Reminder();
 
@@ -30,21 +32,46 @@ namespace Society
             {
                 pdc_reminder_Gridbind();
                 fill_drop();
+
+                String str1 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
+                repeater.fill_list(Repeater2, str2);
+
                 btn_delete.Visible = false;
             }
 
         }
 
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                owner_name_id.Value = e.CommandArgument.ToString();
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_name_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
+
         public void fill_drop()
         {
-            String sql_query = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
-            BL_Pdc.fill_drop(ddl_build_wing, sql_query, "name", "wing_id");
+            //String sql_query = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
+            //BL_Pdc.fill_drop(ddl_build_wing, sql_query, "name", "wing_id");
 
             String sql_query1 = "Select build_wing_id as wing_id,build_wing as name from customer_flat";
             BL_Pdc.fill_drop(drp_build_wing, sql_query1, "name", "wing_id");
 
-            string sql5 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
-            BL_Pdc.fill_drop(ddl_owner, sql5, "name", "owner_id");
+            //string sql5 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
+            //BL_Pdc.fill_drop(ddl_owner, sql5, "name", "owner_id");
 
             string sql6 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
             BL_Pdc.fill_drop(drop_owner, sql6, "name", "owner_id");
@@ -120,9 +147,9 @@ namespace Society
                 Reminder.pdc_rem_id = Convert.ToInt32(pdc_rem_id.Value.ToString());
             Reminder.Sql_Operation = operation1;
             Reminder.Society_Id = society_id.Value;
-            Reminder.owner_id = Convert.ToInt32(ddl_owner.SelectedValue);
-            Reminder.O_Name = ddl_owner.SelectedItem.Text;
-            Reminder.wing_id = Convert.ToInt32(ddl_build_wing.SelectedValue);
+            Reminder.owner_id = Convert.ToInt32(owner_name_id.Value);
+            Reminder.O_Name = TextBox1.Text;
+            Reminder.wing_id = Convert.ToInt32(building_name_id.Value);
             Reminder.Chq_No = Convert.ToInt32(txt_chq_no.Text);
             Reminder.Che_Date = Convert.ToDateTime(txt_chq_date.Text);
             Reminder.Che_Amount = float.Parse(txt_chq_amount.Text);
@@ -143,9 +170,9 @@ namespace Society
 
             (pdc_rem_id.Value) = result.pdc_rem_id.ToString();
             society_id.Value = result.Society_Id;
-            ddl_owner.SelectedValue = result.owner_id.ToString();
+            owner_name_id.Value = result.owner_id.ToString();
 
-            ddl_build_wing.SelectedItem.Text = result.wing_id.ToString();
+            TextBox2.Text = result.wing_id.ToString();
             txt_chq_no.Text = result.Chq_No.ToString();
             txt_chq_date.Text = result.Che_Date.ToString("yyyy-MM-dd");
             txt_chq_amount.Text = result.Che_Amount.ToString();
@@ -170,15 +197,15 @@ namespace Society
         protected void ddl_owner_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            Reminder.owner_id = Convert.ToInt32(ddl_owner.SelectedValue);
+            Reminder.owner_id = Convert.ToInt32(owner_name_id.Value);
             Reminder.Sql_Operation = "owner_select";
 
             var result = BL_Pdc.owner_selectedindexchanged(Reminder);
-
+            TextBox2.Text = "Temp";
             txt_pre_addr1.Text = result.Pre_Addr1;
             txt_pre_addr2.Text = result.Pre_Addr2;
             txt_pre_mob.Text = result.Pre_Mob.ToString();
-            ddl_build_wing.SelectedValue = result.wing_id.ToString();
+            building_name_id.Value = result.wing_id.ToString();
             txt_email.Text = result.Email;
             txt_add_mob.Text = result.Alter_Mob.ToString();
             txt_pre_addr1.Enabled = false;
@@ -196,7 +223,7 @@ namespace Society
             //SqlDataReader sdr = null;
 
             Label acc_no = new Label(), chq_no = new Label(), pdc_id = new Label(), che_date = new Label(), che_amt = new Label();
-            CheckBox depo_chk = new CheckBox(), ret_chk = new CheckBox(), bou_chk = new CheckBox();
+            System.Web.UI.WebControls.CheckBox depo_chk = new System.Web.UI.WebControls.CheckBox(), ret_chk = new System.Web.UI.WebControls.CheckBox(), bou_chk = new System.Web.UI.WebControls.CheckBox();
 
             foreach (GridViewRow row in GridView1.Rows)
             {
