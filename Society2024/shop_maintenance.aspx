@@ -52,7 +52,7 @@
                 btn.value = "Saving...";
 
 
-                __doPostBack('<%= btn_save.UniqueID %>', '');
+                <%--__doPostBack('<%= btn_save.UniqueID %>', '');--%>
 
                 return false; // prevent default to avoid double postback
             }
@@ -208,14 +208,14 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("led_description") %>'
-                                                                        CommandArgument='<%# Eval("led_id") %>'
+                                                                        Text='<%# Eval("flat_type") %>'
+                                                                        CommandArgument='<%# Eval("flat_type_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>
@@ -353,16 +353,16 @@
 
     function initDropdownEvents() {
         const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
-        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
  
-        textBox1.addEventListener("focus", function () {
-            repeaterContainer1.style.display = "block";
-        });
+    textBox1.addEventListener("focus", function () {
+        repeaterContainer1.style.display = "block";
+    });
  
-        textBox1.addEventListener("input", function () {
-            const input = textBox1.value.toLowerCase();
-            filterSuggestions("category-link", input);
-        });
+    textBox1.addEventListener("input", function () {
+        const input = textBox1.value.toLowerCase();
+        filterSuggestions("category-link", input);
+    });
 }
  
  

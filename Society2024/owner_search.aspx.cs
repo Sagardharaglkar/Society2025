@@ -17,6 +17,8 @@ using System.Windows.Forms;
 using DocumentFormat.OpenXml.Bibliography;
 using BusinessLogic.BL;
 using Microsoft.Ajax.Utilities;
+using System.Web.UI.HtmlControls;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Society
 {
@@ -26,13 +28,13 @@ namespace Society
         BL_Owner_Master bL_Owner = new BL_Owner_Master();
         Owner owner = new Owner();
 
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }else
+            } else
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
@@ -148,7 +150,7 @@ namespace Society
             runproc("Select");
             //runproc_Family("Select_Family");
             Family_Details_Gridbind();
-             
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
@@ -158,7 +160,7 @@ namespace Society
             owner.Sql_Operation = "Grid_Show";
             owner.Type = "Owner";
             owner.Society_Id = society_id.Value;
-            dt= bL_Owner.getOwnerDetails(owner);
+            dt = bL_Owner.getOwnerDetails(owner);
             OwnerGrid.DataSource = dt.Tables[0];
             ViewState["dirState"] = dt.Tables[0];
             OwnerGrid.DataBind();
@@ -251,7 +253,7 @@ namespace Society
 
                 (owner_id.Value) = result.owner_id.ToString();
                 society_id.Value = result.Society_Id;
-                Buildling_wing_id.Value = result.wing_id.ToString();
+                lbl_Building.Text = result.wing_id.ToString();
                 txt_poss_date.Text = result.Poss_Date.ToString("yyyy-MM-dd");
                 txt_name.Text = result.Name;
                 txt_pre_mob.Text = result.Pre_Mob;
@@ -267,10 +269,10 @@ namespace Society
                 flat_no_id.Value = result.Flat_type_Id.ToString();
                 listofuploadedfiles.Text = Path.GetFileName(result.Photo_Name);
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
-               
-            }
 
-            AllRepeater();
+            }
+            String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
         }
 
 
@@ -283,51 +285,51 @@ namespace Society
         protected void btn_photo_upload_Click(object sender, EventArgs e)
         {
 
-                string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/";
+            string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/";
 
 
-                System.IO.Directory.CreateDirectory(createfolder);
+            System.IO.Directory.CreateDirectory(createfolder);
 
-                if (FileUpload1.HasFiles)
-                {
-
-                    foreach (HttpPostedFile file_name in FileUpload1.PostedFiles)
-                    {
-                        file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + file_name.FileName));
-                        listofuploadedfiles.Text += file_name.FileName + "<br/>";
-                    }
-
-                    uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
-               
-            }
-               
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
-            }
-
-            protected void btnotice_id_upload_Click(object sender, EventArgs e)
+            if (FileUpload1.HasFiles)
             {
-                string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/";
 
-                System.IO.Directory.CreateDirectory(createfolder);
-
-                if (FileUpload2.HasFiles)
+                foreach (HttpPostedFile file_name in FileUpload1.PostedFiles)
                 {
+                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + file_name.FileName));
+                    listofuploadedfiles.Text += file_name.FileName + "<br/>";
+                }
 
-                    foreach (HttpPostedFile file_name in FileUpload2.PostedFiles)
-                    {
-                        file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/" + file_name.FileName));
-                        listofuploadedfiles1.Text += file_name.FileName + "<br/>";
+                uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
 
-                    }
-
-                    uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (doc_id_id.Value.ToString()) + "\\" + FileUpload2.FileName);
-                
             }
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+        }
+
+        protected void btnotice_id_upload_Click(object sender, EventArgs e)
+        {
+            string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/";
+
+            System.IO.Directory.CreateDirectory(createfolder);
+
+            if (FileUpload2.HasFiles)
+            {
+
+                foreach (HttpPostedFile file_name in FileUpload2.PostedFiles)
+                {
+                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/" + file_name.FileName));
+                    listofuploadedfiles1.Text += file_name.FileName + "<br/>";
+
+                }
+
+                uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (doc_id_id.Value.ToString()) + "\\" + FileUpload2.FileName);
+
+            }
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
 
 
 
-          
+
         }
 
 
@@ -349,15 +351,15 @@ namespace Society
 
         protected void FamilyGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-           
-                GridViewRow row = (GridViewRow)FamilyGrid.Rows[e.RowIndex];
 
-                System.Web.UI.WebControls.Label id = (System.Web.UI.WebControls.Label)row.FindControl("o_ex_id");
-                owner.Sql_Operation = "D_delete";
+            GridViewRow row = (GridViewRow)FamilyGrid.Rows[e.RowIndex];
 
-                owner.O_Ex_Id = Convert.ToInt32(id.Text);
-                bL_Owner.FamilyDelete(owner);
-          
+            System.Web.UI.WebControls.Label id = (System.Web.UI.WebControls.Label)row.FindControl("o_ex_id");
+            owner.Sql_Operation = "D_delete";
+
+            owner.O_Ex_Id = Convert.ToInt32(id.Text);
+            bL_Owner.FamilyDelete(owner);
+
             Family_Details_Gridbind();
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
         }
@@ -370,22 +372,22 @@ namespace Society
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-           
-                runproc("Delete");
-           
+
+            runproc("Delete");
+
             Response.Redirect("owner_search.aspx");
 
         }
         protected void OwnerGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-           
-                GridViewRow row = (GridViewRow)OwnerGrid.Rows[e.RowIndex];
-                System.Web.UI.WebControls.Label owner_id = (System.Web.UI.WebControls.Label)row.FindControl("owner_id");
-                owner.Sql_Operation = "Delete";
 
-                owner.owner_id = Convert.ToInt32(owner_id.Text);
-                bL_Owner.OwnerDelete(owner);
-           
+            GridViewRow row = (GridViewRow)OwnerGrid.Rows[e.RowIndex];
+            System.Web.UI.WebControls.Label owner_id = (System.Web.UI.WebControls.Label)row.FindControl("owner_id");
+            owner.Sql_Operation = "Delete";
+
+            owner.owner_id = Convert.ToInt32(owner_id.Text);
+            bL_Owner.OwnerDelete(owner);
+
             Owner_Gridbind();
         }
 
@@ -416,12 +418,12 @@ namespace Society
 
         }
 
-      
-      
+
+
 
         //protected void ddl_type_SelectedIndexChanged(object sender, EventArgs e)
         // {
-           
+
         //        if (flat_no_id.Value.ToString() != "select")
         //        {
         //            string sql1 = "Select distinct flat_type,flat_id from dbo.flat_types where flat_status=0  and active_status=0 and society_id='" + society_id.Value + "' and  wing_id='" + ddl_build_wing.SelectedValue + "' and flat_type_id='" + ddl_type.SelectedValue +"'";
@@ -464,6 +466,7 @@ namespace Society
             Owner_Gridbind();
         }
 
+      
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
 
@@ -477,8 +480,10 @@ namespace Society
                         TextBox1.Text = link.Text;
                 }
             }
-        }
+        } 
+
     }
+    
 }
 
 

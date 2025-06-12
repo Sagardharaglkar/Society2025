@@ -214,8 +214,9 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select category (Select Item)" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound" >
                                                                 <ItemTemplate>
+                                                                    
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
