@@ -417,13 +417,35 @@ namespace Society
             pdc_reminder_Gridbind();
         }
 
-        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+        //    {
+
+        //        if (owner_name_id.Value != "")
+
+        //        {
+
+        //            var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+        //            if (link.CommandArgument == owner_name_id.Value)
+
+        //                TextBox1.Text = link.Text;
+
+        //        }
+
+        //    }
+
+        //}
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
 
             {
 
-                if (owner_name_id.Value != "")
+                if (building_name_id.Value != "")
 
                 {
 
@@ -456,26 +478,25 @@ namespace Society
 
         }
 
-        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
 
             {
 
-                if (building_name_id.Value != "")
+                if (owner_name_id.Value != "")
 
                 {
 
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
 
-                    if (link.CommandArgument == building_name_id.Value)
+                    if (link.CommandArgument == owner_name_id.Value)
 
-                        TextBox2.Text = link.Text;
+                        TextBox1.Text = link.Text;
 
                 }
 
             }
-
         }
     }
 }
