@@ -217,9 +217,11 @@ namespace Society
             owner.Alter_Mob = txt_add_mob.Text;
             owner.flat_id = Convert.ToInt32(flat_no_id.Value.ToString());
             owner.Flat_type_Id = Convert.ToInt32(type_id.Value.ToString());
-            owner.Photo_Name =uploadphotopath.Text;
+            owner.Photo_Name = uploadphotopath.Text;
             owner.Id_Proof = uploadidproof.Text;
             owner.Type = type;
+            owner.Doc_Id = Convert.ToInt32(doc_id_id.Value); // Set docid  
+
             var result = bL_Owner.updateOwnerDetails(owner);
             owner_id.Value = result.owner_id.ToString();
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
@@ -254,7 +256,7 @@ namespace Society
 
                 (owner_id.Value) = result.owner_id.ToString();
                 society_id.Value = result.Society_Id;
-                lbl_Building.Text = result.wing_id.ToString();
+                Buildling_wing_id.Value = result.wing_id.ToString();
                 txt_poss_date.Text = result.Poss_Date.ToString("yyyy-MM-dd");
                 txt_name.Text = result.Name;
                 txt_pre_mob.Text = result.Pre_Mob;
@@ -267,7 +269,9 @@ namespace Society
                 txt_email.Text = result.Email;
                 txt_add_mob.Text = result.Alter_Mob;
                 flat_no_id.Value = result.flat_id.ToString();
-                flat_no_id.Value = result.Flat_type_Id.ToString();
+                type_id.Value = result.Flat_type_Id.ToString();
+                doc_id_id.Value = result.Doc_Id.ToString();
+
                 listofuploadedfiles.Text = Path.GetFileName(result.Photo_Name);
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
                

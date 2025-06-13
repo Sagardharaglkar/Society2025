@@ -47,6 +47,8 @@ namespace DBCode.DataClass
         private string relation;
         private string foccu;
         private string fdob;
+        private int docid;
+
 
 
     public int owner_id
@@ -235,5 +237,10 @@ namespace DBCode.DataClass
             set { fdob = value; }
         }
 
+        public int Doc_Id
+        {
+            get { return docid; }
+            set { Doc_Id = value; }
+        }
     }
 }

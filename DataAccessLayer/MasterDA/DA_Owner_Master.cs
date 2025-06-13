@@ -92,6 +92,7 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("photo_name", owner.Photo_Name));
                 data_item.Add(st.create_array("id_proof", owner.Id_Proof));
                 data_item.Add(st.create_array("type", owner.Type));
+                data_item.Add(st.create_array("doc_id", owner.Doc_Id));
             }
             status1 = st.run_query_scalar(data_item, "Select", "sp_owner_master", ref sdr);
             if (status1 == "Done")
@@ -228,6 +229,7 @@ namespace DataAccessLayer.MasterDA
                         owner.Photo_Name = sdr["photo_name"].ToString();
                         owner.Id_Proof = sdr["id_proof"].ToString();
                         owner.Type = sdr["type"].ToString();
+                        owner.Doc_Id = Convert.ToInt32(sdr["doc_id"].ToString());
 
                         if (owner.Type == "Rent")
                         {
