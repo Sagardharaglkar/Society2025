@@ -294,13 +294,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.Repeater Repeater4;
 
         /// <summary>
-        /// file_name2 control.
+        /// file_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload file_name2;
+        protected global::System.Web.UI.WebControls.FileUpload file_name;
 
         /// <summary>
         /// listofuploadedfiless control.
@@ -337,15 +337,6 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label15;
-
-        /// <summary>
-        /// file_name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload file_name;
 
         /// <summary>
         /// Label2 control.
