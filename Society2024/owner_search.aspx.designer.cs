@@ -150,15 +150,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label lbl_acc_no_mandatory;
 
         /// <summary>
-        /// temp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label temp;
-
-        /// <summary>
         /// TextBox1 control.
         /// </summary>
         /// <remarks>

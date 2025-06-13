@@ -73,7 +73,6 @@ namespace Society
             {
                 Buildling_wing_id.Value = e.CommandArgument.ToString();
                 lbl_Building.Text = e.CommandArgument.ToString();
-                temp.Text = e.CommandArgument.ToString();
 
                 if (!(type_id.Value == ""))
                 {
@@ -485,7 +484,6 @@ namespace Society
                     if (link.CommandArgument == Buildling_wing_id.Value)
                     {
                         TextBox1.Text = link.Text;
-                        temp.Text = " hello";
 
                     }
                 }

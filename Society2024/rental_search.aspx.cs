@@ -39,24 +39,28 @@ namespace Society
                 txt_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_f_dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
 
-                String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater1, str1);
-
-                String str2 = "Select *  from types ";
-                repeater.fill_list(Repeater2, str2);
-
-                String str3 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater3, str3);
-
-                String str4 = "Select *  from married_status ";
-                repeater.fill_list(Repeater4, str4);
-
-                String str5 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater5, str5);
+                Allbound();
             }
 
         }
 
+        protected void Allbound()
+        {
+            String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
+
+            String str2 = "Select *  from types ";
+            repeater.fill_list(Repeater2, str2);
+
+            String str3 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater3, str3);
+
+            String str4 = "Select *  from married_status ";
+            repeater.fill_list(Repeater4, str4);
+
+            String str5 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater5, str5);
+        }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -229,6 +233,7 @@ namespace Society
             owner.Aggrement_Period_From = Convert.ToDateTime(txt_period_from.Text.ToString());
             owner.Aggrement_Period_To = Convert.ToDateTime(txt_period_to.Text.ToString());
             owner.Police_Verification_Date = Convert.ToDateTime(txt_police_verification.Text.ToString());
+            owner.Doc_Id = Convert.ToInt32(doc_id_id.Value);
             var result = bL_Owner.UpdateRentalDetails(owner);
             owner_id.Value = result.owner_id.ToString();
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
@@ -273,6 +278,7 @@ namespace Society
                 txt_email.Text = result.Email;
                 txt_add_mob.Text = result.Alter_Mob;
                 flat_no_id.Value = result.flat_id.ToString();
+                doc_id_id.Value = result.Doc_Id.ToString();
                 type_id.Value = result.Flat_type_Id.ToString();
                 listofuploadedfiles.Text = Path.GetFileName(result.Photo_Name);
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
@@ -281,7 +287,8 @@ namespace Society
                 txt_period_from.Text = result.Aggrement_Period_From.ToString("yyyy-MM-dd");
                 txt_period_to.Text = result.Aggrement_Period_To.ToString("yyyy-MM-dd");
                 txt_police_verification.Text = result.Police_Verification_Date.ToString("yyyy-MM-dd");
-                Rental_Gridbind();
+                
+                Allbound();
             }
 
         }

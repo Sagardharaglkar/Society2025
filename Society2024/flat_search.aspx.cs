@@ -41,6 +41,8 @@ namespace Society
         protected void Allbound()
         {
             String str = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            System.Diagnostics.Debug.WriteLine(str); // Print str in the output pane  
+
             repeater.fill_list(Repeater1, str);
 
             String str2 = "Select *  from types";

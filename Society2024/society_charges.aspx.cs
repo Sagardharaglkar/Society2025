@@ -52,12 +52,6 @@ namespace Society
 
             }
         }
-        //public void fill_drop1()
-        //{
-        //    String sql_query = "Select *  from society_master";
-        //    bL_society.fill_drop(ddl_society, sql_query, "name", "society_id");
-
-        //}
 
         public void Society_charges_GridBind()
         {
@@ -130,8 +124,6 @@ namespace Society
             charge_id.Value = result.Charge_Id.ToString();
             txt_amount.Text = result.Amount.ToString();
             society_name_id.Value = result.Society_Id.ToString();
-            String str = "Select *  from society_master";
-            repeater.fill_list(categoryRepeater, str);
 
             String strr = "Select *  from society_master";
             repeater.fill_list(categoryRepeater, strr);

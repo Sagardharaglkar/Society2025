@@ -74,6 +74,7 @@ namespace Society
             ViewState["dirState"] = dt.Tables[0];
             GridView1.DataBind();
 
+
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -185,7 +186,8 @@ namespace Society
             txt_chqno.Text = result.Cheq_No;
             txt_chqdate.Text = result.Cheq_Date.ToString("yyyy-MM-dd");
             txt_upi.Text = result.Cheq_No;
-
+            String str1 = "SELECT  * FROM  ledger";
+            repeater.fill_list(Repeater1, str1);
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -274,6 +276,28 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             shop_maintenance_GridBind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (ledger_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == ledger_id.Value)
+
+                        TextBox1.Text = link.Text;
+
+                }
+
+            }
+
         }
     }
 }
