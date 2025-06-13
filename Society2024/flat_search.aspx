@@ -425,17 +425,6 @@
     <script>
         let formSubmitted = false;
 
-    dropdownIds.forEach(function (id) {
-        const select = document.getElementById(id);
-        if (select) {
-            select.addEventListener('change', function () {
-                if (formSubmitted) {
-                    validateSelect(select, select.value);
-                }
-            });
-        }
-    });
-
 
     </script>
 
