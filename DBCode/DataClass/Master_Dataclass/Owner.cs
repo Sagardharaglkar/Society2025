@@ -240,7 +240,7 @@ namespace DBCode.DataClass
         public int Doc_Id
         {
             get { return docid; }
-            set { Doc_Id = value; }
+            set { docid = value; }
         }
     }
 }
