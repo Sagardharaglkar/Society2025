@@ -32,18 +32,23 @@ namespace Society
             {
                 pdc_reminder_Gridbind();
                 fill_drop();
+                Allbound();
 
-                String str1 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater1, str1);
 
-                String str2 = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
-                repeater.fill_list(Repeater2, str2);
 
                 btn_delete.Visible = false;
             }
 
         }
 
+        protected void Allbound()
+        {
+            String str1 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
+
+            String str2 = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
+            repeater.fill_list(Repeater2, str2);
+        }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -191,7 +196,7 @@ namespace Society
             {
                 return_chk.Checked = true;
             }
-
+            Allbound();
         }
 
         protected void ddl_owner_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,7 +206,7 @@ namespace Society
             Reminder.Sql_Operation = "owner_select";
 
             var result = BL_Pdc.owner_selectedindexchanged(Reminder);
-            TextBox2.Text = "Temp";
+            
             txt_pre_addr1.Text = result.Pre_Addr1;
             txt_pre_addr2.Text = result.Pre_Addr2;
             txt_pre_mob.Text = result.Pre_Mob.ToString();
@@ -393,6 +398,50 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             pdc_reminder_Gridbind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (owner_name_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == owner_name_id.Value)
+
+                        TextBox1.Text = link.Text;
+
+                }
+
+            }
+
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (building_name_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == building_name_id.Value)
+
+                        TextBox2.Text = link.Text;
+
+                }
+
+            }
+
         }
     }
 }
