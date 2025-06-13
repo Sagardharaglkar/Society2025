@@ -63,11 +63,11 @@ namespace Society
             String str2 = "SELECT * FROM dbo.pay_mode";
             repeater.fill_list(Repeater4, str2);
 
-            String str1 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
-            repeater.fill_list(Repeater2, str1);
+            String str3 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
+            repeater.fill_list(Repeater2, str3);
 
-            string str1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_lbl.Text + "' ";
-            repeater.fill_list(Repeater3, str1);
+            string str4 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_lbl.Text + "' ";
+            repeater.fill_list(Repeater3, str4);
 
         }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
