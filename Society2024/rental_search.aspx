@@ -623,13 +623,6 @@
                                         </div>
                                     </div>
                                     <hr />
-                                                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                </Triggers>
-                       
-                            </asp:UpdatePanel>
-                           
 
                             <div class="box-header">
                                 <div class="row ">
@@ -726,6 +719,13 @@
                             </div>
                             <hr />
 
+                                                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                </Triggers>
+                       
+                            </asp:UpdatePanel>
+                           
 
                         </div>
                         <div class="modal-footer">
