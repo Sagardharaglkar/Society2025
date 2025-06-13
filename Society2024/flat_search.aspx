@@ -207,7 +207,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="TextBox11" runat="server" CssClass="input-box form-control"
+                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select Building/Wing" autocomplete="off" Style="width:150px;" />
                                                         <div id="RepeaterContainer1" class="suggestion-list" style="width:150px;">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
@@ -431,7 +431,7 @@
    <script type="text/javascript">
 
        function initDropdownEvents() {
-           const textBox1 = document.getElementById("<%= TextBox11.ClientID %>");
+           const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
@@ -515,7 +515,7 @@
        }
 
        function setTextBox1(value) {
-           document.getElementById("<%= TextBox11.ClientID %>").value = value;
+           document.getElementById("<%= TextBox1.ClientID %>").value = value;
            document.getElementById("RepeaterContainer1").style.display = "none";
        }
 

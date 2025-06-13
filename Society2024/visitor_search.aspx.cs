@@ -51,17 +51,23 @@ namespace Society
                 txt_out_time.Enabled = false;
 
 
-                String str1 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
-                repeater.fill_list(Repeater1, str1);
-
-                String str2 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
-                repeater.fill_list(Repeater2, str2);
+                Allbound();
 
             }
 
 
         }
 
+        protected void Allbound()
+        {
+
+            String str1 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
+
+            String str2 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
+            repeater.fill_list(Repeater2, str2);
+
+        }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -223,6 +229,7 @@ namespace Society
             txt_visiting_purpose.Text = result.Visiting_Purpose;
             path = Path.GetFileName(result.Image);
             image.Text = path;
+            Allbound();
         }
 
         protected void btn_in_Click(object sender, EventArgs e)
@@ -316,6 +323,32 @@ namespace Society
             GridView1.PageIndex = e.NewPageIndex;
             Visitor_Gridbind();
 
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (building_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == building_id.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (wing_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == wing_id.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
         }
     }
 }

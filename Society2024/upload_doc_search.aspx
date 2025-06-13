@@ -202,7 +202,7 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required" Style="width:200px"/>
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -236,7 +236,7 @@
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required" Style="width:200px"/>
                                                         <div id="RepeaterContainer2" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -268,7 +268,7 @@
                                                         <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required" Style="width:200px"/>
                                                         <div id="RepeaterContainer3" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
+                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemDataBound="Repeater3_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -305,7 +305,7 @@
                                                         <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required" Style="width:200px" />
                                                         <div id="RepeaterContainer4" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater4" runat="server" OnItemCommand="CategoryRepeater_ItemCommand4">
+                                                            <asp:Repeater ID="Repeater4" runat="server" OnItemDataBound="Repeater4_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -328,7 +328,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <asp:FileUpload ID="file_name2" runat="server" Font-Bold="False" />
+                                            <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
                                             <br />
                                             <asp:Label ID="listofuploadedfiless" runat="server" />
                                             <asp:Label ID="Label22" runat="server" Height="32px" Width="200px" />
@@ -339,7 +339,6 @@
                                                 <div class="col-sm-4">
                                                     <asp:Label ID="listofuploadedfiles" runat="server" />
                                                     <asp:Label ID="Label15" runat="server" Height="32px" Width="200px" />
-                                                    <asp:FileUpload ID="file_name" runat="server" Font-Bold="False" />
                                                     <asp:Label ID="Label2" runat="server" Height="32px" Width="200px"></asp:Label>
                                                 </div>
                                             </div>
@@ -527,6 +526,8 @@
         function setTextBox2(value) {
 
             document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("<%= TextBox3.ClientID %>").value = ""    ;
+            document.getElementById("<%= TextBox4.ClientID %>").value = "";
 
             document.getElementById("RepeaterContainer2").style.display = "none";
 
@@ -535,6 +536,7 @@
         function setTextBox3(value) {
 
             document.getElementById("<%= TextBox3.ClientID %>").value = value;
+            document.getElementById("<%= TextBox4.ClientID %>").value = "";
 
             document.getElementById("RepeaterContainer3").style.display = "none";
 

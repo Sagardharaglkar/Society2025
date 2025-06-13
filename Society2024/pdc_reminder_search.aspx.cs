@@ -54,6 +54,24 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
+                Reminder.owner_id = Convert.ToInt32(owner_name_id.Value);
+                Reminder.Sql_Operation = "owner_select";
+
+                var result = BL_Pdc.owner_selectedindexchanged(Reminder);
+
+                txt_pre_addr1.Text = result.Pre_Addr1;
+                txt_pre_addr2.Text = result.Pre_Addr2;
+                txt_pre_mob.Text = result.Pre_Mob.ToString();
+                building_name_id.Value = result.wing_id.ToString();
+                txt_email.Text = result.Email;
+                txt_add_mob.Text = result.Alter_Mob.ToString();
+                txt_pre_addr1.Enabled = false;
+                txt_pre_addr2.Enabled = false;
+                txt_pre_mob.Enabled = false;
+                txt_add_mob.Enabled = false;
+                txt_email.Enabled = false;
+                String str2 = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
+                repeater.fill_list(Repeater2, str2);
             }
 
         }
@@ -177,7 +195,7 @@ namespace Society
             society_id.Value = result.Society_Id;
             owner_name_id.Value = result.owner_id.ToString();
 
-            TextBox2.Text = result.wing_id.ToString();
+            building_name_id.Value = result.wing_id.ToString();
             txt_chq_no.Text = result.Chq_No.ToString();
             txt_chq_date.Text = result.Che_Date.ToString("yyyy-MM-dd");
             txt_chq_amount.Text = result.Che_Amount.ToString();
@@ -201,12 +219,11 @@ namespace Society
 
         protected void ddl_owner_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             Reminder.owner_id = Convert.ToInt32(owner_name_id.Value);
             Reminder.Sql_Operation = "owner_select";
 
             var result = BL_Pdc.owner_selectedindexchanged(Reminder);
-            
+
             txt_pre_addr1.Text = result.Pre_Addr1;
             txt_pre_addr2.Text = result.Pre_Addr2;
             txt_pre_mob.Text = result.Pre_Mob.ToString();
@@ -400,6 +417,67 @@ namespace Society
             pdc_reminder_Gridbind();
         }
 
+        //protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+        //    {
+
+        //        if (owner_name_id.Value != "")
+
+        //        {
+
+        //            var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+        //            if (link.CommandArgument == owner_name_id.Value)
+
+        //                TextBox1.Text = link.Text;
+
+        //        }
+
+        //    }
+
+        //}
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (building_name_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == owner_name_id.Value)
+                    {
+                        TextBox1.Text = link.Text;
+                        Reminder.owner_id = Convert.ToInt32(owner_name_id.Value);
+                        Reminder.Sql_Operation = "owner_select";
+
+                        var result = BL_Pdc.owner_selectedindexchanged(Reminder);
+
+                        txt_pre_addr1.Text = result.Pre_Addr1;
+                        txt_pre_addr2.Text = result.Pre_Addr2;
+                        txt_pre_mob.Text = result.Pre_Mob.ToString();
+                        building_name_id.Value = result.wing_id.ToString();
+                        txt_email.Text = result.Email;
+                        txt_add_mob.Text = result.Alter_Mob.ToString();
+                        txt_pre_addr1.Enabled = false;
+                        txt_pre_addr2.Enabled = false;
+                        txt_pre_mob.Enabled = false;
+                        txt_add_mob.Enabled = false;
+                        txt_email.Enabled = false;
+                   
+                    }
+                }
+
+            }
+
+        }
+
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -419,29 +497,6 @@ namespace Society
                 }
 
             }
-
-        }
-
-        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-
-            {
-
-                if (building_name_id.Value != "")
-
-                {
-
-                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
-
-                    if (link.CommandArgument == building_name_id.Value)
-
-                        TextBox2.Text = link.Text;
-
-                }
-
-            }
-
         }
     }
 }

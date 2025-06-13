@@ -29,20 +29,23 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                String str1 = "Select wing_id,(name + w_name) as name from global_society_view";
-                repeater.fill_list(Repeater1, str1);
-
-                String str2 = "Select *  from doc_master";
-                repeater.fill_list(Repeater2, str2);
-
-                String str3 = "Select *  from state";
-                repeater.fill_list(Repeater3, str3);
+                Allbound();
 
                 Caretaker_Gridbind();
                 //fill_drop1();
             }
         }
+        protected void Allbound()
+        {
+            String str1 = "Select wing_id,(name + w_name) as name from global_society_view";
+            repeater.fill_list(Repeater1, str1);
 
+            String str2 = "Select *  from doc_master";
+            repeater.fill_list(Repeater2, str2);
+
+            String str3 = "Select *  from state";
+            repeater.fill_list(Repeater3, str3);
+        }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -166,7 +169,7 @@ namespace Society
 
             caretaker_id.Value = result.Caretaker_Id.ToString();
             society_id.Value = result.Society_Id;
-            wing_id.Value = result.Wing_Id.ToString();
+            building_wing_id.Value = result.Wing_Id.ToString();
             txt_flat_no.Text = result.Flat_No;
             txt_c_name.Text = result.C_Name;
             doc_id.Value = result.doc_id.ToString();
@@ -178,6 +181,7 @@ namespace Society
             state_id.Value = result.State_Id.ToString();
             txt_pincode.Text = result.Pincode;
             //txt_doc_executed.Text = result.Doc_Executed;
+            Allbound();
 
         }
 
@@ -252,6 +256,45 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Caretaker_Gridbind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (building_wing_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == building_wing_id.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (doc_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == doc_id.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater3_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (state_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == state_id.Value)
+                        TextBox3.Text = link.Text;
+                }
+            }
         }
     }
 }

@@ -35,11 +35,7 @@ namespace Society
                 //filldrop();
                 Party_GridBind();
 
-                String str1 = "Select * from facilities where active_status=0 and society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater1, str1);
-
-                String str2 = "Select * from owner_master where active_status=0 and society_id='" + society_id.Value + "'";
-                repeater.fill_list(Repeater2, str2);
+                Allbound();
 
                 txt_from_date.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_to_date.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
@@ -55,7 +51,15 @@ namespace Society
             Panel2.Visible = true;
             Panel1.Visible = false;
         }
+        protected void Allbound()
+        {
+            String str1 = "Select * from facilities where active_status=0 and society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
 
+            String str2 = "Select * from owner_master where active_status=0 and society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater2, str2);
+
+        }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -218,7 +222,7 @@ namespace Society
                 Panel1.Visible = true;
                 Panel2.Visible = false;
             }
-
+            Allbound();
         }
 
 
@@ -511,6 +515,32 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Party_GridBind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (facility_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == facility_id.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (name_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == name_id.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
         }
     }
 }
