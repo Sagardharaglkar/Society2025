@@ -18,6 +18,8 @@ namespace Society
 {
     public partial class parking_allotment_search : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
+
         Parking parking = new Parking();
         BL_Parking_Allotment parking_Allotment = new BL_Parking_Allotment();
       
@@ -33,14 +35,18 @@ namespace Society
             {
                 Panel1.Visible = false;
                 Park_Allotment_GridBind();
-                fill_drop1();
+                //fill_drop1();
+                String sql_query = "Select *  from parking where society_id='" + society_id.Value + "'";
+
+                repeater.fill_list(Repeater1, sql_query);
+
             }
             
         }
         public void fill_drop1()
         {
-            String sql_query = "Select *  from parking where society_id='" + society_id.Value + "'";
-            parking_Allotment.fill_drop(ddl_place, sql_query, "parking_no", "place_id");
+            //String sql_query = "Select *  from parking where society_id='" + society_id.Value + "'";
+            //parking_Allotment.fill_drop(ddl_place, sql_query, "parking_no", "place_id");
         }
 
 
@@ -106,7 +112,7 @@ namespace Society
             parking.Park_Type = ddl_type.Text;
             parking.Contact_No = txt_contact_no.Text;
             parking.Vehicle_No = txt_vehical_no.Text;
-            parking.place_id = Convert.ToInt32(ddl_place.SelectedValue.ToString());
+            parking.place_id = Convert.ToInt32(assign_id.Value.ToString());
             parking_Allotment.UpdateParkingAllotment(parking);
 
         }
@@ -125,7 +131,11 @@ namespace Society
             ddl_type.Text = result.Park_Type;
             txt_contact_no.Text = result.Contact_No;
             txt_vehical_no.Text = result.Vehicle_No;
-            ddl_place.SelectedValue = result.place_id.ToString();
+            assign_id.Value = result.place_id.ToString();
+
+            String sql_query = "Select *  from parking where society_id='" + society_id.Value + "'";
+
+            repeater.fill_list(Repeater1, sql_query);
         }
 
         protected void btn_save_Click(object sender, EventArgs e)
@@ -182,8 +192,12 @@ namespace Society
 
         protected void ddl_park_for_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String sql_query = "Select *  from parking where park_for='" + ddl_park_for.SelectedValue + "' and society_id='"+ society_id.Value +"'";
-            parking_Allotment.fill_drop(ddl_place, sql_query, "parking_no", "place_id");
+            //String sql_query = "Select *  from parking where park_for='" + ddl_park_for.SelectedValue + "' and society_id='"+ society_id.Value +"'";
+            //parking_Allotment.fill_drop(ddl_place, sql_query, "parking_no", "place_id");
+
+            String sql_query = "Select *  from parking where park_for='" + ddl_park_for.SelectedValue + "' and society_id='" + society_id.Value + "'";
+
+            repeater.fill_list(Repeater1, sql_query);
 
         }
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -219,6 +233,28 @@ namespace Society
         {
             GridView1.PageIndex = e.NewPageIndex;
             Park_Allotment_GridBind();
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (assign_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == assign_id.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
+        }
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+            assign_id.Value = e.CommandArgument.ToString();
+              
+            }
         }
     }
 

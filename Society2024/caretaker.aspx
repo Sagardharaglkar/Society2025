@@ -207,7 +207,7 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required"/>
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -265,7 +265,7 @@
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required"/>
                                                         <div id="RepeaterContainer2" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -373,7 +373,7 @@
                                                         <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required"/>
                                                         <div id="RepeaterContainer3" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
+                                                            <asp:Repeater ID="Repeater3" runat="server" OnItemDataBound="Repeater3_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"

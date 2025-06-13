@@ -24,6 +24,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField parking_id;
 
         /// <summary>
+        /// assign_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField assign_id;
+
+        /// <summary>
         /// society_id control.
         /// </summary>
         /// <remarks>
@@ -177,22 +186,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// ddl_place control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_place;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
-        /// CompareValidator3 control.
+        /// Repeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator3;
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
 
         /// <summary>
         /// Panel1 control.

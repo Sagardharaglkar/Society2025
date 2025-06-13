@@ -40,7 +40,8 @@ namespace Society
         }
         protected void Allbound()
         {
-            String str = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            String strr = Session["society_id"].ToString();
+            String str = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + strr + "'";
             repeater.fill_list(Repeater1, str);
 
             String str2 = "Select *  from types";
@@ -283,12 +284,11 @@ namespace Society
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (building_lbl.Text != "")
-                {
+                
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == building_lbl.Text)
-                        TextBox11.Text = link.Text;
-                }
+                    if (link.CommandArgument == Building_id.Value.ToString())
+                        TextBox1.Text = link.Text;
+                
             }
         }
 
