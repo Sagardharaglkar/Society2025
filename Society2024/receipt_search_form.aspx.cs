@@ -55,7 +55,21 @@ namespace Society
             }
 
         }
+        protected void Allbound()
+        {
+            String str1 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, str1);
 
+            String str2 = "SELECT * FROM dbo.pay_mode";
+            repeater.fill_list(Repeater4, str2);
+
+            String str3 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
+            repeater.fill_list(Repeater2, str3);
+
+            string str4 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_lbl.Text + "' ";
+            repeater.fill_list(Repeater3, str4);
+
+        }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
@@ -242,6 +256,7 @@ namespace Society
             txt_remarks.Text = result.Remarks;
             txt_received_amt.Text = result.Received_Amount.ToString();
             txt_pdc_balance.Text = (result.Recivable_Amt - result.Received_Amount).ToString();
+            Allbound();
         }
 
         protected void print_save_Command(object sender, CommandEventArgs e)
@@ -508,6 +523,94 @@ namespace Society
         protected void btn_email_Click(object sender, EventArgs e)
         {
         
+
+        }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (building_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == building_id.Value)
+
+                        TextBox1.Text = link.Text;
+
+                }
+
+            }
+
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (wing_name_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == wing_name_id.Value)
+
+                        TextBox2.Text = link.Text;
+
+                }
+
+            }
+
+        }
+
+        protected void Repeater3_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (owner_name_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == owner_name_id.Value)
+
+                        TextBox3.Text = link.Text;
+
+                }
+
+            }
+
+        }
+
+        protected void Repeater4_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+
+            {
+
+                if (pay_mode_id.Value != "")
+
+                {
+
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+
+                    if (link.CommandArgument == pay_mode_id.Value)
+
+                        TextBox4.Text = link.Text;
+
+                }
+
+            }
 
         }
 
