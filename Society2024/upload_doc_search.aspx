@@ -527,6 +527,8 @@
         function setTextBox2(value) {
 
             document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("<%= TextBox3.ClientID %>").value = ""    ;
+            document.getElementById("<%= TextBox4.ClientID %>").value = "";
 
             document.getElementById("RepeaterContainer2").style.display = "none";
 
@@ -535,6 +537,7 @@
         function setTextBox3(value) {
 
             document.getElementById("<%= TextBox3.ClientID %>").value = value;
+            document.getElementById("<%= TextBox4.ClientID %>").value = "";
 
             document.getElementById("RepeaterContainer3").style.display = "none";
 

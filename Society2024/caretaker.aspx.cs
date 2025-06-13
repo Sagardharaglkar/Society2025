@@ -169,7 +169,7 @@ namespace Society
 
             caretaker_id.Value = result.Caretaker_Id.ToString();
             society_id.Value = result.Society_Id;
-            wing_id.Value = result.Wing_Id.ToString();
+            building_wing_id.Value = result.Wing_Id.ToString();
             txt_flat_no.Text = result.Flat_No;
             txt_c_name.Text = result.C_Name;
             doc_id.Value = result.doc_id.ToString();

@@ -61,7 +61,7 @@ namespace Society
             string sql1 = "Select distinct w_name,wing_id from dbo.flat_types where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
             repeater.fill_list(Repeater3, sql1);
            
-            String str = "Select distinct flat_no,flat_id from dbo.flat_types where  society_id='" + society_id.Value + "' and build_id=" + lbl_building.Text + " and wing_id=" + wing_id.Value;
+            String str = "Select distinct flat_no,flat_id from dbo.flat_types where  society_id='" + society_id.Value + "' and build_id=" + building_id.Value + " and wing_id=" + wing_id.Value;
             repeater.fill_list(Repeater4, str);
         }
         

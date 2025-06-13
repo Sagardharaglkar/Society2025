@@ -201,7 +201,7 @@ namespace Society
             Reminder.Sql_Operation = "owner_select";
 
             var result = BL_Pdc.owner_selectedindexchanged(Reminder);
-            TextBox2.Text = "Temp";
+           
             txt_pre_addr1.Text = result.Pre_Addr1;
             txt_pre_addr2.Text = result.Pre_Addr2;
             txt_pre_mob.Text = result.Pre_Mob.ToString();
