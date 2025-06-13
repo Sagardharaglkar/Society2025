@@ -133,8 +133,8 @@ namespace Society
             String str = "Select *  from society_master";
             repeater.fill_list(categoryRepeater, str);
 
-            String str = "Select *  from society_master";
-            repeater.fill_list(categoryRepeater, str);
+            String strr = "Select *  from society_master";
+            repeater.fill_list(categoryRepeater, strr);
 
         }
 

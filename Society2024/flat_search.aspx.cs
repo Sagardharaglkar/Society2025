@@ -57,7 +57,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 Building_id.Value = e.CommandArgument.ToString();
-
+                building_lbl.Text = e.CommandArgument.ToString();
             }
 
         }
@@ -283,10 +283,10 @@ namespace Society
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (Building_id.Value != "")
+                if (building_lbl.Text != "")
                 {
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == Building_id.Value)
+                    if (link.CommandArgument == building_lbl.Text)
                         TextBox11.Text = link.Text;
                 }
             }

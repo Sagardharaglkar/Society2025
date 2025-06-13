@@ -208,8 +208,8 @@
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox11" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select Building/Wing" autocomplete="off" />
-                                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                                            placeholder="Select Building/Wing" autocomplete="off" Style="width:150px;" />
+                                                        <div id="RepeaterContainer1" class="suggestion-list" style="width:150px;">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -388,14 +388,12 @@
 
                                             </div>
                                         </div>
-
+                                        <asp:Label runat="server" Visible="false" ID="building_lbl"></asp:Label>
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
                                 </asp:UpdatePanel>
-
-
 
                             </div>
                             <div class="modal-footer">
