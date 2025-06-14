@@ -151,11 +151,6 @@
         <div id="wrapper">
             <!-- Sidebar -->
 
-
-
-
-            <%--                    <asp:UpdatePanel runat="server">
-<ContentTemplate>--%>
             <asp:Panel ID="Panel1" runat="server">
                 <div class="auto-scroll">
                     <ul class=" navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -173,16 +168,6 @@
 
                         <!-- Divider -->
                         <hr class="sidebar-divider my-0">
-
-                        <!-- Nav Item - Dashboard -->
-                        <%--<li class="nav-item active">
-                <a class="nav-link" href="admin_dashboard.aspx">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Admin Dashboard</span></a>
-                    <a class="collapse-item" href="society_charges.aspx">Society Charges</a>
-                   <a class="collapse-item" href="society_charges_monthwise.aspx">Society Charges Monthwise</a>
-            </li>--%>
-
 
                         <li class="nav-item zoom">
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSociety"
@@ -359,29 +344,10 @@
 
                         </li>
 
-
-
-
-                        <%--      <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesettings"
-                            aria-expanded="true" aria-controls="collapsesettings">
-                            <i class="fas fa-fw fa-folder"></i>
-                            <span>Settings</span></a>
-                        <div id="collapsesettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Accounts Settings:</h6>
-                                <a class="collapse-item" href="account_setting.aspx">Accounts Settings</a>
-
-
-
-                            </div>
-                        </div>
-
-                    </li>--%>
                         <hr class="sidebar-divider">
-                        <li>
+                        <li class="m-auto">
                             <div class="text-center d-none d-md-inline">
-                                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                                <button type="button" class="rounded-circle border-0" id="sidebarToggle"></button>
                             </div>
                         </li>
                         <li class="nav-item zoom">
@@ -407,26 +373,10 @@
                 <!-- Main Content -->
                 <div id="content" style="background: #EBF0F9;">
 
-                    <!-- Topbar -->
-                    <%--                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-
-                    <marquee direction="left">
-                        <strong>
-                 <asp:Label ID="name_society" runat="server" Font-Size="XX-Large" ForeColor="#0066FF" Font-Bold="True" /></strong></marquee>
-
-
-
-
-                </nav>--%>
-
-
                     <nav
                         class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="position:sticky; top:0px; z-index:10; margin-top:3px;">
                         <!-- Sidebar Toggle (Topbar) -->
-                        <button
-                            id="sidebarToggleTop"
-                            class="btn btn-link d-md-none rounded-circle mr-3">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
 
@@ -578,9 +528,8 @@
                                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="dropdown-item"
                                         OnClientClick="return confirm('Are you sure you want to log out?');"
                                         OnClick="logout_Click">
-     &nbsp;&nbsp;<i
-                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
-                    ></i>Log Out
+                                        &nbsp;&nbsp;
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Log Out
                                     </asp:LinkButton>
                                 </div>
                             </li>
@@ -636,9 +585,24 @@
          <%-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>--%>
 
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("sidebarTogglee");
+        const sidebar = document.querySelector(".sidebar"); // Adjust selector as needed
+
+        toggleButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default form behavior
+            sidebar.classList.toggle("toggled");
+        });
+    });
+    </script>
 
 
-        <script>
+    <script>
+
+
+    myButton.addEventListener("click", addClassOnClick);
+
             function toggleSidebar() {
                 var sidebar = document.getElementById("accordionSidebar");
                 if (sidebar) {
@@ -1273,7 +1237,7 @@
             });
         })();
 
-        </script>
+    </script>
 
 
 </body>
