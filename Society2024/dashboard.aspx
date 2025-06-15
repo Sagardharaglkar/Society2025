@@ -290,10 +290,7 @@
                 <%--<asp:Button ID="btnChartAsyncLoad" runat="server" Style="display:none;" OnClick="btnChartAsyncLoad_Click" />--%>
 
 
-                <asp:Chart ID="Chart2" runat="server" Width="792px" Height="316px" ValidateRequestMode="Inherit">
-                    <%-- <Titles>
-                                      <asp:Title Name="Items" Text="EXPENSE TRACKER" Alignment="TopLeft" Font="Microsoft Sans Serif, 18pt" />
-                                  </Titles>--%>
+                <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" ValidateRequestMode="Inherit">
 
                     <Series>
                         <asp:Series Name="Expense" XValueMember="expense_month" YValueMembers="expense"

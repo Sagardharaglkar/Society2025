@@ -46,7 +46,11 @@ namespace Society
                 maintenance_Gridbind();
 
 
-                Allbound();
+                String str1 = "SELECT  * FROM  dbo.building_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
+
+                String str2 = "SELECT * from wing_master where society_id='" + society_id.Value + "'";
+                repeater.fill_list_maintanace(Repeater2, str2);
 
 
                 if (Request.QueryString["id"] != null)
@@ -64,7 +68,7 @@ namespace Society
             String str1 = "SELECT  * FROM  dbo.building_master where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater1, str1);
 
-            String str2 = "SELECT * from wing_master where society_id='" + society_id.Value + "'";
+            String str2 = "Select distinct wing_id,w_name from wing_master where society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "'";
             repeater.fill_list(Repeater2, str2);
         }
 
@@ -74,7 +78,7 @@ namespace Society
             {
                 building_id.Value = e.CommandArgument.ToString();
                 string str1 = "Select distinct wing_id,w_name from wing_master where society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "'";
-                repeater.fill_list(Repeater2, str1);
+                repeater.fill_list_maintanace(Repeater2, str1);
             }
 
         }

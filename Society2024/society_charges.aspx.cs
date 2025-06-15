@@ -125,6 +125,8 @@ namespace Society
             txt_amount.Text = result.Amount.ToString();
             society_name_id.Value = result.Society_Id.ToString();
 
+            String str = "Select *  from society_master";
+            repeater.fill_list(categoryRepeater, str);
 
         }
 

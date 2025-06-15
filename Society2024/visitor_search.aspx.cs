@@ -51,8 +51,14 @@ namespace Society
                 txt_out_time.Enabled = false;
 
 
-                Allbound();
+                
+                
+                
+                String str1 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, str1);
 
+                String str2 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
+                repeater.fill_list(Repeater2, str2);
             }
 
 
@@ -60,11 +66,11 @@ namespace Society
 
         protected void Allbound()
         {
-
-            String str1 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
+            String sess_id = Session["society_id"].ToString();
+            String str1 = "Select *  from building_master where society_id ='" + sess_id + "'";
             repeater.fill_list(Repeater1, str1);
 
-            String str2 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
+            String str2 = "Select unit, flat_id from owner_search_vw where  society_id='" + sess_id + "'and  build_id=" + building_id.Value;
             repeater.fill_list(Repeater2, str2);
 
         }
@@ -74,6 +80,7 @@ namespace Society
             {
                 building_id.Value = e.CommandArgument.ToString();
                 String str = "Select unit, flat_id from owner_search_vw where  society_id='" + society_id.Value + "'and  build_id=" + building_id.Value;
+                repeater.fill_list(Repeater2, str);
             }
 
         }
@@ -82,19 +89,11 @@ namespace Society
         {
             if (e.CommandName == "SelectCategory")
             {
-                wing_id.Value = e.CommandArgument.ToString();
+                visitor_flat_id.Value = e.CommandArgument.ToString();
             }
 
         }
 
-        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectCategory")
-            {
-                visitor_type_id.Value = e.CommandArgument.ToString();
-            }
-
-        }
         public void filldrop()
         {
 
@@ -197,7 +196,7 @@ namespace Society
                 visitor.Out_Time = Convert.ToDateTime(txt_out_time.Text);
             visitor.Contact_No = txt_contact.Text;
             visitor.build_id = Convert.ToInt32(building_id.Value);
-            visitor.flat_id = Convert.ToInt32(wing_id.Value);
+            visitor.flat_id = Convert.ToInt32(visitor_flat_id.Value);
             visitor.Vehical_No = txt_vehical_no.Text;
             visitor.Visiting_Purpose = txt_visiting_purpose.Text;
             visitor.Image = path;
@@ -223,7 +222,7 @@ namespace Society
             if (result.Out_Time != DateTime.MinValue)
                 txt_out_time.Text = result.Out_Time.ToString("hh:mm:ss");
             building_id.Value = result.build_id.ToString();
-            wing_id.Value = result.flat_id.ToString();
+            visitor_flat_id.Value = result.flat_id.ToString();
             txt_contact.Text = result.Contact_No;
             txt_vehical_no.Text = result.Vehical_No;
             txt_visiting_purpose.Text = result.Visiting_Purpose;
@@ -326,7 +325,7 @@ namespace Society
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
+            {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 if (building_id.Value != "")
@@ -342,10 +341,10 @@ namespace Society
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (wing_id.Value != "")
+                if (visitor_flat_id.Value != "")
                 {
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == wing_id.Value)
+                    if (link.CommandArgument == visitor_flat_id.Value)
                         TextBox2.Text = link.Text;
                 }
             }

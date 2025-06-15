@@ -76,8 +76,7 @@
                         <asp:HiddenField ID="society_id" runat="server" />
 
                         <asp:HiddenField ID="building_id" runat="server" />
-                        <asp:HiddenField ID="wing_id" runat="server" />
-                        <asp:HiddenField ID="visitor_type_id" runat="server" />
+                        <asp:HiddenField ID="visitor_flat_id" runat="server" />
 
 
                         <div class="form-group">
@@ -308,7 +307,7 @@
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("flat_no") %>'
+                                                                        Text='<%# Eval("unit") %>'
                                                                         CommandArgument='<%# Eval("flat_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox2(this.innerText);" />
@@ -535,6 +534,7 @@
     function setTextBox1(value) {
 
         document.getElementById("<%= TextBox1.ClientID %>").value = value;
+        document.getElementById("<%= TextBox2.ClientID %>").value = "";
 
         document.getElementById("RepeaterContainer1").style.display = "none";
 

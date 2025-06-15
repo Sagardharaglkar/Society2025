@@ -595,21 +595,6 @@
             sidebar.classList.toggle("toggled");
         });
     });
-    </script>
-
-
-    <script>
-
-
-    myButton.addEventListener("click", addClassOnClick);
-
-            function toggleSidebar() {
-                var sidebar = document.getElementById("accordionSidebar");
-                if (sidebar) {
-                    sidebar.classList.toggle("toggled");
-                }
-                console.log("clicked toggle button")
-            }
 
             document.addEventListener("DOMContentLoaded", function () {
                 let collapsibleMenus = document.querySelectorAll(".collapse");
