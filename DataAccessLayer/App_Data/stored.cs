@@ -31,6 +31,31 @@ namespace Society
             repeater.DataBind();
         }
 
+        public void fill_list_maintanace(Repeater repeater, string sqlstring)
+        {
+            using (SqlConnection con = new SqlConnection(setsqlconnection()))
+            {
+                con.Open();
+
+                // Use SqlDataAdapter to fill data into a DataTable
+                SqlDataAdapter da = new SqlDataAdapter(sqlstring, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                // Add hardcoded row
+                DataRow extraRow = dt.NewRow();
+                extraRow["wing_id"] = 0; // Replace with actual column name and value
+                extraRow["w_name"] = "All"; // Replace with actual column name and value
+                                                           // Add more columns as needed
+                dt.Rows.Add(extraRow);
+
+                // Bind to repeater
+                repeater.DataSource = dt;
+                repeater.DataBind();
+            }
+        }
+
+
 
         public string setsqlconnection()
         {

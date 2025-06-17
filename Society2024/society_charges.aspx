@@ -150,7 +150,7 @@
                                                 <div class="col-sm-7">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select Society" autocomplete="off" />
+                                                            placeholder="Select Society" autocomplete="off" required="required" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="categoryRepeater_ItemDataBound">
                                                                 <ItemTemplate>

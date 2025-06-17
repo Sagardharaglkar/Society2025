@@ -216,7 +216,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off"  required="required" Style="width:200px;"/>
+                                                            placeholder="Select" autocomplete="off" required="required" Style="width: 200px;" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
@@ -246,7 +246,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off"  required="required" Style="width:200px;"/>
+                                                            placeholder="Select" autocomplete="off" required="required" Style="width: 200px;" />
                                                         <div id="RepeaterContainer2" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
@@ -414,76 +414,76 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-12">
+                                                    <div style="width: 800px; overflow: auto;">
+                                                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue">
+
+                                                            <Columns>
+                                                                <asp:TemplateField HeaderText="No." ItemStyle-Width="30">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="id" runat="server" Text='<%#Container.DisplayIndex + 1 %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="pdc_id" Visible="false">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="pdc_rem_id" runat="server" Text='<%#Bind("pdc_rem_id")%>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Cheque No" ItemStyle-Width="100">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="cheque_no" runat="server" Text='<%#Bind("chqno")%>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+
+                                                                <asp:TemplateField HeaderText="Cheque Date" ItemStyle-Width="100">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="chq_date" runat="server" Text='<%#Bind("che_date", "{0:dd/MM/yyyy}")%>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+
+                                                                <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="chq_amount" runat="server" Text='<%#Bind("che_amount")%>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Deposited">
+                                                                    <ItemTemplate>
+                                                                        <asp:CheckBox ID="chk_deposited" runat="server" Enabled="false" Checked='<%# Eval("che_dep").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
+
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Returned">
+                                                                    <ItemTemplate>
+                                                                        <asp:CheckBox ID="chk_returned" runat="server" Enabled="false" Checked='<%# Eval("che_ret").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
+
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                                <asp:TemplateField HeaderText="Bounced">
+                                                                    <ItemTemplate>
+                                                                        <asp:CheckBox ID="chk_bounced" runat="server" Enabled="false" Checked='<%# Eval("che_can").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
+
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                        </asp:GridView>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
                                 </asp:UpdatePanel>
-                                <div class="form-group">
-                                    <div class="row ">
-                                        <div class="col-sm-12">
-                                            <div style="width: 800px; overflow: auto;">
-                                                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue">
-
-                                                    <Columns>
-                                                        <asp:TemplateField HeaderText="No." ItemStyle-Width="30">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="id" runat="server" Text='<%#Container.DisplayIndex + 1 %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="pdc_id" Visible="false">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="pdc_rem_id" runat="server" Text='<%#Bind("pdc_rem_id")%>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Cheque No" ItemStyle-Width="100">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="cheque_no" runat="server" Text='<%#Bind("chqno")%>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Cheque Date" ItemStyle-Width="100">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="chq_date" runat="server" Text='<%#Bind("che_date", "{0:dd/MM/yyyy}")%>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-
-                                                        <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100">
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="chq_amount" runat="server" Text='<%#Bind("che_amount")%>'></asp:Label>
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Deposited">
-                                                            <ItemTemplate>
-                                                                <asp:CheckBox ID="chk_deposited" runat="server" Enabled="false" Checked='<%# Eval("che_dep").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
-
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Returned">
-                                                            <ItemTemplate>
-                                                                <asp:CheckBox ID="chk_returned" runat="server" Enabled="false" Checked='<%# Eval("che_ret").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
-
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Bounced">
-                                                            <ItemTemplate>
-                                                                <asp:CheckBox ID="chk_bounced" runat="server" Enabled="false" Checked='<%# Eval("che_can").ToString() == "1" ? true : false %>' ItemStyle-Width="100"></asp:CheckBox>
-
-                                                            </ItemTemplate>
-                                                        </asp:TemplateField>
-                                                    </Columns>
-                                                </asp:GridView>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-
 
                             </div>
 
@@ -518,11 +518,11 @@
 
 
 
-<script>
+    <script>
 
-    function initDropdownEvents() {
+        function initDropdownEvents() {
 
-        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
 
         const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
@@ -542,100 +542,100 @@
 
         const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
 
-        const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-        textBox2.addEventListener("focus", function () {
+            textBox2.addEventListener("focus", function () {
 
-            repeaterContainer2.style.display = "block";
+                repeaterContainer2.style.display = "block";
 
-        });
+            });
 
-        textBox2.addEventListener("input", function () {
+            textBox2.addEventListener("input", function () {
 
-            const input = textBox2.value.toLowerCase();
+                const input = textBox2.value.toLowerCase();
 
-            filterSuggestions("category-link", input);
+                filterSuggestions("category-link", input);
 
-        });
+            });
 
-    }
-
-
+        }
 
 
-    function filterSuggestions(className, value) {
 
-        const items = document.querySelectorAll("." + className);
 
-        let matchFound = false;
+        function filterSuggestions(className, value) {
 
-        items.forEach(item => {
+            const items = document.querySelectorAll("." + className);
 
-            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+            let matchFound = false;
 
-                item.style.display = "block";
+            items.forEach(item => {
 
-                matchFound = true;
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                    item.style.display = "block";
+
+                    matchFound = true;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+
+                if (!noMatchMessage) {
+
+                    noMatchMessage = document.createElement("div");
+
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+
+                }
+
+                noMatchMessage.style.display = "block";
 
             } else {
 
-                item.style.display = "none";
+                if (noMatchMessage) {
 
-            }
+                    noMatchMessage.style.display = "none";
 
-        });
-
-        let noMatchMessage = document.getElementById("no-match-message");
-
-        if (!matchFound) {
-
-            if (!noMatchMessage) {
-
-                noMatchMessage = document.createElement("div");
-
-                noMatchMessage.id = "no-match-message";
-
-                noMatchMessage.innerText = "No matching suggestions.";
-
-                items[0]?.parentNode?.appendChild(noMatchMessage);
-
-            }
-
-            noMatchMessage.style.display = "block";
-
-        } else {
-
-            if (noMatchMessage) {
-
-                noMatchMessage.style.display = "none";
+                }
 
             }
 
         }
 
-    }
+        function setTextBox1(value) {
 
-    function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
 
-        document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
 
-        document.getElementById("RepeaterContainer1").style.display = "none";
+        }
+        function setTextBox2(value) {
 
-    }
-    function setTextBox2(value) {
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
 
-        document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer2").style.display = "none";
 
-        document.getElementById("RepeaterContainer2").style.display = "none";
-
-    }
+        }
 
 
-    Sys.Application.add_load(initDropdownEvents);
+        Sys.Application.add_load(initDropdownEvents);
 
 
-</script>
- 
+    </script>
+
 </asp:Content>
 
 

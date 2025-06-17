@@ -157,8 +157,8 @@ namespace Society
             listofuploadedfiles.Text = Path.GetFileName(result.File_Save_Path);
             doc_id.Value = result.doc_id.ToString();
             building_id.Value = result.build_id.ToString();
-            wing_id.Value = result.W_Name.ToString();
-            flat_no_id.Value = result.Flat_No.ToString();
+            wing_id.Value = result.wing_id.ToString();
+            flat_no_id.Value = result.flat_id.ToString();
             
             txt_date.Text = result.Date.ToString("yyyy-MM-dd");
             Allbound();

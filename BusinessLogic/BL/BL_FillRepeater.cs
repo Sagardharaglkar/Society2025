@@ -17,5 +17,10 @@ namespace BusinessLogic.BL
         {
             repeater.fill_list(drp_down, sqlstring);
         }
+
+        public void fill_list_maintanace(Repeater drp_down, string sqlstring)
+        {
+            repeater.fill_list_maintanace(drp_down, sqlstring);
+        }
     }
 }

@@ -232,7 +232,7 @@
                                                                 placeholder="Select" autocomplete="off" required="required" Style="width:200px;"/>
                                                             <asp:Panel ID="drp_Container" runat="server" Visible="false">
                                                                 <div id="RepeaterContainer1" class="suggestion-list">
-                                                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
+                                                                    <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                         <ItemTemplate>
                                                                             <asp:LinkButton
                                                                                 ID="lnkCategory"
@@ -267,7 +267,7 @@
                                                             <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select" autocomplete="off" required="required" Style="width:200px;" />
                                                             <div id="RepeaterContainer2" class="suggestion-list">
-                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                                <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                     <ItemTemplate>
                                                                         <asp:LinkButton
                                                                             ID="lnkCategory"

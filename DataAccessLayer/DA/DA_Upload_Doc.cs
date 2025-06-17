@@ -94,9 +94,9 @@ namespace DataAccessLayer.DA
                         doc.File_Save_Path = sdr["file_save_path"].ToString();
                         doc.doc_id = Convert.ToInt32(sdr["doc_id"]);
                         doc.build_id = Convert.ToInt32(sdr["build_id"]);
-                        doc.W_Name = sdr["w_name"].ToString();
-                        doc.Flat_No = sdr["flat_no"].ToString();
-                        
+                        doc.wing_id = Convert.ToInt32(sdr["wing_id"]);
+                        doc.flat_id = Convert.ToInt32(sdr["flat_id"]);
+
                         doc.Date = Convert.ToDateTime(sdr["date"]);
 
                     }
