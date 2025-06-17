@@ -172,7 +172,7 @@ body {
                 <asp:Button ID="Button2" runat="server" Text="Sign In" CssClass="btn-signin" OnClick="btn_Login_Click" />
             </div>
             <div class="options">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/forgot_password.aspx">Forgot Password</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forgot Password</asp:HyperLink>
             </div>
         </div>
         <div class="right">

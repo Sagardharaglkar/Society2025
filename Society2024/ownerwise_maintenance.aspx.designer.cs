@@ -24,6 +24,24 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
+        /// build_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField build_id;
+
+        /// <summary>
+        /// owner_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField owner_id;
+
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -31,15 +49,6 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// ddl_build control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_build;
 
         /// <summary>
         /// TextBox1 control.
@@ -67,15 +76,6 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-
-        /// <summary>
-        /// ddl_owner control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_owner;
 
         /// <summary>
         /// TextBox2 control.

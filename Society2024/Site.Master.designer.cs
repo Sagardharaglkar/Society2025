@@ -78,15 +78,6 @@ namespace Society
         protected global::System.Web.UI.UpdatePanel upNotifCount;
 
         /// <summary>
-        /// TimerNotif control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer TimerNotif;
-
-        /// <summary>
         /// notifCount control.
         /// </summary>
         /// <remarks>

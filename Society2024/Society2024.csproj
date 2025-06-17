@@ -227,7 +227,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="forgetPass.aspx" />
+    <Content Include="Forgot_Password.aspx" />
     <Content Include="support_ticket.aspx" />
     <Content Include="About.aspx" />
     <Content Include="account_setting.aspx" />
@@ -2141,12 +2141,12 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="forgetPass.aspx.cs">
-      <DependentUpon>forgetPass.aspx</DependentUpon>
+    <Compile Include="Forgot_Password.aspx.cs">
+      <DependentUpon>Forgot_Password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="forgetPass.aspx.designer.cs">
-      <DependentUpon>forgetPass.aspx</DependentUpon>
+    <Compile Include="Forgot_Password.aspx.designer.cs">
+      <DependentUpon>Forgot_Password.aspx</DependentUpon>
     </Compile>
     <Compile Include="support_ticket.aspx.cs">
       <DependentUpon>support_ticket.aspx</DependentUpon>

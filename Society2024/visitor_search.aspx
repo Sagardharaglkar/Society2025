@@ -75,7 +75,7 @@
                         <asp:HiddenField ID="visitor_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="server" />
 
-                        <asp:HiddenField ID="building_id" runat="server" />
+                       <asp:HiddenField runat="server" ID="building_id"/>
                         <asp:HiddenField ID="visitor_flat_id" runat="server" />
 
 

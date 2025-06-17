@@ -69,7 +69,7 @@ namespace Society
             repeater.fill_list(Repeater1, str1);
 
             String str2 = "Select distinct wing_id,w_name from wing_master where society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "'";
-            repeater.fill_list(Repeater2, str2);
+            repeater.fill_list_maintanace(Repeater2, str2);
         }
 
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)

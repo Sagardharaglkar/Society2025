@@ -13,8 +13,6 @@ using Microsoft.ApplicationBlocks.Data;
 using System.Collections;
 using static System.Net.Mime.MediaTypeNames;
 
-
-
 namespace Society
 {
     public partial class stored : System.Web.UI.Page
@@ -37,16 +35,15 @@ namespace Society
             {
                 con.Open();
 
-                // Use SqlDataAdapter to fill data into a DataTable
+              
                 SqlDataAdapter da = new SqlDataAdapter(sqlstring, con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 // Add hardcoded row
                 DataRow extraRow = dt.NewRow();
-                extraRow["wing_id"] = 0; // Replace with actual column name and value
-                extraRow["w_name"] = "All"; // Replace with actual column name and value
-                                                           // Add more columns as needed
+                extraRow["wing_id"] = 0; 
+                extraRow["w_name"] = "All"; 
                 dt.Rows.Add(extraRow);
 
                 // Bind to repeater
@@ -54,30 +51,19 @@ namespace Society
                 repeater.DataBind();
             }
         }
-
-
-
+  
         public string setsqlconnection()
         {
             sqlconn =ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            //db_name = WebConfigurationManager.AppSettings["db_name"];
-            //sqlconn = "Server=" + server_name + "; Database=" + db_name + "Tusted_Connection = True; ";
 
-            //sqlconn = "Data Source = 195.250.30.235; User maint_cal_id = admin; password = QWERTYUIOP; Initial Catalog =Society; Integrated Security = false; Connection Timeout=36367";
-            //sqlconn = "Data Source =.; Initial Catalog =Society; Integrated Security = true; Connection Timeout=36367";
             return sqlconn;
         }
-        //function run_query(string operation,collection data_item)
-        //{
 
-        //}
         public void fill_drop_1(DropDownList drp_down, string sqlstring, string text, string value)
         {
             SqlConnection con ;
 
             con = new SqlConnection(setsqlconnection());
-            //  string sqlstring = "Select * from standard";
-            // SqlCommand cmd = new SqlCommand(sqlstring, con);
 
             SqlDataReader sdr = SqlHelper.ExecuteReader(con, CommandType.Text, sqlstring);
             
@@ -99,8 +85,6 @@ namespace Society
             SqlConnection con = null;
            
                 con = new SqlConnection(setsqlconnection());
-                //  string sqlstring = "Select * from standard";
-               // SqlCommand cmd = new SqlCommand(sqlstring, con);
 
                 SqlDataReader sdr = SqlHelper.ExecuteReader(con, CommandType.Text, sqlstring);
             
@@ -111,8 +95,6 @@ namespace Society
             //drp_down.Items.Add(0,new ListItem("Select1", "select1"));
             drp_down.Items.Insert(0, new ListItem("select" ,"0"));
         }
-
-
 
         public ArrayList create_array(string field_name,object field_value)
         {
@@ -129,8 +111,6 @@ namespace Society
             SqlConnection con = null;
             try{
             con = new SqlConnection(setsqlconnection());
-            //  string sqlstring = "Select * from standard";
-           // SqlCommand cmd = new SqlCommand(sqlstring, con);
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             foreach (ArrayList ar in data_item)

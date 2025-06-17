@@ -33,13 +33,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
-        /// wing_id control.
+        /// building_id control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField wing_id;
+        protected global::System.Web.UI.WebControls.HiddenField building_id;
 
         /// <summary>
         /// visitor_flat_id control.

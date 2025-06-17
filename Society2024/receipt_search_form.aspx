@@ -61,7 +61,7 @@
                         <asp:HiddenField ID="owner_name_id" runat="server" />
                         <asp:HiddenField ID="pay_mode_id" runat="server" />
 
-                        <div class="form-group">
+                      <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -74,28 +74,9 @@
 
                                         </asp:DropDownList>&nbsp;&nbsp;
                       
-                                         <div class="dropdown-container">
-                                             <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
-                                                 placeholder="Select" autocomplete="off" required="required" />
-                                             <div id="RepeaterContainer1" class="suggestion-list">
-                                                 <asp:Repeater ID="Repeater5" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
-                                                     <ItemTemplate>
-                                                         <asp:LinkButton
-                                                             ID="lnkCategory"
-                                                             runat="server"
-                                                             CssClass="suggestion-item link-button category-link"
-                                                             Text='<%# Eval("flat_type") %>'
-                                                             CommandArgument='<%# Eval("flat_type_id") %>'
-                                                             CommandName="SelectCategory"
-                                                             OnClientClick="setTextBox1(this.innerText);" />
-                                                     </ItemTemplate>
-                                                     <FooterTemplate>
-                                                         <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                             Text="No items found." />
-                                                     </FooterTemplate>
-                                                 </asp:Repeater>
-                                             </div>
-                                         </div>
+                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
+                                 <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" Font-Bold="true" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                        
                             <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
                              </asp:Panel>
                                         &nbsp;&nbsp; 

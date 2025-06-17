@@ -30,25 +30,7 @@ messaging.onBackgroundMessage(function (payload) {
     self.registration.showNotification(notificationTitle, notificationOptions);
 });
 
-// Handle notification click
-//self.addEventListener('notificationclick', function (event) {
-//    event.notification.close();
 
-//    const clickAction = event.notification.data?.click_action || 'https://localhost:44309/support_ticket'
-
-//    event.waitUntil(
-//        clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
-//            for (const client of clientList) {
-//                if (client.url === clickAction && 'focus' in client) {
-//                    return client.focus();
-//                }
-//            }
-//            if (clients.openWindow) {
-//                return clients.openWindow(clickAction);
-//            }
-//        })
-//    );
-//});
 
 
 //importScripts('https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js');
