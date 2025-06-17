@@ -22,7 +22,28 @@
                 </div>
                 <div class="col-sm-3">
 
-                    <asp:DropDownList ID="ddl_expense" Width="130px" runat="server" OnSelectedIndexChanged="ddl_expense_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    <div class="dropdown-container">
+                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                            placeholder="Select" autocomplete="off" required="required" />
+                        <div id="RepeaterContainer1" class="suggestion-list">
+                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                <ItemTemplate>
+                                    <asp:LinkButton
+                                        ID="lnkCategory"
+                                        runat="server"
+                                        CssClass="suggestion-item link-button category-link"
+                                        Text='<%# Eval("flat_type") %>'
+                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                        CommandName="SelectCategory"
+                                        OnClientClick="setTextBox1(this.innerText);" />
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                        Text="No items found." />
+                                </FooterTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-1">
                     <asp:Label ID="Label2" runat="server" Text="Date:"></asp:Label>

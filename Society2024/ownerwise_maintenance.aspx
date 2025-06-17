@@ -28,8 +28,28 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <asp:DropDownList ID="ddl_build" runat="server" AutoPostBack="true" Width="150px" OnSelectedIndexChanged="ddl_build_SelectedIndexChanged"></asp:DropDownList>
-                                    <asp:CompareValidator ControlToValidate="ddl_build" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Building" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-
+                                    <div class="dropdown-container">
+                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                            placeholder="Select" autocomplete="off" required="required" />
+                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton
+                                                        ID="lnkCategory"
+                                                        runat="server"
+                                                        CssClass="suggestion-item link-button category-link"
+                                                        Text='<%# Eval("flat_type") %>'
+                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                        CommandName="SelectCategory"
+                                                        OnClientClick="setTextBox1(this.innerText);" />
+                                                </ItemTemplate>
+                                                <FooterTemplate>
+                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                        Text="No items found." />
+                                                </FooterTemplate>
+                                            </asp:Repeater>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-1">
                                     <asp:Label ID="Label2" runat="server" Text="Owner Name :"></asp:Label>
@@ -37,9 +57,28 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <asp:DropDownList ID="ddl_owner" runat="server" AutoPostBack="true" Width="150px"></asp:DropDownList>
-                                    <asp:CompareValidator ControlToValidate="ddl_owner" ID="CompareValidator2" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please select Owner" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-
-
+                                    <div class="dropdown-container">
+                                        <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
+                                            placeholder="Select category (Animal or Bird)" autocomplete="off" required="required" />
+                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton
+                                                        ID="lnkCategory"
+                                                        runat="server"
+                                                        CssClass="suggestion-item link-button category-link"
+                                                        Text='<%# Eval("flat_type") %>'
+                                                        CommandArgument='<%# Eval("flat_type_id") %>'
+                                                        CommandName="SelectCategory"
+                                                        OnClientClick="setTextBox1(this.innerText);" />
+                                                </ItemTemplate>
+                                                <FooterTemplate>
+                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                        Text="No items found." />
+                                                </FooterTemplate>
+                                            </asp:Repeater>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-1">
                                     <asp:Label ID="lbl_date" runat="server" Text="From Date:"></asp:Label>
@@ -125,4 +164,102 @@
         </div>
     </div>
 
+
+
+
+
+
+    <script>
+ 
+function initDropdownEvents() {
+
+    const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+
+    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+ 
+    textBox1.addEventListener("focus", function () {
+
+        repeaterContainer1.style.display = "block";
+
+    });
+ 
+    textBox1.addEventListener("input", function () {
+
+        const input = textBox1.value.toLowerCase();
+
+        filterSuggestions("category-link", input);
+
+    });
+
+}
+ 
+ 
+ 
+ 
+function filterSuggestions(className, value) {
+
+    const items = document.querySelectorAll("." + className);
+
+    let matchFound = false;
+ 
+    items.forEach(item => {
+
+        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+            item.style.display = "block";
+
+            matchFound = true;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+ 
+    let noMatchMessage = document.getElementById("no-match-message");
+ 
+    if (!matchFound) {
+
+        if (!noMatchMessage) {
+
+            noMatchMessage = document.createElement("div");
+
+            noMatchMessage.id = "no-match-message";
+ 
+            noMatchMessage.innerText = "No matching suggestions.";
+
+            items[0]?.parentNode?.appendChild(noMatchMessage);
+
+        }
+
+        noMatchMessage.style.display = "block";
+
+    } else {
+
+        if (noMatchMessage) {
+
+            noMatchMessage.style.display = "none";
+
+        }
+
+    }
+
+}
+ 
+function setTextBox1(value) {
+
+    document.getElementById("<%= TextBox1.ClientID %>").value = value;
+
+    document.getElementById("RepeaterContainer1").style.display = "none";
+
+}
+ 
+ 
+Sys.Application.add_load(initDropdownEvents);
+ 
+ 
+</script>
+ 
 </asp:Content>

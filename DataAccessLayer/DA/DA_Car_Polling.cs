@@ -26,6 +26,7 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_car_polling", ref sdr);
 
             if (status1 == "Done")
+                if(sdr.HasRows)
                 dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;

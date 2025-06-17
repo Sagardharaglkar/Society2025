@@ -18,7 +18,7 @@ namespace Society
 
         usefull_Contact Usefull = new usefull_Contact();
         BL_PrintContact bL_printContact = new BL_PrintContact();
-
+        BL_FillRepeater repeater = new BL_FillRepeater();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,7 +32,15 @@ namespace Society
         public void filldrop()
         {
             String sql_query = "Select *  from person_type";
-            bL_printContact.fill_drop(ddl_per_type, sql_query, "p_type_name", "p_type_id");
+            repeater.fill_list(Repeater1, sql_query);
+        }
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                person_id.Value = e.CommandArgument.ToString();
+
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -91,10 +99,10 @@ namespace Society
             sb.Append("SELECT * FROM usefull_contact_vw WHERE active_status=0 AND society_id='")
               .Append(Session["Society_id"].ToString()).Append("'");
 
-            if (ddl_per_type.SelectedItem.Text != "select")
+            if (TextBox1.Text != "select")
             {
                 sb.Append(" AND p_type_name LIKE '")
-                  .Append(ddl_per_type.SelectedItem.Text).Append("%'");
+                  .Append(TextBox1.Text).Append("%'");
                 count++;
             }
 

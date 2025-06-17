@@ -75,10 +75,10 @@
                         <asp:HiddenField ID="visitor_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="server" />
 
-                        <asp:HiddenField ID="building_id" runat="server" />
+
                         <asp:HiddenField ID="wing_id" runat="server" />
                         <asp:HiddenField ID="visitor_type_id" runat="server" />
-
+                        <asp:Label ID="building_id" runat="server"  Visible="false"></asp:Label>
 
                         <div class="form-group">
                             <div class="row align-items-end">

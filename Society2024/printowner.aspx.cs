@@ -1,4 +1,5 @@
-﻿using BusinessLogic.MasterBL;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
 using DBCode.DataClass;
 using Microsoft.Reporting.WebForms;
 
@@ -18,6 +19,7 @@ namespace Society
       
         Owner owner = new Owner();
         BL_Owner_Master bL_Owner = new BL_Owner_Master();
+        BL_FillRepeater repeater = new BL_FillRepeater();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,12 +32,28 @@ namespace Society
         public void filldrop()
         {
             String sql_query1 = "Select distinct build_name from owner_search_vw  where society_id='" + society_id.Value + "'";
-            bL_Owner.fill_drop(ddl_build, sql_query1, "build_name", "build_name");
+            repeater.fill_list(Repeater1, sql_query1);
             String sql_query2 = "Select  distinct w_name from owner_search_vw where society_id='" + society_id.Value + "'";
-            bL_Owner.fill_drop(ddl_wing, sql_query2, "w_name", "w_name");
+            repeater.fill_list(Repeater2, sql_query2);
 
         }
 
+        protected void CategoryRepeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
+        protected void CategoryRepeater2_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                wing_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
         protected void Button1_Click(object sender, EventArgs e)
         {
             int count = 1;
@@ -43,7 +61,7 @@ namespace Society
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
            
 
-                if (ddl_build.SelectedItem.Text == "select" && ddl_wing.SelectedItem.Text == "select")
+                if (TextBox1.Text == "select" && TextBox2.Text == "select")
                     sb.Append("Select * from owner_search_vw where type='Owner' and active_status=0 and  society_id='" + Session["Society_id"].ToString() + "'");
 
 
@@ -51,23 +69,23 @@ namespace Society
                 {
                     sb.Append(" Select * from owner_search_vw where type='owner' and active_status=0 and  society_id='" + Session["Society_id"].ToString() + "'");
 
-                    if (ddl_build.SelectedItem.Text != "select")
+                    if (TextBox1.Text != "select")
                     {
                         if (count > 0)
                         {
                             sb.Append(" AND ");
                         }
-                        sb.Append(" build_name like '" + ddl_build.SelectedItem.Text + "%'");
+                        sb.Append(" build_name like '" + TextBox1.Text + "%'");
                         count++;
                     }
 
-                    if (ddl_wing.SelectedItem.Text != "select")
+                    if (TextBox2.Text != "select")
                     {
                         if (count > 0)
                         {
                             sb.Append(" AND ");
                         }
-                        sb.Append(" w_name like '" + ddl_wing.SelectedItem.Text + "%'");
+                        sb.Append(" w_name like '" + TextBox2.Text + "%'");
                         count++;
                     }
                 }
@@ -78,7 +96,7 @@ namespace Society
                 ReportViewer1.LocalReport.DataSources.Clear();
                 ReportDataSource rds = new ReportDataSource("owner", dt);
                 ReportViewer1.LocalReport.ReportPath = Server.MapPath("owner_details.rdlc");
-                ReportParameter parameter = new ReportParameter("build_name", ddl_build.Text);
+                ReportParameter parameter = new ReportParameter("build_name", TextBox1.Text);
                 ReportViewer1.LocalReport.SetParameters(parameter);
                 ReportViewer1.LocalReport.DataSources.Add(rds);
                 ReportViewer1.LocalReport.Refresh();
@@ -90,11 +108,11 @@ namespace Society
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_build.Text != "select")
+            if (TextBox1.Text != "select")
             {
 
-                string sql1 = "Select distinct w_name,wing_id from dbo.flat where society_id='" + society_id.Value + "'and  name='" + ddl_build.SelectedValue + "'";
-                bL_Owner.fill_drop(ddl_wing, sql1, "w_name", "wing_id");
+                string sql1 = "Select distinct w_name,wing_id from dbo.flat where society_id='" + society_id.Value + "'and  name='" + Repeater1.SelectedValue + "'";
+                bL_Owner.fill_list(Repeater2, sql1);
 
 
 

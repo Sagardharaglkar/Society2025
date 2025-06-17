@@ -72,8 +72,8 @@ namespace Society
         {
             if (e.CommandName == "SelectCategory")
             {
-                building_id.Value = e.CommandArgument.ToString();
-                String str = "Select unit, flat_id from owner_search_vw where  society_id='" + society_id.Value + "'and  build_id=" + building_id.Value;
+                building_id.Text = e.CommandArgument.ToString();
+                String str = "Select unit, flat_id from owner_search_vw where  society_id='" + society_id.Value + "'and  build_id=" + building_id.Text;
             }
 
         }
@@ -196,7 +196,7 @@ namespace Society
             if (txt_out_time.Text != "")
                 visitor.Out_Time = Convert.ToDateTime(txt_out_time.Text);
             visitor.Contact_No = txt_contact.Text;
-            visitor.build_id = Convert.ToInt32(building_id.Value);
+            visitor.build_id = Convert.ToInt32(building_id.Text);
             visitor.flat_id = Convert.ToInt32(wing_id.Value);
             visitor.Vehical_No = txt_vehical_no.Text;
             visitor.Visiting_Purpose = txt_visiting_purpose.Text;
@@ -222,7 +222,7 @@ namespace Society
             txt_in_time.Text = result.In_Time.ToString("hh:mm tt");
             if (result.Out_Time != DateTime.MinValue)
                 txt_out_time.Text = result.Out_Time.ToString("hh:mm:ss");
-            building_id.Value = result.build_id.ToString();
+            building_id.Text = result.build_id.ToString();
             wing_id.Value = result.flat_id.ToString();
             txt_contact.Text = result.Contact_No;
             txt_vehical_no.Text = result.Vehical_No;
@@ -329,10 +329,10 @@ namespace Society
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (building_id.Value != "")
+                if (building_id.Text != "")
                 {
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == building_id.Value)
+                    if (link.CommandArgument == building_id.Text)
                         TextBox1.Text = link.Text;
                 }
             }

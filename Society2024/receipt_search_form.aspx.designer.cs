@@ -123,22 +123,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.DropDownList search_field;
 
         /// <summary>
-        /// pnlSearch control.
+        /// TextBox5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSearch;
+        protected global::System.Web.UI.WebControls.TextBox TextBox5;
 
         /// <summary>
-        /// txt_search control.
+        /// Repeater5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_search;
+        protected global::System.Web.UI.WebControls.Repeater Repeater5;
 
         /// <summary>
         /// btn_search control.

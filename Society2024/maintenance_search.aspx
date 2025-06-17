@@ -86,7 +86,28 @@
                                         <asp:ListItem Value="month_name">Month</asp:ListItem>
                                     </asp:DropDownList>&nbsp;&nbsp;
                     
-                        <asp:DropDownList ID="drop_build" runat="server" Width="200px" Height="32px"></asp:DropDownList>&nbsp;&nbsp;
+                                   <div class="dropdown-container">
+                                       <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
+                                           placeholder="Select" autocomplete="off" required="required" />
+                                       <div id="RepeaterContainer1" class="suggestion-list">
+                                           <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
+                                               <ItemTemplate>
+                                                   <asp:LinkButton
+                                                       ID="lnkCategory"
+                                                       runat="server"
+                                                       CssClass="suggestion-item link-button category-link"
+                                                       Text='<%# Eval("flat_type") %>'
+                                                       CommandArgument='<%# Eval("flat_type_id") %>'
+                                                       CommandName="SelectCategory"
+                                                       OnClientClick="setTextBox1(this.innerText);" />
+                                               </ItemTemplate>
+                                               <FooterTemplate>
+                                                   <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                       Text="No items found." />
+                                               </FooterTemplate>
+                                           </asp:Repeater>
+                                       </div>
+                                   </div>
 
                       <asp:Button ID="btn_search" runat="server" Text="Search" Class="btn btn-primary" OnClick="btn_search_Click" UseSubmitBehavior="False" />&nbsp;&nbsp;
                    
@@ -532,4 +553,101 @@
 
     </script>
 
+
+
+
+
+<script>
+
+    function initDropdownEvents() {
+
+        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+
+    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+ 
+    textBox1.addEventListener("focus", function () {
+
+        repeaterContainer1.style.display = "block";
+
+    });
+ 
+    textBox1.addEventListener("input", function () {
+
+        const input = textBox1.value.toLowerCase();
+
+        filterSuggestions("category-link", input);
+
+    });
+
+}
+ 
+ 
+ 
+ 
+function filterSuggestions(className, value) {
+
+    const items = document.querySelectorAll("." + className);
+
+    let matchFound = false;
+ 
+    items.forEach(item => {
+
+        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+            item.style.display = "block";
+
+            matchFound = true;
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+ 
+    let noMatchMessage = document.getElementById("no-match-message");
+ 
+    if (!matchFound) {
+
+        if (!noMatchMessage) {
+
+            noMatchMessage = document.createElement("div");
+
+            noMatchMessage.id = "no-match-message";
+ 
+            noMatchMessage.innerText = "No matching suggestions.";
+
+            items[0]?.parentNode?.appendChild(noMatchMessage);
+
+        }
+
+        noMatchMessage.style.display = "block";
+
+    } else {
+
+        if (noMatchMessage) {
+
+            noMatchMessage.style.display = "none";
+
+        }
+
+    }
+
+}
+ 
+function setTextBox1(value) {
+
+    document.getElementById("<%= TextBox1.ClientID %>").value = value;
+
+        document.getElementById("RepeaterContainer1").style.display = "none";
+
+    }
+
+
+    Sys.Application.add_load(initDropdownEvents);
+
+
+</script>
+ 
 </asp:Content>

@@ -18,6 +18,7 @@ namespace Society
       
         Shop_Maintenance shop = new Shop_Maintenance();
         BL_Shop_Maint bL_Shop = new BL_Shop_Maint();
+        BL_FillRepeater repeater = new BL_FillRepeater();
         protected void Page_Load(object sender, EventArgs e)
         {
             society_id.Value = Session["society_id"].ToString();
@@ -29,9 +30,17 @@ namespace Society
 
         public void filldrop()
         {
-            string sql1 = "SELECT distinct pay_method  FROM  shop_maintenance where society_id='" + society_id.Value + "'";
-            bL_Shop.fill_drop(ddl_method, sql1, "pay_method", "pay_method");
+            string sql1 = "SELECT distinct pay_method,led_id  FROM  shop_maintenance where society_id='" + society_id.Value + "'";
+            repeater.fill_list(Repeater1, sql1);
 
+        }
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+               payment_id.Value = e.CommandArgument.ToString();
+
+            }
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -42,7 +51,7 @@ namespace Society
            
 
                
-                if (ddl_method.SelectedItem.Text == "select" &&  txt_date.Text == "" )
+                if (TextBox1.Text == "select" &&  txt_date.Text == "" )
                     sb.Append("Select *  from shop_vw where society_id='" + Session["Society_id"].ToString() + "'");
 
 
@@ -50,13 +59,13 @@ namespace Society
                 {
                     sb.Append(" Select *  from shop_vw where society_id='" + Session["Society_id"].ToString() + "'");
 
-                    if (ddl_method.SelectedItem.Text != "select")
+                    if (TextBox1.Text != "select")
                     {
                         if (count > 0)
                         {
                             sb.Append(" AND ");
                         }
-                        sb.Append(" pay_method like '" + ddl_method.SelectedItem.Text + "%'");
+                        sb.Append(" pay_method like '" +TextBox1.Text + "%'");
                         count++;
                     }
                    

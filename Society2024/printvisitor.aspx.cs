@@ -17,23 +17,35 @@ namespace Society
     public partial class printvisitor : System.Web.UI.Page
     {
         Visitor visitor = new Visitor();
-        BL_Visitor_Master bL_Visitor = new BL_Visitor_Master(); 
+        BL_Visitor_Master bL_Visitor = new BL_Visitor_Master();
+
+        BL_FillRepeater repeater = new BL_FillRepeater();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                filldrop();
+              
+                String sql_query = "Select distinct build_name from visitor  where society_id='" + society_id.Value + "'";
+                repeater.fill_list(Repeater1, sql_query);
             }
         }
-        public void filldrop()
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            String sql_query = "Select distinct build_name from visitor  where society_id='" + society_id.Value + "'";
-            bL_Visitor.fill_drop(ddl_build, sql_query, "build_name", "build_name");
-            
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
 
+            }
         }
+        //public void filldrop()
+        //{
+        //    String sql_query = "Select distinct build_name from visitor  where society_id='" + society_id.Value + "'";
+        //    bL_Visitor.fill_drop(ddl_build, sql_query, "build_name", "build_name");
+
+
+        //}
         protected void Button1_Click(object sender, EventArgs e)
         {
             int count = 1;
@@ -42,13 +54,13 @@ namespace Society
           
                     sb.Append(" Select * from visitor where active_status=0 and society_id='" + Session["Society_id"].ToString() + "'");
 
-                    if (ddl_build.SelectedItem.Text != "select")
+                    if (TextBox1.Text != "")
                     {
                         if (count > 0)
                         {
                             sb.Append(" AND ");
                         }
-                        sb.Append(" build_name like '" + ddl_build.SelectedItem.Text + "%'");
+                        sb.Append(" build_name like '" + TextBox1.Text + "%'");
 
                         count++;
                     }
@@ -78,7 +90,7 @@ namespace Society
                 ReportDataSource rds = new ReportDataSource("visitor", dt);
                 ReportViewer1.LocalReport.ReportPath = Server.MapPath("visitor.rdlc");
               //ReportParameter parameter = new ReportParameter("build_name", ddl_build.Text);
-                ReportParameter parameter = new ReportParameter("build_name", ddl_build.Text);
+                ReportParameter parameter = new ReportParameter("build_name", TextBox1.Text);
                 ReportViewer1.LocalReport.SetParameters(parameter);
                 ReportViewer1.LocalReport.DataSources.Add(rds);
                 ReportViewer1.LocalReport.Refresh();
