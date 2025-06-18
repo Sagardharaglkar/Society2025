@@ -21,8 +21,8 @@
                 <div class="col-sm-4">
                     <div class="dropdown-container">
                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                            placeholder="Select" autocomplete="off" required="required" />
-                        <div id="RepeaterContainer1" class="suggestion-list">
+                            placeholder="Select" autocomplete="off" required="required" style="width:50%;" />
+                        <div id="RepeaterContainer1" class="suggestion-list" style="width:50%;">
                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                 <ItemTemplate>
                                     <asp:LinkButton

@@ -258,7 +258,7 @@
             </div>
             <!-- Two big boxes -->
 
-            <div class="layout-box layout-big layout-green card">
+            <div class="layout-box layout-big layout-green card" id="chartContainer">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Expence Tracker</h6>
                     <div class="dropdown no-arrow">
@@ -290,7 +290,7 @@
                 <%--<asp:Button ID="btnChartAsyncLoad" runat="server" Style="display:none;" OnClick="btnChartAsyncLoad_Click" />--%>
 
 
-                <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" ValidateRequestMode="Inherit">
+                <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" Width="600px" ValidateRequestMode="Inherit">
 
                     <Series>
                         <asp:Series Name="Expense" XValueMember="expense_month" YValueMembers="expense"
@@ -362,7 +362,7 @@
                                     <ContentTemplate>
                                         <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging"
                                             PageSize="3" ID="GridView1" runat="server" AutoGenerateColumns="false"
-                                            CssClass="" AllowSorting="true" OnSorting="GridView1_Sorting">
+                                            CssClass="" AllowSorting="true" OnSorting="GridView1_Sorting" Width="100%">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="5" HeaderStyle-ForeColor="#224ABE">
                                                     <ItemTemplate>
@@ -639,6 +639,20 @@
                 });
         }
 
+
+        window.addEventListener('load', resizeChart);
+        window.addEventListener('resize', resizeChart);
+
+        function resizeChart() {
+            var container = document.getElementById('chartContainer');
+            var chart = document.getElementById('<%= Chart2.ClientID %>');
+
+            if (container && chart) {
+                var width = container.offsetWidth;
+
+                chart.style.width = width-3 + 'px';
+            }
+        }
     </script>
 
 </asp:Content>

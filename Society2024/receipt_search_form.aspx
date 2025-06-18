@@ -56,10 +56,7 @@
                         <asp:HiddenField ID="wing_id" runat="server" />
                         <asp:HiddenField ID="owner_id" runat="server" />
 
-                        <asp:HiddenField ID="building_id" runat="server" />
-                        <asp:HiddenField ID="wing_name_id" runat="server" />
-                        <asp:HiddenField ID="owner_name_id" runat="server" />
-                        <asp:HiddenField ID="pay_mode_id" runat="server" />
+
 
                       <div class="form-group">
                             <div class="row ">
@@ -187,7 +184,10 @@
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
 
-
+                                        <asp:HiddenField ID="building_id" runat="server" />
+                                        <asp:HiddenField ID="wing_name_id" runat="server" />
+                                        <asp:HiddenField ID="owner_name_id" runat="server" />
+                                        <asp:HiddenField ID="pay_mode_id" runat="server" />
 
                                         <div class="form-group">
                                             <div class="row ">
@@ -200,8 +200,8 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off"  required="required" Style="width:150px;"/>
-                                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                                            placeholder="Select" autocomplete="off"  required="required" />
+                                                        <div id="RepeaterContainer1" class="suggestion-list" style="width: 100%;">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -247,8 +247,8 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required" Style="width:150px;" />
-                                                        <div id="RepeaterContainer2" class="suggestion-list">
+                                                            placeholder="Select" autocomplete="off" required="required"  />
+                                                        <div id="RepeaterContainer2" class="suggestion-list" style="width: 100%;">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -276,8 +276,8 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required" Style="width:150px;"/>
-                                                        <div id="RepeaterContainer3" class="suggestion-list">
+                                                            placeholder="Select" autocomplete="off" required="required" />
+                                                        <div id="RepeaterContainer3" class="suggestion-list" style="width: 100%;">
                                                             <asp:Repeater ID="Repeater3" runat="server" OnItemDataBound="Repeater3_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -302,6 +302,17 @@
 
                                         <div class="form-group">
                                             <div class="row ">
+                                                <div class="col-lg d-flex">
+                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Male"
+                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
+
+                                                    <asp:RadioButton ID="RadioButton2" runat="server" Text="Female"
+                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row ">
 
 
                                                 <div class="col-sm-3">
@@ -312,8 +323,8 @@
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <asp:TextBox ID="txt_amount" runat="server" Height="32px" Width="150px" placeholder="Enter Amount" Enabled="false"></asp:TextBox>
-                                                </div>
-                                                <div class="col-sm-3">
+                                        </div>
+                                                                                                <div class="col-sm-3">
                                                     <asp:Label ID="lbl_pay_status" runat="server" Text="Pay Mode"></asp:Label>
                                                     <asp:Label ID="lbl_pay_status_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
@@ -321,8 +332,8 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required" Style="width:150px;"/>
-                                                        <div id="RepeaterContainer4" class="suggestion-list">
+                                                            placeholder="Select" autocomplete="off" required="required" />
+                                                        <div id="RepeaterContainer4" class="suggestion-list" style="width: 100%;">
                                                             <asp:Repeater ID="Repeater4" runat="server" OnItemDataBound="Repeater4_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -342,10 +353,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
 
 
                                         <asp:Panel ID="panel3" runat="server" Visible="false">

@@ -55,6 +55,30 @@ namespace Society
             }
 
         }
+
+        protected void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            string selectedGender = "";
+
+            if (RadioButton1.Checked)
+            {
+                selectedGender = "Male";
+            }
+            else if (RadioButton2.Checked)
+            {
+                selectedGender = "Female";
+            }
+
+        }
+        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //lblMessage.Text = "Option 1: " + CheckBox1.Checked + ", Option 2: " + CheckBox2.Checked;
+        }
+
+        protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            //lblMessage.Text = "Option 1: " + CheckBox1.Checked + ", Option 2: " + CheckBox2.Checked;
+        }
         protected void Allbound()
         {
             String str1 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
@@ -98,7 +122,23 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
+                if (owner_name_id.Value != "")
+                {
+                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                    Receipt.Sql_Operation = "pending_balance";
+                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                    shop_maint_id.Value = owner_name_id.Value;
+                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+
+                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+
+                }
             }
+
 
         }
 
@@ -107,6 +147,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 pay_mode_id.Value = e.CommandArgument.ToString();
+                paystatus_check();
 
             }
 
@@ -360,8 +401,8 @@ namespace Society
             }
             
             runproc_save("Update");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             pending();
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             
         }
 

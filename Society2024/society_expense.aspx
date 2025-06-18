@@ -223,13 +223,13 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                       <%-- <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required></asp:TextBox>
+                                                        <%-- <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Name
                                                         </div>--%>
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                                placeholder="Select" autocomplete="off" required="required" Style="width:200px;"/>
+                                                                placeholder="Select" autocomplete="off" required="required" Style="width: 200px;" />
                                                             <asp:Panel ID="drp_Container" runat="server" Visible="false">
                                                                 <div id="RepeaterContainer1" class="suggestion-list">
                                                                     <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
@@ -265,7 +265,7 @@
                                                     <div class="col-sm-3">
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                                placeholder="Select" autocomplete="off" required="required" Style="width:200px;" />
+                                                                placeholder="Select" autocomplete="off" required="required" Style="width: 200px;" />
                                                             <div id="RepeaterContainer2" class="suggestion-list">
                                                                 <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                     <ItemTemplate>
@@ -566,45 +566,45 @@
                 filterSuggestions("link2", input);
             });
         }
-           function filterSuggestions(className, value) {
-               const items = document.querySelectorAll("." + className);
-               let matchFound = false;
+        function filterSuggestions(className, value) {
+            const items = document.querySelectorAll("." + className);
+            let matchFound = false;
 
-               items.forEach(item => {
-                   if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-                       item.style.display = "block";
-                       matchFound = true;
-                   } else {
-                       item.style.display = "none";
-                   }
-               });
+            items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    item.style.display = "block";
+                    matchFound = true;
+                } else {
+                    item.style.display = "none";
+                }
+            });
 
-               let noMatchMessage = document.getElementById("no-match-message");
+            let noMatchMessage = document.getElementById("no-match-message");
 
-               if (!matchFound) {
-                   if (!noMatchMessage) {
-                       noMatchMessage = document.createElement("div");
-                       noMatchMessage.id = "no-match-message";
+            if (!matchFound) {
+                if (!noMatchMessage) {
+                    noMatchMessage = document.createElement("div");
+                    noMatchMessage.id = "no-match-message";
 
-                       noMatchMessage.innerText = "No matching suggestions.";
-                       items[0]?.parentNode?.appendChild(noMatchMessage);
-                   }
-                   noMatchMessage.style.display = "block";
-               } else {
-                   if (noMatchMessage) {
-                       noMatchMessage.style.display = "none";
-                   }
-               }
-           }
+                    noMatchMessage.innerText = "No matching suggestions.";
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+                }
+                noMatchMessage.style.display = "block";
+            } else {
+                if (noMatchMessage) {
+                    noMatchMessage.style.display = "none";
+                }
+            }
+        }
 
-           function setTextBox1(value) {
-               document.getElementById("<%= TextBox1.ClientID %>").value = value;
-               document.getElementById("RepeaterContainer1").style.display = "none";
-           }
+        function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+        }
 
-           function setTextBox2(value) {
-               document.getElementById("<%= TextBox2.ClientID %>").value = value;
-                document.getElementById("RepeaterContainer2").style.display = "none";
+        function setTextBox2(value) {
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer2").style.display = "none";
         }
 
         Sys.Application.add_load(initDropdownEvents);

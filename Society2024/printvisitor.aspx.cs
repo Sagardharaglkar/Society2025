@@ -23,7 +23,12 @@ namespace Society
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            society_id.Value = Session["society_id"].ToString();
+            if (Session["name"] == null)
+            {
+                Response.Redirect("login1.aspx");
+            }
+            else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
               

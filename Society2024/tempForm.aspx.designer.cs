@@ -24,39 +24,30 @@ namespace Society2024
         protected global::System.Web.UI.UpdatePanel updatePanel1;
 
         /// <summary>
-        /// TextBox1 control.
+        /// RadioButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
 
         /// <summary>
-        /// Repeater1 control.
+        /// RadioButton2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
 
         /// <summary>
-        /// TextBox2 control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
-
-        /// <summary>
-        /// Repeater2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater2;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
     }
 }

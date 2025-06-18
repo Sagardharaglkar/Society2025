@@ -18,10 +18,10 @@
                 <div class="col-sm-3 d-flex align-items-center ">
                     <asp:Label ID="lbl_acc_no" Width="176px" runat="server" Text="Building Name :"></asp:Label>
 
-                    <div class="dropdown-container">
+                    <div class="dropdown-continer">
                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                             placeholder="Select" autocomplete="off" required="required" />
-                        <div id="RepeaterContainer1" class="suggestion-list">
+                        <div id="RepeaterContainer1" class="suggestion-list" style="width:50%;">
                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater1_ItemCommand">
                                 <ItemTemplate>
                                     <asp:LinkButton
@@ -45,7 +45,7 @@
                 <div class="col-sm-3 d-flex align-items-center">
                     <asp:Label ID="lbl_date" runat="server" Text="Wing :"></asp:Label>
 
-                    <div class="dropdown-container">
+                    <div class="dropdown-cntainer">
                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
                             placeholder="Select" autocomplete="off" required="required" />
                         <div id="RepeaterContainer2" class="suggestion-list">

@@ -73,8 +73,7 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="m_bill_status" runat="Server"></asp:HiddenField>
 
-                        <asp:HiddenField ID="building_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
+                       
 
                         <div class="form-group">
                             <div class="col-12">
@@ -183,6 +182,9 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+
+                                         <asp:HiddenField ID="building_id" runat="Server"></asp:HiddenField>
+ <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
                                         <asp:Panel ID="Panel1" runat="server">
                                             <div class="form-group">
                                                 <div class="row ">

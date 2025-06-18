@@ -20,8 +20,8 @@
                 </div>
                 <div class="col-sm-3">
 
-                    <div class="dropdown-container">
-                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                    <div class="dropdown-containr">
+                        <asp:TextBox ID="TextBox1" Style="width:200px;" runat="server" CssClass="input-box form-control"
                             placeholder="Select" autocomplete="off" required="required" />
                         <div id="RepeaterContainer1" class="suggestion-list">
                             <asp:Repeater ID="Repeater1" runat="server">
