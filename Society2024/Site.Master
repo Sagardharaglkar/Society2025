@@ -406,7 +406,7 @@
 
                             <!-- Nav Item - Alerts -->
                       
-                            <asp:Timer ID="SharedTimer" runat="server" Interval="5000"  />
+                            <asp:Timer ID="SharedTimer" runat="server" Interval="5000" OnTick="TimerNotif_Tick" />
 
 
                                     <li class="nav-item dropdown no-arrow mx-1">
@@ -420,12 +420,13 @@
                                             aria-expanded="false">
                                             <img src="img/bell.png" width="26px" />
                                             <!-- Counter - Alerts -->
+                                           <%-- <asp:Timer ID="TimerNotif" runat="server" Interval="5000" OnTick="TimerNotif_Tick" />--%>
                                             <asp:Panel runat="server" ID="badgePanel">
 
                                                 <span class="badge badge-danger badge-counter">
                                                     <asp:UpdatePanel ID="upNotifCount" runat="server" UpdateMode="Conditional">
                                                         <ContentTemplate>
-                                                            <asp:Timer ID="TimerNotif" runat="server" Interval="5000" OnTick="TimerNotif_Tick" />
+                                                            
 
                                                             <asp:Label runat="server" ID="notifCount"></asp:Label>
                                                         </ContentTemplate>

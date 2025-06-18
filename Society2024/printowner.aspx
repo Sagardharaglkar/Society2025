@@ -30,8 +30,8 @@
                                     ID="lnkCategory"
                                     runat="server"
                                     CssClass="suggestion-item link-button category-link"
-                                    Text='<%# Eval("flat_type") %>'
-                                    CommandArgument='<%# Eval("flat_type_id") %>'
+                                    Text='<%# Eval("build_name") %>'
+                                    CommandArgument='<%# Eval("build_id") %>'
                                     CommandName="SelectCategory"
                                     OnClientClick="setTextBox1(this.innerText);" />
                             </ItemTemplate>
@@ -57,10 +57,10 @@
                                             ID="lnkCategory"
                                             runat="server"
                                             CssClass="suggestion-item link-button category-link"
-                                            Text='<%# Eval("flat_type") %>'
-                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                            Text='<%# Eval("w_name") %>'
+                                            CommandArgument='<%# Eval("wing_id") %>'
                                             CommandName="SelectCategory"
-                                            OnClientClick="setTextBox1(this.innerText);" />
+                                            OnClientClick="setTextBox2(this.innerText);" />
                                     </ItemTemplate>
                                     <FooterTemplate>
                                         <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -99,6 +99,24 @@ function initDropdownEvents() {
     textBox1.addEventListener("input", function () {
 
         const input = textBox1.value.toLowerCase();
+
+        filterSuggestions("category-link", input);
+
+    });
+
+    const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+
+    const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+
+    textBox2.addEventListener("focus", function () {
+
+        repeaterContainer2.style.display = "block";
+
+    });
+
+    textBox2.addEventListener("input", function () {
+
+        const input = textBox2.value.toLowerCase();
 
         filterSuggestions("category-link", input);
 
@@ -168,8 +186,15 @@ function setTextBox1(value) {
     document.getElementById("RepeaterContainer1").style.display = "none";
 
 }
- 
- 
+
+    function setTextBox2(value) {
+
+        document.getElementById("<%= TextBox2.ClientID %>").value = value;
+
+        document.getElementById("RepeaterContainer2").style.display = "none";
+
+    }
+
 Sys.Application.add_load(initDropdownEvents);
  
  

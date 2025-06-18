@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Society2024
+namespace Society
 {
 
 
-    public partial class forgetPass
+    public partial class Forgot_Password
     {
     }
 }

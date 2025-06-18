@@ -30,9 +30,9 @@ namespace Society
         }
         public void filldrop()
         {
-            String sql_query1 = "Select distinct build_name from owner_search_vw where society_id='" + society_id.Value + "'";
+            String sql_query1 = "Select distinct build_name, build_id from owner_search_vw where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater1, sql_query1);
-            String sql_query2 = "Select  distinct w_name from owner_search_vw where society_id='" + society_id.Value + "'";
+            String sql_query2 = "Select  distinct w_name, wing_id from owner_search_vw where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater2, sql_query2);
 
         }
@@ -45,7 +45,7 @@ namespace Society
             {
 
                 building_id.Value = e.CommandArgument.ToString();
-                string str= "Select distinct w_name,wing_id from dbo.flat where society_id='" + society_id.Value + "'and  name='" + building_id.Value + "'";
+                string str= "Select distinct w_name,wing_id from dbo.flat where society_id='" + society_id.Value + "'and  build_id='" + building_id.Value + "'";
                 repeater.fill_list(Repeater2, str);
             }
 

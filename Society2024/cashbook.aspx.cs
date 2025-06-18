@@ -22,6 +22,7 @@ namespace Society
 {
     public partial class cashbook : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         Cashbook cash = new Cashbook();
         BL_Receipt bL_Receipt = new BL_Receipt();
         DataSet ds = new DataSet();
@@ -47,27 +48,31 @@ namespace Society
 
                 txt_from.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txt_to.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                //ddl_build.SelectedIndex =1;
-
-               // Cashbook_GridBind();
 
             }
 
         }
 
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                building_id.Value = e.CommandArgument.ToString();
+
+            }
+        }
         public void fill_dropdowns()
         {
 
             String sql_query = "Select build_id ,name from building_master where society_id='" + society_id.Value + "'";
-            bL_Receipt.fill_drop(ddl_build, sql_query, "name", "build_id");
-
+            repeater.fill_list(Repeater1, sql_query);
         }
 
         protected void Cashbook_GridBind()
         {
            
             cash.Sql_Operation = "cashbook";
-            cash.build_id = Convert.ToInt32(ddl_build.SelectedValue);
+            cash.build_id = Convert.ToInt32(building_id.Value);
             if (txt_from.Text != "" && txt_to.Text != "")
             {
                 cash.Date1 = Convert.ToDateTime(txt_from.Text.ToString());
@@ -77,9 +82,6 @@ namespace Society
             GridView1.DataSource = ds.Tables[0];
             ViewState["dirState"] = ds.Tables[0];
             GridView1.DataBind();
-
-
-
 
 
         }

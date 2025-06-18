@@ -69,22 +69,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.DropDownList search_field;
 
         /// <summary>
-        /// TextBox4 control.
+        /// drop_build control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
-
-        /// <summary>
-        /// Repeater3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater3;
+        protected global::System.Web.UI.WebControls.DropDownList drop_build;
 
         /// <summary>
         /// btn_search control.

@@ -58,6 +58,8 @@
                 <asp:HiddenField ID="wing_id" runat="server" />
                 <asp:HiddenField ID="owner_id" runat="server" />
 
+                <asp:HiddenField ID="building_id" runat="server" />
+
                 <div class="form-group">
                     <div class="row ">
                         <div class="col-sm-1">
@@ -65,7 +67,7 @@
 
                         </div>
                         <div class="col-sm-2">
-                            <asp:DropDownList ID="ddl_build" runat="server" ValidationGroup="valid" AutoPostBack="true" Width="150px"></asp:DropDownList>
+                            
                             <div class="dropdown-container">
                                 <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                     placeholder="Select" autocomplete="off" required="required" />
@@ -76,8 +78,8 @@
                                                 ID="lnkCategory"
                                                 runat="server"
                                                 CssClass="suggestion-item link-button category-link"
-                                                Text='<%# Eval("flat_type") %>'
-                                                CommandArgument='<%# Eval("flat_type_id") %>'
+                                                Text='<%# Eval("name") %>'
+                                                CommandArgument='<%# Eval("build_id") %>'
                                                 CommandName="SelectCategory"
                                                 OnClientClick="setTextBox1(this.innerText);" />
                                         </ItemTemplate>

@@ -328,10 +328,10 @@ namespace Society
             {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (building_id.Text != "")
+                if (building_id.Value != "")
                 {
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == building_id.Text)
+                    if (link.CommandArgument == building_id.Value)
                         TextBox1.Text = link.Text;
                 }
             }

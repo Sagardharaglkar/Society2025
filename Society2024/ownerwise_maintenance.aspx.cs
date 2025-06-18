@@ -1,20 +1,21 @@
-﻿using System;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
+using DBCode.DataClass;
+using Microsoft.Reporting.WebForms;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
-using System.Web.Configuration;
+using System.Data.SqlClient;
 //using System.Windows.Controls;
 //using Azure;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Page = System.Web.UI.Page;
-using Microsoft.Reporting.WebForms;
-using DBCode.DataClass;
-using BusinessLogic.MasterBL;
 //using System.IdentityModel.Metadata
 
 
@@ -24,8 +25,8 @@ namespace Society
     {
         //stored st = new stored();
         DataSet ds = new DataSet();
-        
 
+        BL_FillRepeater repeater = new BL_FillRepeater();
         maintenance GetMaintenance = new maintenance();
         BL_Maintenance_Master bL_Maintenance = new BL_Maintenance_Master();
         protected void Page_Load(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace Society
                 fill_dropdowns();
                 txt_from.Text =new DateTime(DateTime.Now.Year,1,1).ToString("yyyy-MM-dd");
                 txt_to.Text = DateTime.Now.ToShortDateString();
-                ddl_build.SelectedValue = "1";
+                build_id.Value = "1";
                 ddl_build_SelectedIndexChanged(sender, e);
                 //ownerwise_maintenance_GridBind();
 
@@ -55,20 +56,41 @@ namespace Society
         {
 
             String sql_query = "Select build_id ,name from building_master where society_id='" + society_id.Value + "'";
-            bL_Maintenance.fill_drop(ddl_build, sql_query, "name", "build_id");
+            repeater.fill_list(Repeater1, sql_query);
 
+
+        }
+
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                build_id.Value = e.CommandArgument.ToString();
+
+                string sql1 = "Select distinct owner_id, name from owner_search_vw where society_id='" + society_id.Value + "' and  build_id='" + build_id.Value + "' ";
+                repeater.fill_list(Repeater2, sql1);
+            }
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                owner_id.Value = e.CommandArgument.ToString();
+
+            }
         }
 
         protected void ownerwise_maintenance_GridBind()
         {
             
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                sb.Append("exec sp_dashboard @operation= 'ownerwise_maintenance', @date1='"+ txt_from.Text+"',@date2= '" + txt_to.Text +"' , @build_id= '" + ddl_build.SelectedValue + "', @owner_id= " + ddl_owner.SelectedValue);
+                sb.Append("exec sp_dashboard @operation= 'ownerwise_maintenance', @date1='"+ txt_from.Text+"',@date2= '" + txt_to.Text +"' , @build_id= '" + build_id.Value + "', @owner_id= " + owner_id);
 
                
             GetMaintenance.Sql_Operation = sb.ToString();
-            GetMaintenance.build_id = Convert.ToInt32(ddl_build.SelectedValue);
-            GetMaintenance.owner_id = Convert.ToInt32(ddl_owner.SelectedValue);
+            GetMaintenance.build_id = Convert.ToInt32(build_id.Value);
+            GetMaintenance.owner_id = Convert.ToInt32(owner_id);
             if (txt_from.Text != "" && txt_to.Text != "")
             {
                 GetMaintenance.Date_1 = Convert.ToDateTime(txt_from.Text);
@@ -169,12 +191,12 @@ namespace Society
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddl_build.Text != "select")
-            {
-                string sql1 = "Select distinct owner_id, name from owner_search_vw where society_id='" + society_id.Value + "' and  build_id='" + ddl_build.SelectedValue + "' ";
-                bL_Maintenance.fill_drop(ddl_owner, sql1, "name", "owner_id");
+            //if (ddl_build.Text != "select")
+            //{
+            //    string sql1 = "Select distinct owner_id, name from owner_search_vw where society_id='" + society_id.Value + "' and  build_id='" + build_id.Value + "' ";
+            //    bL_Maintenance.fill_drop(ddl_owner, sql1, "name", "owner_id");
                
-            }
+            //}
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
