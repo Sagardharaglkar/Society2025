@@ -30,7 +30,8 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_facility_booking", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }
@@ -48,7 +49,8 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_facility", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }

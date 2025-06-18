@@ -36,7 +36,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_owner_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
                 ds.Tables.Add(dt);
             return ds;
         }
@@ -57,7 +58,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_owner_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }
@@ -115,7 +117,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -155,7 +158,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -171,7 +175,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -188,7 +193,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -294,7 +300,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_owner_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }
@@ -357,7 +364,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_owner_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }

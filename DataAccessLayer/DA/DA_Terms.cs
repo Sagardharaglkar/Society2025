@@ -62,7 +62,8 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_terms_condition", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }

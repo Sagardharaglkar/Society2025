@@ -24,7 +24,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_society_charges", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }
@@ -133,7 +134,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_society_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             ds.Tables.Add(dt);
             return ds;
         }
@@ -201,6 +203,7 @@ namespace DataAccessLayer.MasterDA
 
             if (status1 == "Done")
                 if (sdr.HasRows)
+                    if (sdr.HasRows)
                     dt.Load(sdr);
             return dt;
         }
