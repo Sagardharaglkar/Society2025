@@ -43,7 +43,7 @@ namespace Society
                 // Add hardcoded row
                 DataRow extraRow = dt.NewRow();
                 extraRow["wing_id"] = 0; 
-                extraRow["w_name"] = "All"; 
+                extraRow["w_name"] = "ALL"; 
                 dt.Rows.InsertAt(extraRow,0);
 
                 // Bind to repeater

@@ -73,12 +73,12 @@ namespace DBCode.DataClass
             get { return duedate; }
             set { duedate = value; }
         }
-        public decimal Total_Amount
+        public decimal Add_OnAmount
         {
             get { return totalamount; }
             set { totalamount = value; }
         }
-        public decimal Amount_Per_Flat
+        public decimal RegularAmount
         {
             get { return amount_per_flat; }
             set { amount_per_flat = value; }

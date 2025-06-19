@@ -281,7 +281,7 @@ namespace Society
 
         protected void btn_close_Click(object sender, EventArgs e)
         {
-            Response.Redirect("maintenance_search.aspx");
+            dt1 = null;
         }
 
 
@@ -371,25 +371,6 @@ namespace Society
                 Response.Write("<script>alert('building Entry Has Been Registered Successfully')");
                 Response.Redirect("maintenance_search.aspx");
             }
-
-
-
-
-            //GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-            //Label n_m_id = (Label)row.FindControl("n_m_id");
-            //ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
-            //SqlDataReader sdr = null;
-            //string status1 = "";
-
-            //data_item.Add(st.create_array("operation", "Delete"));
-            //data_item.Add(st.create_array("n_m_id", n_m_id.Text == null ? (object)DBNull.Value : n_m_id.Text));
-            //status1 = st.run_query(data_item, "Select", "sp_new_maintenance", ref sdr);
-            //if (status1 == "Done")
-            //{
-            //    ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "Delete()", true);
-            //    Response.Write("<script>alert('building Entry Has Been Registered Successfully')");
-            //    Response.Redirect("maintenance_search.aspx");
-            //}
 
 
         }
@@ -562,79 +543,85 @@ namespace Society
             {
                 BtnPanel.Visible = true;
 
-                int i = 1;
-                float total = 0;
-                Maintenance1.Sql_Operation = "exfetch";
-                Maintenance1.Society_Id = society_id.Value;
+            int i = 1;
+            float total = 0;
+            Maintenance1.Sql_Operation = "exfetch";
+            Maintenance1.Society_Id = society_id.Value;
+            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
+            Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
+            var result = bL_Maintenance.Add_Click(Maintenance1);
+            dt1 = result;
+            if (TextBox6.Text == "ALL")
+            {
+                Maintenance1.Sql_Operation = "check_count";
                 Maintenance1.build_id = Convert.ToInt32(building_id.Value);
-                Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
-                var result = bL_Maintenance.Add_Click(Maintenance1);
-                dt1 = result;
-                if (TextBox1.Text == "ALL")
-                {
-                    Maintenance1.Sql_Operation = "check_count";
-                    Maintenance1.Name = building_id.Value;
-                    Maintenance1.W_Name = wing_id.Value.ToString();
-                }
-                else
-
-                {
-                    Maintenance1.Sql_Operation = "check_wing";
-                    Maintenance1.W_Name = wing_id.Value.ToString();
-                    Maintenance1.Name = building_id.Value;
-
-                }
-                var flat = bL_Maintenance.getflat(Maintenance1);
-                Label4.Text = "No of Flat :" + flat.Flat.ToString();
-                foreach (DataRow row in dt1.Rows)
-                {
-
-                    if (i <= dt1.Rows.Count)
-                    {
-                        TextBox txtbox = new TextBox();
-                        TextBox txtbox1 = new TextBox();
-                        TextBox txtbox3 = new TextBox();
-                        txtbox.ClientIDMode = ClientIDMode.Static;
-                        txtbox.ID = "txtcol" + i + "_name";
-                        txtbox.Enabled = false;
-                        txtbox.Text = row["ex_details"].ToString();
-                        txtbox1.ClientIDMode = ClientIDMode.Static;
-                        txtbox1.ID = "txtcol" + i + "_amount";
-                        txtbox1.Enabled = false;
-                        txtbox.ClientIDMode = ClientIDMode.Static;
-                        txtbox3.Enabled = false;
-                        txtbox3.Text = row["f_amount"].ToString();
-                        if (flat.Flat == 0)
-                        {
-                            txtbox1.Text = (float.Parse(row["f_amount"].ToString())).ToString();
-                            total = total + (float.Parse(row["f_amount"].ToString()));
-
-                        }
-                        else
-                        {
-                            txtbox1.Text = (float.Parse(row["f_amount"].ToString()) / flat.Flat).ToString();
-                            total = total + float.Parse(row["f_amount"].ToString()) / flat.Flat;
-                        }
-
-                        pnlTextBoxes.Controls.Add(txtbox);
-                        pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
-                        pnlTextBoxes.Controls.Add(txtbox3);
-                        pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "));
-                        pnlTextBoxes.Controls.Add(txtbox1);
-                        pnlTextBoxes.Controls.Add(new LiteralControl("<br> <br>")); i++;
-
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", txtbox.Text, true);
-                    }
-
-                }
-
-                txt_amount.Text = total.ToString();
-                int flag = 1;
-                if (dt1.Rows.Count == 0)
-                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Expense are Not Approved by Members');", true);
-
-                
+                Maintenance1.W_Name = wing_id.Value.ToString();
             }
+            else
+
+            {
+                Maintenance1.Sql_Operation = "check_wing";
+                Maintenance1.W_Name = wing_id.Value.ToString();
+                Maintenance1.build_id = Convert.ToInt32(building_id.Value);
+
+            }
+            var flat = bL_Maintenance.getflat(Maintenance1);
+            Label4.Text = "No of Flat :" + flat.Flat.ToString();
+            dt1.Columns.Add("amount", typeof(decimal));
+
+            foreach (DataRow row in dt1.Rows)
+            {
+                row["amount"] = Convert.ToDecimal(row["f_amount"].ToString())/flat.Flat;
+
+                //if (i <= dt1.Rows.Count)
+                //{
+                //    TextBox txtbox = new TextBox();
+                //    TextBox txtbox1 = new TextBox();
+                //    TextBox txtbox3 = new TextBox();
+                //    txtbox.ClientIDMode = ClientIDMode.Static;
+                //    txtbox.ID = "txtcol" + i + "_name";
+                //    txtbox.Enabled = false;
+                //    txtbox.Text = row["ex_details"].ToString();
+                //    txtbox1.ClientIDMode = ClientIDMode.Static;
+                //    txtbox1.ID = "txtcol" + i + "_amount";
+                //    txtbox1.Enabled = false;
+                //    txtbox.ClientIDMode = ClientIDMode.Static;
+                //    txtbox3.Enabled = false;
+                //    txtbox3.Text = row["f_amount"].ToString();
+                //    txt_amount.Text = row["f_amount"].ToString();
+                //    if (flat.Flat == 0)
+                //    {
+                //        txtbox1.Text = (float.Parse(row["f_amount"].ToString())).ToString();
+                //        total = total + (float.Parse(row["f_amount"].ToString()));
+
+                //    }
+                //    else
+                //    {
+                //        txtbox1.Text = (float.Parse(row["f_amount"].ToString()) / flat.Flat).ToString();
+                //        total = total + float.Parse(row["f_amount"].ToString()) / flat.Flat;
+                //    }
+
+                //    pnlTextBoxes.Controls.Add(txtbox);
+                //    pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
+                //    pnlTextBoxes.Controls.Add(txtbox3);
+                //    pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "));
+                //    pnlTextBoxes.Controls.Add(txtbox1);
+                //    pnlTextBoxes.Controls.Add(new LiteralControl("<br> <br>")); i++;
+
+                //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", txtbox.Text, true);
+                //}
+
+            }
+            dt1.AcceptChanges();
+            txt_amount.Text= dt1.Compute("SUM(f_amount)", string.Empty).ToString();
+            expenseGrid.DataSource = dt1;
+            expenseGrid.DataBind();
+            Maintenance1.RegularAmount= Convert.ToDecimal(dt1.Compute("SUM(amount)", "Type = 'Regular'"));
+            Maintenance1.Add_OnAmount= Convert.ToDecimal(dt1.Compute("SUM(amount)", "Type = 'Add-On'"));
+
+            //int flag = 1;
+            // if(dt1.Rows.Count==0)
+            //     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Expense are Not Approved by Members');", true);
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -662,6 +649,8 @@ namespace Society
                 }
             }
         }
+
+      
     }
 }
 
