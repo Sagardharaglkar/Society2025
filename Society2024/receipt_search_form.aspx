@@ -302,11 +302,11 @@
 
                                         <div class="form-group">
                                             <div class="row ">
-                                                <div class="col-lg d-flex">
-                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Male"
+                                                <div class="col-sm-6 d-flex" style="align-items: center; justify-content: space-evenly;">
+                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular Expense"
                                                         GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
 
-                                                    <asp:RadioButton ID="RadioButton2" runat="server" Text="Female"
+                                                    <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
                                                         GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
                                                 </div>
                                             </div>

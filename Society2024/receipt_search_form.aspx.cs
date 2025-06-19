@@ -58,15 +58,32 @@ namespace Society
 
         protected void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            string selectedGender = "";
+            //string selectedGender = "";
 
-            if (RadioButton1.Checked)
+            //if (RadioButton1.Checked)
+            //{
+            //    selectedGender = "Male";
+            //}
+            //else if (RadioButton2.Checked)
+            //{
+            //    selectedGender = "Female";
+            //}
+
+            if (owner_name_id.Value != "" && RadioButton1.Checked)
             {
-                selectedGender = "Male";
-            }
-            else if (RadioButton2.Checked)
+                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                Receipt.Sql_Operation = "pending_balance";
+                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                shop_maint_id.Value = owner_name_id.Value;
+                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+                txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+            }else if(owner_name_id.Value != "" && RadioButton2.Checked)
             {
-                selectedGender = "Female";
+                txt_amount.Text = "Add on";
             }
 
         }
@@ -122,21 +139,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
-                if (owner_name_id.Value != "")
-                {
-                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
-                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
 
-                    Receipt.Sql_Operation = "pending_balance";
-                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
-                    shop_maint_id.Value = owner_name_id.Value;
-                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
-
-
-                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
-
-
-                }
             }
 
 
