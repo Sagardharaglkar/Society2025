@@ -44,7 +44,7 @@ namespace Society
                 DataRow extraRow = dt.NewRow();
                 extraRow["wing_id"] = 0; 
                 extraRow["w_name"] = "All"; 
-                dt.Rows.Add(extraRow);
+                dt.Rows.InsertAt(extraRow,0);
 
                 // Bind to repeater
                 repeater.DataSource = dt;
