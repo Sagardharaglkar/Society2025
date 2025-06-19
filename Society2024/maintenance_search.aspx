@@ -131,7 +131,7 @@
                                                         <asp:Label ID="building_name" runat="server" Text='<%# Bind("build_name")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Wing" ItemStyle-Width="350" SortExpression="wings">
+                                                <asp:TemplateField HeaderText="Wing" ItemStyle-Width="150" SortExpression="wings">
                                                     <ItemTemplate>
                                                         <asp:Label ID="w_name" runat="server" Text='<%# Bind("wings")%>'></asp:Label>
                                                     </ItemTemplate>
@@ -152,6 +152,11 @@
                                                         <asp:Label ID="m_total" runat="server" Text='<%# Bind("m_total")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                                 <asp:TemplateField HeaderText="Status" ItemStyle-Width="200" SortExpression="Status">
+     <ItemTemplate>
+         <asp:Label ID="gsg" runat="server" Text='<%# Bind("Status")%>'></asp:Label>
+     </ItemTemplate>
+ </asp:TemplateField>
                                                 <asp:TemplateField ItemStyle-Width="100" HeaderText="Edit">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("n_m_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
@@ -265,41 +270,32 @@
 
                                                 </div>
                                             </div>
+                                            <div style="width: auto; overflow: auto;">
+                                             <asp:GridView ID="expenseGrid" runat="server" PageSize="30"  AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" HeaderStyle-BackColor="lightblue"  ShowHeaderWhenEmpty="true" EmptyDataText="No Expense for this Month">
 
-                                            <div class="form-group">
-                                                <div class="row ">
+     <Columns>
+        
+         <asp:TemplateField HeaderText="Nature of Charges" ItemStyle-Width="100" >
+             <ItemTemplate>
+                 <asp:Label ID="month" runat="server" Text='<%#Bind("ex_details")%>'></asp:Label>
+             </ItemTemplate>
+         </asp:TemplateField>
 
-                                                    <div class="col-sm-2">
-
-                                                        <asp:Label ID="TextBox2" runat="server" Text="Nature Of Charge" Font-Bold="true" required autofocus></asp:Label>
-
-                                                        <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; border-width: 1px;" />
-                                                    </div>
-                                                    <div class="col-sm-2"></div>
-                                                    <div class="col-sm-2">
-
-                                                        <asp:Label ID="TextBox3" runat="server" Text="Total Amount" Font-Bold="true" required autofocus></asp:Label>
-
-                                                        <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; border-width: 1px;" />
-                                                    </div>
-                                                    <div class="col-sm-1"></div>
-                                                    <div class="col-sm-2">
-
-                                                        <asp:Label ID="Label3" runat="server" Text="Amount Per Flat" Font-Bold="true" required autofocus></asp:Label>
-
-                                                        <hr style="display: block; margin-top: 0.5em; margin-bottom: 0.5em; border-width: 1px;" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div>
-                                                <div class="col-sm-2"></div>
-                                                <asp:PlaceHolder runat="server" ID="TextBoxPlaceHolder" />
-                                                <asp:Panel ID="pnlTextBoxes" runat="server" ClientIDMode="Static"></asp:Panel>
-                                            </div>
-                                            <hr />
-                                            <asp:Button ID="btnAdd" runat="server" Text="Add New" OnClick="btnAdd_Click" />
+         <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100" >
+             <ItemTemplate>
+                 <asp:Label ID="Year" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
+             </ItemTemplate>
+         </asp:TemplateField>
+         <asp:TemplateField HeaderText="Amount Per Flat" ItemStyle-Width="350" >
+             <ItemTemplate>
+                 <asp:Label ID="building_name" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
+             </ItemTemplate>
+         </asp:TemplateField>
+           </Columns>
+ </asp:GridView>
+                   </div>                        
+                                          
+                                            <asp:Button ID="btnAdd" runat="server" Text="Add New" UseSubmitBehavior="true"  ValidationGroup="g1" OnClick="btnAdd_Click" />
 
 
 
@@ -333,7 +329,7 @@
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" Visible="False" />
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
                                             <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClick="btn_close_Click" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
 
                                         </div>
                                     </div>

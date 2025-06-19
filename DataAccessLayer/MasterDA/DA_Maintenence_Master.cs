@@ -232,10 +232,10 @@ namespace DataAccessLayer.MasterDA
             int i = 1;
             
             string status1 = "";
-            if (maintenance1.W_Name == "ALL")
+            if (maintenance1.W_Name == "0")
             {
                 data_item.Add(st.create_array("operation", maintenance1.Sql_Operation));
-                data_item.Add(st.create_array("name", maintenance1.Name));
+                data_item.Add(st.create_array("build_id", maintenance1.build_id));
             }
             else
 
@@ -243,7 +243,7 @@ namespace DataAccessLayer.MasterDA
             {
                 data_item.Add(st.create_array("operation", maintenance1.Sql_Operation));
                 data_item.Add(st.create_array("w_name", maintenance1.W_Name));
-                data_item.Add(st.create_array("name", maintenance1.Name));
+                data_item.Add(st.create_array("build_id", maintenance1.build_id));
             }
 
             status1 = st.run_query(data_item, "Select", "sp_flat_master", ref sdr);
@@ -422,6 +422,8 @@ namespace DataAccessLayer.MasterDA
             data_item.Add(st.create_array("m_date", maintenance1.M_Date));
             data_item.Add(st.create_array("wing_id", maintenance1.wing_id));
             data_item.Add(st.create_array("n_m_id", maintenance1.n_m_id));
+            data_item.Add(st.create_array("regular", maintenance1.RegularAmount));
+            data_item.Add(st.create_array("additional", maintenance1.Add_OnAmount));
             status = st.run_query(data_item, "Select", "sp_new_maintenance", ref sdr);
 
             if (status == "Done")
