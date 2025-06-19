@@ -330,7 +330,7 @@
                                             <div class="form-group">
                                                 <div class="row ">
                                                     <div class="col-sm-6">
-                                                        <asp:CheckBox ID="add_chk" runat="server" Text="Adding Maintanance" Width="200px" />
+                                                        <asp:CheckBox Visible="false" ID="add_chk" runat="server" Text="Adding Maintanance" Width="200px" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <asp:Label ID="Label10" runat="server" Text="Tax"></asp:Label>

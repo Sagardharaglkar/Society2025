@@ -262,16 +262,16 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Expence Tracker</h6>
                     <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                        <div class=" d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
+                            <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular"
+                                GroupName="Gender" AutoPostBack="true"  />
+
+                            <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
+                                GroupName="Gender" AutoPostBack="true" />
                         </div>
+                                </ContentTemplate></asp:UpdatePanel>
                     </div>
                 </div>
                 <asp:Panel runat="server" ID="lblNoDataFound2" Visible="False">
