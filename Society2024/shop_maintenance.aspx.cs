@@ -73,8 +73,6 @@ namespace Society
             GridView1.DataSource = dt.Tables[0];
             ViewState["dirState"] = dt.Tables[0];
             GridView1.DataBind();
-
-
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)

@@ -47,9 +47,7 @@
                 <br />
 
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
-                <asp:HiddenField ID="charge_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
-                <asp:HiddenField ID="society_name_id" runat="server" />
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="form-group">
@@ -139,6 +137,9 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                        
+                <asp:HiddenField ID="charge_id" runat="server" />
+                <asp:HiddenField ID="society_name_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-5">

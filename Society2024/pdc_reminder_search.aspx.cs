@@ -453,7 +453,7 @@ namespace Society
 
                     if (link.CommandArgument == owner_name_id.Value)
                     {
-                        TextBox1.Text = link.Text;
+                        TextBox2.Text = link.Text;
                         Reminder.owner_id = Convert.ToInt32(owner_name_id.Value);
                         Reminder.Sql_Operation = "owner_select";
 

@@ -52,7 +52,7 @@
                 btn.value = "Saving...";
 
 
-                <%--__doPostBack('<%= btn_save.UniqueID %>', '');--%>
+                __doPostBack('<%= btn_save.UniqueID %>', '');
 
                 return false; // prevent default to avoid double postback
             }
@@ -76,7 +76,6 @@
                         <asp:HiddenField ID="shop_maint_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-                        <asp:HiddenField ID="ledger_id" runat="server" />
 
                         <div class="form-group">
                             <div class="row ">
@@ -169,6 +168,9 @@
                             <d class="modal-body" id="invoice_data">
                                 <asp:UpdatePanel ID="updatepnl" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+
+                                        
+                        <asp:HiddenField ID="ledger_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
 

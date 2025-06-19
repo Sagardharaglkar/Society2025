@@ -153,6 +153,8 @@
 
             <asp:Panel ID="Panel1" runat="server">
                 <div class="auto-scroll">
+                    <div>
+
                     <ul class=" navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 
@@ -360,6 +362,7 @@
 
 
                     </ul>
+                    </div>
                 </div>
             </asp:Panel>
 
@@ -376,10 +379,10 @@
                     <nav
                         class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="position:sticky; top:0px; z-index:10; margin-top:3px;">
                         <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                     <%--   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
-                        </button>
-
+                        </button>--%>
+                        <button type="button" class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop"><i class="fa fa-bars"></i></button>
                         <!-- Topbar Search -->
                         <marquee direction="left">
                             <strong>
@@ -681,7 +684,7 @@
 
 
         function resetForm() {
-            console.log("Site master function");
+            
 
             const form = document.getElementById("myForm");
 

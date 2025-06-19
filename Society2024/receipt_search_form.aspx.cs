@@ -1,23 +1,23 @@
-﻿using System;
+﻿using BusinessLogic.BL;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
-using System.Web.Configuration;
+using System.Data.SqlClient;
 //using System.Windows.Controls;
 //using Azure;
 using System.Drawing.Drawing2D;
-using Page = System.Web.UI.Page;
-using Utility.DataClass;
-using BusinessLogic.BL;
+using System.Linq;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Wordprocessing;
+using Utility.DataClass;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using Page = System.Web.UI.Page;
 //using System.IdentityModel.Metadata
-
 
 namespace Society
 {
@@ -56,46 +56,6 @@ namespace Society
 
         }
 
-        protected void RadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            //string selectedGender = "";
-
-            //if (RadioButton1.Checked)
-            //{
-            //    selectedGender = "Male";
-            //}
-            //else if (RadioButton2.Checked)
-            //{
-            //    selectedGender = "Female";
-            //}
-
-            if (owner_name_id.Value != "" && RadioButton1.Checked)
-            {
-                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
-                bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
-
-                Receipt.Sql_Operation = "pending_balance";
-                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
-                shop_maint_id.Value = owner_name_id.Value;
-                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
-
-                txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
-
-            }else if(owner_name_id.Value != "" && RadioButton2.Checked)
-            {
-                txt_amount.Text = "Add on";
-            }
-
-        }
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            //lblMessage.Text = "Option 1: " + CheckBox1.Checked + ", Option 2: " + CheckBox2.Checked;
-        }
-
-        protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            //lblMessage.Text = "Option 1: " + CheckBox1.Checked + ", Option 2: " + CheckBox2.Checked;
-        }
         protected void Allbound()
         {
             String str1 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
@@ -140,6 +100,23 @@ namespace Society
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
 
+                if (owner_name_id.Value != "")
+                {
+                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                    Receipt.Sql_Operation = "pending_balance";
+                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                    shop_maint_id.Value = owner_name_id.Value;
+                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+                }
+                else if (owner_name_id.Value != "")
+                {
+                    txt_amount.Text = "Add on";
+                }
             }
 
 

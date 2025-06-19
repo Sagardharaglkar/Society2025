@@ -63,23 +63,6 @@ namespace Society
             Notification_grid.DataBind();
 
         }
-        //protected void Notification_grid_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-
-        //    int notify = Convert.ToInt32(Notification_grid.SelectedDataKey.Value);
-
-
-        //    details.NoticeId = notify;
-
-        //    details.Society_Id = Session["society_id"].ToString();
-
-        //    details.Sql_Operation = "UpdateStatus"; 
-
-        //    BL_Login.UpdateNotifyStatus(details);
-
-
-        //    get_notificatoin();
-        //}
 
         protected void Update_Notify_Status(object sender, GridViewCommandEventArgs e)
         {
@@ -104,24 +87,11 @@ namespace Society
 
         protected void logout_Click(object sender, EventArgs e)
         {
-            //Session.Clear();
-            //Session.Abandon();
-            //Response.Redirect(Request.RawUrl);
-
-            //Response.Redirect("login1.aspx");
-
-
-
-            // Clear session
             Session.Clear();
             Session.Abandon();
-
-            // Prevent caching so Back button won't show the previous page
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
             Response.Cache.SetNoStore();
-
-            // Redirect to login
             Response.Redirect("login1.aspx", true);
 
         }

@@ -107,7 +107,7 @@ namespace Society
         {
             if (charge_id.Value != "")
                 society.Charge_Id = Convert.ToInt32(charge_id.Value);
-                society.Sql_Operation = operation;
+            society.Sql_Operation = operation;
             society.Amount = txt_amount.Text;
             society.Society_Id = society_name_id.Value;
             bL_society.updatecharges(society);

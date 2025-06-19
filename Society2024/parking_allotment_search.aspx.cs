@@ -36,7 +36,7 @@ namespace Society
                 Panel1.Visible = false;
                 Park_Allotment_GridBind();
                 //fill_drop1();
-                String sql_query = "Select *  from parking where society_id='" + society_id.Value + "'";
+                String sql_query = "Select *  from parking where society_id='" + society_id.Value + "' and occupied is null";
 
                 repeater.fill_list(Repeater1, sql_query);
 
@@ -133,8 +133,7 @@ namespace Society
             txt_vehical_no.Text = result.Vehicle_No;
             assign_id.Value = result.place_id.ToString();
 
-            String sql_query = "Select *  from parking where society_id='" + society_id.Value + "'";
-
+            String sql_query = "Select *  from parking where society_id='" + society_id.Value + "' and occupied is null";
             repeater.fill_list(Repeater1, sql_query);
         }
 
@@ -195,7 +194,7 @@ namespace Society
             //String sql_query = "Select *  from parking where park_for='" + ddl_park_for.SelectedValue + "' and society_id='"+ society_id.Value +"'";
             //parking_Allotment.fill_drop(ddl_place, sql_query, "parking_no", "place_id");
 
-            String sql_query = "Select *  from parking where park_for='" + ddl_park_for.SelectedValue + "' and society_id='" + society_id.Value + "'";
+            String sql_query = "Select *  from parking where park_for='" + ddl_park_for.SelectedValue + "' and society_id='" + society_id.Value + "' and occupied is null";
 
             repeater.fill_list(Repeater1, sql_query);
 

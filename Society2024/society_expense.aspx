@@ -238,8 +238,8 @@
                                                                                 ID="lnkCategory"
                                                                                 runat="server"
                                                                                 CssClass="suggestion-item link-button category-link"
-                                                                                Text='<%# Eval("name") %>'
-                                                                                CommandArgument='<%# Eval("wing_id") %>'
+                                                                                Text='<%# Eval("v_name") %>'
+                                                                                CommandArgument='<%# Eval("vendor_id") %>'
                                                                                 CommandName="SelectCategory"
                                                                                 OnClientClick="setTextBox1(this.innerText);" />
                                                                         </ItemTemplate>
@@ -273,8 +273,8 @@
                                                                             ID="lnkCategory"
                                                                             runat="server"
                                                                             CssClass="suggestion-item link-button category-link"
-                                                                            Text='<%# Eval("flat_type") %>'
-                                                                            CommandArgument='<%# Eval("flat_type_id") %>'
+                                                                            Text='<%# Eval("name") %>'
+                                                                            CommandArgument='<%# Eval("wing_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setTextBox2(this.innerText);" />
                                                                     </ItemTemplate>

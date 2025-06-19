@@ -33,15 +33,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
-        /// ledger_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ledger_id;
-
-        /// <summary>
         /// search_field control.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,15 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updatepnl;
+
+        /// <summary>
+        /// ledger_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ledger_id;
 
         /// <summary>
         /// Label6 control.

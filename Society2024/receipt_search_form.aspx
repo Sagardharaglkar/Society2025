@@ -300,7 +300,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+<%--                                        <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-6 d-flex" style="align-items: center; justify-content: space-evenly;">
                                                     <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular Expense"
@@ -310,7 +310,7 @@
                                                         GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>--%>
                                         <div class="form-group">
                                             <div class="row ">
 

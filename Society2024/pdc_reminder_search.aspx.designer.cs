@@ -78,24 +78,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField pdc_rem_id;
 
         /// <summary>
-        /// owner_name_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField owner_name_id;
-
-        /// <summary>
-        /// building_name_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField building_name_id;
-
-        /// <summary>
         /// Label15 control.
         /// </summary>
         /// <remarks>
@@ -184,6 +166,24 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upnlCountry;
+
+        /// <summary>
+        /// owner_name_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField owner_name_id;
+
+        /// <summary>
+        /// building_name_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField building_name_id;
 
         /// <summary>
         /// lbl_cust_name control.

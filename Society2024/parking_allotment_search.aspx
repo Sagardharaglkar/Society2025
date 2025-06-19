@@ -75,8 +75,7 @@
                 </table>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:HiddenField ID="parking_id" runat="server" />
-                        <asp:HiddenField ID="assign_id" runat="server" />
+            
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <div class="form-group">
                             <div class="row ">
@@ -167,6 +166,9 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+
+                                        <asp:HiddenField ID="parking_id" runat="server" />
+                                        <asp:HiddenField ID="assign_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-2">

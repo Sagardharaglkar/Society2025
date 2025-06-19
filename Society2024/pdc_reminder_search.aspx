@@ -94,8 +94,6 @@
                         <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="pdc_rem_id" runat="Server"></asp:HiddenField>
 
-                        <asp:HiddenField runat="server" ID="owner_name_id" />
-                        <asp:HiddenField runat="server" ID="building_name_id" />
 
                         <div class="form-group">
                             <div class="row ">
@@ -205,7 +203,9 @@
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
 
-
+                                        
+                        <asp:HiddenField runat="server" ID="owner_name_id" />
+                        <asp:HiddenField runat="server" ID="building_name_id" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-2">
@@ -303,7 +303,7 @@
 
                                                 <div class="col-sm-8"></div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_pre_addr2" runat="server" MaxLength="250" Height="32px" Width="200px" placeholder="Enter Present Address 1"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_pre_addr2" runat="server" CssClass="not-required" MaxLength="250" Height="32px" Width="200px" placeholder="Enter Present Address 1"></asp:TextBox>
                                                 </div>
 
                                             </div>
@@ -316,7 +316,7 @@
                                                     <asp:Label ID="Label24" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_add_mob" runat="server" MaxLength="10" Height="32px" Width="200px" onblur="checkLength(this)" onkeypress="return digit(event);" placeholder="Enter Mobile No."></asp:TextBox>
+                                                    <asp:TextBox ID="txt_add_mob" runat="server" CssClass="not-required" MaxLength="10" Height="32px" Width="200px" placeholder="Enter Mobile No." TextMode="Phone"></asp:TextBox>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <asp:Label ID="lbl_mob" runat="server" Text="E-mail ID"></asp:Label>
@@ -324,7 +324,7 @@
                                                     <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" ForeColor="Black" Text=":"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" runat="server" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_email" CssClass="form-control" Height="32px" Width="200px" placeholder="Enter Email" runat="server" required TextMode="Email"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Email
                                                     </div>

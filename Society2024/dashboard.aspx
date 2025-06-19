@@ -262,16 +262,17 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Expence Tracker</h6>
                     <div class="dropdown no-arrow">
-                                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                       <%-- <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                        <div class=" d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
-                            <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular"
-                                GroupName="Gender" AutoPostBack="true"  />
+                                <div class=" d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
+                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular"
+                                        GroupName="Gender" AutoPostBack="true" />
 
-                            <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
-                                GroupName="Gender" AutoPostBack="true" />
-                        </div>
-                                </ContentTemplate></asp:UpdatePanel>
+                                    <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
+                                        GroupName="Gender" AutoPostBack="true" />
+                                </div>
+                            </ContentTemplat
+                        </asp:UpdatePanel>--%>
                     </div>
                 </div>
                 <asp:Panel runat="server" ID="lblNoDataFound2" Visible="False">

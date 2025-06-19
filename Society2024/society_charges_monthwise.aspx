@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="society_charges_monthwise.aspx.cs" Inherits="Society.society_charges_monthwise" MasterPageFile="~/Site.Master" %>
-
+        
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -185,7 +185,7 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-7">
-                                                    <asp:TextBox ID="txt_total" CssClass="form-control" runat="server" Width="200px" Height="32px" required autofocus></asp:TextBox>
+                                                    <asp:TextBox ID="txt_total" CssClass="form-control" runat="server" Width="200px" Height="32px" required="required"></asp:TextBox>
 
                                                     <div class="invalid-feedback">
                                                         Please Enter Total Amount
@@ -202,9 +202,7 @@
                                     </Triggers>
                                 </asp:UpdatePanel>
 
-
                             </div>
-
 
                             <div class="modal-footer">
                                 <div class="form-group">
@@ -230,15 +228,15 @@
         function disableSaveButtonIfValid() {
             console.log("Button Clicked");
             var btn = document.getElementById('<%= btn_save.ClientID %>');
-        var modal = document.getElementById('edit_model');
-        var inputs = modal.querySelectorAll('input[required], select[required]');
-        var allValid = true;
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
 
-        inputs.forEach(function (input) {
-            if (!input.checkValidity()) {
-                allValid = false;
-            }
-        });
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
 
         if (allValid && btn) {
             btn.disabled = true;

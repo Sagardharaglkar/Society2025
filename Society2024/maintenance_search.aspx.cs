@@ -558,77 +558,83 @@ namespace Society
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-
-            int i = 1;
-            float total = 0;
-            Maintenance1.Sql_Operation = "exfetch";
-            Maintenance1.Society_Id = society_id.Value;
-            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
-            Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
-            var result = bL_Maintenance.Add_Click(Maintenance1);
-            dt1 = result;
-            if (TextBox1.Text == "ALL")
+            if (TextBox5.Text.Trim() != "" && TextBox6.Text.Trim() != "")
             {
-                Maintenance1.Sql_Operation = "check_count";
-                Maintenance1.Name = building_id.Value;
-                Maintenance1.W_Name = wing_id.Value.ToString();
-            }
-            else
+                BtnPanel.Visible = true;
 
-            {
-                Maintenance1.Sql_Operation = "check_wing";
-                Maintenance1.W_Name = wing_id.Value.ToString();
-                Maintenance1.Name = building_id.Value;
-
-            }
-            var flat = bL_Maintenance.getflat(Maintenance1);
-            Label4.Text = "No of Flat :" + flat.Flat.ToString();
-            foreach (DataRow row in dt1.Rows)
-            {
-
-                if (i <= dt1.Rows.Count)
+                int i = 1;
+                float total = 0;
+                Maintenance1.Sql_Operation = "exfetch";
+                Maintenance1.Society_Id = society_id.Value;
+                Maintenance1.build_id = Convert.ToInt32(building_id.Value);
+                Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
+                var result = bL_Maintenance.Add_Click(Maintenance1);
+                dt1 = result;
+                if (TextBox1.Text == "ALL")
                 {
-                    TextBox txtbox = new TextBox();
-                    TextBox txtbox1 = new TextBox();
-                    TextBox txtbox3 = new TextBox();
-                    txtbox.ClientIDMode = ClientIDMode.Static;
-                    txtbox.ID = "txtcol" + i + "_name";
-                    txtbox.Enabled = false;
-                    txtbox.Text = row["ex_details"].ToString();
-                    txtbox1.ClientIDMode = ClientIDMode.Static;
-                    txtbox1.ID = "txtcol" + i + "_amount";
-                    txtbox1.Enabled = false;
-                    txtbox.ClientIDMode = ClientIDMode.Static;
-                    txtbox3.Enabled = false;
-                    txtbox3.Text = row["f_amount"].ToString();
-                    if (flat.Flat == 0)
+                    Maintenance1.Sql_Operation = "check_count";
+                    Maintenance1.Name = building_id.Value;
+                    Maintenance1.W_Name = wing_id.Value.ToString();
+                }
+                else
+
+                {
+                    Maintenance1.Sql_Operation = "check_wing";
+                    Maintenance1.W_Name = wing_id.Value.ToString();
+                    Maintenance1.Name = building_id.Value;
+
+                }
+                var flat = bL_Maintenance.getflat(Maintenance1);
+                Label4.Text = "No of Flat :" + flat.Flat.ToString();
+                foreach (DataRow row in dt1.Rows)
+                {
+
+                    if (i <= dt1.Rows.Count)
                     {
-                        txtbox1.Text = (float.Parse(row["f_amount"].ToString())).ToString();
-                        total = total + (float.Parse(row["f_amount"].ToString()));
+                        TextBox txtbox = new TextBox();
+                        TextBox txtbox1 = new TextBox();
+                        TextBox txtbox3 = new TextBox();
+                        txtbox.ClientIDMode = ClientIDMode.Static;
+                        txtbox.ID = "txtcol" + i + "_name";
+                        txtbox.Enabled = false;
+                        txtbox.Text = row["ex_details"].ToString();
+                        txtbox1.ClientIDMode = ClientIDMode.Static;
+                        txtbox1.ID = "txtcol" + i + "_amount";
+                        txtbox1.Enabled = false;
+                        txtbox.ClientIDMode = ClientIDMode.Static;
+                        txtbox3.Enabled = false;
+                        txtbox3.Text = row["f_amount"].ToString();
+                        if (flat.Flat == 0)
+                        {
+                            txtbox1.Text = (float.Parse(row["f_amount"].ToString())).ToString();
+                            total = total + (float.Parse(row["f_amount"].ToString()));
 
+                        }
+                        else
+                        {
+                            txtbox1.Text = (float.Parse(row["f_amount"].ToString()) / flat.Flat).ToString();
+                            total = total + float.Parse(row["f_amount"].ToString()) / flat.Flat;
+                        }
+
+                        pnlTextBoxes.Controls.Add(txtbox);
+                        pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
+                        pnlTextBoxes.Controls.Add(txtbox3);
+                        pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "));
+                        pnlTextBoxes.Controls.Add(txtbox1);
+                        pnlTextBoxes.Controls.Add(new LiteralControl("<br> <br>")); i++;
+
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", txtbox.Text, true);
                     }
-                    else
-                    {
-                        txtbox1.Text = (float.Parse(row["f_amount"].ToString()) / flat.Flat).ToString();
-                        total = total + float.Parse(row["f_amount"].ToString()) / flat.Flat;
-                    }
 
-                    pnlTextBoxes.Controls.Add(txtbox);
-                    pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
-                    pnlTextBoxes.Controls.Add(txtbox3);
-                    pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "));
-                    pnlTextBoxes.Controls.Add(txtbox1);
-                    pnlTextBoxes.Controls.Add(new LiteralControl("<br> <br>")); i++;
-
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", txtbox.Text, true);
                 }
 
-            }
+                txt_amount.Text = total.ToString();
+                int flag = 1;
+                if (dt1.Rows.Count == 0)
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Expense are Not Approved by Members');", true);
 
-            txt_amount.Text = total.ToString();
-           int flag = 1;
-            if(dt1.Rows.Count==0)
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Expense are Not Approved by Members');", true);
+                
+            }
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)

@@ -75,10 +75,7 @@
                         <asp:HiddenField ID="file_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-                        <asp:HiddenField ID="doc_id" runat="server" />
-                        <asp:HiddenField ID="building_id" runat="server" />
-                        <asp:HiddenField ID="wing_id" runat="server" />
-                        <asp:HiddenField ID="flat_no_id" runat="server" />
+
 
                         <div class="form-group">
                             <div class="row">
@@ -176,6 +173,11 @@
 
                                 <asp:UpdatePanel ID="afdhh" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+
+                                        <asp:HiddenField ID="doc_id" runat="server" />
+                                        <asp:HiddenField ID="building_id" runat="server" />
+                                        <asp:HiddenField ID="wing_id" runat="server" />
+                                        <asp:HiddenField ID="flat_no_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">

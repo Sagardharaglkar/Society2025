@@ -328,13 +328,14 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <div class="pull-center">
-                                            <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
-                                            <asp:Button ID="btn_bill" runat="server" Text="Generate Bill" class="btn btn-primary" OnClick="btn_bill_Click" />
-                                            <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" Visible="False" />
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
-                                            <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
-
+                                            <asp:Panel runat="server" ID="BtnPanel" CssClass="ml-3">
+                                                <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
+                                                <asp:Button ID="btn_bill" runat="server" Text="Generate Bill" class="btn btn-primary" OnClick="btn_bill_Click" />
+                                                <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" Visible="False" />
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailmodal">Email</button>
+                                                <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" />
+                                                <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+                                            </asp:Panel>
                                         </div>
                                     </div>
                                 </div>
