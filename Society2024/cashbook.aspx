@@ -74,7 +74,7 @@
 
                                     <div class="dropdown-container">
                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                            placeholder="Select" autocomplete="off" required="required" />
+                                            placeholder="Select" autocomplete="off" required="required" ValidationGroup="valid" />
                                         <div id="RepeaterContainer1" style="width: 100%;" class="suggestion-list">
                                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand">
                                                 <ItemTemplate>
@@ -115,12 +115,12 @@
 
                                 <div class="col-sm-1">
                                     <%-- <i class="fas fa-search"></i>--%>
-                                    <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" ValidationGroup="valid" Text="Search" UseSubmitBehavior="False" va />
+                                    <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" ValidationGroup="valid" Text="Search" />
                                 </div>
 
                                 <div class="col-sm-1">
 
-                                    <asp:Button ID="btn_print" runat="server" class="btn btn-primary" OnClick="btn_print_Click" Text="Print" UseSubmitBehavior="False" />
+                                    <asp:Button ID="btn_print" runat="server" class="btn btn-primary" OnClick="btn_print_Click" Text="Print" ValidationGroup="valid"  />
                                 </div>
                             </div>
 
