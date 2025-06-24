@@ -21,6 +21,8 @@ namespace Utility.DataClass
         private int oid;
         private int bid;
         private int wid;
+        private bool regularChecked;
+        private bool addonChecked;
         private float receivedamt;
         private string societyid;
         private string balance;
@@ -44,6 +46,18 @@ namespace Utility.DataClass
             get { return date; }
             set { date = value; }
         }
+        public Boolean RegularChecked
+        {
+            get { return regularChecked; }
+            set { regularChecked = value; }
+        }
+       
+        public Boolean AddonChecked
+        {
+            get { return addonChecked; }
+            set { addonChecked = value; }
+        }   
+       
         public string Bill_No
         {
             get { return billno; }

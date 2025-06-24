@@ -47,12 +47,14 @@ namespace DataAccessLayer.DA
             if (Receipt.Sql_Operation == "Update")
             {
                 data_item.Add(st.create_array("society_id", Receipt.Society_Id));
+                data_item.Add(st.create_array("receipt_no", Receipt.Receipt_No));
                 data_item.Add(st.create_array("pay_mode", Receipt.Pay_Mode));
                 data_item.Add(st.create_array("date", Receipt.Date));
                 data_item.Add(st.create_array("owner_id", Receipt.Owner_Id));
                 data_item.Add(st.create_array("wing_id", Receipt.Wing_Id));
                 data_item.Add(st.create_array("recivable_amt", Receipt.Recivable_Amt));
-               
+                data_item.Add(st.create_array("regularPayment", Receipt.RegularChecked));
+                data_item.Add(st.create_array("AddonPayment", Receipt.AddonChecked));
                 data_item.Add(st.create_array("build_id", Receipt.build_id));
                 data_item.Add(st.create_array("owner_name", Receipt.Owner_Name));
                 data_item.Add(st.create_array("bill_no", Receipt.Bill_No));
@@ -219,9 +221,10 @@ namespace DataAccessLayer.DA
             {
                 if (sdr.Read())
                 {
-                    //if(Convert.ToInt32(sdr["balance"])>0)
-                    Receipt.Balance = (Convert.ToInt32(sdr["balance"]) - Convert.ToInt32(sdr["advance"])).ToString();
-                 
+                    if(Receipt.RegularChecked)
+                    Receipt.Balance = (Convert.ToInt32(sdr["balanceRegular"]) - Convert.ToInt32(sdr["advance_regular"])).ToString();
+                    else
+                        Receipt.Balance = (Convert.ToInt32(sdr["balanceAddon"]) - Convert.ToInt32(sdr["advanceAddon"])).ToString();
                 }
             }
 
