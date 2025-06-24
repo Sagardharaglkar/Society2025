@@ -538,7 +538,7 @@ namespace Society
                 expenseGrid.DataBind();
             }
         }
-        }
+        
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
