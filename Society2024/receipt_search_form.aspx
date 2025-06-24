@@ -172,7 +172,7 @@
                             <div class="modal-header">
                                 
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Receipt</strong></h4>
-                                <asp:Label ID="receipt_no" runat="server" Font-Bold="True" Font-Size="Medium" Text=":252595"></asp:Label>
+                                <asp:Label ID="receipt_no" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
                             </div>
 
 
@@ -303,11 +303,11 @@
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-6 d-flex" style="align-items: center; justify-content: space-evenly;">
-                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular Expense"
-                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
+                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular Expense" Checked="true"
+                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton1_CheckedChanged" />
 
                                                     <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
-                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton_CheckedChanged" />
+                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton2_CheckedChanged" />
                                                 </div>
                                             </div>
                                         </div>

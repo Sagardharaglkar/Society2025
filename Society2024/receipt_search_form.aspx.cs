@@ -125,6 +125,24 @@ namespace Society
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
 
+                if (owner_name_id.Value != "")
+                {
+                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                    Receipt.Sql_Operation = "pending_balance";
+                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                    shop_maint_id.Value = owner_name_id.Value;
+                    Receipt.RegularChecked = RadioButton1.Checked ? true : false;
+                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+                }
+                else if (owner_name_id.Value != "")
+                {
+                    txt_amount.Text = "Add on";
+                }
             }
 
 
@@ -231,12 +249,13 @@ namespace Society
                 Receipt.receipt_id = Convert.ToInt32(receipt_id.Value.ToString());
             Receipt.Sql_Operation = operation;
             Receipt.Society_Id = society_id.Value;
-            //Receipt.Receipt_No = Convert.ToInt32(receipt_no_txt.Text);
+            Receipt.Receipt_No = receipt_no.Text;
             Receipt.Pay_Mode = Convert.ToInt32(pay_mode_id.Value);
             Receipt.Date = Convert.ToDateTime(txt_date.Text);
             Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             Receipt.Recivable_Amt = float.Parse(txt_amount.Text);
-           
+            Receipt.RegularChecked = RadioButton1.Checked ? true : false;
+            Receipt.AddonChecked = RadioButton2.Checked ? true : false;
             Receipt.build_id = Convert.ToInt32(building_id.Value);
             Receipt.Owner_Name = TextBox3.Text.ToString();
             Receipt.Wing_Id = Convert.ToInt32(wing_name_id.Value);
@@ -492,10 +511,11 @@ namespace Society
             //    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
             //    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
 
-            //    Receipt.Sql_Operation = "pending_balance";
-            //    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
-            //    shop_maint_id.Value = owner_name_id.Value;
-            //    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+                Receipt.Sql_Operation = "pending_balance";
+                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                shop_maint_id.Value = owner_name_id.Value;
+                Receipt.RegularChecked = RadioButton1.Checked ? true: false;
+                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
 
                
             //    txt_amount.Text = result.Balance ==null ?  "0": result.Balance.ToString() ;
@@ -641,6 +661,46 @@ namespace Society
 
             }
 
+        }
+
+        protected void RadioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (owner_name_id.Value != "")
+            {
+                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                Receipt.Sql_Operation = "pending_balance";
+                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                shop_maint_id.Value = owner_name_id.Value;
+                Receipt.RegularChecked = RadioButton1.Checked ? true : false;
+                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+
+                txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+
+            }
+        }
+
+        protected void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (owner_name_id.Value != "")
+            {
+                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                Receipt.Sql_Operation = "pending_balance";
+                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                shop_maint_id.Value = owner_name_id.Value;
+                Receipt.RegularChecked = RadioButton1.Checked ? true : false;
+                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+
+                txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+
+            }
         }
 
         //protected void print_save_Command(object sender, CommandEventArgs e)
