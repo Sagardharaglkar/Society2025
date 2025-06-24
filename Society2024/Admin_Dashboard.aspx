@@ -1,6 +1,25 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Admin_Dashboard.aspx.cs" Inherits="Society2024.Admin_Dashboard" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+   
+    <style>
+        .resized-model{
+        width: 529px;
+    height: auto;
+    right: 82px;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 233px;
+    margin-top: 168px;
+    right: 1px;
+   }
+}
+    </style>
     <script type="text/javascript">
         function SuccessEntry() {
             Swal.fire(
@@ -45,35 +64,47 @@
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
 
-
-                <div class="form-group">
-    <div class="row">
-        <div class="col-sm-1.5">
-            <asp:Label ID="society_name" runat="server" Text="Society Name"></asp:Label>
+        <%--<div class="col-sm-1.5">
+            <asp:Label Visible="false" ID="society_name" runat="server" Text="Society Name"></asp:Label>
         </div>
         <div class="col-sm-2">
-            <asp:DropDownList ID="drp_society" runat="server" Width="180px" Height="32px" AutoPostBack="true">
+            <asp:DropDownList Visible="false" ID="drp_society" runat="server" Width="180px" Height="32px" AutoPostBack="true">
             </asp:DropDownList>
+        </div>--%>
+
+        <div class="form-group">
+            <div class="row ">
+                <div class="col-12">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container">
+                            <asp:TextBox
+                                ID="txt_search"
+                                CssClass="aspNetTextBox"
+                                placeHolder="Search here"
+                                TextMode="Search"
+                                runat="server" />
+
+                            <button
+                                id="btn_search"
+                                type="submit"
+                                class="search-button"
+                                runat="server"
+                                onserverclick="btn_search_Click">
+                                <span class="material-symbols-outlined">search</span>
+                            </button>
+                        </div>
+                        &nbsp;&nbsp;
+                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+
+                    </div>
+                </div>
+            </div>
         </div>
-      
-        <div class="col-sm-2">
-            <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Height="32px" placeHolder="Search here" runat="server"></asp:TextBox>
-        </div>
-        
-         <div class="col-sm-2">
-            <asp:Button ID="btn_search" class="btn btn-primary" Text="Search" OnClick="btn_search_Click" runat="server" UseSubmitBehavior="False"/>
-        </div>
-        
-        <div class="col-sm-2">
-            <asp:Button ID="btn_filter" runat="server" class="btn btn-primary" Text="Filter" OnClick="btn_filter_Click" UseSubmitBehavior="False" />
-        </div>
-    </div>
-  </div>
 
 
-       
-        
-    <asp:Panel ID="filterSection" runat="server" visible="false" CssClass="row mt-2">
+
+
+        <asp:Panel ID="filterSection" runat="server" visible="false" CssClass="row mt-2">
         <div class="col-sm-2">
             <asp:Label ID="lbl_state" runat="server" Text="State"></asp:Label>
             <asp:DropDownList ID="drp_state" runat="server" Width="180px" Height="32px" AutoPostBack="true">

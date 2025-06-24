@@ -219,7 +219,7 @@ namespace DataAccessLayer.DA
             status = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
             if (status == "Done")
             {
-                if (sdr.Read())
+                if (sdr.HasRows)
                 {
                     if(Receipt.RegularChecked)
                     Receipt.Balance = (Convert.ToInt32(sdr["balanceRegular"]) - Convert.ToInt32(sdr["advance_regular"])).ToString();

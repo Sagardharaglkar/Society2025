@@ -195,6 +195,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.TextBox txt_new_pass;
 
         /// <summary>
+        /// togglePassword1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button togglePassword1;
+
+        /// <summary>
         /// txt_re_password control.
         /// </summary>
         /// <remarks>
@@ -204,6 +213,24 @@ namespace Society
         protected global::System.Web.UI.WebControls.TextBox txt_re_password;
 
         /// <summary>
+        /// togglePassword2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button togglePassword2;
+
+        /// <summary>
+        /// cvPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvPassword;
+
+        /// <summary>
         /// btn_save control.
         /// </summary>
         /// <remarks>
@@ -211,5 +238,14 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_save;
+
+        /// <summary>
+        /// HyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
     }
 }

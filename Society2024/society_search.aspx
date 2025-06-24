@@ -2,6 +2,7 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .not-required.valid-field {
     border-color: #1cc88a !important;
@@ -20,8 +21,21 @@
     background-position: right calc(.375em + .1875rem) center;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
+
+.resized-model{
+    width:900px;
+    height:auto;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 292px;
+    margin-top: 168px;
+   }
+}
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
             Swal.fire({
@@ -195,8 +209,8 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                    <div class="modal-dialog modal-sm-1" style="right: 80px">
-                        <div class="modal-content" style="height: auto; width: 900px;">
+                    <div class="modal-dialog modal-sm-1">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Society</strong></h4>
@@ -474,8 +488,8 @@
 
 
                 <div class="modal fade bs-example-modal-sm" id="import_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                    <div class="modal-dialog modal-sm-1" style="right: 80px">
-                        <iv class="modal-content" style="height: auto; width: 700px;">
+                    <div class="modal-dialog modal-sm-1" >
+                        <iv class="modal-content resized-model" >
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">

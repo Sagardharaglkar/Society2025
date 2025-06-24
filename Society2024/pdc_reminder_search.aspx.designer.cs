@@ -78,67 +78,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField pdc_rem_id;
 
         /// <summary>
-        /// Label15 control.
+        /// txt_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
-
-        /// <summary>
-        /// pnlSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSearch;
-
-        /// <summary>
-        /// drp_build_wing control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_build_wing;
-
-        /// <summary>
-        /// CompareValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
-
-        /// <summary>
-        /// lbl_name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_name;
-
-        /// <summary>
-        /// drop_owner control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drop_owner;
-
-        /// <summary>
-        /// CompareValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
+        protected global::System.Web.UI.WebControls.TextBox txt_search;
 
         /// <summary>
         /// btn_search control.
@@ -147,7 +93,7 @@ namespace Society
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_search;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
         /// GridView1 control.

@@ -73,23 +73,33 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="m_bill_status" runat="Server"></asp:HiddenField>
 
-                       
+
 
                         <div class="form-group">
-                            <div class="col-12">
-                                <div class="d-flex align-items-center">
-                                    <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" AutoPostBack="true" OnSelectedIndexChanged="search_field_SelectedIndexChanged">
-                                        <asp:ListItem>Select</asp:ListItem>
-                                        <asp:ListItem Value="build_name">Building Name</asp:ListItem>
-                                        <asp:ListItem Value="year">Year</asp:ListItem>
-                                        <asp:ListItem Value="month_name">Month</asp:ListItem>
-                                    </asp:DropDownList>&nbsp;&nbsp;
-                    
-                        <asp:DropDownList ID="drop_build" runat="server" Width="200px" Height="32px"></asp:DropDownList>&nbsp;&nbsp;
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                TextMode="Search"
+                                                runat="server" />
 
-                      <asp:Button ID="btn_search" runat="server" Text="Search" Class="btn btn-primary" OnClick="btn_search_Click" UseSubmitBehavior="False" />&nbsp;&nbsp;
-                   
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>&nbsp;&nbsp;
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
+                                        &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

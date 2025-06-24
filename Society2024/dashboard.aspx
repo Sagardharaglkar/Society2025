@@ -262,8 +262,7 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Expence Tracker</h6>
                     <div class="dropdown no-arrow">
-                       <%-- <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
+                       <asp:UpdatePanel runat="server" UpdateMode="Conditional"> <ContentTemplate>
                                 <div class=" d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
                                     <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular"
                                         GroupName="Gender" AutoPostBack="true" />
@@ -271,8 +270,8 @@
                                     <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
                                         GroupName="Gender" AutoPostBack="true" />
                                 </div>
-                            </ContentTemplat
-                        </asp:UpdatePanel>--%>
+                           </ContentTemplate></asp:UpdatePanel>
+                        
                     </div>
                 </div>
                 <asp:Panel runat="server" ID="lblNoDataFound2" Visible="False">
@@ -580,7 +579,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
     <script type="text/javascript">
-        debugger;
+       
         firebase.initializeApp({
             apiKey: "AIzaSyCVD6hUSK4zMfG43bMjyjwTFmTz5PJc_qk",
             authDomain: "society-management-32053.firebaseapp.com",

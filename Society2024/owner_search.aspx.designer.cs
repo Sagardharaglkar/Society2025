@@ -96,15 +96,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField doc_id_id;
 
         /// <summary>
-        /// search_field control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList search_field;
-
-        /// <summary>
         /// txt_search control.
         /// </summary>
         /// <remarks>
@@ -120,7 +111,7 @@ namespace Society
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_search;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
         /// OwnerGrid control.

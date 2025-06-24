@@ -1,6 +1,25 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="society_charges.aspx.cs" Inherits="Society.society_charges" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+
+    <style>
+        .resized-model{
+        width: 529px;
+    height: auto;
+    right: 82px;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 292px;
+    margin-top: 168px;
+    right: 1px;
+   }
+}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -50,21 +69,62 @@
                 <asp:HiddenField ID="society_id" runat="server" />
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <div class="form-group">
+                       <%-- <div class="form-group" >
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
-                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
+                                        <asp:DropDownList Visible="false" ID="search_field" runat="server" Width="200px" Height="32px">
                                             <asp:ListItem Value="name">Society Name</asp:ListItem>
                                             <asp:ListItem Value="amount">Amount</asp:ListItem>
                                         </asp:DropDownList>&nbsp;&nbsp;
                    
-                         <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                             <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                         <asp:Panel Visible="false" ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
+                             <asp:TextBox ID="txt_search1" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
                         <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
                          </asp:Panel>
+                                            <div class="position-relative" style="    width: 209px;">
+
+
+        <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" Font-Bold="true" placeHolder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
+                        
+     <button style="position: absolute; right: 0px; padding: 0 6px; border-radius: 0 7px 7px 0; background-color: #0D6EFD; height: 32px;"
+         onclick="btn_search_Click">
+         <span class="material-symbols-outlined" style="color: white; margin-top: 1px;">search</span>
+
+     </button>
+</div>
                                         &nbsp;&nbsp;
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>--%>
+
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                TextMode="Search"
+                                                runat="server" />
+
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
+                                        &nbsp;&nbsp;
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
                                     </div>
                                 </div>
@@ -74,7 +134,7 @@
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">
-                                    <div style="width: 80%; overflow: auto;">
+                                    <div style="width: 100%; overflow: auto;">
 
                                         <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" HeaderStyle-BackColor="lightblue" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
 
@@ -125,7 +185,7 @@
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
-                        <div class="modal-content" style="height: auto; width: 500px;">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
 
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Society Charges</strong></h4>

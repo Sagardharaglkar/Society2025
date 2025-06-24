@@ -35,12 +35,12 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
-
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <style type="text/css">
-body {
+        body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f4f8;
@@ -63,11 +63,11 @@ body {
             box-sizing: border-box;
         }
 
-        .left h2 {
-            margin-bottom: 20px;
-            font-weight: 600;
-            color: #466CD9;
-        }
+            .left h2 {
+                margin-bottom: 20px;
+                font-weight: 600;
+                color: #466CD9;
+            }
 
         .form-control {
             width: 100%;
@@ -80,7 +80,7 @@ body {
         }
 
         .btn-signin {
-            margin-top:30px;
+            margin-top: 30px;
             width: 106%;
             padding: 12px;
             background: linear-gradient(to right, #466CD9, #5D8FEF);
@@ -113,16 +113,16 @@ body {
             padding: 30px;
         }
 
-        .right h2 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+            .right h2 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
 
-        .right span {
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
+            .right span {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
 
         .btn-signup {
             padding: 10px 20px;
@@ -139,15 +139,59 @@ body {
             margin-bottom: 20px;
         }
 
-        .social-icons i {
-            margin: 0 5px;
-            font-size: 18px;
-            cursor: pointer;
-            color: #466CD9;
+            .social-icons i {
+                margin: 0 5px;
+                font-size: 18px;
+                cursor: pointer;
+                color: #466CD9;
+            }
+
+                .social-icons i:hover {
+                    color: #2d4bb6;
+                }
+
+        .new_acc {
+            display: none;
         }
 
-        .social-icons i:hover {
-            color: #2d4bb6;
+        .password-container {
+            width: 100%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-show {
+            border: none;
+            background: none;
+            position: absolute;
+            top: 40%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-weight: 100;
+            color: gray;
+            font-size:20px;
+        }
+
+        @media(max-width: 431px) {
+            .right {
+                display: none;
+            }
+
+            .container {
+                width: auto;
+                box-shadow: none;
+            }
+
+            .left {
+                margin: auto;
+                width: 80%;
+                border-radius: 23px 0;
+            }
+
+            .new_acc {
+                display: block;
+            }
         }
     </style>
 
@@ -155,33 +199,44 @@ body {
 
 <body>
 
-            <form id="form2" runat="server" class="needs-validation" novalidate>
-       <div class="container" style="padding:0;">
-        <div class="left">
-            <h2>Sign In</h2>
-            <div class="container2">
-                <div class="mb-3">
-                    <asp:TextBox ID="txt_Username" runat="server" CssClass="form-control" placeholder="Username" required></asp:TextBox>
-                    <div class="invalid-feedback">Please enter your username.</div>
-                </div>
-                <div class="mb-3">
-                    <asp:TextBox ID="txt_password" runat="server" CssClass="form-control" TextMode="Password" placeholder="Password" required></asp:TextBox>
-                    <div class="invalid-feedback">Please enter your password.</div>
-                </div>
+    <form id="form2" runat="server" class="needs-validation" novalidate>
+        <div class="container" style="padding: 0;">
+            <div class="left">
+                <h2>Sign In</h2>
+                <div class="container2">
+                    <div class="mb-3">
+                        <asp:TextBox ID="txt_Username" runat="server" CssClass="form-control" placeholder="Username" required></asp:TextBox>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="password-container">
+                            <asp:TextBox ID="txt_password" runat="server" CssClass="form-control" TextMode="Password" placeholder="Password" required></asp:TextBox>
+                            <asp:Button CssClass="btn-show material-symbols-outlined" Text="visibility" runat="server" OnClientClick="toggleType(); return false;" UseSubmitBehavior="false" class="far fa-eye" ID="togglePassword"></asp:Button>
+                        </div>
+                        <div class="invalid-feedback">Please enter your password.</div>
 
-                <asp:Button ID="Button2" runat="server" Text="Sign In" CssClass="btn-signin" OnClick="btn_Login_Click" />
+                    </div>
+
+                    <asp:Button ID="Button2" runat="server" Text="Sign In" CssClass="btn-signin" OnClick="btn_Login_Click" />
+                </div>
+                <div class="options">
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/ForgetPassword.aspx">Forgot Password</asp:HyperLink>
+                    <div>
+                        <div class="new_acc">
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/new_registration.aspx">
+ Create an Account</asp:HyperLink>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="options">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forgot Password</asp:HyperLink>
+            <div class="right">
+                <h2>Welcome to login</h2>
+                <span>Don't have an account?</span>
+                <asp:Button ID="Button3" runat="server" CssClass="btn-signup" Text="Sign Up" UseSubmitBehavior="false" OnClick="Button1_Click" />
             </div>
         </div>
-        <div class="right">
-            <h2>Welcome to login</h2>
-            <span>Don't have an account?</span>
-            <asp:Button ID="Button3" runat="server" CssClass="btn-signup" Text="Sign Up" UseSubmitBehavior="false"  OnClick="Button1_Click" />
-        </div>
-    </div>
-    <asp:Label ID="lbl" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
+        <asp:Label ID="lbl" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
     </form>
 
 
@@ -209,7 +264,20 @@ body {
 <script src="js/jquery.inputmask.numeric.extensions.js"></script>
 
 <!-- Page script -->
+
 <script>
+
+    function toggleType() {
+        var txt = document.getElementById('<%= txt_password.ClientID %>');
+        var btn = document.getElementById('<%= togglePassword.ClientID %>');
+        if (txt.type === "text") {
+            txt.type = "password";
+            btn.value = "visibility";
+        } else {
+            txt.type = "text";
+            btn.value = "visibility_off";
+        }
+    }
     $(function () {
 
         //Datemask dd/mm/yyyy
@@ -221,12 +289,7 @@ body {
 
 
     });
-</script>
 
-
-
-
-<script type="text/javascript">
     var message = "Function Disabled!";
 
     function clickIE4() {
@@ -251,9 +314,7 @@ body {
         document.onmousedown = clickIE4;
     }
     document.oncontextmenu = new Function("return false")
-</script>
 
-<script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -266,7 +327,7 @@ body {
 
 </script>
 
-    <!-- Bootstrap JS Bundle -->
+<!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Custom validation script -->

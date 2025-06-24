@@ -387,10 +387,10 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("Select * from main_search_vw where active_status=0 and society_id='" + society_id.Value + "'");
-            if (search_field.SelectedItem.Text != "Select")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '%" + drop_build.SelectedItem.Text + "%'");
-            }
+            //if (search_field.SelectedItem.Text != "Select")
+            //{
+            //    sb.Append(" and " + search_field.SelectedValue + " like '%" + drop_build.SelectedItem.Text + "%'");
+            //}
 
             Maintenance1.Sql_Operation = sb.ToString();
             var result = bL_Maintenance.search_maintenance1(Maintenance1);
@@ -434,25 +434,25 @@ namespace Society
 
         protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (search_field.SelectedValue == "year")
-            {
-                string sql2 = "SELECT distinct year FROM maintainance ";
-                bL_Maintenance.fill_drop(drop_build, sql2, "year", "year");
+            //if (search_field.SelectedValue == "year")
+            //{
+            //    string sql2 = "SELECT distinct year FROM maintainance ";
+            //    bL_Maintenance.fill_drop(drop_build, sql2, "year", "year");
 
-            }
-            else if (search_field.SelectedValue == "month_name")
-            {
-                string sql4 = "SELECT distinct month_name FROM maintainance ";
-                bL_Maintenance.fill_drop(drop_build, sql4, "month_name", "month_name");
+            //}
+            //else if (search_field.SelectedValue == "month_name")
+            //{
+            //    string sql4 = "SELECT distinct month_name FROM maintainance ";
+            //    bL_Maintenance.fill_drop(drop_build, sql4, "month_name", "month_name");
 
 
-            }
-            else if (search_field.SelectedValue == "build_name")
-            {
-                string sql3 = "SELECT build_id, name FROM  dbo.building_master where society_id='" + society_id.Value + "' order by name";
-                bL_Maintenance.fill_drop(drop_build, sql3, "name", "build_id");
+            //}
+            //else if (search_field.SelectedValue == "build_name")
+            //{
+            //    string sql3 = "SELECT build_id, name FROM  dbo.building_master where society_id='" + society_id.Value + "' order by name";
+            //    bL_Maintenance.fill_drop(drop_build, sql3, "name", "build_id");
 
-            }
+            //}
         }
 
         protected void drp_wing_SelectedIndexChanged(object sender, EventArgs e)
@@ -537,6 +537,7 @@ namespace Society
                 expenseGrid.DataSource = dt1;
                 expenseGrid.DataBind();
             }
+        }
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)

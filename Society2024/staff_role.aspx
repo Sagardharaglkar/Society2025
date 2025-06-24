@@ -73,24 +73,30 @@
                         <asp:HiddenField ID="role_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <div class="form-group">
-                            <div class="col-12">
-                                <div class="d-flex align-items-center">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                TextMode="Search"
+                                                runat="server" />
 
-                                    <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                        <asp:ListItem Value="role">Role</asp:ListItem>
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
+                                        &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
-                                    </asp:DropDownList>&nbsp;&nbsp;
-
-                            <asp:Panel ID="pnlSearch" runat="server" DefaultButton="search" CssClass="d-flex align-items-center me-2">
-
-                                <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" Style="text-transform: capitalize;" runat="server" placeholder="Search Here"></asp:TextBox>&nbsp;&nbsp;
-                       
-                            <asp:Button ID="search" runat="server" class="btn btn-primary" Text="Search" OnClick="search_Click" UseSubmitBehavior="False" />
-                            </asp:Panel>
-                                    &nbsp;&nbsp;
-                       
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">New Entry</button>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>

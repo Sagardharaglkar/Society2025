@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Society
+namespace Society2024
 {
 
 
-    public partial class Forgot_Password
+    public partial class errorPage500
     {
     }
 }

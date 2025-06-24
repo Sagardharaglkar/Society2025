@@ -8,16 +8,13 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Web.Configuration;
-//using System.Windows.Controls;
-//using Azure;
 using System.Drawing.Drawing2D;
 using Page = System.Web.UI.Page;
 using BusinessLogic.MasterBL;
 using DBCode.DataClass.Master_Dataclass;
 using System.Windows.Forms;
 using BusinessLogic.BL;
-//using System.IdentityModel.Metadata;
-
+using DBCode.DataClass;
 namespace Society
 {
     public partial class wing_search : System.Web.UI.Page
@@ -89,14 +86,15 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("Select * from global_society_view where active_status=0 and society_id='" + society_id.Value + "' ");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //sb.Append("Select * from global_society_view where active_status=0 and society_id='" + society_id.Value + "' ");
+            //if (txt_search.Text != "")
+            //{
+            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+            //}
 
-            wing.Sql_Operation = sb.ToString();
+            wing.Sql_Operation = "search";
+            wing.B_Name = "txt_search.Text";
             var result = bL_Wing.search_wing(wing);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

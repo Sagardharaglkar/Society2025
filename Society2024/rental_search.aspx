@@ -95,7 +95,7 @@
                         <asp:HiddenField ID="doc_id_id" runat="server" />
                         <asp:Label runat="server" Visible="false" ID="Label11"></asp:Label>
                        
-                        <div class="form-group">
+                        <%--<div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -119,8 +119,35 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
+                          <div class="form-group">
+      <div class="row ">
+          <div class="col-12">
+              <div class="d-flex align-items-center">
+                  <div class="search-container">
+                      <asp:TextBox
+                          ID="txt_search"
+                          CssClass="aspNetTextBox"
+                          placeHolder="Search here"
+                          TextMode="Search"
+                          runat="server" />
 
+                      <button
+                          id="btn_search"
+                          type="submit"
+                          class="search-button"
+                          runat="server"
+                          onserverclick="btn_search_Click">
+                          <span class="material-symbols-outlined">search</span>
+                      </button>
+                  </div>
+                  &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+
+              </div>
+          </div>
+      </div>
+  </div>
 
                         <div class="form-group">
                             <div class="row ">

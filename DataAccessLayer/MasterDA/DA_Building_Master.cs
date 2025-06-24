@@ -99,9 +99,10 @@ namespace DataAccessLayer.MasterDA
             string status1 = "";
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", building.Sql_Operation));
-
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            data_item.Add(st.create_array("search", building.Name));
+            data_item.Add(st.create_array("operation", building.Sql_Operation));
+            
+            status1 = st.run_query(data_item, "Select", "sp_building_master", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

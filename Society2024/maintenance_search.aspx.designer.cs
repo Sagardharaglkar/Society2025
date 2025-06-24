@@ -42,22 +42,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField m_bill_status;
 
         /// <summary>
-        /// search_field control.
+        /// txt_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList search_field;
-
-        /// <summary>
-        /// drop_build control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drop_build;
+        protected global::System.Web.UI.WebControls.TextBox txt_search;
 
         /// <summary>
         /// btn_search control.
@@ -66,7 +57,7 @@ namespace Society
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_search;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
         /// GridView1 control.

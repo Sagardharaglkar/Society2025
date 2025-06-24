@@ -227,7 +227,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Forgot_Password.aspx" />
+    <Content Include="css\mobileView\sb-admin-2.css" />
+    <Content Include="css\mobileView\sb-admin-2.min.css" />
+    <Content Include="errorPage.aspx" />
+    <Content Include="errorPage500.aspx" />
+    <Content Include="ForgetPassword.aspx" />
     <Content Include="support_ticket.aspx" />
     <Content Include="About.aspx" />
     <Content Include="account_setting.aspx" />
@@ -2141,12 +2145,26 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forgot_Password.aspx.cs">
-      <DependentUpon>Forgot_Password.aspx</DependentUpon>
+    <Compile Include="errorPage.aspx.cs">
+      <DependentUpon>errorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Forgot_Password.aspx.designer.cs">
-      <DependentUpon>Forgot_Password.aspx</DependentUpon>
+    <Compile Include="errorPage.aspx.designer.cs">
+      <DependentUpon>errorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="errorPage500.aspx.cs">
+      <DependentUpon>errorPage500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="errorPage500.aspx.designer.cs">
+      <DependentUpon>errorPage500.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgetPassword.aspx.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPassword.aspx.designer.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="support_ticket.aspx.cs">
       <DependentUpon>support_ticket.aspx</DependentUpon>

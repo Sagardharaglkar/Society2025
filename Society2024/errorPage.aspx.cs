@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Society2024
 {
-    public partial class Forgot_Password : System.Web.UI.Page
+    public partial class errorPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

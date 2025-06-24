@@ -50,7 +50,21 @@ html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent
 }
+.resized-model {
+    width: 529px;
+    height: auto;
+    right: 82px;
+}
 
+@media(max-width: 431px) {
+    .resized-model {
+        height: auto;
+        margin: auto;
+        width: 292px;
+        margin-top: 168px;
+        right: 1px;
+    }
+}
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block
 }
@@ -10431,8 +10445,9 @@ a:focus {
     }
 
         .topbar .dropdown .dropdown-menu {
-            width: calc(100% - 1.5rem);
-            right: .75rem
+            width: calc(77% - 1.5rem);
+            right: .75rem;
+            max-width:300px;
         }
 
     .topbar .dropdown-list {
