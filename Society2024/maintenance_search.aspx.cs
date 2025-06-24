@@ -194,7 +194,7 @@ namespace Society
             n_m_id.Value = result.n_m_id.ToString();
             building_id.Value = result.build_id.ToString();
             txt_date.Text = result.M_Date.ToString("yyyy-MM-dd");
-            if (result.wing_id.ToString() != "0")
+            
                 wing_id.Value = result.wing_id.ToString();
             txt_amount.Text = result.M_Total.ToString();
 
@@ -327,6 +327,13 @@ namespace Society
                 Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
                 Maintenance1.wing_id = Convert.ToInt32(wing_id.Value);
                 Maintenance1.n_m_id = Convert.ToInt32(n_m_id.Value);
+                 dt1 = (DataTable)ViewState["expenseData"];
+                Maintenance1.RegularAmount = Convert.ToDecimal(dt1.Compute("SUM(amount)", "type = 'Regular'"));
+                bool doesNotExist = dt1.AsEnumerable()
+                          .Any(row => row.Field<string>("Type") == "Add-On");
+                if (doesNotExist)
+                    Maintenance1.Add_OnAmount = Convert.ToDecimal(dt1.Compute("SUM(amount)", "type = 'Add-On'"));
+
                 var result3 = bL_Maintenance.genrate_bill(Maintenance1);
 
                 if (result3.Sql_Result == "Done")
@@ -394,58 +401,7 @@ namespace Society
 
 
         }
-        public void showreport()
-        {
-            ////fetch_shop_maintenance();
-            ////String maintenance_bill = "n_m_id.pdf";
-            //CrystalReportViewer reportViewer = new CrystalReportViewer();
-            //ReportDocument cryRpt = new ReportDocument();
-            //cryRpt.Load(Server.MapPath("~/Report/maintenance_bill_rpt.rpt"));
-            //cryRpt.SetParameterValue("m_id", n_m_id.Value);
-            //// cryRpt.SetParameterValue("subcode", subcode.Value);
-            //cryRpt.SetDatabaseLogon("admin", "admin", "DESKTOP-VR5J462\\SQLEXPRESS", "Society");
-            //reportViewer.ReportSource = cryRpt;
-            ////reportViewer.RefreshReport();
-            //string msg = "";
-
-            //try
-            //{
-            //    //ExportOptions CrExportOptions;
-            //    //DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
-            //    //PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-            //    //CrDiskFileDestinationOptions.DiskFileName = "C:/Report/" + subjectcode;
-            //    //CrExportOptions = cryRpt.ExportOptions;
-            //    //{
-            //    //    CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-            //    //    CrExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-            //    //    CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
-            //    //    CrExportOptions.FormatOptions = CrFormatTypeOptions;
-            //    //}
-            //    //cryRpt.Export();
-            //    cryRpt.PrintToPrinter(1, true, 0, 0);
-            //}
-            //catch (Exception ex)
-            //{
-            //    msg = ex.ToString();
-
-            //}
-            //finally
-            //{
-            //    cryRpt.Database.Dispose();
-            //    cryRpt.Close();
-            //    cryRpt.Dispose();
-            //}
-            //if (msg.Trim() == "")
-            //{
-            //    msg = "alert('PDF Created Successfully')";
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", msg, true);
-            //}
-            //else
-            //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", "alert('Error while Printing report')", true);
-            //}
-        }
-
+        
         protected void Print_Click(object sender, EventArgs e)
         {
 
@@ -539,89 +495,48 @@ namespace Society
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            if (TextBox5.Text.Trim() != "" && TextBox6.Text.Trim() != "")
+            if (TextBox5.Text.Trim() != "" && TextBox6.Text.Trim() != "" && txt_date.Text.Trim()!="")
             {
                 BtnPanel.Visible = true;
 
-            int i = 1;
-            float total = 0;
-            Maintenance1.Sql_Operation = "exfetch";
-            Maintenance1.Society_Id = society_id.Value;
-            Maintenance1.build_id = Convert.ToInt32(building_id.Value);
-            Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
-            var result = bL_Maintenance.Add_Click(Maintenance1);
-            dt1 = result;
-            if (TextBox6.Text == "ALL")
-            {
-                Maintenance1.Sql_Operation = "check_count";
+                int i = 1;
+                float total = 0;
+                Maintenance1.Sql_Operation = "exfetch";
+                Maintenance1.Society_Id = society_id.Value;
                 Maintenance1.build_id = Convert.ToInt32(building_id.Value);
-                Maintenance1.W_Name = wing_id.Value.ToString();
+                Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
+                var result = bL_Maintenance.Add_Click(Maintenance1);
+                dt1 = result;
+                ViewState["expenseData"] = dt1;
+                if (TextBox6.Text == "ALL")
+                {
+                    Maintenance1.Sql_Operation = "check_count";
+                    Maintenance1.build_id = Convert.ToInt32(building_id.Value);
+                    Maintenance1.W_Name = wing_id.Value.ToString();
+                }
+                else
+
+                {
+                    Maintenance1.Sql_Operation = "check_wing";
+                    Maintenance1.W_Name = wing_id.Value.ToString();
+                    Maintenance1.build_id = Convert.ToInt32(building_id.Value);
+
+                }
+                var flat = bL_Maintenance.getflat(Maintenance1);
+                Label4.Text = "No of Flat :" + flat.Flat.ToString();
+                dt1.Columns.Add("amount", typeof(decimal));
+
+                foreach (DataRow row in dt1.Rows)
+                {
+                    row["amount"] = Convert.ToDecimal(row["f_amount"].ToString()) / flat.Flat;
+
+                 
+                }
+                dt1.AcceptChanges();
+                txt_amount.Text = dt1.Compute("SUM(f_amount)", string.Empty).ToString();
+                expenseGrid.DataSource = dt1;
+                expenseGrid.DataBind();
             }
-            else
-
-            {
-                Maintenance1.Sql_Operation = "check_wing";
-                Maintenance1.W_Name = wing_id.Value.ToString();
-                Maintenance1.build_id = Convert.ToInt32(building_id.Value);
-
-            }
-            var flat = bL_Maintenance.getflat(Maintenance1);
-            Label4.Text = "No of Flat :" + flat.Flat.ToString();
-            dt1.Columns.Add("amount", typeof(decimal));
-
-            foreach (DataRow row in dt1.Rows)
-            {
-                row["amount"] = Convert.ToDecimal(row["f_amount"].ToString())/flat.Flat;
-
-                //if (i <= dt1.Rows.Count)
-                //{
-                //    TextBox txtbox = new TextBox();
-                //    TextBox txtbox1 = new TextBox();
-                //    TextBox txtbox3 = new TextBox();
-                //    txtbox.ClientIDMode = ClientIDMode.Static;
-                //    txtbox.ID = "txtcol" + i + "_name";
-                //    txtbox.Enabled = false;
-                //    txtbox.Text = row["ex_details"].ToString();
-                //    txtbox1.ClientIDMode = ClientIDMode.Static;
-                //    txtbox1.ID = "txtcol" + i + "_amount";
-                //    txtbox1.Enabled = false;
-                //    txtbox.ClientIDMode = ClientIDMode.Static;
-                //    txtbox3.Enabled = false;
-                //    txtbox3.Text = row["f_amount"].ToString();
-                //    txt_amount.Text = row["f_amount"].ToString();
-                //    if (flat.Flat == 0)
-                //    {
-                //        txtbox1.Text = (float.Parse(row["f_amount"].ToString())).ToString();
-                //        total = total + (float.Parse(row["f_amount"].ToString()));
-
-                //    }
-                //    else
-                //    {
-                //        txtbox1.Text = (float.Parse(row["f_amount"].ToString()) / flat.Flat).ToString();
-                //        total = total + float.Parse(row["f_amount"].ToString()) / flat.Flat;
-                //    }
-
-                //    pnlTextBoxes.Controls.Add(txtbox);
-                //    pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
-                //    pnlTextBoxes.Controls.Add(txtbox3);
-                //    pnlTextBoxes.Controls.Add(new LiteralControl("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "));
-                //    pnlTextBoxes.Controls.Add(txtbox1);
-                //    pnlTextBoxes.Controls.Add(new LiteralControl("<br> <br>")); i++;
-
-                //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup", txtbox.Text, true);
-                //}
-
-            }
-            dt1.AcceptChanges();
-            txt_amount.Text= dt1.Compute("SUM(f_amount)", string.Empty).ToString();
-            expenseGrid.DataSource = dt1;
-            expenseGrid.DataBind();
-            Maintenance1.RegularAmount= Convert.ToDecimal(dt1.Compute("SUM(amount)", "Type = 'Regular'"));
-            Maintenance1.Add_OnAmount= Convert.ToDecimal(dt1.Compute("SUM(amount)", "Type = 'Add-On'"));
-
-            //int flag = 1;
-            // if(dt1.Rows.Count==0)
-            //     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Expense are Not Approved by Members');", true);
         }
         }
 
