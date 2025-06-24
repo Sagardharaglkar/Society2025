@@ -36,7 +36,7 @@ namespace Society2024
         public void filldrop()
         {
             String sql_query = "Select *  from society_master";
-            BL_Login.fill_drop(drp_society, sql_query, "name", "society_id");
+            //BL_Login.fill_drop(drp_society, sql_query, "name", "society_id");
             String sql_query1 = "Select *  from state";
             BL_Login.fill_drop(drp_state, sql_query1, "state", "state_id");
             String sql_query2 = "Select *  from district";
@@ -55,10 +55,10 @@ namespace Society2024
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             //sb.Append(" Select * from flat where society_id='" + society_id.Value + "'");
             sb.Append("select * from admin_vw where (society_id = '" + society_id.Value + "')");
-            if (drp_society.SelectedValue != "select")
-            {
-                sb.Append(" and (name='" + drp_society.SelectedItem.Text + "')");
-            }
+            //if (drp_society.SelectedValue != "select")
+            //{
+            //    sb.Append(" and (name='" + drp_society.SelectedItem.Text + "')");
+            //}
             if (drp_state.SelectedValue != "select")
             {
                 sb.Append(" and (state='" + drp_state.SelectedItem.Text + "')");

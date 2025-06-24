@@ -73,10 +73,10 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("Select * from inventory_master  where active_status=0 and society_id='" + society_id.Value + "'");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
+            //if (txt_search.Text != "")
+            //{
+            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+            //}
             inventory.Sql_Operation = sb.ToString();
             var result = bL_Inventory.search_inventory(inventory);
             GridView1.DataSource = result;

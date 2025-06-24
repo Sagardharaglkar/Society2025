@@ -130,10 +130,10 @@ namespace Society
             sb.Append("SELECT        dbo.building_master.name as build_name, dbo.society_expense.invoice_no, dbo.society_expense.expense_id, dbo.society_expense.date, dbo.society_expense.ex_type, dbo.society_expense.ex_name,dbo.society_expense.ex_details, dbo.society_expense.amount, "
                        + " dbo.society_expense.f_amount, dbo.society_expense.society_id, CASE WHEN dbo.society_expense.status = 1 THEN 'Bill Generate' ELSE 'Bill Not Generate' END AS expense_status"
 + " FROM            dbo.society_expense INNER JOIN      dbo.building_master ON dbo.society_expense.build_id = dbo.building_master.build_id where society_expense.active_status=0 and society_expense.society_id='" + society_id.Value + "'");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
+            //if (txt_search.Text != "")
+            //{
+            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+            //}
             society.Sql_Operation = sb.ToString();
             var result = bL_Society.search_society_expense(society);
             GridView1.DataSource = result;

@@ -99,7 +99,7 @@
                         <asp:HiddenField ID="married_id" runat="server" />
                         <asp:HiddenField ID="doc_id_id" runat="server" />
 
-                        <div class="form-group">
+<%--                        <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -109,7 +109,7 @@
                                             <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
                                             <asp:ListItem Value="build_name">Building</asp:ListItem>
                                             <asp:ListItem Value="w_name">Wing</asp:ListItem>
-                                            <%-- <asp:ListItem Value="usage">Flat Type</asp:ListItem>--%>
+                                            <%-- <asp:ListItem Value="usage">Flat Type</asp:ListItem>
                                         </asp:DropDownList>&nbsp;&nbsp;
                        
                                
@@ -123,7 +123,36 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
+
+                          <div class="form-group">
+      <div class="row ">
+          <div class="col-12">
+              <div class="d-flex align-items-center">
+                  <div class="search-container">
+                      <asp:TextBox
+                          ID="txt_search"
+                          CssClass="aspNetTextBox"
+                          placeHolder="Search here"
+                          TextMode="Search"
+                          runat="server" />
+
+                      <button
+                          id="btn_search"
+                          type="submit"
+                          class="search-button"
+                          runat="server"
+                          onserverclick="btn_search_Click">
+                          <span class="material-symbols-outlined">search</span>
+                      </button>
+                  </div>
+                  &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+
+              </div>
+          </div>
+      </div>
+  </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">

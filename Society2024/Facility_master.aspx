@@ -81,30 +81,34 @@
 
                 <asp:HiddenField ID="slot_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                
-                        <div class="form-group">
-                            <div class="row ">
-                                <div class="col-12">
-                                    <div class="d-flex align-items-center">
+  <div class="form-group">
+      <div class="row ">
+          <div class="col-12">
+              <div class="d-flex align-items-center">
+                  <div class="search-container">
+                      <asp:TextBox
+                          ID="txt_search"
+                          CssClass="aspNetTextBox"
+                          placeHolder="Search here"
+                          TextMode="Search"
+                          runat="server" />
 
-                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                            <asp:ListItem Value="name">Facility Name</asp:ListItem>
-                                            <asp:ListItem Value="cost">Cost of Facility</asp:ListItem>
-                                        </asp:DropDownList>&nbsp;&nbsp;
-                      
-                            <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                                <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" Font-Bold="true" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                        
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" />
-                                        </asp:Panel>
-                                        &nbsp;&nbsp;
-                        
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
+                      <button
+                          id="btn_search"
+                          type="submit"
+                          class="search-button"
+                          runat="server"
+                          onserverclick="btn_search_Click">
+                          <span class="material-symbols-outlined">search</span>
+                      </button>
+                  </div>
+                  &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
                         <div class="form-group">

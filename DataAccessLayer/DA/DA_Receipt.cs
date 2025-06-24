@@ -217,7 +217,7 @@ namespace DataAccessLayer.DA
             status = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
             if (status == "Done")
             {
-                if (sdr.Read())
+                if (sdr.HasRows)
                 {
                     //if(Convert.ToInt32(sdr["balance"])>0)
                     Receipt.Balance = (Convert.ToInt32(sdr["balance"]) - Convert.ToInt32(sdr["advance"])).ToString();

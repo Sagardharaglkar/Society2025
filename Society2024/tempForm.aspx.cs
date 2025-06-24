@@ -15,16 +15,16 @@ namespace Society2024
         {
             string selectedGender = "";
 
-            if (RadioButton1.Checked)
-            {
-                selectedGender = "Male";
-            }
-            else if (RadioButton2.Checked)
-            {
-                selectedGender = "Female";
-            }
+            //if (RadioButton1.Checked)
+            //{
+            //    selectedGender = "Male";
+            //}
+            //else if (RadioButton2.Checked)
+            //{
+            //    selectedGender = "Female";
+            //}
 
-            lblMessage.Text = "Selected Gender: " + selectedGender;
+            //lblMessage.Text = "Selected Gender: " + selectedGender;
         }
 
 

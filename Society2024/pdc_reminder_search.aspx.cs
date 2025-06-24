@@ -90,14 +90,14 @@ namespace Society
             //String sql_query = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
             //BL_Pdc.fill_drop(ddl_build_wing, sql_query, "name", "wing_id");
 
-            String sql_query1 = "Select build_wing_id as wing_id,build_wing as name from customer_flat";
-            BL_Pdc.fill_drop(drp_build_wing, sql_query1, "name", "wing_id");
+            //String sql_query1 = "Select build_wing_id as wing_id,build_wing as name from customer_flat";
+            //BL_Pdc.fill_drop(drp_build_wing, sql_query1, "name", "wing_id");
 
             //string sql5 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
             //BL_Pdc.fill_drop(ddl_owner, sql5, "name", "owner_id");
 
-            string sql6 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
-            BL_Pdc.fill_drop(drop_owner, sql6, "name", "owner_id");
+            //string sql6 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
+            //BL_Pdc.fill_drop(drop_owner, sql6, "name", "owner_id");
         }
 
         public void pdc_reminder_Gridbind()
@@ -151,10 +151,10 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(" SELECT TOP (100) PERCENT dbo.global_society_view.w_name, dbo.global_society_view.name, dbo.pdc_reminder.pdc_rem_id,dbo.global_society_view.wing_id , dbo.pdc_reminder.owner_id, dbo.pdc_reminder.o_name,dbo.pdc_reminder.chqno, dbo.pdc_reminder.che_amount, dbo.pdc_reminder.che_date, dbo.pdc_reminder.che_dep, dbo.pdc_reminder.che_ret, dbo.pdc_reminder.che_can, dbo.pdc_reminder.society_id FROM  dbo.pdc_reminder INNER JOIN dbo.global_society_view ON dbo.pdc_reminder.wing_id = dbo.global_society_view.wing_id  WHERE(dbo.pdc_reminder.active_status=0 and dbo.pdc_reminder.society_id = '" + society_id.Value + "')");
-            if (drp_build_wing.SelectedValue != "" || drop_owner.SelectedValue != "")
-            {
-                sb.Append(" AND dbo.pdc_reminder.wing_id='" + drp_build_wing.SelectedValue + "' And dbo.pdc_reminder.owner_id='" + drop_owner.SelectedValue + "'");
-            }
+            //if (drp_build_wing.SelectedValue != "" || drop_owner.SelectedValue != "")
+            //{
+            //    sb.Append(" AND dbo.pdc_reminder.wing_id='" + drp_build_wing.SelectedValue + "' And dbo.pdc_reminder.owner_id='" + drop_owner.SelectedValue + "'");
+            //}
             Reminder.Sql_Operation = sb.ToString();
             var result = BL_Pdc.search_reminder(Reminder);
             GridView1.DataSource = result;
@@ -401,14 +401,14 @@ namespace Society
 
         protected void drp_build_wing_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (drp_build_wing.SelectedItem.Text.Trim() != "")
-            {
-                if (drp_build_wing.SelectedItem.Text != "select")
-                {
-                    string sql2 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "' and build_wing='" + drp_build_wing.SelectedItem.Text + "'";
-                    BL_Pdc.fill_drop(drop_owner, sql2, "name", "owner_id");
-                }
-            }
+            //if (drp_build_wing.SelectedItem.Text.Trim() != "")
+            //{
+            //    if (drp_build_wing.SelectedItem.Text != "select")
+            //    {
+            //        string sql2 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "' and build_wing='" + drp_build_wing.SelectedItem.Text + "'";
+            //        BL_Pdc.fill_drop(drop_owner, sql2, "name", "owner_id");
+            //    }
+            //}
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

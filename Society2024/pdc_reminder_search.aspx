@@ -99,23 +99,25 @@
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                TextMode="Search"
+                                                runat="server" />
 
-                                        <asp:Label ID="Label15" runat="server" Text="Building  Name"></asp:Label>&nbsp;&nbsp;
-                    
-                         <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                             <asp:DropDownList ID="drp_build_wing" runat="server" Height="32px" Width="150px" AutoPostBack="true" OnSelectedIndexChanged="drp_build_wing_SelectedIndexChanged"></asp:DropDownList>&nbsp;&nbsp; 
-                         <asp:CompareValidator ControlToValidate="drp_build_wing" ID="CompareValidator1" ValidationGroup="b1" CssClass="errormesg" ErrorMessage="Please select Building" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-
-                             <asp:Label ID="lbl_name" runat="server" Text=" Owner Name"></asp:Label>&nbsp;&nbsp;
-                    
-                        <asp:DropDownList ID="drop_owner" runat="server" Height="32px" Width="150px" AutoPostBack="true"></asp:DropDownList>
-                         </asp:Panel>
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
                                         &nbsp;&nbsp;
-                       <asp:CompareValidator ControlToValidate="drop_owner" ID="CompareValidator2" ValidationGroup="b1" CssClass="errormesg" ErrorMessage="Please select Owner" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-
-                                        <asp:Button ID="btn_search" runat="server" Text="Search" OnClick="btn_search_Click" class="btn btn-primary" UseSubmitBehavior="False" ValidationGroup="b1" />&nbsp;&nbsp;
-               
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
                                     </div>
                                 </div>

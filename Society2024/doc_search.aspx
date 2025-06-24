@@ -74,13 +74,34 @@
 
 
 
-                        <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="300px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                                   
-                                        <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                            &nbsp;&nbsp;
-                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
-                        </asp:Panel>
+                          <div class="form-group">
+      <div class="row ">
+          <div class="col-12">
+              <div class="d-flex align-items-center">
+                  <div class="search-container">
+                      <asp:TextBox
+                          ID="txt_search"
+                          CssClass="aspNetTextBox"
+                          placeHolder="Search here"
+                          TextMode="Search"
+                          runat="server" />
+
+                      <button
+                          id="btn_search"
+                          type="submit"
+                          class="search-button"
+                          runat="server"
+                          onserverclick="btn_search_Click">
+                          <span class="material-symbols-outlined">search</span>
+                      </button>
+                  </div>
+                  &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+
+              </div>
+          </div>
+      </div>
+  </div>
                         &nbsp;&nbsp;
 
 

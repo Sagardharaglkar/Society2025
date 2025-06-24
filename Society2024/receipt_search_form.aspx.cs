@@ -55,6 +55,31 @@ namespace Society
             }
 
         }
+        protected void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RadioButton1.Checked)
+            {
+                if (owner_name_id.Value != "" )
+                {
+                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+
+                    Receipt.Sql_Operation = "pending_balance";
+                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+                    shop_maint_id.Value = owner_name_id.Value;
+                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+
+                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
+
+
+                }
+            }
+            else if (RadioButton2.Checked)
+            {
+                txt_amount.Text = "Add on";
+            }
+        }
 
         protected void Allbound()
         {
@@ -100,23 +125,6 @@ namespace Society
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
 
-                if (owner_name_id.Value != "")
-                {
-                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
-                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
-
-                    Receipt.Sql_Operation = "pending_balance";
-                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
-                    shop_maint_id.Value = owner_name_id.Value;
-                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
-
-                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
-
-                }
-                else if (owner_name_id.Value != "")
-                {
-                    txt_amount.Text = "Add on";
-                }
             }
 
 
@@ -207,10 +215,10 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("Select * from receipt_search_vw where active_status=0 and society_id='" + society_id.Value + "'");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
+            //if (txt_search.Text != "")
+            //{
+            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+            //}
             
             var result = bL_Receipt.search_receipt(sb.ToString());
             GridView1.DataSource = result;
@@ -479,21 +487,21 @@ namespace Society
 
         protected void ddl_owner_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (owner_name_id.Value != "")
-            {
-                string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
-                bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
+            //if (owner_name_id.Value != "")
+            //{
+            //    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
+            //    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
 
-                Receipt.Sql_Operation = "pending_balance";
-                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
-                shop_maint_id.Value = owner_name_id.Value;
-                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
-
-               
-                txt_amount.Text = result.Balance ==null ?  "0": result.Balance.ToString() ;
+            //    Receipt.Sql_Operation = "pending_balance";
+            //    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+            //    shop_maint_id.Value = owner_name_id.Value;
+            //    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
 
                
-            }
+            //    txt_amount.Text = result.Balance ==null ?  "0": result.Balance.ToString() ;
+
+               
+            //}
         }
 
         protected void ddl_build_SelectedIndexChanged(object sender, EventArgs e)

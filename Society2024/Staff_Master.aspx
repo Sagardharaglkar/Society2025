@@ -81,31 +81,34 @@
                         <asp:HiddenField ID="staff_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="build_id" runat="server" />
                         <asp:HiddenField ID="role_id" runat="server" />
+                          <div class="form-group">
+      <div class="row ">
+          <div class="col-12">
+              <div class="d-flex align-items-center">
+                  <div class="search-container">
+                      <asp:TextBox
+                          ID="txt_search"
+                          CssClass="aspNetTextBox"
+                          placeHolder="Search here"
+                          TextMode="Search"
+                          runat="server" />
 
-                        <div class="form-group">
-                            <div class="col-12">
-                                <div class="d-flex align-items-center">
+                      <button
+                          id="btn_search"
+                          type="submit"
+                          class="search-button"
+                          runat="server"
+                          onserverclick="btn_search_Click">
+                          <span class="material-symbols-outlined">search</span>
+                      </button>
+                  </div>
+                  &nbsp;&nbsp;
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
-                                    <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                        <%--<asp:ListItem Value="build_name">Building Name</asp:ListItem>--%>
-                                        <asp:ListItem Value="name">Name</asp:ListItem>
-                                        <asp:ListItem Value="contact_no">Contact No</asp:ListItem>
-                                        <asp:ListItem Value="Role">Role</asp:ListItem>
-
-                                    </asp:DropDownList>&nbsp;&nbsp;
-                       
-                            <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                                <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                       
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                    </asp:Panel>
-                                    &nbsp;&nbsp;
-                      
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
-
-                                </div>
-                            </div>
-                        </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
                         <div class="form-group">
                             <div class="row ">

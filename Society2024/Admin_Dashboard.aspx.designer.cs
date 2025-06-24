@@ -33,24 +33,6 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
-        /// society_name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label society_name;
-
-        /// <summary>
-        /// drp_society control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drp_society;
-
-        /// <summary>
         /// txt_search control.
         /// </summary>
         /// <remarks>
@@ -66,16 +48,7 @@ namespace Society2024
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_search;
-
-        /// <summary>
-        /// btn_filter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_filter;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
         /// filterSection control.

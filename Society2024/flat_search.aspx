@@ -2,7 +2,9 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-        <style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+
+    <style>
         .not-required.valid-field {
             border-color: #1cc88a !important;
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -18,6 +20,8 @@
             background-position: right calc(.375em + .1875rem) center;
             background-size: calc(.75em + .375rem) calc(.75em + .375rem);
         }
+
+   
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -95,24 +99,40 @@
                         <asp:HiddenField ID="usage_id" runat="server" />
                         <asp:HiddenField ID="Bedroom_id" runat="server" />
 
+                      <%--  <asp:DropDownList Visible="false" ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged">
+                            <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
+                            <asp:ListItem Value="bed">Bedrooms</asp:ListItem>
+                        </asp:DropDownList>&nbsp;&nbsp;
+                      
+                     <asp:Panel Visible="false" ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
+                         <asp:TextBox ID="txt_search1" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" runat="server" placeholder="Search here"></asp:TextBox>&nbsp;&nbsp;
+                        
+                         <asp:Button ID="btn_search1" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
+                     </asp:Panel>--%>
+
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server" />
 
-                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged">
-                                            <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
-                                            <asp:ListItem Value="bed">Bedrooms</asp:ListItem>
-                                        </asp:DropDownList>&nbsp;&nbsp;
-                      
-                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                                 <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" runat="server" placeholder="Search here"></asp:TextBox>&nbsp;&nbsp;
-                        
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                             </asp:Panel>
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
                                         &nbsp;&nbsp;
                        
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
                                     </div>
                                 </div>
@@ -208,8 +228,8 @@
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select Building/Wing" autocomplete="off" Style="width:150px;" required="required"/>
-                                                        <div id="RepeaterContainer1" class="suggestion-list" style="width:150px;">
+                                                            placeholder="Select Building/Wing" autocomplete="off" Style="width: 150px;" required="required" />
+                                                        <div id="RepeaterContainer1" class="suggestion-list" style="width: 150px;">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -237,10 +257,10 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                        <div class="dropdown-container">
-                                                        <asp:TextBox ID="TextBox2" runat="server" Style="width:150px" CssClass="input-box form-control"
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="TextBox2" runat="server" Style="width: 150px" CssClass="input-box form-control"
                                                             placeholder="Select " required="required" autocomplete="off" />
-                                                        <div id="RepeaterContainer2" class="suggestion-list" style="width:150px;">
+                                                        <div id="RepeaterContainer2" class="suggestion-list" style="width: 150px;">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
@@ -259,7 +279,7 @@
                                                             </asp:Repeater>
                                                         </div>
                                                     </div>
-                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -428,10 +448,10 @@
 
     </script>
 
-   <script type="text/javascript">
+    <script type="text/javascript">
 
-       function initDropdownEvents() {
-           const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+        function initDropdownEvents() {
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
@@ -442,98 +462,98 @@
 
 
            const textBox4 = document.getElementById("<%= TextBox4.ClientID %>");
-           const repeaterContainer4 = document.getElementById("RepeaterContainer4");
+            const repeaterContainer4 = document.getElementById("RepeaterContainer4");
 
-           textBox1.addEventListener("focus", function () {
-               repeaterContainer1.style.display = "block";
-               repeaterContainer2.style.display = "none";
-           });
+            textBox1.addEventListener("focus", function () {
+                repeaterContainer1.style.display = "block";
+                repeaterContainer2.style.display = "none";
+            });
 
-           textBox1.addEventListener("input", function () {
-               const input = textBox1.value.toLowerCase();
-               filterSuggestions("category-link", input);
-           });
+            textBox1.addEventListener("input", function () {
+                const input = textBox1.value.toLowerCase();
+                filterSuggestions("category-link", input);
+            });
 
-           textBox2.addEventListener("focus", function () {
-               repeaterContainer2.style.display = "block";
-           });
+            textBox2.addEventListener("focus", function () {
+                repeaterContainer2.style.display = "block";
+            });
 
-           textBox2.addEventListener("input", function () {
-               const input = textBox2.value.toLowerCase();
-               filterSuggestions("link2", input);
-           });
+            textBox2.addEventListener("input", function () {
+                const input = textBox2.value.toLowerCase();
+                filterSuggestions("link2", input);
+            });
 
-           textBox3.addEventListener("focus", function () {
-               repeaterContainer3.style.display = "block";
-           });
+            textBox3.addEventListener("focus", function () {
+                repeaterContainer3.style.display = "block";
+            });
 
-           textBox3.addEventListener("input", function () {
-               const input = textBox3.value.toLowerCase();
-               filterSuggestions("link3", input);
-           });
+            textBox3.addEventListener("input", function () {
+                const input = textBox3.value.toLowerCase();
+                filterSuggestions("link3", input);
+            });
 
-           textBox4.addEventListener("focus", function () {
-               repeaterContainer4.style.display = "block";
-           });
+            textBox4.addEventListener("focus", function () {
+                repeaterContainer4.style.display = "block";
+            });
 
-           textBox4.addEventListener("input", function () {
-               const input = textBox4.value.toLowerCase();
-               filterSuggestions("link4", input);
-           });
-       }           
+            textBox4.addEventListener("input", function () {
+                const input = textBox4.value.toLowerCase();
+                filterSuggestions("link4", input);
+            });
+        }
 
 
-       function filterSuggestions(className, value) {
-           const items = document.querySelectorAll("." + className);
-           let matchFound = false;
+        function filterSuggestions(className, value) {
+            const items = document.querySelectorAll("." + className);
+            let matchFound = false;
 
-           items.forEach(item => {
-               if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-                   item.style.display = "block";
-                   matchFound = true;
-               } else {
-                   item.style.display = "none";
-               }
-           });
+            items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    item.style.display = "block";
+                    matchFound = true;
+                } else {
+                    item.style.display = "none";
+                }
+            });
 
-           let noMatchMessage = document.getElementById("no-match-message");
+            let noMatchMessage = document.getElementById("no-match-message");
 
-           if (!matchFound) {
-               if (!noMatchMessage) {
-                   noMatchMessage = document.createElement("div");
-                   noMatchMessage.id = "no-match-message";
+            if (!matchFound) {
+                if (!noMatchMessage) {
+                    noMatchMessage = document.createElement("div");
+                    noMatchMessage.id = "no-match-message";
 
-                   noMatchMessage.innerText = "No matching suggestions.";
-                   items[0]?.parentNode?.appendChild(noMatchMessage);
-               }
-               noMatchMessage.style.display = "block";
-           } else {
-               if (noMatchMessage) {
-                   noMatchMessage.style.display = "none";
-               }
-           }
-       }
+                    noMatchMessage.innerText = "No matching suggestions.";
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+                }
+                noMatchMessage.style.display = "block";
+            } else {
+                if (noMatchMessage) {
+                    noMatchMessage.style.display = "none";
+                }
+            }
+        }
 
-       function setTextBox1(value) {
-           document.getElementById("<%= TextBox1.ClientID %>").value = value;
-           document.getElementById("RepeaterContainer1").style.display = "none";
-       }
+        function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+        }
 
-       function setTextBox2(value) {
-           document.getElementById("<%= TextBox2.ClientID %>").value = value;
-           document.getElementById("RepeaterContainer2").style.display = "none";
-       }
+        function setTextBox2(value) {
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer2").style.display = "none";
+        }
 
-       function setTextBox3(value) {
-           document.getElementById("<%= TextBox3.ClientID %>").value = value;
-           document.getElementById("RepeaterContainer3").style.display = "none";
-       }
+        function setTextBox3(value) {
+            document.getElementById("<%= TextBox3.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer3").style.display = "none";
+        }
 
-       function setTextBox4(value) {
-           document.getElementById("<%= TextBox4.ClientID %>").value = value;
-           document.getElementById("RepeaterContainer4").style.display = "none";
-       }
+        function setTextBox4(value) {
+            document.getElementById("<%= TextBox4.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer4").style.display = "none";
+        }
 
-       Sys.Application.add_load(initDropdownEvents);
-   </script>
+        Sys.Application.add_load(initDropdownEvents);
+    </script>
 </asp:Content>

@@ -175,10 +175,10 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(" Select * from owner_search_vw  where type='Rent'and society_id='" + society_id.Value+ "'");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
+            //if (txt_search.Text != "")
+            //{
+            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+            //}
             owner.Sql_Operation = sb.ToString();
             var result = bL_Owner.search_rental(owner);
             GridView1.DataSource = result;

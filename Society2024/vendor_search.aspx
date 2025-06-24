@@ -84,24 +84,25 @@
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                TextMode="Search"
+                                                runat="server" />
 
-                                        <asp:DropDownList ID="search_field" runat="server" AutoPostBack="true" Width="200px" Height="32px">
-                                            <asp:ListItem Value="v_name">Vendor Name</asp:ListItem>
-                                            <asp:ListItem Value="org_name">Office Name</asp:ListItem>
-                                            <asp:ListItem Value="mobile_no">Mobile No</asp:ListItem>
-                                            <asp:ListItem Value="address1">Address</asp:ListItem>
-                                        </asp:DropDownList>&nbsp;&nbsp
-                   
-
-                      
-                             <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                                 <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp
-                                         
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                             </asp:Panel>
-                                        &nbsp;&nbsp
-                   
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">New Entry</button>
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
                                     </div>
                                 </div>

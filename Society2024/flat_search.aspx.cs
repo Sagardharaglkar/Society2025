@@ -146,7 +146,7 @@ namespace Society
             sb.Append(" Select * from flat where active_status=0 and society_id='" + society_id.Value + "'");
             if (txt_search.Text != "")
             {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+                //sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
             }
 
             flat.Sql_Operation = sb.ToString();
