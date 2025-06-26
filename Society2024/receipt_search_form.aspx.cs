@@ -27,7 +27,7 @@ namespace Society
         receipt Receipt = new receipt();
         BL_Receipt bL_Receipt = new BL_Receipt();
 
-       
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,32 +55,7 @@ namespace Society
             }
 
         }
-        protected void RadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (RadioButton1.Checked)
-            {
-                if (owner_name_id.Value != "" )
-                {
-                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
-                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
-
-                    Receipt.Sql_Operation = "pending_balance";
-                    Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
-                    shop_maint_id.Value = owner_name_id.Value;
-                    var result = bL_Receipt.Owner_Pending_Balance(Receipt);
-
-
-                    txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
-
-
-                }
-            }
-            else if (RadioButton2.Checked)
-            {
-                txt_amount.Text = "Add on";
-            }
-        }
-
+       
         protected void Allbound()
         {
             String str1 = "SELECT * FROM dbo.building_master where society_id='" + society_id.Value + "'";
@@ -124,25 +99,26 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 owner_name_id.Value = e.CommandArgument.ToString();
+                CheckBox1.Checked = true;
+                CheckBox2.Checked = false;
+                Receipt.PayFor = 1;
+
 
                 if (owner_name_id.Value != "")
                 {
-                    string sql1 = "Select  chqno from pdc_reminder where che_dep=1 and owner_id='" + owner_name_id.Value + "' ";
-                    bL_Receipt.fill_drop(ddl_chq, sql1, "chqno", "chqno");
 
                     Receipt.Sql_Operation = "pending_balance";
                     Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+
                     shop_maint_id.Value = owner_name_id.Value;
-                    Receipt.RegularChecked = RadioButton1.Checked ? true : false;
                     var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
 
                     txt_amount.Text = result.Balance == null ? "0" : result.Balance.ToString();
 
+
                 }
-                else if (owner_name_id.Value != "")
-                {
-                    txt_amount.Text = "Add on";
-                }
+
             }
 
 
@@ -243,6 +219,59 @@ namespace Society
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
+
+        protected int check_checked() {
+
+            if (CheckBox1.Checked && CheckBox2.Checked)
+            {
+                return 3;
+
+            }
+            else if (CheckBox1.Checked)
+            {
+                return 1;
+            }
+            else if (CheckBox2.Checked)
+            {
+                return 2;
+            }
+
+            return 0;
+        }
+        protected void CheckBoxes_CheckedChanged(object sender, EventArgs e)
+        {
+           
+
+            if (CheckBox1.Checked && CheckBox2.Checked)
+            {
+                Receipt.PayFor = 3;
+
+            }
+            else if (CheckBox1.Checked)
+            {
+                Receipt.PayFor = 1;
+            }
+            else if (CheckBox2.Checked)
+            {
+                Receipt.PayFor = 2;
+            }
+
+            if (owner_name_id.Value != "")
+            {
+                
+                Receipt.Sql_Operation = "pending_balance";
+                Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
+ 
+                shop_maint_id.Value = owner_name_id.Value;
+                var result = bL_Receipt.Owner_Pending_Balance(Receipt);
+
+                txt_amount.Text = result.Balance == null ? "0" : (Convert.ToInt32(result.Balance) > 0 ? result.Balance.ToString(): "0");
+
+
+            }
+
+        }
+
         public void runproc_save(string operation)
         {
             if (receipt_id.Value != "")
@@ -254,8 +283,7 @@ namespace Society
             Receipt.Date = Convert.ToDateTime(txt_date.Text);
             Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             Receipt.Recivable_Amt = float.Parse(txt_amount.Text);
-            Receipt.RegularChecked = RadioButton1.Checked ? true : false;
-            Receipt.AddonChecked = RadioButton2.Checked ? true : false;
+            Receipt.PayFor = check_checked();
             Receipt.build_id = Convert.ToInt32(building_id.Value);
             Receipt.Owner_Name = TextBox3.Text.ToString();
             Receipt.Wing_Id = Convert.ToInt32(wing_name_id.Value);
@@ -362,6 +390,7 @@ namespace Society
             Receipt.Sql_Operation = "pending_dues";
             Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             Receipt.Balance = txt_pdc_balance.Text;
+            Receipt.PayFor = check_checked();
             Receipt.Received_Amount = float.Parse(txt_received_amt.Text);
             bL_Receipt.Pending_Receipt(Receipt);
 
@@ -408,7 +437,7 @@ namespace Society
             }
             
             runproc_save("Update");
-            pending();
+            //pending();
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             
         }
@@ -514,7 +543,7 @@ namespace Society
                 Receipt.Sql_Operation = "pending_balance";
                 Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
                 shop_maint_id.Value = owner_name_id.Value;
-                Receipt.RegularChecked = RadioButton1.Checked ? true: false;
+            //Receipt.PayFor = payFor;
                 var result = bL_Receipt.Owner_Pending_Balance(Receipt);
 
                
@@ -673,7 +702,7 @@ namespace Society
                 Receipt.Sql_Operation = "pending_balance";
                 Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
                 shop_maint_id.Value = owner_name_id.Value;
-                Receipt.RegularChecked = RadioButton1.Checked ? true : false;
+                //Receipt.PayFor = payFor;
                 var result = bL_Receipt.Owner_Pending_Balance(Receipt);
 
 
@@ -693,7 +722,7 @@ namespace Society
                 Receipt.Sql_Operation = "pending_balance";
                 Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
                 shop_maint_id.Value = owner_name_id.Value;
-                Receipt.RegularChecked = RadioButton1.Checked ? true : false;
+                //Receipt.PayFor = payFor;
                 var result = bL_Receipt.Owner_Pending_Balance(Receipt);
 
 

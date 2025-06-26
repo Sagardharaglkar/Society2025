@@ -195,12 +195,6 @@ namespace Society
         }
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            //sb.Append(" Select *  from building_master where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
 
             building.Sql_Operation = "search";
             building.Name = txt_search.Text;

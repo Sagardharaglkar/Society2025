@@ -190,7 +190,10 @@
                                                 CssClass="aspNetTextBox"
                                                 placeHolder="Search here"
                                                 TextMode="Search"
-                                                runat="server" />
+                                                runat="server"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()"/>
 
                                             <button
                                                 id="btn_search"
@@ -202,7 +205,7 @@
                                             </button>
                                         </div>
                                         &nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
                                     </div>
                                 </div>
@@ -544,31 +547,30 @@
         </div>
     </div>
 
-    <%-- <br />  <br />  <br /> <br />  <br />  <br />  <br />  <br />  <br />--%>
 
     <script>
         let formSubmitted = false;
 
         function validateIFSC() {
             const input = document.getElementById('<%= txt_ifsc.ClientID %>');
-    const pattern = /^[A-Z]{4}0[A-Z0-9]{6}$/;
-    formSubmitted = true;
+            const pattern = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+            formSubmitted = true;
 
-    input.classList.remove('valid-field', 'invalid-field',);
+            input.classList.remove('valid-field', 'invalid-field',);
 
-    if (pattern.test(input.value)) {
-        input.classList.add('valid-field');
-    } else {
-        input.classList.add('invalid-field');
-    }
-}
+            if (pattern.test(input.value)) {
+                input.classList.add('valid-field');
+            } else {
+                input.classList.add('invalid-field');
+            }
+        }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById('<%= txt_ifsc.ClientID %>');
-    input.addEventListener('input', function () {
-        if (formSubmitted) validateIFSC();
-    });
-});
+        document.addEventListener("DOMContentLoaded", function () {
+            const input = document.getElementById('<%= txt_ifsc.ClientID %>');
+            input.addEventListener('input', function () {
+                if (formSubmitted) validateIFSC();
+            });
+        });
 
 
         function validateEmail1(input) {

@@ -232,6 +232,7 @@
     <Content Include="errorPage.aspx" />
     <Content Include="errorPage500.aspx" />
     <Content Include="ForgetPassword.aspx" />
+    <Content Include="img\errorImg404.png" />
     <Content Include="support_ticket.aspx" />
     <Content Include="About.aspx" />
     <Content Include="account_setting.aspx" />

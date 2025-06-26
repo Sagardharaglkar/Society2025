@@ -1,6 +1,31 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Staff_Master.aspx.cs" Inherits="Society2024.Staff_Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+                .resized-model{
+        width: 529px;
+    height: auto;
+    right: 82px;
+}
+
+.resized-input{
+    width:200px;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 292px;
+    margin-top: 168px;
+    right: 1px;
+   }
+
+   .resized-input{
+    width:100%;
+}
+}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -204,7 +229,7 @@
                                                         <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_name" CssClass="form-control resized-input" runat="server" Height="32px"  placeholder="Enter Name" required autofocus></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Name
                                                         </div>
@@ -224,7 +249,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="dropdown-container">
-                                                            <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
+                                                            <asp:TextBox ID="categoryBox"  runat="server" CssClass="input-box resized-input form-control"
                                                                 placeholder="Select" autocomplete="off" required="required" />
                                                             <div id="categoryRepeaterContainer" class="suggestion-list">
                                                                 <asp:Repeater ID="categoryRepeater" runat="server" OnItemDataBound="categoryRepeater_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
@@ -259,7 +284,7 @@
                                                         <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_address" CssClass="form-control" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Address" Width="200px" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_address" CssClass="form-control resized-input" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Address"  required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Adress
                                                         </div>
@@ -277,7 +302,7 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_contact" CssClass="form-control" runat="server" MaxLength="10" Height="32px" Width="200px" TextMode="Phone" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_contact" CssClass="form-control resized-input" runat="server" MaxLength="10" Height="32px" TextMode="Phone" placeholder="Enter Contact No" required autofocus AutoPostBack="true"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Contact No
                                                         </div>
@@ -296,7 +321,7 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" TextMode="Email" Height="32px" Width="200px" placeholder="Enter Email" required autofocus></asp:TextBox>
+                                                        <asp:TextBox ID="txt_email" CssClass="form-control resized-input" runat="server" TextMode="Email" Height="32px" placeholder="Enter Email" required autofocus></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Valid Email
                                                         </div>
@@ -312,7 +337,7 @@
                                                         <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_doj" CssClass="form-control" runat="server" Height="32px" placeholder="Enter Address" Width="200px" TextMode="Date" required></asp:TextBox>
+                                                        <asp:TextBox ID="txt_doj" CssClass="form-control resized-input" runat="server" Height="32px" placeholder="Enter Address" TextMode="Date" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Date
                                                         </div>

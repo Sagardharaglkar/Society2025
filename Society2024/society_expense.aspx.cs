@@ -171,7 +171,7 @@ namespace Society
             if (txt_tds.Text != "")
                 society.Tds = float.Parse(txt_tds.Text);
             society.F_Amount = float.Parse(txt_famount.Text);
-            society.Regular = Convert.ToInt32(regular_chk.Checked == true ? 1 : 0).ToString();
+            society.Regular = Convert.ToInt32(regular_chk.Checked == true ? 0 : 1).ToString();
             var result = bL_Society.UpdateExpense(society);
             expense_id.Value = result.expense_id.ToString();
 

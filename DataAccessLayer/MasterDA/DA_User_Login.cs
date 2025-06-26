@@ -117,6 +117,7 @@ namespace DataAccessLayer.MasterDA
 
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("query", details.Sql_Operation));
+            data_item.Add(st.create_array("search", details.Name));
 
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
@@ -327,6 +328,7 @@ namespace DataAccessLayer.MasterDA
             DataTable ChartData = new DataTable();
             data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("society_id", details.Society_Id));
+            data_item.Add(st.create_array("expense", details.ExpenseType));
 
             status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
             if (status1 == "Done")

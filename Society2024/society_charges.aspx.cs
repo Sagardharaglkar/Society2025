@@ -87,14 +87,15 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("SELECT   name, amount, charge_id  FROM   society_charges inner join society_master on society_charges.society_id = society_master.society_id and society_master.active_status=0");
+            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //sb.Append("SELECT   name, amount, charge_id  FROM   society_charges inner join society_master on society_charges.society_id = society_master.society_id and society_master.active_status=0");
             //if (txt_search.Text != "")
             //{
             //    sb.Append(" where " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
             //}
 
-            society.Sql_Operation = sb.ToString();
+            society.Sql_Operation = "search";
+            society.Name = txt_search.Text;
             var result = bL_society.search_society_charges(society);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

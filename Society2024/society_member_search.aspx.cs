@@ -105,13 +105,8 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("SELECT dbo.UserLogin.user_id, dbo.UserLogin.user_type_id, dbo.UserType.UserTypeName, dbo.UserLogin.name, dbo.UserLogin.username, dbo.UserLogin.password, dbo.UserLogin.address1, dbo.UserLogin.contact_no, dbo.UserLogin.active_status, dbo.UserLogin.address2, dbo.UserLogin.email, dbo.UserLogin.last_dt, dbo.UserLogin.join_dt, dbo.UserLogin.society_id, dbo.UserLogin.token, dbo.society_master.name AS Society_name FROM dbo.UserLogin INNER JOIN dbo.UserType ON dbo.UserLogin.user_type_id = dbo.UserType.UserTypeId INNER JOIN dbo.society_master ON dbo.UserLogin.society_id = dbo.society_master.society_id where userlogin.active_status =0 and userlogin.society_id='" + society_id.Value+ "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
-            member.Sql_Operation = sb.ToString();
+            member.Name = txt_search.Text;
+            member.Sql_Operation = "search";
             var result = bL_Society.search_member(member);
             GridView1.DataSource = result; 
             ViewState["dirState"] = result;

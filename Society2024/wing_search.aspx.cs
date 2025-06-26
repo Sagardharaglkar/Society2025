@@ -86,15 +86,10 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            //System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            //sb.Append("Select * from global_society_view where active_status=0 and society_id='" + society_id.Value + "' ");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
+            
 
             wing.Sql_Operation = "search";
-            wing.B_Name = "txt_search.Text";
+            wing.B_Name = txt_search.Text;
             var result = bL_Wing.search_wing(wing);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

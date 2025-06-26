@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -44,6 +45,7 @@ namespace DataAccessLayer.DA
             string status1;
             data_item.Add(st.create_array("operation", Receipt.Sql_Operation));
             data_item.Add(st.create_array("receipt_id", Receipt.receipt_id));
+            
             if (Receipt.Sql_Operation == "Update")
             {
                 data_item.Add(st.create_array("society_id", Receipt.Society_Id));
@@ -53,18 +55,26 @@ namespace DataAccessLayer.DA
                 data_item.Add(st.create_array("owner_id", Receipt.Owner_Id));
                 data_item.Add(st.create_array("wing_id", Receipt.Wing_Id));
                 data_item.Add(st.create_array("recivable_amt", Receipt.Recivable_Amt));
-                data_item.Add(st.create_array("regularPayment", Receipt.RegularChecked));
-                data_item.Add(st.create_array("AddonPayment", Receipt.AddonChecked));
+                data_item.Add(st.create_array("pay_for", Receipt.PayFor));
                 data_item.Add(st.create_array("build_id", Receipt.build_id));
                 data_item.Add(st.create_array("owner_name", Receipt.Owner_Name));
-                data_item.Add(st.create_array("bill_no", Receipt.Bill_No));
+                //data_item.Add(st.create_array("bill_no", Receipt.Bill_No));
                 if (Receipt.Pay_Mode == 2 || Receipt.Pay_Mode == 3)
                 {
                     data_item.Add(st.create_array("chqno", Receipt.Chqno));
                     data_item.Add(st.create_array("chqdate", Receipt.Chqdate));
                 }
                 data_item.Add(st.create_array("remarks", Receipt.Remarks));
-                data_item.Add(st.create_array("received_amt", Receipt.Received_Amount));
+                if(Receipt.PayFor == 1 || Receipt.PayFor == 3)
+                {
+                    data_item.Add(st.create_array("received_amt", Receipt.Received_Amount));
+
+                }
+                else
+                {
+                    data_item.Add(st.create_array("addon_amt", Receipt.Received_Amount));
+
+                }
               
 
             }
@@ -219,12 +229,16 @@ namespace DataAccessLayer.DA
             status = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
             if (status == "Done")
             {
-                if (sdr.HasRows)
+                if (sdr.Read())
                 {
-                    if(Receipt.RegularChecked)
-                    Receipt.Balance = (Convert.ToInt32(sdr["balanceRegular"]) - Convert.ToInt32(sdr["advance_regular"])).ToString();
-                    else
-                        Receipt.Balance = (Convert.ToInt32(sdr["balanceAddon"]) - Convert.ToInt32(sdr["advanceAddon"])).ToString();
+                    if (Receipt.PayFor == 1)
+                        Receipt.Balance = (Convert.ToDecimal(sdr["balanceRegular"]) - Convert.ToDecimal(sdr["advance_regular"])).ToString();
+                    else if (Receipt.PayFor == 2)
+                        Receipt.Balance = (Convert.ToDecimal(sdr["balanceAddon"]) - Convert.ToDecimal(sdr["advanceAddon"])).ToString();
+                    else if (Receipt.PayFor == 3)
+                        Receipt.Balance = ((Convert.ToDecimal(sdr["balanceRegular"]) + Convert.ToDecimal(sdr["balanceAddon"])) - (Convert.ToDecimal(sdr["advance_regular"]) + Convert.ToDecimal(sdr["advanceAddon"]))).ToString();
+
+
                 }
             }
 
@@ -239,6 +253,7 @@ namespace DataAccessLayer.DA
             data_item.Add(st.create_array("operation", Receipt.Sql_Operation));
             data_item.Add(st.create_array("owner_id", Receipt.Owner_Id));
             data_item.Add(st.create_array("balance", Receipt.Balance));
+            data_item.Add(st.create_array("pay_for", Receipt.PayFor));
             data_item.Add(st.create_array("received_amt", Receipt.Received_Amount));
             string status = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
             return Receipt;

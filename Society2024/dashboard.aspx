@@ -262,13 +262,14 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Expence Tracker</h6>
                     <div class="dropdown no-arrow">
-                       <asp:UpdatePanel runat="server" UpdateMode="Conditional"> <ContentTemplate>
+                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
                                 <div class=" d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
-                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular"
-                                        GroupName="Gender" AutoPostBack="true" />
 
-                                    <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
-                                        GroupName="Gender" AutoPostBack="true" />
+                                    <asp:CheckBox Checked="true" ID="CheckBox1" runat="server" Text="Regular" AutoPostBack="true" OnCheckedChanged="CheckBoxes_CheckedChanged" OnClientClick="resizeChart()" />
+
+                                    <asp:CheckBox ID="CheckBox2" runat="server" Text="Add on" AutoPostBack="true" OnCheckedChanged="CheckBoxes_CheckedChanged" onclick="resizeChart();" />
+
                                 </div>
                            </ContentTemplate></asp:UpdatePanel>
                         
@@ -289,6 +290,8 @@
 
                 <%--<asp:Button ID="btnChartAsyncLoad" runat="server" Style="display:none;" OnClick="btnChartAsyncLoad_Click" />--%>
 
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
 
                 <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" Width="600px" ValidateRequestMode="Inherit">
 
@@ -329,7 +332,13 @@
                         </asp:Legend>
                     </Legends>
                 </asp:Chart>
-
+                        
+                    </ContentTemplate>
+                    <Triggers>
+    <asp:AsyncPostBackTrigger ControlID="CheckBox1" EventName="CheckedChanged" />
+    <asp:AsyncPostBackTrigger ControlID="CheckBox2" EventName="CheckedChanged" />
+</Triggers>
+                </asp:UpdatePanel>
             </div>
 
             <div class="layout-box layout-big layout-blue card">
@@ -644,6 +653,7 @@
         window.addEventListener('resize', resizeChart);
 
         function resizeChart() {
+            console.log("resizeing...")
             var container = document.getElementById('chartContainer');
             var chart = document.getElementById('<%= Chart2.ClientID %>');
 

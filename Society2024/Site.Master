@@ -19,6 +19,14 @@
     </asp:PlaceHolder>
 
     <style>
+                .sidebar {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Optional: if your body or content shifts on toggle */
+#content-wrapper {
+    transition: margin 0.3s ease-in-out;
+}
         .search-container {
         position: relative;
         width: 300px;
@@ -344,10 +352,10 @@
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesuggestion"
                                 aria-expanded="true" aria-controls="collapsesuggestion">
                                 <i class="fas fa-fw fa-folder"></i>
-                                <span>Requests/Suggestion</span></a>
+                                <span>Requests/ Suggestion</span></a>
                             <div id="collapsesuggestion" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
-                                    <h6 class="collapse-header">Request/Suggestions:</h6>
+                                    <h6 class="collapse-header">Request/ Suggestions:</h6>
                                     <a class="collapse-item" href="suggestion_request.aspx">Suggestion</a>
 
 
@@ -629,8 +637,17 @@
 
          <%-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>--%>
 
-
+    
     <script>
+        //function removeFocusAfterTyping() {
+        //    clearTimeout(window.typingTimer);
+        //    window.typingTimer = setTimeout(function () {
+        //        const input = document.querySelector('input[type="search"]');
+        //        if (input) input.blur();
+        //    }, 1000);
+        //}
+
+
     document.addEventListener("DOMContentLoaded", function () {
         const toggleButton = document.getElementById("sidebarTogglee");
         const sidebar = document.querySelector(".sidebar"); // Adjust selector as needed
@@ -759,395 +776,6 @@
             });
         }
 
-
-        //(function () {
-        //    'use strict';
-
-        //    const forms = document.querySelectorAll('.needs-validation');
-
-        //    Array.prototype.slice.call(forms).forEach(function (form) {
-        //        function validateField(input) {
-        //            const tag = input.tagName.toLowerCase();
-        //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
-
-        //            if ((validTypes.includes(input.type) || tag === 'textarea') && input.required) {
-        //                const trimmed = input.value.trim();
-        //                if (trimmed === '') {
-        //                    input.setCustomValidity('Whitespace is not allowed');
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            } else {
-        //                input.setCustomValidity('');
-        //            }
-
-        //            if (!input.checkValidity()) {
-        //                input.classList.remove('is-valid');
-        //                input.classList.add('is-invalid');
-        //            } else {
-        //                input.classList.remove('is-invalid');
-        //                input.classList.add('is-valid');
-        //            }
-        //        }
-
-        //        form.addEventListener('submit', function (event) {
-        //            let hasCustomError = false;
-
-        //            form.querySelectorAll('input, textarea').forEach(function (input) {
-        //                validateField(input);
-        //                if (!input.checkValidity()) {
-        //                    hasCustomError = true;
-        //                }
-        //            });
-
-        //            if (hasCustomError) {
-        //                event.preventDefault();
-        //                event.stopPropagation();
-        //            }
-
-        //            form.classList.add('was-validated');
-        //        }, false);
-
-        //        // Live validation for all inputs (without waiting for submit)
-        //        form.querySelectorAll('input, textarea').forEach(function (input) {
-        //            input.addEventListener('input', function () {
-        //                validateField(input);
-        //            });
-
-        //            // Optional: validate on blur too
-        //            input.addEventListener('blur', function () {
-        //                validateField(input);
-        //            });
-        //        });
-        //    });
-        //})();
-
-        //(function () {
-        //    'use strict';
-
-        //    const forms = document.querySelectorAll('.needs-validation');
-
-        //    Array.prototype.slice.call(forms).forEach(function (form) {
-        //        let submittedOnce = false;
-
-        //        function validateField(input) {
-        //            const tag = input.tagName.toLowerCase();
-        //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
-
-        //            if ((validTypes.includes(input.type) || tag === 'textarea')) {
-        //                const trimmed = input.value.trim();
-
-        //                if (input.required && trimmed === '') {
-        //                    input.setCustomValidity('Whitespace is not allowed');
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            } else {
-        //                input.setCustomValidity('');
-        //            }
-
-        //            if (!input.checkValidity()) {
-        //                input.classList.remove('is-valid');
-        //                input.classList.add('is-invalid');
-        //            } else {
-        //                input.classList.remove('is-invalid');
-        //                input.classList.add('is-valid');
-        //            }
-        //        }
-
-        //        // On form submission
-        //        form.addEventListener('submit', function (event) {
-        //            submittedOnce = true;
-        //            let hasErrors = false;
-
-        //            form.querySelectorAll('input, textarea, select').forEach(function (input) {
-        //                validateField(input);
-        //                if (!input.checkValidity()) {
-        //                    hasErrors = true;
-        //                }
-        //            });
-
-        //            if (hasErrors) {
-        //                event.preventDefault();
-        //                event.stopPropagation();
-        //            }
-
-        //            form.classList.add('was-validated');
-        //        }, false);
-
-        //        // Live validation only after first submission
-        //        form.querySelectorAll('input, textarea, select').forEach(function (input) {
-        //            input.addEventListener('input', function () {
-        //                if (submittedOnce) {
-        //                    validateField(input);
-        //                }
-        //            });
-
-        //            input.addEventListener('blur', function () {
-        //                if (submittedOnce) {
-        //                    validateField(input);
-        //                }
-        //            });
-        //        });
-        //    });
-        //})();
-
-        //(function () {
-        //    'use strict';
-
-        //    const forms = document.querySelectorAll('.needs-validation');
-
-        //    Array.prototype.slice.call(forms).forEach(function (form) {
-        //        let submittedOnce = false;
-
-        //        // Utility function to debounce rapid input events
-        //        function debounce(fn, delay) {
-        //            let timer;
-        //            return function (...args) {
-        //                clearTimeout(timer);
-        //                timer = setTimeout(() => fn.apply(this, args), delay);
-        //            };
-        //        }
-
-        //        // Field validation function
-        //        function validateField(input) {
-        //            const tag = input.tagName.toLowerCase();
-        //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
-
-        //            const needsValidation = (validTypes.includes(input.type) || tag === 'textarea');
-
-        //            if (needsValidation && input.required) {
-        //                const trimmed = input.value.trim();
-        //                if (trimmed === '') {
-        //                    input.setCustomValidity('Whitespace is not allowed');
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            } else {
-        //                input.setCustomValidity('');
-        //            }
-
-        //            if (!input.checkValidity()) {
-        //                input.classList.remove('is-valid');
-        //                input.classList.add('is-invalid');
-        //            } else {
-        //                input.classList.remove('is-invalid');
-        //                input.classList.add('is-valid');
-        //            }
-        //        }
-
-        //        // On submit: validate all, enable live validation
-        //        form.addEventListener('submit', function (event) {
-        //            submittedOnce = true;
-        //            let hasErrors = false;
-
-        //            form.querySelectorAll('input, textarea').forEach(function (input) {
-        //                validateField(input);
-        //                if (!input.checkValidity()) {
-        //                    hasErrors = true;
-        //                }
-        //            });
-
-        //            if (hasErrors) {
-        //                event.preventDefault();
-        //                event.stopPropagation();
-        //            }
-
-        //            form.classList.add('was-validated');
-        //        }, false);
-
-        //        // Add live validation only after submit
-        //        const debouncedValidate = debounce(function (input) {
-        //            if (submittedOnce) {
-        //                validateField(input);
-        //            }
-        //        }, 200); // slight delay to prevent flickering
-
-        //        form.querySelectorAll('input, textarea').forEach(function (input) {
-        //            input.addEventListener('input', function () {
-        //                debouncedValidate(input);
-        //            });
-
-        //            input.addEventListener('blur', function () {
-        //                if (submittedOnce) {
-        //                    validateField(input);
-        //                }
-        //            });
-        //        });
-        //    });
-        //})();
-
-        //(function () {
-        //    'use strict';
-
-        //    const forms = document.querySelectorAll('.needs-validation');
-
-        //    Array.prototype.slice.call(forms).forEach(function (form) {
-        //        let submittedOnce = false;
-
-        //        function validateField(input) {
-        //            const tag = input.tagName.toLowerCase();
-        //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
-
-        //            if ((validTypes.includes(input.type) || tag === 'textarea') && input.required) {
-        //                const trimmed = input.value.trim();
-
-        //                if (trimmed === '') {
-        //                    input.setCustomValidity('Whitespace is not allowed');
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            } else {
-        //                input.setCustomValidity('');
-        //            }
-
-
-        //            if (!input.checkValidity()) {
-        //                input.classList.remove('is-valid');
-        //                input.classList.add('is-invalid');
-        //            } else {
-        //                input.classList.remove('is-invalid');
-        //                input.classList.add('is-valid');
-        //            }
-        //        }
-
-        //        form.addEventListener('submit', function (event) {
-        //            submittedOnce = true;
-        //            let hasCustomError = false;
-
-        //            form.querySelectorAll('input, textarea').forEach(function (input) {
-        //                validateField(input);
-        //                if (!input.checkValidity()) {
-        //                    hasCustomError = true;
-        //                }
-        //            });
-
-        //            if (hasCustomError) {
-        //                event.preventDefault();  // Only prevent if errors exist
-        //                event.stopPropagation();
-        //            }
-
-        //            form.classList.add('was-validated');
-        //        }, false);
-
-        //        // Live validation after submit clicked
-        //        form.querySelectorAll('input, textarea').forEach(function (input) {
-        //            input.addEventListener('input', function () {
-        //                if (submittedOnce) {
-        //                    validateField(input);
-        //                }
-        //            });
-        //        });
-        //    });
-        //})();
-
-        //(function () {
-        //    'use strict';
-
-        //    const forms = document.querySelectorAll('.needs-validation');
-
-        //    Array.prototype.slice.call(forms).forEach(function (form) {
-        //        let submittedOnce = false;
-
-        //        function validateField(input) {
-        //            const tag = input.tagName.toLowerCase();
-        //            const type = input.type.toLowerCase();
-        //            const value = input.value.trim();
-        //            const validTypes = ['text', 'email', 'password', 'search', 'tel', 'url'];
-
-        //            // Common whitespace check
-        //            if ((validTypes.includes(type) || tag === 'textarea') && input.required) {
-        //                if (value === '') {
-        //                    input.setCustomValidity('Whitespace is not allowed');
-        //                    showInvalid(input);
-        //                    return;
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            }
-
-        //            // Additional type-based validations
-        //            if (type === 'email' && value !== '') {
-        //                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        //                if (!emailRegex.test(value)) {
-        //                    input.setCustomValidity('Please enter a valid email address');
-        //                    showInvalid(input);
-        //                    return;
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            }
-
-        //            if (type === 'url' && value !== '') {
-        //                try {
-        //                    new URL(value); // throws if invalid
-        //                    input.setCustomValidity('');
-        //                } catch {
-        //                    input.setCustomValidity('Please enter a valid URL');
-        //                    showInvalid(input);
-        //                    return;
-        //                }
-        //            }
-
-        //            if (type === 'tel' && value !== '') {
-        //                const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
-        //                if (!phoneRegex.test(value)) {
-        //                    input.setCustomValidity('Phone number must be exactly 10 digits');
-        //                    showInvalid(input);
-        //                    return;
-        //                } else {
-        //                    input.setCustomValidity('');
-        //                }
-        //            }
-
-
-        //            // Final validation state
-        //            if (!input.checkValidity()) {
-        //                showInvalid(input);
-        //            } else {
-        //                showValid(input);
-        //            }
-        //        }
-
-        //        function showInvalid(input) {
-        //            input.classList.remove('is-valid');
-        //            input.classList.add('is-invalid');
-        //        }
-
-        //        function showValid(input) {
-        //            input.classList.remove('is-invalid');
-        //            input.classList.add('is-valid');
-        //        }
-
-        //        form.addEventListener('submit', function (event) {
-        //            submittedOnce = true;
-        //            let hasCustomError = false;
-
-        //            form.querySelectorAll('input, textarea').forEach(function (input) {
-        //                validateField(input);
-        //                if (!input.checkValidity()) {
-        //                    hasCustomError = true;
-        //                }
-        //            });
-
-        //            if (hasCustomError) {
-        //                event.preventDefault();
-        //                event.stopPropagation();
-        //            }
-
-        //            form.classList.add('was-validated');
-        //        }, false);
-
-        //        // Live validation
-        //        form.querySelectorAll('input, textarea').forEach(function (input) {
-        //            input.addEventListener('input', function () {
-        //                if (submittedOnce) {
-        //                    validateField(input);
-        //                }
-        //            });
-        //        });
-        //    });
-        //})();
 
         (function () {
             'use strict';

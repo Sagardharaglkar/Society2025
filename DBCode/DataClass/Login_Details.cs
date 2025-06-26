@@ -45,6 +45,7 @@ namespace Utility.DataClass
         private int state_id;
         private int open;
 
+        private int expense_type;
       
 
         private int resolve;
@@ -278,6 +279,12 @@ namespace Utility.DataClass
         {
             get { return web_token; }
             set { web_token = value; }
+        }
+
+        public int ExpenseType
+        {
+            get { return expense_type; }
+            set { expense_type = value; }
         }
     }
 }

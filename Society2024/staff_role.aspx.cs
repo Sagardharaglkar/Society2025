@@ -76,7 +76,7 @@ namespace Society2024
             Response.Redirect("staff_role.aspx");
         }
 
-        protected void search_Click(object sender, EventArgs e)
+        protected void btn_search_Click(object sender, EventArgs e)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("select * from staff_role where active_status=0 and society_id='" + society_id.Value + "'");

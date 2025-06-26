@@ -3,6 +3,23 @@
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .resized-model {
+            width: 1000px;
+            height: auto;
+            right: 82px;
+        }
+
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
 
@@ -162,11 +179,11 @@
                                                         <asp:Label ID="m_total" runat="server" Text='<%# Bind("m_total")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="Status" ItemStyle-Width="200" SortExpression="Status">
-     <ItemTemplate>
-         <asp:Label ID="gsg" runat="server" Text='<%# Bind("Status")%>'></asp:Label>
-     </ItemTemplate>
- </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Status" ItemStyle-Width="200" SortExpression="Status">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="gsg" runat="server" Text='<%# Bind("Status")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField ItemStyle-Width="100" HeaderText="Edit">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("n_m_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
@@ -188,8 +205,8 @@
                 </asp:UpdatePanel>
 
                 <div class="modal fade bs-example-modal-sm" tabindex="-1" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                    <div class="modal-dialog modal-sm-4" style="right: 150px">
-                        <div class="modal-content" style="height: auto; width: 1000px;">
+                    <div class="modal-dialog modal-sm-4">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <h4 class="modal-title"><strong>New Maintainance</strong></h4>
                             </div>
@@ -198,8 +215,8 @@
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
 
-                                         <asp:HiddenField ID="building_id" runat="Server"></asp:HiddenField>
- <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
+                                        <asp:HiddenField ID="building_id" runat="Server"></asp:HiddenField>
+                                        <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
                                         <asp:Panel ID="Panel1" runat="server">
                                             <div class="form-group">
                                                 <div class="row ">
@@ -281,31 +298,31 @@
                                                 </div>
                                             </div>
                                             <div style="width: auto; overflow: auto;">
-                                             <asp:GridView ID="expenseGrid" runat="server" PageSize="30"  AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" HeaderStyle-BackColor="lightblue"  ShowHeaderWhenEmpty="true" EmptyDataText="No Expense for this Month">
+                                                <asp:GridView ID="expenseGrid" runat="server" PageSize="30" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Expense for this Month">
 
-     <Columns>
-        
-         <asp:TemplateField HeaderText="Nature of Charges" ItemStyle-Width="100" >
-             <ItemTemplate>
-                 <asp:Label ID="month" runat="server" Text='<%#Bind("ex_details")%>'></asp:Label>
-             </ItemTemplate>
-         </asp:TemplateField>
+                                                    <Columns>
 
-         <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100" >
-             <ItemTemplate>
-                 <asp:Label ID="Year" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
-             </ItemTemplate>
-         </asp:TemplateField>
-         <asp:TemplateField HeaderText="Amount Per Flat" ItemStyle-Width="350" >
-             <ItemTemplate>
-                 <asp:Label ID="building_name" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
-             </ItemTemplate>
-         </asp:TemplateField>
-           </Columns>
- </asp:GridView>
-                   </div>                        
-                                          
-                                            <asp:Button ID="btnAdd" runat="server" Text="Add New" UseSubmitBehavior="true"  ValidationGroup="g1" OnClick="btnAdd_Click" />
+                                                        <asp:TemplateField HeaderText="Nature of Charges" ItemStyle-Width="100">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="month" runat="server" Text='<%#Bind("ex_details")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+
+                                                        <asp:TemplateField HeaderText="Amount" ItemStyle-Width="100">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="Year" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Amount Per Flat" ItemStyle-Width="350">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="building_name" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
+
+                                            <asp:Button ID="btnAdd" runat="server" Text="Add New" UseSubmitBehavior="true" ValidationGroup="g1" OnClick="btnAdd_Click" />
 
 
 

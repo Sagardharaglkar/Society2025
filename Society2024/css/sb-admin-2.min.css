@@ -10556,16 +10556,25 @@ a:focus {
 }
 
     .sidebar .nav-item {
-        margin: auto;
-/*        background: linear-gradient(90deg,rgba(35, 88, 222, 1) 0%, rgba(59, 106, 224, 0.84) 52%, rgba(110, 142, 224, 0.85) 100%);*/
-                background: linear-gradient(to left, #3560da, #5e96ff7a);
+        /*        margin: auto;
+        background: linear-gradient(to left, #3560da, #5e96ff7a);
         border-radius: 30px;
         margin-top: 13px;
         background: linear-gradient(to left, #4982ee,4982ee);
         margin-bottom: 8px;
         position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+
+        margin: auto;
+        background: linear-gradient(to left, #3560da, #5e96ff);
+        border-radius: 30px;
+        margin-top: 13px;
+        border: 1px solid #00008026;
+        background: linear-gradient(to left, #4982ee,4982ee);
+        margin-bottom: 8px;
+        position: relative;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+    }                               
 
         .sidebar .nav-item:last-child {
             margin-bottom: 1rem

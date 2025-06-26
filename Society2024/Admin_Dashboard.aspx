@@ -94,8 +94,7 @@
                             </button>
                         </div>
                         &nbsp;&nbsp;
-                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-
+                        <asp:Button ID="btn_filter" runat="server" class="btn btn-primary" Text="Filter" OnClick="btn_filter_Click" UseSubmitBehavior="False" />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Terms_and_Condition.aspx.cs" ValidateRequest="false" Inherits="Society2024.Terms_and_Condition" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+                .resized-model{
+        width: 800px;
+    height: auto;
+    right: 82px;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 292px;
+    margin-top: 168px;
+    right: 1px;
+   }
+}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../Scripts/ckeditor/ckeditor.js"></script>
     <script type='text/javascript'>
@@ -109,7 +126,7 @@
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="mymodel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
-                        <div class="modal-content" style="height: auto; width: 800px">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="gridSystem"><strong>Terms and Conditions</strong></h4>
 

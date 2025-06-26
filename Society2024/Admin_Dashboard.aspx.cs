@@ -52,41 +52,8 @@ namespace Society2024
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            //sb.Append(" Select * from flat where society_id='" + society_id.Value + "'");
-            sb.Append("select * from admin_vw where (society_id = '" + society_id.Value + "')");
-            //if (drp_society.SelectedValue != "select")
-            //{
-            //    sb.Append(" and (name='" + drp_society.SelectedItem.Text + "')");
-            //}
-            if (drp_state.SelectedValue != "select")
-            {
-                sb.Append(" and (state='" + drp_state.SelectedItem.Text + "')");
-            }
-            if (drp_district.SelectedValue != "select")
-            {
-                sb.Append(" and (district='" + drp_district.SelectedItem.Text + "')");
-            }
-            if (drp_division.SelectedValue != "select")
-            {
-                sb.Append(" and (division='" + drp_division.SelectedItem.Text + "')");
-            }
-            if (drp_city.SelectedValue != "select")
-            {
-                sb.Append(" and (city='" + drp_city.SelectedItem.Text + "')");
-            }
-
-            if (txt_search.Text != "")
-            {
-
-                sb.Append(" And address like '" + txt_search.Text + "%'");
-
-                sb.Append(" or pincode like '" + txt_search.Text + "%'");
-
-                sb.Append(" or pending_amount like '" + txt_search.Text + "%'");
-            }
-
-            details.Sql_Operation = sb.ToString();
+            details.Sql_Operation = "search";
+            details.Name = txt_search.Text;
             var result = BL_Login.search_admin(details);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

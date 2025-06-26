@@ -2,6 +2,23 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+    <style>
+                .resized-model{
+        width: 800px;
+    height: auto;
+    right: 82px;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 292px;
+    margin-top: 168px;
+    right: 1px;
+   }
+}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -727,7 +744,7 @@
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
-                        <div class="modal-content" style="height: auto; width: 800px">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Helper</strong></h4>

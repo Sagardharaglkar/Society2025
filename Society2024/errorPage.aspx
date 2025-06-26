@@ -2,40 +2,75 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 Not Found</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f9fc;
+      color: #1d1d1f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
 
-    <title>Page not found</title>
+    h1 {
+      color: #002d5f;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    .btn {
+      background-color: #002d5f;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
 
+    .btn:hover {
+      background-color: #004080;
+    }
+
+    .error-image {
+      max-width: 100%;
+      width: 350px;
+      margin: 30px 0;
+    }
+
+    .error-code {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #b30000;
+    }
+  </style>
 </head>
-
 <body>
-         <div class="container-fluid">
+  <h1>Oops... We Didn't Find It!</h1>
+  <p>We've looked everywhere, but we're sorry,<br>we can't find the page you're looking for.</p>
 
-         <!-- 404 Error Text -->
-         <div class="text-center">
-             <div class="error mx-auto" data-text="404">404</div>
-             <p class="lead text-gray-800 mb-5">Page Not Found</p>
-             <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-             <a href="/">&larr; Back to Dashboard</a>
-         </div>
+  <img src="img/errorImg404.png" alt="404 Illustration" class="error-image">
 
-     </div>
+
+  <a href="/" class="btn">Go to homepage →</a>
 </body>
-
 </html>

@@ -1,18 +1,19 @@
-﻿using System;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
+using DocumentFormat.OpenXml.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Data;
-using Utility.DataClass;
-using BusinessLogic.MasterBL;
-using System.Drawing;
-using System.Web.UI.DataVisualization.Charting;
-using DocumentFormat.OpenXml.Drawing;
 using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.WebControls;
+using Utility.DataClass;
 
 namespace Society
 {
@@ -56,12 +57,49 @@ namespace Society
 
                 
             }
+        }
+        protected void CheckBoxes_CheckedChanged(object sender, EventArgs e)
+        {
 
 
+            if (CheckBox1.Checked && CheckBox2.Checked)
+            {
+                details.ExpenseType = 2;
+                GetDataForChart1();
+
+            }
+            else if (CheckBox1.Checked)
+            {
+                details.ExpenseType = 0;
+                GetDataForChart1();
+            }
+            else if (CheckBox2.Checked)
+            {
+                details.ExpenseType = 1;
+                GetDataForChart1();
+            }
 
 
         }
+        protected int check_checked()
+        {
 
+            if (CheckBox1.Checked && CheckBox2.Checked)
+            {
+                return 2;
+
+            }
+            else if (CheckBox1.Checked)
+            {
+                return 0;
+            }
+            else if (CheckBox2.Checked)
+            {
+                return 1;
+            }
+
+            return 0;
+        }
         protected void TimerNotif_Tick(object sender, EventArgs e)
         {
             get_ticket();
@@ -168,11 +206,9 @@ namespace Society
             
             details.Sql_Operation = "ExpenseChart";
             details.Society_Id = society_id.Value;
+            details.ExpenseType = check_checked();
             var dt = BL_Login.get_expense_chart(details);
 
-            //bool hasData = dt != null && dt.Rows.Count > 0;
-
-            // Show/hide data elements based on availability
             Chart2.Visible = dt.Compute("Sum(expense)", string.Empty).ToString() == "0" ? false : true;
             lblNoDataFound2.Visible = dt.Compute("Sum(expense)", string.Empty).ToString() == "0" ? true : false;
 

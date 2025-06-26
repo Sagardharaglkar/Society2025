@@ -2,6 +2,23 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+                .resized-model{
+        width: 800px;
+    height: auto;
+    right: 82px;
+}
+
+@media(max-width: 431px){
+   .resized-model{
+       height: auto;
+    margin: auto;
+    width: 292px;
+    margin-top: 168px;
+    right: 1px;
+   }
+}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -57,34 +74,34 @@
                         <asp:HiddenField ID="owner_id" runat="server" />
 
 
-  <div class="form-group">
-      <div class="row ">
-          <div class="col-12">
-              <div class="d-flex align-items-center">
-                  <div class="search-container">
-                      <asp:TextBox
-                          ID="txt_search"
-                          CssClass="aspNetTextBox"
-                          placeHolder="Search here"
-                          TextMode="Search"
-                          runat="server" />
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                TextMode="Search"
+                                                runat="server" />
 
-                      <button
-                          id="btn_search"
-                          type="submit"
-                          class="search-button"
-                          runat="server"
-                          onserverclick="btn_search_Click">
-                          <span class="material-symbols-outlined">search</span>
-                      </button>
-                  </div>
-                  &nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                            <button
+                                                id="btn_search"
+                                                type="submit"
+                                                class="search-button"
+                                                runat="server"
+                                                onserverclick="btn_search_Click">
+                                                <span class="material-symbols-outlined">search</span>
+                                            </button>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
 
-              </div>
-          </div>
-      </div>
-  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                         <div class="form-group">
@@ -168,7 +185,7 @@
 
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
-                        <div class="modal-content" style="height: auto; width: 800px;">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Receipt</strong></h4>
@@ -303,11 +320,10 @@
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-6 d-flex" style="align-items: center; justify-content: space-evenly;">
-                                                    <asp:RadioButton ID="RadioButton1" runat="server" Text="Regular Expense" Checked="true"
-                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton1_CheckedChanged" />
+                                                    <asp:CheckBox Checked="true" ID="CheckBox1" runat="server" Text="Regular" AutoPostBack="true" OnCheckedChanged="CheckBoxes_CheckedChanged" />
 
-                                                    <asp:RadioButton ID="RadioButton2" runat="server" Text="Add-on"
-                                                        GroupName="Gender" AutoPostBack="true" OnCheckedChanged="RadioButton2_CheckedChanged" />
+                                                    <asp:CheckBox ID="CheckBox2" runat="server" Text="Add on" AutoPostBack="true" OnCheckedChanged="CheckBoxes_CheckedChanged" />
+
                                                 </div>
                                             </div>
                                         </div>

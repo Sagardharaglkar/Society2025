@@ -1,6 +1,23 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="society_expense.aspx.cs" Inherits="Society.society_expense" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .resized-model {
+            width: 950px;
+            height: auto;
+            right: 82px;
+        }
+
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -162,8 +179,8 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                    <div class="modal-dialog modal-sm-4" style="right: 80px">
-                        <div class="modal-content" style="height: auto; width: 950px;">
+                    <div class="modal-dialog modal-sm-4">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Society Expense</strong></h4>
                             </div>
