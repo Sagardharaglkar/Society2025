@@ -203,27 +203,23 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Flat No" Visible="true" SortExpression="flat_no">
+                                                <asp:TemplateField HeaderText="Unit" Visible="true" SortExpression="unit">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="addr1" runat="server" Text='<%# Bind("flat_no")%>'></asp:Label>
+                                                        <asp:Label ID="addr1" runat="server" Text='<%# Bind("unit")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="Wing" Visible="true" SortExpression="w_name">
+                                                <asp:TemplateField HeaderText="Type" Visible="true" SortExpression="flat_type">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>
+                                                        <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Flat Type" Visible="true" SortExpression="usage">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="addr11" runat="server" Text='<%# Bind("usage")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+                                              
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("owner_id")%>'><img src="Images/123.png"/></asp:LinkButton>
-                                                    </ItemTemplate>
+                                                    </ItemTemplate
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Delete" Visible="false" ItemStyle-Width="50">
                                                     <ItemTemplate>
