@@ -181,19 +181,19 @@
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Flat No" Visible="true" SortExpression="flat_no">
+                                                <asp:TemplateField HeaderText="Unit" Visible="true" SortExpression="unit">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="addr" runat="server" Text='<%# Bind("flat_no")%>'></asp:Label>
+                                                        <asp:Label ID="addr" runat="server" Text='<%# Bind("unit")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="wing" Visible="true" SortExpression="w_name">
+                                                <asp:TemplateField HeaderText="Sq.ft" Visible="true" SortExpression="sq_ft">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="addr2" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>
+                                                        <asp:Label ID="addr2" runat="server" Text='<%# Bind("sq_ft")%>'></asp:Label>
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Flat Type" Visible="true" SortExpression="flat_type">
+                                                <asp:TemplateField HeaderText="Type" Visible="true" SortExpression="flat_type">
                                                     <ItemTemplate>
                                                         <asp:Label ID="addr1" runat="server" Text='<%# Bind("flat_type")%>'></asp:Label>
 
