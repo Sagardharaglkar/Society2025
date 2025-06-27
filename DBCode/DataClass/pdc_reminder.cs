@@ -29,6 +29,7 @@ namespace DBCode.DataClass
         private DateTime enddate;
         private string Operation;
         private string Result;
+        private string search;
 
         public int pdc_rem_id
         {
@@ -142,6 +143,11 @@ namespace DBCode.DataClass
         {
             get { return enddate; }
             set { enddate = value; }
+        }
+        public String Search
+        {
+            get { return search; }
+            set { search = value; }
         }
     }
 }

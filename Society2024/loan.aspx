@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="loan.aspx.cs" Inherits="Society.loan" MasterPageFile="~/Site.Master" %>
 
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -76,26 +77,53 @@
 
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
+
                         <div class="form-group">
-                            <div class="row ">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
-                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
-                                            <asp:ListItem Value="bank">Bank Name</asp:ListItem>
-                                            <asp:ListItem Value="loan_clearance">Loan Clearance</asp:ListItem>
-                                        </asp:DropDownList>&nbsp;&nbsp
-                        
-                        <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
+                                        <div class="search-container">
 
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp
-                    
-                        <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />&nbsp;&nbsp
-                        </asp:Panel>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server" 
+                                                TextMode="Search" 
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()"/>
 
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                            <ajaxtoolkit:calendarextender
+                                                id="CalendarExtender1"
+                                                runat="server"
+                                                targetcontrolid="txt_search"
+                                                popupbuttonid="btn_calendar"
+                                                format="yyyy-MM-dd" />
 
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <img
+                                                    id="btn_calendar"
+                                                    src="img/calendar.png"
+                                                    alt="Pick Date"
+                                                    class="calendar-icon"
+                                                    style="cursor: pointer;" />
+
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        &nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

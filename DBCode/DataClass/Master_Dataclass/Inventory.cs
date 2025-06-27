@@ -15,6 +15,7 @@ namespace DBCode.DataClass
         private string societyid;
         private string Operation;
         private string Result;
+        private string name;
 
         public int inventory_id
         {
@@ -55,6 +56,11 @@ namespace DBCode.DataClass
         {
             get { return Result; }
             set { Result = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
     }
 }

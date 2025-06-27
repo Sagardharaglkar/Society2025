@@ -20,31 +20,43 @@
     <ContentTemplate>
 
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                 <div class="form-group">
-                <div class="row ">
+        <div class="form-group">
+            <div class="row">
                 <div class="col-12">
-                  <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container">
 
+                            <asp:TextBox
+                                ID="txt_search"
+                                CssClass="aspNetTextBox"
+                                placeHolder="Search here"
+                                runat="server" 
+                                TextMode="Search" 
+                                AutoPostBack="true"
+                                OnTextChanged="btn_search_Click"
+                                onkeyup="removeFocusAfterTyping()"/>
 
+                            <!-- Calendar and Search Buttons -->
+                            <div class="input-buttons">
+                                 <button
+                                    id="btn_search"
+                                    type="submit"
+                                    class="search-button2"
+                                    runat="server"
+                                    onserverclick="btn_search_Click">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
+                            </div>
+                        </div>
 
-
-                    <asp:Label ID="Inv_post" runat="server" Text="Invoice Posted Before"></asp:Label>&nbsp;&nbsp;
-                  
-                      <asp:TextBox ID="date_before"  Height="32px" Textmode="Date" runat ="server"></asp:TextBox>&nbsp;&nbsp;
-                   
-                              <asp:DropDownList ID="drp_type" runat="server" Width="180px"  Height="32px"  Autopostback="true" >
-                               </asp:DropDownList>&nbsp;&nbsp;
-                           
-                       <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                        <asp:TextBox ID="txt_search" style="text-transform: capitalize;"  Height="32px" placeHolder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                    
-                      <asp:Button ID="btn_search" runat="server" Text="Search" Class="btn btn-primary" OnClick="btn_search_Click" UseSubmitBehavior="False" /></asp:Panel>&nbsp;&nbsp;
-                      <asp:CheckBox ID="select_all" runat="server" OnCheckedChanged="select_all_CheckedChanged" AutoPostBack="true" Text="Select All" />
-                      
+                        &nbsp;&nbsp;
+ <asp:CheckBox ID="select_all" runat="server" OnCheckedChanged="select_all_CheckedChanged" AutoPostBack="true" Text="Select All" />
+                        &nbsp;&nbsp;
+                        <asp:Label runat="server" ID="lbl_due"></asp:Label>
                     </div>
-                  </div>
                 </div>
-             </div>
+            </div>
+        </div>
                 <div class="form-group">
                     <div class="row ">
                           

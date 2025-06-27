@@ -41,9 +41,10 @@ namespace DataAccessLayer.MasterDA
             string status1;
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", notice.Sql_Operation));
+            data_item.Add(st.create_array("Operation", notice.Sql_Operation));
+            data_item.Add(st.create_array("Search", notice.Name));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_notice_master", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

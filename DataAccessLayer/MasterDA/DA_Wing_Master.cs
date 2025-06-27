@@ -101,7 +101,7 @@ namespace DataAccessLayer.MasterDA
             data_item.Add(st.create_array("search", wing.B_Name));
             data_item.Add(st.create_array("Operation", wing.Sql_Operation));
 
-            status1 = st.run_query(data_item, "Select", "sp_wing_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_wing_master", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

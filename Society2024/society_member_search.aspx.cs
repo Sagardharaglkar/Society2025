@@ -16,6 +16,8 @@ using DBCode.DataClass.Master_Dataclass;
 using BusinessLogic.MasterBL;
 using System.Windows.Forms;
 using BusinessLogic.BL;
+using Society2024;
+using DBCode.DataClass;
 //using System.IdentityModel.Metadata;
 
 
@@ -26,6 +28,8 @@ namespace Society
     public partial class society_member_search : System.Web.UI.Page
     {
         BL_FillRepeater repeater = new BL_FillRepeater();
+        Owner owner = new Owner();
+        BL_Owner_Master bl_owner = new BL_Owner_Master();
         Society_Member member = new Society_Member();
         BL_Society_Member_Master bL_Society = new BL_Society_Member_Master();
 
@@ -38,26 +42,38 @@ namespace Society
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
-                String str = "Select *  from UserType";
+                String str = "Select *  from UserType where type=1";
                 repeater.fill_list(categoryRepeater, str);
+                String str2 = "SELECT * FROM owner_master WHERE  login_status=0 and active_status=0 and type = 'owner' AND society_id='"+ Session["society_id"].ToString() + "'";
+                repeater.fill_list(categoryRepeater2, str2);
                 Society_Member_Gridbind();
 
             }
 
         }
 
-        //public void filldrop()
-        //{
-        //    String sql_query1 = "Select *  from UserType";
-        //    bL_Society.fill_drop(ddl_usertype, sql_query1, "UserTypeName", "UserTypeId");
-
-
-        //}
         protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
             {
                 Designation_id.Value = e.CommandArgument.ToString();
+
+
+
+            }
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                name_id.Value = e.CommandArgument.ToString();
+                owner.owner_id = Convert.ToInt32(e.CommandArgument);
+                owner.Sql_Operation = "Select";
+                var result  = bl_owner.runproc(owner);
+                txt_contact_no.Text = result.Pre_Mob;
+                txt_email.Text = result.Email;
+                txt_username.Text = result.Email;
 
             }
         }
@@ -122,12 +138,12 @@ namespace Society
                 member.UserId = Convert.ToInt32(user_id.Value);
             member.Sql_Operation = operation;
             member.Society_Id = society_id.Value;
-            member.Name = txt_name.Text;
+            member.Name = TextBox1.Text;
             member.Designation = Convert.ToInt32(Designation_id.Value);
-            member.Address1 = txt_address1.Text;
-            member.Address2 = txt_address2.Text;
-            member.Contact_No = txt_contact_no.Text;
-            member.Email = txt_email.Text;
+            //member.Address1 = txt_address1.Text;
+            //member.Address2 = txt_address2.Text;
+            //member.Contact_No = txt_contact_no.Text;
+            //member.Email = txt_email.Text;
             member.UserName = txt_username.Text;
             member.Password = txt_password.Text;
             member.Status = 0;
@@ -147,13 +163,13 @@ namespace Society
 
             (user_id.Value) = result.UserId.ToString();
             society_id.Value = result.Society_Id;
-            txt_name.Text = result.Name.ToString();
+            TextBox1.Text = result.Name.ToString();
             Designation_id.Value = result.Designation.ToString();
-            txt_name.Text = result.Name;
-            txt_address1.Text = result.Address1.ToString();
-            txt_address2.Text = result.Address2.ToString();
-            txt_contact_no.Text = result.Contact_No.ToString();
-            txt_email.Text = result.Email.ToString();
+            TextBox1.Text = result.Name;
+            //txt_address1.Text = result.Address1.ToString();
+            //txt_address2.Text = result.Address2.ToString();
+            //txt_contact_no.Text = result.Contact_No.ToString();
+            //txt_email.Text = result.Email.ToString();
             txt_username.Text = result.UserName.ToString();
             txt_password.Text = result.Password.ToString();
 
@@ -186,12 +202,12 @@ namespace Society
                 if (user_id.Value != "")
                     member.UserId = Convert.ToInt32(user_id.Value);
                 member.Sql_Operation = "Delete";
-                member.Name = txt_name.Text;
+                member.Name = TextBox1.Text;
                 member.Designation = Convert.ToInt32(Designation_id.Value);
-                member.Address1 = txt_address1.Text;
-                member.Address2 = txt_address2.Text;
-                member.Contact_No = txt_contact_no.Text;
-                member.Email = txt_email.Text;
+                //member.Address1 = txt_address1.Text;
+                //member.Address2 = txt_address2.Text;
+                //member.Contact_No = txt_contact_no.Text;
+                //member.Email = txt_email.Text;
                 member.UserName = txt_username.Text;
                 member.Password = txt_password.Text;
                 member.Status = 0;
@@ -279,6 +295,17 @@ namespace Society
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
                     if (link.CommandArgument == Designation_id.Value)
                         categoryBox.Text = link.Text;
+                }
+            }
+        }
+
+        protected void categoryRepeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (Designation_id.Value != "")
+                {
+
                 }
             }
         }

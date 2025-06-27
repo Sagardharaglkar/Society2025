@@ -19,6 +19,7 @@ namespace Utility.DataClass
         private string societyid;
         private string Operation;
         private string Result;
+        private string search;
 
 
         public int shop_maint_id
@@ -80,6 +81,11 @@ namespace Utility.DataClass
         {
             get { return Result; }
             set { Result = value; }
+        }
+        public string Search
+        {
+            get { return search; }
+            set { search = value; }
         }
 
     }

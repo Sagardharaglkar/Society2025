@@ -19,7 +19,7 @@ namespace DBCode.DataClass
         private string loantype;
         private string Operation;
         private string Result;
-
+        private string name;
 
 
         public int loan_id
@@ -85,7 +85,11 @@ namespace DBCode.DataClass
             set { Result = value; }
         }
 
-
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
     }
 }

@@ -118,47 +118,131 @@
             height: 100vh;
             overflow: auto;
         }*/
-            .search-container {
-        position: relative;
-        width: 300px;
-        margin: 10px 0;
-    }
+                   .search-container {
+    position: relative;
+    width: 300px;
+    margin: 10px 0;
+}
 
-    .search-container input[type="text"],
-    .search-container .aspNetTextBox {
-        width: 100%;
-    padding: 7px 40px 7px 15px;
+.search-container .aspNetTextBox {
+    width: 100%;
+    padding: 7px 15px;
     border-radius: 12px;
     border: 1px solid #ccc;
     outline: none;
     font-weight: bold;
-    }
+}
 
-    .search-button {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: gray;
-        border-radius: 50%;
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+/* Button container on right side of textbox */
+.input-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
-    .search-button span:hover {
-/*        background-color: lightgray;*/
-            font-size: 25px;
-    color: #696464;
-    }
+/* Calendar Icon */
+.calendar-icon {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    margin-left: 8px;
+    cursor: pointer;
+    margin-right: 12px;
+}
 
-    .material-symbols-outlined {
-        font-size: 24px;
-    }
+/* Search Button */
+.search-button2 {
+    padding: 7px 9px;
+    background: #0d6efd;
+    border-radius: 0 14px 12px 0;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button2 span{
+    color:white;
+}
+
+/* Fix background of CalendarExtender popup */
+.ajax__calendar_container {
+    background-color: white !important;
+    z-index: 9999;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px;
+}        .search-container {
+    position: relative;
+    width: 300px;
+    margin: 10px 0;
+}
+
+.search-container .aspNetTextBox {
+    width: 100%;
+    padding: 7px 15px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-weight: bold;
+}
+
+/* Button container on right side of textbox */
+.input-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Calendar Icon */
+.calendar-icon {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    margin-left: 8px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+/* Search Button */
+.search-button2 {
+    padding: 7px 9px;
+    background: #0d6efd;
+    border-radius: 0 14px 12px 0;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button2 span{
+    color:white;
+}
+
+/* Fix background of CalendarExtender popup */
+.ajax__calendar_container {
+    background-color: white !important;
+    z-index: 9999;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px;
+}
 
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />

@@ -85,13 +85,9 @@ namespace Society
       
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" Select * from meeting_master  where active_status=0 and society_id='" + society_id.Value + "'");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" and " + search_field.SelectedValue + " like '%" + txt_search.Text + "%'");
-            }
-            meeting.Sql_Operation = sb.ToString();
+
+            meeting.Title = txt_search.Text.Trim();
+            meeting.Sql_Operation ="search";
             var result = bL_Meeting.search_meeting(meeting);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
@@ -241,17 +237,6 @@ namespace Society
         }
 
        
-
-        protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (search_field.SelectedValue == "subject")
-                txt_search.TextMode = TextBoxMode.SingleLine;
-                txt_search.Text = "";
-            if (search_field.SelectedValue == "meeting_date")
-                txt_search.TextMode = TextBoxMode.Date;
-                txt_search.Text = "";
-
-        }
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;

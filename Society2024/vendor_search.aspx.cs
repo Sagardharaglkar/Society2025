@@ -70,13 +70,9 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("Select * from vendor_master where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
-            vendor.Sql_Operation = sb.ToString();
+
+            vendor.Name = txt_search.Text.Trim();
+            vendor.Sql_Operation = "search";
             var result = bL_Vendor.search_vendor(vendor);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

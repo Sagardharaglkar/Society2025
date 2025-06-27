@@ -206,9 +206,10 @@ namespace DataAccessLayer.DA
             string status1 = "";
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", party.Sql_Operation));
+            data_item.Add(st.create_array("Opeartion", party.Sql_Operation));
+            data_item.Add(st.create_array("search", party.Name));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_facility", ref sdr);
 
             if (status1 == "Done")
                 dt.Load(sdr);

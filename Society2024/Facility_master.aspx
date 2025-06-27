@@ -82,29 +82,36 @@
                 <asp:HiddenField ID="slot_id" runat="server" />
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
   <div class="form-group">
-      <div class="row ">
+      <div class="row">
           <div class="col-12">
               <div class="d-flex align-items-center">
                   <div class="search-container">
+
                       <asp:TextBox
                           ID="txt_search"
                           CssClass="aspNetTextBox"
                           placeHolder="Search here"
-                          TextMode="Search"
-                          runat="server" />
-
-                      <button
-                          id="btn_search"
-                          type="submit"
-                          class="search-button"
                           runat="server"
-                          onserverclick="btn_search_Click">
-                          <span class="material-symbols-outlined">search</span>
-                      </button>
-                  </div>
-                  &nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                          TextMode="Search"
+                          AutoPostBack="true"
+                          OnTextChanged="btn_search_Click"
+                          onkeyup="removeFocusAfterTyping()" />
 
+                      <!-- Calendar and Search Buttons -->
+                      <div class="input-buttons">
+                          <button
+                              id="btn_search"
+                              type="submit"
+                              class="search-button2"
+                              runat="server"
+                              onserverclick="btn_search_Click">
+                              <span class="material-symbols-outlined">search</span>
+                          </button>
+                      </div>
+                  </div>
+
+                  &nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
               </div>
           </div>
       </div>

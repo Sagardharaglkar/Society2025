@@ -29,6 +29,7 @@ namespace Utility.DataClass
         private int cheamount;
         private string Operation;
         private string Result;
+        private string search;
 
         public int receipt_id
         {
@@ -143,6 +144,11 @@ namespace Utility.DataClass
         {
             get { return Result; }
             set { Result = value; }
+        }
+        public string Search
+        {
+            get { return search; }
+            set { search = value; }
         }
     }
 }

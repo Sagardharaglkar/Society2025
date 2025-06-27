@@ -75,13 +75,9 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" Select *  from ledger");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" where " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
-            GetLedger.Sql_Operation = sb.ToString();
+
+            GetLedger.Search = txt_search.Text.Trim();
+            GetLedger.Sql_Operation = "search";
             var result = bL_Ledger.search_ledger(GetLedger);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
@@ -173,16 +169,7 @@ namespace Society
             //}
         }
 
-        protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (search_field.SelectedValue == "date")
-            {
-                txt_search.TextMode = TextBoxMode.Date;
-            }
-            else
-                txt_search.TextMode = TextBoxMode.SingleLine;
-            txt_search.Text = "";
-        }
+
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

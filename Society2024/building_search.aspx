@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="building_search.aspx.cs" Inherits="Society.building_search" MasterPageFile="~/Site.Master" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <style>
@@ -180,37 +181,41 @@
                                 </div>
                             </div>
                         </div>--%>
-                        <div class="form-group">
-                            <div class="row ">
-                                <div class="col-12">
-                                    <div class="d-flex align-items-center">
-                                        <div class="search-container">
-                                            <asp:TextBox
-                                                ID="txt_search"
-                                                CssClass="aspNetTextBox"
-                                                placeHolder="Search here"
-                                                TextMode="Search"
-                                                runat="server"
-                                                AutoPostBack="true"
-                                                OnTextChanged="btn_search_Click"
-                                                onkeyup="removeFocusAfterTyping()"/>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container">
 
-                                            <button
-                                                id="btn_search"
-                                                type="submit"
-                                                class="search-button"
-                                                runat="server"
-                                                onserverclick="btn_search_Click">
-                                                <span class="material-symbols-outlined">search</span>
-                                            </button>
-                                        </div>
-                                        &nbsp;&nbsp;
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                            <asp:TextBox
+                                ID="txt_search"
+                                CssClass="aspNetTextBox"
+                                placeHolder="Search here"
+                                runat="server" 
+                                TextMode="Search" 
+                                AutoPostBack="true"
+                                OnTextChanged="btn_search_Click"
+                                onkeyup="removeFocusAfterTyping()"/>                    
 
-                                    </div>
-                                </div>
+                            <!-- Calendar and Search Buttons -->
+                            <div class="input-buttons">
+                                 <button
+                                    id="btn_search"
+                                    type="submit"
+                                    class="search-button2"
+                                    runat="server"
+                                    onserverclick="btn_search_Click">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
                             </div>
                         </div>
+
+                        &nbsp;&nbsp;
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">

@@ -13,6 +13,7 @@ namespace DBCode.DataClass
         private string societyid;
         private string Operation;
         private string Result;
+        private string search;
 
 
         public int led_id
@@ -44,6 +45,11 @@ namespace DBCode.DataClass
         {
             get { return Result; }
             set { Result = value; }
+        }
+        public string Search
+        {
+            get { return search; }
+            set { search = value; }
         }
 
 

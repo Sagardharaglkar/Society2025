@@ -264,13 +264,27 @@
                     <div class="dropdown no-arrow">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <div class=" d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
+<div class="d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
 
-                                    <asp:CheckBox Checked="true" ID="CheckBox1" runat="server" Text="Regular" AutoPostBack="true" OnCheckedChanged="CheckBoxes_CheckedChanged" OnClientClick="resizeChart()" />
+    <asp:CheckBox 
+        Checked="true" 
+        ID="CheckBox1" 
+        runat="server" 
+        Text="Regular" 
+        AutoPostBack="true" 
+        OnCheckedChanged="CheckBoxes_CheckedChanged" 
+        onclick="resizeChart();" />
 
-                                    <asp:CheckBox ID="CheckBox2" runat="server" Text="Add on" AutoPostBack="true" OnCheckedChanged="CheckBoxes_CheckedChanged" onclick="resizeChart();" />
+    <asp:CheckBox 
+        ID="CheckBox2" 
+        runat="server" 
+        Text="Add on" 
+        AutoPostBack="true" 
+        OnCheckedChanged="CheckBoxes_CheckedChanged" 
+        onclick="resizeChart();" />
 
-                                </div>
+</div>
+
                            </ContentTemplate></asp:UpdatePanel>
                         
                     </div>

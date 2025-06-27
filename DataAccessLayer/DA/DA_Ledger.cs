@@ -55,9 +55,10 @@ namespace DataAccessLayer.MasterDA
             string status1 = "";
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", GetLedger.Sql_Operation));
+            data_item.Add(st.create_array("Operation",   GetLedger.Sql_Operation));
+            data_item.Add(st.create_array("search",   GetLedger.Search));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_ledger", ref sdr);
 
             if (status1 == "Done")
                 dt.Load(sdr);

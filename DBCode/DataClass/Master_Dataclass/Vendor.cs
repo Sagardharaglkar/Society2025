@@ -19,6 +19,7 @@ namespace DBCode.DataClass.Master_Dataclass
         private string societyid;
         private string Operation;
         private string Result;
+        private string name;
 
 
 
@@ -81,6 +82,11 @@ namespace DBCode.DataClass.Master_Dataclass
         {
             get { return Result; }
             set { Result = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
     }
 }

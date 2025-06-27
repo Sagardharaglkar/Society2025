@@ -194,9 +194,10 @@ namespace DataAccessLayer.DA
             string status1;
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", reminder.Sql_Operation));
+            data_item.Add(st.create_array("Operation", reminder.Sql_Operation));
+            data_item.Add(st.create_array("search", reminder.Search));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_pdc_reminder", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

@@ -13,7 +13,7 @@ namespace Society2024
     {
         protected void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            string selectedGender = "";
+            //string selectedGender = "";
 
             //if (RadioButton1.Checked)
             //{

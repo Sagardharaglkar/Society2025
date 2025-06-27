@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Admin_Dashboard.aspx.cs" Inherits="Society2024.Admin_Dashboard" MasterPageFile="~/Site.Master" %>
 
+
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
    
@@ -73,28 +74,36 @@
         </div>--%>
 
         <div class="form-group">
-            <div class="row ">
+            <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
                         <div class="search-container">
+
                             <asp:TextBox
                                 ID="txt_search"
                                 CssClass="aspNetTextBox"
                                 placeHolder="Search here"
-                                TextMode="Search"
-                                runat="server" />
+                                runat="server" 
+                                TextMode="Search" 
+                                AutoPostBack="true"
+                                OnTextChanged="btn_search_Click"
+                                onkeyup="removeFocusAfterTyping()"/>
 
-                            <button
-                                id="btn_search"
-                                type="submit"
-                                class="search-button"
-                                runat="server"
-                                onserverclick="btn_search_Click">
-                                <span class="material-symbols-outlined">search</span>
-                            </button>
+                            <!-- Calendar and Search Buttons -->
+                            <div class="input-buttons">
+                                 <button
+                                    id="btn_search"
+                                    type="submit"
+                                    class="search-button2"
+                                    runat="server"
+                                    onserverclick="btn_search_Click">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
+                            </div>
                         </div>
+
                         &nbsp;&nbsp;
-                        <asp:Button ID="btn_filter" runat="server" class="btn btn-primary" Text="Filter" OnClick="btn_filter_Click" UseSubmitBehavior="False" />
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                     </div>
                 </div>
             </div>

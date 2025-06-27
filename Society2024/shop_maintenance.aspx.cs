@@ -100,25 +100,9 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" Select * from shop_vw where active_status=0 and society_id='" + society_id.Value + "'");
-            //if(search_field.SelectedItem.Text == "Date")
-            //{
-            //    sb.Append("ANd " + search_field.SelectedValue + " like '%" + txt_search.Text + "%'");
-            //}
 
-            if (txt_search.Text != "")
-            {
-                if (search_field.SelectedValue == "m_date")
-                {
-                    sb.Append(" AND CONVERT(VARCHAR, [m_date], 120) LIKE '%" + txt_search.Text + "%'");
-                }
-                else
-                {
-                    sb.Append(" AND " + search_field.SelectedValue + " like '%" + txt_search.Text + "%'");
-                }
-            }
-            maintenance.Sql_Operation = sb.ToString();
+            maintenance.Search = txt_search.Text.Trim();
+            maintenance.Sql_Operation = "search";
             var result = bL_Shop.search_Shop_maint(maintenance);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
@@ -259,16 +243,6 @@ namespace Society
             Response.Redirect("printshop.aspx");
         }
 
-        protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (search_field.SelectedValue == "m_date")
-            {
-                txt_search.TextMode = TextBoxMode.Date;
-            }
-            else
-                txt_search.TextMode = TextBoxMode.SingleLine;
-            txt_search.Text = "";
-        }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

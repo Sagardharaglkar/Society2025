@@ -174,9 +174,10 @@ namespace DataAccessLayer.DA
             string status1 = "";
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", doc.Sql_Operation));
+            data_item.Add(st.create_array("Operation", doc.Sql_Operation));
+            data_item.Add(st.create_array("search", doc.W_Name));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_upload_doc", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

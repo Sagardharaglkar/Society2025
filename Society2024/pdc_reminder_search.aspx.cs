@@ -149,13 +149,9 @@ namespace Society
         }
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" SELECT TOP (100) PERCENT dbo.global_society_view.w_name, dbo.global_society_view.name, dbo.pdc_reminder.pdc_rem_id,dbo.global_society_view.wing_id , dbo.pdc_reminder.owner_id, dbo.pdc_reminder.o_name,dbo.pdc_reminder.chqno, dbo.pdc_reminder.che_amount, dbo.pdc_reminder.che_date, dbo.pdc_reminder.che_dep, dbo.pdc_reminder.che_ret, dbo.pdc_reminder.che_can, dbo.pdc_reminder.society_id FROM  dbo.pdc_reminder INNER JOIN dbo.global_society_view ON dbo.pdc_reminder.wing_id = dbo.global_society_view.wing_id  WHERE(dbo.pdc_reminder.active_status=0 and dbo.pdc_reminder.society_id = '" + society_id.Value + "')");
-            //if (drp_build_wing.SelectedValue != "" || drop_owner.SelectedValue != "")
-            //{
-            //    sb.Append(" AND dbo.pdc_reminder.wing_id='" + drp_build_wing.SelectedValue + "' And dbo.pdc_reminder.owner_id='" + drop_owner.SelectedValue + "'");
-            //}
-            Reminder.Sql_Operation = sb.ToString();
+
+            Reminder.Search = txt_search.Text.Trim(); 
+            Reminder.Sql_Operation = "search";
             var result = BL_Pdc.search_reminder(Reminder);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

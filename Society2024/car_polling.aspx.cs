@@ -201,39 +201,16 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" SELECT * FROM car_polling WHERE active_status=0 AND society_id='" + society_id.Value + "'");
-
-            if (txt_search.Text != "")
-            {
-                if (search_field.SelectedValue == "date") 
-                {
-                    sb.Append(" AND CONVERT(VARCHAR, [date], 120) LIKE '%" + txt_search.Text + "%'");
-                }
-                else
-                {
-                    sb.Append(" AND " + search_field.SelectedValue + " LIKE '%" + txt_search.Text + "%'");
-                }
-            }
 
 
-            car.Sql_Operation = sb.ToString();
+            car.C_Name = txt_search.Text.Trim();
+            car.Sql_Operation = "search";
             var result = BL_Car.search_car(car);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
 
-        protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (search_field.SelectedValue == "date")
-            {
-                txt_search.TextMode = TextBoxMode.Date;
-            }
-            else
-                txt_search.TextMode = TextBoxMode.SingleLine;
-            txt_search.Text = "";
-        }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

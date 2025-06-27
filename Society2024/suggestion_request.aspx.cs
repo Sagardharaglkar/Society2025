@@ -78,14 +78,9 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("Select * from suggestion_request_master Where active_status=0");
-            if (txt_search.Text != "")
-            {
-                sb.Append(" AND " + search_field.SelectedValue + " like '%" + txt_search.Text + "%'");
-            }
 
-            request.Sql_Operation = sb.ToString();
+            request.Search = txt_search.Text.Trim();
+            request.Sql_Operation = "search";
             var result = BL_Suggestion.search_suggestion(request);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

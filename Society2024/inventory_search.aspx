@@ -95,35 +95,41 @@
                         <asp:HiddenField ID="inventory_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-                        <div class="form-group">
-                            <div class="row ">
-                                <div class="col-12">
-                                    <div class="d-flex align-items-center">
-                                        <div class="search-container">
-                                            <asp:TextBox
-                                                ID="txt_search"
-                                                CssClass="aspNetTextBox"
-                                                placeHolder="Search here"
-                                                TextMode="Search"
-                                                runat="server" />
+                                                        <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container">
 
-                                            <button
-                                                id="btn_search"
-                                                type="submit"
-                                                class="search-button"
-                                                runat="server"
-                                                onserverclick="btn_search_Click">
-                                                <span class="material-symbols-outlined">search</span>
-                                            </button>
-                                        </div>
-                                        &nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                            <asp:TextBox
+                                ID="txt_search"
+                                CssClass="aspNetTextBox"
+                                placeHolder="Search here"
+                                runat="server" 
+                                TextMode="Search" 
+                                AutoPostBack="true"
+                                OnTextChanged="btn_search_Click"
+                                onkeyup="removeFocusAfterTyping()"/>                    
 
-                                    </div>
-                                </div>
+                            <!-- Calendar and Search Buttons -->
+                            <div class="input-buttons">
+                                 <button
+                                    id="btn_search"
+                                    type="submit"
+                                    class="search-button2"
+                                    runat="server"
+                                    onserverclick="btn_search_Click">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
                             </div>
                         </div>
 
+                        &nbsp;&nbsp;
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
                         <asp:GridView ID="GridView1" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" runat="server" AutoGenerateColumns="false" OnRowUpdating="GridView1_RowUpdating" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
                             <Columns>

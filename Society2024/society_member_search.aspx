@@ -3,21 +3,21 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-                .resized-model{
-        width: 400px;
-    height: auto;
-    right: 0px;
-}
+        .resized-model {
+            width: 400px;
+            height: auto;
+            right: 0px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -129,35 +129,41 @@
                                 </div>
                             </div>
                         </div>--%>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                          <div class="form-group">
-      <div class="row ">
-          <div class="col-12">
-              <div class="d-flex align-items-center">
-                  <div class="search-container">
-                      <asp:TextBox
-                          ID="txt_search"
-                          CssClass="aspNetTextBox"
-                          placeHolder="Search here"
-                          TextMode="Search"
-                          runat="server" />
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                      <button
-                          id="btn_search"
-                          type="submit"
-                          class="search-button"
-                          runat="server"
-                          onserverclick="btn_search_Click">
-                          <span class="material-symbols-outlined">search</span>
-                      </button>
-                  </div>
-                  &nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
 
-              </div>
-          </div>
-      </div>
-  </div>
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
@@ -189,16 +195,6 @@
                                                         <asp:Label ID="UserTypeName" runat="server" Text='<%# Bind("UserTypeName")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Address" SortExpression="address1">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="address1" runat="server" Text='<%# Bind("address1")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Contact No" SortExpression="contact_no">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="contact_no" runat="server" Text='<%# Bind("contact_no")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("user_id")%>'> <img src="Images/123.png" /></asp:LinkButton>
@@ -223,7 +219,7 @@
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-6">
-                        <div class="modal-content resized-model" >
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Member</strong></h4>
@@ -236,7 +232,7 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                                        <asp:HiddenField runat="server" ID="name_id" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">
@@ -245,9 +241,27 @@
                                                     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Name" required autofocus></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Name 
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="TextBox1" Style="width: 200px;" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select Designation" autocomplete="off" required="required" />
+                                                        <div id="categoryRepeaterContainer2" class="suggestion-list">
+                                                            <asp:Repeater ID="categoryRepeater2" runat="server" OnItemDataBound="categoryRepeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("owner_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setCategoryBox2(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -262,8 +276,8 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select Designation" autocomplete="off" required="required"/>
+                                                        <asp:TextBox ID="categoryBox" Style="width: 200px;" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select Designation" autocomplete="off" required="required" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemDataBound="categoryRepeater_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
@@ -289,34 +303,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-4">
-                                                    <asp:Label ID="Label7" runat="server" Text=" Address"></asp:Label>
-                                                    <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_address1" CssClass="form-control" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address1" required autofocus></asp:TextBox>
-                                                    <div class="invalid-feedback">
-                                                        Please Enter Adress
-                                                    </div>
-                                                </div>
 
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-4">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <asp:TextBox ID="txt_address2" CssClass="not-required" Style="text-transform: capitalize;" runat="server" Width="200px" placeholder="Enter Address2"></asp:TextBox>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
 
                                         <div class="form-group">
                                             <div class="row ">
@@ -454,7 +441,25 @@
 
             });
 
+            const categoryBox2 = document.getElementById("<%= TextBox1.ClientID %>");
 
+            const categorySuggestions2 = document.getElementById("categoryRepeaterContainer2");
+
+            categoryBox2.addEventListener("focus", function () {
+
+                categorySuggestions2.style.display = "block";
+
+                itemSuggestions.style.display = "none";
+
+            });
+
+            categoryBox.addEventListener("input", function () {
+
+                const input = categoryBox2.value.toLowerCase();
+
+                filterSuggestions("category-link", input);
+
+            });
         }
 
 
@@ -518,7 +523,13 @@
             document.getElementById("categoryRepeaterContainer").style.display = "none";
 
         }
+        function setCategoryBox2(value) {
 
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+
+            document.getElementById("categoryRepeaterContainer2").style.display = "none";
+
+        }
 
         Sys.Application.add_load(initDropdownEvents);
 

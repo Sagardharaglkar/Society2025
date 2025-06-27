@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="society_search.aspx.cs" Inherits="Society.society_search" MasterPageFile="~/Site.Master" %>
 
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -108,26 +109,52 @@
                         <asp:HiddenField ID="user_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="server" />
                         <div class="form-group">
-                            <div class="row ">
-                                &nbsp;&nbsp;
-                                <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
-                                    <asp:ListItem Value="name">Name</asp:ListItem>
-                                    <asp:ListItem Value="establish_date">Establish Date</asp:ListItem>
-                                    <asp:ListItem Value="registration_no">Registration No</asp:ListItem>
-                                    <asp:ListItem Value="off_address1">Address</asp:ListItem>
-                                    <asp:ListItem Value="contact_no1">Contact No</asp:ListItem>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
+                                            
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server" 
+                                                TextMode="Search" 
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()"/>
 
+                                            <ajaxtoolkit:calendarextender
+                                                id="CalendarExtender1"
+                                                runat="server"
+                                                targetcontrolid="txt_search"
+                                                popupbuttonid="btn_calendar"
+                                                format="yyyy-MM-dd" />
 
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <img
+                                                    id="btn_calendar"
+                                                    src="img/calendar.png"
+                                                    alt="Pick Date"
+                                                    class="calendar-icon"
+                                                    style="cursor: pointer;" />
 
-                                </asp:DropDownList>&nbsp;&nbsp;
-                       
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
 
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                      
-                            <asp:Button ID="btn_search" Width="94px" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />&nbsp;&nbsp;
-                      
-                            <asp:Button ID="btn_import" runat="server" Width="220px" class="btn btn-primary" OnClick="btn_import_Click" Text="Import Data From Excel" UseSubmitBehavior="False" />
-
+                                        &nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

@@ -1,25 +1,28 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wing_search.aspx.cs" Inherits="Society.wing_search" MasterPageFile="~/Site.Master" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
-    
-    <style>
-                .resized-model{
-        width: 529px;
-    height: auto;
-    right: 82px;
-}
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+    <style>
+        .resized-model {
+            width: 529px;
+            height: auto;
+            right: 82px;
+        }
+
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
+
         .not-required.valid-field {
             border-color: #1cc88a !important;
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -35,6 +38,8 @@
             background-position: right calc(.375em + .1875rem) center;
             background-size: calc(.75em + .375rem) calc(.75em + .375rem);
         }
+
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -86,13 +91,13 @@
                         </th>
                     </tr>
                 </table>
-                <asp:UpdatePanel UpdateMode="Always" ID="wings" runat="server">
+                <asp:UpdatePanel UpdateMode="Conditional" ID="wings" runat="server">
                     <ContentTemplate>
                         <asp:HiddenField ID="wing_id" runat="server" />
                         <asp:HiddenField ID="HiddenField4" runat="server" />
                         <asp:HiddenField ID="society_id" runat="server" />
                         <asp:HiddenField ID="ddl_build_name" runat="server" />
-<%--                        <div class="form-group">
+                        <%--                        <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -122,34 +127,44 @@
                             </div>
                         </div>--%>
 
-                          <div class="form-group">
-      <div class="row ">
-          <div class="col-12">
-              <div class="d-flex align-items-center">
-                  <div class="search-container">
-                      <asp:TextBox
-                          ID="txt_search"
-                          CssClass="aspNetTextBox"
-                          placeHolder="Search here"
-                          TextMode="Search"
-                          runat="server" />
+                                <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container">
 
-                      <button
-                          id="btn_search"
-                          type="submit"
-                          class="search-button"
-                          runat="server"
-                          onserverclick="btn_search_Click">
-                          <span class="material-symbols-outlined">search</span>
-                      </button>
-                  </div>
-                  &nbsp;&nbsp;
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                            <asp:TextBox
+                                ID="txt_search"
+                                CssClass="aspNetTextBox"
+                                placeHolder="Search here"
+                                runat="server" 
+                                TextMode="Search" 
+                                AutoPostBack="true"
+                                OnTextChanged="btn_search_Click"
+                                onkeyup="removeFocusAfterTyping()"/>                    
 
-              </div>
-          </div>
-      </div>
-  </div>
+                            <!-- Calendar and Search Buttons -->
+                            <div class="input-buttons">
+                                 <button
+                                    id="btn_search"
+                                    type="submit"
+                                    class="search-button2"
+                                    runat="server"
+                                    onserverclick="btn_search_Click">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        &nbsp;&nbsp;
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+
+
 
                         <div class="form-group">
                             <div class="row ">
@@ -316,23 +331,23 @@
 
         function disableSaveButtonIfValid() {
             var btn = document.getElementById('<%= btn_save.ClientID %>');
-         var modal = document.getElementById('edit_model');
-         var inputs = modal.querySelectorAll('input[required], select[required]');
-         var allValid = true;
+            var modal = document.getElementById('edit_model');
+            var inputs = modal.querySelectorAll('input[required], select[required]');
+            var allValid = true;
 
-         inputs.forEach(function (input) {
-             if (!input.checkValidity()) {
-                 allValid = false;
-             }
-         });
-
-
-         if (allValid && btn) {
-             btn.disabled = true;
-             btn.value = "Saving...";
+            inputs.forEach(function (input) {
+                if (!input.checkValidity()) {
+                    allValid = false;
+                }
+            });
 
 
-             __doPostBack('<%= btn_save.UniqueID %>', '');
+            if (allValid && btn) {
+                btn.disabled = true;
+                btn.value = "Saving...";
+
+
+                __doPostBack('<%= btn_save.UniqueID %>', '');
 
                 return false;
             }

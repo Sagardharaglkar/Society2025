@@ -207,14 +207,8 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("Select * from receipt_search_vw where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
-            
-            var result = bL_Receipt.search_receipt(sb.ToString());
+
+            var result = bL_Receipt.search_receipt(txt_search.Text.Trim());
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
