@@ -1,58 +1,38 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="tempForm.aspx.cs" MasterPageFile="~/Site.Master" Inherits="Society2024.tempForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+<style>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Date Range Picker Example</title>
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
 
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+.hover-underline::after,
+.hover-underline::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #ff0000, #00ffff);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
 
-  <!-- Moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+.hover-underline::before {
+  top: -5px;
+  transform-origin: left;
+}
 
-  <script src="
-  https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js
-  "></script>
-  <link href="
-  https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.css
-  " rel="stylesheet">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-    }
-    input {
-      padding: 10px;
-      width: 250px;
-      font-size: 16px;
-    }
-  </style>
-</head>
-<body>
+.hover-underline:hover::after,
+.hover-underline:hover::before {
+  transform: scaleX(1);
+}​
+</style>
 
-  <h2>Select Date Range</h2>
-  <input type="text" id="dateRange" placeholder="Select a date range" />
-
-  <script>
-      $(document).ready(function () {
-          $('#dateRange').daterangepicker({
-              opens: 'center',
-              autoApply: true,
-              showDropdowns: true,
-              locale: {
-                  format: 'ddd, DD MMM',
-                  separator: ' – '
-              }
-          });
-      });
-  </script>
-
-</body>
-</html>
-
+<div class="hover-underline">Hover for underline</div>
 
 </asp:Content>

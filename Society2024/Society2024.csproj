@@ -2985,6 +2985,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="System\Web\UI\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

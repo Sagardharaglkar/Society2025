@@ -207,7 +207,7 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-
+            
             var result = bL_Receipt.search_receipt(txt_search.Text.Trim());
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

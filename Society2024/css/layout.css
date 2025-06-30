@@ -93,8 +93,10 @@
 
 }
 
-@media(max-width: 431px){
+@media(max-width: 1025px){
     .layout-top-row {
         grid-template-columns: 1fr;
     }
 }
+
+

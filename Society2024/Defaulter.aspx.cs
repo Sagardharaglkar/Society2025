@@ -28,7 +28,7 @@ namespace Society2024
 
             if (!IsPostBack)
             {
-                //due_fill(sender,e);
+                due_fill(sender, e);
                 btn_search_Click(sender, e);
             }
         }
@@ -133,7 +133,7 @@ namespace Society2024
                 ViewState["dirState"] = result;
                 ViewState["sortdr"] = "Asc";
             }
-            lbl_due.Text = result.Compute("Sum(due)", string.Empty).ToString();
+            result.Compute("Sum(due)", string.Empty).ToString();
             GridView8.DataSource = result;
             GridView8.DataBind();
 
@@ -142,7 +142,7 @@ namespace Society2024
         protected void due_fill(object sender, EventArgs e)
         {
 
-
+            details.Name = null;
             details.Sql_Operation = "defaulter_show";
             var result = BL_Login.search_defaulter(details);
             if (result != null && result.Rows.Count > 0)

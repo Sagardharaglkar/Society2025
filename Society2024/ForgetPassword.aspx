@@ -20,12 +20,27 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style>
+        .containerMain {
+            background-color: white;
+            width: 30vw;
+            margin: 10vh auto;
+        }
+
+        @media(max-width: 431px) {
+            .containerMain{
+                width:90vw;
+            }
+        }
+    </style>
 </head>
 
 <body style="background-color: #F0F4F8;">
 
-    <div style="background-color: white; max-width: 30vw; margin: 10vh auto;">
+    <div class="containerMain">
 
         <div class="col-lg-6" style="min-width: 100%;">
             <div class="p-5">

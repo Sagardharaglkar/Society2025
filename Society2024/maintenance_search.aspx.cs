@@ -385,14 +385,9 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("Select * from main_search_vw where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (search_field.SelectedItem.Text != "Select")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '%" + drop_build.SelectedItem.Text + "%'");
-            //}
 
-            Maintenance1.Sql_Operation = sb.ToString();
+            Maintenance1.Name = txt_search.Text.Trim();
+            Maintenance1.Sql_Operation = "search";
             var result = bL_Maintenance.search_maintenance1(Maintenance1);
             GridView1.DataSource = result;
             GridView1.DataSource = result;

@@ -2,21 +2,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-                .resized-model{
-        width: 800px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 800px;
+            height: auto;
+            right: 82px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../Scripts/ckeditor/ckeditor.js"></script>
@@ -46,17 +46,17 @@
         }
     </script>
     <script>
-    function initCKEditor() {
-        if (CKEDITOR.instances['<%= editor1.ClientID %>']) {
+        function initCKEditor() {
+            if (CKEDITOR.instances['<%= editor1.ClientID %>']) {
             CKEDITOR.instances['<%= editor1.ClientID %>'].destroy(true);
         }
         CKEDITOR.replace('<%= editor1.ClientID %>');
-    }
+        }
 
-    // Re-initialize after UpdatePanel updates
-    Sys.Application.add_load(function () {
-        initCKEditor();
-    });
+        // Re-initialize after UpdatePanel updates
+        Sys.Application.add_load(function () {
+            initCKEditor();
+        });
     </script>
 
     <div class="box box-primary">
@@ -88,7 +88,7 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 70%; overflow: auto;">
-                                        <asp:GridView ID="GridView1" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15"  runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" OnRowDeleting="GridView1_RowDeleting" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" HeaderStyle-BackColor="lightblue">
+                                        <asp:GridView ID="GridView1" AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageIndex="15" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" OnRowDeleting="GridView1_RowDeleting" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating" HeaderStyle-BackColor="lightblue">
 
                                             <Columns>
                                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
@@ -113,7 +113,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                           
+
 
                                             </Columns>
                                         </asp:GridView>
@@ -133,27 +133,27 @@
                             </div>
                             <div class="modal-body" id="invoice_data">
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-    <ContentTemplate>
+                                    <ContentTemplate>
 
-                                <div class="form-group">
-                                    <div class="row ">
-                                        <div class="col-sm-12">
-                                            <asp:TextBox ID="editor1" runat="server" CssClass="ckeditor" TextMode="MultiLine"> </asp:TextBox>
+                                        <div class="form-group">
+                                            <div class="row ">
+                                                <div class="col-sm-12">
+                                                    <asp:TextBox ID="editor1" runat="server" CssClass="ckeditor" TextMode="MultiLine"> </asp:TextBox>
+                                                </div>
+
+
+                                            </div>
                                         </div>
-
-
-                                    </div>
-                                </div>
-            </ContentTemplate>
-<Triggers>
-<asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand"  />
-</Triggers>
-</asp:UpdatePanel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                    </Triggers>
+                                </asp:UpdatePanel>
 
                             </div>
                             <div class="modal-footer">
 
-                                        <asp:Button type="submit" runat="server" class="btn btn-primary" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Submit" />&nbsp;&nbsp;
+                                <asp:Button type="submit" runat="server" class="btn btn-primary" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Submit" />&nbsp;&nbsp;
                                   <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="False" />
 
                             </div>

@@ -188,9 +188,10 @@ namespace DataAccessLayer.MasterDA
 
             DataTable dt = new DataTable();
 
-            data_item.Add(st.create_array("query", owner.Sql_Operation));
+            data_item.Add(st.create_array("Operation", owner.Sql_Operation));
+            data_item.Add(st.create_array("search", owner.Name));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_owner_master", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

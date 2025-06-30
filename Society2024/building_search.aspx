@@ -23,42 +23,48 @@
             outline: none;
         }
 
-.not-required.valid-field {
-    border-color: #1cc88a !important;
-    padding-right: calc(1.5em + .75rem);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right calc(.375em + .1875rem) center;
-    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-}
+        .not-required.valid-field {
+            border-color: #1cc88a !important;
+            padding-right: calc(1.5em + .75rem);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231cc88a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(.375em + .1875rem) center;
+            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+        }
 
-.not-required.invalid-field {
-    border-color: #e74a3b !important;
-    padding-right: calc(1.5em + .75rem);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e74a3b' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23e74a3b' stroke='none'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right calc(.375em + .1875rem) center;
-    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-}
+        .not-required.invalid-field {
+            border-color: #e74a3b !important;
+            padding-right: calc(1.5em + .75rem);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23e74a3b' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23e74a3b' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(.375em + .1875rem) center;
+            background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+        }
 
-.resized-model{
-        width: 529px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 529px;
+            height: auto;
+            right: 82px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        .txt_len {
+            width: 200px;
+        }
 
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 90%;
+                margin-top: 168px;
+                right: 1px;
+            }
+
+            .txt_len {
+                width: 100%;
+            }
+        }
     </style>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -129,11 +135,6 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            <%--<div class="box-title" style="font-size:xx-large;">
-                <div class=text-center>Search Building</div>
-
-            </div>
-        </div>--%>
             <div class="box-body">
                 <table width="100%">
                     <tr>
@@ -148,74 +149,41 @@
                         <asp:HiddenField ID="society_id" runat="server" />
 
 
-     <%--                   <div class="form-group">
-                            <div class="row ">
+
+                        <div class="form-group">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" Visible="false">
-                                            <asp:ListItem Value="name">Building Name</asp:ListItem>
-                                            <asp:ListItem Value="no_of_floore">Floor</asp:ListItem>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                                        </asp:DropDownList>&nbsp;&nbsp;
+                                            <div class="input-buttons">
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
 
-                                        <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                                           <div class="position-relative" style="    width: 209px;">
-
-
-                                               <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" Font-Bold="true" placeHolder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                        
-                                            <asp:Button runat="server" CssClass="material-symbols-outlined text-white" Text="search" style="position: absolute; right: 0px; padding: 0 6px; border-radius: 0 7px 7px 0; background-color: #0D6EFD; height: 32px;"
-                                                OnClick="btn_search_Click">
-                                                <%--<span class="material-symbols-outlined" style="color: white; margin-top: 1px;">search</span>
-
-                                            </asp:Button>
-                                       </div>
-
-                                            <asp:Button Visible="false" ID="btn_search" runat="server" class="btn btn-primary" CausesValidation="False" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                        </asp:Panel>
                                         &nbsp;&nbsp;
-                        
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>--%>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center">
-                        <div class="search-container">
-
-                            <asp:TextBox
-                                ID="txt_search"
-                                CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>                    
-
-                            <!-- Calendar and Search Buttons -->
-                            <div class="input-buttons">
-                                 <button
-                                    id="btn_search"
-                                    type="submit"
-                                    class="search-button2"
-                                    runat="server"
-                                    onserverclick="btn_search_Click">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
-                            </div>
                         </div>
-
-                        &nbsp;&nbsp;
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">
@@ -257,7 +225,7 @@
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
 
-                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command"  CommandName="Update" CommandArgument='<%# Bind("build_id")%>'><img src="Images/123.png" /></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("build_id")%>'><img src="Images/123.png" /></asp:LinkButton>
                                                         <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
@@ -288,7 +256,7 @@
 
                 <div class="modal fade bs-example-modal-sm" tabindex="-1" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm">
-                        <div class="modal-content resized-model" >
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <%--  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>New Building</strong></h4>
@@ -311,7 +279,7 @@
                                                         <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_name" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Name/No" Style="text-transform: capitalize;" required > </asp:TextBox>
+                                                        <asp:TextBox ID="txt_name" CssClass="form-control txt_len" runat="server" Height="32px" placeholder="Enter Name/No" Style="text-transform: capitalize;" required> </asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please choose a Name/no .
                                                         </div>
@@ -328,7 +296,7 @@
                                                         <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_print_name" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Building Name" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_print_name" CssClass="form-control txt_len" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Building Name" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Building Name
                                                         </div>
@@ -344,7 +312,7 @@
                                                         <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_reg" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Registration No" AutoPostBack="true" required  OnTextChanged="txt_reg_TextChanged" ValidationGroup="g1"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_reg" CssClass="form-control txt_len" runat="server" Height="32px" placeholder="Enter Registration No" AutoPostBack="true" required OnTextChanged="txt_reg_TextChanged" ValidationGroup="g1"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Registration No
                                                         </div>
@@ -361,7 +329,7 @@
                                                         <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_add1" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_add1" CssClass="form-control txt_len" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Address" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Adress
                                                         </div>
@@ -376,7 +344,7 @@
                                                     <div class="col-sm-4">
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_add2" CssClass="not-required" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Address" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_add2" CssClass="not-required txt_len" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Address" required></asp:TextBox>
 
 
                                                     </div>
@@ -392,7 +360,7 @@
                                                         <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_floore" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter No. of Floors" onkeypress="return digit(event);" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_floore" CssClass="form-control txt_len" runat="server" Height="32px" placeholder="Enter No. of Floors" onkeypress="return digit(event);" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter No Of Floors
                                                         </div>
@@ -411,7 +379,7 @@
                                                         <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_bank" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Bank name" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_bank" CssClass="form-control txt_len" runat="server" Height="32px" placeholder="Enter Bank name" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Bank Name
                                                         </div>
@@ -429,7 +397,7 @@
                                                         <asp:Label ID="Label27" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_bank_add" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Full Address" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_bank_add" CssClass="form-control txt_len" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Full Address" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Bank Adress
                                                         </div>
@@ -446,7 +414,7 @@
                                                         <asp:Label ID="Label31" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_branch" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: capitalize;" placeholder="Enter Branch" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_branch" CssClass="form-control txt_len" runat="server" Height="32px" Style="text-transform: capitalize;" placeholder="Enter Branch" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Branch
                                                         </div>
@@ -463,7 +431,7 @@
                                                         <asp:Label ID="Label20" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_ifsc" CssClass="not-required" runat="server" Height="32px" Width="200px" MaxLength="11" placeholder="Enter IFSC Code" required="required" pattern="^[A-Z]{4}0[A-Z0-9]{6}$" ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_ifsc" CssClass="not-required txt_len" runat="server" Height="32px" MaxLength="11" placeholder="Enter IFSC Code" required="required" pattern="^[A-Z]{4}0[A-Z0-9]{6}$"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter IFSC Code
                                                         </div>
@@ -483,7 +451,7 @@
                                                         <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_acc_no" CssClass="form-control" runat="server" Height="32px" Width="200px" placeholder="Enter Account No" required  MaxLength="18"></asp:TextBox>
+                                                        <asp:TextBox ID="txt_acc_no" CssClass="form-control txt_len" runat="server" Height="32px" placeholder="Enter Account No" required MaxLength="18"></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Account No
                                                         </div>
@@ -502,7 +470,7 @@
                                                         <asp:Label ID="Label30" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <asp:TextBox ID="txt_email" CssClass="form-control" runat="server" Height="32px" Width="200px" TextMode="Email" placeholder="Enter Email" required ></asp:TextBox>
+                                                        <asp:TextBox ID="txt_email" CssClass="form-control txt_len" runat="server" Height="32px" TextMode="Email" placeholder="Enter Email" required></asp:TextBox>
                                                         <div class="invalid-feedback">
                                                             Please Enter Email 
                                                         </div>
@@ -533,7 +501,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" OnClientClick="validateIFSC();" runat="server" Text="Save" class="btn btn-primary" OnClick="btn_save_Click" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" OnClientClick="return confirm('Are you sure want to delete?');" Visible="false" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                         </center>
 
                                     </div>

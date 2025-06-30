@@ -38,8 +38,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
 
-    <style type="text/css">
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -78,18 +78,64 @@
             background-color: #eef1f5;
             font-size: 14px;
         }
+.btn-signin {
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #466CD9, #5D8FEF);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+}
 
-        .btn-signin {
-            margin-top: 30px;
-            width: 106%;
-            padding: 12px;
-            background: linear-gradient(to right, #466CD9, #5D8FEF);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.btn-signin::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    z-index: 0;
+}
+
+.btn-signin:hover::before {
+    animation: shimmer 1s ease forwards;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -75%;
+    }
+    100% {
+        left: 125%;
+    }
+}
+
+.btn-signin span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-signin:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(0, 140, 255, 0.4);
+}
+
+
+
 
         .options {
             margin-top: 10px;
@@ -170,7 +216,7 @@
             cursor: pointer;
             font-weight: 100;
             color: gray;
-            font-size:20px;
+            font-size: 20px;
         }
 
         @media(max-width: 431px) {
@@ -216,8 +262,10 @@
                         <div class="invalid-feedback">Please enter your password.</div>
 
                     </div>
+                     <button class="btn-signin" runat="server" onserverclick="btn_Login_Click" ><span>Sign In</span></button>
 
-                    <asp:Button ID="Button2" runat="server" Text="Sign In" CssClass="btn-signin" OnClick="btn_Login_Click" />
+
+            
                 </div>
                 <div class="options">
                     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/ForgetPassword.aspx">Forgot Password</asp:HyperLink>

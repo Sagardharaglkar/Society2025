@@ -287,14 +287,8 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" Select * from servent_maid_master where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-
-            //}
-            servent.Sql_Operation = sb.ToString();
+            servent.S_Name = txt_search.Text.Trim();
+            servent.Sql_Operation = "search";
             var result = bL_Servent.search_servent(servent);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

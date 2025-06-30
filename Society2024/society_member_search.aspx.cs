@@ -8,8 +8,6 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Web.Configuration;
-//using System.Windows.Controls;
-//using Azure;
 using System.Drawing.Drawing2D;
 using Page = System.Web.UI.Page;
 using DBCode.DataClass.Master_Dataclass;
@@ -18,7 +16,6 @@ using System.Windows.Forms;
 using BusinessLogic.BL;
 using Society2024;
 using DBCode.DataClass;
-//using System.IdentityModel.Metadata;
 
 
 
@@ -122,14 +119,12 @@ namespace Society
         protected void btn_search_Click(object sender, EventArgs e)
         {
             member.Name = txt_search.Text;
-            member.Sql_Operation = "search";
+            member.Sql_Operation = "Search";
             var result = bL_Society.search_member(member);
             GridView1.DataSource = result; 
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
-
-
 
         public void runproc_save(string operation)
         {
@@ -140,10 +135,6 @@ namespace Society
             member.Society_Id = society_id.Value;
             member.Name = TextBox1.Text;
             member.Designation = Convert.ToInt32(Designation_id.Value);
-            //member.Address1 = txt_address1.Text;
-            //member.Address2 = txt_address2.Text;
-            //member.Contact_No = txt_contact_no.Text;
-            //member.Email = txt_email.Text;
             member.UserName = txt_username.Text;
             member.Password = txt_password.Text;
             member.Status = 0;

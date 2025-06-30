@@ -77,14 +77,12 @@
                         <asp:HiddenField ID="shop_maint_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-
-
-                        <div class="form-group">
+                                            <div class="form-group">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
                                         <div class="search-container">
-
+                                            
                                             <asp:TextBox
                                                 ID="txt_search"
                                                 CssClass="aspNetTextBox"
@@ -128,6 +126,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <div class="row ">

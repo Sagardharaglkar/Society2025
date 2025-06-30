@@ -155,13 +155,8 @@ namespace Society2024
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("select * from facilities where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
-            GetFacility.Sql_Operation = sb.ToString();
+            GetFacility.Name = txt_search.Text;
+            GetFacility.Sql_Operation = "search";
             var result = bL_Party.search_facility(GetFacility);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

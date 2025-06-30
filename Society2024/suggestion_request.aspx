@@ -1,7 +1,23 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="suggestion_request.aspx.cs" Inherits="Society._thought" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+    <style>
+                .resized-model {
+            width: 600px;
+            height: auto;
+            right: 82px;
+        }
 
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function SuccessEntry() {
@@ -59,15 +75,15 @@
                                 ID="txt_search"
                                 CssClass="aspNetTextBox"
                                 placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
+                                runat="server"
+                                TextMode="Search"
                                 AutoPostBack="true"
                                 OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>                    
+                                onkeyup="removeFocusAfterTyping()" />
 
                             <!-- Calendar and Search Buttons -->
                             <div class="input-buttons">
-                                 <button
+                                <button
                                     id="btn_search"
                                     type="submit"
                                     class="search-button2"
@@ -79,11 +95,11 @@
                         </div>
 
                         &nbsp;&nbsp;
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                     </div>
                 </div>
             </div>
-        </div>
+                                </div>
 
                         <div class="form-group">
                             <div class="row ">
@@ -145,7 +161,7 @@
 
                 <div class="modal fade bs-example-modal-sm" tabindex="-1" id="edit_model" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-1">
-                        <div class="modal-content" style="height: auto; width: 600px;">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <%--  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Suggestion/Request</strong></h4>

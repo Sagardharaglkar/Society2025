@@ -91,13 +91,8 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(" Select * from parking  where active_status=0 and society_id='" + society_id.Value + "'");
-            //if (txt_search.Text != "")
-            //{
-            //    sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            //}
-            parking.Sql_Operation = sb.ToString();
+            parking.Name = txt_search.Text.Trim();
+            parking.Sql_Operation = "search";
             var result = bL_Parking.search_park_place(parking);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

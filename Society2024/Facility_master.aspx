@@ -1,6 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Facility_master.aspx.cs" Inherits="Society2024.Facility_master" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+                .resized-model {
+            width: 900px;
+            height: auto;
+            right: 82px;
+        }
+
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
+    </style>
     <script type="text/javascript">
 
 
@@ -162,7 +179,7 @@
 
                 <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-6">
-                        <div class="modal-content" style="height: auto; width: 900px;">
+                        <div class="modal-content resized-model">
                             <div class="modal-header">
                                 <%-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
                                 <h4 class="modal-title" id="gridSystemModalLabel"><strong>Facilities</strong></h4>

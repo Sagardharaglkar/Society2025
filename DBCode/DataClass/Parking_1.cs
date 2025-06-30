@@ -13,6 +13,7 @@ namespace DBCode.DataClass.Master_Dataclass
         private string societyid;
         private string Operation;
         private string Result;
+        private string name;
 
 
         public int place_id
@@ -24,6 +25,11 @@ namespace DBCode.DataClass.Master_Dataclass
         {
             get { return parkfor; }
             set { parkfor = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
         public string Parking_No
         {

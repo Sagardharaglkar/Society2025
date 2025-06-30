@@ -264,29 +264,30 @@
                     <div class="dropdown no-arrow">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-<div class="d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
+                                <div class="d-flex" style="align-items: center; justify-content: space-evenly; gap: 15px;">
 
-    <asp:CheckBox 
-        Checked="true" 
-        ID="CheckBox1" 
-        runat="server" 
-        Text="Regular" 
-        AutoPostBack="true" 
-        OnCheckedChanged="CheckBoxes_CheckedChanged" 
-        onclick="resizeChart();" />
+                                    <asp:CheckBox
+                                        Checked="true"
+                                        ID="CheckBox1"
+                                        runat="server"
+                                        Text="Regular"
+                                        AutoPostBack="true"
+                                        OnCheckedChanged="CheckBoxes_CheckedChanged"
+                                        onclick="resizeChart();" />
 
-    <asp:CheckBox 
-        ID="CheckBox2" 
-        runat="server" 
-        Text="Add on" 
-        AutoPostBack="true" 
-        OnCheckedChanged="CheckBoxes_CheckedChanged" 
-        onclick="resizeChart();" />
+                                    <asp:CheckBox
+                                        ID="CheckBox2"
+                                        runat="server"
+                                        Text="Add on"
+                                        AutoPostBack="true"
+                                        OnCheckedChanged="CheckBoxes_CheckedChanged"
+                                        onclick="resizeChart();" />
 
-</div>
+                                </div>
 
-                           </ContentTemplate></asp:UpdatePanel>
-                        
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+
                     </div>
                 </div>
                 <asp:Panel runat="server" ID="lblNoDataFound2" Visible="False">
@@ -307,51 +308,51 @@
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
 
-                <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" Width="600px" ValidateRequestMode="Inherit">
+                        <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" Width="600px" ValidateRequestMode="Inherit">
 
-                    <Series>
-                        <asp:Series Name="Expense" XValueMember="expense_month" YValueMembers="expense"
-                            IsVisibleInLegend="true"
-                            IsValueShownAsLabel="False"
-                            YValuesPerPoint="1"
-                            ToolTip="Expence: #VALY" ChartType="Spline" YValueType="Auto" LabelBorderWidth="10" Palette="None" BorderWidth="7" BorderDashStyle="Solid">
-                        </asp:Series>
-                        <asp:Series Name="Due" XValueMember="expense_month" YValueMembers="Due"
-                            IsVisibleInLegend="true"
-                            IsValueShownAsLabel="False"
-                            YValuesPerPoint="1"
-                            ToolTip="Due: #VALY" ChartType="Spline" BorderWidth="7">
-                        </asp:Series>
-                        <asp:Series Name="Collection" XValueMember="expense_month" YValueMembers="Collection"
-                            IsVisibleInLegend="true"
-                            IsValueShownAsLabel="False"
-                            YValuesPerPoint="1"
-                            ToolTip="Collection: #VALY" ChartType="Spline" BorderWidth="7">
-                        </asp:Series>
-                    </Series>
-                    <ChartAreas>
-                        <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="True" AlignmentStyle="PlotPosition">
-                            <AxisX LineColor="Gray" IsMarginVisible="False">
-                                <MajorGrid LineColor="white" />
-                            </AxisX>
-                            <AxisY LineColor="gray">
-                                <MajorGrid LineColor="white" />
-                            </AxisY>
-                            <Area3DStyle Enable3D="false" LightStyle="Realistic"></Area3DStyle>
-                        </asp:ChartArea>
-                    </ChartAreas>
+                            <Series>
+                                <asp:Series Name="Expense" XValueMember="expense_month" YValueMembers="expense"
+                                    IsVisibleInLegend="true"
+                                    IsValueShownAsLabel="False"
+                                    YValuesPerPoint="1"
+                                    ToolTip="Expence: #VALY" ChartType="Spline" YValueType="Auto" LabelBorderWidth="10" Palette="None" BorderWidth="7" BorderDashStyle="Solid">
+                                </asp:Series>
+                                <asp:Series Name="Due" XValueMember="expense_month" YValueMembers="Due"
+                                    IsVisibleInLegend="true"
+                                    IsValueShownAsLabel="False"
+                                    YValuesPerPoint="1"
+                                    ToolTip="Due: #VALY" ChartType="Spline" BorderWidth="7">
+                                </asp:Series>
+                                <asp:Series Name="Collection" XValueMember="expense_month" YValueMembers="Collection"
+                                    IsVisibleInLegend="true"
+                                    IsValueShownAsLabel="False"
+                                    YValuesPerPoint="1"
+                                    ToolTip="Collection: #VALY" ChartType="Spline" BorderWidth="7">
+                                </asp:Series>
+                            </Series>
+                            <ChartAreas>
+                                <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="True" AlignmentStyle="PlotPosition">
+                                    <AxisX LineColor="Gray" IsMarginVisible="False">
+                                        <MajorGrid LineColor="white" />
+                                    </AxisX>
+                                    <AxisY LineColor="gray">
+                                        <MajorGrid LineColor="white" />
+                                    </AxisY>
+                                    <Area3DStyle Enable3D="false" LightStyle="Realistic"></Area3DStyle>
+                                </asp:ChartArea>
+                            </ChartAreas>
 
-                    <Legends>
-                        <asp:Legend>
-                        </asp:Legend>
-                    </Legends>
-                </asp:Chart>
-                        
+                            <Legends>
+                                <asp:Legend>
+                                </asp:Legend>
+                            </Legends>
+                        </asp:Chart>
+
                     </ContentTemplate>
                     <Triggers>
-    <asp:AsyncPostBackTrigger ControlID="CheckBox1" EventName="CheckedChanged" />
-    <asp:AsyncPostBackTrigger ControlID="CheckBox2" EventName="CheckedChanged" />
-</Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="CheckBox1" EventName="CheckedChanged" />
+                        <asp:AsyncPostBackTrigger ControlID="CheckBox2" EventName="CheckedChanged" />
+                    </Triggers>
                 </asp:UpdatePanel>
             </div>
 
@@ -482,8 +483,8 @@
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                    <asp:Panel ID="noUpdates4" runat="server" Style="margin:auto;">
-                        <img style="width: 285px; margin-left:70px;"
+                    <asp:Panel ID="noUpdates4" runat="server" Style="margin: auto;">
+                        <img style="width: 285px; margin-left: 70px;"
                             src="img/noUpdates.jpg" />
                     </asp:Panel>
                 </div>
@@ -537,7 +538,7 @@
                             <asp:Panel ID="chartDots" runat="server">
                                 <div class="mt-4 text-center small">
                                     <span class="mr-2">
-                                        <i class="fas fa-circle text-primary mr-1" style="color: #ff7f7f;"></i>Due
+                                        <i class="fas fa-circle  mr-1" style="color:#FF7F7F;"></i>Due
                                     </span>
                                     <span class="mr-2">
                                         <i class="fas fa-circle mr-1" style="color: #FFFAA0;"></i>Collection
@@ -591,7 +592,7 @@
                     </div>
                 </a>
             </div>
-            
+
         </div>
     </div>
 
@@ -602,7 +603,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-messaging-compat.js"></script>
     <script type="text/javascript">
-       
+
         firebase.initializeApp({
             apiKey: "AIzaSyCVD6hUSK4zMfG43bMjyjwTFmTz5PJc_qk",
             authDomain: "society-management-32053.firebaseapp.com",
@@ -631,7 +632,7 @@
                     })
                     .then(token => {
                         console.log("✅ Token:", token);
-                        
+
 
                         sendTokenToServer(token);
                     })
@@ -674,7 +675,7 @@
             if (container && chart) {
                 var width = container.offsetWidth;
 
-                chart.style.width = width-3 + 'px';
+                chart.style.width = width - 3 + 'px';
             }
         }
     </script>
