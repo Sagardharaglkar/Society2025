@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
 
-        function    () {
+        function openModal() {
             $('#edit_model').modal('show');
         }
 
@@ -86,14 +86,13 @@
                 </table>
                 <br />
 
-                <asp:HiddenField ID="user_id" runat="server" />
-                <asp:HiddenField ID="society_id" runat="server" />
-                <asp:HiddenField ID="Designation_id" runat="server" />
+
 
 
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-
+                                        <asp:HiddenField ID="user_id" runat="server" />
+                <asp:HiddenField ID="society_id" runat="server" />
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -124,7 +123,7 @@
                                         </div>
 
                                         &nbsp;&nbsp;
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                        <button id="btnAdd" type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model"  runat="server" onserverclick="showPass">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +170,7 @@
                                                         <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
- </Columns>
+                                            </Columns>
                                         </asp:GridView>
                                     </div>
                                 </div>
@@ -194,6 +193,8 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                        
+                <asp:HiddenField ID="Designation_id" runat="server" />
                                         <asp:HiddenField runat="server" ID="name_id" />
                                         <div class="form-group">
                                             <div class="row ">
@@ -206,8 +207,8 @@
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" Style="width: 200px;" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select Designation" autocomplete="off" required="required" />
-                                                        <div id="categoryRepeaterContainer2" class="suggestion-list">
-                                                            <asp:Repeater ID="categoryRepeater2" runat="server" OnItemDataBound="categoryRepeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                        <div id="categoryRepeaterContainer1" class="suggestion-list">
+                                                            <asp:Repeater ID="categoryRepeater1" runat="server" OnItemDataBound="categoryRepeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -216,7 +217,7 @@
                                                                         Text='<%# Eval("name") %>'
                                                                         CommandArgument='<%# Eval("owner_id") %>'
                                                                         CommandName="SelectCategory"
-                                                                        OnClientClick="setCategoryBox2(this.innerText);" />
+                                                                        OnClientClick="setCategoryBox1(this.innerText);" />
                                                                 </ItemTemplate>
                                                                 <FooterTemplate>
                                                                     <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -238,10 +239,10 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" Style="width: 200px;" runat="server" CssClass="input-box form-control"
+                                                        <asp:TextBox ID="Textbox2" Style="width: 200px;" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select Designation" autocomplete="off" required="required" />
-                                                        <div id="categoryRepeaterContainer" class="suggestion-list">
-                                                            <asp:Repeater ID="categoryRepeater" runat="server" OnItemDataBound="categoryRepeater_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
+                                                        <div id="categoryRepeaterContainer2" class="suggestion-list">
+                                                            <asp:Repeater ID="categoryRepeater2" runat="server" OnItemDataBound="categoryRepeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
@@ -250,7 +251,7 @@
                                                                         Text='<%# Eval("UserTypeName") %>'
                                                                         CommandArgument='<%# Eval("UserTypeId") %>'
                                                                         CommandName="SelectCategory"
-                                                                        OnClientClick="setCategoryBox(this.innerText);" />
+                                                                        OnClientClick="setCategoryBox2(this.innerText);" />
                                                                 </ItemTemplate>
                                                                 <FooterTemplate>
                                                                     <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -259,7 +260,7 @@
                                                             </asp:Repeater>
                                                         </div>
                                                     </div>
-
+                                                    
 
                                                 </div>
 
@@ -317,6 +318,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <asp:Panel ID="passPanel" runat="server">
                                         <div class="form-group">
                                             <div class="row ">
 
@@ -334,10 +336,11 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                            </asp:Panel>
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="ServerClick" />
                                     </Triggers>
                                 </asp:UpdatePanel>
 
@@ -383,9 +386,9 @@
 
         function initDropdownEvents() {
 
-            const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
+            const categoryBox = document.getElementById("<%= TextBox1.ClientID %>");
 
-            const categorySuggestions = document.getElementById("categoryRepeaterContainer");
+            const categorySuggestions = document.getElementById("categoryRepeaterContainer1");
 
             categoryBox.addEventListener("focus", function () {
 
@@ -403,7 +406,7 @@
 
             });
 
-            const categoryBox2 = document.getElementById("<%= TextBox1.ClientID %>");
+            const categoryBox2 = document.getElementById("<%= Textbox2.ClientID %>");
 
             const categorySuggestions2 = document.getElementById("categoryRepeaterContainer2");
 
@@ -415,7 +418,7 @@
 
             });
 
-            categoryBox.addEventListener("input", function () {
+            categoryBox2.addEventListener("input", function () {
 
                 const input = categoryBox2.value.toLowerCase();
 
@@ -478,16 +481,16 @@
         }
 
 
-        function setCategoryBox(value) {
+        function setCategoryBox1(value) {
 
-            document.getElementById("<%= categoryBox.ClientID %>").value = value;
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
 
-            document.getElementById("categoryRepeaterContainer").style.display = "none";
+            document.getElementById("categoryRepeaterContainer1").style.display = "none";
 
         }
         function setCategoryBox2(value) {
 
-            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("<%= Textbox2.ClientID %>").value = value;
 
             document.getElementById("categoryRepeaterContainer2").style.display = "none";
 

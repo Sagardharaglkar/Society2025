@@ -20,47 +20,62 @@
     <ContentTemplate>
 
                 <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center">
-                        <div class="search-container">
+        <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <div class="form-group d-flex align-items-center mt-0 flex-wrap">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center ">
 
-                            <asp:TextBox
-                                ID="txt_search"
-                                CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>
 
-                            <!-- Calendar and Search Buttons -->
-                            <div class="input-buttons">
-                                 <button
-                                    id="btn_search"
-                                    type="submit"
-                                    class="search-button2"
-                                    runat="server"
-                                    onserverclick="btn_search_Click">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
+                                <div class="search-container">
+
+                                    <asp:TextBox
+                                        ID="txt_search"
+                                        CssClass="aspNetTextBox"
+                                        placeHolder="Search here"
+                                        runat="server"
+                                        TextMode="Search"
+                                        AutoPostBack="true"
+                                        OnTextChanged="btn_search_Click"
+                                        onkeyup="removeFocusAfterTyping()" />
+
+                                    <!-- Calendar and Search Buttons -->
+                                    <div class="input-buttons">
+                                        <button
+                                            id="btn_search"
+                                            type="submit"
+                                            class="search-button2"
+                                            runat="server"
+                                            onserverclick="btn_search_Click">
+                                            <span class="material-symbols-outlined">search</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                &nbsp;&nbsp;
+                        
                             </div>
-                        </div>
 
-                        &nbsp;&nbsp;
- <asp:CheckBox ID="select_all" runat="server" OnCheckedChanged="select_all_CheckedChanged" AutoPostBack="true" Text="Select All" />
-                        &nbsp;&nbsp;
-                        <asp:Label runat="server" ID="lbl_due"></asp:Label>
+                        </div>
                     </div>
                 </div>
+                <div>
+                    <asp:CheckBox ID="select_all" runat="server" OnCheckedChanged="select_all_CheckedChanged" AutoPostBack="true" Text="Select All" />
+                    &nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mr-5">
+                <h3 class=" font-weight-bold mb-0" style="color: #012970;">Total Due</h3>
+                &nbsp;&nbsp;
+ <asp:Label runat="server" ID="lbl_due" Font-Size="24px"></asp:Label>&nbsp;&nbsp;<span style="font-size: 24px;">₹</span>
+
             </div>
         </div>
-                <div class="form-group">
-                    <div class="row ">
-                          
-                        <div class="col-sm-12">
+        <div class="form-group">
+            <div class="row ">
+
+                <div class="col-sm-12">
                             <div style="width: 100%; overflow: auto; height: 263px">
                                 <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView8_PageIndexChanging" PageSize="15" ID="GridView8" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped table_dark" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="Record not found" AllowSorting="true" OnSorting="GridView8_Sorting">
                                    

@@ -35,7 +35,7 @@ namespace DataAccessLayer.MasterDA
             data_item.Add(st.create_array("operation", Maintenance1.Sql_Operation));
             data_item.Add(st.create_array("society_id", Maintenance1.Society_Id));
 
-            status1 = st.run_query(data_item, "Select", "sp_maintenance_master", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_new_maintenance", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

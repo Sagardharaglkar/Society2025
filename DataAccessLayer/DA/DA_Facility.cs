@@ -210,9 +210,10 @@ namespace DataAccessLayer.DA
             data_item.Add(st.create_array("Operation", party.Sql_Operation));
             data_item.Add(st.create_array("search", party.Name));
 
-            status1 = st.run_query(data_item, "Select", "sp_facility", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_facility_booking", ref sdr);
 
             if (status1 == "Done")
+                if(sdr.HasRows)
                 dt.Load(sdr);
             return dt;
         }

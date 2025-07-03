@@ -33,15 +33,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField society_id;
 
         /// <summary>
-        /// Designation_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField Designation_id;
-
-        /// <summary>
         /// txt_search control.
         /// </summary>
         /// <remarks>
@@ -60,6 +51,15 @@ namespace Society
         protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnAdd;
+
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +76,15 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upnlCountry;
+
+        /// <summary>
+        /// Designation_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Designation_id;
 
         /// <summary>
         /// name_id control.
@@ -123,13 +132,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
-        /// categoryRepeater2 control.
+        /// categoryRepeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater categoryRepeater2;
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater1;
 
         /// <summary>
         /// Label4 control.
@@ -159,22 +168,22 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// categoryBox control.
+        /// Textbox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox categoryBox;
+        protected global::System.Web.UI.WebControls.TextBox Textbox2;
 
         /// <summary>
-        /// categoryRepeater control.
+        /// categoryRepeater2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater2;
 
         /// <summary>
         /// lbl_pre_mob control.
@@ -301,6 +310,15 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_username;
+
+        /// <summary>
+        /// passPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel passPanel;
 
         /// <summary>
         /// Label10 control.

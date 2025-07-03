@@ -359,23 +359,23 @@ namespace Society
 
         }
 
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CheckBox1.Checked == true)
-            {
-                DataSet dt = new DataSet();
-                society.Sql_Operation = "reg_exp";
-                society.Society_Id = society_id.Value;
-                dt = bL_Society.chk_reg_exp(society);
-                GridView1.DataSource = dt.Tables[0];
-                ViewState["dirState"] = dt.Tables[0];
-                GridView1.DataBind();
-            }
-            else
-            {
-                Society_Expense_Gridbind();
-            }
-        }
+        //protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (CheckBox1.Checked == true)
+        //    {
+        //        DataSet dt = new DataSet();
+        //        society.Sql_Operation = "reg_exp";
+        //        society.Society_Id = society_id.Value;
+        //        dt = bL_Society.chk_reg_exp(society);
+        //        GridView1.DataSource = dt.Tables[0];
+        //        ViewState["dirState"] = dt.Tables[0];
+        //        GridView1.DataBind();
+        //    }
+        //    else
+        //    {
+        //        Society_Expense_Gridbind();
+        //    }
+        //}
 
         protected void CheckAll_CheckedChanged(object sender, EventArgs e)
         {

@@ -40,16 +40,30 @@ namespace Society
             if (!IsPostBack)
             {
                 String str = "Select *  from UserType where type=1";
-                repeater.fill_list(categoryRepeater, str);
+                repeater.fill_list(categoryRepeater2, str);
                 String str2 = "SELECT * FROM owner_master WHERE  login_status=0 and active_status=0 and type = 'owner' AND society_id='"+ Session["society_id"].ToString() + "'";
-                repeater.fill_list(categoryRepeater2, str2);
+                repeater.fill_list(categoryRepeater1, str2);
                 Society_Member_Gridbind();
 
             }
 
         }
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                name_id.Value = e.CommandArgument.ToString();
+                owner.owner_id = Convert.ToInt32(e.CommandArgument);
+                owner.Sql_Operation = "Select";
+                var result = bl_owner.runproc(owner);
+                txt_contact_no.Text = result.Pre_Mob;
+                txt_email.Text = result.Email;
+                txt_username.Text = result.Email;
 
-        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+            }
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
             {
@@ -60,20 +74,6 @@ namespace Society
             }
         }
 
-        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectCategory")
-            {
-                name_id.Value = e.CommandArgument.ToString();
-                owner.owner_id = Convert.ToInt32(e.CommandArgument);
-                owner.Sql_Operation = "Select";
-                var result  = bl_owner.runproc(owner);
-                txt_contact_no.Text = result.Pre_Mob;
-                txt_email.Text = result.Email;
-                txt_username.Text = result.Email;
-
-            }
-        }
 
         protected void Society_Member_Gridbind()
         {
@@ -159,13 +159,13 @@ namespace Society
             TextBox1.Text = result.Name;
             //txt_address1.Text = result.Address1.ToString();
             //txt_address2.Text = result.Address2.ToString();
-            //txt_contact_no.Text = result.Contact_No.ToString();
-            //txt_email.Text = result.Email.ToString();
+            txt_contact_no.Text = result.Contact_No.ToString();
+            txt_email.Text = result.Email.ToString();
             txt_username.Text = result.UserName.ToString();
             txt_password.Text = result.Password.ToString();
 
             String str = "Select *  from UserType";
-            repeater.fill_list(categoryRepeater, str);
+            repeater.fill_list(categoryRepeater2, str);
 
         }   
 
@@ -220,7 +220,7 @@ namespace Society
             string id = e.CommandArgument.ToString();
             user_id.Value = id;
             runproc_edit_society_member("Select");
-            
+            passPanel.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
@@ -277,15 +277,16 @@ namespace Society
             Society_Member_Gridbind();
         }
 
-        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+
+        protected void categoryRepeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (Designation_id.Value != "")
+                if (name_id.Value != "")
                 {
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
-                    if (link.CommandArgument == Designation_id.Value)
-                        categoryBox.Text = link.Text;
+                    if (link.CommandArgument == name_id.Value)
+                        TextBox1.Text = link.Text;
                 }
             }
         }
@@ -296,10 +297,19 @@ namespace Society
             {
                 if (Designation_id.Value != "")
                 {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == Designation_id.Value)
+                        Textbox2.Text = link.Text;
 
                 }
             }
         }
+
+        protected void showPass(object sender, EventArgs e)
+        {
+            passPanel.Visible = true;
+        }
+
     }
 }
 

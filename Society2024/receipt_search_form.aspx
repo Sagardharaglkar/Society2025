@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="receipt_search_form.aspx.cs" Inherits="Society.receipt_search_form" MasterPageFile="~/Site.Master" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -87,11 +88,25 @@
                                 TextMode="Search" 
                                 AutoPostBack="true"
                                 OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>                    
+                                onkeyup="removeFocusAfterTyping()"/>
+
+                            <ajaxtoolkit:calendarextender
+                                id="CalendarExtender1"
+                                runat="server"
+                                targetcontrolid="txt_search"
+                                popupbuttonid="btn_calendar"
+                                format="dd-MMM-yyyy" />
 
                             <!-- Calendar and Search Buttons -->
                             <div class="input-buttons">
-                                 <button
+                                <img
+                                    id="btn_calendar"
+                                    src="img/calendar.png"
+                                    alt="Pick Date"
+                                    class="calendar-icon"
+                                    style="cursor: pointer;" />
+
+                                <button
                                     id="btn_search"
                                     type="submit"
                                     class="search-button2"

@@ -1,9 +1,11 @@
 ﻿using BusinessLogic.MasterBL;
+using DBCode.DataClass.Master_Dataclass;
 using FirebaseAdmin.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utility.DataClass;
@@ -12,6 +14,10 @@ namespace Society
 {
     public partial class SiteMaster : MasterPage
     {
+
+        Society_Member member = new Society_Member();
+        BL_Society_Member_Master bL_Society = new BL_Society_Member_Master();
+
         BL_User_Login BL_Login = new BL_User_Login();
         Login_Details details = new Login_Details();
         protected void Page_Load(object sender, EventArgs e)
@@ -28,6 +34,7 @@ namespace Society
                     txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
                     name_society.Text = "Welcome To " + Session["society_name"].ToString();
                     get_notificatoin();
+                    //fill_data();
                 }
                 else
                     Panel1.Visible = false;
@@ -84,6 +91,29 @@ namespace Society
         }
 
 
+        protected void fill_data()
+        {
+
+            member.UserId = Convert.ToInt32(Session["UserId"]);
+            member.Sql_Operation = "GetProfile";
+
+            var result = bL_Society.UpdateProfile(member);
+            user_Name.Text = result.Name.ToString();
+            owner_id.Value = result.Owner_id.ToString();
+            userNameIn.Text = result.UserName.ToString();
+            designation.Text = result.role.ToString();
+            Session["pass"] = result.Password.ToString();
+
+            string fullName =result.Name.ToString();
+            string[] parts = fullName.Split(' ');
+
+            fName.Text= parts[0];
+            lName.Text = parts[parts.Length - 1];
+
+            contact.Text = result.Contact_No.ToString();
+            email.Text = result.Email.ToString();
+
+        }
 
         protected void logout_Click(object sender, EventArgs e)
         {
@@ -100,5 +130,31 @@ namespace Society
         {
             get_notificatoin();
         }
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+            member.UserId = Convert.ToInt32(Session["UserId"]);
+            member.Sql_Operation = "UpdateProfile";
+            member.Society_Id = Session["society_id"].ToString();
+            member.Name = fName.Text + " " + lName.Text;
+            member.UserName = userNameIn.Text;
+            member.Password = passwordField.Text == "" ? Session["pass"].ToString() : passwordField.Text;
+            member.Contact_No = contact.Text;
+            member.Email = email.Text;
+            member.Status = 0;
+            member.Owner_id = Convert.ToInt32(owner_id.Value);
+            bL_Society.UpdateProfile(member);
+
+            // Call JS function successentry()
+            ScriptManager.RegisterStartupScript(upnlCountry, upnlCountry.GetType(), "successEntry", "SuccessEntry();", true);
+        }
+
+        protected void Unnamed_ServerClick(object sender, EventArgs e)
+        {
+            fill_data();
+        }
+
+
+        
     }
 }

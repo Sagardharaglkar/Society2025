@@ -79,7 +79,7 @@ namespace Society2024
         protected void btn_search_Click(object sender, EventArgs e)
         {
             getstaff.Name = txt_search.Text.Trim();
-            getstaff.Sql_Operation = "search";
+            getstaff.Sql_Operation = "search_role";
             var result = bL_Staff.search_staff(getstaff);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

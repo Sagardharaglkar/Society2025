@@ -75,7 +75,9 @@
                 input.classList.add("valid-feedback");
                 args.IsValid = true;
             }
+        
         }
+
     </script>
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -328,6 +330,19 @@
     </div>
 
     <script>
+
+       <%-- function setFocusAfterPostBack() {
+            var input = document.getElementById('<%= txt_search.ClientID %>');
+            if (input) {
+                input.focus();
+
+                var val = input.value;
+                input.value = '';
+                put.value = val;
+
+            }
+        }--%>
+ 
 
         function disableSaveButtonIfValid() {
             var btn = document.getElementById('<%= btn_save.ClientID %>');

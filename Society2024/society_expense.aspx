@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="society_expense.aspx.cs" Inherits="Society.society_expense" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>
@@ -76,7 +77,7 @@
                         <asp:HiddenField runat="server" ID="vendor_name_id" />
                         <asp:HiddenField runat="server" ID="building_id" />
 
-                                                         <div class="form-group">
+                                                              <div class="form-group">
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
@@ -90,11 +91,25 @@
                                 TextMode="Search" 
                                 AutoPostBack="true"
                                 OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>                    
+                                onkeyup="removeFocusAfterTyping()"/>
+
+                            <ajaxtoolkit:calendarextender
+                                id="CalendarExtender1"
+                                runat="server"
+                                targetcontrolid="txt_search"
+                                popupbuttonid="btn_calendar"
+                                format="yyyy-MM-dd" />
 
                             <!-- Calendar and Search Buttons -->
                             <div class="input-buttons">
-                                 <button
+                                <img
+                                    id="btn_calendar"
+                                    src="img/calendar.png"
+                                    alt="Pick Date"
+                                    class="calendar-icon"
+                                    style="cursor: pointer;" />
+
+                                <button
                                     id="btn_search"
                                     type="submit"
                                     class="search-button2"
@@ -107,9 +122,6 @@
 
                         &nbsp;&nbsp;
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                  &nbsp;&nbsp;
-
-                        <asp:CheckBox ID="CheckBox1" runat="server" Text="Regular Expense" OnCheckedChanged="CheckBox1_CheckedChanged" AutoPostBack="true" Width="200px" />
                     </div>
                 </div>
             </div>
@@ -152,14 +164,14 @@
                                                         <asp:Label ID="date" runat="server" Text='<%# Bind("date", "{0:dd-MM-yyy}")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Amount" SortExpression="amount">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="amount" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Final Amount" SortExpression="f_amount">
+                                                <asp:TemplateField HeaderText="Amount" SortExpression="f_amount">
                                                     <ItemTemplate>
                                                         <asp:Label ID="f_amount" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                                                                <asp:TemplateField HeaderText="Type" SortExpression="expense_status">
+                                                    <ItemTemplate>
+                                                        <asp:Label runat="server" ID="invoice" Text='<%# Bind("type")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Status" SortExpression="expense_status">

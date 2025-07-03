@@ -11,7 +11,7 @@ namespace DBCode.DataClass.Master_Dataclass
         private string name;
         private int designation;
         private string address1;
-        private string address2;
+        private int address2;
         private string contactno;
         private string email;
         private string societyid;
@@ -38,12 +38,12 @@ namespace DBCode.DataClass.Master_Dataclass
             get { return designation; }
             set { designation = value; }
         }
-        public string Address1
+        public string role
         {
             get { return address1; }
             set { address1 = value; }
         }
-        public string Address2
+        public int Owner_id
         {
             get { return address2; }
             set { address2 = value; }

@@ -220,6 +220,9 @@
         }
 
         @media(max-width: 431px) {
+            .form-control{
+                background:white;
+            }
             .right {
                 display: none;
             }
@@ -230,9 +233,10 @@
             }
 
             .left {
-                margin: auto;
-                width: 80%;
-                border-radius: 23px 0;
+                background: #F0F4F8;
+                height: 100%;
+                width: 100%;
+                padding: 24px;
             }
 
             .new_acc {

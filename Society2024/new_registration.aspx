@@ -149,9 +149,16 @@
 
             .right-panel {
                 width: 100%;
+                background:#F0F4F8;
+                padding: 6px 5px;
+            }
+
+            .form-control{
+                background:white;
             }
 
             .form-container {
+                
                 width: 90vw;
                 margin: 23px auto;
                 box-shadow: none;

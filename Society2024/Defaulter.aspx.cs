@@ -142,7 +142,7 @@ namespace Society2024
         protected void due_fill(object sender, EventArgs e)
         {
 
-            details.Name = null;
+            details.Name = "";
             details.Sql_Operation = "defaulter_show";
             var result = BL_Login.search_defaulter(details);
             if (result != null && result.Rows.Count > 0)

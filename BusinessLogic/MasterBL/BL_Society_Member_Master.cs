@@ -35,6 +35,13 @@ namespace BusinessLogic.MasterBL
          
         }
 
+        public Society_Member UpdateProfile(Society_Member member)
+        {
+
+            return dA_Society_Member.UpdateProfile(member);
+
+        }
+
         public Society_Member delete(Society_Member member)
         {
            
