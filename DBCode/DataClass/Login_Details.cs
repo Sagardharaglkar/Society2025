@@ -44,7 +44,9 @@ namespace Utility.DataClass
         private string web_token;
         private int state_id;
         private int open;
-
+        private string village_id;
+        private string type;
+        private int id;
         private int expense_type;
       
 
@@ -92,6 +94,21 @@ namespace Utility.DataClass
         {
             get { return resolve; }
             set { resolve = value; }
+        }
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public string Village_Id
+        {
+            get { return village_id; }
+            set { village_id = value; }
         }
         public int society_master_id
         {

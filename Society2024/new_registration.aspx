@@ -149,7 +149,7 @@
 
             .right-panel {
                 width: 100%;
-                background:#F0F4F8;
+                            background:#F0F4F8;
                 padding: 6px 5px;
             }
 
@@ -157,8 +157,8 @@
                 background:white;
             }
 
+
             .form-container {
-                
                 width: 90vw;
                 margin: 23px auto;
                 box-shadow: none;
@@ -182,6 +182,15 @@
             </div>
 
             <div class="right-panel">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+           <%-- <h2>Create Account</h2>--%>
+                <div>
+             <asp:RadioButton ID="radiobtn1" runat="server" GroupName="type" Checked="true" ToolTip="Society Login" required />
+                 <span class="ml-2">Society</span>&nbsp;&nbsp;
+                   <asp:RadioButton ID="radiobtn2" runat="server"   GroupName="type" ToolTip="Village Login" required></asp:RadioButton>
+                 <span class="ml-2">Village</span>
+                    </div>
+                </div>
                 <asp:HiddenField ID="UserLoginId" runat="server" />
                 <asp:HiddenField ID="society_id" runat="server" />
                 <h2>Create Account</h2>

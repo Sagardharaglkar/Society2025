@@ -33,6 +33,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
+        /// society control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel society;
+
+        /// <summary>
         /// logout control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton logout;
+
+        /// <summary>
+        /// village control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel village;
 
         /// <summary>
         /// name_society control.

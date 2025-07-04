@@ -33,6 +33,24 @@ namespace Society
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
+        /// radiobtn1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radiobtn1;
+
+        /// <summary>
+        /// radiobtn2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton radiobtn2;
+
+        /// <summary>
         /// UserLoginId control.
         /// </summary>
         /// <remarks>

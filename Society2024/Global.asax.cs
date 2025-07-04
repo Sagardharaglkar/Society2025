@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using Microsoft.AspNet.SignalR;
+using Society;
 
 namespace Society
 {

@@ -64,6 +64,10 @@ namespace BusinessLogic.BL
         {
             return dA_Receipt.get_cashbook(cash);
         }
+        public DataTable get_paid_amount(receipt getReceipt)
+        {
+            return dA_Receipt.Get_Paid_Amount(getReceipt);
+        }
 
         //public receipt email_send(receipt receipt)
         //{

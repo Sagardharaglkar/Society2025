@@ -87,33 +87,6 @@ namespace Society
         protected global::System.Web.UI.UpdatePanel upnlCountry;
 
         /// <summary>
-        /// state_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField state_id;
-
-        /// <summary>
-        /// dist_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField dist_id;
-
-        /// <summary>
-        /// div_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField div_id;
-
-        /// <summary>
         /// lbl_co_name control.
         /// </summary>
         /// <remarks>
@@ -402,22 +375,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label31;
 
         /// <summary>
-        /// TextBox1 control.
+        /// ddl_state control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
-
-        /// <summary>
-        /// categoryRepeater1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater categoryRepeater1;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_state;
 
         /// <summary>
         /// Label37 control.
@@ -447,22 +411,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label39;
 
         /// <summary>
-        /// TextBox2 control.
+        /// ddl_district control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
-
-        /// <summary>
-        /// categoryRepeater2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater categoryRepeater2;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_district;
 
         /// <summary>
         /// Label40 control.
@@ -492,22 +447,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label Label42;
 
         /// <summary>
-        /// TextBox3 control.
+        /// ddl_division control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
-
-        /// <summary>
-        /// categoryRepeater3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater categoryRepeater3;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_division;
 
         /// <summary>
         /// Label14 control.

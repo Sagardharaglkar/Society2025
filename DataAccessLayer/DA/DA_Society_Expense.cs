@@ -65,6 +65,7 @@ namespace DataAccessLayer.DA
             string status1 = "";
 
             DataTable dt = new DataTable();
+
             data_item.Add(st.create_array("operation", expense.Sql_Operation));
             data_item.Add(st.create_array("search", expense.Ex_Name));
 

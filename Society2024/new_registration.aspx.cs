@@ -42,9 +42,11 @@ namespace Society
             Details.Address = txt_Address.Text;
             Details.Mobile = txt_Mobile.Text;
             Details.Emailid = txt_Emailid.Text;
+            Details.Type = radiobtn1.Checked == true ? "Society" : "Village";
             var result = BL_new_Registration.Save_Registration(Details);
             Session["society_id"] = result.Society_Id;
-           
+            Session["village_id"] = result.Village_Id;
+
 
 
         }
@@ -62,7 +64,10 @@ namespace Society
             {
                 runproc_save("Update");
                 // Response.Redirect("society_search.aspx?UserLoginId=" + Session["UserTypeId"].ToString());
-                Response.Redirect("new_society.aspx");
+                if (radiobtn1.Checked)
+                    Response.Redirect("new_society.aspx");
+                else
+                    Response.Redirect("new_village.aspx");
             }
         }
 

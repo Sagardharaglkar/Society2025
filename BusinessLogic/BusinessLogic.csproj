@@ -93,6 +93,7 @@
     <Compile Include="MasterBL\BL_Building_Master.cs" />
     <Compile Include="MasterBL\BL_CareTaker_Master.cs" />
     <Compile Include="MasterBL\BL_Doc_Master.cs" />
+    <Compile Include="MasterBL\BL_House_Tax.cs" />
     <Compile Include="MasterBL\BL_Inventory_Master.cs" />
     <Compile Include="MasterBL\BL_Event_Master.cs" />
     <Compile Include="MasterBL\BL_Flat_Master.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="MasterBL\BL_User_Login.cs" />
     <Compile Include="MasterBL\BL_Vendor_Master.cs" />
     <Compile Include="MasterBL\BL_Village_Master.cs" />
+    <Compile Include="MasterBL\BL_Village_Owner.cs" />
     <Compile Include="MasterBL\BL_Visitor_Master.cs" />
     <Compile Include="MasterBL\BL_Wing_Master.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -99,6 +99,7 @@
     <Compile Include="MasterDA\DA_Doc_Master.cs" />
     <Compile Include="MasterDA\DA_Event_Master.cs" />
     <Compile Include="MasterDA\DA_Flat_Master.cs" />
+    <Compile Include="MasterDA\DA_House_Tax.cs" />
     <Compile Include="MasterDA\DA_Inventory_Master.cs" />
     <Compile Include="DA\DA_Ledger.cs" />
     <Compile Include="MasterDA\DA_Maintenence_Master.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="MasterDA\DA_User_Login.cs" />
     <Compile Include="MasterDA\DA_Vendor_Master.cs" />
     <Compile Include="MasterDA\DA_Village_Master.cs" />
+    <Compile Include="MasterDA\DA_Village_Owner.cs" />
     <Compile Include="MasterDA\DA_Visitor_Master.cs" />
     <Compile Include="MasterDA\DA_Wing_Master.cs" />
     <Compile Include="MasterDA\DA_Suggestion_Request.cs" />

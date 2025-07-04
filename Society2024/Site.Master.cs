@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utility.DataClass;
@@ -14,10 +13,8 @@ namespace Society
 {
     public partial class SiteMaster : MasterPage
     {
-
         Society_Member member = new Society_Member();
         BL_Society_Member_Master bL_Society = new BL_Society_Member_Master();
-
         BL_User_Login BL_Login = new BL_User_Login();
         Login_Details details = new Login_Details();
         protected void Page_Load(object sender, EventArgs e)
@@ -30,11 +27,13 @@ namespace Society
             {
                 if (Session["Name"] != null)
                 {
+                    string str1 = Session["user_type"].ToString();
+                    society.Visible = Session["user_type"].ToString() == "Society";
+                    village.Visible = Session["user_type"].ToString() == "Village";
                     Panel1.Visible = true;
                     txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
                     name_society.Text = "Welcome To " + Session["society_name"].ToString();
                     get_notificatoin();
-                    //fill_data();
                 }
                 else
                     Panel1.Visible = false;
@@ -49,6 +48,7 @@ namespace Society
             //details.UserLoginId = int.Parse(Session["UserId"].ToString());
             //var dt = BL_Login.get_notification(details);
             //notifCount.Text = (dt.Rows.Count > 99) ? "99+" : dt.Rows.Count.ToString();
+            if(Session["society_id"]!= null)
             get_notificatoin();
             upNotifList.Update();
         }
@@ -60,6 +60,7 @@ namespace Society
             //Session["UserId"] = result.UserLoginId;
             details.Sql_Operation = "Notification";
             details.Society_Id = Session["society_id"].ToString();
+
             details.UserLoginId =int.Parse( Session["UserId"].ToString());
 
             var dt =  BL_Login.get_notification(details);
@@ -90,7 +91,6 @@ namespace Society
             }
         }
 
-
         protected void fill_data()
         {
 
@@ -104,10 +104,10 @@ namespace Society
             designation.Text = result.role.ToString();
             Session["pass"] = result.Password.ToString();
 
-            string fullName =result.Name.ToString();
+            string fullName = result.Name.ToString();
             string[] parts = fullName.Split(' ');
 
-            fName.Text= parts[0];
+            fName.Text = parts[0];
             lName.Text = parts[parts.Length - 1];
 
             contact.Text = result.Contact_No.ToString();
@@ -154,7 +154,5 @@ namespace Society
             fill_data();
         }
 
-
-        
     }
 }

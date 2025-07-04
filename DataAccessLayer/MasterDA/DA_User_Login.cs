@@ -33,7 +33,9 @@ namespace DataAccessLayer.MasterDA
                     login.UserLoginId= Convert.ToInt32(sdr["user_id"].ToString());
                     login.Name = sdr["Name"].ToString();
                     login.Society_Id = sdr["society_id"].ToString();
+                    login.Village_Id = sdr["village_id"].ToString();
                     login.Society_Name = sdr["Society_name"].ToString();
+                    login.Type = sdr["type"].ToString();
 
                 }
                

@@ -9,7 +9,7 @@ using System.Net;
 using Utility.DataClass;
 using BusinessLogic.MasterBL;
 
-namespace Society
+namespace Society2024
 {
     public partial class login1 : System.Web.UI.Page
     {
@@ -23,19 +23,28 @@ namespace Society
             details.UserName = txt_Username.Text;
             details.Password = txt_password.Text;
             var result = BL_Login.UpdateLoginDetails(details);
-           Session["UserId"] = result.UserLoginId;
+            Session["UserId"] = result.UserLoginId;
             Session["name"] = result.Name;
             Session["society_id"] = result.Society_Id;
+            Session["village_id"] = result.Village_Id;
             Session["society_name"] = result.Society_Name;
-            if (result.Name != "")
+            Session["user_type"] = result.Type;
+            if (result.Name != null && result.Name != "")
             {
-                Response.Redirect("dashboard.aspx");
+
+               // tokenGenerate(result.UserLoginId.ToString());
+
+                if (result.Village_Id != "")
+                    Response.Redirect("village_dashboard.aspx");
+                else
+                    Response.Redirect("dashboard.aspx");
             }
             else
             {
                 lbl.Text = "Invalid Name or Password";
             }
-           
+
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -109,7 +118,7 @@ namespace Society
     //{
     //    runproc("Update");
     //    // Response.Redirect("society_search.aspx?UserLoginId=" + Session["UserTypeId"].ToString());
-    //    Response.Redirect("new_society.aspx");
+    //    Response.Redirect("new_society2024.aspx");
     //}
 
 

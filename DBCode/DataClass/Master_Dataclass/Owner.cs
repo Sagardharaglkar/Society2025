@@ -50,6 +50,34 @@ namespace DBCode.DataClass
         private int docid;
 
 
+         //Village_Owner
+
+        private int village_owner_id;
+        private int houseno;
+        private string housetype;
+        private decimal sq_ft;
+        private string address;
+        private int state_id;
+        private int district_id;
+        private int taluka_id;
+        private string village_id;
+        private string address_line1;
+
+
+        //house_tax_receipt
+
+        private int house_receipt_id;
+        private DateTime pay_date;
+        private Decimal house_tax;
+        private Decimal paid_amount;
+        private int pay_mode;
+        private Decimal balance;
+        private string chqno;
+        private DateTime chqdate;
+        private Decimal chqamount;
+        private string receipt_no;
+        private float advance;
+
 
     public int owner_id
         {
@@ -242,5 +270,117 @@ namespace DBCode.DataClass
             get { return docid; }
             set { docid = value; }
         }
+
+        //Village_Owner
+
+        public int Village_Owner_id
+        {
+            get { return village_owner_id; }
+            set { village_owner_id = value; }
+        }
+        public int House_No
+        {
+            get { return houseno; }
+            set { houseno = value; }
+        }
+        public string House_Type
+        {
+            get { return housetype; }
+            set { housetype = value; }
+        }
+        public decimal Sq_Ft
+        {
+            get { return sq_ft; }
+            set { sq_ft = value; }
+        }
+        public string Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
+        public int State_Id
+        {
+            get { return state_id; }
+            set { state_id = value; }
+        }
+        public int District_Id
+        {
+            get { return district_id; }
+            set { district_id = value; }
+        }
+        public int Taluka_Id
+        {
+            get { return taluka_id; }
+            set { taluka_id = value; }
+        }
+        public string Village_Id
+        {
+            get { return village_id; }
+            set { village_id = value; }
+        }
+        public string Address_Line1
+        {
+            get { return address_line1; }
+            set { address_line1 = value; }
+        }
+
+
+        //house_tax_receipt
+        public int House_Receipt_Id
+        {
+            get { return house_receipt_id; }
+            set { house_receipt_id = value; }
+        }
+        public DateTime Pay_Date
+        {
+            get { return pay_date; }
+            set { pay_date = value; }
+        }
+        public Decimal House_Tax
+        {
+            get { return house_tax; }
+            set { house_tax = value; }
+        }
+        public Decimal Paid_Amount
+        {
+            get { return paid_amount; }
+            set { paid_amount = value; }
+        }
+        public int Pay_Mode
+        {
+            get { return pay_mode; }
+            set { pay_mode = value; }
+        }
+        public Decimal Balance
+        {
+            get { return balance; }
+            set { balance = value; }
+        }
+        public string Chqno
+        {
+            get { return chqno; }
+            set { chqno = value; }
+        }
+        public Decimal Chq_Amount
+        {
+            get { return chqamount; }
+            set { chqamount = value; }
+        }
+        public DateTime Chqdate
+        {
+            get { return chqdate; }
+            set { chqdate = value; }
+        }
+        public string Receipt_No
+        {
+            get { return receipt_no; }
+            set { receipt_no = value; }
+        }
+        public float Advance
+        {
+            get { return advance; }
+            set { advance = value; }
+        }
     }
 }
+

@@ -18,38 +18,58 @@ namespace DataAccessLayer.DA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public Login_Details update_registration(Login_Details details)
+        public Login_Details update_registration(Login_Details details)                                         
         {
 
-            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+          ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
 
             SqlDataReader sdr1 = null;
             int sdr = 0;
 
             string status1 = "";
-            data_item.Add(st.create_array("operation", "new_society"));
-           
-            status1=st.run_query_scalar(data_item, "Select", "sp_UserLogin", ref sdr);
+            if (details.Type == "Society")
+                data_item.Add(st.create_array("operation", "new_society"));
+            else
+
+                data_item.Add(st.create_array("operation", "new_village"));
+            status1 = st.run_query_scalar(data_item, "Select", "sp_UserLogin", ref sdr);
             if (status1 == "Done")
-                details.society_master_id =Convert.ToInt32(sdr.ToString());
+                details.Id = Convert.ToInt32(sdr.ToString());
             data_item.Clear();
 
             data_item.Add(st.create_array("operation", "Select"));
-            data_item.Add(st.create_array("society_master_id", details.society_master_id));
-            status1 = st.run_query(data_item, "Select", "sp_society_master", ref sdr1);
+
+            if (details.Type == "Society")
+            {
+
+                data_item.Add(st.create_array("society_master_id", details.Id));
+                status1 = st.run_query(data_item, "Select", "sp_society_master", ref sdr1);
+            }
+            else
+            {
+                data_item.Add(st.create_array("id", details.Id));
+                status1 = st.run_query(data_item, "Select", "sp_village_master", ref sdr1);
+            }
             if (status1 == "Done")
                 if (sdr1.Read())
-                    details.Society_Id = sdr1["society_id"].ToString();
-            data_item.Clear();
+                {
+                    if (details.Type == "Society")
+                        details.Society_Id = sdr1["society_id"].ToString();
+                    else
+                        details.Village_Id = sdr1["village_id"].ToString();
+                }
+                    data_item.Clear();
             data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("user_id", details.UserLoginId));
-            if (details.Sql_Operation == "Update")
+           if (details.Sql_Operation == "Update")
             {
                 if(details.Designation==0)
                     data_item.Add(st.create_array("user_type_id", 1));
                 else
                 data_item.Add(st.create_array("user_type_id", details.Designation));
+                data_item.Add(st.create_array("type", details.Type));
                 data_item.Add(st.create_array("society_id", details.Society_Id));
+                data_item.Add(st.create_array("village_id", details.Village_Id));
                 data_item.Add(st.create_array("Name", details.Name));
                 data_item.Add(st.create_array("UserName", details.UserName));
                 data_item.Add(st.create_array("Password", details.Password));
@@ -156,7 +176,84 @@ namespace DataAccessLayer.DA
         //{
 
         //}
+        public Login_Details Textchanged_Reg(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status = "";
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("id", details.Id));
+            data_item.Add(st.create_array("name", details.Name));
+            data_item.Add(st.create_array("registration_no", details.Registration_No));
 
+            status = st.run_query(data_item, "Select", "sp_village_master", ref sdr);
+
+            if (status == "Done")
+                if (sdr.Read())
+                    details.Sql_Result = "Already exist";
+                else
+                    details.Sql_Result = "";
+            return details;
+        }
+
+        public Login_Details Select_Village(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1 = "";
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("id", details.Id));
+            status1 = st.run_query(data_item, "Select", "sp_village_master", ref sdr);
+            if (status1 == "Done")
+            {
+                if (details.Sql_Operation == "Select")
+                {
+                    while (sdr.Read())
+                    {
+
+                        details.Village_Id = sdr["village_id"].ToString();
+                        details.Contact_No1 = sdr["contact_no"].ToString();
+                        details.Email = sdr["email"].ToString();
+                        details.Address = sdr["address"].ToString();
+                        details.State_Id = Convert.ToInt32(sdr["state_id"].ToString());
+                        details.Pincode = sdr["pincode"].ToString();
+                        details.Division = sdr["division"].ToString();
+                        details.District_Id = Convert.ToInt32(sdr["district_id"].ToString());
+
+                    }
+                }
+
+            }
+            return details;
+        }
+
+        public Login_Details Update_Village(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            int sdr1 = 0;
+            string status1 = "";
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("id", details.Id));
+            if (details.Sql_Operation == "Update")
+            {
+                data_item.Add(st.create_array("village_id", details.Village_Id));
+                data_item.Add(st.create_array("name", details.Name));
+                data_item.Add(st.create_array("contact_no", details.Contact_No1));
+                data_item.Add(st.create_array("address", details.Address));
+                data_item.Add(st.create_array("email", details.Email));
+                data_item.Add(st.create_array("state_id", details.State_Id));
+                data_item.Add(st.create_array("pincode", details.Pincode));
+                data_item.Add(st.create_array("division", details.Division));
+                data_item.Add(st.create_array("district_id", details.District_Id));
+
+            }
+            status1 = st.run_query_scalar(data_item, "Select", "sp_village_master", ref sdr1);
+
+            return details;
+        }
+
+       
         public Login_Details select_society(Login_Details details)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
@@ -193,7 +290,21 @@ namespace DataAccessLayer.DA
             return details;
 
         }
+        public Login_Details Delete_Village(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status = "";
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("id", details.Id));
 
+            status = st.run_query(data_item, "Delete", "sp_village_master", ref sdr);
+            if (status == "Done")
+            {
+                details.Sql_Result = status;
+            }
+            return details;
+        }
         public Login_Details New_Society(Login_Details details)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();

@@ -53,9 +53,28 @@ namespace BusinessLogic.BL
             return dA_New_Registration.select_society(details);
         }
 
+        public Login_Details reg_textchanged(Login_Details details)
+        {
+            return dA_New_Registration.Textchanged_Reg(details);
+        }
+
+        public Login_Details delete_village(Login_Details details)
+        {
+            return dA_New_Registration.Delete_Village(details);
+        }
+
         public Login_Details Email_Check(Login_Details details)
         {
             return dA_New_Registration.email_check(details);
+        }
+        public Login_Details update_village(Login_Details details)
+        {
+            return dA_New_Registration.Update_Village(details);
+        }
+
+        public Login_Details select_village(Login_Details details)
+        {
+            return dA_New_Registration.Select_Village(details);
         }
     }
 }

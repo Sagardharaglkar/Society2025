@@ -93,6 +93,8 @@
     <Compile Include="DataClass\Master_Dataclass\Doc.cs" />
     <Compile Include="DataClass\Master_Dataclass\Event.cs" />
     <Compile Include="DataClass\Master_Dataclass\Flat.cs" />
+    <Compile Include="DataClass\Master_Dataclass\house.cs" />
+    <Compile Include="DataClass\Master_Dataclass\House_Tax.cs" />
     <Compile Include="DataClass\Master_Dataclass\Inventory.cs" />
     <Compile Include="DataClass\Master_Dataclass\Meeting.cs" />
     <Compile Include="DataClass\Master_Dataclass\Notice.cs" />
@@ -102,9 +104,11 @@
     <Compile Include="DataClass\Master_Dataclass\Search_Society.cs" />
     <Compile Include="DataClass\Master_Dataclass\Servent_Made.cs" />
     <Compile Include="DataClass\Master_Dataclass\Society_Member.cs" />
+    <Compile Include="DataClass\Master_Dataclass\Sq_ft.cs" />
     <Compile Include="DataClass\Master_Dataclass\Suggestion_Request.cs" />
     <Compile Include="DataClass\Master_Dataclass\Vendor.cs" />
     <Compile Include="DataClass\Master_Dataclass\Village.cs" />
+    <Compile Include="DataClass\Master_Dataclass\VillageOwner.cs" />
     <Compile Include="DataClass\Master_Dataclass\Visitor.cs" />
     <Compile Include="DataClass\Master_Dataclass\Wing.cs" />
     <Compile Include="DataClass\meeting_extension.cs" />

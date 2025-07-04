@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login1.aspx.cs" Inherits="Society.login1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login1.aspx.cs" Inherits="Society2024.login1" %>
 
 <!DOCTYPE html>
 
@@ -61,6 +61,7 @@
             background: #ffffff;
             padding: 40px;
             box-sizing: border-box;
+
         }
 
             .left h2 {
@@ -220,7 +221,7 @@
         }
 
         @media(max-width: 431px) {
-            .form-control{
+                        .form-control{
                 background:white;
             }
             .right {
@@ -233,6 +234,9 @@
             }
 
             .left {
+                              margin: auto;
+                width: 80%;
+                border-radius: 23px 0;
                 background: #F0F4F8;
                 height: 100%;
                 width: 100%;

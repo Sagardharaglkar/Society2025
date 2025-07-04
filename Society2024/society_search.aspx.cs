@@ -1,19 +1,18 @@
-﻿using BusinessLogic.BL;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Web.UI.WebControls;
+using System.Data;
 //using System.Windows.Controls;
 //using Azure;
 using BusinessLogic.MasterBL;
-using ClosedXML.Excel;
-using DBCode.DataClass;
-using DBCode.DataClass.Master_Dataclass;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.IO;
+using DBCode.DataClass.Master_Dataclass;
+using DBCode.DataClass;
 using System.Windows.Forms;
+using System.Web.UI;
+using ClosedXML.Excel;
 //using System.IdentityModel.Metadata;
 
 
@@ -22,7 +21,6 @@ namespace Society
 {
     public partial class society_search : System.Web.UI.Page
     {
-        BL_FillRepeater repeater = new BL_FillRepeater();
         private BL_Society_Master bL_Society = new BL_Society_Master();
         private Search_Society society = new Search_Society();
         private Wing wing = new Wing();
@@ -35,15 +33,14 @@ namespace Society
         private Building building = new Building();
         private BL_Society_Member_Master bL_Society_Member = new BL_Society_Member_Master();
         private Society_Member member = new Society_Member();
-        string upfilename;
-
+        string  upfilename;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }
-            else
+            }else
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
 
@@ -51,56 +48,17 @@ namespace Society
                 fill_drop1();
                 Society_Gridbind();
 
-                String str = "Select *  from state";
-                repeater.fill_list(categoryRepeater1, str);
-
-                String str2 = "Select *  from district";
-                repeater.fill_list(categoryRepeater2, str2);
-
-                String str3 = "Select *  from division";
-                repeater.fill_list(categoryRepeater3, str3);
             }
 
         }
-
-        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectCategory")
-            {
-                state_id.Value = e.CommandArgument.ToString();
-
-
-                String str2 =" select * from dbo.district Where state_id = " + state_id.Value;
-                repeater.fill_list(categoryRepeater2, str2);
-            }
-        }
-        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectCategory")
-            {
-                dist_id.Value = e.CommandArgument.ToString();
-
-                string sql2 = "select * from dbo.division Where district_id=" + dist_id.Value;
-                repeater.fill_list(categoryRepeater3, sql2);
-            }
-        }
-        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectCategory")
-            {
-                div_id.Value = e.CommandArgument.ToString();
-            }
-        }
-
-
         public void fill_drop1()
         {
-            //String sql_query = "Select *  from state";
-            //bL_Society.fill_drop(ddl_state, sql_query, "state", "state_id");
-            //String sql_query1 = "Select *  from district";
-            //bL_Society.fill_drop(ddl_district, sql_query1, "district", "district_id");
-            //String sql_query2 = "Select *  from division";
-            //bL_Society.fill_drop(ddl_division, sql_query2, "division", "division_id");
+            String sql_query = "Select *  from state";
+            bL_Society.fill_drop(ddl_state, sql_query, "state", "state_id");
+            String sql_query1 = "Select *  from district";
+            bL_Society.fill_drop(ddl_district, sql_query1, "district", "district_id");
+            String sql_query2 = "Select *  from division";
+            bL_Society.fill_drop(ddl_division, sql_query2, "division", "division_id");
         }
 
         public void Society_Gridbind()
@@ -111,7 +69,7 @@ namespace Society
             GridView1.DataSource = dt.Tables[0];
             ViewState["dirState"] = dt.Tables[0];
             GridView1.DataBind();
-
+           
 
         }
 
@@ -146,7 +104,7 @@ namespace Society
 
             society.Name = txt_search.Text.Trim();
             society.Sql_Operation = "search";
-
+            
             var result = bL_Society.search_society(society);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
@@ -169,11 +127,11 @@ namespace Society
             society.Contact_No1 = txt_contact_no1.Text;
             society.Email = txt_email.Text;
             society.City = txt_city.Text;
-            society.State_Id = Convert.ToInt32(state_id.Value.ToString());
+            society.State_Id = Convert.ToInt32(ddl_state.SelectedValue.ToString());
             society.Pincode = txt_pincode.Text;
             society.Home_No = Convert.ToInt32(txt_street.Text);
-            society.Division = div_id.Value;
-            society.District_Id = Convert.ToInt32(dist_id.Value);
+            society.Division =ddl_division.SelectedValue;
+            society.District_Id = Convert.ToInt32(ddl_district.SelectedValue);
             society.Tan_No = txt_tan_no.Text;
             society.Gstin_No = txt_gstin_no.Text;
             society.Pan_No = txt_pan_no.Text;
@@ -187,7 +145,7 @@ namespace Society
             society.Sql_Operation = operation;
 
             var result = bL_Society.updateSocietyDetails(society);
-
+            
 
             (society_master_id.Value) = result.society_master_id.ToString();
             society_id.Value = result.Society_Id;
@@ -199,11 +157,11 @@ namespace Society
             txt_contact_no1.Text = result.Contact_No1;
             txt_email.Text = result.Email;
             txt_city.Text = result.City;
-            state_id.Value = result.State_Id.ToString();
+            ddl_state.SelectedValue = result.State_Id.ToString();
             txt_pincode.Text = result.Pincode;
             txt_street.Text = result.Home_No.ToString();
-            div_id.Value = result.Division.ToString();
-            dist_id.Value = result.District_Id.ToString();
+            ddl_division.Text = result.Division.ToString();
+            ddl_district.SelectedValue = result.District_Id.ToString();
             txt_tan_no.Text = result.Tan_No;
             txt_gstin_no.Text = result.Gstin_No;
             txt_pan_no.Text = result.Pan_No;
@@ -238,13 +196,13 @@ namespace Society
         protected void btn_delete_Click(object sender, EventArgs e)
         {
 
-            if (society_master_id.Value != "")
-                society.society_master_id = Convert.ToInt32(society_master_id.Value);
-            society.Sql_Operation = "Delete";
+                if (society_master_id.Value != "")
+                    society.society_master_id = Convert.ToInt32(society_master_id.Value);
+                society.Sql_Operation = "Delete";
 
-
-            bL_Society.delete(society);
-
+               
+                bL_Society.delete(society);
+            
             Response.Redirect("society_search.aspx");
         }
 
@@ -255,22 +213,22 @@ namespace Society
             string id = e.CommandArgument.ToString();
             society_master_id.Value = id;
             runproc("Select");
-
+            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
             //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "OpenModal()", "<script>$('#mymodal').modal('show');</script>", true);
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+           
+                GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+                System.Web.UI.WebControls.Label society_master_id = (System.Web.UI.WebControls.Label)row.FindControl("society_master_id");
+                society.Sql_Operation = "Delete";
 
-            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-            System.Web.UI.WebControls.Label society_master_id = (System.Web.UI.WebControls.Label)row.FindControl("society_master_id");
-            society.Sql_Operation = "Delete";
-
-            society.society_master_id = Convert.ToInt32(society_master_id.Text);
-            bL_Society.delete(society);
-
-            Society_Gridbind();
+                society.society_master_id = Convert.ToInt32(society_master_id.Text);
+                bL_Society.delete(society);
+            
+                Society_Gridbind();
         }
 
 
@@ -306,6 +264,130 @@ namespace Society
                 Label22.Text = result.Sql_Result;
             }
         }
+        //public void document()
+        //{
+
+        //    if (FileUpload1.HasFiles)
+        //    {
+
+        //        foreach (HttpPostedFile file_name in FileUpload1.PostedFiles)
+        //        {
+        //            file_name.SaveAs(System.IO.Path.Combine(Server.MapPath(file_name.FileName)));
+        //            upfilename = file_name.FileName;
+        //        }
+
+        //        path = System.IO.Path.Combine(Server.MapPath(file_name.FileName));
+        //    }
+        //}
+
+        //protected void btn_photo_upload_Click(object sender, EventArgs e)
+        //{
+        //    uploadedfiles.Text = "";
+
+        //    document();
+
+        //            ImportDataFromExcel(path + "\\"+ upfilename);
+
+
+
+        //}
+        //public void ImportDataFromExcel(string excelFilePath)
+        //{
+
+        //    string[] upfile;
+        //    upfile = upfilename.Split('.');
+
+        //    ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+        //    SqlDataReader sdr = null;
+        //    string status1 = "";
+        //    int count = 0;
+        //    Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+        //    Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+        //    try
+        //    {
+        //        xlWorkBook = xlApp.Workbooks.Open(excelFilePath, 0, true, 5, "", "", false, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", true, false, 0, true, 0);
+
+        //        Microsoft.Office.Interop.Excel.Worksheet worksheet1 = (Microsoft.Office.Interop.Excel.Worksheet)xlApp.Worksheets.Item[1];
+
+        //        int sheet1LastRowCount = worksheet1.UsedRange.Rows.Count;
+        //        int columnCount = worksheet1.UsedRange.Columns.Count;
+        //        string[] firstRow = new string[columnCount];
+        //        for (int i = 2; i <= sheet1LastRowCount; i++)
+        //        {
+        //            if (worksheet1.Range["A" + i, "A" + i].Value2.ToString().Trim() != null)
+        //            {
+        //                if (!string.IsNullOrEmpty(society_master_id.Value))
+        //                    society.society_master_id = Convert.ToInt32(society_master_id.Value);
+
+        //                society.Sql_Operation = "Update";
+        //                society.Name = worksheet1.Range["A" + i, "A" + i].Value2.ToString().Trim();
+
+        //                society.Registration_No = worksheet1.Range["C" + i, "C" + i].Value2.ToString().Trim();
+        //                society.Off_Address1 = worksheet1.Range["D" + i, "D" + i].Value2.ToString().Trim();
+        //                society.Off_Address2 = worksheet1.Range["E" + i, "E" + i].Value2.ToString().Trim();
+        //                society.Contact_No1 = worksheet1.Range["F" + i, "F" + i].Value2.ToString().Trim();
+        //                society.Email = worksheet1.Range["G" + i, "G" + i].Value2.ToString().Trim();
+        //                //society.Society_Id = worksheet1.Range["H" + i, "H" + i].Value2.ToString().Trim();
+        //                society.City = worksheet1.Range["I" + i, "I" + i].Value2.ToString().Trim();
+
+        //                society.Pincode = worksheet1.Range["K" + i, "K" + i].Value2.ToString().Trim();
+        //                society.Tan_No = worksheet1.Range["L" + i, "L" + i].Value2.ToString().Trim();
+        //                society.Gstin_No = worksheet1.Range["M" + i, "M" + i].Value2.ToString().Trim();
+        //                society.Pan_No = worksheet1.Range["N" + i, "N" + i].Value2.ToString().Trim();
+
+        //                society.Establish_Date = Convert.ToDateTime(worksheet1.Range["B" + i, "B" + i].Value.ToString().Trim());
+        //                society.State_Id = Convert.ToInt32(worksheet1.Range["J" + i, "J" + i].Value2.ToString().Trim());
+
+        //                bL_Society.updateSocietyDetails(society);
+        //            }
+        //        }
+        //        if (uploadedfiles.Text != "Selected Values Does not match to Excel data")
+        //        {
+        //            if (count > 0)
+        //            {
+        //                uploadedfiles.Text = "   " + count + " Rows  Updated Successfully";
+        //                runproc("Update");
+        //            }
+        //            else
+        //                uploadedfiles.Text = "Already have data!!";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        uploadedfiles.Text = ex.ToString();
+        //        Console.WriteLine(ex.Message);
+        //        xlApp.Quit();
+        //    }
+        //    finally
+        //    {
+        //        xlApp.Quit();
+        //    }
+        //    //File.Delete(excelFilePath);
+
+        //}
+
+        protected void ddl_state_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddl_state.Text != "select")
+            {
+
+                string sql1 = "select * from dbo.district Where state_id=" + ddl_state.SelectedValue;
+                bL_Society.fill_drop(ddl_district, sql1, "district", "district_id");
+
+            }
+        }
+
+        protected void ddl_district_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddl_district.Text != "select")
+            {
+
+                string sql2 = "select * from dbo.division Where district_id=" + ddl_district.SelectedValue;
+                bL_Society.fill_drop(ddl_division, sql2, "division", "division_id");
+
+            }
+        }
+
 
 
 
@@ -372,75 +454,75 @@ namespace Society
 
 
 
-        public void ImportDataFromExcel(string excelFilePath)
+    public void ImportDataFromExcel(string excelFilePath)
+    {
+        int count = 0;
+
+        try
         {
-            int count = 0;
-
-            try
+            using (var workbook = new XLWorkbook(excelFilePath))
             {
-                using (var workbook = new XLWorkbook(excelFilePath))
+                var worksheet = workbook.Worksheet(1);
+                int sheet1LastRowCount = worksheet.LastRowUsed().RowNumber();
+
+                for (int i = 2; i <= sheet1LastRowCount; i++)
                 {
-                    var worksheet = workbook.Worksheet(1);
-                    int sheet1LastRowCount = worksheet.LastRowUsed().RowNumber();
-
-                    for (int i = 2; i <= sheet1LastRowCount; i++)
+                    var cellA = worksheet.Cell("A" + i).GetString().Trim();
+                    if (!string.IsNullOrEmpty(cellA))
                     {
-                        var cellA = worksheet.Cell("A" + i).GetString().Trim();
-                        if (!string.IsNullOrEmpty(cellA))
+                        if (ddl_import.SelectedValue == "society_member")
                         {
-                            if (ddl_import.SelectedValue == "society_member")
-                            {
-                                member.Society_Id = society_id.Value;
-                                member.Name = worksheet.Cell("A" + i).GetString().Trim();
-                                member.Contact_No = worksheet.Cell("E" + i).GetString().Trim();
-                                member.Sql_Operation = "chk_name";
+                            member.Society_Id = society_id.Value;
+                            member.Name = worksheet.Cell("A" + i).GetString().Trim();
+                            member.Contact_No = worksheet.Cell("E" + i).GetString().Trim();
+                            member.Sql_Operation = "chk_name";
 
-                                var society_member_exist = bL_Society_Member.SocietyMemberTextChange(member);
-                                if (string.IsNullOrEmpty(society_member_exist.Sql_Result))
-                                {
-                                    member.Sql_Operation = "Update";
-                                    member.Designation = getRole(worksheet.Cell("B" + i).GetString().Trim());
-                                    //member.role = worksheet.Cell("C" + i).GetString().Trim();
-                                    //member.Address2 = worksheet.Cell("D" + i).GetString().Trim();
-                                    member.Email = worksheet.Cell("F" + i).GetString().Trim();
-                                    member.UserName = worksheet.Cell("G" + i).GetString().Trim();
-                                    member.Password = worksheet.Cell("H" + i).GetString().Trim();
-                                    bL_Society_Member.updateSocietyMemberDetails(member);
-                                    count++;
-                                }
-                            }
-                            else if (ddl_import.SelectedValue == "building")
+                            var society_member_exist = bL_Society_Member.SocietyMemberTextChange(member);
+                            if (string.IsNullOrEmpty(society_member_exist.Sql_Result))
                             {
-                                building.Registration_No = worksheet.Cell("F" + i).GetString().Trim();
-                                building.Sql_Operation = "check_no";
-                                var building_exist = bL_Building.BuildingTextchange(building);
+                                member.Sql_Operation = "Update";
+                                member.Designation = getRole(worksheet.Cell("B" + i).GetString().Trim());
+                                //member.Address1 = worksheet.Cell("C" + i).GetString().Trim();
+                                //member.Address2 = worksheet.Cell("D" + i).GetString().Trim();
+                                member.Email = worksheet.Cell("F" + i).GetString().Trim();
+                                member.UserName = worksheet.Cell("G" + i).GetString().Trim();
+                                member.Password = worksheet.Cell("H" + i).GetString().Trim();
+                                bL_Society_Member.updateSocietyMemberDetails(member);
+                                count++;
+                            }
+                        }
+                        else if (ddl_import.SelectedValue == "building")
+                        {
+                            building.Registration_No = worksheet.Cell("F" + i).GetString().Trim();
+                            building.Sql_Operation = "check_no";
+                            var building_exist = bL_Building.BuildingTextchange(building);
 
-                                if (string.IsNullOrEmpty(building_exist.Sql_Result))
-                                {
-                                    building.Sql_Operation = "Update";
-                                    building.Society_Id = society_id.Value;
-                                    building.Name = worksheet.Cell("A" + i).GetString().Trim();
-                                    building.Address1 = worksheet.Cell("B" + i).GetString().Trim();
-                                    building.Address2 = worksheet.Cell("C" + i).GetString().Trim();
-                                    building.No_Of_Floore = int.TryParse(worksheet.Cell("D" + i).GetString().Trim(), out int floors) ? floors : 0;
-                                    building.Print_Name = worksheet.Cell("E" + i).GetString().Trim();
-                                    building.Bank_Name = worksheet.Cell("G" + i).GetString().Trim();
-                                    building.Bank_Add = worksheet.Cell("H" + i).GetString().Trim();
-                                    building.Branch = worksheet.Cell("I" + i).GetString().Trim();
-                                    building.Ifsc_Code = worksheet.Cell("J" + i).GetString().Trim();
-                                    building.Acc_No = worksheet.Cell("K" + i).GetString().Trim();
-                                    building.Email = worksheet.Cell("L" + i).GetString().Trim();
-                                    bL_Building.updateBuildingDetails(building);
-                                    count++;
-                                }
-                            }
-                            else if (ddl_import.SelectedValue == "owner")
+                            if (string.IsNullOrEmpty(building_exist.Sql_Result))
                             {
-                                wing.Sql_Operation = "getbuilding";
-                                wing.Society_Id = society_id.Value;
-                                wing.B_Name = worksheet.Cell("A" + i).GetString().Trim();
-                                var build = bL_Wing.Get_Building(wing);
-                                wing.build_id = build.build_id;
+                                building.Sql_Operation = "Update";
+                                building.Society_Id = society_id.Value;
+                                building.Name = worksheet.Cell("A" + i).GetString().Trim();
+                                building.Address1 = worksheet.Cell("B" + i).GetString().Trim();
+                                building.Address2 = worksheet.Cell("C" + i).GetString().Trim();
+                                building.No_Of_Floore = int.TryParse(worksheet.Cell("D" + i).GetString().Trim(), out int floors) ? floors : 0;
+                                building.Print_Name = worksheet.Cell("E" + i).GetString().Trim();
+                                building.Bank_Name = worksheet.Cell("G" + i).GetString().Trim();
+                                building.Bank_Add = worksheet.Cell("H" + i).GetString().Trim();
+                                building.Branch = worksheet.Cell("I" + i).GetString().Trim();
+                                building.Ifsc_Code = worksheet.Cell("J" + i).GetString().Trim();
+                                building.Acc_No = worksheet.Cell("K" + i).GetString().Trim();
+                                building.Email = worksheet.Cell("L" + i).GetString().Trim();
+                                bL_Building.updateBuildingDetails(building);
+                                count++;
+                            }
+                        }
+                        else if (ddl_import.SelectedValue == "owner")
+                        {
+                            wing.Sql_Operation = "getbuilding";
+                            wing.Society_Id = society_id.Value;
+                            wing.B_Name = worksheet.Cell("A" + i).GetString().Trim();
+                            var build = bL_Wing.Get_Building(wing);
+                            wing.build_id = build.build_id;
                                 if (build.build_id != 0)
                                 {
                                     wing.Sql_Operation = "check_name";
@@ -520,29 +602,29 @@ namespace Society
 
 
                                 }
-                            }
                         }
                     }
                 }
+            }
 
-                uploadedfiles.Text = count > 0
-                    ? $"{count} Rows Inserted Successfully"
-                    : "Rows already exist";
-            }
-            catch (Exception ex)
-            {
-                uploadedfiles.Text = ex.ToString();
-            }
-            finally
-            {
-                if (File.Exists(excelFilePath))
-                    File.Delete(excelFilePath);
-            }
+            uploadedfiles.Text = count > 0
+                ? $"{count} Rows Inserted Successfully"
+                : "Rows already exist";
         }
+        catch (Exception ex)
+        {
+            uploadedfiles.Text = ex.ToString();
+        }
+        finally
+        {
+            if (File.Exists(excelFilePath))
+                File.Delete(excelFilePath);
+        }
+    }
 
 
 
-        private int getUsage(string usage)
+    private int getUsage(string usage)
         {
             if (usage == "Residential")
                 return 1;

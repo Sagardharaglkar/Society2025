@@ -31,8 +31,6 @@ namespace BusinessLogic.MasterBL
             return DA_Owner.updateOwnerDetails(owner);
         }
 
-
-
         public Owner updateFamilyOwnerDetails(Owner owner)
         {
             
@@ -135,5 +133,8 @@ namespace BusinessLogic.MasterBL
         {
             return DA_Owner.GetFlat(owner);
         }
+
+        //house_tax
+        
     }
 }

@@ -49,7 +49,7 @@ namespace Society
             }
         }
 
-           protected void Allbound()
+        protected void Allbound()
         {
             String str1 = "Select vendor_id,v_name from vendor_master where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater1, str1);
@@ -173,8 +173,8 @@ namespace Society
             {
                 society.expense_id = Convert.ToInt32(expense_id.Value);
                 society.User_Id = Convert.ToInt32(dataRow["user_id"].ToString());
-                if(dataRow["type"].ToString()!="get")
-                bL_Society.updateApprover(society);
+                if (dataRow["type"].ToString() != "get")
+                    bL_Society.updateApprover(society);
             }
         }
 
@@ -198,7 +198,7 @@ namespace Society
                 cash.Checked = true;
                 TextBox1.Text = result.Ex_Name;
                 drp_Container.Visible = false;
-                
+
             }
             else
 
@@ -224,7 +224,7 @@ namespace Society
             txt_tax.Text = result.Tax.ToString();
             txt_tds.Text = result.Tds.ToString();
             txt_famount.Text = result.F_Amount.ToString();
-            if(result.Status==1)
+            if (result.Status == 1)
             {
                 expense_panel.Enabled = false;
             }
@@ -254,7 +254,7 @@ namespace Society
             expense_id.Value = id;
             runproc("Select");
             btn_delete.Visible = true;
-          
+
             btn_add.Visible = false;
             getapprovallist();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
@@ -273,7 +273,7 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            
+
             if (GridView3.Rows.Count > 0)
             {
                 runproc_save("Update");
@@ -414,7 +414,7 @@ namespace Society
             DataSet dt = new DataSet();
             member.Sql_Operation = "add_approver";
             member.Society_Id = society_id.Value;
-            member.UserId =Convert.ToInt32( Session["UserId"].ToString());
+            member.UserId = Convert.ToInt32(Session["UserId"].ToString());
             dt = bL_Society_member.add_approver(member);
 
 
@@ -587,7 +587,7 @@ namespace Society
 
 
             }
-            
+
         }
 
 
@@ -601,7 +601,7 @@ namespace Society
             society.Sql_Operation = "update_status";
             bL_Society.update_status(society);
             getapprovallist();
-           
+
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -655,6 +655,5 @@ namespace Society
         }
     }
 }
-
 
 

@@ -232,7 +232,15 @@
     <Content Include="errorPage.aspx" />
     <Content Include="errorPage500.aspx" />
     <Content Include="ForgetPassword.aspx" />
+    <Content Include="house_master.aspx" />
+    <Content Include="house_tax.aspx" />
+    <Content Include="house_tax_receipt.aspx" />
     <Content Include="img\errorImg404.png" />
+    <Content Include="new_village.aspx" />
+    <Content Include="Paid_amountreport.aspx" />
+    <Content Include="print_house_owner.aspx" />
+    <Content Include="print_house_tax_receipt.aspx" />
+    <Content Include="square_feet_rate.aspx" />
     <Content Include="support_ticket.aspx" />
     <Content Include="About.aspx" />
     <Content Include="account_setting.aspx" />
@@ -321,7 +329,11 @@
     <Content Include="TokenService.asmx" />
     <Content Include="upload_doc_search.aspx" />
     <Content Include="vendor_search.aspx" />
+    <Content Include="village_dashboard.aspx" />
+    <Content Include="village_master.aspx" />
+    <Content Include="village_owner_master.aspx" />
     <Content Include="visitor_search.aspx" />
+    <Content Include="water_tax.aspx" />
     <Content Include="wing_search.aspx" />
     <Content Include="ledger.xsc">
       <DependentUpon>ledger.xsd</DependentUpon>
@@ -2167,6 +2179,62 @@
     <Compile Include="ForgetPassword.aspx.designer.cs">
       <DependentUpon>ForgetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="house_master.aspx.cs">
+      <DependentUpon>house_master.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="house_master.aspx.designer.cs">
+      <DependentUpon>house_master.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="house_tax.aspx.cs">
+      <DependentUpon>house_tax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="house_tax.aspx.designer.cs">
+      <DependentUpon>house_tax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="house_tax_receipt.aspx.cs">
+      <DependentUpon>house_tax_receipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="house_tax_receipt.aspx.designer.cs">
+      <DependentUpon>house_tax_receipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="new_village.aspx.cs">
+      <DependentUpon>new_village.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="new_village.aspx.designer.cs">
+      <DependentUpon>new_village.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paid_amountreport.aspx.cs">
+      <DependentUpon>Paid_amountreport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paid_amountreport.aspx.designer.cs">
+      <DependentUpon>Paid_amountreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="print_house_owner.aspx.cs">
+      <DependentUpon>print_house_owner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="print_house_owner.aspx.designer.cs">
+      <DependentUpon>print_house_owner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="print_house_tax_receipt.aspx.cs">
+      <DependentUpon>print_house_tax_receipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="print_house_tax_receipt.aspx.designer.cs">
+      <DependentUpon>print_house_tax_receipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="square_feet_rate.aspx.cs">
+      <DependentUpon>square_feet_rate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="square_feet_rate.aspx.designer.cs">
+      <DependentUpon>square_feet_rate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="support_ticket.aspx.cs">
       <DependentUpon>support_ticket.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2697,6 +2765,42 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="village_dashboard.aspx.cs">
+      <DependentUpon>village_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="village_dashboard.aspx.designer.cs">
+      <DependentUpon>village_dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="village_master.aspx.cs">
+      <DependentUpon>village_master.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="village_master.aspx.designer.cs">
+      <DependentUpon>village_master.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="village_owner.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>village_owner.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="village_owner_master.aspx.cs">
+      <DependentUpon>village_owner_master.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="village_owner_master.aspx.designer.cs">
+      <DependentUpon>village_owner_master.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="village_receipt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>village_receipt.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Village_Receipt_Vw.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Village_Receipt_Vw.xsd</DependentUpon>
+    </Compile>
     <Compile Include="visitor.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2708,6 +2812,13 @@
     </Compile>
     <Compile Include="visitor_search.aspx.designer.cs">
       <DependentUpon>visitor_search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="water_tax.aspx.cs">
+      <DependentUpon>water_tax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="water_tax.aspx.designer.cs">
+      <DependentUpon>water_tax.aspx</DependentUpon>
     </Compile>
     <Compile Include="wing_search.aspx.cs">
       <DependentUpon>wing_search.aspx</DependentUpon>
@@ -2724,11 +2835,13 @@
     <EmbeddedResource Include="maintenance_receipt.rdlc" />
     <EmbeddedResource Include="ownerwise_maintenance.rdlc" />
     <EmbeddedResource Include="owner_details.rdlc" />
+    <EmbeddedResource Include="paid_amount.rdlc" />
     <EmbeddedResource Include="rental_details.rdlc" />
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="society_expense.rdlc" />
     <EmbeddedResource Include="Cashbook.rdlc" />
     <EmbeddedResource Include="usefull_contact.rdlc" />
+    <EmbeddedResource Include="village_owner.rdlc" />
     <EmbeddedResource Include="visitor.rdlc" />
   </ItemGroup>
   <ItemGroup>
@@ -2953,6 +3066,39 @@
     </Content>
     <Content Include="visitor.xsc">
       <DependentUpon>visitor.xsd</DependentUpon>
+    </Content>
+    <Content Include="Village_Receipt_Vw.xsc">
+      <DependentUpon>Village_Receipt_Vw.xsd</DependentUpon>
+    </Content>
+    <Content Include="village_receipt.xsc">
+      <DependentUpon>village_receipt.xsd</DependentUpon>
+    </Content>
+    <Content Include="village_owner.xsc">
+      <DependentUpon>village_owner.xsd</DependentUpon>
+    </Content>
+    <None Include="village_owner.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>village_owner.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="village_owner.xss">
+      <DependentUpon>village_owner.xsd</DependentUpon>
+    </Content>
+    <None Include="village_receipt.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>village_receipt.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="village_receipt.xss">
+      <DependentUpon>village_receipt.xsd</DependentUpon>
+    </Content>
+    <None Include="Village_Receipt_Vw.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Village_Receipt_Vw.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Village_Receipt_Vw.xss">
+      <DependentUpon>Village_Receipt_Vw.xsd</DependentUpon>
     </Content>
     <None Include="visitor.xsd">
       <Generator>MSDataSetGenerator</Generator>

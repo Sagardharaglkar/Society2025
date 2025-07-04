@@ -201,10 +201,24 @@ namespace DataAccessLayer.DA
             return Receipt;
         }
 
+        public DataTable Get_Paid_Amount(receipt getReceipt)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1;
+
+            DataTable dt = new DataTable();
+            data_item.Add(st.create_array("query", getReceipt.Sql_Operation));
+
+            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+
+            if (status1 == "Done")
+                dt.Load(sdr);
+            return dt;
+        }
 
         public DataTable receipt_search(string receipt)
-       
-           {
+        {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;

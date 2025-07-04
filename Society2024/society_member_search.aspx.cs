@@ -34,14 +34,15 @@ namespace Society
         {
             if (Session["name"] == null)
             {
-               // Response.Redirect("login1.aspx");
-            }else
+                // Response.Redirect("login1.aspx");
+            }
+            else
                 society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
                 String str = "Select *  from UserType where type=1";
                 repeater.fill_list(categoryRepeater2, str);
-                String str2 = "SELECT * FROM owner_master WHERE  login_status=0 and active_status=0 and type = 'owner' AND society_id='"+ Session["society_id"].ToString() + "'";
+                String str2 = "SELECT * FROM owner_master WHERE  login_status=0 and active_status=0 and type = 'owner' AND society_id='" + Session["society_id"].ToString() + "'";
                 repeater.fill_list(categoryRepeater1, str2);
                 Society_Member_Gridbind();
 
@@ -121,7 +122,7 @@ namespace Society
             member.Name = txt_search.Text;
             member.Sql_Operation = "Search";
             var result = bL_Society.search_member(member);
-            GridView1.DataSource = result; 
+            GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
@@ -150,7 +151,7 @@ namespace Society
             member.Sql_Operation = operation;
 
             var result = bL_Society.updateSocietyMemberDetails(member);
-            
+
 
             (user_id.Value) = result.UserId.ToString();
             society_id.Value = result.Society_Id;
@@ -167,13 +168,13 @@ namespace Society
             String str = "Select *  from UserType";
             repeater.fill_list(categoryRepeater2, str);
 
-        }   
+        }
 
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            
-            if (Label25.Text == "" )
+
+            if (Label25.Text == "")
             {
                 btn_save.Visible = false;
                 runproc_save("Update");
@@ -189,23 +190,23 @@ namespace Society
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-           
-                if (user_id.Value != "")
-                    member.UserId = Convert.ToInt32(user_id.Value);
-                member.Sql_Operation = "Delete";
-                member.Name = TextBox1.Text;
-                member.Designation = Convert.ToInt32(Designation_id.Value);
-                //member.Address1 = txt_address1.Text;
-                //member.Address2 = txt_address2.Text;
-                //member.Contact_No = txt_contact_no.Text;
-                //member.Email = txt_email.Text;
-                member.UserName = txt_username.Text;
-                member.Password = txt_password.Text;
-                member.Status = 0;
-                bL_Society.delete(member);
-            
-                Response.Redirect("society_member_search.aspx");
-            
+
+            if (user_id.Value != "")
+                member.UserId = Convert.ToInt32(user_id.Value);
+            member.Sql_Operation = "Delete";
+            member.Name = TextBox1.Text;
+            member.Designation = Convert.ToInt32(Designation_id.Value);
+            //member.Address1 = txt_address1.Text;
+            //member.Address2 = txt_address2.Text;
+            //member.Contact_No = txt_contact_no.Text;
+            //member.Email = txt_email.Text;
+            member.UserName = txt_username.Text;
+            member.Password = txt_password.Text;
+            member.Status = 0;
+            bL_Society.delete(member);
+
+            Response.Redirect("society_member_search.aspx");
+
         }
 
         protected void btn_close_Click(object sender, EventArgs e)
@@ -227,15 +228,15 @@ namespace Society
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            
-                GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-                System.Web.UI.WebControls.Label user_id = (System.Web.UI.WebControls.Label)row.FindControl("user_id");
-                member.Sql_Operation = "Delete";
 
-                member.UserId = Convert.ToInt32(user_id.Text);
-                bL_Society.delete(member);
-                //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
-          
+            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            System.Web.UI.WebControls.Label user_id = (System.Web.UI.WebControls.Label)row.FindControl("user_id");
+            member.Sql_Operation = "Delete";
+
+            member.UserId = Convert.ToInt32(user_id.Text);
+            bL_Society.delete(member);
+            //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('" + result.Sql_Result + "')", true);
+
             Society_Member_Gridbind();
 
 
@@ -313,4 +314,3 @@ namespace Society
     }
 }
 
-    
