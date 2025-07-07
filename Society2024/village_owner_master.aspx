@@ -78,6 +78,9 @@
                         <asp:HiddenField ID="taluka_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="state_id" runat="Server"></asp:HiddenField>
 
+                        <asp:HiddenField runat="server" ID="house_type"/>
+                        <asp:HiddenField runat="server" ID="doc_type"/>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -234,8 +237,8 @@
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("name") %>'
-                                                                        CommandArgument='<%# Eval("wing_id") %>'
+                                                                        Text='<%# Eval("house_type") %>'
+                                                                        CommandArgument='<%# Eval("house_type_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>
@@ -329,8 +332,8 @@
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("name") %>'
-                                                                        CommandArgument='<%# Eval("wing_id") %>'
+                                                                        Text='<%# Eval("doc_name") %>'
+                                                                        CommandArgument='<%# Eval("doc_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>

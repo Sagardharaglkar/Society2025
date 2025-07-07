@@ -1,6 +1,7 @@
-﻿using BusinessLogic.MasterBL;
-using DBCode.DataClass.Master_Dataclass;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
 using DBCode.DataClass;
+using DBCode.DataClass.Master_Dataclass;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,6 +16,8 @@ namespace Society2024
 {
     public partial class village_owner_master : System.Web.UI.Page
     {
+
+        BL_FillRepeater repeater = new BL_FillRepeater();
         BL_Village_Owner bL_Village_owner = new BL_Village_Owner();
         VillageOwner owner = new VillageOwner();
 
@@ -29,21 +32,44 @@ namespace Society2024
 
             if (!IsPostBack)
             {
-                fill_drop();
+
                 village_owner_Gridbind();
                 fetch_house_no();
                 fetch_address();
+
+                String sql_query1 = "Select *  from house_type";
+                repeater.fill_list(Repeater1, sql_query1);
+                String sql_query5 = "Select *  from doc_master";
+                repeater.fill_list(Repeater2, sql_query5);
             }
 
         }
 
-        public void fill_drop()
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            String sql_query1 = "Select *  from house_type";
-            bL_Village_owner.fill_drop(ddl_house_type, sql_query1, "house_type", "house_type_id");
-            String sql_query5 = "Select *  from doc_master";
-            bL_Village_owner.fill_drop(ddl_doc_type, sql_query5, "doc_name", "doc_id");
+            if (e.CommandName == "SelectCategory")
+            {
+                house_type.Value = e.CommandArgument.ToString();
+
+            }
         }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                doc_type.Value = e.CommandArgument.ToString();
+
+            }
+        }
+
+        //public void fill_drop()
+        //{
+        //    String sql_query1 = "Select *  from house_type";
+        //    bL_Village_owner.fill_drop(ddl_house_type, sql_query1, "house_type", "house_type_id");
+        //    String sql_query5 = "Select *  from doc_master";
+        //    bL_Village_owner.fill_drop(ddl_doc_type, sql_query5, "doc_name", "doc_id");
+        //}
         public void village_owner_Gridbind()
         {
             DataSet dt = new DataSet();
@@ -64,7 +90,7 @@ namespace Society2024
             owner.Village_Id = village_id.Value;
             owner.Name = txt_name.Text;
             owner.House_No = Convert.ToInt32(txt_house_no.Text);
-            owner.House_Type = ddl_house_type.Text;
+            owner.House_Type = TextBox1.Text;
             owner.Sq_Ft = Convert.ToDecimal(txt_sq_ft.Text);
             owner.Address = txt_address.Text;
             owner.Pre_Mob = txt_pre_mob.Text;
@@ -89,7 +115,7 @@ namespace Society2024
                 village_id.Value = result.Village_Id;
                 txt_name.Text = result.Name;
                 txt_house_no.Text = result.House_No.ToString();
-                ddl_house_type.SelectedValue = result.House_Type.ToString();
+                house_type.Value = result.House_Type.ToString();
                 txt_sq_ft.Text = result.Sq_Ft.ToString();
                 txt_address.Text = result.Address;
                 txt_pre_mob.Text = result.Pre_Mob;
@@ -141,7 +167,7 @@ namespace Society2024
         }
         protected void btnotice_id_upload_Click(object sender, EventArgs e)
         {
-            string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/";
+            string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (TextBox2.Text) + "/";
 
             System.IO.Directory.CreateDirectory(createfolder);
 
@@ -150,12 +176,12 @@ namespace Society2024
 
                 foreach (HttpPostedFile file_name in FileUpload2.PostedFiles)
                 {
-                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (ddl_doc_type.SelectedItem.Text) + "/" + file_name.FileName));
+                    file_name.SaveAs(System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (TextBox2.Text) + "/" + file_name.FileName));
                     listofuploadedfiles1.Text += file_name.FileName + "<br/>";
 
                 }
 
-                uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (ddl_doc_type.SelectedItem.Text) + "\\" + FileUpload2.FileName);
+                uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (TextBox2.Text) + "\\" + FileUpload2.FileName);
 
             }
            
@@ -263,5 +289,35 @@ namespace Society2024
 
         protected void btn_import_Click(object sender, EventArgs e)
         { }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (house_type.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == house_type.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
+
+
         }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (doc_type.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == doc_type.Value)
+                        TextBox2.Text = link.Text;
+                }
+            }
+        }
+
+
+    }
 }

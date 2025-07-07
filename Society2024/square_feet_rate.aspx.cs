@@ -1,4 +1,5 @@
-﻿using BusinessLogic.MasterBL;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
 using DBCode.DataClass.Master_Dataclass;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 
-<%@ Register Assembly = "AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
 namespace Society2024
 {
     public partial class square_feet_rate : System.Web.UI.Page
     {
+
+        BL_FillRepeater repeater = new BL_FillRepeater();
         private Village village = new Village();
         private BL_Village_Master bL_Village = new BL_Village_Master();
         protected void Page_Load(object sender, EventArgs e)
@@ -27,9 +28,12 @@ namespace Society2024
 
             if (!IsPostBack)
             {
-                fill_drop();
+      
                 Square_Feet_Gridbind();
-              
+
+                String sql_query = "Select * from house_type";
+                repeater.fill_list(Repeater1, sql_query);
+
             }
         }
 
@@ -44,11 +48,13 @@ namespace Society2024
             GridView1.DataBind();
         }
 
-        public void fill_drop()
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            String sql_query = "Select * from house_type";
-            bL_Village.fill_drop(ddl_house_type, sql_query, "house_type", "house_type_id");
-           
+            if (e.CommandName == "SelectCategory")
+            {
+                house_type.Value = e.CommandArgument.ToString();
+
+            }
         }
         public void runproc_save(String operation)
         {
@@ -56,7 +62,7 @@ namespace Society2024
                village.Sq_Rate_Id = Convert.ToInt32(sq_rate_id.Value);
             village.Sql_Operation = operation;
             village.Village_Id = village_id.Value;
-            village.House_Type_Id = ddl_house_type.SelectedValue;
+            village.House_Type_Id = house_type.Value;
             village.Rate = Convert.ToDecimal(txt_rate.Text);
             village.Applied_Date = Convert.ToDateTime(txt_applied_date.Text);
             village.Bill_Generation_Date = Convert.ToDateTime(txt_gen_date.Text);
@@ -74,7 +80,7 @@ namespace Society2024
 
             village_id.Value = result.Village_Id.ToString();
             sq_rate_id.Value = result.Sq_Rate_Id.ToString();
-            ddl_house_type.SelectedValue = result.House_Type_Id;
+            house_type.Value = result.House_Type_Id;
             txt_rate.Text = result.Rate.ToString();
             village_id.Value = result.Village_Id;
             txt_applied_date.Text = result.Applied_Date.ToString("yyyy-MM-dd");
@@ -153,6 +159,20 @@ namespace Society2024
         protected void ddl_house_type_SelectedIndexChanged(object sender, EventArgs e)
         {
            
+        }
+
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (house_type.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == house_type.Value)
+                        TextBox1.Text = link.Text;
+                }
+            }
         }
     }
 }

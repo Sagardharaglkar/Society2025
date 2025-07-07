@@ -79,6 +79,8 @@
                 <asp:HiddenField ID="house_id" runat="server" />
                 <asp:HiddenField ID="modified_u_id" runat="server" />
 
+                     <asp:HiddenField  ID="house_type" runat="server"/>
+
 <div class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -208,15 +210,15 @@
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound" >
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="Repeater1_ItemDataBound" >
                                                                 <ItemTemplate>
                                                                     
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
                                                                         CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("name") %>'
-                                                                        CommandArgument='<%# Eval("wing_id") %>'
+                                                                        Text='<%# Eval("house_type") %>'
+                                                                        CommandArgument='<%# Eval("house_type_id") %>'
                                                                         CommandName="SelectCategory"
                                                                         OnClientClick="setTextBox1(this.innerText);" />
                                                                 </ItemTemplate>

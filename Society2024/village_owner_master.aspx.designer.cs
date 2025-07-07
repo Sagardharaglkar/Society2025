@@ -69,6 +69,24 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.HiddenField state_id;
 
         /// <summary>
+        /// house_type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField house_type;
+
+        /// <summary>
+        /// doc_type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField doc_type;
+
+        /// <summary>
         /// txt_search control.
         /// </summary>
         /// <remarks>
