@@ -60,15 +60,6 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.HiddenField modified_u_id;
 
         /// <summary>
-        /// search_field control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList search_field;
-
-        /// <summary>
         /// txt_search control.
         /// </summary>
         /// <remarks>
@@ -78,13 +69,22 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.TextBox txt_search;
 
         /// <summary>
+        /// CalendarExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
+
+        /// <summary>
         /// btn_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_search;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
         /// GridView1 control.
@@ -132,13 +132,22 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.Label Label14;
 
         /// <summary>
-        /// ddl_house_type control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_house_type;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+
+        /// <summary>
+        /// Repeater1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
 
         /// <summary>
         /// Label1 control.

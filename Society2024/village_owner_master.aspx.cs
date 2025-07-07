@@ -225,6 +225,17 @@ namespace Society2024
            
         }
 
+        protected void repeaterContainer1(object source, RepeaterCommandEventArgs e)
+        {
+            // Your logic here
+        }
+
+
+        protected void repeaterContainer2(object source, RepeaterCommandEventArgs e)
+        {
+            // Your logic here
+        }
+
         protected void ddl_district_SelectedIndexChanged(object sender, EventArgs e)
         {
           
@@ -236,7 +247,7 @@ namespace Society2024
             sb.Append("SELECT dbo.house_owner.village_owner_id, dbo.house_owner.house_no, dbo.house_type.house_type, dbo.house_owner.sq_ft, dbo.house_owner.name, dbo.house_owner.address FROM dbo.house_owner INNER JOIN dbo.house_type ON dbo.house_owner.house_type = dbo.house_type.house_type_id where active_status=0 and village_id='" + village_id.Value + "'");
             if (txt_search.Text != "")
             {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+          
             }
             owner.Sql_Operation = sb.ToString();
             var result = bL_Village_owner.search_house_owner(owner);
@@ -249,5 +260,8 @@ namespace Society2024
         {
 
         }
-    }
+
+        protected void btn_import_Click(object sender, EventArgs e)
+        { }
+        }
 }

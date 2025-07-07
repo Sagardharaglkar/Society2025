@@ -41,6 +41,8 @@ namespace Society
             //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
             //}
         }
+       
+        protected void btn_search_Click(object sender, EventArgs e) { }
 
         private void BindComments(int helpdeskId)
         {

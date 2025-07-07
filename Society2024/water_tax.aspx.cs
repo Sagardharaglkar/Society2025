@@ -173,7 +173,6 @@ namespace Society2024
             sb.Append("SELECT dbo.water_tax.water_tax_id, dbo.water_tax.house_no,FORMAT(dbo.water_tax.from_date, 'MMMM yyyy') AS from_date, dbo.water_tax.to_date, dbo.water_tax.water_connection_size, dbo.water_tax.water_tax_amount, dbo.water_tax.village_id,dbo.connection_type.con_type_id, dbo.connection_type.connection_type FROM  dbo.water_tax INNER JOIN dbo.connection_type ON dbo.water_tax.con_type_id = dbo.connection_type.con_type_id and active_status = 0 and village_id='" + village_id.Value + "'");
             if (txt_search.Text != "")
             {
-                sb.Append(" where " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
             }
             village.Sql_Operation = sb.ToString();
             var result = bL_Village.search_sq_ft_rate(village);
@@ -181,16 +180,8 @@ namespace Society2024
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
+    protected void btn_import_Click(object sender, EventArgs e)
+    { }
 
-        protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            if (search_field.SelectedValue == "from_date")
-                txt_search.TextMode = TextBoxMode.Month;
-                
-            else
-                txt_search.TextMode = TextBoxMode.SingleLine;
-                 txt_search.Text = "";
-        }
     }
 }
