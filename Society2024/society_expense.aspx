@@ -181,7 +181,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command1" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">

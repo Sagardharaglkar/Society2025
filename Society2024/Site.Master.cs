@@ -32,7 +32,7 @@ namespace Society
                     village.Visible = Session["user_type"].ToString() == "Village";
                     Panel1.Visible = true;
                     txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
-                    name_society.Text = "Welcome To " + Session["society_name"].ToString();
+                    name_society.Text = Session["society_name"].ToString();
                     get_notificatoin();
                 }
                 else

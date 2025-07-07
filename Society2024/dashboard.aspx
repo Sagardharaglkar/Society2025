@@ -4,11 +4,69 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="css/layout.css" rel="stylesheet" />
+        <style>
 
+
+      .top-dashboard {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-card {
+        flex: 1;
+        min-width: 250px;
+        max-width: 300px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow:rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        --start: #defffe;
+    --first: #edf4ff;
+    color: #0d0d3d;
+    --end: #f6f9fd;
+    background: radial-gradient(16rem 100% at 6.64% 0, var(--start) 0, var(--first) 42.5%, var(--end) 100%);
+        border: 1px solid #1e1e4c26;
+    height: 100%;
+
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.top-card:hover {
+  box-shadow: 0 0 10px #18008f40;
+  transform: scale(1.01);
+}
+
+      .top-card h2 {
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0 0 10px;
+      }
+
+      .top-card .top-value {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .top-card .top-subtitle {
+        font-size: 14px;
+        margin-top: 4px;
+        opacity: 0.9;
+      }
+
+      .top-card .top-icon {
+        font-size: 24px;
+        padding: 17px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.147);
+      }
+    </style>
     <style>
-        body {
-            background: #EBF0F9;
-        }
+
 
         .helpdesk-card {
             background-color: #ecf0f1;
@@ -173,89 +231,58 @@
         <!-- LEFT COLUMN -->
         <div class="layout-left">
             <!-- Top row: three small boxes -->
-
-            <div class="layout-top-row layout-small">
-                <div class="border-left-primary card layout-small hov card-body">
-                    <a href="Defaulter.aspx" style="text-decoration: none;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3
-                                class="card-heading text-xs font-weight-bold  text-primary text-uppercase">Due
-                            </h3>
-
-                        </div>
-                        <div class="dropdown-divider"></div>
-
-                        <asp:UpdatePanel runat="server" ID="updatePanelDue" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <asp:HiddenField ID="society_id" runat="server" />
-                                <asp:HiddenField ID="notice_id" runat="server" />
-                                <asp:HiddenField ID="HiddenField4" runat="server" />
-
-                                <div
-                                    class="d-flex justify-content-between align-items-center">
-                                    <img src="img/cash.png" width="76px" />
-                                    <asp:Label runat="server" ID="lblDue" class="h1 mb-0 font-weight-bold text-gray-800">
-                   
-                                    </asp:Label>
-
-                                </div>
-
-                            </ContentTemplate>
-
-                            <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="due_this_month" EventName="Click" />
-                                <asp:AsyncPostBackTrigger ControlID="due_last_month" EventName="Click" />
-                                <asp:AsyncPostBackTrigger ControlID="due_this_year" EventName="Click" />
-                            </Triggers>
-                        </asp:UpdatePanel>
-                    </a>
+    <div class="top-dashboard">
+      <!-- Card 1: Due Payments -->
+      <a href="DuePayments.aspx" style="text-decoration: none; color: inherit;">
+        <div class="top-card top-purple">
+          <div>
+            <h2>Due Payments</h2>
+            <asp:UpdatePanel runat="server" ID="updatePanelDue" UpdateMode="Conditional">
+              <ContentTemplate>
+                <asp:HiddenField ID="society_id" runat="server" />
+                <asp:HiddenField ID="notice_id" runat="server" />
+                <asp:HiddenField ID="HiddenField4" runat="server" />
+                <div class="top-value">
+                  ₹ <asp:Label runat="server" ID="lblDue"> </asp:Label>
                 </div>
-                <div class="border-left-warning card layout-small layout-ed hov card-body">
-                    <a href="Defaulter.aspx" style="text-decoration: none;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3
-                                class="card-heading text-xs font-weight-bold  text-warning text-uppercase">Defaulter
-                            </h3>
+              </ContentTemplate>
+              <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="due_this_month" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="due_last_month" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="due_this_year" EventName="Click" />
+              </Triggers>
+            </asp:UpdatePanel>
+          </div>
+          <div class="top-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        </div>
+      </a>
 
-                        </div>
-                        <div class="dropdown-divider"></div>
-
-
-                        <div
-                            class="d-flex justify-content-between align-items-center">
-                            <img src="img/defaulters.png" width="76px" />
-                            <div>
-
-                                <asp:Label runat="server" ID="defaulter" class="h1 mb-0 font-weight-bold text-gray-800">
-                   
-                                </asp:Label>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="border-left-info card layout-small layout-ed hov card-body">
-                    <a href="owner_search.aspx" style="text-decoration: none;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h3
-                                class="card-heading text-xs font-weight-bold  text-info text-uppercase">Members
-                            </h3>
-
-                        </div>
-                        <div class="dropdown-divider"></div>
-
-
-                        <div
-                            class="d-flex justify-content-between align-items-center">
-                            <img src="img/friends.png" width="76px" />
-                            <asp:Label runat="server" ID="residents" class="h1 mb-0 font-weight-bold text-gray-800">
-                   
-                            </asp:Label>
-
-                        </div>
-                    </a>
-                </div>
+      <!-- Card 2: Defaulters -->
+      <a href="Defaulters.aspx" style="text-decoration: none; color: inherit;">
+        <div class="top-card top-pink">
+          <div>
+            <h2>Defaulters</h2>
+            <div class="top-value">
+              <asp:Label runat="server" ID="defaulter"> </asp:Label>
             </div>
+          </div>
+          <div class="top-icon"><i class="fas fa-user-times"></i></div>
+        </div>
+      </a>
+
+      <!-- Card 3: Total Members -->
+      <a href="Members.aspx" style="text-decoration: none; color: inherit;">
+        <div class="top-card top-blue">
+          <div>
+            <h2>Total Members</h2>
+            <div class="top-value">
+              <asp:Label runat="server" ID="residents"> </asp:Label>
+            </div>
+          </div>
+          <div class="top-icon"><i class="fas fa-users"></i></div>
+        </div>
+      </a>
+    </div>
             <!-- Two big boxes -->
 
             <div class="layout-box layout-big layout-green card" id="chartContainer">
@@ -681,5 +708,4 @@
     </script>
 
 </asp:Content>
-
 

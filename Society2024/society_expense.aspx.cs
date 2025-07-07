@@ -43,9 +43,6 @@ namespace Society
                 list_fill();
                 ViewState["user_data"] = approverdt;
                 Allbound();
-
-
-
             }
         }
 
@@ -230,7 +227,7 @@ namespace Society
             }
             Allbound();
         }
-
+        
         public void runproc_approvar(string operation)
         {
             if (approvar_id.Value != "")
@@ -259,9 +256,8 @@ namespace Society
             getapprovallist();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
-
-        private void getapprovallist()
-        {
+        
+        private void getapprovallist(){
             DataTable dt = new DataTable();
             society.Sql_Operation = "Grid_Show";
             society.expense_id = Convert.ToInt32(expense_id.Value);
@@ -652,6 +648,18 @@ namespace Society
 
             }
 
+        }
+
+        protected void edit_Command1(object sender, CommandEventArgs e)
+        {
+            string id = e.CommandArgument.ToString();
+            expense_id.Value = id;
+            runproc("Select");
+            btn_delete.Visible = true;
+
+            btn_add.Visible = false;
+            getapprovallist();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
     }
 }
