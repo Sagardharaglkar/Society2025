@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
+<%@ Register Assembly = "AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 namespace Society2024
 {
     public partial class square_feet_rate : System.Web.UI.Page
@@ -85,9 +88,7 @@ namespace Society2024
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("SELECT dbo.square_ft_rate.sq_rate_id, dbo.square_ft_rate.rate, dbo.house_type.house_type, dbo.square_ft_rate.applied_date FROM dbo.square_ft_rate INNER JOIN dbo.house_type ON dbo.square_ft_rate.house_type_id = dbo.house_type.house_type_id and active_status=0");
             if (txt_search.Text != "")
-            {
-                sb.Append(" where " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
-            }
+            
             village.Sql_Operation = sb.ToString();
             var result = bL_Village.search_sq_ft_rate(village);
             GridView1.DataSource = result;
@@ -142,20 +143,7 @@ namespace Society2024
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
-        protected void search_field_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (search_field.SelectedValue == "rate")
-                txt_search.TextMode = TextBoxMode.SingleLine;
-            txt_search.Text = "";
-            if (search_field.SelectedValue == "house_type.house_type")
-                txt_search.TextMode = TextBoxMode.SingleLine;
-            txt_search.Text = "";
-            if (search_field.SelectedValue == "applied_date")
-                txt_search.TextMode = TextBoxMode.Date;
-            txt_search.Text = "";
-
-        }
-
+       
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;

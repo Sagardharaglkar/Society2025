@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="square_feet_rate.aspx.cs" Inherits="Society2024.square_feet_rate" MasterPageFile="~/Site.Master" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
        
@@ -78,29 +79,55 @@
                 <asp:HiddenField ID="house_id" runat="server" />
                 <asp:HiddenField ID="modified_u_id" runat="server" />
 
-                <div class="form-group">
-                    <div class="row ">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
+<div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                                <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged" AutoPostBack="true">
-                                    <asp:ListItem Value="rate">Square Feet Rate</asp:ListItem>
-                                    <asp:ListItem Value="house_type.house_type">House Type</asp:ListItem>
-                                    <asp:ListItem Value="applied_date">Applied Date</asp:ListItem>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server" 
+                                                TextMode="Search" 
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()"/>
 
-                                </asp:DropDownList>&nbsp;&nbsp;
-                      
-                            <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" Font-Bold="true" placeholder="Search Here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                        
-                                &nbsp;&nbsp; 
-                        
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                            <ajaxtoolkit:calendarextender
+                                                id="CalendarExtender1"
+                                                runat="server"
+                                                targetcontrolid="txt_search"
+                                                popupbuttonid="btn_calendar"
+                                                format="yyyy-MM" />
 
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <img
+                                                    id="btn_calendar"
+                                                    src="img/calendar.png"
+                                                    alt="Pick Date"
+                                                    class="calendar-icon"
+                                                    style="cursor: pointer;" />
+
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                       
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
                 <div class="form-group">
@@ -177,9 +204,30 @@
                                                         <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                         <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select" autocomplete="off" required="required" />
+                                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound" >
+                                                                <ItemTemplate>
+                                                                    
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("wing_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setTextBox1(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
 
-                                                        <asp:DropDownList ID="ddl_house_type" Height="32px" Width="200px" runat="server" OnSelectedIndexChanged="ddl_house_type_SelectedIndexChanged"></asp:DropDownList>
 
                                                     </div>
 
@@ -270,5 +318,56 @@
             </div>
         </div>
     </div>
+    <script>
+        function initDropdownEvents() {
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+
+            textBox1.addEventListener("focus", function () {
+                repeaterContainer1.style.display = "block";
+            });
+
+            textBox1.addEventListener("input", function () {
+                const input = textBox1.value.toLowerCase();
+                filterSuggestions("category-link", input);
+            });
+        }
+            function filterSuggestions(className, value) {
+                const items = document.querySelectorAll("." + className);
+                let matchFound = false;
+
+                items.forEach(item => {
+                    if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        item.style.display = "block";
+                        matchFound = true;
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+
+                let noMatchMessage = document.getElementById("no-match-message");
+
+                if (!matchFound) {
+                    if (!noMatchMessage) {
+                        noMatchMessage = document.createElement("div");
+                        noMatchMessage.id = "no-match-message";
+
+                        noMatchMessage.innerText = "No matching suggestions.";
+                        items[0]?.parentNode?.appendChild(noMatchMessage);
+                    }
+                    noMatchMessage.style.display = "block";
+                } else {
+                    if (noMatchMessage) {
+                        noMatchMessage.style.display = "none";
+                    }
+                }
+        }
+        function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+        }
+
+
+    </script>
 
 </asp:Content>

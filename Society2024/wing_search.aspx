@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wing_search.aspx.cs" Inherits="Society.wing_search" MasterPageFile="~/Site.Master" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">

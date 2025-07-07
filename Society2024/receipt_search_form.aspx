@@ -397,24 +397,34 @@
 
                                         <asp:Panel ID="panel3" runat="server" Visible="false">
                                             <div class="form-group">
-                                                <div class="row ">
+                                             <div class="row">
+    <!-- Label -->
+    <div class="col-sm-2">
+        <asp:Label ID="Label21" runat="server" Text="Enter UPI:"></asp:Label>
+        <asp:Label ID="Label22" runat="server" Text="*" ForeColor="Red"></asp:Label>
+    </div>
+
+    <!-- Input -->
+    <div class="col-sm-4">
+        <asp:TextBox ID="txt_upi" CssClass="form-control" required Width="200px" Height="32px" runat="server"></asp:TextBox>
+        <div class="invalid-feedback">
+            Please Enter UPI
+        </div>
+    </div>
+
+    <!-- Small Blank Column -->
+    <div class="col-sm-1">
+        <!-- Blank spacing -->
+    </div>
+
+    <!-- Button -->
+    <div class="col-sm-2">
+        <asp:Button ID="Button2" runat="server" Height="30px" CssClass="btn btn-primary" Text="Verify & Proceed" />
+    </div>
+</div>
 
 
-                                                    <div class="col-sm-2">
-                                                        <asp:Label ID="Label21" runat="server" Text="Enter UPI:"></asp:Label>
-                                                        <asp:Label ID="Label22" runat="server" Text="*" ForeColor="Red"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <asp:TextBox ID="txt_upi" CssClass="form-control" required Width="200px" Height="32px" runat="server"></asp:TextBox>
-                                                        <div class="invalid-feedback">
-                                                            Please Enter UPI
-                                                        </div>
-                                                    </div>
 
-                                                    <asp:Button ID="Button2" runat="server" Height="30px" CssClass="btn btn-primary" Text="Verify & Proceed" />
-                                                </div>
-
-                                            </div>
                                         </asp:Panel>
 
 
