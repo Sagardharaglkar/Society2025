@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="village_master.aspx.cs" Inherits="Society2024.village_master" MasterPageFile="~/Site.Master" %>
-
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         function SuccessEntry() {
@@ -87,27 +87,46 @@
                 <asp:HiddenField ID="user_id" runat="server" />
                 <asp:HiddenField ID="village_id" runat="server" />
                 
-               
-                <div class="form-group">
-                    <div class="row">
+                                       <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center">
+                        <div class="search-container">
 
-                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px" AutoPostBack="true">
-                            <asp:ListItem Value="name">Village Name</asp:ListItem>
-                            <asp:ListItem Value="dbo.division.division">Division</asp:ListItem>
-                            <asp:ListItem Value="email">Email</asp:ListItem>
-                            <asp:ListItem Value="contact_no">Contact No</asp:ListItem>
+                            <asp:TextBox
+                                ID="txt_search"
+                                CssClass="aspNetTextBox"
+                                placeHolder="Search here"
+                                runat="server" 
+                                TextMode="Search" 
+                                AutoPostBack="true"
+                                OnTextChanged="btn_search_Click"
+                                onkeyup="removeFocusAfterTyping()"/>                    
 
-                        </asp:DropDownList>&nbsp;&nbsp;
-                       
+                            <!-- Calendar and Search Buttons -->
+                            <div class="input-buttons">
+                                 <button
+                                    id="btn_search"
+                                    type="submit"
+                                    class="search-button2"
+                                    runat="server"
+                                    onserverclick="btn_search_Click">
+                                    <span class="material-symbols-outlined">search</span>
+                                </button>
+                            </div>
+                        </div>
 
-                            <asp:TextBox ID="txt_search" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                      
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />&nbsp;&nbsp;
-                      
-                            <asp:Button ID="btn_import" runat="server" class="btn btn-primary" OnClick="btn_import_Click" Text="Import Data From Excel" UseSubmitBehavior="False" />
+                        &nbsp;&nbsp;
+                            <asp:Button ID="Button1" runat="server" class="btn btn-primary" OnClick="btn_import_Click" Text="Import Data From Excel" UseSubmitBehavior="False" />
 
                     </div>
                 </div>
+            </div>
+        </div>
+                
+  
+                      
+                           
 
 
 
@@ -163,7 +182,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
+
                </ContentTemplate>
                     </asp:UpdatePanel>
 

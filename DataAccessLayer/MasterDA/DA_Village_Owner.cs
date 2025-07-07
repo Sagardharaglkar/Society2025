@@ -194,7 +194,7 @@ namespace DataAccessLayer.MasterDA
                         village_owner.Village_Id = sdr["village_id"].ToString();
                         village_owner.Alter_Mob = sdr["alter_mob"].ToString();
                         village_owner.Id_Proof = sdr["id_proof"].ToString();
-                        village_owner.Address_Line1 = sdr["address_Line1"].ToString();
+                        //village_owner.Address_Line1 = sdr["address_Line1"].ToString();
                     }
                 }
             }

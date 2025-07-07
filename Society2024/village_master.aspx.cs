@@ -112,7 +112,7 @@ namespace Society2024
 
             if (txt_search.Text != "")
             {
-                sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
+                //sb.Append(" and " + search_field.SelectedValue + " like '" + txt_search.Text + "%'");
             }
             village.Sql_Operation = sb.ToString();
             var result = bL_Village.search_village(village);

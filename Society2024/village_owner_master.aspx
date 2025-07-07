@@ -47,7 +47,7 @@
         }
     </script>
 
-   <%-- <script>
+    <%-- <script>
         window.onload = function () {
             document.getElementById('<%= FileUpload2.ClientID %>').setAttribute('accept', '.pdf');
         };
@@ -78,28 +78,35 @@
                         <asp:HiddenField ID="taluka_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="state_id" runat="Server"></asp:HiddenField>
 
-
                         <div class="form-group">
-                            <div class="row ">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                                        <asp:DropDownList ID="search_field" runat="server" Width="200px" Height="32px">
-                                            <asp:ListItem Value="name">Name</asp:ListItem>
-                                            <asp:ListItem Value="house_no">House No</asp:ListItem>
-                                            <asp:ListItem Value="house_type.house_type">House Type</asp:ListItem>
-                                            <asp:ListItem Value="sq_ft">Sq Ft</asp:ListItem>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                                        </asp:DropDownList>&nbsp;&nbsp;
-                       
-                               <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                                   <asp:TextBox ID="txt_search" Font-Bold="true" Style="text-transform: capitalize;" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                       
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                                        </asp:Panel>
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <asp:LinkButton ID="btn_search" runat="server" CssClass="search-button2" OnClick="btn_search_Click">
+    <span class="material-symbols-outlined">search</span>
+                                                </asp:LinkButton>
+
+                                                </button>
+                                            </div>
+                                        </div>
+
                                         &nbsp;&nbsp;
-                        
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                            <asp:Button ID="Button1" runat="server" class="btn btn-primary" OnClick="btn_import_Click" Text="Import Data From Excel" UseSubmitBehavior="False" />
+
                                     </div>
                                 </div>
                             </div>
@@ -216,10 +223,30 @@
                                                 </div>
                                                 <div class="col-sm-3">
 
-                                                    <asp:DropDownList ID="ddl_house_type" Height="32px" Width="200px" OnSelectedIndexChanged="ddl_house_type_SelectedIndexChanged" parsely-trigger="change" AutoPostBack="true" runat="server"></asp:DropDownList>
-                                                    <br />
-                                                    <asp:CompareValidator ControlToValidate="ddl_house_type" ID="CompareValidator1" ValidationGroup="g1" CssClass="errormesg" ErrorMessage="Please Select Type" Font-Bold="true" ForeColor="Red" runat="server" Display="Dynamic" Operator="NotEqual" ValueToCompare="select" Type="String" />
-                                                    <asp:Label ID="Label20" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select" autocomplete="off" required="required" />
+                                                        <div id="RepeaterContainer1" class="suggestion-list">
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound">
+                                                                <ItemTemplate>
+
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("wing_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setTextBox1(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
 
@@ -262,7 +289,7 @@
 
                                         <div class="form-group">
                                             <div class="row ">
-                                                 <div class="col-sm-3">
+                                                <div class="col-sm-3">
                                                     <asp:Label ID="lbl_pre_mob" runat="server" Text="Mobile No."></asp:Label>
                                                     <asp:Label ID="lbl_pre_mob_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="lbl_pre_mob_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
@@ -279,7 +306,7 @@
                                                     <asp:TextBox ID="txt_add_mob" Height="32px" Width="200px" runat="server" MaxLength="10" onkeypress="return digit(event);" onblur="checkLength(this)" placeholder="Alternate Mobile No."></asp:TextBox>
 
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
 
@@ -291,8 +318,30 @@
                                                     <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="ddl_doc_type" Height="32px" Width="200px" runat="server">
-                                                    </asp:DropDownList>
+                                                    <div class="dropdown-container">
+                                                        <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
+                                                            placeholder="Select" autocomplete="off" required="required" />
+                                                        <div id="RepeaterContainer2" class="suggestion-list">
+                                                            <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2" OnItemDataBound="Repeater2_ItemDataBound">
+                                                                <ItemTemplate>
+
+                                                                    <asp:LinkButton
+                                                                        ID="lnkCategory"
+                                                                        runat="server"
+                                                                        CssClass="suggestion-item link-button category-link"
+                                                                        Text='<%# Eval("name") %>'
+                                                                        CommandArgument='<%# Eval("wing_id") %>'
+                                                                        CommandName="SelectCategory"
+                                                                        OnClientClick="setTextBox1(this.innerText);" />
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                        Text="No items found." />
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -307,33 +356,103 @@
 
                                             </div>
                                         </div>
-                                       
+
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="OwnerGrid" EventName="RowCommand" />
                                     </Triggers>
                                 </asp:UpdatePanel>
-                                </div>
+                            </div>
 
-                                <div class="modal-footer">
-                                    <div class="form-group">
-                                        <div class="row">
-                                           <center>
-                                                <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
-                                                <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                                <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" UseSubmitBehavior="false" OnClick="btn_close_Click" CausesValidation="False" />
-                                           </center>
-                                        </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <center>
+                                            <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
+                                            <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
+                                            <asp:Button ID="btn_close" type="button-close" class="btn btn-primary" runat="server" Text="Close" UseSubmitBehavior="false" OnClick="btn_close_Click" CausesValidation="False" />
+                                        </center>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
+                    </div>
+
 
 
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script>
+        function initDropdownEvents() {
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+
+        textBox1.addEventListener("focus", function () {
+            repeaterContainer1.style.display = "block";
+        });
+
+        textBox1.addEventListener("input", function () {
+            const input = textBox1.value.toLowerCase();
+            filterSuggestions("category-link", input);
+        });
+
+        const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+
+            textBox2.addEventListener("focus", function () {
+                repeaterContainer2.style.display = "block";
+
+            });
+
+            textBox2.addEventListener("input", function () {
+                const input = textBox2.value.toLowerCase();
+                filterSuggestions("category-link", input);
+            });
+        }
+        function filterSuggestions(className, value) {
+            const items = document.querySelectorAll("." + className);
+            let matchFound = false;
+
+            items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    item.style.display = "block";
+                    matchFound = true;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+                if (!noMatchMessage) {
+                    noMatchMessage = document.createElement("div");
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+                }
+                noMatchMessage.style.display = "block";
+            } else {
+                if (noMatchMessage) {
+                    noMatchMessage.style.display = "none";
+                }
+            }
+        }
+
+        function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+        }
+        function setTextBox2(value) {
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
+            document.getElementById("RepeaterContainer1").style.display = "none";
+        }
+
+    </script>
 
 </asp:Content>
