@@ -336,7 +336,27 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
             if (status1 == "Done")
             {
-                ChartData.Load(sdr);
+                if (sdr.HasRows)
+                    ChartData.Load(sdr);
+            }
+            return ChartData;
+        }
+
+        public DataTable Get_Recent_Chart(Login_Details details)
+        {
+
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1 = "";
+            DataTable ChartData = new DataTable();
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("society_id", details.Society_Id));
+
+            status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
+            if (status1 == "Done")
+            {
+                if (sdr.HasRows)
+                    ChartData.Load(sdr);
             }
             return ChartData;
         }

@@ -16,7 +16,7 @@ namespace BusinessLogic.BL
         {
             parking_Allotment.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet GetParkingAllotment(Parking parking)
+        public DataTable GetParkingAllotment(Parking parking)
         {
             return parking_Allotment.GetParkingAllotment(parking);
 

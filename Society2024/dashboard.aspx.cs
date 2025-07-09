@@ -52,6 +52,7 @@ namespace Society
 
                 fetch_defaulter();
                 dashUpdates();
+                GetDataForRecent();
                 getResidents();
                 
 
@@ -141,11 +142,11 @@ namespace Society
                     
                         break;
                     case "meeting":
-                        row["ImageUrl"] = "img/meet.gif";
+                        row["ImageUrl"] = "img/meeting.gif";
                        
                         break;
                     case "event":
-                        row["ImageUrl"] = "img/eve.gif";
+                        row["ImageUrl"] = "img/event.gif";
                         
                         break;
                     // Add more cases as needed
@@ -220,6 +221,20 @@ namespace Society
 
         }
 
+        public void GetDataForRecent()
+        {
+
+            details.Sql_Operation = "RecentActivity";
+            details.Society_Id = society_id.Value;
+
+            var dt = BL_Login.get_recent_chart(details);
+            
+            Recent_activity.DataSource = dt;
+            Recent_activity.DataBind();
+
+
+        }
+
         public void GetDataForPieChart(DateTime date1, DateTime date2)
         {
 
@@ -253,8 +268,8 @@ namespace Society
                 {
                     switch (point.AxisLabel)
                     {
-                        case "Due":  point.Color = System.Drawing.ColorTranslator.FromHtml("#FF6666"); break;
-                        case "Collection": point.Color = System.Drawing.ColorTranslator.FromHtml("#FFFA8D"); break;
+                        case "Due":  point.Color = System.Drawing.ColorTranslator.FromHtml("#6266F1"); break;
+                        case "Collection": point.Color = System.Drawing.ColorTranslator.FromHtml("#A6B4FD"); break;
                     }
                   //  point.ToolTip = $"{point.AxisLabel}: {point.YValues[0]:N2}";
                 }

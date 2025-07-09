@@ -4,8 +4,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
+    [<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script type="text/javascript">
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -54,10 +53,7 @@
 
             return false; // prevent postback if not valid
         }
-    </script>
-
-
-    <div class="box box-primary">
+    </script><div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
                 <table width="100%">
@@ -71,8 +67,6 @@
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="notice_id" runat="server" />
-                        <asp:HiddenField ID="Recipient_id" runat="server" />
 
                        
                         <div class="form-group">
@@ -187,6 +181,9 @@
                             <div class="modal-body" id="invoice_data">
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                        
+                        <asp:HiddenField ID="notice_id" runat="server" />
+                        <asp:HiddenField ID="Recipient_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">

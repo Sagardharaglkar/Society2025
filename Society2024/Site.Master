@@ -489,7 +489,7 @@
 
 
             <nav
-                class="navbar navbar-expand navbar-light bg-white topbar static-top shadow" style="position: sticky; top: 0px; z-index: 10; margin-top: 3px; margin-bottom:13px;">
+                class="navbar navbar-expand navbar-light bg-white topbar static-top shadow" style="padding:0 16px; position: sticky; top: 0px; z-index: 10; margin-top: 3px; margin-bottom:13px;">
                 <!-- Sidebar Toggle (Topbar) -->
                 <%--   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
@@ -905,13 +905,13 @@
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <div class="modal fade bs-example-modal-sm" style="padding: 15px 10px;" id="edit_model2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+     <div class="modal fade bs-example-modal-sm" style="padding:15px 10px;" id="edit_model2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
             <div class="modal-dialog modal-sm-6">
                 <div class="modal-content user-info-model">
                     <div class="modal-body">
                         <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <asp:HiddenField runat="server" ID="owner_id" />
+                                <asp:HiddenField  runat="server" ID="owner_id"/>
                                 <div class="cover-image">
                                     <img src="img/undraw_profile.svg" alt="Profile Picture" class="profile-pic">
                                 </div>
@@ -945,7 +945,7 @@
                                             <asp:TextBox runat="server" ID="email" type="email" class="form-control" placeholder="adela@simmple.com"></asp:TextBox>
                                         </div>
 
-
+                               
 
                                         <div class="col-md-12">
                                             <label class="form-label">Contact</label>
@@ -987,11 +987,13 @@
                         </asp:UpdatePanel>
                     </div>
                     <div class="modal-footer">
-                        <div class="mt-4 text-end d-flex" style="gap: 4px;">
+                        <div class="mt-4 text-end d-flex" style="gap:4px;
+
+">
                             <asp:Button ID="btn_save" runat="server" Text="Update" class="btn btn-primary" OnClick="btn_save_Click" />
                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" data-dismiss="modal" />
+                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" data-dismiss="modal" />
 
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -1002,6 +1004,8 @@
             </div>
             <!-- /.modal-body -->
         </div>
+        <!-- /.modal-content -->
+        <%--</div>--%>
         <!-- /.modal-content -->
         <%--</div>--%>
     </form>
