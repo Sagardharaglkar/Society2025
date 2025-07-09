@@ -16,7 +16,7 @@ namespace BusinessLogic.BL
         {
             Pdc_Reminder.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getPdcReminder(pdc_reminder Reminder)
+        public DataTable getPdcReminder(pdc_reminder Reminder)
         {
 
             return Pdc_Reminder.getpdcreminder(Reminder);
@@ -26,7 +26,7 @@ namespace BusinessLogic.BL
         {
             return Pdc_Reminder.Chqno_Textchanged(reminder);
         }
-        public DataSet ownergrid(pdc_reminder Reminder)
+        public DataTable ownergrid(pdc_reminder Reminder)
         {
 
             return Pdc_Reminder.Owner_Grid(Reminder);

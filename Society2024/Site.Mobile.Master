@@ -258,7 +258,7 @@
 
                         <!-- Divider -->
                         <hr class="sidebar-divider my-0">
-
+                        <asp:Panel runat="server" ID="society">
                         <li class="nav-item zoom">
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSociety"
                                 aria-expanded="true" aria-controls="collapseTwo">
@@ -433,6 +433,29 @@
                             </div>
 
                         </li>
+                        </asp:Panel>
+
+                                                    <asp:Panel runat="server" ID="village">
+                                <li>
+                                    <a class="sidebar-item collapsed" href="#" data-toggle="collapse" data-target="#Village"
+                                        aria-expanded="true" aria-controls="collapsereport">
+                                        <i class="fas fa-fw fa-file-alt"></i>
+                                        <span>Village</span>
+                                    </a>
+                                    <div id="Village" class="collapse" data-parent="#accordionSidebar">
+                                        <div class="collapse-inner">
+                                            <h6 class="collapse-header">Village Management</h6>
+                                            <a class="collapse-item" href="village_dashboard.aspx">Dashboard</a>
+                                            <a class="collapse-item" href="village_master.aspx">Village master</a>
+                                            <a class="collapse-item" href="village_owner_master.aspx">Owner Master</a>
+                                            <a class="collapse-item" href="water_tax.aspx">Water Tax</a>
+                                            <a class="collapse-item" href="square_feet_rate.aspx">Square Feet Rate</a>
+
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </asp:Panel>
 
                         <hr class="sidebar-divider">
                         <li class="m-auto">

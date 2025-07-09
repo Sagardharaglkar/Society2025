@@ -102,12 +102,12 @@ namespace Society
 
         public void pdc_reminder_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Reminder.Sql_Operation = "Grid_Show";
             Reminder.Society_Id = society_id.Value;
             dt = BL_Pdc.getPdcReminder(Reminder);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }
@@ -264,11 +264,11 @@ namespace Society
 
         public void grid_show()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Reminder.Sql_Operation = "ownerwise_cheq";
             //Reminder.owner_id = Convert.ToInt32(ddl_owner.SelectedValue);
             dt = BL_Pdc.ownergrid(Reminder);
-            GridView2.DataSource = dt.Tables[0];
+            GridView2.DataSource = dt;
             GridView2.DataBind();
         }
         public void clear()
