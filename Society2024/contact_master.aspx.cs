@@ -172,7 +172,7 @@ namespace Society
                 contact.Society_Id = society_id.Value;
                 contact.P_Type = 2;
                 var dt = bL_Contact.GetContactDetails_1(contact);
-                GridView1.DataSource = dt.Tables[0];
+            GridView1.DataSource = dt;
                 GridView1.DataBind();
 
         }

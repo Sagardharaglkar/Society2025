@@ -12,12 +12,11 @@ namespace DataAccessLayer.DA
     public class DA_Car_Polling
     {
         stored st = new stored();
-        public DataSet Get_Car_Polling(carpolling car)
+        public DataTable Get_Car_Polling(carpolling car)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", car.Sql_Operation));
             data_item.Add(st.create_array("society_id", car.Society_Id));
@@ -28,8 +27,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if(sdr.HasRows)
                 dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public object search_car(carpolling car)

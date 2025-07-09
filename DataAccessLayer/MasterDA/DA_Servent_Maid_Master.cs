@@ -12,13 +12,12 @@ namespace DataAccessLayer.MasterDA
     public class DA_Servent_Maid_Master
     {
         stored st = new stored();
-        public DataSet getServentDetails(Servent_Made servent)
+        public DataTable getServentDetails(Servent_Made servent)
         {
 
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", servent.Sql_Operation));
             data_item.Add(st.create_array("society_id", servent.Society_Id));
@@ -28,8 +27,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
         public Servent_Made updateServentDetails(Servent_Made servent)
         {

@@ -70,7 +70,6 @@ namespace DataAccessLayer.MasterDA
                 ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
                 SqlDataReader sdr = null;
                 string status1;
-                DataSet ds = new DataSet();
                 DataTable dt = new DataTable();
                 data_item.Add(st.create_array("operation", details.Sql_Operation));
                 data_item.Add(st.create_array("society_id", details.Society_Id));
@@ -91,7 +90,6 @@ namespace DataAccessLayer.MasterDA
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("society_id", details.Society_Id));
@@ -116,7 +114,6 @@ namespace DataAccessLayer.MasterDA
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("query", details.Sql_Operation));
             data_item.Add(st.create_array("search", details.Name));
@@ -317,7 +314,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
             if (status1 == "Done")
             {
-                ChartData.Load(sdr);
+                if (sdr.HasRows)
+                    ChartData.Load(sdr);
             }
             return ChartData;
         }
@@ -336,7 +334,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
             if (status1 == "Done")
             {
-                ChartData.Load(sdr);
+                if (sdr.HasRows)
+                    ChartData.Load(sdr);
             }
             return ChartData;
         }
@@ -370,7 +369,6 @@ namespace DataAccessLayer.MasterDA
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("society_id", details.Society_Id));
@@ -393,7 +391,6 @@ namespace DataAccessLayer.MasterDA
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("society_id", details.Society_Id));
@@ -426,7 +423,7 @@ namespace DataAccessLayer.MasterDA
 
 
                     dt.Load(sdr);
-                    
+
                 }
             return dt;
         }
@@ -436,7 +433,6 @@ namespace DataAccessLayer.MasterDA
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("society_id", details.Society_Id));

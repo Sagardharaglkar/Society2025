@@ -19,12 +19,11 @@ namespace DataAccessLayer.DA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getpdcreminder(pdc_reminder Reminder)
+        public DataTable getpdcreminder(pdc_reminder Reminder)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Reminder.Sql_Operation));
             data_item.Add(st.create_array("society_id", Reminder.Society_Id));
@@ -34,8 +33,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
         public pdc_reminder Chqno_Textchanged(pdc_reminder reminder)
         {
@@ -56,12 +54,11 @@ namespace DataAccessLayer.DA
                     reminder.Sql_Result = "";
             return reminder;
         }
-        public DataSet Owner_Grid(pdc_reminder Reminder)
+        public DataTable Owner_Grid(pdc_reminder Reminder)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Reminder.Sql_Operation));
             data_item.Add(st.create_array("owner_id", Reminder.owner_id));
@@ -71,8 +68,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
         public pdc_reminder Update_Pdc_Reminder(pdc_reminder Reminder)
         {
@@ -205,12 +201,11 @@ namespace DataAccessLayer.DA
             return dt;
         }
 
-        public DataSet Update_Pdc_Clearing(pdc_reminder Reminder)
+        public DataTable Update_Pdc_Clearing(pdc_reminder Reminder)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Reminder.Sql_Operation));
             data_item.Add(st.create_array("startdate", Reminder.Start_Date));
@@ -221,10 +216,9 @@ namespace DataAccessLayer.DA
                 if (sdr.HasRows)
                 {
                 dt.Load(sdr);
-                ds.Tables.Add(dt);
 
             }
-            return ds;
+            return dt;
         }
 
 

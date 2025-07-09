@@ -21,13 +21,12 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getVisitorDetails(Visitor visitor)
+        public DataTable getVisitorDetails(Visitor visitor)
         {
 
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", visitor.Sql_Operation));
             data_item.Add(st.create_array("society_id", visitor.Society_Id));
@@ -37,8 +36,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if(sdr.HasRows)
                 dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
         public Visitor UpdateVisitorDetails(Visitor visitor)
         {

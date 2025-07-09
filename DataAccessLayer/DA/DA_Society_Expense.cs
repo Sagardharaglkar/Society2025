@@ -20,12 +20,11 @@ namespace DataAccessLayer.DA
             st.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet getExpenseDetails(Society_Expense society)
+        public DataTable getExpenseDetails(Society_Expense society)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", society.Sql_Operation));
             data_item.Add(st.create_array("society_id", society.Society_Id));
@@ -35,8 +34,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public DataTable get_approver(Society_Expense expense)
@@ -191,12 +189,11 @@ namespace DataAccessLayer.DA
             return society;
         }
 
-        public DataSet Chk_Reg_Exp(Society_Expense society)
+        public DataTable Chk_Reg_Exp(Society_Expense society)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", society.Sql_Operation));
             data_item.Add(st.create_array("society_id", society.Society_Id));
@@ -206,8 +203,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public DataTable society_expense_search(Society_Expense expense)

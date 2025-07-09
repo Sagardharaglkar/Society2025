@@ -17,12 +17,11 @@ namespace DataAccessLayer.DA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet GetParkingAllotment(Parking parking)
+        public DataTable GetParkingAllotment(Parking parking)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", parking.Sql_Operation));
             data_item.Add(st.create_array("society_id", parking.Society_Id));
@@ -32,8 +31,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public Parking updateparkingallotment(Parking parking)

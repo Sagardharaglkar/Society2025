@@ -18,12 +18,11 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getCaretakerDetails(string society)
+        public DataTable getCaretakerDetails(string society)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", "Grid_Show"));
             data_item.Add(st.create_array("society_id", society));
@@ -33,8 +32,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
         public Caretaker updateCaretakerDetails(Caretaker care)
         {

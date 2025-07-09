@@ -18,12 +18,11 @@ namespace DataAccessLayer.DA
         {
             st.fill_drop(drp_down, sql, text, value);
         }
-        public DataSet GetStaff_Details(staff Staff)
+        public DataTable GetStaff_Details(staff Staff)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Staff.Sql_Operation));
             data_item.Add(st.create_array("society_id", Staff.Society_Id));
@@ -33,8 +32,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public staff Role_Update(staff getstaff)
@@ -115,12 +113,11 @@ namespace DataAccessLayer.DA
             return getstaff;
         }
 
-        public DataSet Get_Role(staff getstaff)
+        public DataTable Get_Role(staff getstaff)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", getstaff.Sql_Operation));
             data_item.Add(st.create_array("society_id", getstaff.Society_Id));
@@ -128,9 +125,9 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_staff_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
         }
 
         public staff Contact_TextChanged(staff Staff)

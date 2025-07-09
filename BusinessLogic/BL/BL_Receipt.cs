@@ -17,7 +17,7 @@ namespace BusinessLogic.BL
             dA_Receipt.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet GetReceipt(receipt Receipt)
+        public DataTable GetReceipt(receipt Receipt)
         {
             return dA_Receipt.getreceipt(Receipt);
         }
@@ -60,7 +60,7 @@ namespace BusinessLogic.BL
             return dA_Receipt.receipt_search(receipt);
         }
 
-        public DataSet Get_CashBook(Cashbook cash)
+        public DataTable Get_CashBook(Cashbook cash)
         {
             return dA_Receipt.get_cashbook(cash);
         }

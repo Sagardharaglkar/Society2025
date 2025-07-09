@@ -49,12 +49,11 @@ namespace DataAccessLayer.DA
 
         }
 
-        public DataSet Term_Show(terms_condition terms)
+        public DataTable Term_Show(terms_condition terms)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", terms.Sql_Operation));
             data_item.Add(st.create_array("society_id", terms.Society_Id));
@@ -64,8 +63,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public terms_condition Delete_Term(terms_condition terms)

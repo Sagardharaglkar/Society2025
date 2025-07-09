@@ -181,139 +181,118 @@
      </asp:UpdatePanel>
              
 
+<div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg"> <!-- changed modal-sm-4 to modal-lg -->
+        <div class="modal-content" style="height: auto; width: 1000px;">
+            <div class="modal-header">
+                <h4 class="modal-title" id="gridSystemModalLabel"><strong>Square Feet Rate</strong></h4>
+            </div>
 
-                <div class="modal fade bs-example-modal-sm" id="edit_model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
-                    <div class="modal-dialog modal-sm-4">
-                        <div class="modal-content" style="height: auto; width: 1000px;">
-                            <div class="modal-header">
-                              <h4 class="modal-title" id="gridSystemModalLabel"><strong>Square Feet Rate</strong></h4>
-                                
-                            </div>
-
-
-                            <div class="modal-body" id="invoice_data">
-                                
-                                    <div class="form-group">
-                                        <div class="alert alert-danger danger" style="display: none;"></div>
-                                    </div>
-                                    <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
-                                        <ContentTemplate>
-
-                                            <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-3">
-                                                        <asp:Label ID="Label3" runat="server" Text="House Type"></asp:Label>
-                                                        <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="dropdown-container">
-                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required" />
-                                                        <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="Repeater1_ItemDataBound" >
-                                                                <ItemTemplate>
-                                                                    
-                                                                    <asp:LinkButton
-                                                                        ID="lnkCategory"
-                                                                        runat="server"
-                                                                        CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("house_type") %>'
-                                                                        CommandArgument='<%# Eval("house_type_id") %>'
-                                                                        CommandName="SelectCategory"
-                                                                        OnClientClick="setTextBox1(this.innerText);" />
-                                                                </ItemTemplate>
-                                                                <FooterTemplate>
-                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                                        Text="No items found." />
-                                                                </FooterTemplate>
-                                                            </asp:Repeater>
-                                                        </div>
-                                                    </div>
-
-
-                                                    </div>
-
-
-                                                    <div class="col-sm-3">
-                                                        <asp:Label ID="Label1" runat="server" Text="Rate/Per sq ft"></asp:Label>
-                                                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-
-                                                    </div>
-                                                   
-                                                    <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_rate" runat="server" Height="32px" Width="200px" placeholder="Enter Square Feet Rate"></asp:TextBox>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <div class="row ">
-
-                                                    <div class="col-sm-3">
-                                                        <asp:Label ID="Label6" runat="server" Text="Bill Generation Date"></asp:Label>
-                                                        <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_gen_date" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus></asp:TextBox>
-                                                        <br />
-                                                        <asp:Label ID="Label9" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                                                    </div> 
-                                                    <div class="col-sm-3">
-                                                        <asp:Label ID="Label10" runat="server" Text="Due Date"></asp:Label>
-                                                        <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_due" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus></asp:TextBox>
-                                                        <br />
-                                                        <asp:Label ID="Label15" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                             <div class="form-group">
-                                                <div class="row ">
-                                                    <div class="col-sm-3">
-                                                        <asp:Label ID="Label2" runat="server" Text="Applied Date"></asp:Label>
-                                                        <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                        <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <asp:TextBox ID="txt_applied_date" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus></asp:TextBox>
-                                                        <br />
-                                                        <asp:Label ID="Label26" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                                                    </div>
-                                                    
-                                                    </div>
-                                                 </div>
-                                            
-                                            </ContentTemplate>
-                                        <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
-                                    </Triggers>
-                                    </asp:UpdatePanel>
-                            </div>
-
-                            <div class="modal-footer">
-
-                                <div class="form-group">
-                                    <div class="row ">
-                                        <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" OnClick="btn_close_Click" UseSubmitBehavior="false" CausesValidation="False" />
-                                        </center>
+            <div class="modal-body" id="invoice_data">
+                <div class="form-group">
+                    <div class="alert alert-danger danger" style="display: none;"></div>
+                </div>
+                <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-3">
+                                    <asp:Label ID="Label3" runat="server" Text="House Type"></asp:Label>
+                                    <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                    <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                </div>
+                                <div class="dropdown-container">
+                                    <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                        placeholder="Select" autocomplete="off" required="required" />
+                                    <div id="RepeaterContainer1" class="suggestion-list">
+                                        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="Repeater1_ItemDataBound" >
+                                            <ItemTemplate>
+                                                <asp:LinkButton
+                                                    ID="lnkCategory"
+                                                    runat="server"
+                                                    CssClass="suggestion-item link-button category-link"
+                                                    Text='<%# Eval("house_type") %>'
+                                                    CommandArgument='<%# Eval("house_type_id") %>'
+                                                    CommandName="SelectCategory"
+                                                    OnClientClick="setTextBox1(this.innerText);" />
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                    Text="No items found." />
+                                            </FooterTemplate>
+                                        </asp:Repeater>
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="col-sm-3">
+                                <asp:Label ID="Label1" runat="server" Text="Rate/Per sq ft"></asp:Label>
+                                <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <asp:TextBox ID="txt_rate" runat="server" Height="32px" Width="200px" placeholder="Enter Square Feet Rate"></asp:TextBox>
                             </div>
                         </div>
-                        <!-- /.modal-body -->
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
+
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-3">
+                                    <asp:Label ID="Label6" runat="server" Text="Bill Generation Date"></asp:Label>
+                                    <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                    <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <asp:TextBox ID="txt_gen_date" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="Label9" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <asp:Label ID="Label10" runat="server" Text="Due Date"></asp:Label>
+                                    <asp:Label ID="Label11" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                    <asp:Label ID="Label12" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <asp:TextBox ID="txt_due" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="Label15" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-3">
+                                    <asp:Label ID="Label2" runat="server" Text="Applied Date"></asp:Label>
+                                    <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                    <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <asp:TextBox ID="txt_applied_date" runat="server" Height="32px" Width="200px" TextMode="Date" required autofocus></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="Label26" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+
+            <div class="modal-footer justify-content-end">
+                <asp:Button ID="Button1" runat="server" Text="Save" CssClass="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
+                <asp:Button ID="Button2" runat="server" Text="Close" CssClass="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); $('#edit_model').modal('hide'); return false;" />
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
                 <!-- /.modal-dialog -->
 
 
@@ -321,55 +300,82 @@
         </div>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            initDropdownEvents();
+        });
+
         function initDropdownEvents() {
             const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+
+        if (!textBox1 || !repeaterContainer1) return; // defensive check
+
+        textBox1.addEventListener("focus", function () {
+            repeaterContainer1.style.display = "block";
+        });
+
+        textBox1.addEventListener("input", function () {
+            const input = textBox1.value.trim().toLowerCase();
+
+            if (input === "") {
+                repeaterContainer1.style.display = "none";  // hide suggestions if empty input
+            } else {
+                repeaterContainer1.style.display = "block"; // show suggestions
+            }
+
+            filterSuggestions("category-link", input);
+        });
+
+        // Optionally hide suggestions if clicked outside textbox or container
+        document.addEventListener("click", function(event) {
+            if (!textBox1.contains(event.target) && !repeaterContainer1.contains(event.target)) {
+                repeaterContainer1.style.display = "none";
+            }
+        });
+    }
+
+    function filterSuggestions(className, value) {
+        const items = document.querySelectorAll("." + className);
+        let matchFound = false;
+
+        items.forEach(item => {
+            if (item.innerText.toLowerCase().includes(value)) {
+                item.style.display = "block";
+                matchFound = true;
+            } else {
+                item.style.display = "none";
+            }
+        });
+
+        let noMatchMessage = document.getElementById("no-match-message");
+
+        // Create no-match message container only once and append to repeaterContainer1
+        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+
+        if (!matchFound) {
+            if (!noMatchMessage) {
+                noMatchMessage = document.createElement("div");
+                noMatchMessage.id = "no-match-message";
+                noMatchMessage.style.padding = "5px";
+                noMatchMessage.style.color = "#888";
+                noMatchMessage.style.fontStyle = "italic";
+                noMatchMessage.innerText = "No matching suggestions.";
+                repeaterContainer1.appendChild(noMatchMessage);
+            }
+            noMatchMessage.style.display = "block";
+        } else if (noMatchMessage) {
+            noMatchMessage.style.display = "none";
+        }
+    }
+
+    function setTextBox1(value) {
+        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
             const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-            textBox1.addEventListener("focus", function () {
-                repeaterContainer1.style.display = "block";
-            });
-
-            textBox1.addEventListener("input", function () {
-                const input = textBox1.value.toLowerCase();
-                filterSuggestions("category-link", input);
-            });
+            if (textBox1) textBox1.value = value;
+            if (repeaterContainer1) repeaterContainer1.style.display = "none";
         }
-            function filterSuggestions(className, value) {
-                const items = document.querySelectorAll("." + className);
-                let matchFound = false;
-
-                items.forEach(item => {
-                    if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-                        item.style.display = "block";
-                        matchFound = true;
-                    } else {
-                        item.style.display = "none";
-                    }
-                });
-
-                let noMatchMessage = document.getElementById("no-match-message");
-
-                if (!matchFound) {
-                    if (!noMatchMessage) {
-                        noMatchMessage = document.createElement("div");
-                        noMatchMessage.id = "no-match-message";
-
-                        noMatchMessage.innerText = "No matching suggestions.";
-                        items[0]?.parentNode?.appendChild(noMatchMessage);
-                    }
-                    noMatchMessage.style.display = "block";
-                } else {
-                    if (noMatchMessage) {
-                        noMatchMessage.style.display = "none";
-                    }
-                }
-        }
-        function setTextBox1(value) {
-            document.getElementById("<%= TextBox1.ClientID %>").value = value;
-            document.getElementById("RepeaterContainer1").style.display = "none";
-        }
-
-
     </script>
+
 
 </asp:Content>

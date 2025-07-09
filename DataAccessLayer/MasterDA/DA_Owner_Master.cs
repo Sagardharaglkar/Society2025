@@ -22,13 +22,12 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_list(list_box, sqlstring);
         }
-        public DataSet getOwnerDetails(Owner owner)
+        public DataTable getOwnerDetails(Owner owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 ;
              DataTable dt = new DataTable();
-            DataSet ds = new DataSet();
             data_item.Add(st.create_array("operation",owner.Sql_Operation));
             data_item.Add(st.create_array("society_id", owner.Society_Id));
             data_item.Add(st.create_array("type", owner.Type));
@@ -38,18 +37,16 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-                ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
 
 
-        public DataSet getFamilyDetails(Owner owner)
+        public DataTable getFamilyDetails(Owner owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 ;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", owner.Sql_Operation));
             data_item.Add(st.create_array("owner_id", owner.owner_id));
@@ -60,8 +57,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public Owner updateOwnerDetails(Owner owner)
@@ -287,12 +283,11 @@ namespace DataAccessLayer.MasterDA
 
 
 
-        public DataSet getRentalDetails(Owner owner)
+        public DataTable getRentalDetails(Owner owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 ;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", owner.Sql_Operation));
             data_item.Add(st.create_array("society_id", owner.Society_Id));
@@ -303,8 +298,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public Owner updateRentalDetails(Owner owner)
@@ -351,12 +345,11 @@ namespace DataAccessLayer.MasterDA
 
         }
 
-        public DataSet getFamily1Details(Owner owner)
+        public DataTable getFamily1Details(Owner owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 ;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", owner.Sql_Operation));
             data_item.Add(st.create_array("owner_id", owner.owner_id));
@@ -367,8 +360,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public Owner updateFamilyOwnerDetails(Owner owner)
