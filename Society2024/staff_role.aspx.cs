@@ -40,12 +40,12 @@ namespace Society2024
 
         public void Role_GridBind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             getstaff.Sql_Operation = "Role_Show";
             getstaff.Society_Id = society_id.Value;
             dt = bL_Staff.getrole(getstaff);
-            ViewState["dirState"] = dt.Tables[0];
-            GridView1.DataSource = dt.Tables[0];
+            ViewState["dirState"] = dt;
+            GridView1.DataSource = dt;
             GridView1.DataBind();
         }
         public void runproc_save(string operation)

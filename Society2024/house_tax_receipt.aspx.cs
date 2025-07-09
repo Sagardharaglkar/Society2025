@@ -44,13 +44,13 @@ namespace Society
         }
         public void house_tax_receipt_gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             owner.Sql_Operation = "Grid_Show";
             owner.Village_Id = village_id.Value;
             dt = bL_Owner.get_tax_receipt(owner);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

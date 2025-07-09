@@ -18,13 +18,12 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet Get_Tax_Receipt(VillageOwner village_owner)
+        public DataTable Get_Tax_Receipt(VillageOwner village_owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
             DataTable dt = new DataTable();
-            DataSet ds = new DataSet();
             data_item.Add(st.create_array("operation", village_owner.Sql_Operation));
             data_item.Add(st.create_array("village_id", village_owner.Village_Id));
 
@@ -33,26 +32,24 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
-        public DataSet Get_Village_Owner(VillageOwner village_owner)
+        public DataTable Get_Village_Owner(VillageOwner village_owner)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
             DataTable dt = new DataTable();
-            DataSet ds = new DataSet();
             data_item.Add(st.create_array("operation", village_owner.Sql_Operation));
             data_item.Add(st.create_array("village_id", village_owner.Village_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_house_owner", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
         }
         public VillageOwner village_owner_delete(VillageOwner village_owner)
         {
@@ -83,7 +80,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
 
         }
@@ -145,7 +143,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
         public VillageOwner Check_Select(VillageOwner village_owner)
@@ -389,7 +388,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 

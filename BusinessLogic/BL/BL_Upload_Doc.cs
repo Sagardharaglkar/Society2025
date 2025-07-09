@@ -17,7 +17,7 @@ namespace BusinessLogic.BL
             dA_Upload.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet GetUploadDoc(upload_doc doc)
+        public DataTable GetUploadDoc(upload_doc doc)
         {
             return dA_Upload.get_upload_doc(doc);
         }

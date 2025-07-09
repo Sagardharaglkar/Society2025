@@ -20,12 +20,11 @@ namespace DataAccessLayer.MasterDA
             st.fill_drop(ddl_state, sql_query, v1, v2);
         }
 
-        public DataSet Get_Village(Village village)
+        public DataTable Get_Village(Village village)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", village.Sql_Operation));
             data_item.Add(st.create_array("village_id", village.Village_Id));
@@ -33,17 +32,16 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_village_master", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
         }
 
-        public DataSet getsquare_feet(Village village)
+        public DataTable getsquare_feet(Village village)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", village.Sql_Operation));
             data_item.Add(st.create_array("village_id", village.Village_Id));
@@ -51,9 +49,9 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_square_ft_rate", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
         }
 
         public DataTable Village_Search(Village village)
@@ -68,7 +66,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -84,7 +83,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -150,12 +150,11 @@ namespace DataAccessLayer.MasterDA
             return village;
         }
 
-        public DataSet Get_Water_Tax(Village village)
+        public DataTable Get_Water_Tax(Village village)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", village.Sql_Operation));
             data_item.Add(st.create_array("village_id", village.Village_Id));
@@ -163,9 +162,9 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_water_tax", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
         }
 
         public DataTable Search_Sq_Ft_Rate(Village village)
@@ -180,7 +179,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 

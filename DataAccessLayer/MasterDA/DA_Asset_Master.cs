@@ -8,12 +8,12 @@ namespace DataAccessLayer.MasterDA
 {
     public class DA_Asset_Master
     {
-        public DataSet getAssetDetails(int a_id, string society_id)
+        public DataTable getAssetDetails(int a_id, string society_id)
         {
-            DataSet ds = new DataSet();
+            DataTable ds = new DataTable();
             return ds;
         }
-        public void updateAssetDetails(DataSet assetmaster)
+        public void updateAssetDetails(DataTable assetmaster)
         {
 
         }

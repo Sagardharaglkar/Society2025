@@ -9,13 +9,13 @@ namespace BusinessLogic.MasterBL
 {
     public class BL_Asset_Master
     {
-        public DataSet getAssetDetails(int a_id, string society_id)
+        public DataTable getAssetDetails(int a_id, string society_id)
         {
             DA_Asset_Master dA_Asset = new DA_Asset_Master();
-            DataSet asset_data =dA_Asset.getAssetDetails(a_id, society_id);
+            DataTable asset_data =dA_Asset.getAssetDetails(a_id, society_id);
             return asset_data;
         }
-        public void updateAssetDetails(DataSet assetmaster)
+        public void updateAssetDetails(DataTable assetmaster)
         {
             DA_Asset_Master dA_Asset = new DA_Asset_Master();
            dA_Asset.updateAssetDetails(assetmaster);

@@ -156,26 +156,26 @@ namespace Society
 
         public void Owner_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             owner.Sql_Operation = "Grid_Show";
             owner.Type = "Owner";
             owner.Society_Id = society_id.Value;
             dt = bL_Owner.getOwnerDetails(owner);
-            OwnerGrid.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            OwnerGrid.DataSource = dt;
+            ViewState["dirState"] = dt;
             OwnerGrid.DataBind();
 
         }
 
         public void Family_Details_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             owner.Sql_Operation = "Grid_Show_Family";
             owner.owner_id = Convert.ToInt32(owner_id.Value);
             owner.Type = "Owner";
             dt = bL_Owner.getFamilyDetails(owner);
-            FamilyGrid.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            FamilyGrid.DataSource = dt;
+            ViewState["dirState"] = dt;
             FamilyGrid.DataBind();
 
         }

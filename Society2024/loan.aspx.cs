@@ -93,13 +93,13 @@ namespace Society
 
         public void Loan_GridBind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             GetLoan.Sql_Operation = "Grid_Show";
             GetLoan.Society_Id = society_id.Value;
             dt = l_Loan.GetLoan(GetLoan);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

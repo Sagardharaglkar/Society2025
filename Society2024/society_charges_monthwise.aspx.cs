@@ -41,12 +41,12 @@ namespace Society
         }
         public void monthwise_charges_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Maintenance1.Sql_Operation = "Charges_Show";
             Maintenance1.Society_Id = society_id.Value;
             dt = bL_Maintenance.get_monthwise_charges(Maintenance1);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

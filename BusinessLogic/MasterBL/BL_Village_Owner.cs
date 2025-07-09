@@ -21,11 +21,11 @@ namespace BusinessLogic.MasterBL
         {
             return dA_Village.Print_House_Receipt(village_owner);
         }
-        public DataSet get_tax_receipt(VillageOwner village_owner)
+        public DataTable get_tax_receipt(VillageOwner village_owner)
         {
             return dA_Village.Get_Tax_Receipt(village_owner);
         }
-        public DataSet get_village_owner(VillageOwner village_owner)
+        public DataTable get_village_owner(VillageOwner village_owner)
         {
             return dA_Village.Get_Village_Owner(village_owner);
         }

@@ -201,12 +201,11 @@ namespace DataAccessLayer.DA
             return dt;
         }
 
-        public DataSet Update_Pdc_Clearing(pdc_reminder Reminder)
+        public DataTable Update_Pdc_Clearing(pdc_reminder Reminder)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Reminder.Sql_Operation));
             data_item.Add(st.create_array("startdate", Reminder.Start_Date));
@@ -217,10 +216,9 @@ namespace DataAccessLayer.DA
                 if (sdr.HasRows)
                 {
                 dt.Load(sdr);
-                ds.Tables.Add(dt);
 
             }
-            return ds;
+            return dt;
         }
 
 

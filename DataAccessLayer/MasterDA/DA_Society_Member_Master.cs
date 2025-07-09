@@ -17,13 +17,12 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getSocietyMemberDetails(Society_Member member)
+        public DataTable getSocietyMemberDetails(Society_Member member)
         {
 
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", member.Sql_Operation));
             data_item.Add(st.create_array("society_id", member.Society_Id));
@@ -33,17 +32,15 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
 
         }
-        public DataSet Add_Approver(Society_Member member)
+        public DataTable Add_Approver(Society_Member member)
         {
 
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", member.Sql_Operation));
             data_item.Add(st.create_array("society_id", member.Society_Id));
@@ -53,8 +50,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
 
         }
 

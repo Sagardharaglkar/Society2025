@@ -19,7 +19,7 @@ namespace BusinessLogic.MasterBL
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getcharge(Search_Society society)
+        public DataTable getcharge(Search_Society society)
         {
 
             return dA_Society.getCharge(society);
@@ -65,7 +65,7 @@ namespace BusinessLogic.MasterBL
             return dA_Society.Update_Charges(society);
         }
 
-        public DataSet getSocietyDetails(string society)
+        public DataTable getSocietyDetails(string society)
         {
             return dA_Society.Get_Society_Details(society);
         }

@@ -51,12 +51,12 @@ namespace Society
         }
         public void Wing_GridBind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             wing.Sql_Operation = "Grid_Show";
             wing.Society_Id = society_id.Value;
             dt = bL_Wing.getWingDetails(wing);
-            ViewState["dirState"] = dt.Tables[0];
-            GridView1.DataSource = dt.Tables[0];
+            ViewState["dirState"] = dt;
+            GridView1.DataSource = dt;
             GridView1.DataBind();
 
         }

@@ -12,10 +12,10 @@ namespace BusinessLogic.MasterBL
     public class BL_CareTaker_Master
     {
         DA_CareTaker_Master DA_CareTaker = new DA_CareTaker_Master();
-        public DataSet CareTakerDetails(string society_id)
+        public DataTable CareTakerDetails(string society_id)
         {
             DA_CareTaker_Master dA_Care = new DA_CareTaker_Master();
-            DataSet caretaker_data = dA_Care.getCaretakerDetails(society_id);
+            DataTable caretaker_data = dA_Care.getCaretakerDetails(society_id);
             return caretaker_data;
 
         }

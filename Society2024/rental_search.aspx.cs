@@ -125,25 +125,25 @@ namespace Society
 
         public void Rental_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             owner.Sql_Operation = "Grid_Show";
             owner.Type = "Rent";
             owner.Society_Id = society_id.Value;
             dt = bL_Owner.getRentalDetails(owner);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }
 
         public void Family_Details_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             owner.Sql_Operation = "Grid_Show_Family";
             owner.owner_id = Convert.ToInt32(owner_id.Value);
             dt = bL_Owner.getFamilyDetails(owner);
-            GridView2.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView2.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView2.DataBind();
 
         }

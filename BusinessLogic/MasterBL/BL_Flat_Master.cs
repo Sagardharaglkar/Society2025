@@ -22,10 +22,10 @@ namespace BusinessLogic.MasterBL
             master.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet getFlatDetails( string society)
+        public DataTable getFlatDetails( string society)
         {
 
-            DataSet flat_data = dA_Flat.getflatDetails(society);
+            DataTable flat_data = dA_Flat.getflatDetails(society);
             return flat_data;
         }
             public Flat updateFlatDetails( Flat flat)

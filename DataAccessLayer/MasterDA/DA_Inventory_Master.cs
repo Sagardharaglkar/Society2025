@@ -12,12 +12,11 @@ namespace DataAccessLayer.MasterDA
     public class DA_Inventory_Master
     {
         stored st = new stored();
-        public DataSet getInventoryDetils(Inventory inventory)
+        public DataTable getInventoryDetils(Inventory inventory)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", inventory.Sql_Operation));
             data_item.Add(st.create_array("society_id", inventory.Society_Id));
@@ -26,8 +25,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public object inventory_search(Inventory inventory)

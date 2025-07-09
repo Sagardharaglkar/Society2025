@@ -25,12 +25,11 @@ namespace DataAccessLayer.MasterDA
         {
             st.fill_drop_1(drp_down, sqlstring, text, value);
         }
-        public DataSet get_maintenance_details(maintenance Maintenance1)
+        public DataTable get_maintenance_details(maintenance Maintenance1)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Maintenance1.Sql_Operation));
             data_item.Add(st.create_array("society_id", Maintenance1.Society_Id));
@@ -40,16 +39,14 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
-        public DataSet Get_Monthwise_Charges(maintenance_cal maintenance1)
+        public DataTable Get_Monthwise_Charges(maintenance_cal maintenance1)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", maintenance1.Sql_Operation));
             data_item.Add(st.create_array("society_id", maintenance1.Society_Id));
@@ -59,8 +56,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public maintenance Update_Maintenance_Details(maintenance Maintenance1)
@@ -189,13 +185,12 @@ namespace DataAccessLayer.MasterDA
                     dt.Load(sdr);
             return dt;
         }
-        public DataSet ownerwise_maintenance(maintenance getMaintenance)
+        public DataTable ownerwise_maintenance(maintenance getMaintenance)
         {
 
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("query", getMaintenance.Sql_Operation));
             
@@ -204,8 +199,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
             
 

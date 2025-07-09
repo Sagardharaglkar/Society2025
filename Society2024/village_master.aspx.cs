@@ -43,13 +43,13 @@ namespace Society2024
 
         public void Village_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             village.Sql_Operation = "Grid_Show";
             village.Village_Id = village_id.Value;
             dt = bL_Village.get_village_details(village);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

@@ -50,12 +50,12 @@ namespace Society
 
         public void Parking_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             parking.Sql_Operation = "Grid_Show";
             parking.Society_Id = society_id.Value;
             dt = bL_Parking.getParkingDetails(parking);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

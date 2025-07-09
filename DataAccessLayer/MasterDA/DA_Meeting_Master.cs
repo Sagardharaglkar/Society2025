@@ -12,12 +12,11 @@ namespace DataAccessLayer.MasterDA
     public class DA_Meeting_Master
     {
         stored st = new stored();
-        public DataSet get_meeting_details(Meeting meeting)
+        public DataTable get_meeting_details(Meeting meeting)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", meeting.Sql_Operation));
             data_item.Add(st.create_array("society_id", meeting.Society_Id));
@@ -27,15 +26,13 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
-        public DataSet mom_gridbind(Meeting meeting)
+        public DataTable mom_gridbind(Meeting meeting)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", meeting.Sql_Operation));
             //data_item.Add(st.create_array("meet_id", meeting.meet_id));
@@ -49,8 +46,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                  dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public Meeting get_meeting(Meeting meeting)

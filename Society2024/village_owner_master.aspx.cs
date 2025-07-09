@@ -72,12 +72,12 @@ namespace Society2024
         //}
         public void village_owner_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             owner.Sql_Operation = "Grid_Show";
             owner.Village_Id = (village_id.Value);
             dt = bL_Village_owner.get_village_owner(owner);
-            OwnerGrid.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            OwnerGrid.DataSource = dt;
+            ViewState["dirState"] = dt;
             OwnerGrid.DataBind();
 
         }

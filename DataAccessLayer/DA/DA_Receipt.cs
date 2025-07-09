@@ -19,12 +19,11 @@ namespace DataAccessLayer.DA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getreceipt(receipt Receipt)
+        public DataTable getreceipt(receipt Receipt)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", Receipt.Sql_Operation));
             data_item.Add(st.create_array("society_id", Receipt.Society_Id));
@@ -34,8 +33,8 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if(sdr.HasRows)
                 dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+
+            return dt;
         }
 
         public receipt updatereceipt(receipt Receipt)
@@ -152,12 +151,11 @@ namespace DataAccessLayer.DA
 
         }
 
-        public DataSet get_cashbook(Cashbook cash)
+        public DataTable get_cashbook(Cashbook cash)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", cash.Sql_Operation));
             data_item.Add(st.create_array("build_id", cash.build_id));
@@ -171,8 +169,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public receipt receipt_exfetch(receipt Receipt)
@@ -213,7 +210,8 @@ namespace DataAccessLayer.DA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 

@@ -34,64 +34,64 @@ namespace BusinessLogic.BL
             return dA_Contact.per_type_selectIndexChanged(contact);
         }
 
-        public DataSet GetUsefullContact(string society_id)
+        public DataTable GetUsefullContact(string society_id)
         {
-            return dA_Contact.get_usefull_contact(society_id);
+            return dA_Contact.Get_usefull_contact(society_id);
         }
 
         public DataTable search_usefull_contact(usefull_Contact usefull)
         {
             return dA_Contact.usefull_contact_search(usefull);
         }
-        public DataSet GetContactDetails_1(usefull_Contact contact)
+        public DataTable GetContactDetails_1(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_1(contact);
         }
 
-        public DataSet GetContactDetails_2(usefull_Contact contact)
+        public DataTable GetContactDetails_2(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_2(contact);
         }
 
-        public DataSet GetContactDetails_3(usefull_Contact contact)
+        public DataTable GetContactDetails_3(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_3(contact);
         }
 
-        public DataSet GetContactDetails_4(usefull_Contact contact)
+        public DataTable GetContactDetails_4(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_4(contact);
         }
-        public DataSet GetContactDetails_5(usefull_Contact contact)
+        public DataTable GetContactDetails_5(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_5(contact);
         }
 
-        public DataSet GetContactDetails_6(usefull_Contact contact)
+        public DataTable GetContactDetails_6(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_6(contact);
         }
 
-        public DataSet GetContactDetails_7(usefull_Contact contact)
+        public DataTable GetContactDetails_7(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_7(contact);
         }
 
-        public DataSet GetContactDetails_8(usefull_Contact contact)
+        public DataTable GetContactDetails_8(usefull_Contact contact)
         {
-            return dA_Contact.get_contact_details_8(contact);
+            return dA_Contact.Get_contact_details_8(contact);
         }
 
-        public DataSet GetContactDetails_9(usefull_Contact contact)
+        public DataTable GetContactDetails_9(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_9(contact);
         }
 
-        public DataSet GetContactDetails_10(usefull_Contact contact)
+        public DataTable GetContactDetails_10(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_10(contact);
         }
-        public DataSet GetContactDetails_11(usefull_Contact contact)
+        public DataTable GetContactDetails_11(usefull_Contact contact)
         {
             return dA_Contact.get_contact_details_11(contact);
         }

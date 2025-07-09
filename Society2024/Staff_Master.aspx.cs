@@ -51,12 +51,12 @@ namespace Society2024
         //}
         public void staff_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Staff.Sql_Operation = "Grid_Show";
             Staff.Society_Id = society_id.Value;
             dt = bL_Staff.getstaffdetails(Staff);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

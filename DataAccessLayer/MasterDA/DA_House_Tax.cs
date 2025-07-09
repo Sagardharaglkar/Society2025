@@ -20,22 +20,21 @@ namespace DataAccessLayer.MasterDA
             st.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet Get_House_Tax(House_Tax getHouse)
+        public DataTable Get_House_Tax(House_Tax getHouse)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
             DataTable dt = new DataTable();
-            DataSet ds = new DataSet();
             data_item.Add(st.create_array("operation", getHouse.Sql_Operation));
             data_item.Add(st.create_array("village_id", getHouse.Village_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_house_tax", ref sdr);
 
             if (status1 == "Done")
-                dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
         }
 
         public House_Tax Fetch_House_No(House_Tax getHouse)

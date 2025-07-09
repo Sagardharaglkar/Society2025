@@ -56,12 +56,12 @@ namespace Society
         public void Society_charges_GridBind()
         {
           
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             society.Sql_Operation = "Grid_Show";
            
             dt = bL_society.getcharge(society);
-            ViewState["dirState"] = dt.Tables[0];
-            GridView1.DataSource = dt.Tables[0];
+            ViewState["dirState"] = dt;
+            GridView1.DataSource = dt;
             GridView1.DataBind();
         }
 

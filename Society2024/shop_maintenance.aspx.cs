@@ -65,13 +65,13 @@ namespace Society
         }
         public void shop_maintenance_GridBind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             maintenance.Sql_Operation = "Grid_Show";
             maintenance.Society_Id = society_id.Value;
             dt = bL_Shop.getshopmaintenance(maintenance);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

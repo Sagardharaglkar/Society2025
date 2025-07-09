@@ -13,12 +13,11 @@ namespace DataAccessLayer.MasterDA
     public class DA_Society_Master
     {
         stored st = new stored();
-        public DataSet getCharge(Search_Society society)
+        public DataTable getCharge(Search_Society society)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", "Grid_Show"));
             status1 = st.run_query(data_item, "Select", "sp_society_charges", ref sdr);
@@ -26,8 +25,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
         public Search_Society updateSocietyDetails(Search_Society society)
           {
@@ -120,12 +118,11 @@ namespace DataAccessLayer.MasterDA
             return society;
         }
 
-        public DataSet Get_Society_Details(string society)
+        public DataTable Get_Society_Details(string society)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", "Grid_Show"));
             data_item.Add(st.create_array("society_id", society));
@@ -136,8 +133,7 @@ namespace DataAccessLayer.MasterDA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public Search_Society Update_Charges(Search_Society society)

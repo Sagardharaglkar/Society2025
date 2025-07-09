@@ -12,7 +12,7 @@ namespace BusinessLogic.MasterBL
     public class BL_Notice_Master
     {
         DA_Notice_Master dA_Notice = new DA_Notice_Master();
-        public DataSet getNotice( Notice notice)
+        public DataTable getNotice( Notice notice)
         {
            
            return dA_Notice.getNotice(notice);

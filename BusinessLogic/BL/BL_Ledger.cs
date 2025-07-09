@@ -11,7 +11,7 @@ namespace BusinessLogic.BL
     public class BL_Ledger
     {
         DA_Ledger dA_Ledger = new DA_Ledger();
-        public DataSet getLedgerDetails(Ledger GetLedger)
+        public DataTable getLedgerDetails(Ledger GetLedger)
         {
             return dA_Ledger.Get_Ledger(GetLedger);
 

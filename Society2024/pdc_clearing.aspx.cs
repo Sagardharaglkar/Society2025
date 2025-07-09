@@ -40,14 +40,14 @@ namespace Society
         
         public void runproc_save(string operation)
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Reminder.Sql_Operation = operation;
             Reminder.Start_Date = Convert.ToDateTime(txt_form_date.Text);
             Reminder.End_Date = Convert.ToDateTime(txt_to_date.Text);
            
             dt = BL_Pdc.updatePdcClearing(Reminder);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
             Button1.Visible = GridView1.Rows.Count > 0;

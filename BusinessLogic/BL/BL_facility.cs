@@ -16,7 +16,7 @@ namespace BusinessLogic.BL
         {
             dA_facility.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet GetPartyDetails(facility Facility)
+        public DataTable GetPartyDetails(facility Facility)
         {
             return dA_facility.getparty(Facility);
 
@@ -41,7 +41,7 @@ namespace BusinessLogic.BL
             return dA_facility.getflatno(Facility);
         }
 
-        public DataSet getfacility(facility getFacility)
+        public DataTable getfacility(facility getFacility)
         {
             return dA_facility.GetFacility(getFacility);
         }
@@ -71,7 +71,7 @@ namespace BusinessLogic.BL
             return dA_facility.Runproc_Save(getFacility);
         }
 
-        public DataSet getslot(facility getFacility)
+        public DataTable getslot(facility getFacility)
         {
             return dA_facility.Get_Slot(getFacility);
         }

@@ -19,7 +19,7 @@ namespace BusinessLogic.MasterBL
             dA_House.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet get_house_tax(House_Tax getHouse)
+        public DataTable get_house_tax(House_Tax getHouse)
         {
             return dA_House.Get_House_Tax(getHouse);
         }

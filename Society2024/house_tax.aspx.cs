@@ -38,12 +38,12 @@ namespace Society2024
 
         public void house_tax_gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             GetHouse.Sql_Operation = "Grid_Show";
             GetHouse.Village_Id = (village_id.Value);
             dt = bL_House.get_house_tax(GetHouse);
-            OwnerGrid.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            OwnerGrid.DataSource = dt;
+            ViewState["dirState"] = dt;
             OwnerGrid.DataBind();
 
         }

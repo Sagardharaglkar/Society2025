@@ -21,7 +21,7 @@ namespace BusinessLogic.BL
             return dA_terms.Delete_Term(terms);
         }
 
-        public DataSet getTermsDetails(terms_condition terms)
+        public DataTable getTermsDetails(terms_condition terms)
         {
             return dA_terms.Term_Show(terms);
         }

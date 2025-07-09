@@ -63,11 +63,11 @@ namespace Society
 
         public void Society_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             dt = bL_Society.getSocietyDetails(society_id.Value);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
            
 

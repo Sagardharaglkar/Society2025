@@ -8,12 +8,12 @@ namespace DataAccessLayer.MasterDA
 {
     public class DA_Amc_Master
     {
-        public DataSet geAmcDetails(int amc_id, string society_id)
+        public DataTable geAmcDetails(int amc_id, string society_id)
         {
-            DataSet ds = new DataSet();
+            DataTable ds = new DataTable();
             return ds;
         }
-        public void updateAmcDetails(DataSet amcmaster)
+        public void updateAmcDetails(DataTable amcmaster)
         {
 
         }

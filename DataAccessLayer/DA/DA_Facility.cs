@@ -17,12 +17,11 @@ namespace DataAccessLayer.DA
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getparty(facility party)
+        public DataTable getparty(facility party)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", party.Sql_Operation));
             data_item.Add(st.create_array("society_id", party.Society_Id));
@@ -32,16 +31,14 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
-        public DataSet GetFacility(facility getFacility)
+        public DataTable GetFacility(facility getFacility)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", getFacility.Sql_Operation));
             data_item.Add(st.create_array("society_id", getFacility.Society_Id));
@@ -51,16 +48,14 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if (sdr.HasRows)
                     dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
-        public DataSet Get_Slot(facility getFacility)
+        public DataTable Get_Slot(facility getFacility)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1 = "";
-            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", getFacility.Sql_Operation));
             data_item.Add(st.create_array("facility_id", getFacility.facility_id));
@@ -73,8 +68,7 @@ namespace DataAccessLayer.DA
             if (status1 == "Done")
                 if(sdr.HasRows)
                 dt.Load(sdr);
-            ds.Tables.Add(dt);
-            return ds;
+            return dt;
         }
 
         public facility Delete_Slot(facility getFacility)

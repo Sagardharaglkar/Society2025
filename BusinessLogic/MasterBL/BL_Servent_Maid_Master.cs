@@ -13,7 +13,7 @@ namespace BusinessLogic.MasterBL
     public class BL_Servent_Maid_Master
     {
         stored st = new stored();
-        public DataSet getServentDetails(Servent_Made servent)
+        public DataTable getServentDetails(Servent_Made servent)
         {
             DA_Servent_Maid_Master dA_Servent = new DA_Servent_Maid_Master();
             return dA_Servent.getServentDetails(servent);

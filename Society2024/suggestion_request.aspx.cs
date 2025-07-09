@@ -34,14 +34,14 @@ namespace Society
 
         public void Suggestion_Gridbind()
         {
-            DataSet ds = new DataSet();
+            DataTable ds = new DataTable();
             request.Sql_Operation = "Grid_Show";
             if (sug_id.Value != "")
                 request.sug_id = Convert.ToInt32(sug_id.Value);
             request.Society_Id = society_id.Value;
             ds = BL_Suggestion.getsuggestion(request);
-            GridView1.DataSource = ds.Tables[0];
-            ViewState["dirState"] = ds.Tables[0];
+            GridView1.DataSource = ds;
+            ViewState["dirState"] = ds;
             GridView1.DataBind();
 
         }

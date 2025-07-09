@@ -11,7 +11,7 @@ namespace BusinessLogic.MasterBL
     public class BL_Vendor_Master
     {
         DA_Vendor_Master dA_Vendor = new DA_Vendor_Master();
-        public DataSet getvendorDetails(Vendor vendor)
+        public DataTable getvendorDetails(Vendor vendor)
         {
            return dA_Vendor.Get_Vendor_Details(vendor);
            

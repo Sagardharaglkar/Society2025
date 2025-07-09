@@ -25,7 +25,7 @@ namespace Society
         BL_FillRepeater repeater = new BL_FillRepeater();
         Cashbook cash = new Cashbook();
         BL_Receipt bL_Receipt = new BL_Receipt();
-        DataSet ds = new DataSet();
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -78,9 +78,9 @@ namespace Society
                 cash.Date1 = Convert.ToDateTime(txt_from.Text.ToString());
                 cash.Date2 = Convert.ToDateTime(txt_to.Text.ToString());
             }
-            ds = bL_Receipt.Get_CashBook(cash);
-            GridView1.DataSource = ds.Tables[0];
-            ViewState["dirState"] = ds.Tables[0];
+            var dt = bL_Receipt.Get_CashBook(cash);
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
 
@@ -169,7 +169,7 @@ namespace Society
             GridView1.Visible = false;
             Cashbook_GridBind();
                 ReportViewer1.LocalReport.DataSources.Clear();
-                ReportDataSource rds = new ReportDataSource("cashbook", ds.Tables[0]);
+                ReportDataSource rds = new ReportDataSource("cashbook", (DataTable)ViewState["dirState"]);
                 ReportViewer1.LocalReport.ReportPath = Server.MapPath("Cashbook.rdlc");
                 //  ReportParameter parameter = new ReportParameter("@receipt_id",receipt_id.Value);
                 // ReportViewer1.LocalReport.SetParameters(parameter);

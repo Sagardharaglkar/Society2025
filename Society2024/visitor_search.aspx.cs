@@ -107,12 +107,12 @@ namespace Society
 
         public void Visitor_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             visitor.Sql_Operation = "Grid_Show";
             visitor.Society_Id = society_id.Value;
             dt = BL_Visitor.getVisitorDetails(visitor);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

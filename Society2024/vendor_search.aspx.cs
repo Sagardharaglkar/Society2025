@@ -35,13 +35,13 @@ namespace Society
 
         public void Vendor_GridBind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             vendor.Sql_Operation = "Grid_Show";
             vendor.Society_Id = society_id.Value;
             dt = bL_Vendor.getvendorDetails(vendor);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }
