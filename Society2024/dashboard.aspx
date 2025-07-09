@@ -225,12 +225,10 @@
 
         .divider {
             height: 1px;
-/*            background: #0000004d;*/
+            /*            background: #0000004d;*/
             width: 88%;
             margin: 0 21px;
         }
-
-
     </style>
 
     <style>
@@ -326,154 +324,156 @@
             border-radius: 12px;
         }
 
-                .custom-width {
+        .custom-width {
             width: calc(95% / 3);
         }
 
         @media (max-width: 431px) {
-            .top-dashboard{
-                flex-direction:column;
+            .top-dashboard {
+                flex-direction: column;
             }
 
-            .custom-width{
-                width:100%;
+            .custom-width {
+                width: 100%;
             }
 
-            .netlify-color{
-                background:white;
+            .netlify-color {
+                background: white;
             }
 
-            .layout-blue{
-                flex-direction:column;
-                background:none;
+            .layout-blue {
+                flex-direction: column;
+                background: none;
             }
 
-            .pdc-weekly{
-                width:100%;
+            .pdc-weekly {
+                width: 100%;
             }
-        
         }
 
         @media(max-width:321px) {
             .custom-width {
                 width: 91%;
             }
+
+            .custom-width-container {
+                width: 91%;
+            }
         }
     </style>
-      <style>
-      .recent-container {
-    max-width: 379px;
-    margin: 2px auto;
-    background: #fff;
-    border-radius: 16px;
-    padding: 0 9px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
+    <style>
+        .recent-container {
+            max-width: 379px;
+            margin: 2px auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 0 9px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
 
-    .recent-heading {
-      margin-bottom: 24px;
-      font-size: 1.8rem;
-      color: #1f2937;
-      text-align: center;
-    }
+        .recent-heading {
+            margin-bottom: 24px;
+            font-size: 1.8rem;
+            color: #1f2937;
+            text-align: center;
+        }
 
-    .recent-activity {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid #e5e7eb;
-    }
+        .recent-activity {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
 
-    .recent-activity:last-child {
-      border-bottom: none;
-    }
+            .recent-activity:last-child {
+                border-bottom: none;
+            }
 
-    .recent-activity-left {
-      display: flex;
-      align-items: center;
-    }
+        .recent-activity-left {
+            display: flex;
+            align-items: center;
+        }
 
-    .recent-icon {
-      width: 40px;
-      height: 40px;
-      background-color: #eef2ff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 14px;
-      font-size: 20px;
-      color: #4f46e5;
-    }
+        .recent-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #eef2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            font-size: 20px;
+            color: #4f46e5;
+        }
 
-    .recent-details {
-      display: flex;
-      flex-direction: column;
-    }
+        .recent-details {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .recent-details .recent-text {
-      font-weight: 600;
-      color: #111827;
-    }
+            .recent-details .recent-text {
+                font-weight: 600;
+                color: #111827;
+            }
 
-    .recent-details .recent-time {
-      font-size:12px;
-/*      color: #6b7280;*/
-          color: #9b9b9b;
+            .recent-details .recent-time {
+                font-size: 12px;
+                /*      color: #6b7280;*/
+                color: #9b9b9b;
+            }
 
-    }
+        .recent-activity-right {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
 
-    .recent-activity-right {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
+        .recent-amount {
+            color: #16a34a;
+        }
 
-    .recent-amount {
-      color: #16a34a;
-    }
+        .recent-apartment {
+            color: #2563eb;
+        }
 
-    .recent-apartment {
-      color: #2563eb;
-    }
+        .recent-new-member {
+            color: #9333ea;
+        }
 
-    .recent-new-member {
-      color: #9333ea;
-    }
+        .green-bg {
+            --tw-bg-opacity: 1;
+            background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+        }
 
-    .green-bg {
-          --tw-bg-opacity: 1;
-    background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+        .blue-bg {
+            --tw-bg-opacity: 1;
+            background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+        }
 
-}
-.blue-bg {
-        --tw-bg-opacity: 1;
-    background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
-}
+        .green-txt {
+            --tw-bg-opacity: 1;
+            color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+        }
 
-    .green-txt {
-          --tw-bg-opacity: 1;
-    color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
-
-}
-.blue-txt {
-        --tw-bg-opacity: 1;
-    color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
-}
-
+        .blue-txt {
+            --tw-bg-opacity: 1;
+            color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+        }
 
 
-    @media (max-width: 480px) {
-      .recent-activity {
-        flex-direction: column;
-        align-items: flex-start;
-      }
 
-      .recent-activity-right {
-        margin-top: 8px;
-      }
-    }
-  </style>
+        @media (max-width: 480px) {
+            .recent-activity {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .recent-activity-right {
+                margin-top: 8px;
+            }
+        }
+    </style>
 
     <%--  <h4 style="color: Navy">Purchase Entry</h4>--%>
 
@@ -526,7 +526,7 @@
                 </a>
 
                 <!-- Card 3: Total Members -->
-                <a href="Members.aspx" class="card-radius custom-width" style="text-decoration: none; color: inherit;">
+                <a href="owner_search.aspx" class="card-radius custom-width" style="text-decoration: none; color: inherit;">
                     <div class="card-radius top-card top-blue netlify-color">
                         <div>
                             <h2>Total Members</h2>
@@ -540,7 +540,7 @@
             </div>
             <!-- Two big boxes -->
 
-            <div class="card-radius custom-width layout-box layout-big layout-green card" id="chartContainer">
+            <div class="card-radius custom-width-container layout-box layout-big layout-green card" id="chartContainer">
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <div class="header-card">
                         <h6>Expense Tracker</h6>
@@ -639,8 +639,8 @@
                 </asp:UpdatePanel>
             </div>
 
-            <div class="custom-width layout-box layout-big layout-blue d-flex" style="gap: 20px;">
-                <div class="card pdc-weekly" >
+            <div class="custom-width-container layout-box layout-big layout-blue d-flex" style="gap: 20px;">
+                <div class="card pdc-weekly">
                     <div class="header-card">
                         <h6>PDC Clearing</h6>
                     </div>
@@ -697,7 +697,7 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
-                <div class="card pdc-weekly" >
+                <div class="card pdc-weekly">
                     <div class="header-card">
                         <h6>Weekly Updates</h6>
                     </div>
@@ -718,7 +718,7 @@
                                                 <asp:Image runat="server" Width="35px" Height="39px"
                                                     ImageUrl='<%# Eval("ImageUrl") %>'
                                                     AlternateText="Type Image" />
-                                                <div style="width: 100%;">
+                                                <div>
                                                     <div class="inner-div">
                                                         <asp:Label runat="server" ID="Label1" Text='<%# Eval("type") %>' Font-Size="Small" ForeColor="#808080"></asp:Label>
                                                         <asp:Label runat="server" Text='<%# Eval("date", "{0:yyyy-MM-dd}") %>' Font-Size="Small" ForeColor="#BCBED0"></asp:Label>
@@ -749,23 +749,23 @@
 
         <div class="layout-right">
 
-            <div class="card custom-width layout-box layout-tall layout-purple card-radius">
+            <div class="card custom-width-container layout-box layout-tall layout-purple card-radius">
                 <div class="header-card">
                     <h6>Recent Activity</h6>
                 </div>
                 <div class="divider"></div>
-                <div style="height: 226px; overflow: auto;     padding: 0 5px;">
+                <div style="height: 226px; overflow: auto; padding: 0 5px;">
+                    <div>
+                        <asp:GridView Width="100%" OnRowCommand="Updates_RowCommand" ID="Recent_activity" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" EmptyDataText="No Updates" SelectedRowStyle-Width="100">
+                            <Columns>
 
-                    <asp:GridView Width="100%" OnRowCommand="Updates_RowCommand" ID="Recent_activity" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" EmptyDataText="No Updates" SelectedRowStyle-Width="100">
-                        <Columns>
+                                <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
+                                    <ItemTemplate>
+                                        <div class="recent-container">
+                                            <div class="recent-activity">
+                                                <div class="recent-activity-left">
 
-                            <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
-                                <ItemTemplate>
-                                    <div class="recent-container">
-                                        <div class="recent-activity">
-                                            <div class="recent-activity-left">
-                                                
-                                                  <%--  <asp:Literal ID="IconLiteral" runat="server"
+                                                    <%--  <asp:Literal ID="IconLiteral" runat="server"
                                                         Text='<%# Eval("received_amt").ToString() == "0.00" ? "<i class=\"fas fa-tools text-white\"></i>" : "<i class=\"fas fa-check text-white\"></i>" %>'>
                                                     </asp:Literal>--%>
 
@@ -773,32 +773,34 @@
                                                         <i class='<%# Eval("received_amt").ToString() == "0.00" ? "fas fa-tools text-white" : "fas fa-check text-white" %>'></i>
                                                     </div>
 
-                                                
-                                                <div class="recent-details">
-                                                    <div class="recent-text">
-                                                        <asp:Label CssClass="link-style" ID="Label1" runat="server" Text='<%# Bind("particular")%>' Font-Size="14px"></asp:Label>
-                                                    </div>
-                                                    <div class="recent-time">
-                                                        <asp:Label CssClass="link-style" ID="Label3" runat="server" Text='<%# Bind("timestamp")%>' Font-Size="12px" ForeColor="#9B9B9B"></asp:Label>
+
+                                                    <div class="recent-details">
+                                                        <div class="recent-text">
+                                                            <asp:Label CssClass="link-style" ID="Label1" runat="server" Text='<%# Bind("particular")%>' Font-Size="14px"></asp:Label>
+                                                        </div>
+                                                        <div class="recent-time">
+                                                            <asp:Label CssClass="link-style" ID="Label3" runat="server" Text='<%# Bind("timestamp")%>' Font-Size="12px" ForeColor="#9B9B9B"></asp:Label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="recent-activity-right recent-amount">
-                                                <asp:Label CssClass='<%# Eval("received_amt").ToString() == "0.00" ? "link-style blue-txt" : "link-style green-txt" %>' ID="Label2" runat="server" Text='<%# Eval("received_amt").ToString() == "0.00"?Eval("date", "{0:MMM-dd}"):Eval("received_amt")%>'></asp:Label>
+                                                <div class="recent-activity-right recent-amount">
+                                                    <asp:Label CssClass='<%# Eval("received_amt").ToString() == "0.00" ? "link-style blue-txt" : "link-style green-txt" %>' ID="Label2" runat="server" Text='<%# Eval("received_amt").ToString() == "0.00"?Eval("date", "{0:MMM-dd}"):Eval("received_amt")%>'></asp:Label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                        <a class="pl-2 pb-2" href="">See All</a>
+                    </div>
                 </div>
             </div>
 
             <asp:UpdatePanel runat="server" ID="updatePanelDonat" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="card-radius custom-width card layout-box layout-medium layout-pink">
+                    <div class="card-radius custom-width-container card layout-box layout-medium layout-pink">
                         <div style="display: flex; align-items: center; justify-content: space-between;">
                             <div class="header-card">
                                 <h6>Income Tracker</h6>
@@ -849,7 +851,7 @@
                                         <i class="fas fa-circle  mr-1" style="color: #6266F1;"></i>Due
                                     </span>
                                     <span class="mr-2">
-                                        <i class="fas fa-circle mr-1" style="color: #A6B4FD ;"></i>Collection
+                                        <i class="fas fa-circle mr-1" style="color: #A6B4FD;"></i>Collection
                                     </span>
                                 </div>
                             </asp:Panel>
@@ -862,7 +864,7 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
             <asp:Timer ID="SharedTimer" runat="server" Interval="1000" OnTick="TimerNotif_Tick" />
-            <div class="card custom-width card-radius layout-box layout-small-right layout-cyan">
+            <div class="card custom-width-container card-radius layout-box layout-small-right layout-cyan">
                 <a href="support_ticket.aspx" style="text-decoration: none;">
                     <div class="header-card">
                         <h6>HelpDesk Ticket</h6>

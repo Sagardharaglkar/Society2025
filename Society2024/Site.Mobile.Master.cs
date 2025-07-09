@@ -1,4 +1,6 @@
 using BusinessLogic.MasterBL;
+using DBCode.DataClass.Master_Dataclass;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace Society
 {
     public partial class Site_Mobile : System.Web.UI.MasterPage
     {
+        Society_Member member = new Society_Member();
+        BL_Society_Member_Master bL_Society = new BL_Society_Member_Master();
         BL_User_Login BL_Login = new BL_User_Login();
         Login_Details details = new Login_Details();
         protected void Page_Load(object sender, EventArgs e)
@@ -23,9 +27,12 @@ namespace Society
             {
                 if (Session["Name"] != null)
                 {
+                    string str1 = Session["user_type"].ToString();
+                    society.Visible = Session["user_type"].ToString() == "Society";
+                    village.Visible = Session["user_type"].ToString() == "Village";
                     Panel1.Visible = true;
                     txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
-                    name_society.Text = "Welcome To " + Session["society_name"].ToString();
+                    name_society.Text = Session["society_name"].ToString();
                     get_notificatoin();
                 }
                 else
@@ -41,7 +48,8 @@ namespace Society
             //details.UserLoginId = int.Parse(Session["UserId"].ToString());
             //var dt = BL_Login.get_notification(details);
             //notifCount.Text = (dt.Rows.Count > 99) ? "99+" : dt.Rows.Count.ToString();
-            get_notificatoin();
+            if (Session["society_id"] != null)
+                get_notificatoin();
             upNotifList.Update();
         }
 
@@ -52,6 +60,7 @@ namespace Society
             //Session["UserId"] = result.UserLoginId;
             details.Sql_Operation = "Notification";
             details.Society_Id = Session["society_id"].ToString();
+
             details.UserLoginId = int.Parse(Session["UserId"].ToString());
 
             var dt = BL_Login.get_notification(details);
@@ -82,7 +91,29 @@ namespace Society
             }
         }
 
+        protected void fill_data()
+        {
 
+            member.UserId = Convert.ToInt32(Session["UserId"]);
+            member.Sql_Operation = "GetProfile";
+
+            var result = bL_Society.UpdateProfile(member);
+            user_Name.Text = result.Name.ToString();
+            owner_id.Value = result.Owner_id.ToString();
+            userNameIn.Text = result.UserName.ToString();
+            designation.Text = result.role.ToString();
+            Session["pass"] = result.Password.ToString();
+
+            string fullName = result.Name.ToString();
+            string[] parts = fullName.Split(' ');
+
+            fName.Text = parts[0];
+            lName.Text = parts[parts.Length - 1];
+
+            contact.Text = result.Contact_No.ToString();
+            email.Text = result.Email.ToString();
+
+        }
 
         protected void logout_Click(object sender, EventArgs e)
         {
@@ -98,6 +129,29 @@ namespace Society
         protected void lnkDetails2_Click(object sender, EventArgs e)
         {
             get_notificatoin();
+        }
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+            member.UserId = Convert.ToInt32(Session["UserId"]);
+            member.Sql_Operation = "UpdateProfile";
+            member.Society_Id = Session["society_id"].ToString();
+            member.Name = fName.Text + " " + lName.Text;
+            member.UserName = userNameIn.Text;
+            member.Password = passwordField.Text == "" ? Session["pass"].ToString() : passwordField.Text;
+            member.Contact_No = contact.Text;
+            member.Email = email.Text;
+            member.Status = 0;
+            member.Owner_id = Convert.ToInt32(owner_id.Value);
+            bL_Society.UpdateProfile(member);
+
+            // Call JS function successentry()
+            ScriptManager.RegisterStartupScript(upnlCountry, upnlCountry.GetType(), "successEntry", "SuccessEntry();", true);
+        }
+
+        protected void Unnamed_ServerClick(object sender, EventArgs e)
+        {
+            fill_data();
         }
     }
 }
