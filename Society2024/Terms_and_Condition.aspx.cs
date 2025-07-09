@@ -38,16 +38,16 @@ namespace Society2024
 
         public void terms_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Terms.Sql_Operation = "Grid_Show";
             Terms.Society_Id = society_id.Value;
             dt = bL_Terms.getTermsDetails(Terms);
-            if (dt.Tables[0].Rows.Count != 0)
+            if (dt.Rows.Count != 0)
                 add_new.Visible = false;
             else
                 add_new.Visible = true;
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

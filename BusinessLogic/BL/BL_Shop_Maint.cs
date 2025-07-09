@@ -17,7 +17,7 @@ namespace BusinessLogic.BL
             dA_Shop_Maint.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet getshopmaintenance(Shop_Maintenance maintenance)
+        public DataTable getshopmaintenance(Shop_Maintenance maintenance)
         {
             return dA_Shop_Maint.Get_Shop_Maintenance(maintenance);
         }

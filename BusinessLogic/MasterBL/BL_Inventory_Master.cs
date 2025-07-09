@@ -11,7 +11,7 @@ namespace BusinessLogic.MasterBL
     public class BL_Inventory_Master
     {
         DA_Inventory_Master dA_Inventory = new DA_Inventory_Master();
-        public DataSet getInventoryDetails(Inventory inventory)
+        public DataTable getInventoryDetails(Inventory inventory)
         {
             return dA_Inventory.getInventoryDetils(inventory);
         }

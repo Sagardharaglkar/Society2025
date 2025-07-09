@@ -11,7 +11,7 @@ namespace BusinessLogic.MasterBL
 {
     public class BL_Parking_Master
     {
-        public DataSet getParkingDetails(Parking_1 parking)
+        public DataTable getParkingDetails(Parking_1 parking)
         {
             DA_Parking_Master dA_Parking = new DA_Parking_Master();
             return dA_Parking.getParkingDetails(parking);

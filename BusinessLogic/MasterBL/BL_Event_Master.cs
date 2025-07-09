@@ -11,7 +11,7 @@ namespace BusinessLogic.MasterBL
     public class BL_Event_Master
     {
         DA_Event_Master dA_Event = new DA_Event_Master();
-        public DataSet getEventDetails(Event evt)
+        public DataTable getEventDetails(Event evt)
         {
           
             return dA_Event.getEventDetails(evt);

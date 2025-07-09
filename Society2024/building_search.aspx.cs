@@ -41,12 +41,12 @@ namespace Society
 
         public void Building_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             building.Sql_Operation = "Grid_Show";
             building.Society_Id = society_id.Value;
             dt = bL_Building.getBuildingDetails(building);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

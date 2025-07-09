@@ -110,12 +110,12 @@ namespace Society
 
         public void maintenance_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Maintenance1.Sql_Operation = "Grid_Show";
             Maintenance1.Society_Id = society_id.Value;
             dt = bL_Maintenance.getMaintenanceDetails(Maintenance1);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

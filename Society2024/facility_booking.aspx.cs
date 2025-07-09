@@ -89,13 +89,13 @@ namespace Society
         }
         public void Party_GridBind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             party.Sql_Operation = "Grid_Show";
             party.Society_Id = society_id.Value;
             dt = bL_Facility.GetPartyDetails(party);
 
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }
@@ -296,16 +296,16 @@ namespace Society
             to_time.Text = DateTime.Now.ToLocalTime().AddHours(1).ToString("hh:mm");
             if (facility_id.Value != "")
             {
-                DataSet dt = new DataSet();
+                DataTable dt = new DataTable();
                 party.Sql_Operation = "Get_Slot";
                 party.Society_Id = society_id.Value;
                 party.From_Date = Convert.ToDateTime(txt_date.Text.ToString());
                 party.facility_id = Convert.ToInt32(facility_id.Value);
                 dt = bL_Facility.getslot(party);
-                if (dt.Tables[0].Rows.Count > 0)
+                if (dt.Rows.Count > 0)
                 {
-                    GridView2.DataSource = dt.Tables[0];
-                    ViewState["dirState"] = dt.Tables[0];
+                    GridView2.DataSource = dt;
+                    ViewState["dirState"] = dt;
                     GridView2.DataBind();
                 }
                 else

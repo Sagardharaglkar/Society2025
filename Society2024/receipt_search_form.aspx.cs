@@ -159,12 +159,12 @@ namespace Society
     
         protected void Receipt_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             Receipt.Sql_Operation = "Grid_Show";
             Receipt.Society_Id = society_id.Value;
             dt = bL_Receipt.GetReceipt(Receipt);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

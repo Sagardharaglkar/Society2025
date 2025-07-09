@@ -48,12 +48,12 @@ namespace Society
         }
         protected void Meeting_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             meeting.Sql_Operation = "Grid_Show";
             meeting.Society_Id = society_id.Value;
             dt = bL_Meeting.getMeetingDetails(meeting);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

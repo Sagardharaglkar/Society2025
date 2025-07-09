@@ -19,7 +19,7 @@ namespace BusinessLogic.MasterBL
         {
             dA_Village.fill_drop(ddl_state, sql_query, v1, v2);
         }
-        public DataSet get_village_details(Village village)
+        public DataTable get_village_details(Village village)
         {
             return dA_Village.Get_Village(village);
         }
@@ -32,7 +32,7 @@ namespace BusinessLogic.MasterBL
         {
             return dA_Village.Update_Sq_Ft_Rate(village);
         }
-        public DataSet GetSquare_Feet(Village village)
+        public DataTable GetSquare_Feet(Village village)
         {
             return dA_Village.getsquare_feet(village);
         }
@@ -42,7 +42,7 @@ namespace BusinessLogic.MasterBL
             return dA_Village.Search_Sq_Ft_Rate(village);
         }
 
-        public DataSet get_water_tax(Village village)
+        public DataTable get_water_tax(Village village)
         {
            return dA_Village.Get_Water_Tax(village);
         }

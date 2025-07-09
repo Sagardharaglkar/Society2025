@@ -16,7 +16,7 @@ namespace BusinessLogic.BL
         {
             A_Loan.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet GetLoan(Loan l_Loan)
+        public DataTable GetLoan(Loan l_Loan)
         {
             return A_Loan.getloan(l_Loan);
 

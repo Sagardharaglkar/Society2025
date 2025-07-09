@@ -14,10 +14,10 @@ namespace BusinessLogic.MasterBL
     {
 
         DA_Visitor_Master DA_Visitor = new DA_Visitor_Master();
-        public DataSet getVisitorDetails(Visitor visitor)
+        public DataTable getVisitorDetails(Visitor visitor)
         {
             DA_Visitor_Master dA_Visitor_= new DA_Visitor_Master();
-            DataSet visitor_data = dA_Visitor_.getVisitorDetails(visitor);
+            DataTable visitor_data = dA_Visitor_.getVisitorDetails(visitor);
             return visitor_data;
 
         }

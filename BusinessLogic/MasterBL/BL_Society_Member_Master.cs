@@ -12,13 +12,13 @@ namespace BusinessLogic.MasterBL
     public class BL_Society_Member_Master
     {
         DA_Society_Member_Master dA_Society_Member = new DA_Society_Member_Master();
-        public DataSet getSocietyMemberDetails(Society_Member member)
+        public DataTable getSocietyMemberDetails(Society_Member member)
         {
            
-            DataSet society_member_master = dA_Society_Member.getSocietyMemberDetails(member);
+            DataTable society_member_master = dA_Society_Member.getSocietyMemberDetails(member);
             return society_member_master;
         }
-        public DataSet add_approver(Society_Member member)
+        public DataTable add_approver(Society_Member member)
         {
 
              return dA_Society_Member.Add_Approver(member);

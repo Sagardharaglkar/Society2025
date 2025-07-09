@@ -24,7 +24,7 @@ namespace BusinessLogic.MasterBL
         {
             dA_Maintenence.fill_drop_1(drp_down, sqlstring, text, value);
         }
-        public DataSet getMaintenanceDetails(maintenance Maintenance1)
+        public DataTable getMaintenanceDetails(maintenance Maintenance1)
         {
           
             return dA_Maintenence.get_maintenance_details(Maintenance1);
@@ -40,7 +40,7 @@ namespace BusinessLogic.MasterBL
             return dA_Maintenence.btn_add_click(Maintenance1);
         }
 
-        public DataSet get_monthwise_charges(maintenance_cal maintenance1)
+        public DataTable get_monthwise_charges(maintenance_cal maintenance1)
         {
             return dA_Maintenence.Get_Monthwise_Charges(maintenance1);
         }
@@ -92,7 +92,7 @@ namespace BusinessLogic.MasterBL
             return dA_Maintenence.Genrate_Bill(Maintenance1);
         }
 
-        public DataSet Get_Ownerwise_Maintenance(maintenance getMaintenance)
+        public DataTable Get_Ownerwise_Maintenance(maintenance getMaintenance)
         {
             return dA_Maintenence.ownerwise_maintenance(getMaintenance);
         }

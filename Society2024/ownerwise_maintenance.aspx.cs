@@ -24,7 +24,7 @@ namespace Society
     public partial class ownerwise_maintenance : System.Web.UI.Page
     {
         //stored st = new stored();
-        DataSet ds = new DataSet();
+       
 
         BL_FillRepeater repeater = new BL_FillRepeater();
         maintenance GetMaintenance = new maintenance();
@@ -96,9 +96,9 @@ namespace Society
                 GetMaintenance.Date_1 = Convert.ToDateTime(txt_from.Text);
                 GetMaintenance.Date_2 = Convert.ToDateTime(txt_to.Text);
             }
-            ds = bL_Maintenance.Get_Ownerwise_Maintenance(GetMaintenance);
-            GridView1.DataSource = ds.Tables[0];
-            ViewState["dirState"]= ds.Tables[0];
+           var dt = bL_Maintenance.Get_Ownerwise_Maintenance(GetMaintenance);
+            GridView1.DataSource = dt;
+            ViewState["dirState"]= dt;
             GridView1.DataBind();
 
         }
@@ -178,7 +178,7 @@ namespace Society
                 ownerwise_maintenance_GridBind();
 
                 ReportViewer1.LocalReport.DataSources.Clear();
-                ReportDataSource rds = new ReportDataSource("ownerwise", ds.Tables[0]);
+                ReportDataSource rds = new ReportDataSource("ownerwise", (DataTable)ViewState["dirState"]);
                 ReportViewer1.LocalReport.ReportPath = Server.MapPath("ownerwise_maintenance.rdlc");
                 //  ReportParameter parameter = new ReportParameter("@receipt_id",receipt_id.Value);
                 // ReportViewer1.LocalReport.SetParameters(parameter);

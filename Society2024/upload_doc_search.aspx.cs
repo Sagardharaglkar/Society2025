@@ -229,12 +229,12 @@ namespace Society
 
         protected void upload_doc_gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             doc.Sql_Operation= "Grid_Show";
             doc.Society_Id = society_id.Value;
             dt = BL_Upload.GetUploadDoc(doc);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

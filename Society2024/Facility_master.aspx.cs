@@ -33,12 +33,12 @@ namespace Society2024
 
         public void facility_gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             GetFacility.Sql_Operation = "Grid_Show";
             GetFacility.Society_Id = society_id.Value;
             dt = bL_Party.getfacility(GetFacility);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 
@@ -99,12 +99,12 @@ namespace Society2024
 
         public void slot_gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             GetFacility.Sql_Operation = "Grid_Show_Slot";
             GetFacility.facility_id = Convert.ToInt32(facility_id.Value);
             dt = bL_Party.getslot(GetFacility);
-            GridView2.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView2.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView2.DataBind();
         }
 

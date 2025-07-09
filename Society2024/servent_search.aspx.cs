@@ -55,12 +55,12 @@ namespace Society
         }
         public void Servent_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             servent.Sql_Operation = "Grid_Show";
             servent.Society_Id = society_id.Value;
             dt = bL_Servent.getServentDetails(servent);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

@@ -88,12 +88,12 @@ namespace Society
 
         protected void Society_Expense_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             society.Sql_Operation = "Grid_Show";
             society.Society_Id = society_id.Value;
             dt = bL_Society.GetExpense(society);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 
@@ -407,14 +407,14 @@ namespace Society
         public void list_fill()
         {
 
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             member.Sql_Operation = "add_approver";
             member.Society_Id = society_id.Value;
             member.UserId = Convert.ToInt32(Session["UserId"].ToString());
             dt = bL_Society_member.add_approver(member);
 
 
-            GridView2.DataSource = dt.Tables[0];
+            GridView2.DataSource = dt;
 
             GridView2.DataBind();
 
@@ -423,12 +423,12 @@ namespace Society
 
         protected void btn_confirm_Click(object sender, EventArgs e)
         {
-            DataSet ds = new DataSet();
+            DataTable ds = new DataTable();
             member.Sql_Operation = "add_approver";
             member.Society_Id = society_id.Value;
             member.UserId = Convert.ToInt32(Session["UserId"].ToString());
             ds = bL_Society_member.add_approver(member);
-            approverdt = ds.Tables[0];
+            approverdt = ds;
             foreach (GridViewRow row in GridView2.Rows)
             {
                 System.Web.UI.WebControls.Label user_id = (System.Web.UI.WebControls.Label)row.FindControl("user_id");

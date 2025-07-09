@@ -78,12 +78,12 @@ namespace Society
 
         protected void Society_Member_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             member.Sql_Operation = "Grid_Show";
             member.Society_Id = society_id.Value;
             dt = bL_Society.getSocietyMemberDetails(member);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

@@ -14,12 +14,12 @@ namespace BusinessLogic.MasterBL
     {
 
         DA_Owner_Master DA_Owner = new DA_Owner_Master();
-        public DataSet getOwnerDetails(Owner owner)
+        public DataTable getOwnerDetails(Owner owner)
         {
             return DA_Owner.getOwnerDetails(owner);
         }
            
-        public DataSet getFamilyDetails(Owner owner)
+        public DataTable getFamilyDetails(Owner owner)
         {
             
             return DA_Owner.getFamilyDetails(owner);
@@ -95,7 +95,7 @@ namespace BusinessLogic.MasterBL
         }
        
         //rental_search 
-        public DataSet getRentalDetails(Owner owner)
+        public DataTable getRentalDetails(Owner owner)
         {
 
             return DA_Owner.getRentalDetails(owner);

@@ -38,7 +38,7 @@ namespace BusinessLogic.BL
             return Pdc_Reminder.Update_Pdc_Reminder(Reminder);
 
         }
-        public DataSet updatePdcClearing(pdc_reminder Reminder)
+        public DataTable updatePdcClearing(pdc_reminder Reminder)
         {
 
             return Pdc_Reminder.Update_Pdc_Clearing(Reminder);

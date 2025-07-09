@@ -18,10 +18,10 @@ namespace BusinessLogic.MasterBL
         {
             st.fill_drop(drp_down, sqlstring, text, value);
         }
-        public DataSet getWingDetails(Wing wing)
+        public DataTable getWingDetails(Wing wing)
         {
             
-            DataSet wing_master =dA_Wing.getWingDetails(wing);
+            DataTable wing_master =dA_Wing.getWingDetails(wing);
             return wing_master;
         }
         public Wing updateWingDetails(Wing wing)

@@ -13,13 +13,13 @@ namespace BusinessLogic.MasterBL
     public class BL_Meeting_Master
     {
         DA_Meeting_Master dA_Meeting = new DA_Meeting_Master();
-        public DataSet getMeetingDetails(Meeting meeting)
+        public DataTable getMeetingDetails(Meeting meeting)
         {
           
             return dA_Meeting.get_meeting_details(meeting);
             
         }
-        public DataSet MoM_Gridbind(Meeting meeting)
+        public DataTable MoM_Gridbind(Meeting meeting)
         {
            
             return dA_Meeting.mom_gridbind(meeting);

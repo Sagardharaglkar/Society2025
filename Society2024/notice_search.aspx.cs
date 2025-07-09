@@ -55,14 +55,14 @@ namespace Society
 
         public void Notice_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             notice.Sql_Operation = "Grid_Show";
             if (notice_id.Value != "")
                 notice.notice_id = Convert.ToInt32(notice_id.Value);
             notice.Society_Id = society_id.Value;
             dt = bL_Notice.getNotice(notice);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
 
         }

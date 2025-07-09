@@ -10,10 +10,10 @@ namespace BusinessLogic.MasterBL
 {
     public class BL_Building_Master
     {
-        public DataSet getBuildingDetails(Building build)
+        public DataTable getBuildingDetails(Building build)
         {
             DA_Building_Master DAB = new DA_Building_Master();
-            DataSet building_data = DAB.getBuildingDetails(build);
+            DataTable building_data = DAB.getBuildingDetails(build);
             return building_data;
         }
         public Building updateBuildingDetails(Building building)

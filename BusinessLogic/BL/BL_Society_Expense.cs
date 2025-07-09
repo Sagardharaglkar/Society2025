@@ -18,7 +18,7 @@ namespace BusinessLogic.BL
             dA_Society.fill_drop(drp_down, sqlstring, text, value);
         }
 
-        public DataSet GetExpense(Society_Expense expense)
+        public DataTable GetExpense(Society_Expense expense)
         {
             return dA_Society.getExpenseDetails(expense);
 
@@ -49,7 +49,7 @@ namespace BusinessLogic.BL
             return dA_Society.get_expense_report(expense);
         }
 
-        public DataSet chk_reg_exp(Society_Expense society)
+        public DataTable chk_reg_exp(Society_Expense society)
         {
             return dA_Society.Chk_Reg_Exp(society);
         }

@@ -36,7 +36,7 @@ namespace BusinessLogic.BL
 
         public DataTable GetUsefullContact(string society_id)
         {
-            return dA_Contact.get_usefull_contact(society_id);
+            return dA_Contact.Get_usefull_contact(society_id);
         }
 
         public DataTable search_usefull_contact(usefull_Contact usefull)

@@ -40,12 +40,12 @@ namespace Society
 
         public void Event_Gridbind()
         {
-            DataSet dt = new DataSet();
+            DataTable dt = new DataTable();
             evt.Sql_Operation = "Grid_Show";
             evt.Society_Id = society_id.Value;
             dt = bL_Event.getEventDetails(evt);
-            GridView1.DataSource = dt.Tables[0];
-            ViewState["dirState"] = dt.Tables[0];
+            GridView1.DataSource = dt;
+            ViewState["dirState"] = dt;
             GridView1.DataBind();
         }
 

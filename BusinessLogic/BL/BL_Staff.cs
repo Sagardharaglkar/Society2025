@@ -22,7 +22,7 @@ namespace BusinessLogic.BL
             return dA_Staff.Update_Staff(Staff);
         }
 
-        public DataSet getstaffdetails(staff Staff)
+        public DataTable getstaffdetails(staff Staff)
         {
             return dA_Staff.GetStaff_Details(Staff);
         }
@@ -47,7 +47,7 @@ namespace BusinessLogic.BL
             return dA_Staff.Role_Update(getstaff);
         }
 
-        public DataSet getrole(staff getstaff)
+        public DataTable getrole(staff getstaff)
         {
            return dA_Staff.Get_Role(getstaff);
         }

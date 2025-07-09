@@ -11,7 +11,7 @@ namespace BusinessLogic.BL
     public class BL_Car_Polling
     {
         DA_Car_Polling DA_Car = new DA_Car_Polling();
-        public DataSet Getcarpolling(carpolling car)
+        public DataTable Getcarpolling(carpolling car)
         {
             return DA_Car.Get_Car_Polling(car);
 

@@ -182,7 +182,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 1;
             var dt = bL_Contact.GetContactDetails_2(contact);
-            GridView2.DataSource = dt.Tables[0];
+            GridView2.DataSource = dt;
             GridView2.DataBind();
 
 
@@ -194,7 +194,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 6;
             var dt = bL_Contact.GetContactDetails_3(contact);
-            GridView8.DataSource = dt.Tables[0];
+            GridView8.DataSource = dt;
             GridView8.DataBind();
 
 
@@ -206,7 +206,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 4;
             var dt = bL_Contact.GetContactDetails_4(contact);
-            GridView4.DataSource = dt.Tables[0];
+            GridView4.DataSource = dt;
             GridView4.DataBind();
 
            
@@ -217,7 +217,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 5;
             var dt = bL_Contact.GetContactDetails_5(contact);
-            GridView5.DataSource = dt.Tables[0];
+            GridView5.DataSource = dt;
             GridView5.DataBind();
 
 
@@ -230,7 +230,7 @@ namespace Society
             contact.P_Type = 9;
           
             var dt = bL_Contact.GetContactDetails_6(contact);
-            GridView6.DataSource = dt.Tables[0];
+            GridView6.DataSource = dt;
             GridView6.DataBind();
 
 
@@ -241,7 +241,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 3;
             var dt = bL_Contact.GetContactDetails_7(contact);
-            GridView7.DataSource = dt.Tables[0];
+            GridView7.DataSource = dt;
             GridView7.DataBind();
 
         }
@@ -252,7 +252,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 8;
             var dt  = bL_Contact.GetContactDetails_8(contact);
-            GridView3.DataSource = dt.Tables[0];
+            GridView3.DataSource = dt;
             GridView3.DataBind();
 
 
@@ -263,7 +263,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 7;
             var dt  = bL_Contact.GetContactDetails_9(contact);
-            GridView9.DataSource = dt.Tables[0];
+            GridView9.DataSource = dt;
             GridView9.DataBind();
 
 
@@ -274,7 +274,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 10;
             var dt  = bL_Contact.GetContactDetails_10(contact);
-            GridView10.DataSource = dt.Tables[0];
+            GridView10.DataSource = dt;
             GridView10.DataBind();
 
 
@@ -285,7 +285,7 @@ namespace Society
             contact.Society_Id = society_id.Value;
             contact.P_Type = 11;
             var dt  = bL_Contact.GetContactDetails_11(contact);
-            GridView11.DataSource = dt.Tables[0];
+            GridView11.DataSource = dt;
             GridView11.DataBind();
 
         }

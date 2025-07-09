@@ -11,7 +11,7 @@ namespace BusinessLogic.MasterBL
     public class BL_Doc_Master
     {
       
-        public DataSet getDocDetails(Doc doc)
+        public DataTable getDocDetails(Doc doc)
         {
             DA_Doc_Master dA_Doc = new DA_Doc_Master();
             return dA_Doc.getDocDetails(doc);
