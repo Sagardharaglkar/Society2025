@@ -2,16 +2,17 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <style>
-        .filter-container {
-            position: relative;
-        }
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css" rel="stylesheet" />
 
+    <style>
+        .filter-container { position: relative; }
         #filterSidebar {
             position: absolute;
             top: 40px;
             left: 0;
-            width: 260px;
+            width: 280px;
             background-color: #f8f9fa;
             box-shadow: 0 0 5px rgba(0,0,0,0.2);
             z-index: 10;
@@ -19,36 +20,25 @@
             display: none;
             border-radius: 4px;
         }
-
-        #filterSidebar.show {
-            display: block;
-        }
-
+        #filterSidebar.show { display: block; }
         .filter-chip {
-            margin: 5px;
+            margin: 4px;
+            padding: 4px 6px;
+            font-size: 13px;
+            background-color: #17a2b8;
+            color: white;
+            border-radius: 16px;
             display: inline-flex;
             align-items: center;
-            padding: 6px 8px;
-            background-color: #17a2b8;
-            color: #fff;
-            border-radius: 20px;
         }
-
         .filter-chip button {
             background: none;
             border: none;
             color: white;
-            padding: 6px 10px;
-            margin-left: 8px;
+            margin-left: 6px;
             cursor: pointer;
             font-weight: bold;
         }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-        }
-
         .search-button2 {
             margin-left: 5px;
             background-color: #007bff;
@@ -57,62 +47,43 @@
             padding: 6px 10px;
             border-radius: 4px;
         }
-
-        .calendar-icon {
-            height: 30px;
-            margin-left: 5px;
-        }
-
-        .input-buttons {
-            display: inline-flex;
-            align-items: center;
-        }
+        #priceSlider { margin-top: 10px; }
+        #priceRangeDisplay { font-size: 14px; margin-top: 4px; }
     </style>
 
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
-                <h1 class="font-weight-bold" style="color: #012970;">Recent Activities</h1>
-                <br />
+                <h1 class="font-weight-bold" style="color: #012970;">Recent Activities</h1><br />
 
-                <!-- Search & Filter -->
+                <!-- Search and Filter -->
                 <div class="form-group filter-container">
                     <div class="d-flex align-items-center">
-                        <!-- Filter Icon Button -->
-                        <button type="button" style="margin-right: 8px; padding: 0; border-radius: 12px; border: 1px solid #ccc;"
-                            onclick="toggleFilterPanel()" title="Filter Activities" style="margin-right: 8px;">
-                            <img style="width: 28px; margin: 5px;"
-                                src="img/filter.svg" />
+                        <button id="filterButton" type="button" style="margin-right: 8px; border-radius: 12px; border: 1px solid #ccc;">
+                            <img style="width: 28px; margin: 5px;" src="img/filter.svg" />
                         </button>
-
-                        <!-- Search Bar -->
-                        <div class="search-container">
-                            <asp:TextBox ID="txt_search" CssClass="aspNetTextBox" placeHolder="Search here" runat="server" TextMode="Search" AutoPostBack="true" />
-                            <ajaxtoolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txt_search" PopupButtonID="btn_calendar" Format="yyyy-MM-dd" />
-                            <div class="input-buttons">
-                                <img id="btn_calendar" src="img/calendar.png" alt="Pick Date" class="calendar-icon" style="cursor: pointer;" />
-                                <button id="btn_sea6rch" type="submit" class="search-button2" runat="server">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
-                            </div>
-                        </div>
+                        <asp:TextBox ID="txt_search" CssClass="aspNetTextBox" placeHolder="Search here" runat="server" TextMode="Search" AutoPostBack="true" />
+                        <button id="btn_sea6rch" type="submit" class="search-button2" runat="server">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
                     </div>
 
-                    <!-- Inline Slide-in Filter Panel -->
+                    <!-- Filter Panel -->
                     <div id="filterSidebar">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h6>Filter Options</h6>
                             <button class="btn btn-sm btn-danger" onclick="toggleFilterPanel()">×</button>
                         </div>
 
+                        <!-- Calendar Filter -->
                         <div class="form-group">
-                            <label for="dateFrom">From Date</label>
-                            <input type="date" class="form-control" id="dateFrom" />
+                            <label>Date Range</label>
+                            <input type="text" id="calendarRange" class="form-control" placeholder="Select date range" />
+                            <input type="hidden" id="dateFrom" />
+                            <input type="hidden" id="dateTo" />
                         </div>
-                        <div class="form-group">
-                            <label for="dateTo">To Date</label>
-                            <input type="date" class="form-control" id="dateTo" />
-                        </div>
+
+                        <!-- Activity Type -->
                         <div class="form-group">
                             <label for="activityType">Activity Type</label>
                             <select class="form-control" id="activityType">
@@ -121,9 +92,13 @@
                                 <option value="Payment">Payment</option>
                             </select>
                         </div>
+
+                        <!-- Price Range -->
                         <div class="form-group">
-                            <label for="priceRange">Max Price: ₹<span id="priceVal">5000</span></label>
-                            <input type="range" id="priceRange" min="0" max="5000" value="5000" class="form-control-range" oninput="updatePriceValue()" />
+                            <label style="margin-bottom: 40px;">
+                                Price Range</label>
+                            <div id="priceSlider"></div>
+                            <div id="priceRangeDisplay">₹0 – ₹5000</div>
                         </div>
 
                         <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="resetFilters()">Reset</button>
@@ -143,7 +118,7 @@
                                     <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="s_id" Visible="false">
+                            <asp:TemplateField HeaderText="s_id">
                                 <ItemTemplate>
                                     <asp:Label ID="s_id" runat="server" Text='<%# Bind("date") %>'></asp:Label>
                                 </ItemTemplate>
@@ -165,46 +140,99 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+
     <script>
+        // Toggle sidebar on click
+        document.getElementById("filterButton").addEventListener("click", () => {
+            document.getElementById("filterSidebar").classList.toggle("show");
+        });
+
         function toggleFilterPanel() {
+            document.getElementById("filterSidebar").classList.remove("show");
+        }
+
+        // Close on outside click
+        document.addEventListener("click", function (event) {
             const sidebar = document.getElementById("filterSidebar");
-            sidebar.classList.toggle("show");
-        }
+            const button = document.getElementById("filterButton");
+            const clickedInside = sidebar.contains(event.target) || button.contains(event.target);
+            if (!clickedInside) {
+                sidebar.classList.remove("show");
+            }
 
-        function updatePriceValue() {
-            document.getElementById("priceVal").innerText = document.getElementById("priceRange").value;
-        }
+        });
 
+        // Date Picker
+        flatpickr("#calendarRange", {
+            mode: "range",
+            dateFormat: "Y-m-d",
+            onChange: function (selectedDates) {
+                if (selectedDates.length === 2) {
+                    document.getElementById("dateFrom").value = flatpickr.formatDate(selectedDates[0], "Y-m-d");
+                    document.getElementById("dateTo").value = flatpickr.formatDate(selectedDates[1], "Y-m-d");
+                }
+            }
+        });
+
+        // Price Slider
+        let minPrice = 0;
+        let maxPrice = 5000;
+        const priceSlider = document.getElementById("priceSlider");
+        const priceDisplay = document.getElementById("priceRangeDisplay");
+
+        noUiSlider.create(priceSlider, {
+            start: [minPrice, maxPrice],
+            connect: true,
+            range: { min: 0, max: 5000 },
+            step: 100,
+            tooltips: [true, true],
+            format: {
+                to: value => Math.round(value),
+                from: value => Number(value)
+            }
+        });
+
+        priceSlider.noUiSlider.on('update', function (values) {
+            minPrice = values[0];
+            maxPrice = values[1];
+            priceDisplay.textContent = `₹${minPrice} – ₹${maxPrice}`;
+        });
+
+        // Filter chips logic
         function applyFilter() {
             const fromDate = document.getElementById("dateFrom").value;
             const toDate = document.getElementById("dateTo").value;
             const type = document.getElementById("activityType").value;
-            const price = document.getElementById("priceRange").value;
 
             let chipsHTML = '';
 
             if (fromDate || toDate) {
-                chipsHTML += `<span class="filter-chip" id="chip-date">Date: ${fromDate || '...'} – ${toDate || '...'} <button onclick="removeFilter('date')">×</button></span>`;
+                chipsHTML += `<span class="filter-chip" id="chip-date">📅 ${fromDate || '...'} – ${toDate || '...'} <button onclick="removeFilter('date')">×</button></span>`;
             }
 
             if (type) {
-                chipsHTML += `<span class="filter-chip" id="chip-type">Type: ${type} <button onclick="removeFilter('type')">×</button></span>`;
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ Type: ${type} <button onclick="removeFilter('type')">×</button></span>`;
             }
-
-            if (price < 5000) {
-                chipsHTML += `<span class="filter-chip" id="chip-price">Price ≤ ₹${price} <button onclick="removeFilter('price')">×</button></span>`;
+            
+            if (minPrice || maxPrice) {
+                chipsHTML += `<span class="filter-chip" id="chip-price">💰 ₹${minPrice} – ₹${maxPrice} <button onclick="removeFilter('price')">×</button></span>`;
             }
 
             document.getElementById("filterChips").innerHTML = chipsHTML;
             toggleFilterPanel();
+
+            // Trigger fetch/filter logic as needed
         }
 
         function resetFilters() {
             document.getElementById("dateFrom").value = '';
             document.getElementById("dateTo").value = '';
             document.getElementById("activityType").value = '';
-            document.getElementById("priceRange").value = 5000;
-            updatePriceValue();
+            document.getElementById("calendarRange").value = '';
+            priceSlider.noUiSlider.set([0, 5000]);
             document.getElementById("filterChips").innerHTML = '';
         }
 
@@ -212,6 +240,7 @@
             if (type === 'date') {
                 document.getElementById("dateFrom").value = '';
                 document.getElementById("dateTo").value = '';
+                document.getElementById("calendarRange").value = '';
                 document.getElementById("chip-date")?.remove();
             }
             if (type === 'type') {
@@ -219,8 +248,7 @@
                 document.getElementById("chip-type")?.remove();
             }
             if (type === 'price') {
-                document.getElementById("priceRange").value = 5000;
-                updatePriceValue();
+                priceSlider.noUiSlider.set([0, 5000]);
                 document.getElementById("chip-price")?.remove();
             }
         }

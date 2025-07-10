@@ -77,6 +77,12 @@ namespace BusinessLogic.MasterBL
             return dA_User.Get_Recent_Chart(details);
         }
 
+        public DataTable get_recent_Search(Login_Details details)
+        {
+
+            return dA_User.Get_Recent_Search(details);
+        }
+
 
 
         public DataTable Get_Pdc_Clearing(Login_Details details)
