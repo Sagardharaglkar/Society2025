@@ -793,7 +793,7 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
-                        <a class="pl-2 pb-2" href="">See All</a>
+                        <a class="pl-2 pb-2" href="recent_activity.aspx">See All</a>
                     </div>
                 </div>
             </div>
