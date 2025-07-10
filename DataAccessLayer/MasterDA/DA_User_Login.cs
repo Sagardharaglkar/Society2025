@@ -207,6 +207,24 @@ namespace DataAccessLayer.MasterDA
            
         }
 
+        public DataTable Get_Recent_Search(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1 = "";
+
+            DataTable dt = new DataTable();
+            data_item.Add(st.create_array("Operation", details.Sql_Operation));
+            data_item.Add(st.create_array("search", details.Name));
+
+            status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
+
+            if (status1 == "Done")
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
+        }
+
         public Login_Details GetTicket(Login_Details details)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();

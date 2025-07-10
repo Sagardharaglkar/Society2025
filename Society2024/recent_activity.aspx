@@ -143,7 +143,7 @@
                                     <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="s_id" Visible="false">
+                            <asp:TemplateField HeaderText="s_id">
                                 <ItemTemplate>
                                     <asp:Label ID="s_id" runat="server" Text='<%# Bind("date") %>'></asp:Label>
                                 </ItemTemplate>
