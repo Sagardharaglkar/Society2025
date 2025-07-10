@@ -43,6 +43,8 @@
 
         function openModal() {
             $('#edit_model').modal('show');
+          
+          
         }
 
         function digit(evt) {
@@ -69,13 +71,7 @@
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
 
-                        <asp:HiddenField ID="expense_id" runat="server"></asp:HiddenField>
-                        <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
-                        <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
-                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-
-                        <asp:HiddenField runat="server" ID="vendor_name_id" />
-                        <asp:HiddenField runat="server" ID="building_id" />
+                    
 
                                                               <div class="form-group">
             <div class="row">
@@ -131,7 +127,8 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
-                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
+                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue"
+                                            ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
 
                                             <Columns>
                                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
@@ -161,7 +158,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Date" SortExpression="date" ItemStyle-Width="150">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="date" runat="server" Text='<%# Bind("date", "{0:dd-MM-yyy}")%>'></asp:Label>
+                                                        <asp:Label ID="date" runat="server" Text='<%# Bind("date", "{0:dd-MM-yyyy}")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Amount" SortExpression="f_amount">
@@ -169,7 +166,7 @@
                                                         <asp:Label ID="f_amount" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                                                                <asp:TemplateField HeaderText="Type" SortExpression="expense_status">
+                                                      <asp:TemplateField HeaderText="Type" SortExpression="expense_status">
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" ID="invoice" Text='<%# Bind("type")%>'></asp:Label>
                                                     </ItemTemplate>
@@ -181,7 +178,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command1" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" ID="editrwr" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
@@ -208,6 +205,13 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                            <asp:HiddenField ID="expense_id" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+
+    <asp:HiddenField runat="server" ID="vendor_name_id" />
+    <asp:HiddenField runat="server" ID="building_id" />
                                         <asp:Panel ID="expense_panel" runat="server">
 
 
@@ -471,7 +475,8 @@
                                     </ContentTemplate>
 
                                     <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                       <%-- <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />--%>
+                                        <asp:AsyncPostBackTrigger ControlID="btn_confirm" EventName="Click" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </div>
@@ -556,7 +561,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="pull-right">
-                                            <asp:Button ID="btn_confirm" runat="server" Text="Confirm" OnClick="btn_confirm_Click" UseSubmitBehavior="false" class="btn btn-primary" />
+                                            <asp:Button ID="btn_confirm" runat="server" Text="Confirm" OnClick="btn_confirm_Click" data-dismiss="modal" UseSubmitBehavior="false" class="btn btn-primary" />
                                         </div>
                                     </div>
                                 </div>

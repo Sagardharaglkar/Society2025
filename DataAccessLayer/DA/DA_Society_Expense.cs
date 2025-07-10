@@ -257,9 +257,12 @@ namespace DataAccessLayer.DA
             }
             status1 = st.run_query_scalar(data_item, "Select", "sp_society_expense", ref sdr);
             if (status1 == "Done")
+            {
                 if (sdr != 0)
                     society.expense_id = sdr;
-
+            }
+            else
+                society.Sql_Result="Error";
             return society;
 
 

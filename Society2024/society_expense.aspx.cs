@@ -73,16 +73,7 @@ namespace Society
                 building_id.Value = e.CommandArgument.ToString();
             }
         }
-        public void filldrop()
-        {
-            //String sql_query1 = "Select * from vendor_master where society_id='" + society_id.Value + "'";
-            //bL_Society.fill_drop(ddl_vendor, sql_query1, "v_name", "vendor_id");
-
-            //String sql_query2 = "Select * from building_master where society_id='" + society_id.Value + "'";
-            //bL_Society.fill_drop(ddl_build, sql_query2, "name", "build_id");
-
-
-        }
+      
 
 
 
@@ -130,7 +121,7 @@ namespace Society
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
-        public void runproc_save(String operation)
+        public string runproc_save(String operation)
         {
             if (expense_id.Value != "")
                 society.expense_id = Convert.ToInt32(expense_id.Value);
@@ -173,6 +164,7 @@ namespace Society
                 if (dataRow["type"].ToString() != "get")
                     bL_Society.updateApprover(society);
             }
+            return result.Sql_Result;
         }
 
         public void runproc(string operation)
@@ -272,7 +264,8 @@ namespace Society
 
             if (GridView3.Rows.Count > 0)
             {
-                runproc_save("Update");
+                var str=runproc_save("Update");
+                if(str=="Done")
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
             }
             else
@@ -650,17 +643,7 @@ namespace Society
 
         }
 
-        protected void edit_Command1(object sender, CommandEventArgs e)
-        {
-            string id = e.CommandArgument.ToString();
-            expense_id.Value = id;
-            runproc("Select");
-            btn_delete.Visible = true;
-
-            btn_add.Visible = false;
-            getapprovallist();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
-        }
+       
     }
 }
 
