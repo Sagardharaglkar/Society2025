@@ -237,6 +237,7 @@
     <Content Include="house_tax_receipt.aspx" />
     <Content Include="img\errorImg404.png" />
     <Content Include="img\event.gif" />
+    <Content Include="img\filter.svg" />
     <Content Include="img\meeting.gif" />
     <Content Include="img\temp\event.gif" />
     <Content Include="img\temp\meeting.gif" />
@@ -245,6 +246,7 @@
     <Content Include="Paid_amountreport.aspx" />
     <Content Include="print_house_owner.aspx" />
     <Content Include="print_house_tax_receipt.aspx" />
+    <Content Include="recent_activity.aspx" />
     <Content Include="square_feet_rate.aspx" />
     <Content Include="support_ticket.aspx" />
     <Content Include="About.aspx" />
@@ -2232,6 +2234,13 @@
     </Compile>
     <Compile Include="print_house_tax_receipt.aspx.designer.cs">
       <DependentUpon>print_house_tax_receipt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="recent_activity.aspx.cs">
+      <DependentUpon>recent_activity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recent_activity.aspx.designer.cs">
+      <DependentUpon>recent_activity.aspx</DependentUpon>
     </Compile>
     <Compile Include="square_feet_rate.aspx.cs">
       <DependentUpon>square_feet_rate.aspx</DependentUpon>
