@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.BL;
 using BusinessLogic.MasterBL;
 using DocumentFormat.OpenXml.Drawing;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,6 +15,8 @@ using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using Utility.DataClass;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace Society
 {
@@ -24,12 +27,16 @@ namespace Society
         public Color Color { get; set; }
         public string Label { get; set; }
         public int Value { get; set; }
+
     }
     public partial class dashboard : System.Web.UI.Page
     {
 
         BL_User_Login BL_Login = new BL_User_Login();
         Login_Details details = new Login_Details();
+
+
+        public string strJson;
         protected void Page_Load(object sender, System.EventArgs e)
         {
            
@@ -59,48 +66,51 @@ namespace Society
                 
             }
         }
-        protected void CheckBoxes_CheckedChanged(object sender, EventArgs e)
-        {
+        //protected void CheckBoxes_CheckedChanged(object sender, EventArgs e)
+        //{
 
 
-            if (CheckBox1.Checked && CheckBox2.Checked)
-            {
-                details.ExpenseType = 2;
-                GetDataForChart1();
+        //    if (CheckBox1.Checked && CheckBox2.Checked)
+        //    {
+        //        details.ExpenseType = 2;
+        //        GetDataForChart1();
 
-            }
-            else if (CheckBox1.Checked)
-            {
-                details.ExpenseType = 0;
-                GetDataForChart1();
-            }
-            else if (CheckBox2.Checked)
-            {
-                details.ExpenseType = 1;
-                GetDataForChart1();
-            }
+        //    }
+        //    else if (CheckBox1.Checked)
+        //    {
+        //        details.ExpenseType = 0;
+        //        GetDataForChart1();
+        //    }
+        //    else if (CheckBox2.Checked)
+        //    {
+        //        details.ExpenseType = 1;
+        //        GetDataForChart1();
+        //    }
 
 
-        }
-        protected int check_checked()
-        {
+        //}
+        //protected int check_checked()
+        //{
 
-            if (CheckBox1.Checked && CheckBox2.Checked)
-            {
-                return 2;
+        //    if (CheckBox1.Checked && CheckBox2.Checked)
+        //    {
+        //        Session["checked"] = 2;
+        //        return 2;
 
-            }
-            else if (CheckBox1.Checked)
-            {
-                return 0;
-            }
-            else if (CheckBox2.Checked)
-            {
-                return 1;
-            }
+        //    }
+        //    else if (CheckBox1.Checked)
+        //    {
+        //        Session["checked"] = 0;
+        //        return 0;
+        //    }
+        //    else if (CheckBox2.Checked)
+        //    {
+        //        Session["checked"] = 1;
+        //        return 1;
+        //    }
 
-            return 0;
-        }
+        //    return 0;
+        //}
         protected void TimerNotif_Tick(object sender, EventArgs e)
         {
             get_ticket();
@@ -205,21 +215,37 @@ namespace Society
         public void GetDataForChart1()
         {
             
-            details.Sql_Operation = "ExpenseChart";
-            details.Society_Id = society_id.Value;
-            details.ExpenseType = check_checked();
-            var dt = BL_Login.get_expense_chart(details);
+            //details.Sql_Operation = "ExpenseChart";
+            //details.Society_Id = society_id.Value;
+            //details.ExpenseType = check_checked();
+            //var dt = BL_Login.get_expense_chart(details);
 
-            Chart2.Visible = dt.Compute("Sum(expense)", string.Empty).ToString() == "0" ? false : true;
-            lblNoDataFound2.Visible = dt.Compute("Sum(expense)", string.Empty).ToString() == "0" ? true : false;
+            //Chart2.Visible = dt.Compute("Sum(expense)", string.Empty).ToString() == "0" ? false : true;
+            //lblNoDataFound2.Visible = dt.Compute("Sum(expense)", string.Empty).ToString() == "0" ? true : false;
+
+           
+
+            //JavaScriptSerializer serializer = new JavaScriptSerializer();
+            //jsonData = serializer.Serialize(yourObject);
 
 
 
-            Chart2.DataSource = dt;
-            Chart2.DataBind();
+            //Chart2.DataSource = dt;
+            //Chart2.DataBind();
             
 
         }
+        //public string getJson()
+        //{
+        //    details.Sql_Operation = "ExpenseChart";
+        //    details.Society_Id = society_id.Value;
+        //    details.ExpenseType = check_checked();
+        //    var dt = BL_Login.get_expense_chart(details);
+
+        //    strJson = JsonConvert.SerializeObject(dt, Formatting.Indented);
+        //    return strJson;
+
+        //}
 
         public void GetDataForRecent()
         {

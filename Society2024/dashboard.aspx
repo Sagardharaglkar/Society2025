@@ -62,8 +62,7 @@
                 border-radius: 12px;
                 background-color: rgba(255, 255, 255, 0.147);
             }
-    </style>
-    <style>
+
         .helpdesk-card {
             background-color: #ecf0f1;
             padding: 30px 20px;
@@ -229,9 +228,7 @@
             width: 88%;
             margin: 0 21px;
         }
-    </style>
 
-    <style>
         .pdc-card-container {
             max-width: 600px;
             width: 100%;
@@ -360,8 +357,7 @@
                 width: 91%;
             }
         }
-    </style>
-    <style>
+
         .recent-container {
             max-width: 379px;
             margin: 2px auto;
@@ -406,6 +402,12 @@
             margin-right: 14px;
             font-size: 20px;
             color: #4f46e5;
+        }
+
+        canvas {
+            max-width: 900px;
+            margin: auto;
+            display: block;
         }
 
         .recent-details {
@@ -541,101 +543,47 @@
             <!-- Two big boxes -->
 
             <div class="card-radius custom-width-container layout-box layout-big layout-green card" id="chartContainer">
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <div class="header-card">
-                        <h6>Expense Tracker</h6>
-                    </div>
-                    <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div class="header-card">
+                                <h6>Expense Tracker</h6>
+                            </div>
                             <div class="d-flex mr-4" style="align-items: center; justify-content: space-evenly; gap: 15px;">
 
-                                <asp:CheckBox
+                                <%--                                <asp:CheckBox
                                     Checked="true"
                                     ID="CheckBox1"
                                     runat="server"
                                     Text="Regular"
-                                    AutoPostBack="true"
-                                    OnCheckedChanged="CheckBoxes_CheckedChanged"
-                                    onclick="resizeChart();" />
+                                    onclick="loadExpenseChart();" />
 
                                 <asp:CheckBox
                                     ID="CheckBox2"
                                     runat="server"
-                                    Text="Add on"
-                                    AutoPostBack="true"
-                                    OnCheckedChanged="CheckBoxes_CheckedChanged"
-                                    onclick="resizeChart();" />
+                                    Text="Add"                         
+                                    onclick="loadExpenseChart();" />--%>
+
+                                <input type="checkbox" id="CheckBox1" checked="checked" >
+                                <label for="CheckBox1">Regular</label>
+
+                                <input type="checkbox" id="CheckBox2" >
+                                <label for="CheckBox2">Add on</label>
+
 
                             </div>
 
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-                <div class="divider" style="width: 94%;"></div>
+                        </div>
+                        <div class="divider" style="width: 94%;"></div>
 
-                <asp:Panel runat="server" ID="lblNoDataFound2" Visible="False">
-                    <img src="img/noDataFound2.jpg" style="margin-left: 122px; width: 445px;" />
-                </asp:Panel>
-                <%--         <asp:UpdateProgress ID="ChartUpdateProgress" runat="server" AssociatedUpdatePanelID="chartUpdatePanal">
-                            <ProgressTemplate>
-                                <div style="position: absolute; left: 50%; top: 50%; z-index: 9999;">
-                                    <img src="img/loading.gif" alt="Loading..." />
-                                    <span>Loading chart...</span>
-                                </div>
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>--%>
+                        <asp:Panel runat="server" ID="lblNoDataFound2" Visible="False">
+                            <img src="img/noDataFound2.jpg" style="margin-left: 122px; width: 445px;" />
+                        </asp:Panel>
 
 
-                <%--<asp:Button ID="btnChartAsyncLoad" runat="server" Style="display:none;" OnClick="btnChartAsyncLoad_Click" />--%>
 
-                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-
-                        <asp:Chart ID="Chart2" runat="server" CssClass="widthSet" Height="316px" Width="600px" ValidateRequestMode="Inherit">
-
-                            <Series>
-                                <asp:Series Name="Expense" XValueMember="expense_month" YValueMembers="expense"
-                                    IsVisibleInLegend="true"
-                                    IsValueShownAsLabel="False"
-                                    YValuesPerPoint="1"
-                                    ToolTip="Expence: #VALY" ChartType="Spline" YValueType="Auto" LabelBorderWidth="10" Palette="None" BorderWidth="7" BorderDashStyle="Solid">
-                                </asp:Series>
-                                <asp:Series Name="Due" XValueMember="expense_month" YValueMembers="Due"
-                                    IsVisibleInLegend="true"
-                                    IsValueShownAsLabel="False"
-                                    YValuesPerPoint="1"
-                                    ToolTip="Due: #VALY" ChartType="Spline" BorderWidth="7">
-                                </asp:Series>
-                                <asp:Series Name="Collection" XValueMember="expense_month" YValueMembers="Collection"
-                                    IsVisibleInLegend="true"
-                                    IsValueShownAsLabel="False"
-                                    YValuesPerPoint="1"
-                                    ToolTip="Collection: #VALY" ChartType="Spline" BorderWidth="7">
-                                </asp:Series>
-                            </Series>
-                            <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" Area3DStyle-Enable3D="True" AlignmentStyle="PlotPosition">
-                                    <AxisX LineColor="Gray" IsMarginVisible="False">
-                                        <MajorGrid LineColor="white" />
-                                    </AxisX>
-                                    <AxisY LineColor="gray">
-                                        <MajorGrid LineColor="white" />
-                                    </AxisY>
-                                    <Area3DStyle Enable3D="false" LightStyle="Realistic"></Area3DStyle>
-                                </asp:ChartArea>
-                            </ChartAreas>
-
-                            <Legends>
-                                <asp:Legend>
-                                </asp:Legend>
-                            </Legends>
-                        </asp:Chart>
-
+                        <div id="reportsChart"></div>
                     </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="CheckBox1" EventName="CheckedChanged" />
-                        <asp:AsyncPostBackTrigger ControlID="CheckBox2" EventName="CheckedChanged" />
-                    </Triggers>
                 </asp:UpdatePanel>
             </div>
 
@@ -645,7 +593,6 @@
                         <h6>PDC Clearing</h6>
                     </div>
                     <div class="divider"></div>
-
 
 
                     <div style="width: 100%; overflow: auto;">
@@ -902,9 +849,115 @@
                     </div>
                 </a>
             </div>
+            <asp:Label runat="server" ID="hiddenJson" Visible="false"></asp:Label>
+
+
 
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        //Sys.Application.add_load(loadExpenseChart());
+        let chartInstance = null;
+
+        function getSelectedCheckboxValue() {
+            const checkbox1 = document.getElementById('CheckBox1');
+            const checkbox2 = document.getElementById('CheckBox2');
+
+            const isChecked1 = checkbox1.checked;
+            const isChecked2 = checkbox2.checked;
+
+            if (isChecked1 && isChecked2) return 2;
+            if (isChecked1) return 0;
+            if (isChecked2) return 1;
+
+            return 3; // fallback
+        }
+
+        function loadExpenseChart() {
+            const selectedValue = getSelectedCheckboxValue();
+
+            fetch('TokenService.asmx/getJson', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ a: selectedValue })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    try {
+                        const parsed = JSON.parse(data.d);
+
+                        const months = parsed.map(item => item.expense_month);
+                        const expenseData = parsed.map(item => item.expense);
+                        const dueData = parsed.map(item => item.Due);
+                        const collectionData = parsed.map(item => item.Collection);
+
+                        const options = {
+                            series: [
+                                { name: 'Expense', data: expenseData },
+                                { name: 'Due', data: dueData },
+                                { name: 'Collection', data: collectionData }
+                            ],
+                            chart: {
+                                height: 350,
+                                type: 'area',
+                                toolbar: { show: false }
+                            },
+                            markers: { size: 4 },
+                            colors: ['#4154f1', '#ffc107', '#28a745'],
+                            fill: {
+                                type: "gradient",
+                                gradient: {
+                                    shadeIntensity: 1,
+                                    opacityFrom: 0.3,
+                                    opacityTo: 0.4,
+                                    stops: [0, 90, 100]
+                                }
+                            },
+                            dataLabels: { enabled: false },
+                            stroke: { curve: 'smooth', width: 2 },
+                            xaxis: {
+                                type: 'category',
+                                categories: months
+                            },
+                            tooltip: {
+                                x: { format: 'MMM' }
+                            }
+                        };
+
+                        // Destroy existing chart before creating a new one
+                        if (chartInstance) {
+                            chartInstance.destroy();
+                        }
+
+                        chartInstance = new ApexCharts(document.querySelector("#reportsChart"), options);
+                        chartInstance.render();
+
+                    } catch (err) {
+                        console.error("Parsing or chart error:", err);
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                });
+        }
+
+        // Add onchange listeners and load initial chart
+        window.addEventListener("load", () => {
+            document.getElementById('CheckBox1').addEventListener('change', loadExpenseChart);
+            document.getElementById('CheckBox2').addEventListener('change', loadExpenseChart);
+
+            loadExpenseChart();
+        });
+
+
+    </script>
+
+
 
 
 
@@ -978,7 +1031,7 @@
         window.addEventListener('resize', resizeChart);
 
         function resizeChart() {
-            console.log("resizeing...")
+<%--            console.log("resizeing...")
             var container = document.getElementById('chartContainer');
             var chart = document.getElementById('<%= Chart2.ClientID %>');
 
@@ -986,7 +1039,7 @@
                 var width = container.offsetWidth;
 
                 chart.style.width = width - 3 + 'px';
-            }
+            }--%>
         }
     </script>
 

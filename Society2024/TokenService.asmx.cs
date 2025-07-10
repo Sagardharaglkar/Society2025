@@ -1,4 +1,6 @@
-﻿using BusinessLogic.MasterBL;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,8 @@ namespace Society2024
     {
         BL_User_Login bl = new BL_User_Login();
         Login_Details login = new Login_Details();
-
+        BL_User_Login BL_Login = new BL_User_Login();
+        Login_Details details = new Login_Details();
         [WebMethod(EnableSession = true)]
         public string SaveToken(string token)
         {
@@ -47,6 +50,19 @@ namespace Society2024
                 System.Diagnostics.Debug.WriteLine("Error in SaveToken: " + ex.Message);
                 return "Error: " + ex.Message;
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string getJson(int a)
+        {
+
+            details.Sql_Operation = "ExpenseChart";
+            details.Society_Id = Session["society_id"].ToString();
+            details.ExpenseType = a;
+            var dt = BL_Login.get_expense_chart(details);
+
+           string strJson = JsonConvert.SerializeObject(dt, Formatting.Indented);
+            return strJson;
         }
     }
 }
