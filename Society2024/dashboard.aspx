@@ -17,7 +17,7 @@
         .top-dashboard {
             display: flex;
             gap: 20px;
-            flex-wrap: wrap;
+            /*            flex-wrap: wrap;*/
             justify-content: center;
         }
 
@@ -228,6 +228,7 @@
             width: 88%;
             margin: 0 21px;
         }
+
 
         .pdc-card-container {
             max-width: 600px;
@@ -564,10 +565,10 @@
                                     Text="Add"                         
                                     onclick="loadExpenseChart();" />--%>
 
-                                <input type="checkbox" id="CheckBox1" checked="checked" >
+                                <input type="checkbox" id="CheckBox1" checked="checked">
                                 <label for="CheckBox1">Regular</label>
 
-                                <input type="checkbox" id="CheckBox2" >
+                                <input type="checkbox" id="CheckBox2">
                                 <label for="CheckBox2">Add on</label>
 
 
@@ -589,7 +590,7 @@
 
             <div class="custom-width-container layout-box layout-big layout-blue d-flex" style="gap: 20px;">
                 <div class="card pdc-weekly">
-                    <div class="header-card">
+                    <div class="header-card" style="margin-bottom: 10px;">
                         <h6>PDC Clearing</h6>
                     </div>
                     <div class="divider"></div>
@@ -604,7 +605,7 @@
                             <ContentTemplate>
                                 <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging"
                                     PageSize="3" ID="GridView1" runat="server" AutoGenerateColumns="false"
-                                    CssClass="" AllowSorting="true" OnSorting="GridView1_Sorting" Width="100%" BorderStyle="None">
+                                    CssClass="" AllowSorting="true" OnSorting="GridView1_Sorting" Width="100%" BorderStyle="None" ShowHeader="False">
                                     <Columns>
                                         <asp:TemplateField>
                                             <ItemTemplate>

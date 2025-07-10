@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.MasterBL;
+using DBCode.DataClass.Master_Dataclass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,17 @@ namespace Society
             GridView1.DataSource = dt;
             GridView1.DataBind();
 
+        }
+
+        protected void btn_search_Click(object sender, EventArgs e)
+        {
+            details.Sql_Operation = "search";
+            details.Name = txt_search.Text;
+            var result = BL_Login.get_recent_Search(details);
+            GridView1.DataSource = result;
+            ViewState["dirState"] = result;
+            GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
     }
