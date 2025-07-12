@@ -59,6 +59,14 @@ namespace Utility.DataClass
         private string Operation;
         private string Result;
 
+        private string fromDate;
+        private string toDate;
+        private string Recent_type;
+        private string min_Price;
+        private string max_Price;
+        private string search;
+        private string Society_id;
+
 
         public int UserLoginId
         {
@@ -303,5 +311,46 @@ namespace Utility.DataClass
             get { return expense_type; }
             set { expense_type = value; }
         }
+
+        public string From_date
+        {
+            get { return fromDate; }
+            set { fromDate = value; }
+        }
+
+        public string To_date
+        {
+            get { return toDate; }
+            set { toDate = value; }
+        }
+
+        public string Recent_Type
+        {
+            get { return Recent_type; }
+            set { Recent_type = value; }
+        }
+        public string Min_Price
+        {
+            get { return min_Price; }
+            set { min_Price = value; }
+        }
+        public string Max_Price
+        {
+            get { return max_Price; }
+            set { max_Price = value; }
+        }
+
+
+        public string Search
+        {
+            get { return search; }
+            set { search = value; }
+        }
+        public string society_id
+        {
+            get { return Society_id; }
+            set { Society_id = value; }
+        }
+
     }
 }
