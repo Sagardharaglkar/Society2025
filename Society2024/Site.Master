@@ -1024,26 +1024,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        function SuccessEntry() {
-            console.log("swal firing")
+        function FailedEntry() {
             Swal.fire({
-                title: '✅ Success!',
-                text: 'Saved Successfully',
-                icon: 'success',
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
                 showConfirmButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                timer: 2000,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
                 timerProgressBar: true,
 
                 didOpen: () => {
                     Swal.showLoading()
-                },
-                willClose: () => {
-                    location.reload();
-
                 }
+
+
             });
+
         }
         var lastFocusedElement = null;
 

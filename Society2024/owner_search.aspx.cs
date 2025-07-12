@@ -190,7 +190,8 @@ namespace Society
             OwnerGrid.DataBind();
 
         }
-        public void runproc_save(string operation)
+        
+        public string runproc_save(string operation)
         {
             string type = "Owner";
             if (owner_id.Value != "")
@@ -216,9 +217,12 @@ namespace Society
             owner.Type = type;
             owner.Doc_Id = Convert.ToInt32(doc_id_id.Value); // Set docid  
 
+           
             var result = bL_Owner.updateOwnerDetails(owner);
+
             owner_id.Value = result.owner_id.ToString();
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            return result.Sql_Result;
         }
 
 
@@ -278,8 +282,14 @@ namespace Society
 
         protected void btn_save_Click1(object sender, EventArgs e)
         {
-            runproc_save("Update");
+            string str = runproc_save("Update");
+            if (str == "done") 
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+             else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
         }
 
         protected void btn_photo_upload_Click(object sender, EventArgs e)

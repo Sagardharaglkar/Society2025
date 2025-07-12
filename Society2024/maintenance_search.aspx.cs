@@ -153,7 +153,7 @@ namespace Society
 
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
 
             Maintenance1.Sql_Operation = "exfetch";
@@ -178,6 +178,8 @@ namespace Society
             //Maintenance1.Nature_Of_Charge = txt_nature_charge.Text;
             var result = bL_Maintenance.updateMaintenanceDetails(Maintenance1);
             n_m_id.Value = result.n_m_id.ToString();
+
+            return result.Sql_Result;
 
 
         }
@@ -257,9 +259,16 @@ namespace Society
 
                 else
                 {
-                    runproc_save("Update");
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Maintenance Bill Only Save Not Generate Maintenance Bill..!!!');", true);
+
+                    var str = runproc_save("Update");
+                    if (str == "Done") { 
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Maintenance Bill Only Save Not Generate Maintenance Bill..!!!');", true);
                     ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                }else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
+                    }
                 }
 
             }

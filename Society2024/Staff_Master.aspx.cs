@@ -62,11 +62,19 @@ namespace Society2024
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            runproc_save("Update");
+            var str = runproc_save("Update");
+            if (str == "Done")
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-        }
 
-        public void runproc_save(string operation)
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
+        
+    }
+
+        public string runproc_save(string operation)
         {
             if (staff_id.Value != "")
                 Staff.staff_id = Convert.ToInt32(staff_id.Value);
@@ -80,8 +88,10 @@ namespace Society2024
             Staff.Date_Of_Join = Convert.ToDateTime(txt_doj.Text);
 
             Staff.role_id = Convert.ToInt32(role_id.Value);
-            bL_Staff.update_staff(Staff);
+            var result = bL_Staff.update_staff(Staff);
             staff_Gridbind();
+
+            return result.Sql_Result;
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)

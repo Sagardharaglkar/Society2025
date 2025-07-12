@@ -43,6 +43,25 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
+        function FailedEntry() {
+            Swal.fire({
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                showConfirmButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+
+
+            });
+
+        }
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -62,6 +81,9 @@
                 }
             });
         }
+
+       
+
     </script>
     <script type="text/javascript">
         function validateInput(sender, args) {
@@ -96,7 +118,7 @@
                         <asp:HiddenField ID="wing_id" runat="server" />
                         <asp:HiddenField ID="HiddenField4" runat="server" />
                         <asp:HiddenField ID="society_id" runat="server" />
-                        <asp:HiddenField ID="ddl_build_name" runat="server" />
+
                         <%--                        <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
@@ -242,6 +264,7 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                                                <asp:HiddenField ID="ddl_build_name" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-5">

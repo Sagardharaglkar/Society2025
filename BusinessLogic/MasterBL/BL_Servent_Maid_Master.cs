@@ -19,10 +19,10 @@ namespace BusinessLogic.MasterBL
             return dA_Servent.getServentDetails(servent);
         
         }
-        public void updateServentDetails(Servent_Made servent)
+        public Servent_Made updateServentDetails(Servent_Made servent)
         {
             DA_Servent_Maid_Master dA_Servent = new DA_Servent_Maid_Master();
-           dA_Servent.updateServentDetails(servent);
+          return dA_Servent.updateServentDetails(servent);
 
         }
         public Servent_Made runproc(Servent_Made servent)

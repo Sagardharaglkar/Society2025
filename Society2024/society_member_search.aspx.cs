@@ -34,7 +34,7 @@ namespace Society
         {
             if (Session["name"] == null)
             {
-                // Response.Redirect("login1.aspx");
+                 Response.Redirect("login1.aspx");
             }
             else
                 society_id.Value = Session["society_id"].ToString();
@@ -127,7 +127,7 @@ namespace Society
             GridView1.DataBind();
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
 
             if (user_id.Value != "")
@@ -139,8 +139,9 @@ namespace Society
             member.UserName = txt_username.Text;
             member.Password = txt_password.Text;
             member.Status = 0;
-            bL_Society.updateSocietyMemberDetails(member);
-
+            
+            var result = bL_Society.updateSocietyMemberDetails(member);
+            return result.Sql_Result;
         }
 
 
@@ -176,10 +177,16 @@ namespace Society
 
             if (Label25.Text == "")
             {
-                btn_save.Visible = false;
-                runproc_save("Update");
+               // btn_save.Visible = false;
+                string str = runproc_save("Update");
+                if(str=="Done")
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
 
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                }
             }
             else
             {

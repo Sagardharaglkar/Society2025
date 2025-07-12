@@ -42,6 +42,25 @@
         function openModal() {
             $('#edit_model').modal('show');
         }
+        function FailedEntry() {
+            Swal.fire({
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                showConfirmButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+
+
+            });
+
+        }
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -108,10 +127,7 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="flat_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="server" />
-                        <asp:HiddenField ID="Building_id" runat="server" />
-                        <asp:HiddenField ID="flat_type_id" runat="server" />
-                        <asp:HiddenField ID="usage_id" runat="server" />
-                        <asp:HiddenField ID="Bedroom_id" runat="server" />
+
 
                       <%--  <asp:DropDownList Visible="false" ID="search_field" runat="server" Width="200px" Height="32px" OnSelectedIndexChanged="search_field_SelectedIndexChanged">
                             <asp:ListItem Value="flat_no">Flat No</asp:ListItem>
@@ -239,6 +255,10 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                                                <asp:HiddenField ID="Building_id" runat="server" />
+                        <asp:HiddenField ID="flat_type_id" runat="server" />
+                        <asp:HiddenField ID="usage_id" runat="server" />
+                        <asp:HiddenField ID="Bedroom_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-2">

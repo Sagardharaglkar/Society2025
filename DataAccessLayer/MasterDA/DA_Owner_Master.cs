@@ -93,6 +93,7 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("doc_id", owner.Doc_Id));
             }
             status1 = st.run_query_scalar(data_item, "Select", "sp_owner_master", ref sdr);
+            owner.Sql_Result = status1;
             if (status1 == "Done")
                 if(sdr!=0)
                 owner.owner_id = sdr;
@@ -338,6 +339,7 @@ namespace DataAccessLayer.MasterDA
 
             }
             status1 = st.run_query_scalar(data_item, "Select", "sp_owner_master", ref sdr);
+            owner.Sql_Result = status1;
             if (status1 == "Done")
                 if(sdr!=0)
                 owner.owner_id = sdr;

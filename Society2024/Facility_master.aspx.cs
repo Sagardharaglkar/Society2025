@@ -42,7 +42,7 @@ namespace Society2024
             GridView1.DataBind();
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (facility_id.Value != "")
                 GetFacility.facility_id = Convert.ToInt32(facility_id.Value.ToString());
@@ -54,6 +54,8 @@ namespace Society2024
             GetFacility.Sql_Operation = operation;
             var result= bL_Party.update_facility(GetFacility);
             facility_id.Value = result.facility_id.ToString();
+
+            return result.Sql_Result;
         }
 
         private void runproc_facility(string operation)
@@ -132,9 +134,17 @@ namespace Society2024
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            runproc_save("Update");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            var str = runproc_save("Update");
+           if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
         }
+    }
+
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {

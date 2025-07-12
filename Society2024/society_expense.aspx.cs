@@ -266,7 +266,8 @@ namespace Society
             {
                 var str=runproc_save("Update");
                 if(str=="Done")
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
             }
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "alert('Add at least one Approver.')", true);

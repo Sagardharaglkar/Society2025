@@ -30,7 +30,7 @@ namespace DataAccessLayer.DA
             return dt;
         }
 
-        public object search_car(carpolling car)
+        public DataTable search_car(carpolling car)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
@@ -86,10 +86,11 @@ namespace DataAccessLayer.DA
                     
                     }
                 }
-                else
-                {
-                    car.Sql_Result = status1;
-                }
+                
+            }
+            else
+            {
+                car.Sql_Result = status1;
             }
             return car;
 

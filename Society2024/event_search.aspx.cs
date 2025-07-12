@@ -87,6 +87,7 @@ namespace Society
 
         public void runproc_save(string operation)
         {
+            
             if (event_id.Value != "")
                 evt.Event_Id = Convert.ToInt32(event_id.Value.ToString());
             evt.Sql_Operation = operation;
@@ -95,17 +96,24 @@ namespace Society
             evt.From_Date = Convert.ToDateTime(txt_from_date.Text.ToString());
             evt.To_Date = Convert.ToDateTime(txt_to_date.Text.ToString());
             evt.Description = txt_desc.Text;
-           var result= bL_Event.updateEventDetails(evt);
+           var result = bL_Event.updateEventDetails(evt);
             foreach (DataRow row in result.Rows)
+
+          
             {
                 evt.User_Id = Convert.ToInt32(row["user_id"].ToString());
                 evt.UserType = row["type"].ToString();
                 evt.Notification_Id = evt.Event_Id;
              evt.Notification_Type = "Event";
                 evt.Body = txt_sub.Text;
-                bL_Event.send_notification(evt);
+               bL_Event.send_notification(evt);
                 generate_notification(row["token"].ToString());
+
+            
+
+    
             }
+          
         }
 
         protected async void generate_notification(string token)

@@ -87,6 +87,10 @@ namespace DataAccessLayer.MasterDA
                 }
                
             }
+            else
+            {
+                building.Sql_Result = status1;
+            }
             return building;
         }
 

@@ -164,6 +164,7 @@ namespace DataAccessLayer.DA
 
             }
             status1 = st.run_query_scalar(data_item, "Select", "sp_facility", ref sdr);
+            getfacility.Sql_Result = status1;
             if (sdr != 0)
                 getfacility.facility_id = sdr;
            
