@@ -92,6 +92,7 @@ namespace Society2024
             staff_Gridbind();
 
             return result.Sql_Result;
+
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)

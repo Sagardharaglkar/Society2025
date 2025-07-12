@@ -68,6 +68,8 @@ namespace DataAccessLayer.DA
             }
             status1 = st.run_query(data_item, "Select", "sp_car_polling", ref sdr);
 
+            car.Sql_Result = status1;
+
             if (status1 == "Done")
             {
                 if (car.Sql_Operation == "Select")

@@ -111,7 +111,7 @@ namespace Society
             GridView1.DataBind();
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
 
             if (!string.IsNullOrEmpty(society_master_id.Value))
@@ -135,7 +135,9 @@ namespace Society
             society.Tan_No = txt_tan_no.Text;
             society.Gstin_No = txt_gstin_no.Text;
             society.Pan_No = txt_pan_no.Text;
-            bL_Society.updateSocietyDetails(society);
+            var result = bL_Society.updateSocietyDetails(society);
+
+            return result.Sql_Result;
         }
 
         public void runproc(string operation)
@@ -187,7 +189,7 @@ namespace Society
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "failedEntry();", true);
 
             }
 

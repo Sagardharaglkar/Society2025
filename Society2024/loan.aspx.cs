@@ -141,7 +141,7 @@ namespace Society
             GetLoan.Society_Noc = Convert.ToDateTime(txt_noc_society.Text);
             if(txt_loan_clear.Text != "")
             GetLoan.Loan_Clearance = Convert.ToDateTime(txt_loan_clear.Text);
-            l_Loan.Update_Loan(GetLoan);
+            var result = l_Loan.Update_Loan(GetLoan);
         }
 
 
@@ -183,6 +183,7 @@ namespace Society
             runproc_save("Update");
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
         }
+
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
