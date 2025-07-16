@@ -243,7 +243,23 @@ namespace DataAccessLayer.MasterDA
             return society;
 
         }
-   
-    
+
+        public int getFlats(Search_Society society)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1 = "";
+            int flat = 0;
+            data_item.Add(st.create_array("operation", society.Sql_Operation));
+            data_item.Add(st.create_array("society_id", society.Society_Id));
+           
+            status1 = st.run_query(data_item, "Select", "sp_society_master", ref sdr);
+            if (status1 == "Done")
+                if (sdr.Read())
+                    flat = Convert.ToInt32(sdr["flats"].ToString());
+
+            return flat;
+
+        }
     }
 }

@@ -1,24 +1,24 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="society_charges.aspx.cs" Inherits="Society.society_charges" MasterPageFile="~/Site.Master" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
 
     <style>
-        .resized-model{
-        width: 529px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 529px;
+            height: auto;
+            right: 82px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -69,7 +69,7 @@
                 <asp:HiddenField ID="society_id" runat="server" />
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                       <%-- <div class="form-group" >
+                        <%-- <div class="form-group" >
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -101,41 +101,41 @@
                             </div>
                         </div>--%>
 
-        <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center">
-                        <div class="search-container">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                            <asp:TextBox
-                                ID="txt_search"
-                                CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                            <!-- Calendar and Search Buttons -->
-                            <div class="input-buttons">
-                                 <button
-                                    id="btn_search"
-                                    type="submit"
-                                    class="search-button2"
-                                    runat="server"
-                                    onserverclick="btn_search_Click">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        &nbsp;&nbsp;
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
                         <div class="form-group">
                             <div class="row ">
@@ -203,55 +203,60 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        
-                <asp:HiddenField ID="charge_id" runat="server" />
-                <asp:HiddenField ID="society_name_id" runat="server" />
+
+                                        <asp:HiddenField ID="charge_id" runat="server" />
+                                        <asp:HiddenField ID="society_name_id" runat="server" />
+                                                                               <div class="form-group">
+                                           <div class="row">
+                                              <div class="col-sm-5">
+
+    <asp:Label ID="lbl_co_name" runat="server" Text="Society Name :"></asp:Label>
+
+    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+</div>
+<div class="col-sm-7">
+    <div class="dropdown-container">
+        <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
+            placeholder="Select Society" autocomplete="off" required="required" />
+        <div id="categoryRepeaterContainer" class="suggestion-list">
+            <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="categoryRepeater_ItemDataBound">
+                <ItemTemplate>
+                    <asp:LinkButton
+                        ID="lnkCategory"
+                        runat="server"
+                        CssClass="suggestion-item link-button category-link"
+                        Text='<%# Eval("name") %>'
+                        CommandArgument='<%# Eval("society_id") %>'
+                        CommandName="SelectCategory"
+                        OnClientClick="setCategoryBox(this.innerText);" />
+                </ItemTemplate>
+                <FooterTemplate>
+                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                        Text="No items found." />
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
+    </div>
+
+   
+    <asp:Label ID="Label2" runat="server" ForeColor="Red"></asp:Label>
+
+</div>
+                                               <div class="col-sm-5">
+                                                   <asp:Label ID="Label5" runat="server" Text="Total Units :"></asp:Label>
+                                                   <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                               </div>
+                                               <div class="col-sm-7">
+                                                   <asp:TextBox ID="txt_flat" runat="server" Width="200px" Height="32px" Enabled="false" placeholder="Enter Amount" required autofocus></asp:TextBox>
+                                                   <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="Red"></asp:Label>
+                                               </div>
+                                           </div>
+                                       </div>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-5">
 
-                                                    <asp:Label ID="lbl_co_name" runat="server" Text="Society Name :"></asp:Label>
-
-                                                    <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select Society" autocomplete="off" required="required" />
-                                                        <div id="categoryRepeaterContainer" class="suggestion-list">
-                                                            <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="categoryRepeater_ItemDataBound">
-                                                                <ItemTemplate>
-                                                                    <asp:LinkButton
-                                                                        ID="lnkCategory"
-                                                                        runat="server"
-                                                                        CssClass="suggestion-item link-button category-link"
-                                                                        Text='<%# Eval("name") %>'
-                                                                        CommandArgument='<%# Eval("society_id") %>'
-                                                                        CommandName="SelectCategory"
-                                                                        OnClientClick="setCategoryBox(this.innerText);" />
-                                                                </ItemTemplate>
-                                                                <FooterTemplate>
-                                                                    <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                                        Text="No items found." />
-                                                                </FooterTemplate>
-                                                            </asp:Repeater>
-                                                        </div>
-                                                    </div>
- 
-                                                    <br />
-                                                   
-                                                    <asp:Label ID="Label2" runat="server" ForeColor="Red"></asp:Label>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-5">
-
-                                                    <asp:Label ID="Label1" runat="server" Text="amount :"></asp:Label>
+                                                  <asp:Label ID="Label1" runat="server" Text="Amount per Unit :"></asp:Label>
 
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
@@ -265,6 +270,7 @@
 
                                             </div>
                                         </div>
+
                                     </ContentTemplate>
 
                                     <Triggers>
@@ -282,7 +288,7 @@
                                         <center>
                                             <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" runat="server" Text="Save" OnClick="btn_save_Click" class="btn btn-primary" ValidationGroup="g1" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" runat="server" Visible="false" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                         </center>
                                         </>
                                     </div>
@@ -313,7 +319,7 @@
             });
 
 
-            if (allValid && btn ) {
+            if (allValid && btn) {
                 btn.disabled = true;
                 btn.value = "Saving...";
 
@@ -422,5 +428,5 @@
 
 
     </script>
- 
+
 </asp:Content>

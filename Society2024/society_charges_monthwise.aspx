@@ -60,8 +60,7 @@
 
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:HiddenField ID="mon_charge_id" runat="server" />
-                        <asp:HiddenField ID="society_id" runat="server" />
+               
                         <%--<div class="form-group" style="display:none;">
                             <div class="row">
                                 <div class="col-12">
@@ -196,8 +195,45 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                                 <asp:HiddenField ID="mon_charge_id" runat="server" />
+         <asp:HiddenField ID="society_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row">
+                                               <div class="col-sm-5">
+
+     <asp:Label ID="lbl_co_name" runat="server" Text="Society Name :"></asp:Label>
+
+     <asp:Label ID="lbl_co_name_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+ </div>
+ <div class="col-sm-7">
+     <div class="dropdown-container">
+         <asp:TextBox ID="categoryBox" Style="width:200px;" runat="server" CssClass="input-box form-control"
+             placeholder="Select Society" autocomplete="off" required="required" />
+         <div id="categoryRepeaterContainer" class="suggestion-list">
+             <asp:Repeater ID="categoryRepeater" runat="server" OnItemCommand="CategoryRepeater_ItemCommand" OnItemDataBound="categoryRepeater_ItemDataBound">
+                 <ItemTemplate>
+                     <asp:LinkButton
+                         ID="lnkCategory"
+                         runat="server"
+                         CssClass="suggestion-item link-button category-link"
+                         Text='<%# Eval("name") %>'
+                         CommandArgument='<%# Eval("society_id") %>'
+                         CommandName="SelectCategory"
+                         OnClientClick="setCategoryBox(this.innerText);" />
+                 </ItemTemplate>
+                 <FooterTemplate>
+                     <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                         Text="No items found." />
+                 </FooterTemplate>
+             </asp:Repeater>
+         </div>
+     </div>
+ 
+     <br />
+    
+     <asp:Label ID="Label1" runat="server" ForeColor="Red"></asp:Label>
+
+ </div>
                                                 <div class="col-sm-5">
                                                     <asp:Label ID="Label2" runat="server" Text="Amount :"></asp:Label>
                                                     <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
@@ -281,5 +317,100 @@
             }
             return false;
         }
+    </script>
+    
+    <script>
+
+        function initDropdownEvents() {
+
+            const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
+
+            const categorySuggestions = document.getElementById("categoryRepeaterContainer");
+
+            categoryBox.addEventListener("focus", function () {
+
+                categorySuggestions.style.display = "block";
+
+                itemSuggestions.style.display = "none";
+
+            });
+
+            categoryBox.addEventListener("input", function () {
+
+                const input = categoryBox.value.toLowerCase();
+
+                filterSuggestions("category-link", input);
+
+            });
+
+
+        }
+
+
+        function filterSuggestions(className, value) {
+
+            const items = document.querySelectorAll("." + className);
+
+            let matchFound = false;
+
+            items.forEach(item => {
+
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
+                    item.style.display = "block";
+
+                    matchFound = true;
+
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+
+                if (!noMatchMessage) {
+
+                    noMatchMessage = document.createElement("div");
+
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+
+                }
+
+                noMatchMessage.style.display = "block";
+
+            } else {
+
+                if (noMatchMessage) {
+
+                    noMatchMessage.style.display = "none";
+
+                }
+
+            }
+
+        }
+
+
+        function setCategoryBox(value) {
+
+            document.getElementById("<%= categoryBox.ClientID %>").value = value;
+
+            document.getElementById("categoryRepeaterContainer").style.display = "none";
+
+        }
+
+
+        Sys.Application.add_load(initDropdownEvents);
+
+
     </script>
 </asp:Content>
