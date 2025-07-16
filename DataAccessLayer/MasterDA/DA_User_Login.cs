@@ -115,10 +115,10 @@ namespace DataAccessLayer.MasterDA
             SqlDataReader sdr = null;
             string status1 = "";
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", details.Sql_Operation));
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
             data_item.Add(st.create_array("search", details.Name));
 
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

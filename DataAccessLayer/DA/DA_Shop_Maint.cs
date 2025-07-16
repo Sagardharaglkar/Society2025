@@ -57,6 +57,7 @@ namespace DataAccessLayer.DA
                 
             }
             status1 = st.run_query(data_item, "Select", "sp_shop_maintenance", ref sdr);
+            maintenance.Sql_Result = status1;
 
             if (status1 == "Done")
             {

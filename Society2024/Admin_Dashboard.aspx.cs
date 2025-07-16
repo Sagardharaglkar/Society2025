@@ -28,6 +28,7 @@ namespace Society2024
             {
                 //defaulter_Click(sender, e);
                 filldrop();
+                fill_drop1();
                 //date_before.Text = DateTime.Now.ToShortDateString();
                 btn_search_Click(sender, e);
             }
@@ -49,10 +50,22 @@ namespace Society2024
             BL_Login.fill_drop(drp_division, sql_query4, "division", "division_id");
 
         }
+
+        public void fill_drop1()
+        {
+            String sql_query = "Select *  from state";
+            BL_Login.fill_drop(ddl_state, sql_query, "state", "state_id");
+            String sql_query1 = "Select *  from district";
+            BL_Login.fill_drop(ddl_district, sql_query1, "district", "district_id");
+            String sql_query2 = "Select *  from division";
+            BL_Login.fill_drop(ddl_division, sql_query2, "division", "division_id");
+
+        }
+
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
-            details.Sql_Operation = "search";
+            details.Sql_Operation = "AdminSearch";
             details.Name = txt_search.Text;
             var result = BL_Login.search_admin(details);
             GridView1.DataSource = result;
@@ -115,10 +128,76 @@ namespace Society2024
         {
 
         }
+        protected void btnApplyFilters_Click1(object sender, EventArgs e)
+        {
+            // Get filter values from the controls
+           
+        }
+
+        private void ApplyFilters(string state, string district, string city, string pincode, decimal minPending, decimal maxPending)
+        {
+            // Example: Filtering logic (replace with your actual data access logic)
+
+            DataTable dt = (DataTable)ViewState["dirState"];
+            var query = dt.AsEnumerable();
+
+            if (!string.IsNullOrEmpty(state))
+            {
+                query = query.Where(x => x.Field<string>("State") == state);
+            }
+            if (!string.IsNullOrEmpty(district))
+            {
+                query = query.Where(x => x.Field<string>("District") == district);
+            }
+            if (!string.IsNullOrEmpty(city))
+            {
+                query = query.Where(x => x.Field<string>("City") == city);
+            }
+            if (!string.IsNullOrEmpty(pincode))
+            {
+                query = query.Where(x => x.Field<string>("Pincode") == pincode);
+            }
+
+            if (minPending > 0)
+            {
+                query = query.Where(x => x.Field<decimal>("PendingAmount") >= minPending);
+            }
+            if (maxPending < 100000)
+            {
+                query = query.Where(x => x.Field<decimal>("PendingAmount") <= maxPending);
+            }
+
+            // Convert the filtered rows back to a DataTable
+            DataTable filtered = query.CopyToDataTable();
+
+            // Bind to GridView
+            GridView1.DataSource = filtered;
+            GridView1.DataBind();
+        }
+
 
         protected void btn_filter_Click(object sender, EventArgs e)
         {
             filterSection.Visible = true;
         }
+
+        protected void btnApplyFilters_Click(object sender, EventArgs e)
+        {
+            string state = drp_state.SelectedValue;
+            string district = drp_district.SelectedValue;
+            string city = drp_city.SelectedValue;
+            string pincode = txt_pincode.Text;
+ 
+
+            decimal minpending = Convert.ToDecimal(minPendingHidden.Value);
+            decimal maxpending = Convert.ToDecimal(maxPendingHidden.Value);
+
+            // Optional: Add price if needed
+            int minprice = Convert.ToInt32(minPriceHidden.Value);
+            int maxprice = Convert.ToInt32(maxPriceHidden.Value);
+
+            // Apply filters using all collected values
+            ApplyFilters(state, district, city, pincode,  minpending, maxpending /*, minprice, maxprice if needed */);
+        }
+    }
     }   
-}

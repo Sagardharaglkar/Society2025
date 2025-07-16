@@ -48,6 +48,7 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("email", vendor.Email));
             }
             status1 = st.run_query(data_item, "Select", "sp_vendor_master", ref sdr);
+            vendor.Sql_Result = status1;
 
             if (status1 == "Done")
             {

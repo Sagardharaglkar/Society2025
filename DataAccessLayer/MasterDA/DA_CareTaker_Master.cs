@@ -59,9 +59,10 @@ namespace DataAccessLayer.MasterDA
 
             }
             status1 = st.run_query(data_item, "Select", "sp_caretaker_master", ref sdr);
+            care.Sql_Result = status1;
 
             if (status1 == "Done")
-            {
+            { 
                 if (care.Sql_Operation == "Select")
                 {
                     while (sdr.Read())

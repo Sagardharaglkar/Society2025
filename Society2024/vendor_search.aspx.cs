@@ -78,7 +78,7 @@ namespace Society
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
-        public void runproc_save(String operation)
+        public string runproc_save(String operation)
         {
             if (vendor_id.Value != "")
                 vendor.vendor_id = Convert.ToInt32(vendor_id.Value.ToString());
@@ -91,7 +91,8 @@ namespace Society
             vendor.Mobile_No = txt_mob.Text;
             vendor.Org_Tel_No = txt_org_mob.Text;
             vendor.Email = txt_mail.Text;
-            bL_Vendor.updatevendorDetails(vendor);
+            var result = bL_Vendor.updatevendorDetails(vendor);
+            return result.Sql_Result;
 
         }
         public void runproc(String operation)
@@ -125,8 +126,15 @@ namespace Society
         {
             if (Label10.Text == "" && Label12.Text=="" )
             {
-                runproc_save("Update");
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                string str = runproc_save("Update");
+
+                if (str == "Done")
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+                }
             }
             else
             {

@@ -160,7 +160,7 @@ namespace Society
 
 
 
-        public void runproc_save(string operation1)
+        public string runproc_save(string operation1)
         {
             if (pdc_rem_id.Value != "")
                 Reminder.pdc_rem_id = Convert.ToInt32(pdc_rem_id.Value.ToString());
@@ -175,7 +175,8 @@ namespace Society
             Reminder.Che_Dep = deposite_chk.Checked == true ? 1 : 0;
             Reminder.Che_Can = bounce_chk.Checked == true ? 1 : 0;
             Reminder.Che_Ret = return_chk.Checked == true ? 1 : 0;
-            BL_Pdc.updatePdcReminder(Reminder);
+            var result = BL_Pdc.updatePdcReminder(Reminder);
+            return result.Sql_Result;
 
         }
 
@@ -357,10 +358,15 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            runproc_save("Update");
-            save_change();
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-           
+            string str = runproc_save("Update");
+
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
         }
 
 

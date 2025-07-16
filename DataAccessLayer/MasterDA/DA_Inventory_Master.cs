@@ -63,6 +63,7 @@ namespace DataAccessLayer.MasterDA
 
             }
             status1 = st.run_query(data_item, "Select", "sp_inventory_master", ref sdr);
+            inventory.Sql_Result = status1;
 
             if (status1 == "Done")
             {

@@ -23,6 +23,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
+        function FailedEntry() {
+            Swal.fire({
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                showConfirmButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+
+
+            });
+
+        }
         function SuccessEntry() {
             Swal.fire({
                 title: '✅ Success!',
@@ -47,45 +66,10 @@
             $('#edit_model').modal('show');
         }
 
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-        }
-        function checkLength(el) {
-
-            if (el.value.length != 10) {
-
-                alert("length must be exactly 10 digits")
-
-                return false;
-            }
-        }
+      
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        function SuccessEntry() {
-            Swal.fire({
-                title: '✅ Success!',
-                text: 'Saved Successfully',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                timer: 3000,
-                timerProgressBar: true,
-
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-                willClose: () => {
-                    window.location.href = 'pdc_reminder_search.aspx';
-                }
-            });
-        }
-    </script>
+   
 
 
     <div class="box box-primary">

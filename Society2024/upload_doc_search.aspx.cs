@@ -178,7 +178,7 @@ namespace Society
             Label2.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (file_id.Value != "")
                 doc.File_Id = Convert.ToInt32(file_id.Value);
@@ -191,7 +191,8 @@ namespace Society
           
             doc.flat_id = Convert.ToInt32(flat_no_id.Value.ToString());
             doc.Date = Convert.ToDateTime(txt_date.Text);
-            BL_Upload.updatedocsearch(doc);
+            var result = BL_Upload.updatedocsearch(doc);
+            return result.Sql_Result;
    
         }
 
@@ -211,23 +212,21 @@ namespace Society
                 listofuploadedfiles.ForeColor = System.Drawing.Color.Red;
                 return;
             }
-
-            //if (Label7.Text == "")
-            //{
+            {
                 uplaod_doc();
-                runproc_save("Update");
-                
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                string str = runproc_save("Update");
 
-            //}
-            //else
-            //{
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                if (str == "Done")
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
 
-            //}
-        }
+                }
 
-        protected void upload_doc_gridbind()
+            }
+            }
+            protected void upload_doc_gridbind()
         {
             DataTable dt = new DataTable();
             doc.Sql_Operation= "Grid_Show";
