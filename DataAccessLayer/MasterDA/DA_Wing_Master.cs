@@ -74,6 +74,7 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("w_name", wing.W_Name));
             }
             status1 = st.run_query(data_item, "Select", "sp_wing_master", ref sdr);
+            wing.Sql_Result = status1;
             if (status1 == "Done")
             {
                 if (wing.Sql_Operation == "Select")

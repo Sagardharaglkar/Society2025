@@ -79,6 +79,7 @@ namespace DataAccessLayer.MasterDA
                
             }
             status1 = st.run_query(data_item, "Select", "sp_ledger", ref sdr);
+            GetLedger.Sql_Result = status1;
 
             if (status1 == "Done")
             {

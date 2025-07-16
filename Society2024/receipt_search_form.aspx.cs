@@ -266,7 +266,7 @@ namespace Society
 
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (receipt_id.Value != "")
                 Receipt.receipt_id = Convert.ToInt32(receipt_id.Value.ToString());
@@ -294,7 +294,8 @@ namespace Society
             Receipt.Remarks = txt_remarks.Text;
             Receipt.Received_Amount = float.Parse(txt_received_amt.Text);
             Receipt.Balance = txt_pdc_balance.Text;
-            bL_Receipt.UpdateReceipt(Receipt);
+            var result = bL_Receipt.UpdateReceipt(Receipt);
+            return result.Sql_Result;
 
             //  data_item.Add(st.create_array("bill_no", string.IsNullOrWhiteSpace(ddl_bill.SelectedValue) ? (object)DBNull.Value : ddl_bill.SelectedValue));
 
@@ -429,11 +430,16 @@ namespace Society
                     return;
                 }
             }
-            
-            runproc_save("Update");
-            //pending();
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            
+
+            string str = runproc_save("Update");
+
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
         }
 
         protected void btn_delete_Click(object sender, System.EventArgs e)

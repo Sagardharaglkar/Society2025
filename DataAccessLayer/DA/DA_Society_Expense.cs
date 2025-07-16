@@ -265,7 +265,7 @@ namespace DataAccessLayer.DA
                 society.Sql_Result="Error";
             return society;
 
-
+            
         }
         public Society_Expense Delete_Expense(Society_Expense society)
         {

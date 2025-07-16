@@ -152,7 +152,7 @@ namespace Society
         }
 
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (flat_id.Value != "")
                 flat.flat_id = Convert.ToInt32(flat_id.Value);
@@ -166,7 +166,12 @@ namespace Society
             flat.Sq_Ft = txt_feet.Text;
             flat.Terrace_Sq_Ft = txt_terrace.Text;
             flat.Intercom_No = txt_intercom.Text;
-            bL_Flat.updateFlatDetails(flat);
+            var result  = bL_Flat.updateFlatDetails(flat);
+
+            return result.Sql_Result;
+
+            
+           
         }
 
         public void runproc(string operation)
@@ -201,13 +206,20 @@ namespace Society
         }
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            if (Label20.Text == "")
-            {
-                runproc_save("Update");
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            }
-            else
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+
+        
+                // btn_save.Visible = false;
+                string str = runproc_save("Update");
+                if (str == "Done")
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
+
+                }
+            
+            
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)

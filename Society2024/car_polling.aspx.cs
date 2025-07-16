@@ -80,7 +80,7 @@ namespace Society
 
         }
 
-        public void runproc_save(String operation)
+        public string runproc_save(String operation)
         {
             if (car_id.Value != "")
                 car.Car_Id = Convert.ToInt32(car_id.Value.ToString());
@@ -93,7 +93,8 @@ namespace Society
             car.Date = Convert.ToDateTime(txt_date.Text);
             car.Destination = txt_destination.Text;
             car.Charges = txt_charges.Text;
-            BL_Car.updatecarpolling(car);
+            var result = BL_Car.updatecarpolling(car);
+            return result.Sql_Result;
 
         }
 
@@ -125,7 +126,7 @@ namespace Society
             }
         else
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
 
         }
     }

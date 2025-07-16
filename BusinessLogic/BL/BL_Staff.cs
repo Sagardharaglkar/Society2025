@@ -19,7 +19,8 @@ namespace BusinessLogic.BL
 
         public staff update_staff(staff Staff)
         {
-            return dA_Staff.Update_Staff(Staff);
+          
+          return dA_Staff.Update_Staff(Staff);
         }
 
         public DataTable getstaffdetails(staff Staff)

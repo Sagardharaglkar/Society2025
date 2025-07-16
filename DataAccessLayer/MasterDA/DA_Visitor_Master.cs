@@ -66,7 +66,7 @@ namespace DataAccessLayer.MasterDA
             status = st.run_query(data_item, "Select", "sp_Visitor", ref sdr);
             if (status == "Done")
             {
-                if (visitor.Sql_Operation == "Select")
+                if (visitor.Sql_Result == "Select")
                 {
 
                     if (sdr.Read())

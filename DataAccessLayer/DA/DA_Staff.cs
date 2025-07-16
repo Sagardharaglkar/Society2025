@@ -51,6 +51,7 @@ namespace DataAccessLayer.DA
 
             }
             status1 = st.run_query(data_item, "Select", "sp_staff_master", ref sdr);
+            getstaff.Sql_Result = status1;
 
             if (status1 == "Done")
             {
@@ -204,6 +205,7 @@ namespace DataAccessLayer.DA
               
             }
             status1 = st.run_query(data_item, "Select", "sp_staff_master", ref sdr);
+            Staff.Sql_Result = status1;
 
             if (status1 == "Done")
             {

@@ -54,7 +54,7 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("intercom_no", flat.Intercom_No));
             }
             status1 = st.run_query(data_item, "Select", "sp_flat_master", ref sdr);
-
+            flat.Sql_Result = status1;
             if (status1 == "Done")
             {
                 if (flat.Sql_Operation == "Select")

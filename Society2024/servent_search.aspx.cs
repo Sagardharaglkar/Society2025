@@ -94,7 +94,7 @@ namespace Society
 
 
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (servent_id.Value != "")
                 servent.servent_id = Convert.ToInt32(servent_id.Value);
@@ -121,7 +121,9 @@ namespace Society
             servent.Meal = chk_meal.Checked == true ? 1 : 0;
             if (txt_meal.Text != "")
                 servent.Meal_Charge = float.Parse(txt_meal.Text);
-            bL_Servent.updateServentDetails(servent);
+            var result = bL_Servent.updateServentDetails(servent);
+
+            return result.Sql_Result;
         }
 
         protected void btn_save_Click(object sender, EventArgs e)

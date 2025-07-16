@@ -109,12 +109,18 @@ namespace Society
             GridView1.DataBind();
         }
         protected void btn_save_Click(object sender, EventArgs e)
+
         {
+            string str = runproc_save("Update");
 
-            runproc_save("Update");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
         }
-
         protected void btn_delete_Click(object sender, EventArgs e)
         {
             
@@ -126,7 +132,7 @@ namespace Society
         {
             Response.Redirect("shop_maintenance.aspx");
         }
-        public void runproc_save(String operation)
+        public string runproc_save(String operation)
         {
             if (shop_maint_id.Value != "")
                 maintenance.shop_maint_id = Convert.ToInt32(shop_maint_id.Value.ToString());
@@ -145,7 +151,8 @@ namespace Society
                 maintenance.Cheq_Date = Convert.ToDateTime(txt_chqdate.Text);
             if (txt_upi.Text != "")
                 maintenance.Cheq_No = txt_upi.Text;
-            bL_Shop.updateshopmaintenance(maintenance);
+            var result = bL_Shop.updateshopmaintenance(maintenance);
+            return result.Sql_Result;
 
         }
 

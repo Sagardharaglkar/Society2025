@@ -200,7 +200,7 @@ namespace Society
             //    bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             string type = "Rent";
             if (owner_id.Value != "")
@@ -229,9 +229,12 @@ namespace Society
             owner.Aggrement_Period_To = Convert.ToDateTime(txt_period_to.Text.ToString());
             owner.Police_Verification_Date = Convert.ToDateTime(txt_police_verification.Text.ToString());
             owner.Doc_Id = Convert.ToInt32(doc_id_id.Value);
+           
             var result = bL_Owner.UpdateRentalDetails(owner);
             owner_id.Value = result.owner_id.ToString();
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            
+      
+            return result.Sql_Result;
         }
 
         public void runproc_F_Save(string operation)
@@ -295,14 +298,14 @@ namespace Society
             {
                 runproc_save("Update");
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+
                
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
             }
-
-
         }
 
         protected void btn_photo_upload_Click(object sender, EventArgs e)

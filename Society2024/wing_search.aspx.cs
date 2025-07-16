@@ -103,15 +103,23 @@ namespace Society
         {
             if (Label4.Text == "")
             {
-                runproc_save("Update");
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                string str = runproc_save("Update");
+
+                if (str == "Done")
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+                }
+
             }
-            else
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
+            //else
+               // ClientScript.RegisterStartupScript(this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
 
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (wing_id.Value != "")
                 wing.wing_id = Convert.ToInt32(wing_id.Value);
@@ -119,7 +127,10 @@ namespace Society
             wing.Society_Id = society_id.Value;
             wing.build_id = Convert.ToInt32(ddl_build_name.Value);
             wing.W_Name = txt_w_name.Text;
-            bL_Wing.updateWingDetails(wing);
+            var result = bL_Wing.updateWingDetails(wing);
+
+            return result.Sql_Result;
+
         }
 
         public void runproc(string operation)

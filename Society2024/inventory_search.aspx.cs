@@ -79,7 +79,7 @@ namespace Society
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
-            public void runproc_save(string operation)
+            public string runproc_save(string operation)
         {
             if (inventory_id.Value != "")
                 inventory.inventory_id = Convert.ToInt32(inventory_id.Value.ToString());
@@ -89,7 +89,8 @@ namespace Society
             inventory.Qty = float.Parse(txt_quantity.Text);
             inventory.Slot = Convert.ToInt32(txt_slot.Text.ToString());
             inventory.Charges = float.Parse(txt_charges.Text);
-            bL_Inventory.updateInventoryDetails(inventory);
+            var result = bL_Inventory.updateInventoryDetails(inventory);
+                return result.Sql_Result;
         }
 
         public void runproc(string operation)
@@ -109,17 +110,16 @@ namespace Society
         }
         protected void btn_save_Click(object sender, EventArgs e)
         {
+            string str = runproc_save("Update");
 
-            if (Label7.Text == "")
-            {
-                runproc_save("Update");
+            if (str == "Done")
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
 
             }
+
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)

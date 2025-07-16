@@ -58,7 +58,7 @@ namespace DataAccessLayer.MasterDA
 
             }
             status1 = st.run_query(data_item, "Select" , "sp_servent_maid_master", ref sdr);
-
+            servent.Sql_Result = status1;
             if (status1 == "Done")
             {
                 if (servent.Sql_Operation == "Select")

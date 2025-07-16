@@ -161,7 +161,7 @@ namespace Society
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
 
             if (FileUpload1.HasFiles)
@@ -201,7 +201,8 @@ namespace Society
             visitor.Visiting_Purpose = txt_visiting_purpose.Text;
             visitor.Image = path;
 
-            BL_Visitor.updateVisitorDetails(visitor);
+            var result = BL_Visitor.updateVisitorDetails(visitor);
+            return result.Sql_Result;
         }
 
         public void runproc(string operation)

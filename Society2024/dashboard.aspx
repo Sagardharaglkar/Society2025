@@ -890,8 +890,9 @@
                 .then(response => response.json())
                 .then(data => {
                     try {
+                        console.log(data.d);
                         const parsed = JSON.parse(data.d);
-
+                        console.log(parsed)
                         const months = parsed.map(item => item.expense_month);
                         const expenseData = parsed.map(item => item.expense);
                         const dueData = parsed.map(item => item.Due);

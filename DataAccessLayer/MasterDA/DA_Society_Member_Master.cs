@@ -75,9 +75,10 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("password", member.Password));
                 data_item.Add(st.create_array("active_status", member.Status));
                 data_item.Add(st.create_array("owner_id", member.Owner_id));
+                data_item.Add(st.create_array("type", "Society"));
             }
             status1 = st.run_query(data_item, "Select", "sp_UserLogin", ref sdr);
-
+            member.Sql_Result = status1;
             if (status1 == "Done")
             {
                 if (member.Sql_Operation == "Select")
@@ -101,6 +102,7 @@ namespace DataAccessLayer.MasterDA
                 }
 
             }
+
             return member;
         }
 

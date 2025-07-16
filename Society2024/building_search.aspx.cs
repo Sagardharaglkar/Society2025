@@ -71,7 +71,7 @@ namespace Society
             }
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
 
             if (build_id.Value != "")
@@ -101,8 +101,8 @@ namespace Society
             building.Ifsc_Code = txt_ifsc.Text;
             building.Acc_No = txt_acc_no.Text;
             building.Email = txt_email.Text;
-            bL_Building.updateBuildingDetails(building);
-
+           var result =  bL_Building.updateBuildingDetails(building);
+            return result.Sql_Result;
 
         }
 
@@ -127,6 +127,8 @@ namespace Society
             txt_ifsc.Text = result.Ifsc_Code;
             txt_acc_no.Text = result.Acc_No;
             txt_email.Text = result.Email;
+
+            
         }
 
         protected void btn_save_Click(object sender, EventArgs e)
@@ -134,8 +136,12 @@ namespace Society
             txt_email.Attributes.Add("onkeyup", "validateEmail(this)");
             if (Label13.Text == "")
             {
-                runproc_save("Update");
+                var str = runproc_save("Update");
+                if (str == "Done")
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+                else
+                    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+                    
             }
             else
             {
@@ -225,12 +231,3 @@ namespace Society
 
     }
 }
-
-
-
-
-
-
-
-
-

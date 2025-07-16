@@ -32,10 +32,17 @@ namespace Society2024
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-                runproc_save("Role_Update");
+            var str = runproc_save("Role_Update");
+            if (str == "Done")
              
 
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
+            {
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
+
         }
 
         public void Role_GridBind()
@@ -48,14 +55,16 @@ namespace Society2024
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }
-        public void runproc_save(string operation)
+        public string runproc_save (string operation)
         {
             if (role_id.Value != "")
                 getstaff.role_id = Convert.ToInt32(role_id.Value);
             getstaff.Sql_Operation = operation;
             getstaff.Society_Id = society_id.Value;
             getstaff.role = txt_role.Text;
-            bL_Staff.role_update(getstaff);
+            var result = bL_Staff.role_update(getstaff);
+
+            return result.Sql_Result;
         }
 
         public void runproc(string operation)
