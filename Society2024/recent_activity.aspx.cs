@@ -2,6 +2,7 @@
 using DBCode.DataClass.Master_Dataclass;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -36,7 +37,10 @@ namespace Society
             details.Society_Id = Session["society_id"].ToString();
 
             var dt = BL_Login.get_recent_chart(details);
-
+            maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString();
+            minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString();
+            //maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<int>("received_amt")).ToString();
+            //minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<int>("received_amt")).ToString();
             GridView1.DataSource = dt;
             GridView1.DataBind();
 
@@ -62,6 +66,8 @@ namespace Society
             details.Max_Price = maxPriceHidden.Value;
 
             var result = BL_Login.get_recent_Search(details);
+
+
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();

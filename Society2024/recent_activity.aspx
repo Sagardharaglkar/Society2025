@@ -58,7 +58,8 @@
             margin-top: 4px;
         }
     </style>
-
+    <asp:HiddenField ID="HiddenField1" runat="server" />
+<asp:HiddenField ID="HiddenField2" runat="server" />
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
@@ -227,15 +228,15 @@
         });
 
         // Price Slider
-        let minPrice = 0;
-        let maxPrice = 50000;
+        let minPrice = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value);
+        let maxPrice = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value);
         const priceSlider = document.getElementById("priceSlider");
         const priceDisplay = document.getElementById("priceRangeDisplay");
 
         noUiSlider.create(priceSlider, {
             start: [minPrice, maxPrice],
             connect: true,
-            range: { min: 0, max: 50000 },
+            range: { min: parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value), max: parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) },
             step: 100,
             tooltips: [true, true],
             format: {
@@ -244,15 +245,17 @@
             }
         });
 
-        priceSlider.noUiSlider.on('update', function (values) {
-            minPrice = values[0];
-            maxPrice = values[1];
-            priceDisplay.textContent = `₹${minPrice} – ₹${maxPrice}`;
-            document.getElementById("<%= minPriceHidden.ClientID %>").value = minPrice;
-            document.getElementById("<%= maxPriceHidden.ClientID %>").value = maxPrice;
+        window.addEventListener("load", function () {
+            const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
+            const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
+
+            // Update slider with server values
+            priceSlider.noUiSlider.set([minFromServer, maxFromServer]);
         });
 
-        // Apply Filter Logic
+
+
+        // Apply Filter Logic  z
         function applyFilter() {
             const fromDate = document.getElementById("<%= dateFrom.ClientID %>").value;
             const toDate = document.getElementById("<%= dateTo.ClientID %>").value;
