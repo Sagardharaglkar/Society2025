@@ -684,7 +684,7 @@
 
                             <!-- Admin Dashboard Dropdown -->
                             <asp:Panel runat="server" ID="society">
-                                <li>
+                                <li class="nav-item">
                                     <a class="sidebar-item collapsed" href="#" data-toggle="collapse" data-target="#collapseSociety"
                                         aria-expanded="true" aria-controls="collapseSociety">
                                         <i class="fas fa-fw fa-tachometer-alt"></i>
