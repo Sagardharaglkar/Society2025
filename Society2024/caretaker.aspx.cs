@@ -135,7 +135,7 @@ namespace Society
             GridView1.DataBind();
         }
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
             if (caretaker_id.Value != "")
                 care.Caretaker_Id = Convert.ToInt32(caretaker_id.Value);
@@ -153,7 +153,8 @@ namespace Society
             care.State_Id = Convert.ToInt32(state_id.Value.ToString());
             care.Pincode = txt_pincode.Text;
             //care.Doc_Executed = txt_doc_executed.Text;
-            bL_Caretaker.updateCareTakerDetails(care);
+            var result = bL_Caretaker.updateCareTakerDetails(care);
+            return result.Sql_Result;
         }
 
         public void runproc(string operation)
@@ -184,16 +185,16 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            //if (Label13.Text == "")
-            //{
-                runproc_save("Update");
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            //}
-            //else
-            //{
-            //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+            string str = runproc_save("Update");
 
-            //}
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
+
         }
 
         protected void btn_close_Click(object sender, EventArgs e)

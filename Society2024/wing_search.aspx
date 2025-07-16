@@ -18,7 +18,6 @@
                 height: auto;
                 margin: auto;
                 width: 292px;
-                margin-top: 168px;
                 right: 1px;
             }
         }

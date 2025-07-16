@@ -5,16 +5,30 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type='text/javascript'>
+        function FailedEntry() {
+            Swal.fire({
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                showConfirmButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+
+
+            });
+
+        }
         function openModal() {
             $('#edit').modal('show');
         }
 
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
 
-                return false;
-            }
-        }
 
         function SuccessEntry() {
             Swal.fire({

@@ -129,7 +129,7 @@ namespace Society
             wing.W_Name = txt_w_name.Text;
             var result = bL_Wing.updateWingDetails(wing);
 
-            return result.Sql_Operation;
+            return result.Sql_Result;
 
         }
 

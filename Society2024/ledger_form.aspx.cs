@@ -84,9 +84,17 @@ namespace Society
             GridView1.DataBind();
         }
         protected void btn_save_Click(object sender, EventArgs e)
+
         {
-            runproc_save("Update");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            string str = runproc_save("Update");
+
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)
@@ -105,7 +113,7 @@ namespace Society
             
             Response.Redirect("ledger_form.aspx");
         }
-        public void runproc_save(String operation)
+        public string runproc_save(String operation)
         {
             if (led_id.Value != "")
                GetLedger.led_id = Convert.ToInt32(led_id.Value.ToString());
@@ -113,7 +121,8 @@ namespace Society
             GetLedger.Society_Id = society_id.Value;
             GetLedger.Led_Description = txt_des.Text;
             GetLedger.Led_Status = radiobtn1.Checked == true ? "Active" : "Inactive";
-            bL_Ledger.updateLedgerDetails(GetLedger);
+            var result = bL_Ledger.updateLedgerDetails(GetLedger);
+            return result.Sql_Result;
 
         }
 

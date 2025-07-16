@@ -92,6 +92,7 @@ namespace DataAccessLayer.DA
 
             }
             status1 = st.run_query(data_item, "Select", "sp_pdc_reminder", ref sdr);
+            Reminder.Sql_Result = status1;
 
             if (status1 == "Done")
             {

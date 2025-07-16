@@ -3,8 +3,32 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" rel="stylesheet" />
+    <!-- Flatpickr Date Range Picker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+
    
     <style>
+        .filter-container { position: relative; }
+        #filterSidebar {
+            position: absolute; top: 40px; left: 0; width: 300px;
+            background: #f8f9fa; box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            padding: 20px; border-radius: 4px; display: none; z-index: 10;
+        }
+        #filterSidebar.show { display: block; }
+        .filter-chip {
+            margin: 4px; padding: 4px 6px; font-size: 13px;
+            background: #17a2b8; color: #fff; border-radius: 16px;
+            display: inline-flex; align-items: center;
+        }
+        .filter-chip button {
+            background: none; border: none; color: #fff;
+            margin-left: 6px; cursor: pointer; font-weight: bold;
+        }
+
         .resized-model{
         width: 529px;
     height: auto;
@@ -29,7 +53,7 @@
                 'success'
             )
         }
-        function Fail() {
+        function FailedEntry() {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -60,7 +84,9 @@
                 <br />
 
                 <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
-                <asp:HiddenField ID="HiddenField4" runat="server" />
+                <asp:HiddenField ID="maxPriceHidden" runat="server" />
+                <asp:HiddenField ID="minPriceHidden" runat="server" />
+
                 <asp:HiddenField ID="society_id" runat="server" />
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
@@ -77,17 +103,85 @@
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center">
-                        <div class="search-container">
+                     <!-- Filter Button -->
+<button id="filterButton" type="button" style="margin-right: 8px; border-radius: 12px; border: 1px solid #ccc;">
+    <img style="width: 28px; margin: 5px;" src="img/filter.svg" alt="Filter" />
+</button>
 
-                            <asp:TextBox
-                                ID="txt_search"
+<!-- Filter Sidebar -->
+<div id="filterSidebar">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h6>Filter Options</h6>
+        <button class="btn btn-sm btn-danger" onclick="document.getElementById('filterSidebar').classList.remove('show')">×</button>
+
+    </div>
+
+  <div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            <label>State</label>
+            <asp:DropDownList ID="ddl_state" runat="server" CssClass="form-control" AutoPostBack="false"></asp:DropDownList>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-group">
+            <label>District</label>
+            <asp:DropDownList ID="ddl_district" runat="server" CssClass="form-control" AutoPostBack="false"></asp:DropDownList>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-group">
+            <label>City</label>
+            <asp:DropDownList ID="ddl_division" runat="server" CssClass="form-control" AutoPostBack="false"></asp:DropDownList>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-group">
+            <label>Pin Code</label>
+            <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" placeholder="Enter Pin Code" />
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Pending Amount -->
+<div class="form-group">
+    <label>Pending Amount (₹)</label>
+    <div id="pendingSlider"></div>
+    <div id="pendingRangeDisplay">₹0 – ₹50000</div>
+    <asp:HiddenField ID="minPendingHidden" runat="server" />
+    <asp:HiddenField ID="maxPendingHidden" runat="server" />
+</div>
+      <!-- Date Filter -->
+    <div class="form-group">
+        <label>Date Range</label>
+        <asp:TextBox ID="calendarRange" runat="server" CssClass="form-control" placeholder="Select date range" />
+        <asp:HiddenField ID="dateFrom" runat="server" />
+        <asp:HiddenField ID="dateTo" runat="server" />
+    </div>
+
+
+
+    <!-- Filter Buttons -->
+    <asp:Button ID="btnResetFilters" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm mt-2" OnClientClick="resetFilters(); return false;" />
+    <asp:Button ID="btnApplyFilters" runat="server" Text="Apply Filter" CssClass="btn btn-primary btn-sm mt-2" OnClick="btnApplyFilters_Click" />
+</div>
+
+
+                        <div class="search-container">
+                            
+
+                            <asp:TextBox ID="txt_search" runat="server"
                                 CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>
+                                placeholder="Search here"
+                                onkeypress="return triggerSearchOnEnter(event);" />
+
+
 
                             <!-- Calendar and Search Buttons -->
                             <div class="input-buttons">
@@ -185,17 +279,17 @@
 
                                         <asp:TemplateField HeaderText="Charges Per Month" ItemStyle-Width="150" SortExpression="chargesPerMonth">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label10" runat="server" Text='<%# Bind("chargesPerMonth")%>'></asp:Label>
+                                                <asp:Label ID="lblChargesPerMonth" runat="server" Text='<%# Bind("chargesPerMonth")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Pending Amount" ItemStyle-Width="150" SortExpression="pending_amount">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label10" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
+                                                <asp:Label ID="lblPendingAmount" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Pending Month" ItemStyle-Width="150" SortExpression="month">
                                             <ItemTemplate>
-                                                <asp:Label ID="Label10" runat="server" Text='<%# Bind("month")%>'></asp:Label>
+                                                <asp:Label ID="lblPendingMonth" runat="server" Text='<%# Bind("month")%>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                    </Columns>
@@ -205,11 +299,100 @@
                     </div>
                 </div>
             </ContentTemplate>
-</asp:UpdatePanel>
-                </div>
+
+                </asp:UpdatePanel>
+
+            </div>
             </div>
            
         </div>
-   
 
-</asp:Content>
+  <!-- NoUiSlider CSS & JS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+
+<script type="text/javascript">
+  function initializeFilterUI() {
+    console.log("Initializing filter UI...");
+
+    const btn = document.getElementById("filterButton");
+    const sidebar = document.getElementById("filterSidebar");
+    const closeBtn = sidebar?.querySelector(".btn-danger");
+
+    if (btn && sidebar) {
+      btn.onclick = e => { e.stopPropagation(); sidebar.classList.toggle("show"); };
+      closeBtn?.addEventListener("click", e => { e.stopPropagation(); sidebar.classList.remove("show"); });
+      document.addEventListener("click", e => {
+        if (!sidebar.contains(e.target) && !btn.contains(e.target)) sidebar.classList.remove("show");
+      });
+    }
+
+
+      // Flatpickr
+      flatpickr("#<%= calendarRange.ClientID %>", {
+          mode: "range",
+          dateFormat: "Y-m-d",
+          onChange: function (selectedDates) {
+              if (selectedDates.length === 2) {
+                  document.getElementById("<%= dateFrom.ClientID %>").value = selectedDates[0].toISOString().split("T")[0];
+                    document.getElementById("<%= dateTo.ClientID %>").value = selectedDates[1].toISOString().split("T")[0];
+                }
+            }
+        });
+
+    // Pending slider
+    try {
+      const s2 = document.getElementById("pendingSlider");
+      if (s2 && !s2.noUiSlider) {
+        noUiSlider.create(s2, {
+          start: [0, 50000], connect: true,
+          range: { min: 0, max: 50000 },
+          step: 100, tooltips: true,
+          format: { to: v => Math.round(v), from: v => +v }
+        });
+        s2.noUiSlider.on('update', vals => {
+          document.getElementById("pendingRangeDisplay").textContent = `₹${vals[0]} – ₹${vals[1]}`;
+          document.getElementById("<%= minPendingHidden.ClientID %>").value = vals[0];
+          document.getElementById("<%= maxPendingHidden.ClientID %>").value = vals[1];
+        });
+      }
+    } catch (e) { console.error("Pending slider error:", e); }
+  }
+
+  function resetFilters() {
+    ["<%= txt_pincode.ClientID %>", "<%= drp_state.ClientID %>", "<%= drp_district.ClientID %>", "<%= drp_city.ClientID %>"]
+      .forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if ('selectedIndex' in el) el.selectedIndex = 0;
+          else el.value = '';
+        }
+      });
+
+    const fs = document.getElementById("flatsSlider")?.noUiSlider;
+    fs?.set([0, 500]);
+
+    const ps = document.getElementById("pendingSlider")?.noUiSlider;
+    ps?.set([0, 50000]);
+
+    document.getElementById("filterSidebar")?.classList.remove("show");
+  }
+
+  function triggerSearchOnEnter(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      __doPostBack('<%= btn_search.UniqueID %>', '');
+            return false;
+        }
+        return true;
+    }
+
+    // Initialization after full load or UpdatePanel partial postback
+    if (typeof Sys !== "undefined" && Sys.Application) {
+        Sys.Application.add_load(initializeFilterUI);
+    } else {
+        window.addEventListener("load", initializeFilterUI);
+    }
+</script>
+
+    </asp:Content>

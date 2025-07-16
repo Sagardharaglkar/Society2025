@@ -78,6 +78,7 @@ namespace DataAccessLayer.DA
 
             }
             status1 = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
+            Receipt.Sql_Result = status1;
 
             if (status1 == "Done")
             {
