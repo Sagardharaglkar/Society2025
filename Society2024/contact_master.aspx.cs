@@ -77,7 +77,7 @@ namespace Society
         //}
 
 
-        public void runproc_save(string operation)
+        public string runproc_save(string operation)
         {
 
             if (usefull_contact_id.Value != "")
@@ -92,8 +92,8 @@ namespace Society
             contact.Contact_No = txt_org_tel.Text;
             contact.Email = txt_email.Text;
             contact.Remark = txt_remark.Text;
-            bL_Contact.update_Usefull_Contact_Details(contact);
-
+            var result = bL_Contact.update_Usefull_Contact_Details(contact);
+            return result.Sql_Result;
         }
 
 

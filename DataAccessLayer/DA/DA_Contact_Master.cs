@@ -56,8 +56,9 @@ namespace DataAccessLayer.DA
 
             }
             status1 = st.run_query(data_item, "Select", "sp_usefull_contact", ref sdr);
+            contact.Sql_Result = status1;
 
-            if (status1 == "Done")
+            if (status1 == "Done") 
             {
                 if (contact.Sql_Operation == "Select")
                 {
