@@ -37,8 +37,12 @@ namespace Society
             details.Society_Id = Session["society_id"].ToString();
 
             var dt = BL_Login.get_recent_chart(details);
-            maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString();
-            minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString();
+            if (dt.Rows.Count > 0)
+            {
+                maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString() == null ? "0": dt.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString();
+                minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString() == null ? "0": dt.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString();
+
+            }
             //maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<int>("received_amt")).ToString();
             //minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<int>("received_amt")).ToString();
             GridView1.DataSource = dt;
@@ -76,16 +80,10 @@ namespace Society
 
         protected void btnApplyFilters_Click(object sender, EventArgs e)
         {
-            // Filter values from HiddenFields
+       
+             gridBind();
 
 
-            gridBind();
-
-
-            // Apply filters to your data source and bind to GridView
-            //BindGridWithFilters(fromDate, toDate, type, minPrice, maxPrice);
-
-            // Generate filter chips HTML
             string chipsHtml = "";
 
             if (!string.IsNullOrEmpty(details.From_date) || !string.IsNullOrEmpty(details.To_date))

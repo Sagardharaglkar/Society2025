@@ -1,4 +1,7 @@
-﻿using BusinessLogic.MasterBL;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +11,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utility.DataClass;
+using static System.Windows.Forms.AxHost;
 
 namespace Society2024
 {
@@ -15,7 +19,9 @@ namespace Society2024
     {
         BL_User_Login BL_Login = new BL_User_Login();
         Login_Details details = new Login_Details();
-       
+
+        BL_FillRepeater repeater = new BL_FillRepeater();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
@@ -26,14 +32,51 @@ namespace Society2024
 
             if (!IsPostBack)
             {
+                minPriceHidden.Value = "0";
+                maxPriceHidden.Value = "50000";
                 //defaulter_Click(sender, e);
                 filldrop();
-                fill_drop1();
                 //date_before.Text = DateTime.Now.ToShortDateString();
                 btn_search_Click(sender, e);
+                string str = "select * from state";
+                repeater.fill_list(Repeater1, str);
             }
         }
 
+        protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                state.Value = e.CommandArgument.ToString();
+
+                if (!(state.Value == ""))
+                {
+                    string sql1 = "Select *  from district where state_id = " + state.Value;
+                    repeater.fill_list(Repeater2, sql1);
+                }
+            }
+
+        }
+
+        protected void CategoryRepeater_ItemCommand2(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                dist.Value = e.CommandArgument.ToString();
+                string sql1 = "Select distinct city from society_master where city is not null and district_id = " + dist.Value;
+                repeater.fill_list(Repeater3, sql1);
+            }
+
+        }
+        protected void CategoryRepeater_ItemCommand3(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                city.Value = e.CommandArgument.ToString();
+
+            }
+
+        }
         public void filldrop()
         {
             String sql_query = "Select *  from society_master";
@@ -50,18 +93,6 @@ namespace Society2024
             BL_Login.fill_drop(drp_division, sql_query4, "division", "division_id");
 
         }
-
-        public void fill_drop1()
-        {
-            String sql_query = "Select *  from state";
-            BL_Login.fill_drop(ddl_state, sql_query, "state", "state_id");
-            String sql_query1 = "Select *  from district";
-            BL_Login.fill_drop(ddl_district, sql_query1, "district", "district_id");
-            String sql_query2 = "Select *  from division";
-            BL_Login.fill_drop(ddl_division, sql_query2, "division", "division_id");
-
-        }
-
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
@@ -93,7 +124,7 @@ namespace Society2024
             //    }
 
             //    sb.Append(")"); // Closing parenthesis for grouped OR conditions
-                
+
             //}
 
             //details.Sql_Operation = sb.ToString();
@@ -128,53 +159,6 @@ namespace Society2024
         {
 
         }
-        protected void btnApplyFilters_Click1(object sender, EventArgs e)
-        {
-            // Get filter values from the controls
-           
-        }
-
-        private void ApplyFilters(string state, string district, string city, string pincode, decimal minPending, decimal maxPending)
-        {
-            // Example: Filtering logic (replace with your actual data access logic)
-
-            DataTable dt = (DataTable)ViewState["dirState"];
-            var query = dt.AsEnumerable();
-
-            if (!string.IsNullOrEmpty(state))
-            {
-                query = query.Where(x => x.Field<string>("State") == state);
-            }
-            if (!string.IsNullOrEmpty(district))
-            {
-                query = query.Where(x => x.Field<string>("District") == district);
-            }
-            if (!string.IsNullOrEmpty(city))
-            {
-                query = query.Where(x => x.Field<string>("City") == city);
-            }
-            if (!string.IsNullOrEmpty(pincode))
-            {
-                query = query.Where(x => x.Field<string>("Pincode") == pincode);
-            }
-
-            if (minPending > 0)
-            {
-                query = query.Where(x => x.Field<decimal>("PendingAmount") >= minPending);
-            }
-            if (maxPending < 100000)
-            {
-                query = query.Where(x => x.Field<decimal>("PendingAmount") <= maxPending);
-            }
-
-            // Convert the filtered rows back to a DataTable
-            DataTable filtered = query.CopyToDataTable();
-
-            // Bind to GridView
-            GridView1.DataSource = filtered;
-            GridView1.DataBind();
-        }
-
 
         protected void btn_filter_Click(object sender, EventArgs e)
         {
@@ -183,21 +167,37 @@ namespace Society2024
 
         protected void btnApplyFilters_Click(object sender, EventArgs e)
         {
-            string state = drp_state.SelectedValue;
-            string district = drp_district.SelectedValue;
-            string city = drp_city.SelectedValue;
-            string pincode = txt_pincode.Text;
- 
 
-            decimal minpending = Convert.ToDecimal(minPendingHidden.Value);
-            decimal maxpending = Convert.ToDecimal(maxPendingHidden.Value);
+            details.From_date = dateFrom.Value;
+            details.To_date = dateTo.Value;
+            details.Recent_Type = activityType.SelectedValue;
+            details.Min_Price = minPriceHidden.Value;
+            details.Max_Price = maxPriceHidden.Value;
 
-            // Optional: Add price if needed
-            int minprice = Convert.ToInt32(minPriceHidden.Value);
-            int maxprice = Convert.ToInt32(maxPriceHidden.Value);
 
-            // Apply filters using all collected values
-            ApplyFilters(state, district, city, pincode,  minpending, maxpending /*, minprice, maxprice if needed */);
+            string chipsHtml = "";
+
+            if (!string.IsNullOrEmpty(details.From_date) || !string.IsNullOrEmpty(details.To_date))
+            {
+                chipsHtml += $"<span class='filter-chip' id='chip-date'>📅 {details.From_date} – {details.To_date} <button onclick=\"removeFilter('date')\">×</button></span>";
+            }
+
+            if (!string.IsNullOrEmpty(details.Recent_Type))
+            {
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Type: {details.Recent_Type} <button onclick=\"removeFilter('type')\">×</button></span>";
+            }
+
+            if (!string.IsNullOrEmpty(details.Min_Price) || !string.IsNullOrEmpty(details.Max_Price))
+            {
+                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{details.Min_Price} – ₹{details.Max_Price} <button onclick=\"removeFilter('price')\">×</button></span>";
+            }
+
+            // Assign HTML to filterChips div
+            filterChips.InnerHtml = chipsHtml;
+
+            // Close the filter sidebar after applying filters
+            ScriptManager.RegisterStartupScript(this, GetType(), "hideSidebar", "document.getElementById('filterSidebar').classList.remove('show');", true);
+
         }
     }
-    }   
+}
