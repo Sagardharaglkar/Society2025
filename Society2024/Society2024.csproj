@@ -247,6 +247,7 @@
     <Content Include="print_house_owner.aspx" />
     <Content Include="print_house_tax_receipt.aspx" />
     <Content Include="recent_activity.aspx" />
+    <Content Include="society_receipt.aspx" />
     <Content Include="square_feet_rate.aspx" />
     <Content Include="support_ticket.aspx" />
     <Content Include="About.aspx" />
@@ -2241,6 +2242,13 @@
     </Compile>
     <Compile Include="recent_activity.aspx.designer.cs">
       <DependentUpon>recent_activity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="society_receipt.aspx.cs">
+      <DependentUpon>society_receipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="society_receipt.aspx.designer.cs">
+      <DependentUpon>society_receipt.aspx</DependentUpon>
     </Compile>
     <Compile Include="square_feet_rate.aspx.cs">
       <DependentUpon>square_feet_rate.aspx</DependentUpon>

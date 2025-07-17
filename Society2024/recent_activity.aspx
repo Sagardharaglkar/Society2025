@@ -128,7 +128,7 @@
                         <div class="form-group">
                             <label>Activity Type</label>
                             <asp:DropDownList ID="activityType" runat="server" CssClass="form-control" AutoPostBack="false">
-                                <asp:ListItem Text="All" Value="" />
+                                <asp:ListItem Text="All" Value="0" />
                                 <asp:ListItem Text="Maintenance" Value="Maintenance" />
                                 <asp:ListItem Text="Payment" Value="Payment" />
                             </asp:DropDownList>
