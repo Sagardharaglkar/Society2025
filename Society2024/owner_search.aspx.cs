@@ -312,8 +312,8 @@ namespace Society
                 uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
 
             }
-            
 
+        }
 
         protected void btnotice_id_upload_Click(object sender, EventArgs e)
         {
