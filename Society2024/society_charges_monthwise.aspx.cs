@@ -1,5 +1,7 @@
-﻿using BusinessLogic.MasterBL;
+﻿using BusinessLogic.BL;
+using BusinessLogic.MasterBL;
 using DBCode.DataClass;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +16,7 @@ namespace Society
 {
     public partial class society_charges_monthwise : System.Web.UI.Page
     {
+        BL_FillRepeater repeater = new BL_FillRepeater();
         maintenance_cal Maintenance1 = new maintenance_cal();
         BL_Maintenance_Master bL_Maintenance = new BL_Maintenance_Master();
         protected void Page_Load(object sender, EventArgs e)
@@ -21,12 +24,13 @@ namespace Society
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }else
-                society_id.Value = Session["society_id"].ToString();
+            }
 
             if (!IsPostBack)
             {               
                 monthwise_charges_Gridbind();
+                String str = "Select *  from society_master";
+                repeater.fill_list(categoryRepeater, str);
             }
 
         }
@@ -43,7 +47,6 @@ namespace Society
         {
             DataTable dt = new DataTable();
             Maintenance1.Sql_Operation = "Charges_Show";
-            Maintenance1.Society_Id = society_id.Value;
             dt = bL_Maintenance.get_monthwise_charges(Maintenance1);
             GridView1.DataSource = dt;
             ViewState["dirState"] = dt;
@@ -78,7 +81,7 @@ namespace Society
             Maintenance1.Society_Id = society_id.Value;
            
             Maintenance1.Pending_Amount = (Convert.ToDecimal(txt_pen_amt.Text) + Convert.ToDecimal(txt_amt.Text))-Convert.ToDecimal(txt_total.Text);
-            Maintenance1.Total_Amount = Convert.ToDecimal(txt_total.Text);
+            Maintenance1.Amount = Convert.ToDecimal(txt_amt.Text);
             bL_Maintenance.update_monthwise_charges_details(Maintenance1);
          
         }
@@ -95,6 +98,27 @@ namespace Society
             txt_total.Text = result.Total_Amount.ToString();
 
 
+        }
+        protected void categoryRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (society_id.Value != "")
+                {
+                    var link = (LinkButton)e.Item.FindControl("lnkCategory");
+                    if (link.CommandArgument == society_id.Value)
+                        categoryBox.Text = link.Text;
+                    //remaining_due();
+                }
+            }
+        }
+        protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectCategory")
+            {
+                society_id.Value = e.CommandArgument.ToString();
+                remaining_due();
+            }
         }
 
         public void remaining_due()
@@ -176,7 +200,7 @@ namespace Society
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
-            remaining_due();
+            //remaining_due();
            
         }
     }

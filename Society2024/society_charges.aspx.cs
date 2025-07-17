@@ -17,6 +17,7 @@ using DBCode.DataClass.Master_Dataclass;
 using System.Windows.Forms;
 using DBCode.DataClass;
 using BusinessLogic.BL;
+using System.Reflection.Emit;
 //using System.IdentityModel.Metadata;
 
 namespace Society
@@ -26,8 +27,8 @@ namespace Society
         BL_FillRepeater repeater = new BL_FillRepeater();
         private BL_Society_Master bL_society = new BL_Society_Master();
         private Search_Society society = new Search_Society();
-       
         
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
@@ -47,12 +48,19 @@ namespace Society
         protected void CategoryRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SelectCategory")
-            {
+            { 
                 society_name_id.Value = e.CommandArgument.ToString();
+                society.Sql_Operation = "TotalFlats";
+                society.Society_Id = society_name_id.Value;
+                txt_flat.Text = bL_society.getFlats(society).ToString();
+                society.Society_Id = society_name_id.Value;
+                society.Sql_Operation = "society_exist";
 
+                var result = bL_society.check_society(society);
+                Label2.Text = result.Sql_Result;
             }
         }
-
+        
         public void Society_charges_GridBind()
         {
           
@@ -176,7 +184,7 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            if (Label4.Text == "")
+            if (Label2.Text == "")
             {
                 runproc_save("Update");
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);

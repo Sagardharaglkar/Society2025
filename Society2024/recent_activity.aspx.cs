@@ -26,30 +26,11 @@ namespace Society
 
             if (!IsPostBack)
             {
-                GetDataForRecent();
+                gridBind();
             }
         }
 
-            public void GetDataForRecent()
-        {
-
-            details.Sql_Operation = "RecentActivity";
-            details.Society_Id = Session["society_id"].ToString();
-
-            var dt = BL_Login.get_recent_chart(details);
-            if (dt.Rows.Count > 0)
-            {
-                maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString() == null ? "0": dt.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString();
-                minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString() == null ? "0": dt.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString();
-
-            }
-            //maxPriceHidden.Value = dt.AsEnumerable().Max(row => row.Field<int>("received_amt")).ToString();
-            //minPriceHidden.Value = dt.AsEnumerable().Min(row => row.Field<int>("received_amt")).ToString();
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-
-        }
-
+          
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
@@ -60,14 +41,54 @@ namespace Society
 
         protected void gridBind()
         {
-            details.Sql_Operation = "search";
-            details.society_id = Session["society_id"].ToString(); ;
-            details.Name = txt_search.Text;
-            details.From_date = dateFrom.Value;
-            details.To_date = dateTo.Value;
-            details.Recent_Type = activityType.SelectedValue;
-            details.Min_Price = minPriceHidden.Value;
-            details.Max_Price = maxPriceHidden.Value;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            int count = 1;
+                          sb.Append("Select *  from recent_activity_vw where society_id='" + Session["Society_id"].ToString() + "'");
+
+
+            if (txt_search.Text != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" or ");
+                }
+               
+                sb.Append(" particular like '" + txt_search.Text + "%'or cast (received_amt as varchar) like '" + txt_search.Text + 
+                    "%'or type like '" + txt_search.Text+ "%'or cast (m_date as varchar) like '" + txt_search.Text + "%'");
+                count++;
+            }
+           if (activityType.SelectedItem.Text != "All")
+                    {
+                        if (count > 0)
+                        {
+                            sb.Append(" AND ");
+                        }
+                        sb.Append(" type = '" + activityType.SelectedItem.Text + "'");
+                        count++;
+                    }
+
+                    if (dateFrom.Value != "" && dateTo.Value != "")
+                    {
+                        if (count > 0)
+                        {
+                            sb.Append(" AND ");
+                        }
+                        sb.Append(" m_date between  '" + dateFrom.Value + "' and '" + dateTo.Value + "'");
+                        count++;
+            }
+            if (minPriceHidden.Value != "" && maxPriceHidden.Value != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" received_amt between  '" + minPriceHidden.Value + "' and '" + maxPriceHidden.Value + "'");
+                count++;
+            }
+            sb.Append("order by date desc");
+                details.Sql_Operation = "RecentActivity";
+            details.Name = sb.ToString();
+            
 
             var result = BL_Login.get_recent_Search(details);
 

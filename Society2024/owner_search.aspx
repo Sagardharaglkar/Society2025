@@ -61,7 +61,9 @@
         }
 
         function openModal() {
+            console.log("modal opening");
             $('#edit_model').modal('show');
+ 
         }
 
         $('#edit_model').on('hidden.bs.modal', function () {
@@ -124,16 +126,7 @@
                 </table>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:HiddenField ID="owner_id" runat="server" />
-                        <asp:HiddenField ID="o_ex_id" runat="server"></asp:HiddenField>
-                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="flat_id" runat="server" />
-
-                        <asp:HiddenField ID="flat_no_id" runat="server" />
-                        <asp:HiddenField ID="Buildling_wing_id" runat="server" />
-                        <asp:HiddenField ID="type_id" runat="server" />
-                        <asp:HiddenField ID="married_id" runat="server" />
-                        <asp:HiddenField ID="doc_id_id" runat="server" />
+                       
 
 <%--                        <div class="form-group">
                             <div class="row ">
@@ -270,8 +263,18 @@
                             </div>
 
                             <div class="modal-body" id="invoice_data">
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                <asp:UpdatePanel ID="modalpanel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                         <asp:HiddenField ID="owner_id" runat="server" />
+                        <asp:HiddenField ID="o_ex_id" runat="server"></asp:HiddenField>
+                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                        <asp:HiddenField ID="flat_id" runat="server" />
+
+                        <asp:HiddenField ID="flat_no_id" runat="server" />
+                        <asp:HiddenField ID="Buildling_wing_id" runat="server" />
+                        <asp:HiddenField ID="type_id" runat="server" />
+                        <asp:HiddenField ID="married_id" runat="server" />
+                        <asp:HiddenField ID="doc_id_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-3">
@@ -722,9 +725,14 @@
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="OwnerGrid" EventName="RowCommand" />
+                                        <%--<asp:AsyncPostBackTrigger ControlID="btn_photo_upload" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="btnotice_id_upload" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="add" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="OwnerGrid" EventName="RowCommand" />--%>
+
                                     </Triggers>
                                     <Triggers>
-                                        <asp:PostBackTrigger ControlID="btn_photo_upload" />
+                                        <asp:PostBackTrigger ControlID="btn_photo_upload"  />
                                         <asp:PostBackTrigger ControlID="btnotice_id_upload" />
                                         <asp:PostBackTrigger ControlID="add" />
                                     </Triggers>

@@ -326,7 +326,9 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat="server" Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" TextMode="Phone"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat= "server"    56
+                                                        
+                                                        Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" TextMode="Phone"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Contact No
                                                     </div>
@@ -373,10 +375,7 @@
         </div>
     </div>
 
-
-
-
-
+                               
 
     <script>
 
@@ -392,11 +391,9 @@
         const input = textBox1.value.toLowerCase();
         filterSuggestions("category-link", input);
     });
-}
- 
- 
- 
- 
+        }
+
+        81jiop
 function filterSuggestions(className, value) {
     const items = document.querySelectorAll("." + className);
     let matchFound = false;
@@ -414,7 +411,7 @@ function filterSuggestions(className, value) {
  
     if (!matchFound) {
         if (!noMatchMessage) {
-            noMatchMessage = document.createElement("div");
+            noMatchMessage = document.createElement("div");op
             noMatchMessage.id = "no-match-message";
  
             noMatchMessage.innerText = "No matching suggestions.";
@@ -432,10 +429,11 @@ function setTextBox1(value) {
     document.getElementById("<%= TextBox1.ClientID %>").value = value;0
             document.getElementById("RepeaterContainer1").style.display = "none";
         }
-
+op
 
         Sys.Application.add_load(initDropdownEvents);
 
 
 </script>
 </asp:Content>
+opopopopopopopopopopopopopopdfl;

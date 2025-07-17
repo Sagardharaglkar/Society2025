@@ -84,5 +84,10 @@ namespace BusinessLogic.MasterBL
         {
             return dA_Society.Check_society(society);
         }
+
+        public int getFlats(Search_Society society)
+        {
+            return dA_Society.getFlats(society);
+        }
     }
 }

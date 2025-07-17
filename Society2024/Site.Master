@@ -89,7 +89,7 @@
             margin: 16px 0;
         }
 
-        /* Section Headings */
+        /* Section Headings */  
         .sidebar-heading {
             font-size: 12px;
             font-weight: 600;
@@ -198,8 +198,7 @@
 
             .hover-underline::before {
                 top: -4px;
-                left: 0;
-                transform-origin: left;
+                left: 0;                transform-origin: left;
             }
 
             .hover-underline:hover::after,
@@ -932,7 +931,7 @@
 
                     matchedPanelId = panel.id;
                 }
-            });
+            }); 
         });
 
         // Restore from localStorage if no match found

@@ -246,6 +246,7 @@ namespace Society
 
             btn_add.Visible = false;
             getapprovallist();
+            //ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
         
@@ -644,7 +645,10 @@ namespace Society
 
         }
 
-       
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
+        }
     }
 }
 

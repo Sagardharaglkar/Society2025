@@ -124,15 +124,15 @@
                                 <asp:HiddenField ID="dateTo" runat="server" />
                             </div>
 
-                            <!-- Activity Type -->
-                            <div class="form-group">
-                                <label>Activity Type</label>
-                                <asp:DropDownList ID="activityType" runat="server" CssClass="form-control" AutoPostBack="false">
-                                    <asp:ListItem Text="All" Value="" />
-                                    <asp:ListItem Text="Maintenance" Value="Maintenance" />
-                                    <asp:ListItem Text="Payment" Value="Payment" />
-                                </asp:DropDownList>
-                            </div>
+                        <!-- Activity Type -->
+                        <div class="form-group">
+                            <label>Activity Type</label>
+                            <asp:DropDownList ID="activityType" runat="server" CssClass="form-control" AutoPostBack="false">
+                                <asp:ListItem Text="All" Value="0" />
+                                <asp:ListItem Text="Maintenance" Value="Maintenance" />
+                                <asp:ListItem Text="Payment" Value="Payment" />
+                            </asp:DropDownList>
+                        </div>
 
                             <!-- Price Range -->
                             <div class="form-group">

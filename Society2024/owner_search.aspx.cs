@@ -313,7 +313,6 @@ namespace Society
 
             }
 
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
         }
 
         protected void btnotice_id_upload_Click(object sender, EventArgs e)
@@ -335,10 +334,8 @@ namespace Society
                 uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (doc_id_id.Value.ToString()) + "\\" + FileUpload2.FileName);
 
             }
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
 
-
-
+            ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "openModal();", true);
 
         }
 

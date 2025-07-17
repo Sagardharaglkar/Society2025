@@ -149,8 +149,8 @@ namespace DataAccessLayer.MasterDA
             {
                 data_item.Add(st.create_array("society_id", Maintenance1.Society_Id));
                 
-                data_item.Add(st.create_array("pending_amount", Maintenance1.Pending_Amount));
-                data_item.Add(st.create_array("amount", Maintenance1.Total_Amount));
+                
+                data_item.Add(st.create_array("amount", Maintenance1.Amount));
             }
             status1 = st.run_query(data_item, "Select", "sp_Society_Charges_monthwise", ref sdr);
             if (status1 == "Done")
@@ -161,7 +161,7 @@ namespace DataAccessLayer.MasterDA
                     {
                         Maintenance1.mon_charge_id = Convert.ToInt32(sdr["mon_charge_id"].ToString());
                         Maintenance1.Amount = Convert.ToDecimal(sdr["amount"].ToString());
-                        Maintenance1.Pending_Amount = Convert.ToDecimal(sdr["pending_amount"].ToString());
+
                         Maintenance1.Date = Convert.ToDateTime(sdr["date"].ToString());
                     }
                 }
