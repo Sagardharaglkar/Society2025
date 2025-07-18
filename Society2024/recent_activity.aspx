@@ -141,6 +141,9 @@
                                 <div id="priceRangeDisplay">₹0 – ₹5000</div>
                                 <asp:HiddenField ID="minPriceHidden" runat="server" />
                                 <asp:HiddenField ID="maxPriceHidden" runat="server" />
+                                <asp:HiddenField ID="selectedMinPriceHidden" runat="server" />
+                                <asp:HiddenField ID="selectedMaxPriceHidden" runat="server" />
+
                             </div>
 
                             <asp:Button ID="btnResetFilters" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm mt-2" OnClientClick="resetFilters(); return false;" />
@@ -218,24 +221,28 @@
             // Flatpickr
             flatpickr("#<%= calendarRange.ClientID %>", {
                 mode: "range",
-                dateFormat: "Y-m-d",
+                dateFormat: "Y-m-d", // Keep format as YYYY-MM-DD
                 onChange: function (selectedDates) {
                     if (selectedDates.length === 2) {
-                        document.getElementById("<%= dateFrom.ClientID %>").value = selectedDates[0].toISOString().split("T")[0];
-                        document.getElementById("<%= dateTo.ClientID %>").value = selectedDates[1].toISOString().split("T")[0];
-                    }
-                }
-            });
+                        const fromDate = selectedDates[0].toLocaleDateString('en-CA'); // YYYY-MM-DD
+                        const toDate = selectedDates[1].toLocaleDateString('en-CA');   // YYYY-MM-DD
 
-            // Price Slider
+                        document.getElementById("<%= dateFrom.ClientID %>").value = fromDate;
+            document.getElementById("<%= dateTo.ClientID %>").value = toDate;
+        }
+    }
+});
+
+
             window.addEventListener("load", function () {
                 const priceSlider = document.getElementById("priceSlider");
-                const priceDisplay = document.getElementById("priceRangeDisplay");
 
                 const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
                 const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
 
-                // Safety check
+                const selectedMinHidden = document.getElementById("<%= selectedMinPriceHidden.ClientID %>");
+                const selectedMaxHidden = document.getElementById("<%= selectedMaxPriceHidden.ClientID %>");
+
                 if (!priceSlider) {
                     console.error("priceSlider element not found!");
                     return;
@@ -253,11 +260,12 @@
                     }
                 });
 
-                // Optionally set values again if needed (but usually not required after create)
-                priceSlider.noUiSlider.set([minFromServer, maxFromServer]);
+                // Set selected values to hidden fields on slider change
+                priceSlider.noUiSlider.on('update', function (values, handle) {
+                    selectedMinHidden.value = Math.round(values[0]);
+                    selectedMaxHidden.value = Math.round(values[1]);
+                });
             });
-
-
 
 
             // Apply Filter Logic  z
@@ -283,12 +291,15 @@
             }
 
             function resetFilters() {
+                const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
+                const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
+
                 document.getElementById("<%= dateFrom.ClientID %>").value = '';
                 document.getElementById("<%= dateTo.ClientID %>").value = '';
                 document.getElementById("<%= calendarRange.ClientID %>").value = '';
-                document.getElementById("<%= activityType.ClientID %>").value = '';
+                document.getElementById("<%= activityType.ClientID %>").value = 'All';
                 document.getElementById("filterChips").innerHTML = '';
-                priceSlider.noUiSlider.set([0, 5000]);
+                priceSlider.noUiSlider.set([minFromServer, maxFromServer]);
             }
 
             function removeFilter(type) {
@@ -302,8 +313,8 @@
                 }
                 if (type === 'price') {
                     priceSlider.noUiSlider.set([0, 5000]);
-                    document.getElementById("<%= minPriceHidden.ClientID %>").value = '';
-            document.getElementById("<%= maxPriceHidden.ClientID %>").value = '';
+                    document.getElementById("<%= selectedMaxPriceHidden.ClientID %>").value = '';
+                    document.getElementById("<%= selectedMinPriceHidden.ClientID %>").value = '';
                 }
 
                 // Trigger the same Apply Filters button click via JavaScript

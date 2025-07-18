@@ -294,7 +294,8 @@ namespace Society
 
         protected void btn_photo_upload_Click(object sender, EventArgs e)
         {
-
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('hide');", true);
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
             string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/";
 
 
@@ -312,13 +313,15 @@ namespace Society
                 uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
 
             }
+  
 
         }
 
         protected void btnotice_id_upload_Click(object sender, EventArgs e)
         {
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('hide');", true);
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
             string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/";
-
             System.IO.Directory.CreateDirectory(createfolder);
 
             if (FileUpload2.HasFiles)
@@ -335,7 +338,6 @@ namespace Society
 
             }
 
-            ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "openModal();", true);
 
         }
 

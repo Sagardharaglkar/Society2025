@@ -30,7 +30,7 @@ namespace Society
             }
         }
 
-          
+
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
@@ -43,7 +43,7 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             int count = 1;
-                          sb.Append("Select *  from recent_activity_vw where society_id='" + Session["Society_id"].ToString() + "'");
+            sb.Append("Select *  from recent_activity_vw where society_id='" + Session["Society_id"].ToString() + "'");
 
 
             if (txt_search.Text != "")
@@ -52,46 +52,51 @@ namespace Society
                 {
                     sb.Append(" or ");
                 }
-               
-                sb.Append(" particular like '" + txt_search.Text + "%'or cast (received_amt as varchar) like '" + txt_search.Text + 
-                    "%'or type like '" + txt_search.Text+ "%'or cast (m_date as varchar) like '" + txt_search.Text + "%'");
+
+                sb.Append(" particular like '" + txt_search.Text + "%'or cast (received_amt as varchar) like '" + txt_search.Text +
+                    "%'or type like '" + txt_search.Text + "%'or cast (m_date as varchar) like '" + txt_search.Text + "%'");
                 count++;
             }
-           if (activityType.SelectedItem.Text != "All")
-                    {
-                        if (count > 0)
-                        {
-                            sb.Append(" AND ");
-                        }
-                        sb.Append(" type = '" + activityType.SelectedItem.Text + "'");
-                        count++;
-                    }
-
-                    if (dateFrom.Value != "" && dateTo.Value != "")
-                    {
-                        if (count > 0)
-                        {
-                            sb.Append(" AND ");
-                        }
-                        sb.Append(" m_date between  '" + dateFrom.Value + "' and '" + dateTo.Value + "'");
-                        count++;
-            }
-            if (minPriceHidden.Value != "" && maxPriceHidden.Value != "")
+            if (activityType.SelectedItem.Text != "All")
             {
                 if (count > 0)
                 {
                     sb.Append(" AND ");
                 }
-                sb.Append(" received_amt between  '" + minPriceHidden.Value + "' and '" + maxPriceHidden.Value + "'");
+                sb.Append(" type = '" + activityType.SelectedItem.Text + "'");
+                count++;
+            }
+
+            if (dateFrom.Value != "" && dateTo.Value != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" m_date between cast(  '" + dateFrom.Value + "' as date) and cast('" + dateTo.Value + "' as date)");
+                count++;
+            }
+            if (selectedMinPriceHidden.Value != "" && selectedMaxPriceHidden.Value != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" received_amt between cast( '" + selectedMinPriceHidden.Value + "' as decimal) and cast ('" + selectedMaxPriceHidden.Value + "' as decimal)");
                 count++;
             }
             sb.Append("order by date desc");
-                details.Sql_Operation = "RecentActivity";
+            details.Sql_Operation = "RecentActivity";
             details.Name = sb.ToString();
-            
+
 
             var result = BL_Login.get_recent_Search(details);
+            if (result.Rows.Count > 0)
+            {
+                maxPriceHidden.Value = result.AsEnumerable().Max(row => row.Field<decimal>("received_amt")).ToString();
+                minPriceHidden.Value = result.AsEnumerable().Min(row => row.Field<decimal>("received_amt")).ToString();
 
+            }
 
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
@@ -101,25 +106,25 @@ namespace Society
 
         protected void btnApplyFilters_Click(object sender, EventArgs e)
         {
-       
-             gridBind();
+
+            gridBind();
 
 
             string chipsHtml = "";
 
-            if (!string.IsNullOrEmpty(details.From_date) || !string.IsNullOrEmpty(details.To_date))
+            if (!string.IsNullOrEmpty(dateFrom.Value) || !string.IsNullOrEmpty(dateTo.Value))
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-date'>📅 {details.From_date} – {details.To_date} <button onclick=\"removeFilter('date')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-date'>📅 {dateFrom.Value} – {dateTo.Value} <button onclick=\"removeFilter('date')\">×</button></span>";
             }
 
-            if (!string.IsNullOrEmpty(details.Recent_Type))
+            if (activityType.SelectedItem.Text != "All")
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Type: {details.Recent_Type} <button onclick=\"removeFilter('type')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Type: {activityType.SelectedItem.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
             }
 
-            if (!string.IsNullOrEmpty(details.Min_Price) || !string.IsNullOrEmpty(details.Max_Price))
+            if (!string.IsNullOrEmpty(selectedMinPriceHidden.Value) || !string.IsNullOrEmpty(selectedMaxPriceHidden.Value))
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{details.Min_Price} – ₹{details.Max_Price   } <button onclick=\"removeFilter('price')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{selectedMinPriceHidden.Value} – ₹{selectedMaxPriceHidden.Value} <button onclick=\"removeFilter('price')\">×</button></span>";
             }
 
             // Assign HTML to filterChips div
@@ -131,4 +136,4 @@ namespace Society
         }
 
     }
-}                          
+}

@@ -105,6 +105,24 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField maxPriceHidden;
 
         /// <summary>
+        /// selectedMinPriceHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField selectedMinPriceHidden;
+
+        /// <summary>
+        /// selectedMaxPriceHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField selectedMaxPriceHidden;
+
+        /// <summary>
         /// btnResetFilters control.
         /// </summary>
         /// <remarks>

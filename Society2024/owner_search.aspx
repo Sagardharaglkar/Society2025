@@ -544,7 +544,7 @@
                                                 </div>
 
                                                 <div class="col-sm-2">
-                                                    <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
+                                                    <asp:Button ID="btnotice_id_upload" data-dismiss="modal" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
                                                     <div class="overflow-div">
                                                         <asp:Label ID="listofuploadedfiles1" runat="server" />
                                                     </div>
@@ -563,7 +563,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
-                                                    <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
+                                                    <asp:Button data-dismiss="modal" ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
                                                     <div class="overflow-div">
                                                         <asp:Label ID="listofuploadedfiles" runat="server" />
                                                     </div>
