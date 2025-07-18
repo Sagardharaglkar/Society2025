@@ -32,8 +32,6 @@ namespace Society2024
 
             if (!IsPostBack)
             {
-                minPriceHidden.Value = "0";
-                maxPriceHidden.Value = "50000";
                 //defaulter_Click(sender, e);
                 filldrop();
                 //date_before.Text = DateTime.Now.ToShortDateString();
@@ -95,14 +93,7 @@ namespace Society2024
         }
         protected void btn_search_Click(object sender, EventArgs e)
         {
-
-            details.Sql_Operation = "AdminSearch";
-            details.Name = txt_search.Text;
-            var result = BL_Login.search_admin(details);
-            GridView1.DataSource = result;
-            ViewState["dirState"] = result;
-            GridView1.DataBind();
-
+            gridBind();
 
             //System.Text.StringBuilder sb = new System.Text.StringBuilder();
             // sb.Append("SELECT * FROM admin_vw WHERE (society_id = '" + society_id.Value + "')");
@@ -133,6 +124,90 @@ namespace Society2024
             //ViewState["dirState"] = result;
             //GridView1.DataBind();
 
+        }
+        protected void gridBind()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            int count = 1;
+            sb.Append("Select *  from admin_vw where society_id='" + Session["Society_id"].ToString() + "'");
+
+
+            if (txt_search.Text != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" or ");
+                }
+
+                sb.Append(" name like '" + txt_search.Text + "%' or address like '" + txt_search.Text +
+                    "%' or email like '" + txt_search.Text + "%' or contact_no1 like '" + txt_search.Text + "%' or cast (total_flats as varchar) like '" + txt_search.Text + "%' or cast (pending_amount as varchar) like '" + txt_search.Text + "%'");
+                count++;
+            }
+            if (TextBox1.Text != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" state_id = '" + state.Value + "'");
+                count++;
+            }
+            if (TextBox2.Text != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" district_id = '" + dist.Value + "'");
+                count++;
+            }
+            if (TextBox3.Text != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" city = '" + city.Value + "'");
+                count++;
+            }
+
+
+
+            if (dateFrom.Value != "" && dateTo.Value != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" date between cast(  '" + dateFrom.Value + "' as date) and cast('" + dateTo.Value + "' as date)");
+                count++;
+            }
+            if (minPriceHidden.Value != "" && maxPriceHidden.Value != "")
+            {
+                if (count > 0)
+                {
+                    sb.Append(" AND ");
+                }
+                sb.Append(" pending_amount between cast( '" + minPriceHidden.Value + "' as decimal) and cast ('" + maxPriceHidden.Value + "' as decimal)");
+                count++;
+            }
+            //sb.Append(" order by date desc");
+            details.Sql_Operation = "Adminsearch";
+            details.Name = sb.ToString();
+
+
+            var result = BL_Login.get_recent_Search(details);
+            if (result.Rows.Count > 0)
+            {
+                maxPriceHidden.Value = result.AsEnumerable().Max(row => row.Field<decimal>("pending_amount")).ToString();
+                minPriceHidden.Value = result.AsEnumerable().Min(row => row.Field<decimal>("pending_amount")).ToString();
+
+            }
+
+            GridView1.DataSource = result;
+            ViewState["dirState"] = result;
+            GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -167,29 +242,35 @@ namespace Society2024
 
         protected void btnApplyFilters_Click(object sender, EventArgs e)
         {
-
-            details.From_date = dateFrom.Value;
-            details.To_date = dateTo.Value;
-            details.Recent_Type = activityType.SelectedValue;
-            details.Min_Price = minPriceHidden.Value;
-            details.Max_Price = maxPriceHidden.Value;
+            gridBind();
 
 
             string chipsHtml = "";
 
-            if (!string.IsNullOrEmpty(details.From_date) || !string.IsNullOrEmpty(details.To_date))
+            if (!string.IsNullOrEmpty(dateFrom.Value) || !string.IsNullOrEmpty(dateTo.Value))
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-date'>📅 {details.From_date} – {details.To_date} <button onclick=\"removeFilter('date')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-date'>📅 {dateFrom.Value} – {dateTo.Value} <button onclick=\"removeFilter('date')\">×</button></span>";
             }
 
-            if (!string.IsNullOrEmpty(details.Recent_Type))
+            if (TextBox1.Text != "")
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Type: {details.Recent_Type} <button onclick=\"removeFilter('type')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ State: {TextBox1.Text} <button onclick=\"removeFilter('state')\">×</button></span>";
             }
-
-            if (!string.IsNullOrEmpty(details.Min_Price) || !string.IsNullOrEmpty(details.Max_Price))
+            if (TextBox2.Text != "")
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{details.Min_Price} – ₹{details.Max_Price} <button onclick=\"removeFilter('price')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ District: {TextBox2.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
+            }
+            if (TextBox3.Text != "")
+            {
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ City: {TextBox3.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
+            }
+            if (TextBox4.Text != "")
+            {
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Pincode: {TextBox4.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
+            }
+            if (!string.IsNullOrEmpty(minPriceHidden.Value) || !string.IsNullOrEmpty(maxPriceHidden.Value))
+            {
+                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{minPriceHidden.Value} – ₹{maxPriceHidden.Value} <button onclick=\"removeFilter('price')\">×</button></span>";
             }
 
             // Assign HTML to filterChips div

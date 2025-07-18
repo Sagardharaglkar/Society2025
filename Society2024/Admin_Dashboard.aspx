@@ -272,15 +272,7 @@
                                         <asp:HiddenField ID="dateTo" runat="server" />
                                     </div>
 
-                                    <!-- Activity Type -->
-                                    <div class="form-group">
-                                        <label>Activity Type</label>
-                                        <asp:DropDownList ID="activityType" runat="server" CssClass="form-control" AutoPostBack="false">
-                                            <asp:ListItem Text="All" Value="" />
-                                            <asp:ListItem Text="Maintenance" Value="Maintenance" />
-                                            <asp:ListItem Text="Payment" Value="Payment" />
-                                        </asp:DropDownList>
-                                    </div>
+                                
 
                                     <!-- Price Range -->
                                     <div class="form-group">
@@ -466,15 +458,22 @@
         function applyFilter() {
             const fromDate = document.getElementById("<%= dateFrom.ClientID %>").value;
             const toDate = document.getElementById("<%= dateTo.ClientID %>").value;
-            const type = document.getElementById("<%= activityType.ClientID %>").value;
-
+            const state = document.getElementById("<%= TextBox1.ClientID %>").value;
+ const district = document.getElementById("<%= TextBox2.ClientID %>").value;
+ const city = document.getElementById("<%= TextBox3.ClientID %>").value;
             let chipsHTML = "";
 
             if (fromDate || toDate) {
                 chipsHTML += `<span class="filter-chip" id="chip-date">📅 ${fromDate || '...'} – ${toDate || '...'} <button onclick="removeFilter('date')">×</button></span>`;
             }
-            if (type) {
-                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ Type: ${type} <button onclick="removeFilter('type')">×</button></span>`;
+            if (state) {
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ State: ${state} <button onclick="removeFilter('state')">×</button></span>`;
+            }
+             if (district) {
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ District: ${district} <button onclick="removeFilter('district')">×</button></span>`;
+            }
+            if (city) {
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ city: ${city} <button onclick="removeFilter('city')">×</button></span>`;
             }
             if (minPrice || maxPrice) {
                 chipsHTML += `<span class="filter-chip" id="chip-price">💰 ₹${minPrice} – ₹${maxPrice} <button onclick="removeFilter('price')">×</button></span>`;
@@ -487,8 +486,10 @@
         function resetFilters() {
             document.getElementById("<%= dateFrom.ClientID %>").value = '';
             document.getElementById("<%= dateTo.ClientID %>").value = '';
-            document.getElementById("<%= calendarRange.ClientID %>").value = '';
-            document.getElementById("<%= activityType.ClientID %>").value = '';
+            document.getElementById("<%= TextBox1.ClientID %>").value = '';
+            document.getElementById("<%= TextBox2.ClientID %>").value = '';
+document.getElementById("<%= TextBox3.ClientID %>").value = '';
+document.getElementById("<%= TextBox4.ClientID %>").value = '';
             document.getElementById("filterChips").innerHTML = '';
             priceSlider.noUiSlider.set([0, 5000]);
         }
@@ -499,9 +500,9 @@
                 document.getElementById("<%= dateTo.ClientID %>").value = '';
                 document.getElementById("<%= calendarRange.ClientID %>").value = '';
             }
-            if (type === 'type') {
+           <%-- if (type === 'type') {
                 document.getElementById("<%= activityType.ClientID %>").value = '';
-            }
+            }--%>
             if (type === 'price') {
                 priceSlider.noUiSlider.set([0, 5000]);
                 document.getElementById("<%= minPriceHidden.ClientID %>").value = '';
