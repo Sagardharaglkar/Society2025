@@ -34,9 +34,6 @@ namespace Society2024
             {
                 minPriceHidden.Value = "0";
                 maxPriceHidden.Value = "50000";
-                //defaulter_Click(sender, e);
-                filldrop();
-                //date_before.Text = DateTime.Now.ToShortDateString();
                 btn_search_Click(sender, e);
                 string str = "select * from state";
                 repeater.fill_list(Repeater1, str);
@@ -77,22 +74,7 @@ namespace Society2024
             }
 
         }
-        public void filldrop()
-        {
-            String sql_query = "Select *  from society_master";
-            //BL_Login.fill_drop(drp_society, sql_query, "name", "society_id");
-            String sql_query1 = "Select *  from state";
-            BL_Login.fill_drop(drp_state, sql_query1, "state", "state_id");
-            String sql_query2 = "Select *  from district";
-            BL_Login.fill_drop(drp_district, sql_query2, "district", "district_id");
 
-            String sql_query3 = "Select distinct city from society_master where city is not null";
-            BL_Login.fill_drop(drp_city, sql_query3, "city", "city");
-
-            String sql_query4 = "Select distinct division,division_id from division where division is not null";
-            BL_Login.fill_drop(drp_division, sql_query4, "division", "division_id");
-
-        }
         protected void btn_search_Click(object sender, EventArgs e)
         {
 
@@ -160,10 +142,6 @@ namespace Society2024
 
         }
 
-        protected void btn_filter_Click(object sender, EventArgs e)
-        {
-            filterSection.Visible = true;
-        }
 
         protected void btnApplyFilters_Click(object sender, EventArgs e)
         {
