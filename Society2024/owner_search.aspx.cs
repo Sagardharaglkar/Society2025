@@ -283,7 +283,7 @@ namespace Society
         protected void btn_save_Click1(object sender, EventArgs e)
         {
             string str = runproc_save("Update");
-            if (str == "done") 
+            if (str == "Done") 
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
              else
             {
@@ -313,8 +313,12 @@ namespace Society
                 uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
 
             }
-  
+            //     ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal",
+            //"setTimeout(function() { $('#edit_model').modal('show'); }, 500);", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal",
+     "Sys.Application.add_load(function() { setTimeout(function () { $('#edit_model').modal('show'); }, 500); });", true);
 
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
         }
 
         protected void btnotice_id_upload_Click(object sender, EventArgs e)

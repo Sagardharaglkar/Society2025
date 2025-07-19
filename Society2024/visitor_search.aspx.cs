@@ -144,16 +144,10 @@ namespace Society
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append("Select * from visitor where society_id='" + society_id.Value + "'");
-            if (drp_visiting_type.SelectedIndex != 0)
-            {
-                sb.Append(" and type = '" + drp_visiting_type.SelectedItem.Text + "'");
-            }
+           
 
             // From and To date conditions
-            if (!string.IsNullOrWhiteSpace(txt_from.Text) && !string.IsNullOrWhiteSpace(txt_to.Text))
-            {
-                sb.Append(" And in_date BETWEEN cast('" + txt_from.Text + "' as smalldatetime) AND cast('" + txt_to.Text + "' as smalldatetime)");
-            }
+           
 
             visitor.Sql_Operation = sb.ToString();
             var result = BL_Visitor.search_visitor(visitor);

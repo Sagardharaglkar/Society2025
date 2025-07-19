@@ -170,7 +170,7 @@
                                             </div>
                                         </div>
 
-                                        &nbsp;&nbsp;
+                                        &nbsp;&nbsp; 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                     </div>
                                 </div>

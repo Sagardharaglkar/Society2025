@@ -2,6 +2,9 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+   
+
     <style>
                 .resized-model{
         width: 900px;
@@ -19,7 +22,30 @@
     right: 1px;
    }
 }
+.input-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#dateInput {
+    width: 150px;
+    padding: 6px 10px;
+}
+
+.calendar-icon {
+    width: 24px;
+    height: 24px;
+}
+.calendar-input {
+  background: url('img/calendar.png') no-repeat right 10px center;
+  background-size: 20px 20px;
+  padding-right: 30px; /* space for image */
+}
+
+
     </style>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function FailedEntry() {
@@ -111,47 +137,70 @@
 
                         <asp:HiddenField ID="visitor_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="server" />
-
+                        <asp:HiddenField runat="server" ID="datefrom"/><asp:HiddenField runat="server" ID="dateto"/>
                        <asp:HiddenField runat="server" ID="building_id"/>
                         <asp:HiddenField ID="visitor_flat_id" runat="server" />
+<div class="form-group">
+    <div class="row">
+        <!-- Search and Calendar Container -->
+        <div class="col-12">
+            <div class="d-flex align-items-center">
+                <div class="search-container">
+
+                    <!-- Search TextBox -->
+                    <asp:TextBox
+                        ID="txt_search"
+                        CssClass="aspNetTextBox"
+                        placeholder="Search here"
+                        runat="server"
+                        TextMode="Search"
+                        AutoPostBack="true"
+                        OnTextChanged="btn_search_Click"
+                        onkeyup="removeFocusAfterTyping()" />
+
+                    <!-- Hidden Flatpickr Input -->
 
 
-                        <div class="form-group">
-                            <div class="row align-items-end">
+                    <!-- Calendar and Search Buttons -->
+                    <div class="input-buttons">
+                        <!-- Image that triggers Flatpickr -->
+                        <img
+                            id="btn_calendar"
+                            src="img/calendar.png"
+                            alt="Pick Date"
+                            class="calendar-icon"
+                            style="cursor: pointer;"
+                            onclick="openCalendar();" />
 
-                                <!-- Visitor Type -->
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lbl_acc_no" runat="server" ForeColor="Black" Text="Visitor Type"></asp:Label>
-                                    <asp:DropDownList ID="drp_visiting_type" runat="server" ForeColor="Gray">
-                                        <asp:ListItem>--Select--</asp:ListItem>
-                                        <asp:ListItem Value="Cab">Cab</asp:ListItem>
-                                        <asp:ListItem Value="Service">Home service</asp:ListItem>
-                                        <asp:ListItem Value="Delivery">Delivery</asp:ListItem>
-                                        <asp:ListItem Value="Guest">Guest & Others</asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
+                        <!-- Search Button -->
+                        <button 
+                            id="btn_search"
+                            type="submit"
+                            class="search-button2"
+                            runat="server"
+                            onserverclick="btn_search_Click">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </div>
 
-                                <!-- From Date -->
-                                <div class="col-sm-2">
-                                    <asp:Label ID="Label1" runat="server" ForeColor="Black" Text="From Date"></asp:Label>
-                                    <asp:TextBox ID="txt_from" runat="server" ForeColor="Gray" TextMode="Date"></asp:TextBox>
-                                </div>
+                </div>
+                 <!-- Buttons Section (Add and Print buttons) -->
+    <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-start">
+            <!-- "Add" Button -->
+            <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target="#p">Add</button>
 
-                                <!-- To Date -->
-                                <div class="col-sm-2">
-                                    <asp:Label ID="Label2" runat="server" ForeColor="Black" Text="To Date"></asp:Label>
-                                    <asp:TextBox ID="txt_to" runat="server" ForeColor="Gray" TextMode="Date"></asp:TextBox>
-                                </div>
+            <!-- "Print" Button -->
+            <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
 
-                                <!-- Buttons -->
-                                <div class="col-sm-6">
-                                    <asp:Button ID="btn_search" runat="server" Text="Search" OnClick="btn_search_Click" UseSubmitBehavior="False" CssClass="btn btn-primary me-2" />
-                                    <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target=".bs-example-modal-sm">New Entry</button>
-                                    <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-                                </div>
+   
+</div>
 
-                            </div>
-                        </div>
 
 
                         <div class="form-group">
@@ -469,7 +518,7 @@
             </div>
         </div>
    
-
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
 
@@ -583,15 +632,24 @@
         document.getElementById("RepeaterContainer2").style.display = "none";
 
     }
+    const input = document.getElementById("<%= txt_search.ClientID %>")
+    flatpickr("#<%= txt_search.ClientID %>", {
+        mode: "range",
+        dateFormat: "Y-m-d", // Keep format as YYYY-MM-DD
+        onChange: function (selectedDates) {
+            if (selectedDates.length === 2) {
+                const fromDate = selectedDates[0].toLocaleDateString('en-CA'); // YYYY-MM-DD
+                const toDate = selectedDates[1].toLocaleDateString('en-CA');   // YYYY-MM-DD
 
+<%--                document.getElementById("<%= dateFrom.ClientID %>").value = fromDate;
+                document.getElementById("<%= dateTo.ClientID %>").value = toDate;--%>
+            }
+        }
 
-
-    Sys.Application.add_load(initDropdownEvents);
-
-
+    // Re-initialize all scripts after partial postbacks
+    Sys.Application.add_load(function () {
+            initDropdownEvents();
+        initFlatpickr();
+    });
 </script>
- 
-</asp:Content>
-
-
-
+     </asp:Content>

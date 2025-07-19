@@ -406,13 +406,17 @@
             document.getElementById("filterSidebar").classList.remove("show");
         }
 
-        document.addEventListener("click", function (e) {
-            const sidebar = document.getElementById("filterSidebar");
-            const button = document.getElementById("filterButton");
-            if (!sidebar.contains(e.target) && !button.contains(e.target)) {
-                sidebar.classList.remove("show");
-            }
-        });
+document.addEventListener("click", function (e) {
+    const sidebar = document.getElementById("filterSidebar");
+    const button = document.getElementById("filterButton");
+    const filterPanel = document.getElementById("filterSection"); // The filter panel
+
+    // Ensure that the sidebar doesn't close when interacting inside the filter panel
+    if (!sidebar.contains(e.target) && !button.contains(e.target) && !filterPanel.contains(e.target)) {
+        sidebar.classList.remove("show");
+    }
+});
+
 
         // Flatpickr
         flatpickr("#<%= calendarRange.ClientID %>", {

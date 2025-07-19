@@ -158,7 +158,7 @@
                                                 class="calendar-icon"
                                                 style="cursor: pointer;" />
 
-                                            <button
+                                            <button 
                                                 id="btn_search"
                                                 type="submit"
                                                 class="search-button2"

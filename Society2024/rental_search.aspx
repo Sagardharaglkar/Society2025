@@ -124,11 +124,6 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="flat_id" runat="server" />
 
-                        <asp:HiddenField ID="flat_no_id" runat="server" />
-                        <asp:HiddenField ID="Buildling_wing_id" runat="server" />
-                        <asp:HiddenField ID="type_id" runat="server" />
-                        <asp:HiddenField ID="married_id" runat="server" />
-                        <asp:HiddenField ID="doc_id_id" runat="server" />
                         <asp:Label runat="server" Visible="false" ID="Label11"></asp:Label>
                        
   <div class="form-group">
@@ -259,6 +254,12 @@
                         <div class="modal-body" id="invoice_data">
                             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
+                                    
+                        <asp:HiddenField ID="flat_no_id" runat="server" />
+                        <asp:HiddenField ID="Buildling_wing_id" runat="server" />
+                        <asp:HiddenField ID="type_id" runat="server" />
+                        <asp:HiddenField ID="married_id" runat="server" />
+                        <asp:HiddenField ID="doc_id_id" runat="server" />
                                     <div class="form-group">
                                         <div class="row ">
                                             <div class="col-sm-3">

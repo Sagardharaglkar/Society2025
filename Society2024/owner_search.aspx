@@ -19,6 +19,12 @@
    }
 }
     </style>
+    <!-- jQuery (required by Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function FailedEntry() {
@@ -61,7 +67,7 @@
         }
 
         function openModal() {
-            console.log("modal opening");
+           
             $('#edit_model').modal('show');
  
         }
@@ -254,7 +260,7 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                <div class="modal fade bs-example-modal-sm" runat="server" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" ClientIDMode="Static" data-backdrop="static" >
                     <div class="modal-dialog modal-sm-4" >
 
                         <div class="modal-content resized-model">
@@ -725,10 +731,7 @@
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="OwnerGrid" EventName="RowCommand" />
-                                        <%--<asp:AsyncPostBackTrigger ControlID="btn_photo_upload" EventName="Click" />
-                                        <asp:AsyncPostBackTrigger ControlID="btnotice_id_upload" EventName="Click" />
-                                        <asp:AsyncPostBackTrigger ControlID="add" EventName="Click" />
-                                        <asp:AsyncPostBackTrigger ControlID="OwnerGrid" EventName="RowCommand" />--%>
+                                     
 
                                     </Triggers>
                                     <Triggers>
@@ -761,6 +764,8 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <script>
