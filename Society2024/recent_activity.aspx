@@ -145,11 +145,43 @@
                                 <asp:HiddenField ID="selectedMaxPriceHidden" runat="server" />
 
                             </div>
+<asp:UpdatePanel ID="UpdatePanel2" runat="server">
+    <ContentTemplate>
 
-                            <asp:Button ID="btnResetFilters" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm mt-2" OnClientClick="resetFilters(); return false;" />
-                            <asp:Button ID="btnApplyFilters" runat="server" Text="Apply Filter"
-                                CssClass="btn btn-primary btn-sm mt-2"
-                                OnClick="btnApplyFilters_Click" />
+        <!-- Buttons -->
+        <div class="mb-2">
+            <asp:Button ID="btnResetFilters" runat="server" Text="Reset"
+                CssClass="btn btn-secondary btn-sm"
+                OnClientClick="resetFilters(); return false;" />
+
+            <asp:Button ID="btnApplyFilters" runat="server" Text="Apply Filter"
+                CssClass="btn btn-primary btn-sm"
+                OnClick="btnApplyFilters_Click"
+                UseSubmitBehavior="false" />
+        </div>
+
+        <!-- Filter Chips -->
+        <div id="Div1" runat="server" class="chips-container"></div>
+
+        <!-- GridView -->
+        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false"
+            CssClass="table table-bordered table-hover table-striped" ShowHeaderWhenEmpty="true"
+            EmptyDataText="No Record Found">
+            <Columns>
+                <asp:TemplateField HeaderText="No" ItemStyle-Width="30">
+                    <ItemTemplate>
+                        <%# Container.DataItemIndex + 1 %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="date" HeaderText="Date" />
+                <asp:BoundField DataField="particular" HeaderText="Name" />
+                <asp:BoundField DataField="received_amt" HeaderText="Amount" />
+            </Columns>
+        </asp:GridView>
+
+    </ContentTemplate>
+</asp:UpdatePanel>
+
 
                         </div>
                     </div>
@@ -242,11 +274,6 @@
 
                 const selectedMinHidden = document.getElementById("<%= selectedMinPriceHidden.ClientID %>");
                 const selectedMaxHidden = document.getElementById("<%= selectedMaxPriceHidden.ClientID %>");
-
-                if (!priceSlider) {
-                    console.error("priceSlider element not found!");
-                    return;
-                }
 
                 noUiSlider.create(priceSlider, {
                     start: [minFromServer, maxFromServer],

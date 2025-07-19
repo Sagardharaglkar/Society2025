@@ -27,16 +27,16 @@
         }
 
         #filterSidebar {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            width: 280px;
-            background-color: #f8f9fa;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-            z-index: 10;
-            padding: 20px;
-            display: none;
-            border-radius: 4px;
+    position: absolute;
+    top: 132px;
+    left: 13px;
+    width: 331px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 20px;
+    display: none;
+    border-radius: 4px;
         }
 
             #filterSidebar.show {
@@ -107,11 +107,6 @@
                 </table>
                 <br />
 
-                <asp:HiddenField ID="HiddenField4" runat="server" />
-                <asp:HiddenField ID="society_id" runat="server" />
-                <asp:HiddenField ID="state" runat="server" />
-                <asp:HiddenField ID="dist" runat="server" />
-                <asp:HiddenField ID="city" runat="server" />
 
                 <div class="form-group">
                     <div class="row">
@@ -159,126 +154,128 @@
                     <div class="row">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>State</label>
-                                        <div class="dropdown-container">
-                                            <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                placeholder="Select" autocomplete="off" required="required" />
-                                            <div id="RepeaterContainer1" class="suggestion-list">
-                                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
-                                                    <ItemTemplate>
+                                <asp:HiddenField ID="HiddenField4" runat="server" />
+                                <asp:HiddenField ID="society_id" runat="server" />
+                                <asp:HiddenField ID="state" runat="server" />
+                                <asp:HiddenField ID="dist" runat="server" />
+                                <asp:HiddenField ID="city" runat="server" />
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <div class="dropdown-container">
+                                                <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                                    placeholder="Select" autocomplete="off" required="required" />
+                                                <div id="RepeaterContainer1" class="suggestion-list">
+                                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
+                                                        <ItemTemplate>
 
-                                                        <asp:LinkButton
-                                                            ID="lnkCategory"
-                                                            runat="server"
-                                                            CssClass="suggestion-item link-button category-link"
-                                                            Text='<%# Eval("state") %>'
-                                                            CommandArgument='<%# Eval("state_id") %>'
-                                                            CommandName="SelectCategory"
-                                                            OnClientClick="setTextBox1(this.innerText);" />
-                                                    </ItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                            Text="No items found." />
-                                                    </FooterTemplate>
-                                                </asp:Repeater>
+                                                            <asp:LinkButton
+                                                                ID="lnkCategory"
+                                                                runat="server"
+                                                                CssClass="suggestion-item link-button category-link"
+                                                                Text='<%# Eval("state") %>'
+                                                                CommandArgument='<%# Eval("state_id") %>'
+                                                                CommandName="SelectCategory"
+                                                                OnClientClick="setTextBox1(this.innerText);" />
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                Text="No items found." />
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>District</label>
+                                            <div class="dropdown-container">
+                                                <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
+                                                    placeholder="Select" autocomplete="off" required="required" />
+                                                <div id="RepeaterContainer2" class="suggestion-list">
+                                                    <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton
+                                                                ID="lnkCategory"
+                                                                runat="server"
+                                                                CssClass="suggestion-item link-button category-link"
+                                                                Text='<%# Eval("district") %>'
+                                                                CommandArgument='<%# Eval("district_id") %>'
+                                                                CommandName="SelectCategory"
+                                                                OnClientClick="setTextBox2(this.innerText);" />
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                Text="No items found." />
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
 
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>District</label>
-                                        <div class="dropdown-container">
-                                            <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                placeholder="Select" autocomplete="off" required="required" />
-                                            <div id="RepeaterContainer2" class="suggestion-list">
-                                                <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton
-                                                            ID="lnkCategory"
-                                                            runat="server"
-                                                            CssClass="suggestion-item link-button category-link"
-                                                            Text='<%# Eval("district") %>'
-                                                            CommandArgument='<%# Eval("district_id") %>'
-                                                            CommandName="SelectCategory"
-                                                            OnClientClick="setTextBox2(this.innerText);" />
-                                                    </ItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                            Text="No items found." />
-                                                    </FooterTemplate>
-                                                </asp:Repeater>
+                                            <label>City</label>
+                                            <div class="dropdown-container">
+                                                <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
+                                                    placeholder="Select" autocomplete="off" required="required" />
+                                                <div id="RepeaterContainer3" class="suggestion-list">
+                                                    <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton
+                                                                ID="lnkCategory"
+                                                                runat="server"
+                                                                CssClass="suggestion-item link-button category-link"
+                                                                Text='<%# Eval("city") %>'
+                                                                CommandArgument='society_id.value'
+                                                                CommandName="SelectCategory"
+                                                                OnClientClick="setTextBox3(this.innerText);" />
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                Text="No items found." />
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-6">
-                                    <div class="form-group">
-
-                                        <label>City</label>
-                                        <div class="dropdown-container">
-                                            <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
-                                                placeholder="Select" autocomplete="off" required="required" />
-                                            <div id="RepeaterContainer3" class="suggestion-list">
-                                                <asp:Repeater ID="Repeater3" runat="server" OnItemCommand="CategoryRepeater_ItemCommand3">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton
-                                                            ID="lnkCategory"
-                                                            runat="server"
-                                                            CssClass="suggestion-item link-button category-link"
-                                                            Text='<%# Eval("city") %>'
-                                                            CommandArgument='society_id.value'
-                                                            CommandName="SelectCategory"
-                                                            OnClientClick="setTextBox3(this.innerText);" />
-                                                    </ItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                            Text="No items found." />
-                                                    </FooterTemplate>
-                                                </asp:Repeater>
-                                            </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Pin Code</label>
+                                            <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control" placeholder="Enter Pin Code" />
                                         </div>
                                     </div>
                                 </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <!-- Date Filter -->
+                        <div class="form-group">
+                            <label>Date Range</label>
+                            <asp:TextBox ID="calendarRange" runat="server" CssClass="form-control" placeholder="Select date range" />
+                            <asp:HiddenField ID="dateFrom" runat="server" />
+                            <asp:HiddenField ID="dateTo" runat="server" />
+                        </div>
 
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Pin Code</label>
-                                        <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control" placeholder="Enter Pin Code" />
-                                    </div>
-                                </div>
-                                                            </ContentTemplate>
-                        </asp:UpdatePanel>  
-                                <!-- Date Filter -->
-                                <div class="form-group">
-                                    <label>Date Range</label>
-                                    <asp:TextBox ID="calendarRange" runat="server" CssClass="form-control" placeholder="Select date range" />
-                                    <asp:HiddenField ID="dateFrom" runat="server" />
-                                    <asp:HiddenField ID="dateTo" runat="server" />
-                                </div>
 
-                                <!-- Activity Type -->
-                                <div class="form-group">
-                                    <label>Activity Type</label>
-                                    <asp:DropDownList ID="activityType" runat="server" CssClass="form-control" AutoPostBack="false">
-                                        <asp:ListItem Text="All" Value="" />
-                                        <asp:ListItem Text="Maintenance" Value="Maintenance" />
-                                        <asp:ListItem Text="Payment" Value="Payment" />
-                                    </asp:DropDownList>
-                                </div>
 
-                                <!-- Price Range -->
-                                <div class="form-group">
-                                    <label>Price Range</label>
-                                    <div id="priceSlider"></div>
-                                    <div id="priceRangeDisplay">₹0 – ₹5000</div>
-                                    <asp:HiddenField ID="minPriceHidden" runat="server" />
-                                    <asp:HiddenField ID="maxPriceHidden" runat="server" />
-                                </div>
+                        <!-- Price Range -->
+                        <div class="form-group">
+                            <label>Price Range</label>
+                            <div id="priceSlider"></div>
+                            <div id="priceRangeDisplay">₹0 – ₹5000</div>
+                            <asp:HiddenField ID="minPriceHidden" runat="server" />
+                            <asp:HiddenField ID="maxPriceHidden" runat="server" />
+                            <asp:HiddenField ID="selectedMinPriceHidden" runat="server" />
+                            <asp:HiddenField ID="selectedMaxPriceHidden" runat="server" />
+                        </div>
 
                         <asp:Button ID="btnResetFilters" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm mt-2" OnClientClick="resetFilters(); return false;" />
                         <asp:Button ID="btnApplyFilters" runat="server" Text="Apply Filter"
@@ -395,31 +392,34 @@
             }
         });
 
-        // Price Slider
-        let minPrice = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value);
-        let maxPrice = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value);
-        const priceSlider = document.getElementById("priceSlider");
-        const priceDisplay = document.getElementById("priceRangeDisplay");
+            window.addEventListener("load", function () {
+                const priceSlider = document.getElementById("priceSlider");
 
-        noUiSlider.create(priceSlider, {
-            start: [minPrice, maxPrice],
-            connect: true,
-            range: { min: parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value), max: parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) },
-            step: 100,
-            tooltips: [true, true],
-            format: {
-                to: value => Math.round(value),
-                from: value => Number(value)
-            }
-        });
+                const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
+                const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
+                console.log(minFromServer, maxFromServer)
+                const selectedMinHidden = document.getElementById("<%= selectedMinPriceHidden.ClientID %>");
+                const selectedMaxHidden = document.getElementById("<%= selectedMaxPriceHidden.ClientID %>");
 
-        window.addEventListener("load", function () {
-            const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
-            const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
 
-            // Update slider with server values
-            priceSlider.noUiSlider.set([minFromServer, maxFromServer]);
-        });
+                noUiSlider.create(priceSlider, {
+                    start: [minFromServer, maxFromServer],
+                    connect: true,
+                    range: { min: minFromServer, max: maxFromServer },
+                    step: 100,
+                    tooltips: [true, true],
+                    format: {
+                        to: value => Math.round(value),
+                        from: value => Number(value)
+                    }
+                });
+
+                // Set selected values to hidden fields on slider change
+                priceSlider.noUiSlider.on('update', function (values, handle) {
+                    selectedMinHidden.value = Math.round(values[0]);
+                    selectedMaxHidden.value = Math.round(values[1]);
+                });
+            });
 
 
 
@@ -427,15 +427,22 @@
         function applyFilter() {
             const fromDate = document.getElementById("<%= dateFrom.ClientID %>").value;
             const toDate = document.getElementById("<%= dateTo.ClientID %>").value;
-            const type = document.getElementById("<%= activityType.ClientID %>").value;
-
+            const state = document.getElementById("<%= TextBox1.ClientID %>").value;
+            const district = document.getElementById("<%= TextBox2.ClientID %>").value;
+            const city = document.getElementById("<%= TextBox3.ClientID %>").value;
             let chipsHTML = "";
 
             if (fromDate || toDate) {
                 chipsHTML += `<span class="filter-chip" id="chip-date">📅 ${fromDate || '...'} – ${toDate || '...'} <button onclick="removeFilter('date')">×</button></span>`;
             }
-            if (type) {
-                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ Type: ${type} <button onclick="removeFilter('type')">×</button></span>`;
+            if (state) {
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ State: ${state} <button onclick="removeFilter('state')">×</button></span>`;
+            }
+             if (district) {
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ District: ${district} <button onclick="removeFilter('district')">×</button></span>`;
+            }
+            if (city) {
+                chipsHTML += `<span class="filter-chip" id="chip-type">🛠️ city: ${city} <button onclick="removeFilter('city')">×</button></span>`;
             }
             if (minPrice || maxPrice) {
                 chipsHTML += `<span class="filter-chip" id="chip-price">💰 ₹${minPrice} – ₹${maxPrice} <button onclick="removeFilter('price')">×</button></span>`;
@@ -448,8 +455,10 @@
         function resetFilters() {
             document.getElementById("<%= dateFrom.ClientID %>").value = '';
             document.getElementById("<%= dateTo.ClientID %>").value = '';
-            document.getElementById("<%= calendarRange.ClientID %>").value = '';
-            document.getElementById("<%= activityType.ClientID %>").value = '';
+            document.getElementById("<%= TextBox1.ClientID %>").value = '';
+            document.getElementById("<%= TextBox2.ClientID %>").value = '';
+            document.getElementById("<%= TextBox3.ClientID %>").value = '';
+            document.getElementById("<%= TextBox4.ClientID %>").value = '';
             document.getElementById("filterChips").innerHTML = '';
             priceSlider.noUiSlider.set([0, 5000]);
         }
@@ -460,15 +469,30 @@
                 document.getElementById("<%= dateTo.ClientID %>").value = '';
                 document.getElementById("<%= calendarRange.ClientID %>").value = '';
             }
-            if (type === 'type') {
-                document.getElementById("<%= activityType.ClientID %>").value = '';
-            }
             if (type === 'price') {
                 priceSlider.noUiSlider.set([0, 5000]);
-                document.getElementById("<%= minPriceHidden.ClientID %>").value = '';
-                document.getElementById("<%= maxPriceHidden.ClientID %>").value = '';
+                document.getElementById("<%= selectedMinPriceHidden.ClientID %>").value = '';
+                document.getElementById("<%= selectedMaxPriceHidden.ClientID %>").value = '';
             }
 
+            if(type ==='state'){
+               document.getElementById("<%= TextBox1.ClientID %>").value = '';
+            }
+
+            
+            if(type ==='dist'){
+               document.getElementById("<%= TextBox2.ClientID %>").value = '';
+            }
+
+            
+            if(type ==='city'){
+               document.getElementById("<%= TextBox3.ClientID %>").value = '';
+            }
+
+            
+            if(type ==='pin'){
+               document.getElementById("<%= TextBox4.ClientID %>").value = '';
+            }
             // Trigger the same Apply Filters button click via JavaScript
             __doPostBack('<%= btnApplyFilters.UniqueID %>', '');
         }

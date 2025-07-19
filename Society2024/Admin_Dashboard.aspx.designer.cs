@@ -15,6 +15,24 @@ namespace Society2024
     {
 
         /// <summary>
+        /// txt_search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_search;
+
+        /// <summary>
+        /// btn_search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
+
+        /// <summary>
         /// HiddenField4 control.
         /// </summary>
         /// <remarks>
@@ -58,24 +76,6 @@ namespace Society2024
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField city;
-
-        /// <summary>
-        /// txt_search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_search;
-
-        /// <summary>
-        /// btn_search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_search;
 
         /// <summary>
         /// TextBox1 control.
@@ -168,15 +168,6 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.HiddenField dateTo;
 
         /// <summary>
-        /// activityType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList activityType;
-
-        /// <summary>
         /// minPriceHidden control.
         /// </summary>
         /// <remarks>
@@ -193,6 +184,24 @@ namespace Society2024
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField maxPriceHidden;
+
+        /// <summary>
+        /// selectedMinPriceHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField selectedMinPriceHidden;
+
+        /// <summary>
+        /// selectedMaxPriceHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField selectedMaxPriceHidden;
 
         /// <summary>
         /// btnResetFilters control.

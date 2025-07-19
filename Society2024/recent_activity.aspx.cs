@@ -46,17 +46,17 @@ namespace Society
             sb.Append("Select *  from recent_activity_vw where society_id='" + Session["Society_id"].ToString() + "'");
 
 
-            if (txt_search.Text != "")
+            if (!string.IsNullOrWhiteSpace(txt_search.Text))
             {
-                if (count > 0)
-                {
-                    sb.Append(" or ");
-                }
-
-                sb.Append(" particular like '" + txt_search.Text + "%'or cast (received_amt as varchar) like '" + txt_search.Text +
-                    "%'or type like '" + txt_search.Text + "%'or cast (m_date as varchar) like '" + txt_search.Text + "%'");
+                sb.Append(" AND (");
+                sb.Append(" particular LIKE '" + txt_search.Text + "%'");
+                sb.Append(" OR CAST(received_amt AS VARCHAR) LIKE '" + txt_search.Text + "%'");
+                sb.Append(" OR type LIKE '" + txt_search.Text + "%'");
+                sb.Append(" OR CAST(m_date AS VARCHAR) LIKE '" + txt_search.Text + "%'");
+                sb.Append(" )");
                 count++;
             }
+
             if (activityType.SelectedItem.Text != "All")
             {
                 if (count > 0)

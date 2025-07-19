@@ -120,29 +120,7 @@ namespace Society
             }
 
         }
-        public void fill_drop1()
-        {
-            //String sql_query = "Select *  from married_status ";
-            //bL_Owner.fill_drop(drp_married, sql_query, "married_name", "married_id");
-
-            //String sql_query1 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
-            //bL_Owner.fill_drop(ddl_flat, sql_query1, "flat_type", "flat_id");
-
-            //String sql_query2 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
-            //bL_Owner.fill_drop(ddl_build_wing, sql_query2, "name", "wing_id");
-
-            //String sql_query3 = "Select *  from types ";
-            //bL_Owner.fill_drop(ddl_type, sql_query3, "flat_type", "flat_type_id");
-
-            //String sql_query4 = "Select * from doc_master where active_status=0 and society_id='" + society_id.Value + "'";
-            //bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
-        }
-
-        //public void fill_list()
-        //{
-        //    String sql_query3 = "Select *  from types ";
-        //    bL_Owner.fill_list(ddl_type, sql_query3, "flat_type", "flat_type_id");
-        //}
+ 
         protected void edit_Command(object sender, CommandEventArgs e)
         {
             string id = e.CommandArgument.ToString();
@@ -293,9 +271,7 @@ namespace Society
         }
 
         protected void btn_photo_upload_Click(object sender, EventArgs e)
-        {
-            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('hide');", true);
-            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
+        { 
             string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/";
 
 
@@ -313,14 +289,16 @@ namespace Society
                 uploadphotopath.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + FileUpload1.FileName);
 
             }
-  
+
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+
 
         }
 
         protected void btnotice_id_upload_Click(object sender, EventArgs e)
         {
             //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('hide');", true);
-            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
             string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/" + (doc_id_id.Value.ToString()) + "/";
             System.IO.Directory.CreateDirectory(createfolder);
 
@@ -337,6 +315,9 @@ namespace Society
                 uploadidproof.Text = System.IO.Path.Combine(Server.MapPath("~/Documents") + "\\" + txt_name.Text + "\\" + (doc_id_id.Value.ToString()) + "\\" + FileUpload2.FileName);
 
             }
+            //ScriptManager.RegisterStartupScript(modalpanel, this.GetType(), "Pop", "$('#edit_model').modal('show');", true);
+
+            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
 
 
         }

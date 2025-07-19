@@ -180,25 +180,6 @@ namespace Society
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }
-        public void fill_drop1()
-        {
-            //    String sql_query = "Select *  from married_status ";
-            //    bL_Owner.fill_drop(drp_married, sql_query, "married_name", "married_id");
-
-            //    String sql_query1 = "Select society_id,flat_id,(flat_no +'  '+ usage+'  '+ bed +'  '+ sq_ft) as flat_type  from flat where  society_id='" + society_id.Value + "'";
-            //    bL_Owner.fill_drop(ddl_flat, sql_query1, "flat_type", "flat_id");
-
-            //    //String sql_query2 = "Select w_id,(name + w_name) as name from global_society_view";
-            //    //st.fill_drop(ddl_build_wing, sql_query2, "name", "w_id");
-            //    String sql_query2 = "Select wing_id,(name +': '+ w_name) as name from global_society_view where society_id='" + society_id.Value + "' order by name ";
-            //    bL_Owner.fill_drop(ddl_build_wing, sql_query2, "name", "wing_id");
-
-            //    String sql_query3 = "Select *  from types";
-            //    bL_Owner.fill_drop(ddl_type, sql_query3, "flat_type", "flat_type_id");
-
-            //    String sql_query4 = "Select * from doc_master where society_id='" + society_id.Value + "'";
-            //    bL_Owner.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
-        }
 
         public string runproc_save(string operation)
         {

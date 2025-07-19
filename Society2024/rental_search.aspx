@@ -3,21 +3,21 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-                .resized-model{
-        width: 900px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 900px;
+            height: auto;
+            right: 82px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -130,42 +130,42 @@
                         <asp:HiddenField ID="married_id" runat="server" />
                         <asp:HiddenField ID="doc_id_id" runat="server" />
                         <asp:Label runat="server" Visible="false" ID="Label11"></asp:Label>
-                       
-  <div class="form-group">
-      <div class="row">
-          <div class="col-12">
-              <div class="d-flex align-items-center">
-                  <div class="search-container">
 
-                      <asp:TextBox
-                          ID="txt_search"
-                          CssClass="aspNetTextBox"
-                          placeHolder="Search here"
-                          runat="server"
-                          TextMode="Search"
-                          AutoPostBack="true"
-                          OnTextChanged="btn_search_Click"
-                          onkeyup="removeFocusAfterTyping()" />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                      <!-- Calendar and Search Buttons -->
-                      <div class="input-buttons">
-                          <button
-                              id="btn_search"
-                              type="submit"
-                              class="search-button2"
-                              runat="server"
-                              onserverclick="btn_search_Click">
-                              <span class="material-symbols-outlined">search</span>
-                          </button>
-                      </div>
-                  </div>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                  &nbsp;&nbsp;
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        &nbsp;&nbsp;
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-              </div>
-          </div>
-      </div>
-  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">
@@ -269,7 +269,7 @@
                                             <div class="col-sm-3">
                                                 <div class="dropdown-container">
                                                     <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                        placeholder="Select" autocomplete="off" required="required"/>
+                                                        placeholder="Select" autocomplete="off" required="required" />
                                                     <div id="RepeaterContainer1" class="suggestion-list">
                                                         <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                             <ItemTemplate>
@@ -347,7 +347,7 @@
                                             <div class="col-sm-3">
                                                 <div class="dropdown-container">
                                                     <asp:TextBox ID="TextBox3" runat="server" CssClass="input-box form-control"
-                                                        placeholder="Select" autocomplete="off" required="required"/>
+                                                        placeholder="Select" autocomplete="off" required="required" />
                                                     <div id="RepeaterContainer3" class="suggestion-list">
                                                         <asp:Repeater ID="Repeater3" runat="server" OnItemDataBound="Repeater3_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand3">
                                                             <ItemTemplate>
@@ -446,7 +446,7 @@
                                             <div class="col-sm-3">
                                                 <div class="dropdown-container">
                                                     <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
-                                                        placeholder="Select" autocomplete="off" required="required"/>
+                                                        placeholder="Select" autocomplete="off" required="required" />
                                                     <div id="RepeaterContainer4" class="suggestion-list">
                                                         <asp:Repeater ID="Repeater4" runat="server" OnItemDataBound="Repeater4_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                             <ItemTemplate>
@@ -484,121 +484,121 @@
                                         </div>
                                     </div>
 
-                                     <asp:Label runat="server" Visible="false" ID="building_lbl"></asp:Label>
+                                    <asp:Label runat="server" Visible="false" ID="building_lbl"></asp:Label>
 
 
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="Label3" runat="server" Text="ID Proof"></asp:Label>
-                                        <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                        <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="Label3" runat="server" Text="ID Proof"></asp:Label>
+                                                <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="dropdown-container">
+                                                    <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
+                                                        placeholder="Select" autocomplete="off" required="required" />
+                                                    <div id="RepeaterContainer5" class="suggestion-list">
+                                                        <asp:Repeater ID="Repeater5" runat="server" OnItemDataBound="Repeater5_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand5">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton
+                                                                    ID="lnkCategory"
+                                                                    runat="server"
+                                                                    CssClass="suggestion-item link-button category-link"
+                                                                    Text='<%# Eval("doc_name") %>'
+                                                                    CommandArgument='<%# Eval("doc_id") %>'
+                                                                    CommandName="SelectCategory"
+                                                                    OnClientClick="setTextBox5(this.innerText);" />
+                                                            </ItemTemplate>
+                                                            <FooterTemplate>
+                                                                <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
+                                                                    Text="No items found." />
+                                                            </FooterTemplate>
+                                                        </asp:Repeater>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:FileUpload ID="FileUpload2" runat="server" />
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
+                                                <div class="overflow-div">
+                                                    <asp:Label ID="listofuploadedfiles1" runat="server" />
+                                                </div>
+                                                <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
+                                            </div>
+                                        </div>
+
+
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="dropdown-container">
-                                            <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
-                                                placeholder="Select" autocomplete="off" required="required"/>
-                                            <div id="RepeaterContainer5" class="suggestion-list">
-                                                <asp:Repeater ID="Repeater5" runat="server" OnItemDataBound="Repeater5_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand5">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton
-                                                            ID="lnkCategory"
-                                                            runat="server"
-                                                            CssClass="suggestion-item link-button category-link"
-                                                            Text='<%# Eval("doc_name") %>'
-                                                            CommandArgument='<%# Eval("doc_id") %>'
-                                                            CommandName="SelectCategory"
-                                                            OnClientClick="setTextBox5(this.innerText);" />
-                                                    </ItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
-                                                            Text="No items found." />
-                                                    </FooterTemplate>
-                                                </asp:Repeater>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="Label2" runat="server" Text="Photo Proof"></asp:Label>
+                                                <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                                <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
+                                                <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
+                                                <div class="overflow-div">
+                                                    <asp:Label ID="listofuploadedfiles" runat="server" />
+                                                </div>
+                                                <asp:Label ID="uploadidpath" runat="server" Visible="false" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <asp:FileUpload ID="FileUpload2" runat="server" />
-                                    </div>
+                                    <hr />
 
-                                    <div class="col-sm-2">
-                                        <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
-                                        <div class="overflow-div">
-                                            <asp:Label ID="listofuploadedfiles1" runat="server" />
+                                    <div class="box-header">
+                                        <div class="row ">
+                                            <div class="col-sm-12">
+                                                <h3 class="box-title"><b>Occupation Details</b></h3>
+                                            </div>
                                         </div>
-                                        <asp:Label ID="uploadphotopath" runat="server" Visible="false" />
                                     </div>
-                                </div>
-
-
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="Label2" runat="server" Text="Photo Proof"></asp:Label>
-                                        <asp:Label ID="Label18" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                        <asp:Label ID="Label29" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
-                                        <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
-                                        <div class="overflow-div">
-                                            <asp:Label ID="listofuploadedfiles" runat="server" />
+                                    <div class="form-group">
+                                        <div class="row ">
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_occup" runat="server" Text="Occupation"></asp:Label>
+                                                <asp:Label ID="lbl_occup_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_occup" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Occupation"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_mon_inc" runat="server" Text="Organization"></asp:Label>
+                                                <asp:Label ID="lbl_mon_inc_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_org" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Organization Name"></asp:TextBox>
+                                            </div>
                                         </div>
-                                        <asp:Label ID="uploadidpath" runat="server" Visible="false" />
                                     </div>
-                                </div>
-                            </div>
-                            <hr />
 
-                            <div class="box-header">
-                                <div class="row ">
-                                    <div class="col-sm-12">
-                                        <h3 class="box-title"><b>Occupation Details</b></h3>
+                                    <div class="form-group">
+                                        <div class="row ">
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_off_addr1" runat="server" Text="Office Address"></asp:Label>
+                                                <asp:Label ID="lbl_off_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_off_addr1" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Office Address"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_off_tel" runat="server" Text="Office Tel."></asp:Label>
+                                                <asp:Label ID="lbl_off_tel_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_off_tel" runat="server" Height="32px" Width="200px" MaxLength="50" onkeypress="return digit(event);" placeholder="Enter Office Tel."></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txt_off_tel" ErrorMessage="Numbers Only" Font-Bold="True" ForeColor="Red" ValidationExpression="^\d+" Display="Dynamic" ValidationGroup="g1"></asp:RegularExpressionValidator>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_occup" runat="server" Text="Occupation"></asp:Label>
-                                        <asp:Label ID="lbl_occup_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_occup" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Occupation"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_mon_inc" runat="server" Text="Organization"></asp:Label>
-                                        <asp:Label ID="lbl_mon_inc_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_org" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Organization Name"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
+                                    <hr />
 
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_off_addr1" runat="server" Text="Office Address"></asp:Label>
-                                        <asp:Label ID="lbl_off_addr1_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_off_addr1" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="250" placeholder="Enter Office Address"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_off_tel" runat="server" Text="Office Tel."></asp:Label>
-                                        <asp:Label ID="lbl_off_tel_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_off_tel" runat="server" Height="32px" Width="200px" MaxLength="50" onkeypress="return digit(event);" placeholder="Enter Office Tel."></asp:TextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txt_off_tel" ErrorMessage="Numbers Only" Font-Bold="True" ForeColor="Red" ValidationExpression="^\d+" Display="Dynamic" ValidationGroup="g1"></asp:RegularExpressionValidator>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            
                                     <div class="box-header">
                                         <div class="row ">
                                             <div class="col-sm-12">
@@ -668,108 +668,108 @@
                                     </div>
                                     <hr />
 
-                            <div class="box-header">
-                                <div class="row ">
-                                    <div class="col-sm-12">
-                                        <h3 class="box-title"><b>Family Details</b></h3>
+                                    <div class="box-header">
+                                        <div class="row ">
+                                            <div class="col-sm-12">
+                                                <h3 class="box-title"><b>Family Details</b></h3>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_tof_acc" runat="server" Text="Family Member"></asp:Label>
+                                    <div class="form-group">
+                                        <div class="row ">
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_tof_acc" runat="server" Text="Family Member"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_fam_mem_name" Style="text-transform: capitalize;" runat="server" Height="32px" Width="200px" placeholder="Enter family member"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_bank_acc" runat="server" Text="Relation"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_owner_rel" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Relation"></asp:TextBox>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_fam_mem_name" Style="text-transform: capitalize;" runat="server" Height="32px" Width="200px" placeholder="Enter family member"></asp:TextBox>
+                                    <div class="form-group">
+                                        <div class="row ">
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_bank" runat="server" Text="Occupaation"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_f_occu" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Occupation"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:Label ID="lbl_bank_addr1" runat="server" Text="DOB"></asp:Label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <asp:TextBox ID="txt_f_dob" runat="server" MaxLength="50" Height="32px" Width="200px" placeholder="Enter Dob" TextMode="Date"></asp:TextBox>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_bank_acc" runat="server" Text="Relation"></asp:Label>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <center>
+                                                <asp:Button ID="btn_add" class="btn btn-primary" runat="server" Text="Add" OnClick="btn_add_Click"></asp:Button>
+                                            </center>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_owner_rel" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Relation"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_bank" runat="server" Text="Occupaation"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_f_occu" runat="server" Style="text-transform: capitalize;" Height="32px" Width="200px" MaxLength="50" placeholder="Enter Occupation"></asp:TextBox>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:Label ID="lbl_bank_addr1" runat="server" Text="DOB"></asp:Label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <asp:TextBox ID="txt_f_dob" runat="server" MaxLength="50" Height="32px" Width="200px" placeholder="Enter Dob" TextMode="Date"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <center>
-                                        <asp:Button ID="btn_add" class="btn btn-primary" runat="server" Text="Add" OnClick="btn_add_Click"></asp:Button>
-                                    </center>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-12">
-                                        <asp:GridView ID="GridView2" runat="server" Width="100%" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView2_RowDeleting" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" OnSorting="GridView2_Sorting" EmptyDataText="No Record Found" AllowSorting="True">
+                                    <hr />
+                                    <div class="form-group">
+                                        <div class="row ">
+                                            <div class="col-sm-12">
+                                                <asp:GridView ID="GridView2" runat="server" Width="100%" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView2_RowDeleting" HeaderStyle-BackColor="lightblue" ShowHeaderWhenEmpty="true" OnSorting="GridView2_Sorting" EmptyDataText="No Record Found" AllowSorting="True">
 
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="detail_id" Visible="false">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="o_ex_id" runat="server" Text='<%# Bind("o_ex_id")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="owner_id" Visible="false">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="owner_id" runat="server" Text='<%# Bind("owner_id")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Name" SortExpression="f_name">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="f_name" runat="server" Text='<%# Bind("f_name")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Relation" SortExpression="relation">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="relation" runat="server" Text='<%# Bind("relation")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Occupation" SortExpression="f_occu">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="f_occu" runat="server" Text='<%# Bind("f_occu")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="DOB" SortExpression="f_dob">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="f_dob" runat="server" Text='<%# Bind("f_dob", "{0:dd-MM-yyyy}")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField ItemStyle-Width="50">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                        </asp:GridView>
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="detail_id" Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="o_ex_id" runat="server" Text='<%# Bind("o_ex_id")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="owner_id" Visible="false">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="owner_id" runat="server" Text='<%# Bind("owner_id")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Name" SortExpression="f_name">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="f_name" runat="server" Text='<%# Bind("f_name")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Relation" SortExpression="relation">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="relation" runat="server" Text='<%# Bind("relation")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Occupation" SortExpression="f_occu">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="f_occu" runat="server" Text='<%# Bind("f_occu")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="DOB" SortExpression="f_dob">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="f_dob" runat="server" Text='<%# Bind("f_dob", "{0:dd-MM-yyyy}")%>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ItemStyle-Width="50">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <hr />
+                                    <hr />
 
-                                                                </ContentTemplate>
+                                </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                 </Triggers>
-                       
+
                             </asp:UpdatePanel>
-                           
+
 
                         </div>
                         <div class="modal-footer">
@@ -907,12 +907,12 @@
 
         function setTextBox3(value) {
             document.getElementById("<%= TextBox3.ClientID %>").value = value;
-             document.getElementById("RepeaterContainer3").style.display = "none";
+            document.getElementById("RepeaterContainer3").style.display = "none";
         }
 
         function setTextBox4(value) {
             document.getElementById("<%= TextBox4.ClientID %>").value = value;
-             document.getElementById("RepeaterContainer4").style.display = "none";
+            document.getElementById("RepeaterContainer4").style.display = "none";
         }
 
         function setTextBox5(value) {
