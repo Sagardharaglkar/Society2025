@@ -3,21 +3,21 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-                .resized-model{
-        width: 900px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 900px;
+            height: auto;
+            right: 82px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
     </style>
     <!-- jQuery (required by Bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -66,19 +66,15 @@
             });
         }
 
-        function openModal() {
-           
-            $('#edit_model').modal('show');
- 
-        }
 
-        $('#edit_model').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset');
-        })
 
-        
+        //$('#edit_model').on('hidden.bs.modal', function () {
+        //    $(this).find('form').trigger('reset');
+        //})
+
+
         function disableSaveButtonIfValid() {
-           
+
             var btn = document.getElementById('<%= btn_save.ClientID %>');
             var modal = document.getElementById('edit_model');
             var inputs = modal.querySelectorAll('input[required], select[required]');
@@ -96,7 +92,7 @@
                 btn.value = "Saving...";
 
 
-                      __doPostBack('<%= btn_save.UniqueID %>', '');
+                __doPostBack('<%= btn_save.UniqueID %>', '');
 
                 return false;
             }
@@ -118,6 +114,7 @@
         }
     </style>
 
+
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
@@ -132,9 +129,9 @@
                 </table>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                       
 
-<%--                        <div class="form-group">
+
+                        <%--                        <div class="form-group">
                             <div class="row ">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
@@ -160,42 +157,42 @@
                             </div>
                         </div>--%>
 
-                                <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center">
-                        <div class="search-container">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                            <asp:TextBox
-                                ID="txt_search"
-                                CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>                    
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                            <!-- Calendar and Search Buttons -->
-                            <div class="input-buttons">
-                                 <button
-                                    id="btn_search"
-                                    type="submit"
-                                    class="search-button2"
-                                    runat="server"
-                                    onserverclick="btn_search_Click">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        &nbsp;&nbsp;
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-                
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">
@@ -241,7 +238,7 @@
 
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                              
+
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
                                                     <ItemTemplate>
                                                         <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("owner_id")%>'><img src="Images/123.png"/></asp:LinkButton>
@@ -260,8 +257,9 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <div class="modal fade bs-example-modal-sm" runat="server" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" ClientIDMode="Static" data-backdrop="static" >
-                    <div class="modal-dialog modal-sm-4" >
+
+                <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                    <div class="modal-dialog modal-sm-4">
 
                         <div class="modal-content resized-model">
                             <div class="modal-header">
@@ -271,16 +269,16 @@
                             <div class="modal-body" id="invoice_data">
                                 <asp:UpdatePanel ID="modalpanel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                         <asp:HiddenField ID="owner_id" runat="server" />
-                        <asp:HiddenField ID="o_ex_id" runat="server"></asp:HiddenField>
-                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="flat_id" runat="server" />
+                                        <asp:HiddenField ID="owner_id" runat="server" />
+                                        <asp:HiddenField ID="o_ex_id" runat="server"></asp:HiddenField>
+                                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                                        <asp:HiddenField ID="flat_id" runat="server" />
 
-                        <asp:HiddenField ID="flat_no_id" runat="server" />
-                        <asp:HiddenField ID="Buildling_wing_id" runat="server" />
-                        <asp:HiddenField ID="type_id" runat="server" />
-                        <asp:HiddenField ID="married_id" runat="server" />
-                        <asp:HiddenField ID="doc_id_id" runat="server" />
+                                        <asp:HiddenField ID="flat_no_id" runat="server" />
+                                        <asp:HiddenField ID="Buildling_wing_id" runat="server" />
+                                        <asp:HiddenField ID="type_id" runat="server" />
+                                        <asp:HiddenField ID="married_id" runat="server" />
+                                        <asp:HiddenField ID="doc_id_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-3">
@@ -288,14 +286,14 @@
                                                     <asp:Label ID="lbl_acc_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                   
+
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
-                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound" >
+                                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1" OnItemDataBound="Repeater1_ItemDataBound">
                                                                 <ItemTemplate>
-                                                                    
+
                                                                     <asp:LinkButton
                                                                         ID="lnkCategory"
                                                                         runat="server"
@@ -339,7 +337,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required"/>
+                                                            placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer2" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2" OnItemDataBound="Repeater2_ItemDataBound">
                                                                 <ItemTemplate>
@@ -467,7 +465,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox4" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required"/>
+                                                            placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer4" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater4" runat="server" OnItemDataBound="Repeater4_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand4">
                                                                 <ItemTemplate>
@@ -524,7 +522,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox5" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select " autocomplete="off" required="required"/>
+                                                            placeholder="Select " autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer5" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater5" runat="server" OnItemDataBound="Repeater5_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand5">
                                                                 <ItemTemplate>
@@ -550,7 +548,7 @@
                                                 </div>
 
                                                 <div class="col-sm-2">
-                                                    <asp:Button ID="btnotice_id_upload" data-dismiss="modal" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
+                                                    <asp:Button ID="btnotice_id_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btnotice_id_upload_Click" UseSubmitBehavior="False" />
                                                     <div class="overflow-div">
                                                         <asp:Label ID="listofuploadedfiles1" runat="server" />
                                                     </div>
@@ -569,7 +567,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
-                                                    <asp:Button data-dismiss="modal" ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
+                                                    <asp:Button ID="btn_photo_upload" runat="server" Text="Upload" Class="btn btn-primary" OnClick="btn_photo_upload_Click" UseSubmitBehavior="False" />
                                                     <div class="overflow-div">
                                                         <asp:Label ID="listofuploadedfiles" runat="server" />
                                                     </div>
@@ -735,7 +733,7 @@
 
                                     </Triggers>
                                     <Triggers>
-                                        <asp:PostBackTrigger ControlID="btn_photo_upload"  />
+                                        <asp:PostBackTrigger ControlID="btn_photo_upload" />
                                         <asp:PostBackTrigger ControlID="btnotice_id_upload" />
                                         <asp:PostBackTrigger ControlID="add" />
                                     </Triggers>
@@ -749,6 +747,9 @@
                                             <asp:Button ID="btn_save" OnClientClick="disableSaveButtonIfValid();" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click1" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+                                 
+
+
                                         </center>
                                         <br />
                                     </div>
@@ -764,11 +765,21 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
     <script>
+
+        function openModal() {
+            $('#edit_model').modal('show');
+            console.log("Modal opened (Bootstrap 4)");
+        }
 
         function initDropdownEvents() {
             const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");

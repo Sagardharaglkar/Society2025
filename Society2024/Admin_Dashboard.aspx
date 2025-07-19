@@ -27,16 +27,16 @@
         }
 
         #filterSidebar {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            width: 280px;
-            background-color: #f8f9fa;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-            z-index: 10;
-            padding: 20px;
-            display: none;
-            border-radius: 4px;
+    position: absolute;
+    top: 132px;
+    left: 13px;
+    width: 331px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 20px;
+    display: none;
+    border-radius: 4px;
         }
 
             #filterSidebar.show {
@@ -97,10 +97,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-
             <div class="box-body">
-
-
                 <table width="100%">
                     <tr>
                         <th width="100%">
@@ -110,67 +107,58 @@
                 </table>
                 <br />
 
-                <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
-                <asp:HiddenField ID="HiddenField4" runat="server" />
-                <asp:HiddenField ID="society_id" runat="server" />
-                <asp:HiddenField ID="state" runat="server" />
-                <asp:HiddenField ID="dist" runat="server" />
-                <asp:HiddenField ID="city" runat="server" />
 
-                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <button id="filterButton" type="button" style="margin-right: 8px; border-radius: 12px; border: 1px solid #ccc;">
+                                    <img style="width: 28px; margin: 5px;" src="img/filter.svg" />
+                                </button>
 
-                        <%--<div class="col-sm-1.5">
-            <asp:Label Visible="false" ID="society_name" runat="server" Text="Society Name"></asp:Label>
-        </div>
-        <div class="col-sm-2">
-            <asp:DropDownList Visible="false" ID="drp_society" runat="server" Width="180px" Height="32px" AutoPostBack="true">
-            </asp:DropDownList>
-        </div>--%>
-                        <div class="form-group filter-container">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="d-flex align-items-center">
-                                            <button id="filterButton" type="button" style="margin-right: 8px; border-radius: 12px; border: 1px solid #ccc;">
-                                                <img style="width: 28px; margin: 5px;" src="img/filter.svg" />
-                                            </button>
+                                <div class="search-container">
 
-                                            <div class="search-container">
+                                    <asp:TextBox
+                                        ID="txt_search"
+                                        CssClass="aspNetTextBox"
+                                        placeHolder="Search here"
+                                        runat="server"
+                                        TextMode="Search"
+                                        AutoPostBack="true"
+                                        OnTextChanged="btn_search_Click"
+                                        onkeyup="removeFocusAfterTyping()" />
 
-                                                <asp:TextBox
-                                                    ID="txt_search"
-                                                    CssClass="aspNetTextBox"
-                                                    placeHolder="Search here"
-                                                    runat="server"
-                                                    TextMode="Search"
-                                                    AutoPostBack="true"
-                                                    OnTextChanged="btn_search_Click"
-                                                    onkeyup="removeFocusAfterTyping()" />
-
-                                                <!-- Calendar and Search Buttons -->
-                                                <div class="input-buttons">
-                                                    <button
-                                                        id="btn_search"
-                                                        type="submit"
-                                                        class="search-button2"
-                                                        runat="server"
-                                                        onserverclick="btn_search_Click">
-                                                        <span class="material-symbols-outlined">search</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <!-- Calendar and Search Buttons -->
+                                    <div class="input-buttons">
+                                        <button
+                                            id="btn_search"
+                                            type="submit"
+                                            class="search-button2"
+                                            runat="server"
+                                            onserverclick="btn_search_Click">
+                                            <span class="material-symbols-outlined">search</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <!-- Filter Sidebar -->
-                            <div id="filterSidebar">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6>Filter Options</h6>
-                                    <button class="btn btn-sm btn-danger" onclick="toggleFilterPanel()">×</button>
-                                </div>
+                <!-- Filter Sidebar -->
+                <div id="filterSidebar">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6>Filter Options</h6>
+                        <button class="btn btn-sm btn-danger" onclick="toggleFilterPanel()">×</button>
+                    </div>
+                    <div class="row">
+                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:HiddenField ID="HiddenField4" runat="server" />
+                                <asp:HiddenField ID="society_id" runat="server" />
+                                <asp:HiddenField ID="state" runat="server" />
+                                <asp:HiddenField ID="dist" runat="server" />
+                                <asp:HiddenField ID="city" runat="server" />
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
@@ -228,7 +216,8 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
 
@@ -264,132 +253,109 @@
                                             <asp:TextBox ID="TextBox4" runat="server" CssClass="form-control" placeholder="Enter Pin Code" />
                                         </div>
                                     </div>
-                                    <!-- Date Filter -->
-                                    <div class="form-group">
-                                        <label>Date Range</label>
-                                        <asp:TextBox ID="calendarRange" runat="server" CssClass="form-control" placeholder="Select date range" />
-                                        <asp:HiddenField ID="dateFrom" runat="server" />
-                                        <asp:HiddenField ID="dateTo" runat="server" />
-                                    </div>
-
-                                
-
-                                    <!-- Price Range -->
-                                    <div class="form-group">
-                                        <label>Price Range</label>
-                                        <div id="priceSlider"></div>
-                                        <div id="priceRangeDisplay">₹0 – ₹5000</div>
-                                        <asp:HiddenField ID="minPriceHidden" runat="server" />
-                                        <asp:HiddenField ID="maxPriceHidden" runat="server" />
-                                    </div>
-
-                                    <asp:Button ID="btnResetFilters" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm mt-2" OnClientClick="resetFilters(); return false;" />
-                                    <asp:Button ID="btnApplyFilters" runat="server" Text="Apply Filter"
-                                        CssClass="btn btn-primary btn-sm mt-2"
-                                        OnClick="btnApplyFilters_Click" />
-
                                 </div>
-                            </div>
-
-                            <asp:Panel ID="filterSection" runat="server" Visible="false" CssClass="row mt-2">
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lbl_state" runat="server" Text="State"></asp:Label>
-                                    <asp:DropDownList ID="drp_state" runat="server" Width="180px" Height="32px" AutoPostBack="true">
-                                    </asp:DropDownList>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lbl_district" runat="server" Text="District"></asp:Label>
-                                    <asp:DropDownList ID="drp_district" runat="server" Width="180px" Height="32px" AutoPostBack="true">
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lbl_division" runat="server" Text="Division"></asp:Label>
-                                    <asp:DropDownList ID="drp_division" runat="server" Width="180px" Height="32px" AutoPostBack="true">
-                                    </asp:DropDownList>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lbl_city" runat="server" Text="City"></asp:Label>
-                                    <asp:DropDownList ID="drp_city" runat="server" Width="180px" Height="32px" AutoPostBack="true">
-                                    </asp:DropDownList>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <asp:Label ID="lbl_pincode" runat="server" Text="Pin Code"></asp:Label>
-                                    <asp:TextBox ID="txt_pincode" runat="server" Width="180px" Height="32px" placeHolder="Enter Pin Code"></asp:TextBox>
-                                </div>
-                            </asp:Panel>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <!-- Date Filter -->
+                        <div class="form-group">
+                            <label>Date Range</label>
+                            <asp:TextBox ID="calendarRange" runat="server" CssClass="form-control" placeholder="Select date range" />
+                            <asp:HiddenField ID="dateFrom" runat="server" />
+                            <asp:HiddenField ID="dateTo" runat="server" />
+                        </div>
 
 
 
-                            <div id="filterChips" runat="server" class="chips-container"></div>
+                        <!-- Price Range -->
+                        <div class="form-group">
+                            <label>Price Range</label>
+                            <div id="priceSlider"></div>
+                            <div id="priceRangeDisplay">₹0 – ₹5000</div>
+                            <asp:HiddenField ID="minPriceHidden" runat="server" />
+                            <asp:HiddenField ID="maxPriceHidden" runat="server" />
+                            <asp:HiddenField ID="selectedMinPriceHidden" runat="server" />
+                            <asp:HiddenField ID="selectedMaxPriceHidden" runat="server" />
+                        </div>
 
-                            <div class="form-group">
-                                <div class="row ">
-                                    <div class="col-sm-12">
-                                        <div style="width: 100%; overflow: auto;">
-                                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" EmptyDataText="No Record Found" ShowHeaderWhenEmpty="true" HeaderStyle-BackColor="lightblue" AllowSorting="true" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating">
+                        <asp:Button ID="btnResetFilters" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm mt-2" OnClientClick="resetFilters(); return false;" />
+                        <asp:Button ID="btnApplyFilters" runat="server" Text="Apply Filter"
+                            CssClass="btn btn-primary btn-sm mt-2"
+                            OnClick="btnApplyFilters_Click" />
 
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Society Name" ItemStyle-Width="400" SortExpression="name">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="society_name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                    </div>
+                </div>
+                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div id="filterChips" runat="server" class="chips-container"></div>
 
-                                                    <asp:TemplateField HeaderText="Address" ItemStyle-Width="400" SortExpression="address">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="address" runat="server" Text='<%# Eval("address") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Total Flats" ItemStyle-Width="150" SortExpression="total_flats">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label6" runat="server" Text='<%# Bind("total_flats")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Point of Contact" ItemStyle-Width="400" SortExpression="contact_no1">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label7" runat="server" Text='<%# Bind("contact_no1")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Email Address" ItemStyle-Width="150" SortExpression="email">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label8" runat="server" Text='<%# Bind("email")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                        <div class="form-group">
+                            <div class="row ">
+                                <div class="col-sm-12">
+                                    <div style="width: 100%; overflow: auto;">
+                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" EmptyDataText="No Record Found" ShowHeaderWhenEmpty="true" HeaderStyle-BackColor="lightblue" AllowSorting="true" OnSorting="GridView1_Sorting" OnRowUpdating="GridView1_RowUpdating">
 
-                                                    <asp:TemplateField HeaderText="Charges Per Month" ItemStyle-Width="150" SortExpression="chargesPerMonth">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label10" runat="server" Text='<%# Bind("chargesPerMonth")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Pending Amount" ItemStyle-Width="150" SortExpression="pending_amount">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label10" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Pending Month" ItemStyle-Width="150" SortExpression="month">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label10" runat="server" Text='<%# Bind("month")%>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                        </div>
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRowNumber" Text='<%# Container.DataItemIndex + 1 %>' runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Society Name" ItemStyle-Width="400" SortExpression="name">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="society_name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Address" ItemStyle-Width="400" SortExpression="address">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="address" runat="server" Text='<%# Eval("address") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Total Flats" ItemStyle-Width="150" SortExpression="total_flats">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("total_flats")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Point of Contact" ItemStyle-Width="400" SortExpression="contact_no1">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("contact_no1")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Email Address" ItemStyle-Width="150" SortExpression="email">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("email")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+
+                                                <asp:TemplateField HeaderText="Charges Per Month" ItemStyle-Width="150" SortExpression="chargesPerMonth">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("chargesPerMonth")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Pending Amount" ItemStyle-Width="150" SortExpression="pending_amount">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Pending Month" ItemStyle-Width="150" SortExpression="month">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("month")%>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnApplyFilters" EventName="Click" />
+                        <asp:AsyncPostBackTrigger ControlID="txt_search" EventName="TextChanged" />
+                    </Triggers>
                 </asp:UpdatePanel>
             </div>
         </div>
-
     </div>
 
 
@@ -430,31 +396,34 @@ document.addEventListener("click", function (e) {
             }
         });
 
-        // Price Slider
-        let minPrice = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value);
-        let maxPrice = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value);
-        const priceSlider = document.getElementById("priceSlider");
-        const priceDisplay = document.getElementById("priceRangeDisplay");
+            window.addEventListener("load", function () {
+                const priceSlider = document.getElementById("priceSlider");
 
-        noUiSlider.create(priceSlider, {
-            start: [minPrice, maxPrice],
-            connect: true,
-            range: { min: parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value), max: parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) },
-            step: 100,
-            tooltips: [true, true],
-            format: {
-                to: value => Math.round(value),
-                from: value => Number(value)
-            }
-        });
+                const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
+                const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
+                console.log(minFromServer, maxFromServer)
+                const selectedMinHidden = document.getElementById("<%= selectedMinPriceHidden.ClientID %>");
+                const selectedMaxHidden = document.getElementById("<%= selectedMaxPriceHidden.ClientID %>");
 
-        window.addEventListener("load", function () {
-            const minFromServer = parseInt(document.getElementById("<%= minPriceHidden.ClientID %>").value) || 0;
-            const maxFromServer = parseInt(document.getElementById("<%= maxPriceHidden.ClientID %>").value) || 50000;
 
-            // Update slider with server values
-            priceSlider.noUiSlider.set([minFromServer, maxFromServer]);
-        });
+                noUiSlider.create(priceSlider, {
+                    start: [minFromServer, maxFromServer],
+                    connect: true,
+                    range: { min: minFromServer, max: maxFromServer },
+                    step: 100,
+                    tooltips: [true, true],
+                    format: {
+                        to: value => Math.round(value),
+                        from: value => Number(value)
+                    }
+                });
+
+                // Set selected values to hidden fields on slider change
+                priceSlider.noUiSlider.on('update', function (values, handle) {
+                    selectedMinHidden.value = Math.round(values[0]);
+                    selectedMaxHidden.value = Math.round(values[1]);
+                });
+            });
 
 
 
@@ -463,8 +432,8 @@ document.addEventListener("click", function (e) {
             const fromDate = document.getElementById("<%= dateFrom.ClientID %>").value;
             const toDate = document.getElementById("<%= dateTo.ClientID %>").value;
             const state = document.getElementById("<%= TextBox1.ClientID %>").value;
- const district = document.getElementById("<%= TextBox2.ClientID %>").value;
- const city = document.getElementById("<%= TextBox3.ClientID %>").value;
+            const district = document.getElementById("<%= TextBox2.ClientID %>").value;
+            const city = document.getElementById("<%= TextBox3.ClientID %>").value;
             let chipsHTML = "";
 
             if (fromDate || toDate) {
@@ -492,8 +461,8 @@ document.addEventListener("click", function (e) {
             document.getElementById("<%= dateTo.ClientID %>").value = '';
             document.getElementById("<%= TextBox1.ClientID %>").value = '';
             document.getElementById("<%= TextBox2.ClientID %>").value = '';
-document.getElementById("<%= TextBox3.ClientID %>").value = '';
-document.getElementById("<%= TextBox4.ClientID %>").value = '';
+            document.getElementById("<%= TextBox3.ClientID %>").value = '';
+            document.getElementById("<%= TextBox4.ClientID %>").value = '';
             document.getElementById("filterChips").innerHTML = '';
             priceSlider.noUiSlider.set([0, 5000]);
         }
@@ -504,15 +473,30 @@ document.getElementById("<%= TextBox4.ClientID %>").value = '';
                 document.getElementById("<%= dateTo.ClientID %>").value = '';
                 document.getElementById("<%= calendarRange.ClientID %>").value = '';
             }
-           <%-- if (type === 'type') {
-                document.getElementById("<%= activityType.ClientID %>").value = '';
-            }--%>
             if (type === 'price') {
                 priceSlider.noUiSlider.set([0, 5000]);
-                document.getElementById("<%= minPriceHidden.ClientID %>").value = '';
-                document.getElementById("<%= maxPriceHidden.ClientID %>").value = '';
+                document.getElementById("<%= selectedMinPriceHidden.ClientID %>").value = '';
+                document.getElementById("<%= selectedMaxPriceHidden.ClientID %>").value = '';
             }
 
+            if(type ==='state'){
+               document.getElementById("<%= TextBox1.ClientID %>").value = '';
+            }
+
+            
+            if(type ==='dist'){
+               document.getElementById("<%= TextBox2.ClientID %>").value = '';
+            }
+
+            
+            if(type ==='city'){
+               document.getElementById("<%= TextBox3.ClientID %>").value = '';
+            }
+
+            
+            if(type ==='pin'){
+               document.getElementById("<%= TextBox4.ClientID %>").value = '';
+            }
             // Trigger the same Apply Filters button click via JavaScript
             __doPostBack('<%= btnApplyFilters.UniqueID %>', '');
         }
@@ -523,32 +507,32 @@ document.getElementById("<%= TextBox4.ClientID %>").value = '';
 
         function initDropdownEvents() {
             const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
-             const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-             textBox1.addEventListener("focus", function () {
-                 repeaterContainer1.style.display = "block";
-                 repeaterContainer2.style.display = "none";
-                 repeaterContainer3.style.display = "none";
-             });
+            textBox1.addEventListener("focus", function () {
+                repeaterContainer1.style.display = "block";
+                repeaterContainer2.style.display = "none";
+                repeaterContainer3.style.display = "none";
+            });
 
-             textBox1.addEventListener("input", function () {
-                 const input = textBox1.value.toLowerCase();
-                 filterSuggestions("category-link", input);
-             });
+            textBox1.addEventListener("input", function () {
+                const input = textBox1.value.toLowerCase();
+                filterSuggestions("category-link", input);
+            });
 
-             const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
-             const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-             textBox2.addEventListener("focus", function () {
-                 repeaterContainer2.style.display = "block";
-             });
+            textBox2.addEventListener("focus", function () {
+                repeaterContainer2.style.display = "block";
+            });
 
-             textBox2.addEventListener("input", function () {
-                 const input = textBox2.value.toLowerCase();
-                 filterSuggestions("category-link", input);
-             });
+            textBox2.addEventListener("input", function () {
+                const input = textBox2.value.toLowerCase();
+                filterSuggestions("category-link", input);
+            });
 
-             const textBox3 = document.getElementById("<%= TextBox3.ClientID %>");
+            const textBox3 = document.getElementById("<%= TextBox3.ClientID %>");
             const repeaterContainer3 = document.getElementById("RepeaterContainer3");
 
             textBox3.addEventListener("focus", function () {
@@ -598,9 +582,9 @@ document.getElementById("<%= TextBox4.ClientID %>").value = '';
 
         function setTextBox1(value) {
             document.getElementById("<%= TextBox1.ClientID %>").value = value;
-             document.getElementById("RepeaterContainer1").style.display = "none";
-             document.getElementById("<%= TextBox2.ClientID %>").value = "";
-             document.getElementById("<%= TextBox3.ClientID %>").value = "";
+            document.getElementById("RepeaterContainer1").style.display = "none";
+            document.getElementById("<%= TextBox2.ClientID %>").value = "";
+            document.getElementById("<%= TextBox3.ClientID %>").value = "";
         }
 
         function setTextBox2(value) {
@@ -619,4 +603,5 @@ document.getElementById("<%= TextBox4.ClientID %>").value = '';
 
 
     </script>
+
 </asp:Content>

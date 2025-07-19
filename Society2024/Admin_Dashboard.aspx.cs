@@ -32,10 +32,8 @@ namespace Society2024
 
             if (!IsPostBack)
             {
-                //defaulter_Click(sender, e);
-                filldrop();
-                //date_before.Text = DateTime.Now.ToShortDateString();
-                btn_search_Click(sender, e);
+                gridBind();
+
                 string str = "select * from state";
                 repeater.fill_list(Repeater1, str);
             }
@@ -75,22 +73,7 @@ namespace Society2024
             }
 
         }
-        public void filldrop()
-        {
-            String sql_query = "Select *  from society_master";
-            //BL_Login.fill_drop(drp_society, sql_query, "name", "society_id");
-            String sql_query1 = "Select *  from state";
-            BL_Login.fill_drop(drp_state, sql_query1, "state", "state_id");
-            String sql_query2 = "Select *  from district";
-            BL_Login.fill_drop(drp_district, sql_query2, "district", "district_id");
 
-            String sql_query3 = "Select distinct city from society_master where city is not null";
-            BL_Login.fill_drop(drp_city, sql_query3, "city", "city");
-
-            String sql_query4 = "Select distinct division,division_id from division where division is not null";
-            BL_Login.fill_drop(drp_division, sql_query4, "division", "division_id");
-
-        }
         protected void btn_search_Click(object sender, EventArgs e)
         {
             gridBind();
@@ -167,7 +150,7 @@ namespace Society2024
                 {
                     sb.Append(" AND ");
                 }
-                sb.Append(" city = '" + city.Value + "'");
+                sb.Append(" city = '" + society_id.Value + "'");
                 count++;
             }
 
@@ -182,13 +165,13 @@ namespace Society2024
                 sb.Append(" date between cast(  '" + dateFrom.Value + "' as date) and cast('" + dateTo.Value + "' as date)");
                 count++;
             }
-            if (minPriceHidden.Value != "" && maxPriceHidden.Value != "")
+            if (selectedMinPriceHidden.Value != "" && selectedMaxPriceHidden.Value != "")
             {
                 if (count > 0)
                 {
                     sb.Append(" AND ");
                 }
-                sb.Append(" pending_amount between cast( '" + minPriceHidden.Value + "' as decimal) and cast ('" + maxPriceHidden.Value + "' as decimal)");
+                sb.Append(" pending_amount between cast( '" + selectedMinPriceHidden.Value + "' as decimal) and cast ('" + selectedMaxPriceHidden.Value + "' as decimal)");
                 count++;
             }
             //sb.Append(" order by date desc");
@@ -235,10 +218,6 @@ namespace Society2024
 
         }
 
-        protected void btn_filter_Click(object sender, EventArgs e)
-        {
-            filterSection.Visible = true;
-        }
 
         protected void btnApplyFilters_Click(object sender, EventArgs e)
         {
@@ -258,19 +237,19 @@ namespace Society2024
             }
             if (TextBox2.Text != "")
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ District: {TextBox2.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ District: {TextBox2.Text} <button onclick=\"removeFilter('dist')\">×</button></span>";
             }
             if (TextBox3.Text != "")
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ City: {TextBox3.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ City: {TextBox3.Text} <button onclick=\"removeFilter('city')\">×</button></span>";
             }
             if (TextBox4.Text != "")
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Pincode: {TextBox4.Text} <button onclick=\"removeFilter('type')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-type'>🛠️ Pincode: {TextBox4.Text} <button onclick=\"removeFilter('pin')\">×</button></span>";
             }
-            if (!string.IsNullOrEmpty(minPriceHidden.Value) || !string.IsNullOrEmpty(maxPriceHidden.Value))
+            if (!string.IsNullOrEmpty(selectedMinPriceHidden.Value) || !string.IsNullOrEmpty(selectedMaxPriceHidden.Value))
             {
-                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{minPriceHidden.Value} – ₹{maxPriceHidden.Value} <button onclick=\"removeFilter('price')\">×</button></span>";
+                chipsHtml += $"<span class='filter-chip' id='chip-price'>💰 ₹{selectedMinPriceHidden.Value} – ₹{selectedMaxPriceHidden.Value} <button onclick=\"removeFilter('price')\">×</button></span>";
             }
 
             // Assign HTML to filterChips div

@@ -275,11 +275,6 @@
                 const selectedMinHidden = document.getElementById("<%= selectedMinPriceHidden.ClientID %>");
                 const selectedMaxHidden = document.getElementById("<%= selectedMaxPriceHidden.ClientID %>");
 
-                if (!priceSlider) {
-                    console.error("priceSlider element not found!");
-                    return;
-                }
-
                 noUiSlider.create(priceSlider, {
                     start: [minFromServer, maxFromServer],
                     connect: true,
