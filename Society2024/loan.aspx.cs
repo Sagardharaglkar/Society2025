@@ -189,10 +189,12 @@ namespace Society
 
             GetLoan.Name = txt_search.Text.Trim();
             GetLoan.Sql_Operation = "search";
+            GetLoan.Society_Id = society_id.Value;
             var result = l_Loan.search_loan(GetLoan);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         protected void edit_Click(object sender, EventArgs e)

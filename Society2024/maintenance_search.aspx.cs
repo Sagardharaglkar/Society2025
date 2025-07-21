@@ -168,7 +168,7 @@ namespace Society
             Maintenance1.M_Date = Convert.ToDateTime(txt_date.Text);
             var flat = Label4.Text.Split(':');
 
-
+           if (flat.Length > 1) 
             Maintenance1.Flat = Convert.ToInt32(flat[1]);
             Maintenance1.wing_id = Convert.ToInt32(wing_id.Value);
 
@@ -397,11 +397,13 @@ namespace Society
 
             Maintenance1.Name = txt_search.Text.Trim();
             Maintenance1.Sql_Operation = "search";
+            Maintenance1.Society_Id = society_id.Value;
             var result = bL_Maintenance.search_maintenance1(Maintenance1);
             GridView1.DataSource = result;
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
 
         }

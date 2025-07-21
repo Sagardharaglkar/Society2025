@@ -81,11 +81,12 @@ namespace Society
 
             request.Search = txt_search.Text.Trim();
             request.Sql_Operation = "search";
+            request.Society_Id = society_id.Value;
             var result = BL_Suggestion.search_suggestion(request);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
-
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
     
         public void runproc(String operation)

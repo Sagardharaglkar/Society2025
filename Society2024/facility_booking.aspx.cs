@@ -128,10 +128,12 @@ namespace Society
         {
             party.Name = txt_search.Text.Trim();
             party.Sql_Operation = "search";
+            party.Society_Id = society_id.Value;
             var result = bL_Facility.search_party(party);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
         protected void edit_Command(object sender, CommandEventArgs e)
@@ -145,7 +147,7 @@ namespace Society
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
-        public void runproc_save(String operation)
+        public string runproc_save(String operation)
         {
             if (facility_book_id.Value != "")
                 party.facility_book_id = Convert.ToInt32(facility_book_id.Value.ToString());
@@ -179,7 +181,8 @@ namespace Society
             party.From_Time = Convert.ToDateTime(from_time.Text.ToString());
             party.To_Time = Convert.ToDateTime(to_time.Text.ToString());
             party.Society_In = society_in.Checked == true ? 1 : 0;
-            bL_Facility.UpdateParty(party);
+            var result = bL_Facility.UpdateParty(party);
+            return result.Sql_Result;
 
 
         }
@@ -223,8 +226,16 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            runproc_save("Update");
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            var str = runproc_save("Update");
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+
+            }
+
         }
 
         protected void btn_delete_Click(object sender, EventArgs e)

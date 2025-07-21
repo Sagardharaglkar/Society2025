@@ -51,7 +51,7 @@
                 showConfirmButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK',
-                timer: 3000,
+                timer: 1400,
                 timerProgressBar: true,
 
                 didOpen: () => {
@@ -98,7 +98,8 @@
                 <table width="100%">
                     <tr>
                         <th width="100%" class="">
-                            <h1 class=" tex0 font-weight-bold " style="color: #012970;">Inventorys
+                            <h1 class=" tex0 font-weight-bold " style="color: #012970;">Inventories
+
                             </h1>
                         </th>
                     </tr>

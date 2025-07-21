@@ -121,6 +121,7 @@ namespace Society
         {
             member.Name = txt_search.Text;
             member.Sql_Operation = "Search";
+            member.Society_Id = society_id.Value;
             var result = bL_Society.search_member(member);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

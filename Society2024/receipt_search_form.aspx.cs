@@ -210,6 +210,7 @@ namespace Society
             
             var result = bL_Receipt.search_receipt(txt_search.Text.Trim());
             GridView1.DataSource = result;
+
             ViewState["dirState"] = result;
             GridView1.DataBind();
         }

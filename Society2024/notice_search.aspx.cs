@@ -97,10 +97,12 @@ namespace Society
 
             notice.Name = txt_search.Text.Trim();
             notice.Sql_Operation = "search";
+            notice.Society_Id = society_id.Value;
             var result = bL_Notice.search_notice(notice);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public  void  runproc_save(string operation)

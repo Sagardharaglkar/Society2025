@@ -74,10 +74,12 @@ namespace Society
 
             inventory.Name = txt_search.Text.Trim();
             inventory.Sql_Operation = "search";
+            inventory.Society_Id = society_id.Value;
             var result = bL_Inventory.search_inventory(inventory);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
             public string runproc_save(string operation)
         {

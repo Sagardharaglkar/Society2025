@@ -96,6 +96,7 @@ namespace Society2024
             if (txt_search.Text != "")
             
             village.Sql_Operation = sb.ToString();
+           
             var result = bL_Village.search_sq_ft_rate(village);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

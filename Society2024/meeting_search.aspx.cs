@@ -88,10 +88,12 @@ namespace Society
 
             meeting.Title = txt_search.Text.Trim();
             meeting.Sql_Operation ="search";
+            meeting.Society_Id = society_id.Value;
             var result = bL_Meeting.search_meeting(meeting);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public void runproc_save(String operation)

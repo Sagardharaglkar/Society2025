@@ -189,10 +189,12 @@ namespace Society2024
         {
             Staff.Name = txt_search.Text;
             Staff.Sql_Operation = "search";
+            Staff.Society_Id = society_id.Value;
             var result = bL_Staff.search_staff(Staff);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         protected void txt_contact_TextChanged(object sender, EventArgs e)

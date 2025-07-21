@@ -175,10 +175,12 @@ namespace Society
         {
             owner.Name = txt_search.Text.Trim();
             owner.Sql_Operation ="search";
+            owner.Society_Id = society_id.Value;
             var result = bL_Owner.search_rental(owner);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public string runproc_save(string operation)

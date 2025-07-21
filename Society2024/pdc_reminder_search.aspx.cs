@@ -152,10 +152,12 @@ namespace Society
 
             Reminder.Search = txt_search.Text.Trim(); 
             Reminder.Sql_Operation = "search";
+            Reminder.Society_Id = society_id.Value;
             var result = BL_Pdc.search_reminder(Reminder);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
 

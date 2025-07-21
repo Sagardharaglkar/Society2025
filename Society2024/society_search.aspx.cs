@@ -104,11 +104,12 @@ namespace Society
 
             society.Name = txt_search.Text.Trim();
             society.Sql_Operation = "search";
-            
+            society.Society_Id = society_id.Value;
             var result = bL_Society.search_society(society);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public string runproc_save(string operation)

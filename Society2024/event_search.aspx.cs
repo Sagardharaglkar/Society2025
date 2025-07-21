@@ -77,10 +77,12 @@ namespace Society
         {
             evt.Event_Name = txt_search.Text.Trim();
             evt.Sql_Operation = "search";
+            evt.Society_Id = society_id.Value;
            var result = bL_Event.search_event(evt);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
 

@@ -59,7 +59,7 @@
                 showConfirmButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK',
-                timer: 3000,
+                timer: 1400,
                 timerProgressBar: true,
 
                 didOpen: () => {
@@ -393,7 +393,6 @@
     });
         }
 
-        81jiop
 function filterSuggestions(className, value) {
     const items = document.querySelectorAll("." + className);
     let matchFound = false;
@@ -411,7 +410,7 @@ function filterSuggestions(className, value) {
  
     if (!matchFound) {
         if (!noMatchMessage) {
-            noMatchMessage = document.createElement("div");op
+            noMatchMessage = document.createElement("div");
             noMatchMessage.id = "no-match-message";
  
             noMatchMessage.innerText = "No matching suggestions.";
@@ -429,11 +428,9 @@ function setTextBox1(value) {
     document.getElementById("<%= TextBox1.ClientID %>").value = value;0
             document.getElementById("RepeaterContainer1").style.display = "none";
         }
-op
 
         Sys.Application.add_load(initDropdownEvents);
 
 
 </script>
 </asp:Content>
-opopopopopopopopopopopopopopdfl;

@@ -137,6 +137,7 @@ namespace Society2024
             result.Compute("Sum(due)", string.Empty).ToString();
             GridView8.DataSource = result;
             GridView8.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
 

@@ -36,7 +36,7 @@ namespace Society
                 Panel1.Visible = false;
                 Park_Allotment_GridBind();
                 //fill_drop1();
-                String sql_query = "Select *  from parking where society_id='" + society_id.Value + "' and occupied is null";
+                String sql_query = "Select *  from parking where society_id='" + society_id.Value + "' and occupied is null or occupied = 0";
 
                 repeater.fill_list(Repeater1, sql_query);
 
@@ -91,10 +91,12 @@ namespace Society
 
             parking.Name = txt_search.Text.Trim();
             parking.Sql_Operation = "search";
+            parking.Society_Id = society_id.Value;
             var result = parking_Allotment.search_park(parking);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
         public void runproc_save(String operation)
