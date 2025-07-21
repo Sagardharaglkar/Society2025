@@ -159,6 +159,7 @@ namespace DataAccessLayer.DA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", Staff.Sql_Operation));
             data_item.Add(st.create_array("search", Staff.Name));
+            data_item.Add(st.create_array("society_id", Staff.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_staff_master", ref sdr);
 

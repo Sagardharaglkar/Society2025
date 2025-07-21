@@ -55,6 +55,7 @@ namespace DataAccessLayer.MasterDA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation",   GetLedger.Sql_Operation));
             data_item.Add(st.create_array("search",   GetLedger.Search));
+            data_item.Add(st.create_array("society_id", GetLedger.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_ledger", ref sdr);
 

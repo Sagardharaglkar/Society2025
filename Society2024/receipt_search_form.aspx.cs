@@ -207,8 +207,10 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            
-            var result = bL_Receipt.search_receipt(txt_search.Text.Trim());
+
+            Receipt.Owner_Name= txt_search.Text.Trim();
+            Receipt.Society_Id = society_id.Value;
+            var result = bL_Receipt.search_receipt(Receipt);
             GridView1.DataSource = result;
 
             ViewState["dirState"] = result;

@@ -103,7 +103,9 @@ namespace DataAccessLayer.MasterDA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("search", building.Name));
             data_item.Add(st.create_array("operation", building.Sql_Operation));
-            
+            data_item.Add(st.create_array("society_id", building.Society_Id));
+
+
             status1 = st.run_query(data_item, "Select", "sp_building_master", ref sdr);
 
             if (status1 == "Done")

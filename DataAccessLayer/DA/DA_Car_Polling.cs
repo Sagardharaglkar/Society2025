@@ -39,6 +39,7 @@ namespace DataAccessLayer.DA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", car.Sql_Operation));
             data_item.Add(st.create_array("search", car.C_Name));
+            data_item.Add(st.create_array("society_id", car.Society_Id));
             status1 = st.run_query(data_item, "Select", "sp_car_polling", ref sdr);
 
             if (status1 == "Done")

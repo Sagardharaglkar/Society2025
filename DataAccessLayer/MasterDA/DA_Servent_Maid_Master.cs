@@ -122,6 +122,7 @@ namespace DataAccessLayer.MasterDA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", servent.Sql_Operation));
             data_item.Add(st.create_array("search", servent.S_Name));
+            data_item.Add(st.create_array("society_id", servent.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_servent_maid_master", ref sdr);
 

@@ -187,6 +187,7 @@ namespace DataAccessLayer.MasterDA
 
             data_item.Add(st.create_array("Operation", owner.Sql_Operation));
             data_item.Add(st.create_array("search", owner.Name));
+            data_item.Add(st.create_array("society_id", owner.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_owner_master", ref sdr);
 
