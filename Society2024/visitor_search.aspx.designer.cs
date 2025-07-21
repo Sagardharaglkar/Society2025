@@ -69,6 +69,24 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField visitor_flat_id;
 
         /// <summary>
+        /// searchDateFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField searchDateFrom;
+
+        /// <summary>
+        /// SearchDateTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SearchDateTo;
+
+        /// <summary>
         /// txt_search control.
         /// </summary>
         /// <remarks>
@@ -76,6 +94,15 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_search;
+
+        /// <summary>
+        /// calendarRange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox calendarRange;
 
         /// <summary>
         /// btn_search control.

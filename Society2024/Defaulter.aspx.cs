@@ -127,6 +127,7 @@ namespace Society2024
 
             details.Name = txt_search.Text.Trim();
             details.Sql_Operation = "defaulter_show";
+            details.society_id = society_id.Value;
             var result = BL_Login.search_defaulter(details);
             if (result != null && result.Rows.Count > 0)
             {

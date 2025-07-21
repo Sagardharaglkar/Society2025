@@ -18,8 +18,36 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+                 <style>
+    /* Highlight active parent folder (panel) */
+    li.active-panel > a.sidebar-item {
+        background-color: #007bff !important;
+        color: white !important;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-    <style>
+    /* Highlight current page link inside opened panel */
+    .collapse-inner a.active-link {
+        background-color: #e0f2ff !important;
+        color: #1d4ed8 !important;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Default styling for collapse-inner links */
+    .collapse-inner a {
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    /* Optional hover effect for active links */
+    .active-link:hover {
+        box-shadow: 0 0 0 2px rgba(0,123,255,0.4);
+    }
+
         ul#accordionSidebar::-webkit-scrollbar {
             display: none;
         }
@@ -163,8 +191,7 @@
             .collapse.show {
                 display: block;
             }
-    </style>
-    <style>
+
         .hover-underline {
             position: relative;
             border-radius: 30px;
@@ -209,9 +236,7 @@
             .hover-underline:hover {
                 transform: scale(1.05);
             }
-    </style>
 
-    <style>
         .user-info-model {
             width: 500px;
         }
@@ -868,37 +893,7 @@
                             </li>
                         </ul>
                     </div>       
-             <style>
-    /* Highlight active parent folder (panel) */
-    li.active-panel > a.sidebar-item {
-        background-color: #007bff !important;
-        color: white !important;
-        font-weight: bold;
-        border-radius: 4px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* Highlight current page link inside opened panel */
-    .collapse-inner a.active-link {
-        background-color: #e0f2ff !important;
-        color: #1d4ed8 !important;
-        font-weight: bold;
-        border-radius: 6px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* Default styling for collapse-inner links */
-    .collapse-inner a {
-        color: #007bff;
-        font-weight: bold;
-    }
-
-    /* Optional hover effect for active links */
-    .active-link:hover {
-        box-shadow: 0 0 0 2px rgba(0,123,255,0.4);
-    }
-</style>
-
+   
 
 
 
@@ -1171,30 +1166,15 @@
                 input.setSelectionRange(length, length);
             }
         }
-    </script>
-    <script>
-        let shouldToggleBack = false;
 
-        $('#accordionSidebar').hover(
-            function () {
-                // Hover in
-                if ($(this).hasClass('toggled')) {
-                    console.log('Hovered into sidebar while it is toggled');
-                    $(this).removeClass('toggled');
-                    shouldToggleBack = true;
-                } else {
-                    shouldToggleBack = false;
-                }
-            },
-            function () {
-                // Hover out
-                console.log('Hovered out of sidebar');
-                if (shouldToggleBack) {
-                    $(this).addClass('toggled');
-                    shouldToggleBack = false; // Reset flag to avoid future unintended toggles
-                }
-            }
-        );
+        function removeFocusAfterTyping() {
+            clearTimeout(window.typingTimer);
+            const input = document.querySelector('input[type="Search"]');
+            window.typingTimer = setTimeout(function () {
+                if (input) input.blur();
+            }, 500);
+            input.focus();
+        }
 
 
         function showPasswordFields() {
@@ -1252,16 +1232,7 @@
                 reEnterPasswordField.classList.add('is-invalid');
             }
         }
-    </script>
-    <script>
-        function removeFocusAfterTyping() {
-            clearTimeout(window.typingTimer);
-            const input = document.querySelector('input[type="Search"]');
-            window.typingTimer = setTimeout(function () {
-                if (input) input.blur();
-            }, 500);
-            input.focus();
-        }
+
 
 
         document.addEventListener("DOMContentLoaded", function () {

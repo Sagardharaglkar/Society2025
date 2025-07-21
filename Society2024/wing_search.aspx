@@ -37,8 +37,6 @@
             background-position: right calc(.375em + .1875rem) center;
             background-size: calc(.75em + .375rem) calc(.75em + .375rem);
         }
-
-
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -81,7 +79,7 @@
             });
         }
 
-       
+
 
     </script>
     <script type="text/javascript">
@@ -118,72 +116,42 @@
                         <asp:HiddenField ID="HiddenField4" runat="server" />
                         <asp:HiddenField ID="society_id" runat="server" />
 
-                        <%--                        <div class="form-group">
-                            <div class="row ">
+                        <div class="form-group">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                                        <asp:DropDownList Visible="false" ID="search_field" runat="server" Width="200px" Height="32px">
-                                            <asp:ListItem Value="w_name">Wing Name</asp:ListItem>
-                                            <asp:ListItem Value="name">Building Name</asp:ListItem>
-                                        </asp:DropDownList>
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
+
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
                                         &nbsp;&nbsp;
-                 
-                
-                      <asp:Panel Visible="false" ID="pnlSearch" runat="server" DefaultButton="btn_search" CssClass="d-flex align-items-center me-2">
-                          <asp:TextBox ID="txt_search1" Font-Bold="true" Width="200px" Height="32px" placeholder="Search here" runat="server"></asp:TextBox>
-                          &nbsp;&nbsp;
-                     <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Text="Search" UseSubmitBehavior="False" />
-                      </asp:Panel>
-                                        &nbsp;&nbsp;
-                                     <div class="position-relative mr-3" style="width: 209px;">
-                                         <asp:TextBox ID="txt_search" Style="text-transform: capitalize;" Width="200px" Height="32px" Font-Bold="true" placeHolder="Search here" runat="server"></asp:TextBox>&nbsp;&nbsp;
-                        
-                                            <asp:Button runat="server" CssClass="material-symbols-outlined text-white" Text="search" Style="position: absolute; right: 0px; padding: 0 6px; border-radius: 0 7px 7px 0; background-color: #0D6EFD; height: 32px;"
-                                                OnClick="btn_search_Click"></asp:Button>
-                                     </div>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>--%>
-
-                                <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center">
-                        <div class="search-container">
-
-                            <asp:TextBox
-                                ID="txt_search"
-                                CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>                    
-
-                            <!-- Calendar and Search Buttons -->
-                            <div class="input-buttons">
-                                 <button
-                                    id="btn_search"
-                                    type="submit"
-                                    class="search-button2"
-                                    runat="server"
-                                    onserverclick="btn_search_Click">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
-                            </div>
                         </div>
 
-                        &nbsp;&nbsp;
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-                
 
 
 
@@ -192,8 +160,8 @@
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
                                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped"
-                                            AllowSorting="true" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" HeaderStyle-BackColor="lightblue" 
-                                            OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" 
+                                            AllowSorting="true" ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" HeaderStyle-BackColor="lightblue"
+                                            OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
                                             OnRowUpdating="GridView1_RowUpdating" AllowPaging="true"
                                             PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging">
 
@@ -263,7 +231,7 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                                                <asp:HiddenField ID="ddl_build_name" runat="server" />
+                                        <asp:HiddenField ID="ddl_build_name" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-5">

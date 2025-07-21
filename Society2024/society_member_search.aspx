@@ -118,6 +118,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="search-container">
 
+
                                             <asp:TextBox
                                                 ID="txt_search"
                                                 CssClass="aspNetTextBox"

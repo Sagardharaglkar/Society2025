@@ -51,9 +51,9 @@ namespace Society
                 txt_out_time.Enabled = false;
 
 
-                
-                
-                
+
+
+
                 String str1 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
                 repeater.fill_list(Repeater1, str1);
 
@@ -94,17 +94,6 @@ namespace Society
 
         }
 
-        public void filldrop()
-        {
-
-            //String sql_query2 = "Select *  from building_master where society_id ='" + society_id.Value + "'";
-            //BL_Visitor.fill_drop(ddl_build, sql_query2, "name", "build_id");
-
-            //String sql_query4 = "Select * from owner_search_vw where society_id ='" + society_id.Value + "'";
-            //BL_Visitor.fill_drop(ddl_flat, sql_query4, "unit", "flat_id");
-        }
-
-
         public void Visitor_Gridbind()
         {
             DataTable dt = new DataTable();
@@ -142,14 +131,21 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append("Select * from visitor where society_id='" + society_id.Value + "'");
-           
+            visitor.V_Name = "";
 
-            // From and To date conditions
-           
+            if (searchDateFrom.Value != "" && SearchDateTo.Value != "")
+            {
+                visitor.In_Date = Convert.ToDateTime(searchDateFrom.Value);
+                visitor.Out_Date = Convert.ToDateTime(SearchDateTo.Value);
+            }
 
-            visitor.Sql_Operation = sb.ToString();
+            if ((SearchDateTo.Value == "") || (searchDateFrom.Value=="") || (!string.IsNullOrEmpty(txt_search.Text) && !(txt_search.Text.Contains(searchDateFrom.Value))))
+            {
+                visitor.V_Name = txt_search.Text;
+            }
+
+            visitor.Sql_Operation = "Search";
+            visitor.Society_Id = society_id.Value;
             var result = BL_Visitor.search_visitor(visitor);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
@@ -320,7 +316,7 @@ namespace Society
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
-            {
+        {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 if (building_id.Value != "")

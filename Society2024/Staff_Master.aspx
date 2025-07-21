@@ -125,7 +125,7 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="staff_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="build_id" runat="server" />
-                        <asp:HiddenField ID="role_id" runat="server" />
+        
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -262,7 +262,7 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                                                        <asp:HiddenField ID="role_id" runat="server" />
                                             <div class="form-group">
                                                 <div class="row ">
                                                     <div class="col-sm-4">

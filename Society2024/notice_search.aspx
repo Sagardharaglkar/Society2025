@@ -4,74 +4,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-    [<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script type="text/javascript">
-                                                                            function FailedEntry() {
-                                                                                Swal.fire({
-                                                                                    title: '❌ Failed!',
-                                                                                    text: 'Something went wrong. Please try again.',
-                                                                                    icon: 'error',
-                                                                                    showConfirmButton: true,
-                                                                                    confirmButtonColor: '#d33',
-                                                                                    confirmButtonText: 'Retry',
-                                                                                    timer: 3000,
-                                                                                    timerProgressBar: true,
 
-                                                                                    didOpen: () => {
-                                                                                        Swal.showLoading()
-                                                                                    }
-
-
-                                                                                });
-
-        function SuccessEntry() {
-            Swal.fire({
-                title: '✅ Success!',
-                text: 'Saved Successfully',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                timer: 3000,
-                timerProgressBar: true,
-
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-                willClose: () => {
-                    window.location.href = 'notice_search.aspx';
-                }
-            });
-        }
-
-        function openModal() {
-            $('#edit_model').modal('show');
-        }
-
-        function disableSaveButtonIfValid() {
-            var btn = document.getElementById('<%= btn_save.ClientID %>');
-            var modal = document.getElementById('edit_model');
-            var inputs = modal.querySelectorAll('input[required], select[required]');
-            var allValid = true;
-
-            inputs.forEach(function (input) {
-                if (!input.checkValidity()) {
-                    allValid = false;
-                }
-            });
-
-            if (allValid && btn) {
-                btn.disabled = true;
-                btn.value = "Saving...";
-
-
-                __doPostBack('<%= btn_save.UniqueID %>', '');
-
-                return false; // prevent default to avoid double postback
-            }
-
-            return false; // prevent postback if not valid
-        }
-    </script><div class="box box-primary">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
                 <table width="100%">
@@ -86,7 +20,7 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-                       
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-12">
@@ -97,18 +31,18 @@
                                                 ID="txt_search"
                                                 CssClass="aspNetTextBox"
                                                 placeHolder="Search here"
-                                                runat="server" 
-                                                TextMode="Search" 
+                                                runat="server"
+                                                TextMode="Search"
                                                 AutoPostBack="true"
                                                 OnTextChanged="btn_search_Click"
-                                                onkeyup="removeFocusAfterTyping()"/>
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                                            <ajaxtoolkit:calendarextender
-                                                id="CalendarExtender1"
+                                            <ajaxToolkit:CalendarExtender
+                                                ID="CalendarExtender1"
                                                 runat="server"
-                                                targetcontrolid="txt_search"
-                                                popupbuttonid="btn_calendar"
-                                                format="yyyy-MM-dd" />
+                                                TargetControlID="txt_search"
+                                                PopupButtonID="btn_calendar"
+                                                Format="yyyy-MM-dd" />
 
                                             <!-- Calendar and Search Buttons -->
                                             <div class="input-buttons">
@@ -131,7 +65,7 @@
                                         </div>
 
                                         &nbsp;&nbsp;
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -199,9 +133,9 @@
                             <div class="modal-body" id="invoice_data">
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        
-                        <asp:HiddenField ID="notice_id" runat="server" />
-                        <asp:HiddenField ID="Recipient_id" runat="server" />
+
+                                        <asp:HiddenField ID="notice_id" runat="server" />
+                                        <asp:HiddenField ID="Recipient_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-4">
@@ -228,8 +162,8 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="categoryBox" runat="server" Style="width:200px;" CssClass="form-control"
-                                                            placeholder="Select Recipients" autocomplete="off" required="required"/>
+                                                        <asp:TextBox ID="categoryBox" runat="server" Style="width: 200px;" CssClass="form-control"
+                                                            placeholder="Select Recipients" autocomplete="off" required="required" />
                                                         <div id="categoryRepeaterContainer" class="suggestion-list">
                                                             <asp:Repeater ID="categoryRepeater" runat="server" OnItemDataBound="categoryRepeater_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand">
                                                                 <ItemTemplate>
@@ -249,7 +183,7 @@
                                                             </asp:Repeater>
                                                         </div>
                                                     </div>
- 
+
                                                 </div>
                                             </div>
                                         </div>
@@ -388,99 +322,131 @@
             </div>
         </div>
     </div>
-<script>
+        <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function FailedEntry() {
+        Swal.fire({
+            title: '❌ Failed!',
+            text: 'Something went wrong. Please try again.',
+            icon: 'error',
+            showConfirmButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Retry',
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+    }
+
+    function SuccessEntry() {
+        Swal.fire({
+            title: '✅ Success!',
+            text: 'Saved Successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                window.location.href = 'notice_search.aspx';
+            }
+        });
+    }
+
+    function openModal() {
+        $('#edit_model').modal('show');
+    }
+
+    function disableSaveButtonIfValid() {
+        var btn = document.getElementById('<%= btn_save.ClientID %>');
+        var modal = document.getElementById('edit_model');
+        var inputs = modal.querySelectorAll('input[required], select[required]');
+        var allValid = true;
+
+        inputs.forEach(function (input) {
+            if (!input.checkValidity()) {
+                allValid = false;
+            }
+        });
+
+        if (allValid && btn) {
+            btn.disabled = true;
+            btn.value = "Saving...";
+            __doPostBack('<%= btn_save.UniqueID %>', '');
+            return false; // prevent default to avoid double postback
+        }
+
+        return false; // prevent postback if not valid
+    }
 
     function initDropdownEvents() {
-
         const categoryBox = document.getElementById("<%= categoryBox.ClientID %>");
-
         const categorySuggestions = document.getElementById("categoryRepeaterContainer");
 
         categoryBox.addEventListener("focus", function () {
-
             categorySuggestions.style.display = "block";
-
             itemSuggestions.style.display = "none";
-
         });
 
         categoryBox.addEventListener("input", function () {
-
             const input = categoryBox.value.toLowerCase();
-
             filterSuggestions("category-link", input);
-
         });
-
-
     }
 
-
     function filterSuggestions(className, value) {
-
         const items = document.querySelectorAll("." + className);
-
         let matchFound = false;
 
         items.forEach(item => {
-
             if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-
                 item.style.display = "block";
-
                 matchFound = true;
-
             } else {
-
                 item.style.display = "none";
-
             }
-
         });
 
         let noMatchMessage = document.getElementById("no-match-message");
 
         if (!matchFound) {
-
             if (!noMatchMessage) {
-
                 noMatchMessage = document.createElement("div");
-
                 noMatchMessage.id = "no-match-message";
-
                 noMatchMessage.innerText = "No matching suggestions.";
-
                 items[0]?.parentNode?.appendChild(noMatchMessage);
-
             }
-
             noMatchMessage.style.display = "block";
-
         } else {
-
             if (noMatchMessage) {
-
                 noMatchMessage.style.display = "none";
-
             }
-
         }
-
     }
-
 
     function setCategoryBox(value) {
-
         document.getElementById("<%= categoryBox.ClientID %>").value = value;
-
         document.getElementById("categoryRepeaterContainer").style.display = "none";
-
     }
 
-
     Sys.Application.add_load(initDropdownEvents);
-
-
 </script>
- 
+
+
 </asp:Content>

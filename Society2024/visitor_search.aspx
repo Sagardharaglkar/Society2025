@@ -2,48 +2,70 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
 
     <style>
-                .resized-model{
-        width: 900px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 900px;
+            height: auto;
+            right: 82px;
+        }
 
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
-.input-buttons {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
 
-#dateInput {
-    width: 150px;
-    padding: 6px 10px;
-}
+        .input-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.calendar-icon {
-    width: 24px;
-    height: 24px;
-}
-.calendar-input {
-  background: url('img/calendar.png') no-repeat right 10px center;
-  background-size: 20px 20px;
-  padding-right: 30px; /* space for image */
-}
+        #dateInput {
+            width: 150px;
+            padding: 6px 10px;
+        }
 
+        .calendar-icon {
+            width: 24px;
+            height: 24px;
+        }
 
+        .calendar-input {
+            background: url('img/calendar.png') no-repeat right 10px center;
+            background-size: 20px 20px;
+            padding-right: 30px; /* space for image */
+        }
+
+        .calendar-input {
+            background-image: url('img/calendar.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 24px 24px;
+            border: none;
+            outline: none;
+            width: 30px;
+            height: 30px;
+            color: transparent; /* hide text */
+            cursor: pointer;
+        }
+
+            .calendar-input::placeholder {
+                color: transparent;
+            }
+
+        .pr {
+            padding: 7px 15px;
+            padding-right: 70px;
+        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -137,69 +159,63 @@
 
                         <asp:HiddenField ID="visitor_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="server" />
-                        <asp:HiddenField runat="server" ID="datefrom"/><asp:HiddenField runat="server" ID="dateto"/>
-                       <asp:HiddenField runat="server" ID="building_id"/>
+                        <asp:HiddenField runat="server" ID="datefrom" />
+                        <asp:HiddenField runat="server" ID="dateto" />
+                        <asp:HiddenField runat="server" ID="building_id" />
                         <asp:HiddenField ID="visitor_flat_id" runat="server" />
-<div class="form-group">
-    <div class="row">
-        <!-- Search and Calendar Container -->
-        <div class="col-12">
-            <div class="d-flex align-items-center">
-                <div class="search-container">
 
-                    <!-- Search TextBox -->
-                    <asp:TextBox
-                        ID="txt_search"
-                        CssClass="aspNetTextBox"
-                        placeholder="Search here"
-                        runat="server"
-                        TextMode="Search"
-                        AutoPostBack="true"
-                        OnTextChanged="btn_search_Click"
-                        onkeyup="removeFocusAfterTyping()" />
+                        <asp:HiddenField ID="searchDateFrom" runat="server" />
+                        <asp:HiddenField ID="SearchDateTo" runat="server" />
 
-                    <!-- Hidden Flatpickr Input -->
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- Search and Calendar Container -->
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center" style="gap:12px;">
+                                        <div class="search-container">
+
+                                            <!-- Search TextBox -->
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox "
+                                                placeholder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" Style="padding-right: 70px;" />
+
+                                            <div class="input-buttons">
+
+                                                <asp:TextBox ID="calendarRange" runat="server" CssClass="calendar-input" />
+                                                <!-- Search Button -->
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+                                        <!-- Buttons Section (Add and Print buttons) -->
+
+                                        <div class=" d-flex">
+                                            <!-- "Add" Button -->
+                                            <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target="#p">Add</button>
+
+                                            <!-- "Print" Button -->
+                                            <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
 
 
-                    <!-- Calendar and Search Buttons -->
-                    <div class="input-buttons">
-                        <!-- Image that triggers Flatpickr -->
-                        <img
-                            id="btn_calendar"
-                            src="img/calendar.png"
-                            alt="Pick Date"
-                            class="calendar-icon"
-                            style="cursor: pointer;"
-                            onclick="openCalendar();" />
-
-                        <!-- Search Button -->
-                        <button 
-                            id="btn_search"
-                            type="submit"
-                            class="search-button2"
-                            runat="server"
-                            onserverclick="btn_search_Click">
-                            <span class="material-symbols-outlined">search</span>
-                        </button>
-                    </div>
-
-                </div>
-                 <!-- Buttons Section (Add and Print buttons) -->
-    <div class="row mt-3">
-        <div class="col-12 d-flex justify-content-start">
-            <!-- "Add" Button -->
-            <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target="#p">Add</button>
-
-            <!-- "Print" Button -->
-            <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-        </div>
-    </div>
-            </div>
-        </div>
-    </div>
-
-   
-</div>
+                        </div>
 
 
 
@@ -385,7 +401,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="dropdown-container">
                                                         <asp:TextBox ID="TextBox2" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" required="required"/>
+                                                            placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer2" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand2">
                                                                 <ItemTemplate>
@@ -405,7 +421,7 @@
                                                             </asp:Repeater>
                                                         </div>
                                                     </div>
- 
+
                                                 </div>
 
 
@@ -429,8 +445,8 @@
                                                         <asp:ListItem Value="Service">Home Service </asp:ListItem>
                                                         <asp:ListItem Value="Delivery">Delivery </asp:ListItem>
                                                         <asp:ListItem Value="Guest">Guest & Others </asp:ListItem>
-                                                        </asp:DropDownList>
- 
+                                                    </asp:DropDownList>
+
                                                 </div>
 
                                                 <div class="col-sm-3">
@@ -484,9 +500,9 @@
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="d-flex flex-column">
-                                                    <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
-                                                    <asp:Label ID="image" runat="server"></asp:Label>
-                                                        </div>
+                                                        <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg,jpeg" />
+                                                        <asp:Label ID="image" runat="server"></asp:Label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -496,18 +512,17 @@
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                     </Triggers>
-                                  
+
                                 </asp:UpdatePanel>
 
-</div>
-                                <div class="form-group">
-                                    <div class="row ">
-                                        <div class="col-sm-12">
-                                            <div class="pull-center">
-                                                <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_in" runat="server" Text="In" class="btn btn-primary" BackColor="red" ValidationGroup="valid" OnClick="btn_in_Click" />
-                                                <asp:Button ID="btn_out" runat="server" Text="Out" class="btn btn-primary" BackColor="red" ValidationGroup="g1" OnClick="btn_out_Click" Visible="false" />
-                                                <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss ="modal" />
-                                            </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row ">
+                                    <div class="col-sm-12">
+                                        <div class="pull-center">
+                                            <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_in" runat="server" Text="In" class="btn btn-primary" BackColor="red" ValidationGroup="valid" OnClick="btn_in_Click" />
+                                            <asp:Button ID="btn_out" runat="server" Text="Out" class="btn btn-primary" BackColor="red" ValidationGroup="g1" OnClick="btn_out_Click" Visible="false" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                         </div>
                                     </div>
                                 </div>
@@ -517,139 +532,159 @@
                 </div>
             </div>
         </div>
-   
-                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    </div>
 
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    function initDropdownEvents() {
+    <script>
 
-        const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
+        function initDropdownEvents() {
 
-        const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
 
-        textBox1.addEventListener("focus", function () {
+            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-            repeaterContainer1.style.display = "block";
+            textBox1.addEventListener("focus", function () {
 
-        });
+                repeaterContainer1.style.display = "block";
 
-        textBox1.addEventListener("input", function () {
+            });
 
-            const input = textBox1.value.toLowerCase();
+            textBox1.addEventListener("input", function () {
 
-            filterSuggestions("category-link", input);
+                const input = textBox1.value.toLowerCase();
 
-        });
-        const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+                filterSuggestions("category-link", input);
 
-        const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+            });
+            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
 
-        textBox2.addEventListener("focus", function () {
+            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
 
-            repeaterContainer2.style.display = "block";
+            textBox2.addEventListener("focus", function () {
 
-        });
+                repeaterContainer2.style.display = "block";
 
-        textBox2.addEventListener("input", function () {
+            });
 
-            const input = textBox2.value.toLowerCase();
+            textBox2.addEventListener("input", function () {
 
-            filterSuggestions("category-link", input);
+                const input = textBox2.value.toLowerCase();
 
-        });
+                filterSuggestions("category-link", input);
 
-
-    }
+            });
 
 
+        }
 
+        function filterSuggestions(className, value) {
 
-    function filterSuggestions(className, value) {
+            const items = document.querySelectorAll("." + className);
 
-        const items = document.querySelectorAll("." + className);
+            let matchFound = false;
 
-        let matchFound = false;
+            items.forEach(item => {
 
-        items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
 
-            if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    item.style.display = "block";
 
-                item.style.display = "block";
+                    matchFound = true;
 
-                matchFound = true;
+                } else {
+
+                    item.style.display = "none";
+
+                }
+
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+
+                if (!noMatchMessage) {
+
+                    noMatchMessage = document.createElement("div");
+
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+
+                }
+
+                noMatchMessage.style.display = "block";
 
             } else {
 
-                item.style.display = "none";
+                if (noMatchMessage) {
+
+                    noMatchMessage.style.display = "none";
+
+                }
 
             }
 
+        }
+
+        function setTextBox1(value) {
+
+            document.getElementById("<%= TextBox1.ClientID %>").value = value;
+            document.getElementById("<%= TextBox2.ClientID %>").value = "";
+
+            document.getElementById("RepeaterContainer1").style.display = "none";
+
+        }
+
+        function setTextBox2(value) {
+
+            document.getElementById("<%= TextBox2.ClientID %>").value = value;
+
+            document.getElementById("RepeaterContainer2").style.display = "none";
+
+        }
+
+        function setupFlatpickr() {
+            const calendarInput = document.getElementById('<%= calendarRange.ClientID %>');
+            const searchInput = document.getElementById('<%= txt_search.ClientID %>');
+
+            if (!calendarInput) return;
+
+            // Make sure Flatpickr is not initialized twice
+            if (calendarInput._flatpickr) {
+                calendarInput._flatpickr.destroy();
+            }
+
+            calendarInput.readOnly = true;
+
+            flatpickr(calendarInput, {
+                mode: "range",
+                dateFormat: "Y-m-d",
+                onChange: function (selectedDates) {
+                    if (selectedDates.length === 2) {
+                        const fromDate = selectedDates[0].toLocaleDateString('en-CA');
+                        const toDate = selectedDates[1].toLocaleDateString('en-CA');
+                        searchInput.value = `${fromDate} to ${toDate}`;
+                        document.getElementById("<%= searchDateFrom.ClientID %>").value = fromDate;
+                        document.getElementById("<%= SearchDateTo.ClientID %>").value = toDate;
+                    }
+                }
+            });
+        }
+
+        // Initial load
+        window.onload = function () {
+            setupFlatpickr();
+        };
+
+        // Re-apply after every postback
+        Sys.Application.add_load(function () {
+            setupFlatpickr();
+            initDropdownEvents();
         });
 
-        let noMatchMessage = document.getElementById("no-match-message");
-
-        if (!matchFound) {
-
-            if (!noMatchMessage) {
-
-                noMatchMessage = document.createElement("div");
-
-                noMatchMessage.id = "no-match-message";
-
-                noMatchMessage.innerText = "No matching suggestions.";
-
-                items[0]?.parentNode?.appendChild(noMatchMessage);
-
-            }
-
-            noMatchMessage.style.display = "block";
-
-        } else {
-
-            if (noMatchMessage) {
-
-                noMatchMessage.style.display = "none";
-
-            }
-
-        }
-
-    }
-
-    function setTextBox1(value) {
-
-        document.getElementById("<%= TextBox1.ClientID %>").value = value;
-        document.getElementById("<%= TextBox2.ClientID %>").value = "";
-
-        document.getElementById("RepeaterContainer1").style.display = "none";
-
-    }
-    function setTextBox2(value) {
-
-        document.getElementById("<%= TextBox2.ClientID %>").value = value;
-
-        document.getElementById("RepeaterContainer2").style.display = "none";
-
-    }
-    const input = document.getElementById("<%= txt_search.ClientID %>")
-    flatpickr("#<%= txt_search.ClientID %>", {
-        mode: "range",
-        dateFormat: "Y-m-d", // Keep format as YYYY-MM-DD
-        onChange: function (selectedDates) {
-            if (selectedDates.length === 2) {
-                const fromDate = selectedDates[0].toLocaleDateString('en-CA'); // YYYY-MM-DD
-                const toDate = selectedDates[1].toLocaleDateString('en-CA');   // YYYY-MM-DD
-
-<%--                document.getElementById("<%= dateFrom.ClientID %>").value = fromDate;
-                document.getElementById("<%= dateTo.ClientID %>").value = toDate;--%>
-            }
-        }
-
-    // Re-initialize all scripts after partial postbacks
-    Sys.Application.add_load(function () {
-            initDropdownEvents();
-        initFlatpickr();
-    });
-</script>
-     </asp:Content>
+    </script>
+</asp:Content>
