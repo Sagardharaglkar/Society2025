@@ -31,7 +31,7 @@
                 showConfirmButton: true,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'OK',
-                timer: 3000,
+                timer: 1400,
                 timerProgressBar: true,
 
                 didOpen: () => {

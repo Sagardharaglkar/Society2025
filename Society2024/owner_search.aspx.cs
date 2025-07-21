@@ -162,6 +162,7 @@ namespace Society
             
             owner.Sql_Operation = "search";
             owner.Name = txt_search.Text;
+            owner.Society_Id = society_id.Value;
             var result = bL_Owner.search_rental(owner);
             OwnerGrid.DataSource = result;
             ViewState["dirState"] = result;

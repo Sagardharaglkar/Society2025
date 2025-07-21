@@ -127,6 +127,7 @@ namespace Society2024
 
             details.Name = txt_search.Text.Trim();
             details.Sql_Operation = "defaulter_show";
+            details.society_id = society_id.Value;
             var result = BL_Login.search_defaulter(details);
             if (result != null && result.Rows.Count > 0)
             {
@@ -136,6 +137,7 @@ namespace Society2024
             result.Compute("Sum(due)", string.Empty).ToString();
             GridView8.DataSource = result;
             GridView8.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
 

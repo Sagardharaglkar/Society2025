@@ -167,10 +167,12 @@ namespace Society2024
         {
             GetFacility.Name = txt_search.Text;
             GetFacility.Sql_Operation = "search";
+            GetFacility.Society_Id = society_id.Value;
             var result = bL_Party.search_facility(GetFacility);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)

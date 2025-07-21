@@ -129,10 +129,12 @@ namespace Society
 
             care.C_Name = txt_search.Text.Trim();
             care.Sql_Operation = "search";
+            care.Society_Id = society_id.Value;
             var result = bL_Caretaker.search_caretaker(care);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public string runproc_save(string operation)

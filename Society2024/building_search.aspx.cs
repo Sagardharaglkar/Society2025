@@ -204,10 +204,12 @@ namespace Society
 
             building.Sql_Operation = "search";
             building.Name = txt_search.Text;
+            building.Society_Id = society_id.Value;
             var result = bL_Building.search_building(building);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

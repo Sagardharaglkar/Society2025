@@ -78,10 +78,12 @@ namespace Society
 
             GetLedger.Search = txt_search.Text.Trim();
             GetLedger.Sql_Operation = "search";
+            GetLedger.Society_Id = society_id.Value;
             var result = bL_Ledger.search_ledger(GetLedger);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
         protected void btn_save_Click(object sender, EventArgs e)
 

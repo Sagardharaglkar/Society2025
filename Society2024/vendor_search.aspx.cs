@@ -73,10 +73,12 @@ namespace Society
 
             vendor.Name = txt_search.Text.Trim();
             vendor.Sql_Operation = "search";
+            vendor.Society_Id = society_id.Value;
             var result = bL_Vendor.search_vendor(vendor);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
         public string runproc_save(String operation)
         {

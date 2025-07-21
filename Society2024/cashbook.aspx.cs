@@ -121,6 +121,7 @@ namespace Society
             Panel1.Visible = false;
             GridView1.Visible = true;
             int count = 1;
+
           
         }
 

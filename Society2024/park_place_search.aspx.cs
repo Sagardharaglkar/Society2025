@@ -93,10 +93,12 @@ namespace Society
         {
             parking.Name = txt_search.Text.Trim();
             parking.Sql_Operation = "search";
+            parking.Society_Id = society_id.Value;
             var result = bL_Parking.search_park_place(parking);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public void runproc(String operation)

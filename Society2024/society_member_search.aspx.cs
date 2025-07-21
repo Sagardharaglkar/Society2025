@@ -121,10 +121,12 @@ namespace Society
         {
             member.Name = txt_search.Text;
             member.Sql_Operation = "Search";
+            member.Society_Id = society_id.Value;
             var result = bL_Society.search_member(member);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
         public string runproc_save(string operation)

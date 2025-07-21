@@ -85,6 +85,7 @@ namespace Society
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
 
         }
         public void runproc_save(string operation)

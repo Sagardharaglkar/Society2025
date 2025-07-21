@@ -206,10 +206,12 @@ namespace Society
 
             car.C_Name = txt_search.Text.Trim();
             car.Sql_Operation = "search";
+            car.Society_Id = society_id.Value;
             var result = BL_Car.search_car(car);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
 

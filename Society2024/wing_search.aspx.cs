@@ -90,6 +90,7 @@ namespace Society
 
             wing.Sql_Operation = "search";
             wing.B_Name = txt_search.Text;
+            wing.Society_Id = society_id.Value;
             var result = bL_Wing.search_wing(wing);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;

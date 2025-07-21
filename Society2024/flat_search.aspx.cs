@@ -145,10 +145,12 @@ namespace Society
 
             flat.B_Name = txt_search.Text;
             flat.Sql_Operation = "search";
+            flat.Society_Id = society_id.Value;
             var result = bL_Flat.search_flat(flat);
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
         }
 
 
