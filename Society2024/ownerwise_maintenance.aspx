@@ -158,6 +158,7 @@
                                 </div>
                             </div>
                         </div>
+                        <asp:label runat="server" ID="lbl_owner_id" Visible="false"></asp:label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
 

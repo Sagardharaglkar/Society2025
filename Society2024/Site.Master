@@ -974,14 +974,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Email Address*</label>
-                                            <asp:TextBox runat="server" ID="email" type="email" class="form-control" placeholder="adela@simmple.com"></asp:TextBox>
+                                            <asp:TextBox runat="server" ID="email" type="email" class="form-control" placeholder="adela@simmple.com" TextMode="Email"></asp:TextBox>
                                         </div>
 
 
 
                                         <div class="col-md-12">
                                             <label class="form-label">Contact</label>
-                                            <asp:TextBox runat="server" ID="contact" type="text" class="form-control" placeholder="Enter Contact" TextMode="Phone"></asp:TextBox>
+                                            <asp:TextBox runat="server" type="contact" ID="contact" class="form-control" placeholder="Enter Contact" TextMode="Phone" MaxLength="10"></asp:TextBox>
                                         </div>
 
                                         <div class="col-md-12">

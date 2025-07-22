@@ -103,7 +103,7 @@ namespace DataAccessLayer.DA
                             Receipt.Chqdate = Convert.ToDateTime(sdr["chqdate"]);
                         }
                         Receipt.Remarks = sdr["remarks"].ToString();
-                        Receipt.Received_Amount = float.Parse(sdr["received_amt"].ToString());
+                        Receipt.Received_Amount = float.Parse(sdr["recevied_amt"].ToString());
                        
 
                     }

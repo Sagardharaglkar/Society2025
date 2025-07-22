@@ -69,8 +69,8 @@ namespace Society
             String str3 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
             repeater.fill_list(Repeater2, str3);
 
-            string str4 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_lbl.Text + "' ";
-            repeater.fill_list(Repeater3, str4);
+            string str4 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_id.Value + "' ";
+            repeater.fill_list(Repeater3, str4); 
 
         }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
@@ -78,7 +78,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 building_id.Value = e.CommandArgument.ToString();
-                building_lbl.Text = e.CommandArgument.ToString();
+             
                 String str1 = "Select distinct w_name,wing_id from global_society_view where  society_id='" + society_id.Value + "' and  build_id='" + building_id.Value + "' ";
                 repeater.fill_list(Repeater2, str1);
             }
@@ -90,7 +90,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 wing_name_id.Value = e.CommandArgument.ToString();
-                string str1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_lbl.Text + "' ";
+                string str1 = "Select distinct owner_id,name from owner_search_vw where society_id='" + society_id.Value + "' and wing_id='" + wing_name_id.Value + "' and  build_id='" + building_id.Value + "' ";
                 repeater.fill_list(Repeater3, str1);
             }
 
@@ -280,12 +280,13 @@ namespace Society
             Receipt.Receipt_No = receipt_no.Text;
             Receipt.Pay_Mode = Convert.ToInt32(pay_mode_id.Value);
             Receipt.Date = Convert.ToDateTime(txt_date.Text);
+            Receipt.build_id = Convert.ToInt32(building_id.Value);
+            Receipt.Wing_Id = Convert.ToInt32(wing_name_id.Value);
             Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             Receipt.Recivable_Amt = float.Parse(txt_amount.Text);
             Receipt.PayFor = check_checked();
-            Receipt.build_id = Convert.ToInt32(building_id.Value);
             Receipt.Owner_Name = TextBox3.Text.ToString();
-            Receipt.Wing_Id = Convert.ToInt32(wing_name_id.Value);
+            //Receipt.Owner_Id = Convert.ToInt32(owner_name_id.Value);
             if (pay_mode_id.Value == "3")
             {
                 Receipt.Chqno = ddl_chq.SelectedValue;
@@ -321,8 +322,8 @@ namespace Society
 
             txt_amount.Text = result.Recivable_Amt.ToString();
             building_id.Value = result.build_id.ToString();
-            owner_id.Value = result.Owner_Id.ToString();
-            wing_id.Value = result.Wing_Id.ToString();
+            wing_name_id.Value = result.Wing_Id.ToString();
+            owner_name_id.Value = result.Owner_Id.ToString();
             //ddl_bill.SelectedValue = result.Bill_No.ToString();
             if(result.Pay_Mode==3)
            ddl_chq.SelectedValue = result.Chqno;
@@ -505,11 +506,7 @@ namespace Society
             receipt_id.Value = id;
             Session["receipt_no"] = receipt_id.Value;
             runproc("Select");
-            ddl_build_SelectedIndexChanged(sender, e);
-            wing_name_id.Value = wing_id.Value;
-            ddl_wing_SelectedIndexChanged(sender, e);
-            owner_name_id.Value = owner_id.Value;
-            ddl_owner_SelectedIndexChanged(sender, e);
+
             paystatus_check();
             btn_delete.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
@@ -531,8 +528,8 @@ namespace Society
         }
 
         protected void txt_received_amt_TextChanged(object sender, EventArgs e)
-        {
-            
+            {
+            if(txt_amount.Text!="" && txt_received_amt.Text!="")
             txt_pdc_balance.Text = (Decimal.Parse(txt_amount.Text) - Decimal.Parse(txt_received_amt.Text)).ToString();
         }
 
@@ -673,6 +670,7 @@ namespace Society
 
             }
 
+        
         }
 
         protected void Repeater4_ItemDataBound(object sender, RepeaterItemEventArgs e)

@@ -159,6 +159,10 @@
                             </div>
                         </div>
                     </ContentTemplate>
+                    <Triggers>
+
+                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                    </Triggers>
                 </asp:UpdatePanel>
                 <div class="modal fade bs-example-modal-sm" id="edit_model" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-sm-4">
@@ -237,7 +241,7 @@
                                                         <div class="dropdown-container">
                                                             <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
                                                                 placeholder="Select" autocomplete="off" required="required" Style="width: 200px;" />
-                                                            <asp:Panel ID="drp_Container" runat="server" Visible="false">
+                                                            <asp:Panel ID="drp_Container" runat="server">
                                                                 <div id="RepeaterContainer1" class="suggestion-list">
                                                                     <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                                         <ItemTemplate>
@@ -248,7 +252,7 @@
                                                                                 Text='<%# Eval("v_name") %>'
                                                                                 CommandArgument='<%# Eval("vendor_id") %>'
                                                                                 CommandName="SelectCategory"
-                                                                                OnClientClick="setTextBox1(this.innerText);" />
+                                                                                OnClientClick="setCategoryBox1(this.innerText);" />
                                                                         </ItemTemplate>
                                                                         <FooterTemplate>
                                                                             <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -283,7 +287,7 @@
                                                                             Text='<%# Eval("name") %>'
                                                                             CommandArgument='<%# Eval("build_id") %>'
                                                                             CommandName="SelectCategory"
-                                                                            OnClientClick="setTextBox2(this.innerText);" />
+                                                                            OnClientClick="setCategoryBox2(this.innerText);" />
                                                                     </ItemTemplate>
                                                                     <FooterTemplate>
                                                                         <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -440,7 +444,7 @@
                                     </ContentTemplate>
 
                                     <Triggers>
-                                        <%-- <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />--%>
+                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                         <asp:AsyncPostBackTrigger ControlID="btn_confirm" EventName="Click" />
                                     </Triggers>
                                 </asp:UpdatePanel>
@@ -554,8 +558,6 @@
             categoryBox.addEventListener("focus", function () {
                 console.log("focused")
                 categorySuggestions.style.display = "block";
-
-
             });
 
             categoryBox.addEventListener("input", function () {
@@ -688,7 +690,7 @@
                 timer: 3000,
                 timerProgressBar: true,
 
-                openModal();
+                //openModal();
             });
         }
 

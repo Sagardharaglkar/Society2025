@@ -48,7 +48,7 @@
 
         <div align="center">
             <asp:Button ID="Button1" runat="server" Text="Load Report" OnClick="Button1_Click"
-                class="btn btn-primary" Font-Bold="True" Visible="false" />
+                class="btn btn-primary" Font-Bold="True"  />
             <br />
             <br />
 
