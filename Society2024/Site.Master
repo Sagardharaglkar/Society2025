@@ -813,11 +813,12 @@
                                             <a href="pdc_clearing.aspx">PDC Clearing</a>
                                             <a href="receipt_search_form.aspx">Receipt</a>
                                             <a href="society_expense.aspx">Society Expense</a>
+                                            <a href="society_receipt.aspx">Society Receipt</a>
                                             <h6>Other Pages:</h6>
                                         </div>
                                     </div>
                                 </li>
-
+                                
                                 <!-- Suggestion -->
                                 <li>
                                     <a class="sidebar-item collapsed" href="#" data-toggle="collapse" data-target="#collapsesuggestion"

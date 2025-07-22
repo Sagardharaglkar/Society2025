@@ -107,7 +107,25 @@ namespace DataAccessLayer.MasterDA
         }
 
 
-        
+        public DataTable Search_receipt(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1 = "";
+            DataTable dt = new DataTable();
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("Society_id", details.Society_Id));
+
+            status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
+
+            if (status1 == "Done")
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
+
+        }
+
+
 
         public DataTable Search_Admin(Login_Details details)
         {
