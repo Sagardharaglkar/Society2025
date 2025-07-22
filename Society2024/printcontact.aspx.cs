@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using Utility.DataClass;
 
 namespace Society
@@ -22,7 +23,12 @@ namespace Society
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            society_id.Value = Session["society_id"].ToString();
+            if (Session["name"] == null)
+            {
+                Response.Redirect("login1.aspx");
+            }
+            else
+                society_id.Value = Session["society_id"].ToString();
             if (!IsPostBack)
             {
                 filldrop();
@@ -39,6 +45,24 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 person_id.Value = e.CommandArgument.ToString();
+
+                Usefull.Sql_Operation = "SELECT * FROM usefull_contact_vw WHERE active_status = 0 AND society_id ='"+society_id.Value+ "' AND usefull_contact_id ="+ e.CommandArgument.ToString();
+                var dt = bL_printContact.button_click(Usefull);
+
+                if (dt.Rows.Count > 0)
+                {
+                    ReportViewer1.Visible = true;
+                    // ReportViewer1.Reset();
+                    ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/usefull_contact.rdlc");
+                    ReportDataSource rds = new ReportDataSource("usefull_contact", dt);
+                    ReportViewer1.LocalReport.DataSources.Clear();
+                    ReportViewer1.LocalReport.DataSources.Add(rds);
+                    ReportViewer1.LocalReport.Refresh();
+                }
+                else
+                {
+                    ReportViewer1.Visible = false;
+                }
 
             }
         }

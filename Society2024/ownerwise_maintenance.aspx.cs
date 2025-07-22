@@ -77,6 +77,7 @@ namespace Society
             if (e.CommandName == "SelectCategory")
             {
                 owner_id.Value = e.CommandArgument.ToString();
+                lbl_owner_id.Text = owner_id.Value;
 
             }
         }
@@ -90,7 +91,7 @@ namespace Society
                
             GetMaintenance.Sql_Operation = sb.ToString();
             GetMaintenance.build_id = Convert.ToInt32(build_id.Value);
-            GetMaintenance.owner_id = Convert.ToInt32(owner_id);
+            GetMaintenance.owner_id = Convert.ToInt32(lbl_owner_id.Text.ToString());
             if (txt_from.Text != "" && txt_to.Text != "")
             {
                 GetMaintenance.Date_1 = Convert.ToDateTime(txt_from.Text);

@@ -86,14 +86,7 @@
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <%--                <h4 style="color: Navy">Purchase Entry</h4>--%>
-                        <asp:HiddenField ID="receipt_id" runat="server" />
-                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="build_id" runat="server" />
-                        <asp:HiddenField ID="n_m_id" runat="server" />
-
-                        <asp:HiddenField ID="shop_maint_id" runat="server" />
-                        <asp:HiddenField ID="wing_id" runat="server" />
-                        <asp:HiddenField ID="owner_id" runat="server" />
+               
 
 
                         <div class="form-group">
@@ -243,7 +236,14 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
+                                                 <asp:HiddenField ID="receipt_id" runat="server" />
+         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+         <asp:HiddenField ID="build_id" runat="server" />
+         <asp:HiddenField ID="n_m_id" runat="server" />
 
+         <asp:HiddenField ID="shop_maint_id" runat="server" />
+         <asp:HiddenField ID="wing_id" runat="server" />
+         <asp:HiddenField ID="owner_id" runat="server" />
                                         <asp:HiddenField ID="building_id" runat="server" />
                                         <asp:HiddenField ID="wing_name_id" runat="server" />
                                         <asp:HiddenField ID="owner_name_id" runat="server" />
@@ -530,7 +530,7 @@
                                             </div>
                                         </div>
 
-                                        <asp:Label runat="server" ID="building_lbl" Visible="false"></asp:Label>
+                                 
 
                                     </ContentTemplate>
                                     <Triggers>
