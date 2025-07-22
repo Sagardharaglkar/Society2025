@@ -216,15 +216,17 @@ namespace DataAccessLayer.DA
             return dt;
         }
 
-        public DataTable receipt_search(string receipt)
+        public DataTable receipt_search(receipt receipt)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("search", receipt));
-            data_item.Add(st.create_array("operation", "search"));
+            data_item.Add(st.create_array("search", receipt.Owner_Name));
+            data_item.Add(st.create_array("operation", receipt.Sql_Operation));
+            data_item.Add(st.create_array("society_id", receipt.Society_Id));
+
 
             status1 = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
 

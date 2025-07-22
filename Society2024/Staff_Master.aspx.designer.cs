@@ -96,15 +96,6 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.HiddenField role_id;
 
         /// <summary>
-        /// role_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField role_id;
-
-        /// <summary>
         /// lbl_co_name control.
         /// </summary>
         /// <remarks>

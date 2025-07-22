@@ -551,7 +551,7 @@
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
 
                                             <asp:Button ID="btn_print" runat="server" Text="Print" class="btn btn-primary" OnClick="btn_print_Click" CausesValidation="false" />
-                                            <asp:Button ID="btn_email" runat="server" Text="Email" class="btn btn-primary" OnClick="btn_email_Click" CausesValidation="false" />
+                                            <asp:Button ID="btn_email" Visible="false" runat="server" Text="Email" class="btn btn-primary" OnClick="btn_email_Click" CausesValidation="false" />
                                         </center>
                                     </div>
                                 </div>

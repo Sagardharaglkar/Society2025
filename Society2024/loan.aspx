@@ -258,7 +258,7 @@
                                                                 Text='<%# Eval("loan_type") %>'
                                                                 CommandArgument='<%# Eval("type_id") %>'
                                                                 CommandName="SelectCategory"
-                                                                OnClientClick="setTextBox1(this.innerText);" />
+                                                                OnClientClick="setTextBox2(this.innerText);" />
                                                         </ItemTemplate>
                                                         <FooterTemplate>
                                                             <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'
@@ -316,7 +316,7 @@
                                                                 Text='<%# Eval("c_name") %>'
                                                                 CommandArgument='<%# Eval("cert_id") %>'
                                                                 CommandName="SelectCategory"
-                                                                OnClientClick="setTextBox1(this.innerText);" />
+                                                                OnClientClick="setTextBox3(this.innerText);" />
                                                         </ItemTemplate>
                                                         <FooterTemplate>
                                                             <asp:Literal ID="litNoItem" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'

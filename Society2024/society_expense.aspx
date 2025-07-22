@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="society_expense.aspx.cs" Inherits="Society.society_expense" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -19,58 +20,7 @@
             }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        function SuccessEntry() {
-            Swal.fire({
-                title: '✅ Success!',
-                text: 'Saved Successfully',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                timer: 1400,
-                timerProgressBar: true,
 
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-                willClose: () => {
-                    window.location.href = 'society_expense.aspx';
-                }
-            });
-        }
-
-        function FailedEntry() {
-            Swal.fire({
-                title: '❌ Failed!',
-                text: 'Something went wrong. Please try again.',
-                icon: 'error',
-                showConfirmButton: true,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Retry',
-                timer: 3000,
-                timerProgressBar: true,
-
-                openModal();
-            });
-        }
-
-        function openModal() {
-            $('#edit_model').modal('show');
-          
-          
-        }
-
-        function digit(evt) {
-            if (evt.keyCode < 48 || evt.keyCode > 57) {
-
-                return false;
-            }
-        }
-
-
-    </script>
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="box-body">
@@ -86,57 +36,57 @@
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
 
-                    
 
-                                                              <div class="form-group">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center">
-                        <div class="search-container">
 
-                            <asp:TextBox
-                                ID="txt_search"
-                                CssClass="aspNetTextBox"
-                                placeHolder="Search here"
-                                runat="server" 
-                                TextMode="Search" 
-                                AutoPostBack="true"
-                                OnTextChanged="btn_search_Click"
-                                onkeyup="removeFocusAfterTyping()"/>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="search-container">
 
-                            <ajaxtoolkit:calendarextender
-                                id="CalendarExtender1"
-                                runat="server"
-                                targetcontrolid="txt_search"
-                                popupbuttonid="btn_calendar"
-                                format="yyyy-MM-dd" />
+                                            <asp:TextBox
+                                                ID="txt_search"
+                                                CssClass="aspNetTextBox"
+                                                placeHolder="Search here"
+                                                runat="server"
+                                                TextMode="Search"
+                                                AutoPostBack="true"
+                                                OnTextChanged="btn_search_Click"
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                            <!-- Calendar and Search Buttons -->
-                            <div class="input-buttons">
-                                <img
-                                    id="btn_calendar"
-                                    src="img/calendar.png"
-                                    alt="Pick Date"
-                                    class="calendar-icon"
-                                    style="cursor: pointer;" />
+                                            <ajaxToolkit:CalendarExtender
+                                                ID="CalendarExtender1"
+                                                runat="server"
+                                                TargetControlID="txt_search"
+                                                PopupButtonID="btn_calendar"
+                                                Format="yyyy-MM-dd" />
 
-                                <button
-                                    id="btn_search"
-                                    type="submit"
-                                    class="search-button2"
-                                    runat="server"
-                                    onserverclick="btn_search_Click">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
+                                            <!-- Calendar and Search Buttons -->
+                                            <div class="input-buttons">
+                                                <img
+                                                    id="btn_calendar"
+                                                    src="img/calendar.png"
+                                                    alt="Pick Date"
+                                                    class="calendar-icon"
+                                                    style="cursor: pointer;" />
+
+                                                <button
+                                                    id="btn_search"
+                                                    type="submit"
+                                                    class="search-button2"
+                                                    runat="server"
+                                                    onserverclick="btn_search_Click">
+                                                    <span class="material-symbols-outlined">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        &nbsp;&nbsp;
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
                         <div class="form-group">
                             <div class="row ">
@@ -181,7 +131,7 @@
                                                         <asp:Label ID="f_amount" runat="server" Text='<%# Bind("f_amount")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                      <asp:TemplateField HeaderText="Type" SortExpression="expense_status">
+                                                <asp:TemplateField HeaderText="Type" SortExpression="expense_status">
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" ID="invoice" Text='<%# Bind("type")%>'></asp:Label>
                                                     </ItemTemplate>
@@ -220,13 +170,13 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                            <asp:HiddenField ID="expense_id" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
+                                        <asp:HiddenField ID="expense_id" runat="server"></asp:HiddenField>
+                                        <asp:HiddenField ID="approvar_id" runat="server"></asp:HiddenField>
+                                        <asp:HiddenField ID="mem_id" runat="server"></asp:HiddenField>
+                                        <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
-    <asp:HiddenField runat="server" ID="vendor_name_id" />
-    <asp:HiddenField runat="server" ID="building_id" />
+                                        <asp:HiddenField runat="server" ID="vendor_name_id" />
+                                        <asp:HiddenField runat="server" ID="building_id" />
                                         <asp:Panel ID="expense_panel" runat="server">
 
 
@@ -490,7 +440,7 @@
                                     </ContentTemplate>
 
                                     <Triggers>
-                                       <%-- <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />--%>
+                                        <%-- <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />--%>
                                         <asp:AsyncPostBackTrigger ControlID="btn_confirm" EventName="Click" />
                                     </Triggers>
                                 </asp:UpdatePanel>
@@ -592,80 +542,168 @@
         </div>
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
 
         function initDropdownEvents() {
-            console.log("doing something");
-            const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
-            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
 
-            const textBox2 = document.getElementById("<%= TextBox2.ClientID %>");
-            const repeaterContainer2 = document.getElementById("RepeaterContainer2");
+            const categoryBox = document.getElementById("<%= TextBox1.ClientID %>");
+
+            const categorySuggestions = document.getElementById("RepeaterContainer1");
+
+            categoryBox.addEventListener("focus", function () {
+                console.log("focused")
+                categorySuggestions.style.display = "block";
 
 
-            textBox1.addEventListener("focus", function () {
-                repeaterContainer1.style.display = "block";
-                repeaterContainer2.style.display = "none";
-                console.log("clicking");
             });
 
-            textBox1.addEventListener("input", function () {
-                const input = textBox1.value.toLowerCase();
+            categoryBox.addEventListener("input", function () {
+
+                const input = categoryBox.value.toLowerCase();
+
                 filterSuggestions("category-link", input);
+
             });
 
-            textBox2.addEventListener("focus", function () {
-                repeaterContainer2.style.display = "block";
+            const categoryBox2 = document.getElementById("<%= TextBox2.ClientID %>");
+
+            const categorySuggestions2 = document.getElementById("RepeaterContainer2");
+
+            categoryBox2.addEventListener("focus", function () {
+
+                categorySuggestions2.style.display = "block";
+
+
             });
 
-            textBox2.addEventListener("input", function () {
-                const input = textBox2.value.toLowerCase();
-                filterSuggestions("link2", input);
+            categoryBox2.addEventListener("input", function () {
+
+                const input = categoryBox2.value.toLowerCase();
+
+                filterSuggestions("category-link", input);
+
             });
         }
+
+
         function filterSuggestions(className, value) {
+
             const items = document.querySelectorAll("." + className);
+
             let matchFound = false;
 
             items.forEach(item => {
+
                 if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+
                     item.style.display = "block";
+
                     matchFound = true;
+
                 } else {
+
                     item.style.display = "none";
+
                 }
+
             });
 
             let noMatchMessage = document.getElementById("no-match-message");
 
             if (!matchFound) {
+
                 if (!noMatchMessage) {
+
                     noMatchMessage = document.createElement("div");
+
                     noMatchMessage.id = "no-match-message";
 
                     noMatchMessage.innerText = "No matching suggestions.";
+
                     items[0]?.parentNode?.appendChild(noMatchMessage);
+
                 }
+
                 noMatchMessage.style.display = "block";
+
             } else {
+
                 if (noMatchMessage) {
+
                     noMatchMessage.style.display = "none";
+
                 }
+
             }
+
         }
 
-        function setTextBox1(value) {
+
+        function setCategoryBox1(value) {
+
             document.getElementById("<%= TextBox1.ClientID %>").value = value;
-            document.getElementById("RepeaterContainer1").style.display = "none";
-        }
 
-        function setTextBox2(value) {
+            document.getElementById("RepeaterContainer1").style.display = "none";
+
+        }
+        function setCategoryBox2(value) {
+
             document.getElementById("<%= TextBox2.ClientID %>").value = value;
+
             document.getElementById("RepeaterContainer2").style.display = "none";
+
         }
 
         Sys.Application.add_load(initDropdownEvents);
+
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 1400,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'society_expense.aspx';
+                }
+            });
+        }
+
+        function FailedEntry() {
+            Swal.fire({
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                showConfirmButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
+                timerProgressBar: true,
+
+                openModal();
+            });
+        }
+
+        function openModal() {
+            $('#edit_model').modal('show');
+
+
+        }
+
+        function digit(evt) {
+            if (evt.keyCode < 48 || evt.keyCode > 57) {
+
+                return false;
+            }
+        }
 
 
     </script>

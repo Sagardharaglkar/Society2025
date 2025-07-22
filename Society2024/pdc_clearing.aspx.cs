@@ -44,6 +44,7 @@ namespace Society
             Reminder.Sql_Operation = operation;
             Reminder.Start_Date = Convert.ToDateTime(txt_form_date.Text);
             Reminder.End_Date = Convert.ToDateTime(txt_to_date.Text);
+            Reminder.Society_Id = society_id.Value;
            
             dt = BL_Pdc.updatePdcClearing(Reminder);
             GridView1.DataSource = dt;

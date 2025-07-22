@@ -21,56 +21,6 @@
     </style>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        function FailedEntry() {
-            Swal.fire({
-                title: '❌ Failed!',
-                text: 'Something went wrong. Please try again.',
-                icon: 'error',
-                showConfirmButton: true,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Retry',
-                timer: 3000,
-                timerProgressBar: true,
-
-                didOpen: () => {
-                    Swal.showLoading()
-                }
-
-
-            });
-
-        }
-        function SuccessEntry() {
-            Swal.fire({
-                title: '✅ Success!',
-                text: 'Saved Successfully',
-                icon: 'success',
-                showConfirmButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                timer: 1400,
-                timerProgressBar: true,
-
-                didOpen: () => {
-                    Swal.showLoading()
-                },
-                willClose: () => {
-                    window.location.href = "pdc_reminder_search.aspx?view_id=" + Request.QueryString["view_id"];
-                }
-            });
-        }
-
-        function openModal() {
-            $('#edit_model').modal('show');
-        }
-
-      
-
-    </script>
-   
-
 
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -348,50 +298,52 @@
 
                                         <div class="form-group">
                                             <div class="row ">
-                                                <div class="col-sm-1">
+                                                <div class="col-sm-4">
                                                     <asp:Label ID="lbl_chq_no" runat="server" Text="Cheque No"></asp:Label>
                                                     <asp:Label ID="lbl_chq_no_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="lbl_chq_no_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_chq_no" CssClass="form-control" runat="server" Height="30px" Width="150px" MaxLength="50" onkeypress="return digit(event);" OnTextChanged="txt_chq_no_TextChanged" placeholder="Cheque No"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_chq_no" required="required" CssClass="form-control" runat="server" Height="30px" Width="150px" MaxLength="50" onkeypress="return digit(event);" OnTextChanged="txt_chq_no_TextChanged" placeholder="Cheque No" TextMode="Number"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Cheque No
                                                     </div>
                                                     <asp:Label ID="Label2" runat="server"></asp:Label>
                                                 </div>
-
-                                                <div class="col-sm-1">
+                                            </div>
+                                            <div class="row mt-1">
+                                                <div class="col-sm-4">
                                                     <asp:Label ID="lbl_chq_date" runat="server" Text="Cheque Date"></asp:Label>
                                                     <asp:Label ID="lbl_chq_date_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="lbl_chq_date_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_chq_date" CssClass="form-control" Height="30px" Width="150px" runat="server" TextMode="Date"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_chq_date" CssClass="form-control" Height="30px" Width="150px" runat="server" TextMode="Date" required="required"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Date
                                                     </div>
                                                 </div>
-
-
-                                                <div class="col-sm-1">
+                                            </div>
+                                            <div class="row mt-1">
+                                                <div class="col-sm-4">
                                                     <asp:Label ID="lbl_chq_amount" runat="server" Text="Cheque Amount"></asp:Label>
                                                     <asp:Label ID="lbl_chq_amount_sep" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="lbl_chq_amount_mandatory" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_chq_amount" CssClass="form-control" runat="server" Height="30px" Width="150px" onkeypress="return digit(event);" placeholder="Cheque Amount" required></asp:TextBox>
+                                                    <asp:TextBox ID="txt_chq_amount" CssClass="form-control" runat="server" Height="30px" Width="150px" onkeypress="return digit(event);" placeholder="Cheque Amount" required="required" TextMode="Number"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Amount
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                   
 
 
                                         <div class="form-group">
                                             <div class="row ">
-                                                <div class="col-sm-2"></div>
+                                                <%--                                                <div class="col-sm-2"></div>
                                                 <div class="col-sm-2">
                                                     <asp:Label ID="Label11" runat="server" Text="Cheque Deposited"></asp:Label>
                                                     <br />
@@ -414,13 +366,13 @@
 
 
 
-                                                </div>
+                                                </div>--%>
 
 
 
-                                                <div class="col-sm-2">
-                                                    <asp:Button ID="btn_next" runat="server" Text="Next" class="btn btn-primary" autopostback="true" ValidationGroup="g1" OnClick="btn_next_Click" />
-                                                </div>
+                                              <%--  <div class="col-sm-2">
+                                                    <asp:Button ID="btn_next1" runat="server" Text="Add next" class="btn btn-primary" autopostback="true" ValidationGroup="g1" OnClick="btn_next_Click" />
+                                                </div>--%>
                                             </div>
                                         </div>
 
@@ -491,6 +443,8 @@
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="btn_next" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="btn_close" EventName="Click" />
                                     </Triggers>
                                 </asp:UpdatePanel>
 
@@ -501,9 +455,11 @@
                                 <div class="form-group">
                                     <div class="row ">
                                         <center>
-                                            <asp:Button ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
+                                             <asp:Button ID="btn_next" runat="server" Text="Add next" class="btn btn-primary" autopostback="true" ValidationGroup="g1" OnClick="btn_next_Click" />
+                                              
+                                            <asp:Button Visible="false" ID="btn_save" runat="server" Text="Save" class="btn btn-primary" ValidationGroup="g1" OnClick="btn_save_Click" />
                                             <asp:Button ID="btn_delete" runat="server" Text="Delete" class="btn btn-primary" Visible="false" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
-                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
+                                            <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False"  OnClick="btn_close_Click1" />
 
                                         </center>
                                     </div>
@@ -525,8 +481,19 @@
     </div>
 
 
+        <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
         function initDropdownEvents() {
@@ -642,6 +609,50 @@
 
         Sys.Application.add_load(initDropdownEvents);
 
+        function FailedEntry() {
+            Swal.fire({
+                title: '❌ Failed!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+                showConfirmButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Retry',
+                timer: 3000,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+
+
+            });
+
+        }
+        function openModal() {
+            $('#edit_model').modal('show');
+        }
+
+
+
+        function SuccessEntry() {
+            Swal.fire({
+                title: '✅ Success!',
+                text: 'Saved Successfully',
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 1400,
+                timerProgressBar: true,
+
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    window.location.href = 'pdc_reminder_search.aspx';
+                }
+            });
+        }
 
     </script>
 
