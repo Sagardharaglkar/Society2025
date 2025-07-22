@@ -265,10 +265,10 @@
                                                             <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                         </div>
                                                         <div class="col-sm-3">
-                                                            <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter contact No" AutoPostBack="True" required="required" OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
+                                                            <asp:TextBox ID="txt_mobile_no1" CssClass="form-control" runat="server" MaxLength="10" TextMode="Phone" placeholder="Enter contact No" AutoPostBack="True" required="required"   OnTextChanged="txt_mobile_no1_TextChanged"></asp:TextBox>
                                                             <div class="invalid-feedback">
                                                                 Please Enter Contact No
-                                                            </div>
+                                                            </div>  
                                                             <br />
 
                                                             <asp:Label ID="Label11" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>

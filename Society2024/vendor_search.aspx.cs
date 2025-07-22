@@ -153,15 +153,14 @@ namespace Society
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Are you sure want to delete", "delete", buttons);
-            if (result == DialogResult.Yes)
-            {
+            //MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            //DialogResult result = MessageBox.Show("Are you sure want to delete", "delete", buttons);
+       
                 if (vendor_id.Value != "")
                     vendor.vendor_id = Convert.ToInt32(vendor_id.Value);
                 vendor.Sql_Operation = "Delete";
                 bL_Vendor.delete(vendor);
-            }
+            
             Response.Redirect("vendor_search.aspx");
         }
 

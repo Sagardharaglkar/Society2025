@@ -115,7 +115,8 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="contact_type_id" runat="Server"/>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add</button>
+                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+            
                         <br />
                         <br />
                         <div class="box box-info">
@@ -124,11 +125,7 @@
                                     <div class="row ">
                                         <div class="col-sm-12">
                                             <h3 class="box-title"><strong>Electrician Contact</strong></h3>
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -193,11 +190,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Plumber Contact</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -253,11 +246,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Carpenter Contact</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -312,11 +301,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Milk Supplier Contact</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -371,11 +356,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Paper Supplier Contact</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -430,11 +411,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Mechanics Contact</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -488,11 +465,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>TV Cable Contact</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -548,11 +521,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Servants Details</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -598,11 +567,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Building Cleaner Details</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+  
                                     </div>
                                 </div>
                             </div>
@@ -653,11 +618,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Chairman Details</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -708,11 +669,7 @@
                                 <div class="row ">
                                     <div class="col-sm-12">
                                         <h3 class="box-title"><strong>Committee Members Details</strong></h3>
-                                        <div class="box-tools pull-right">
-                                            <button type="button" class="tn btn-info btn-sm" data-widget="collapse">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -936,6 +893,17 @@
             </div>
         </div>
     </div>
+        <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
     function initDropdownEvents() {

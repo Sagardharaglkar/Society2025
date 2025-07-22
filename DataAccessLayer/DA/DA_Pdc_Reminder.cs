@@ -212,6 +212,7 @@ namespace DataAccessLayer.DA
             data_item.Add(st.create_array("operation", Reminder.Sql_Operation));
             data_item.Add(st.create_array("startdate", Reminder.Start_Date));
             data_item.Add(st.create_array("enddate", Reminder.End_Date));
+            data_item.Add(st.create_array("society_id", Reminder.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_pdc_reminder", ref sdr);
             if (status1 == "Done")

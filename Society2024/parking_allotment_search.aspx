@@ -3,21 +3,21 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-                .resized-model{
-        width: 800px;
-    height: auto;
-    right: 82px;
-}
+        .resized-model {
+            width: 800px;
+            height: auto;
+            right: 82px;
+        }
 
-@media(max-width: 431px){
-   .resized-model{
-       height: auto;
-    margin: auto;
-    width: 292px;
-    margin-top: 168px;
-    right: 1px;
-   }
-}
+        @media(max-width: 431px) {
+            .resized-model {
+                height: auto;
+                margin: auto;
+                width: 292px;
+                margin-top: 168px;
+                right: 1px;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
@@ -72,6 +72,7 @@
         }
 
         function disableSaveButtonIfValid() {
+            validateVehicleNumber();
             var btn = document.getElementById('<%= btn_save.ClientID %>');
             var modal = document.getElementById('edit_model');
             var inputs = modal.querySelectorAll('input[required], select[required]');
@@ -110,7 +111,7 @@
                 </table>
                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-            
+                   <asp:HiddenField ID="parking_id" runat="server" />
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                                                           <div class="form-group">
             <div class="row">
@@ -217,7 +218,7 @@
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
 
-                                        <asp:HiddenField ID="parking_id" runat="server" />
+                                 
                                         <asp:HiddenField ID="assign_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
@@ -326,9 +327,7 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat= "server"    56
-                                                        
-                                                        Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" TextMode="Phone"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat= "server" Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" TextMode="Phone"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Contact No
                                                     </div>
@@ -339,7 +338,7 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_vehical_no" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: uppercase" placeholder="Enter Vehical No" AutoPostBack="true" required autofocus OnTextChanged="txt_vehical_no_TextChanged"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_vehical_no" ClientIDMode="Static" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: uppercase" placeholder="Enter Vehical No" AutoPostBack="true" required autofocus OnTextChanged="txt_vehical_no_TextChanged" TextMode="SingleLine"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Vehical No
                                                     </div>
@@ -376,60 +375,79 @@
     </div>
 
                                
+<script>
 
-    <script>
+    function validateVehicleNumber() {
+        const input = document.getElementById('txt_vehical_no');
+    
+        if (!input) return;
+
+        const vehicleNumber = input.value.trim().toUpperCase();
+        const regex = /^[A-Z]{2}\d{1,2}[A-Z]{1,2}\d{4}$/;
+
+        if (regex.test(vehicleNumber)) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+        }
+    }
+
 
         function initDropdownEvents() {
             const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
-    const repeaterContainer1 = document.getElementById("RepeaterContainer1");
- 
-    textBox1.addEventListener("focus", function () {
-        repeaterContainer1.style.display = "block";
-    });
- 
-    textBox1.addEventListener("input", function () {
-        const input = textBox1.value.toLowerCase();
-        filterSuggestions("category-link", input);
-    });
+            const repeaterContainer1 = document.getElementById("RepeaterContainer1");
+
+            textBox1.addEventListener("focus", function () {
+                repeaterContainer1.style.display = "block";
+            });
+
+            textBox1.addEventListener("input", function () {
+                const input = textBox1.value.toLowerCase();
+                filterSuggestions("category-link", input);
+            });
         }
 
-function filterSuggestions(className, value) {
-    const items = document.querySelectorAll("." + className);
-    let matchFound = false;
- 
-    items.forEach(item => {
-        if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
-            item.style.display = "block";
-            matchFound = true;
-        } else {
-            item.style.display = "none";
+        function filterSuggestions(className, value) {
+            const items = document.querySelectorAll("." + className);
+            let matchFound = false;
+
+            items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    item.style.display = "block";
+                    matchFound = true;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+
+            let noMatchMessage = document.getElementById("no-match-message");
+
+            if (!matchFound) {
+                if (!noMatchMessage) {
+                    noMatchMessage = document.createElement("div");
+                    noMatchMessage.id = "no-match-message";
+
+                    noMatchMessage.innerText = "No matching suggestions.";
+                    items[0]?.parentNode?.appendChild(noMatchMessage);
+                }
+                noMatchMessage.style.display = "block";
+            } else {
+                if (noMatchMessage) {
+                    noMatchMessage.style.display = "none";
+                }
+            }
         }
-    });
- 
-    let noMatchMessage = document.getElementById("no-match-message");
- 
-    if (!matchFound) {
-        if (!noMatchMessage) {
-            noMatchMessage = document.createElement("div");
-            noMatchMessage.id = "no-match-message";
- 
-            noMatchMessage.innerText = "No matching suggestions.";
-            items[0]?.parentNode?.appendChild(noMatchMessage);
-        }
-        noMatchMessage.style.display = "block";
-    } else {
-        if (noMatchMessage) {
-            noMatchMessage.style.display = "none";
-        }
-    }
-}
- 
-function setTextBox1(value) {
-    document.getElementById("<%= TextBox1.ClientID %>").value = value;0
+
+
+        function setTextBox1(value) {
+            document.getElementById("<%= TextBox1.ClientID %>").value = value; 0
             document.getElementById("RepeaterContainer1").style.display = "none";
         }
 
         Sys.Application.add_load(initDropdownEvents);
+
 
 
 </script>

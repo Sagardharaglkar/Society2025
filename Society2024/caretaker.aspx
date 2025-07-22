@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <style>
                 .resized-model{
-        width: 800px;
+        width: 900px;
     height: auto;
     right: 82px;
 }

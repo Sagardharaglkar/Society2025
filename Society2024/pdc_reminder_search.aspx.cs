@@ -31,7 +31,6 @@ namespace Society
             if (!IsPostBack)
             {
                 pdc_reminder_Gridbind();
-                fill_drop();
                 Allbound();
 
 
@@ -85,20 +84,6 @@ namespace Society
             }
         }
 
-        public void fill_drop()
-        {
-            //String sql_query = "Select wing_id,(name +' '+ w_name) as name from global_society_view";
-            //BL_Pdc.fill_drop(ddl_build_wing, sql_query, "name", "wing_id");
-
-            //String sql_query1 = "Select build_wing_id as wing_id,build_wing as name from customer_flat";
-            //BL_Pdc.fill_drop(drp_build_wing, sql_query1, "name", "wing_id");
-
-            //string sql5 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
-            //BL_Pdc.fill_drop(ddl_owner, sql5, "name", "owner_id");
-
-            //string sql6 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "'";
-            //BL_Pdc.fill_drop(drop_owner, sql6, "name", "owner_id");
-        }
 
         public void pdc_reminder_Gridbind()
         {
@@ -174,9 +159,9 @@ namespace Society
             Reminder.Chq_No = Convert.ToInt32(txt_chq_no.Text);
             Reminder.Che_Date = Convert.ToDateTime(txt_chq_date.Text);
             Reminder.Che_Amount = float.Parse(txt_chq_amount.Text);
-            Reminder.Che_Dep = deposite_chk.Checked == true ? 1 : 0;
-            Reminder.Che_Can = bounce_chk.Checked == true ? 1 : 0;
-            Reminder.Che_Ret = return_chk.Checked == true ? 1 : 0;
+            //Reminder.Che_Dep = deposite_chk.Checked == true ? 1 : 0;
+            //Reminder.Che_Can = bounce_chk.Checked == true ? 1 : 0;
+            //Reminder.Che_Ret = return_chk.Checked == true ? 1 : 0;
             var result = BL_Pdc.updatePdcReminder(Reminder);
             return result.Sql_Result;
 
@@ -199,20 +184,20 @@ namespace Society
             txt_chq_date.Text = result.Che_Date.ToString("yyyy-MM-dd");
             txt_chq_amount.Text = result.Che_Amount.ToString();
 
-            if (result.Che_Dep != 0)
-            {
-                deposite_chk.Checked = true;
-            }
+            //if (result.Che_Dep != 0)
+            //{
+            //    deposite_chk.Checked = true;
+            //}
 
-            if (result.Che_Can != 0)
-            {
-                bounce_chk.Checked = true;
-            }
+            //if (result.Che_Can != 0)
+            //{
+            //    bounce_chk.Checked = true;
+            //}
 
-            if (result.Che_Ret != 0)
-            {
-                return_chk.Checked = true;
-            }
+            //if (result.Che_Ret != 0)
+            //{
+            //    return_chk.Checked = true;
+            //}
             Allbound();
         }
 
@@ -256,9 +241,9 @@ namespace Society
                 Reminder.Sql_Operation = "save_change_rem";
                 Reminder.Che_Date = Convert.ToDateTime(txt_chq_date.Text);
                 Reminder.Che_Amount = float.Parse(txt_chq_amount.Text);
-                Reminder.Che_Dep = deposite_chk.Checked == true ? 1 : 0;
-                Reminder.Che_Can = bounce_chk.Checked == true ? 1 : 0;
-                Reminder.Che_Ret = return_chk.Checked == true ? 1 : 0;
+                //Reminder.Che_Dep = deposite_chk.Checked == true ? 1 : 0;
+                //Reminder.Che_Can = bounce_chk.Checked == true ? 1 : 0;
+                //Reminder.Che_Ret = return_chk.Checked == true ? 1 : 0;
                 BL_Pdc.save_changes(Reminder);
 
             }
@@ -279,9 +264,9 @@ namespace Society
             txt_chq_no.Text = "";
             txt_chq_date.Text = "";
             txt_chq_amount.Text = "";
-            deposite_chk.Checked = false;
-            return_chk.Checked = false;
-            bounce_chk.Checked = false;
+            //deposite_chk.Checked = false;
+            //return_chk.Checked = false;
+            //bounce_chk.Checked = false;
         }
 
 
@@ -360,15 +345,48 @@ namespace Society
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
-            string str = runproc_save("Update");
+            //string str = runproc_save("Update");
 
-            if (str == "Done")
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-            else
+            //if (str == "Done")
+            //    ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            //else
+            //{
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
+
+            //}
+
+            if (txt_chq_no.Text.Trim() == "")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "FailedEntry();", true);
-
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Please Enter Cheque No !!!');", true);
+                return;
             }
+            if (txt_chq_date.Text == "")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Please Enter Cheque Date !!!');", true);
+                return;
+            }
+            if (txt_chq_amount.Text.Trim() == "")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Please Enter Cheque Amount!!!');", true);
+                return;
+            }
+
+            if (pdc_rem_id.Value != "")
+                Reminder.pdc_rem_id = Convert.ToInt32(pdc_rem_id.Value);
+            Reminder.Chq_No = Convert.ToInt32(txt_chq_no.Text);
+            Reminder.Sql_Operation = "chq_no_exist";
+
+            var result = BL_Pdc.next_click(Reminder);
+
+            if (result.Sql_Result == "Exist")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Cheque No Already Exists !!!');", true);
+                return;
+            }
+            else
+                runproc_save("Update");
+            clear();
+            grid_show();
         }
 
 
@@ -403,45 +421,12 @@ namespace Society
             pdc_reminder_Gridbind();
         }
 
-        protected void drp_build_wing_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (drp_build_wing.SelectedItem.Text.Trim() != "")
-            //{
-            //    if (drp_build_wing.SelectedItem.Text != "select")
-            //    {
-            //        string sql2 = "select owner_id,(name +' '+ flat_no) as name from customer_flat where society_id='" + society_id.Value + "' and build_wing='" + drp_build_wing.SelectedItem.Text + "'";
-            //        BL_Pdc.fill_drop(drop_owner, sql2, "name", "owner_id");
-            //    }
-            //}
-        }
-
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
             pdc_reminder_Gridbind();
         }
 
-        //protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        //{
-        //    if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-
-        //    {
-
-        //        if (owner_name_id.Value != "")
-
-        //        {
-
-        //            var link = (LinkButton)e.Item.FindControl("lnkCategory");
-
-        //            if (link.CommandArgument == owner_name_id.Value)
-
-        //                TextBox1.Text = link.Text;
-
-        //        }
-
-        //    }
-
-        //}
 
         protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -501,6 +486,11 @@ namespace Society
                 }
 
             }
+        }
+
+        protected void btn_close_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("pdc_reminder_search.aspx");
         }
     }
 }

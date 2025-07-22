@@ -202,8 +202,6 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-
-
             car.C_Name = txt_search.Text.Trim();
             car.Sql_Operation = "search";
             car.Society_Id = society_id.Value;

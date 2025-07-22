@@ -501,7 +501,7 @@ namespace Society
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            if (TextBox5.Text.Trim() != "" && TextBox6.Text.Trim() != "" && txt_date.Text.Trim()!="")
+                                            
             {
                 BtnPanel.Visible = true;
 
@@ -512,7 +512,15 @@ namespace Society
                 Maintenance1.build_id = Convert.ToInt32(building_id.Value);
                 Maintenance1.Date = Convert.ToDateTime(txt_date.Text);
                 var result = bL_Maintenance.Add_Click(Maintenance1);
-                dt1 = result;
+                if (result.Rows.Count > 0)
+                {
+                    BtnPanel.Visible = true;
+                }
+                else
+                {
+                    BtnPanel.Visible = false;
+                }
+                    dt1 = result;
                 ViewState["expenseData"] = dt1;
                 if (TextBox6.Text == "ALL")
                 {

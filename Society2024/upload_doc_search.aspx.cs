@@ -106,23 +106,7 @@ namespace Society
             }
 
         }
-        public void fill_drop1()
-        {
-            //String sql_query = "Select *  from flat_master where society_id='" + society_id.Value + "'";
-            //st.fill_drop(ddl_flatno, sql_query, "flat_no", "facility_id");
 
-            //String sql_query1 = "Select *  from bedroom ";
-            //st.fill_drop(ddl_type, sql_query1, "bed", "bed_id");
-
-            //String sql_query2 = "Select *  from building_master where society_id='" + society_id.Value + "'";
-            //BL_Upload.fill_drop(ddl_build, sql_query2, "name", "build_id");
-
-            ////String sql_query3 = "Select *  from wing_master where society_id='" + society_id.Value + "'";
-            ////st.fill_drop(ddl_wing, sql_query3, "w_name", "w_id");
-
-            //String sql_query4 = "Select *  from doc_master where society_id='" + society_id.Value + "'";
-            //BL_Upload.fill_drop(ddl_doc_type, sql_query4, "doc_name", "doc_id");
-        }
         public void uplaod_doc()
         {
             string createfolder = Server.MapPath("~/Documents") + "/" + TextBox2.Text + "/" + TextBox3.Text + "/" + TextBox4.Text + "/" + (TextBox1.Text) + "/";
@@ -263,8 +247,6 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-
-
             doc.W_Name = txt_search.Text.Trim();
             doc.Sql_Operation = "search";
             doc.Society_Id = society_id.Value;

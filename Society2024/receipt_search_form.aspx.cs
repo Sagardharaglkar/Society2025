@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.BL;
+using DBCode.DataClass;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Society
         receipt Receipt = new receipt();
         BL_Receipt bL_Receipt = new BL_Receipt();
 
+        pdc_reminder Reminder = new pdc_reminder();
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -207,9 +209,9 @@ namespace Society
 
         protected void btn_search_Click(object sender, EventArgs e)
         {
-
-            Receipt.Owner_Name= txt_search.Text.Trim();
-            Receipt.Society_Id = society_id.Value;
+            Receipt.Sql_Operation= "search";
+            Receipt.Society_Id= society_id.Value;
+            Receipt.Owner_Name = txt_search.Text;
             var result = bL_Receipt.search_receipt(Receipt);
             GridView1.DataSource = result;
 

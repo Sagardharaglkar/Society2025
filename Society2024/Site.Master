@@ -1363,7 +1363,6 @@
             });
         }
 
-
         (function () {
             'use strict';
 
@@ -1412,7 +1411,7 @@
                         }
                     }
 
-                    if (type === 'tel' && value !== '') {
+                    if ((type === 'tel' || type==='Phone') && value !== '') {
                         const phoneRegex = /^\d{10}$/; // Only digits, exactly 10
                         if (!phoneRegex.test(value)) {
                             input.setCustomValidity('Phone number must be exactly 10 digits');
@@ -1441,6 +1440,7 @@
                         showValid(input);
                     }
                 }
+
 
                 function showInvalid(input) {
                     input.classList.remove('is-valid');

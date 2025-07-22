@@ -113,8 +113,6 @@ if (allValid && btn) {
                         <asp:HiddenField ID="slot_id" runat="server" />
                         <asp:HiddenField ID="hidden_total_amount" runat="server" />
 
-                        <asp:HiddenField ID="facility_id" runat="server" />
-                        <asp:HiddenField ID="name_id" runat="server" />
 
 
                         <div class="form-group">
@@ -240,7 +238,8 @@ if (allValid && btn) {
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                        <asp:HiddenField ID="facility_id" runat="server" />
+                        <asp:HiddenField ID="name_id" runat="server" /> 
 
                                         <div class="form-group">
                                             <div class="row ">

@@ -269,7 +269,7 @@ namespace Society
             {
                 var str=runproc_save("Update");
                 if(str=="Done")
-                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
 
             }
             else
