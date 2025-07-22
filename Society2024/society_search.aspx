@@ -27,7 +27,15 @@
     width:900px;
     height:auto;
 }
-
+      .calendar-icon {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: none;
+            margin-left: 8px;
+            cursor: pointer;
+            margin-right: 12px;
+        }
 @media(max-width: 431px){
    .resized-model{
        height: auto;

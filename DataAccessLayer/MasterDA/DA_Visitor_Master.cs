@@ -34,21 +34,21 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_visitor", ref sdr);
 
             if (status1 == "Done")
-                if(sdr.HasRows)
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
         public Visitor UpdateVisitorDetails(Visitor visitor)
         {
-              ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
-             SqlDataReader sdr = null;
-             string status = "";
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status = "";
             data_item.Add(st.create_array("operation", visitor.Sql_Operation));
             data_item.Add(st.create_array("visitor_id", visitor.visitor_id));
             if (visitor.Sql_Operation == "Update")
             {
                 data_item.Add(st.create_array("society_id", visitor.Society_Id));
-                  data_item.Add(st.create_array("v_name", visitor.V_Name));
+                data_item.Add(st.create_array("v_name", visitor.V_Name));
                 data_item.Add(st.create_array("type", visitor.V_Type));
                 data_item.Add(st.create_array("contact_no", visitor.Contact_No));
                 data_item.Add(st.create_array("flat_id", visitor.flat_id));
@@ -59,9 +59,9 @@ namespace DataAccessLayer.MasterDA
                 data_item.Add(st.create_array("in_time", visitor.In_Time));
                 if (visitor.Out_Time != DateTime.MinValue)
                     data_item.Add(st.create_array("out_time", visitor.Out_Time));
-                    data_item.Add(st.create_array("build_id", visitor.build_id));
-                    data_item.Add(st.create_array("vehicle_no", visitor.Vehical_No));
-                    data_item.Add(st.create_array("purpose", visitor.Visiting_Purpose));
+                data_item.Add(st.create_array("build_id", visitor.build_id));
+                data_item.Add(st.create_array("vehicle_no", visitor.Vehical_No));
+                data_item.Add(st.create_array("purpose", visitor.Visiting_Purpose));
             }
             status = st.run_query(data_item, "Select", "sp_Visitor", ref sdr);
             if (status == "Done")
@@ -88,7 +88,7 @@ namespace DataAccessLayer.MasterDA
                             visitor.In_Time = Convert.ToDateTime(sdr["in_time"].ToString());
                         if (sdr["out_time"].ToString() != "")
                             visitor.Out_Time = Convert.ToDateTime(sdr["out_time"].ToString());
-                       
+
                         visitor.build_id = Convert.ToInt32(sdr["build_id"].ToString());
 
                     }
@@ -114,8 +114,8 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
 
             if (status1 == "Done")
-                if(sdr.HasRows)
-                dt.Load(sdr);
+                if (sdr.HasRows)
+                    dt.Load(sdr);
             return dt;
         }
 
@@ -126,10 +126,15 @@ namespace DataAccessLayer.MasterDA
             string status1 = "";
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("query", visitor.Sql_Operation));
+            data_item.Add(st.create_array("Operation", visitor.Sql_Operation));
+            data_item.Add(st.create_array("search", visitor.V_Name));
+            data_item.Add(st.create_array("society_id", visitor.Society_Id));
+            if (visitor.In_Date != DateTime.MinValue)
+                data_item.Add(st.create_array("fromDate", visitor.In_Date));
+            if (visitor.Out_Date != DateTime.MinValue)
+                data_item.Add(st.create_array("toDate", visitor.Out_Date));
 
-
-            status1 = st.run_query(data_item, "Select", "sp_search", ref sdr);
+            status1 = st.run_query(data_item, "Select", "sp_visitor", ref sdr);
 
             if (status1 == "Done")
                 if (sdr.HasRows)

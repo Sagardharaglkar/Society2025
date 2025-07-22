@@ -139,7 +139,7 @@ namespace DataAccessLayer.MasterDA
             status1 = st.run_query(data_item, "Select", "sp_dashboard", ref sdr);
             if (status1 == "Done")
             {
-                if(sdr.Read())
+                while(sdr.Read())
                    
                 details.Sql_Result = sdr["residents"].ToString();
             }
@@ -196,6 +196,7 @@ namespace DataAccessLayer.MasterDA
 
                 DataTable dt = new DataTable();
                 data_item.Add(st.create_array("Operation", details.Sql_Operation));
+                data_item.Add(st.create_array("society_id", details.society_id));
                 data_item.Add(st.create_array("search", details.Name));
                data_item.Add(st.create_array("society_id", details.Society_Id));
 

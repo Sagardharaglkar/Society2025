@@ -118,6 +118,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="search-container">
 
+
                                             <asp:TextBox
                                                 ID="txt_search"
                                                 CssClass="aspNetTextBox"
@@ -214,6 +215,7 @@
                                     <ContentTemplate>
                                         
                 <asp:HiddenField ID="Designation_id" runat="server" />
+
                                         <asp:HiddenField runat="server" ID="name_id" />
                                         <div class="form-group">
                                             <div class="row ">

@@ -269,7 +269,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
+                                                        <asp:TextBox ID="TextBox1" Height="32px" Width="200px" runat="server" CssClass="input-box form-control"
                                                             placeholder="Select" autocomplete="off" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="Repeater1_ItemCommand">
