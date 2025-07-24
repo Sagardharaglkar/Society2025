@@ -113,7 +113,7 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="usefull_contact_id" runat="server"></asp:HiddenField>
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
-                        <asp:HiddenField ID="contact_type_id" runat="Server"/>
+                      
 
                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
             
@@ -729,7 +729,7 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                                          <asp:HiddenField ID="contact_type_id" runat="Server"/>
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-2">

@@ -110,7 +110,7 @@
                                                 runat="server"
                                                 TargetControlID="txt_search"
                                                 PopupButtonID="btn_calendar"
-                                                Format="dd-MMM-yyyy" />
+                                                Format="dd MMM yyyy" />
 
                                             <!-- Calendar and Search Buttons -->
                                             <div class="input-buttons">

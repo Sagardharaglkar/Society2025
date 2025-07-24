@@ -10,7 +10,7 @@
 
         @media(max-width: 431px) {
             .resized-model {
-                height: auto;
+                height: auto;   
                 margin: auto;
                 width: 292px;
                 margin-top: 168px;

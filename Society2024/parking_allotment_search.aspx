@@ -270,8 +270,8 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="dropdown-container">
-                                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="input-box form-control"
-                                                            placeholder="Select" autocomplete="off" />
+                                                        <asp:TextBox ID="TextBox1" runat="server" style="width:84%;" CssClass="input-box form-control"
+                                                            placeholder="Select" autocomplete="off" required="required" />
                                                         <div id="RepeaterContainer1" class="suggestion-list">
                                                             <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="Repeater1_ItemDataBound" OnItemCommand="Repeater1_ItemCommand">
                                                                 <ItemTemplate>
@@ -327,7 +327,7 @@
                                                     <asp:Label ID="Label10" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat= "server" Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" TextMode="Phone"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_contact_no" CssClass="form-control" runat= "server" Height="32px" Width="200px" MaxLength="10" placeholder="Enter Contact No" required="required" type="tel" TextMode="Phone"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Contact No
                                                     </div>
@@ -338,7 +338,7 @@
                                                     <asp:Label ID="Label9" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <asp:TextBox ID="txt_vehical_no" ClientIDMode="Static" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: uppercase" placeholder="Enter Vehical No" AutoPostBack="true" required autofocus OnTextChanged="txt_vehical_no_TextChanged" TextMode="SingleLine"></asp:TextBox>
+                                                    <asp:TextBox ID="txt_vehical_no" type="text" data-type="vehicle" ClientIDMode="Static" CssClass="form-control" runat="server" Height="32px" Width="200px" Style="text-transform: uppercase" placeholder="MH-12-AB-1234" AutoPostBack="true" required autofocus OnTextChanged="txt_vehical_no_TextChanged" TextMode="SingleLine"></asp:TextBox>
                                                     <div class="invalid-feedback">
                                                         Please Enter Vehical No
                                                     </div>

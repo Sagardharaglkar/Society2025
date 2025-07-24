@@ -3,6 +3,7 @@ using DBCode.DataClass.Master_Dataclass;
 using FirebaseAdmin.Messaging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,6 +28,7 @@ namespace Society
             {
                 if (Session["Name"] != null)
                 {
+                    //ownerH.Value = Session["userID"].ToString();
                     string str1 = Session["user_type"].ToString();
                     society.Visible = Session["user_type"].ToString() == "Society";
                     village.Visible = Session["user_type"].ToString() == "Village";
@@ -34,6 +36,22 @@ namespace Society
                     txt_welcome.Text = "Hello,\n" + Session["Name"].ToString();
                     name_society.Text = Session["society_name"].ToString();
                     get_notificatoin();
+
+                    userID.Value = Session["userID"].ToString();
+                    string ownerId = Session["userID"].ToString();  // This comes from the hidden field
+                    string imagePath = $"~/img/ProfilePic/owner_{ownerId}.png";
+                    string serverPath = Server.MapPath(imagePath);
+
+                    if (File.Exists(serverPath))
+                    {
+                        profileImage.Src = ResolveUrl(imagePath); // Set user-specific image
+                        profileImage2.Src = ResolveUrl(imagePath); // Set user-specific image
+                    }
+                    else
+                    {
+                        profileImage.Src = ResolveUrl("~/img/undraw_profile.svg"); // Set default image
+                        profileImage2.Src = ResolveUrl("~/img/undraw_profile.svg"); // Set default image
+                    }
                 }
                 else
                     Panel1.Visible = false;

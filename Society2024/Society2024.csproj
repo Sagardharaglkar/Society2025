@@ -229,6 +229,7 @@
   <ItemGroup>
     <Content Include="css\mobileView\sb-admin-2.css" />
     <Content Include="css\mobileView\sb-admin-2.min.css" />
+    <Content Include="css\site_master_style.css" />
     <Content Include="errorPage.aspx" />
     <Content Include="errorPage500.aspx" />
     <Content Include="ForgetPassword.aspx" />
@@ -242,6 +243,7 @@
     <Content Include="img\temp\event.gif" />
     <Content Include="img\temp\meeting.gif" />
     <Content Include="img\temp\notice.gif" />
+    <Content Include="js\site_master_js.js" />
     <Content Include="new_village.aspx" />
     <Content Include="Paid_amountreport.aspx" />
     <Content Include="print_house_owner.aspx" />
@@ -2761,6 +2763,9 @@
       <DependentUpon>TokenService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UploadImageHandler.ashx.cs">
+      <DependentUpon>UploadImageHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="upload_doc_search.aspx.cs">
       <DependentUpon>upload_doc_search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3078,6 +3083,7 @@
     <Content Include="society_sample.xss">
       <DependentUpon>society_sample.xsd</DependentUpon>
     </Content>
+    <Content Include="UploadImageHandler.ashx" />
     <None Include="usefull_contact.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>usefull_contact.Designer.cs</LastGenOutput>
@@ -3152,6 +3158,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="img\ProfilePic\" />
     <Folder Include="System\Web\UI\" />
     <Folder Include="Uploads\" />
   </ItemGroup>

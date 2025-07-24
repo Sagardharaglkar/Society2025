@@ -1,38 +1,179 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="tempForm.aspx.cs" MasterPageFile="~/Site.Master" Inherits="Society2024.tempForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-<style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
 
-.hover-underline {
-  position: relative;
-  display: inline-block;
-}
+        .profile-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: auto;
+        }
 
-.hover-underline::after,
-.hover-underline::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, #ff0000, #00ffff);
-  bottom: -5px;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s ease-out;
-}
+        #profileImage {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #000;
+            cursor: pointer;
+        }
 
-.hover-underline::before {
-  top: -5px;
-  transform-origin: left;
-}
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-.hover-underline:hover::after,
-.hover-underline:hover::before {
-  transform: scaleX(1);
-}​
-</style>
+        .profile-container:hover .overlay {
+            opacity: 1;
+        }
 
-<div class="hover-underline">Hover for underline</div>
+        #cropModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        #cropBox {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #preview {
+            max-width: 300px;
+            max-height: 300px;
+        }
+
+        .btn-group {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-upload {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+        <div class="profile-container">
+            <img id="profileImage" src="img/profilePic.png" alt="Profile">
+            <div class="overlay" onclick="document.getElementById('fileInput1').click()">
+                <div>📷<br>
+                    Change<br>
+                    profile photo</div>
+            </div>
+        </div>
+
+        <input type="file" id="fileInput1" accept="image/*" style="display: none" />
+        <!-- Crop Modal -->
+        <div id="cropModal">
+            <div id="cropBox">
+                <p><strong>Drag the image to adjust</strong></p>
+                <img id="preview" />
+                <div class="btn-group">
+                    <asp:Button runat="server" class="btn-upload" OnClientClick="uploadCroppedImage()" Text="Upload ✅" UseSubmitBehavior="False"></asp:Button>
+                    <button class="btn-cancel" onclick="closeModal()">Cancel ❌</button>
+                </div>
+            </div>
+        </div>
+          <asp:HiddenField runat="server" ID="ownerH"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput1');
+        const profileImage = document.getElementById('profileImage');
+        const cropModal = document.getElementById('cropModal');
+        const preview = document.getElementById('preview');
+        let cropper;
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                preview.src = reader.result;
+                cropModal.style.display = 'flex';
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(preview, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    responsive: true,
+                    zoomable: true,
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function closeModal() {
+            cropModal.style.display = 'none';
+            cropper.destroy();
+        }
+
+        function uploadCroppedImage() {
+            const canvas = cropper.getCroppedCanvas({
+                width: 150,
+                height: 150,
+            });
+
+            const dataUrl = canvas.toDataURL('image/png');
+            const ownerId = document.getElementById("<%= ownerH.ClientID %>").value;
+
+            // Update image preview
+            profileImage.src = dataUrl;
+            closeModal();
+
+            // Send to server with imageData and ownerId
+            fetch('UploadImageHandler.ashx', {
+                method: 'POST',
+                body: JSON.stringify({ imageData: dataUrl, ownerId: ownerId }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.text())
+                .then(data => console.log("Server:", data))
+                .catch(error => console.error("Upload failed:", error));
+        }
+
+
+    </script>
 
 </asp:Content>

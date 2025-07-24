@@ -90,9 +90,6 @@
                     <ContentTemplate>
                         <asp:HiddenField ID="loan_id" runat="server" />
 
-                        <asp:HiddenField ID="flat_no_id" runat="server" />
-                        <asp:HiddenField ID="loan_type_id" runat="server" />
-                        <asp:HiddenField ID="share_id" runat="server" />
 
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
 
@@ -204,7 +201,10 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                                        
+                        <asp:HiddenField ID="flat_no_id" runat="server" />
+                        <asp:HiddenField ID="loan_type_id" runat="server" />
+                        <asp:HiddenField ID="share_id" runat="server" />
                                         <div class="form-group">
                                             <div class="alert alert-danger danger" style="display: none;"></div>
                                         </div>
@@ -215,7 +215,7 @@
                                                 <asp:TextBox ID="TextBox1" Style="width: 100%" runat="server" CssClass="input-box form-control"
                                                     placeholder="Select" required="required" autocomplete="off" />
                                                 <div id="RepeaterContainer1" Style="width: 100%" class="suggestion-list">
-                                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand2">
+                                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="CategoryRepeater_ItemCommand1">
                                                         <ItemTemplate>
                                                             <asp:LinkButton
                                                                 ID="lnkCategory"

@@ -105,6 +105,15 @@ namespace Society
         protected global::System.Web.UI.WebControls.Label txt_welcome;
 
         /// <summary>
+        /// profileImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage profileImage;
+
+        /// <summary>
         /// upOpenButton control.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,24 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField owner_id;
+
+        /// <summary>
+        /// userID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField userID;
+
+        /// <summary>
+        /// profileImage2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage profileImage2;
 
         /// <summary>
         /// user_Name control.
