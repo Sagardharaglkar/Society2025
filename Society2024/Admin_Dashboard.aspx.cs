@@ -123,7 +123,7 @@ namespace Society2024
                 }
 
                 sb.Append(" name like '" + txt_search.Text + "%' or address like '" + txt_search.Text +
-                    "%' or email like '" + txt_search.Text + "%' or contact_no1 like '" + txt_search.Text + "%' or cast (total_flats as varchar) like '" + txt_search.Text + "%' or cast (pending_amount as varchar) like '" + txt_search.Text + "%'");
+                    "%' or email like '" + txt_search.Text + "%' or contact_no1 like '" + txt_search.Text + "%' or cast (total_unit as varchar) like '" + txt_search.Text + "%' or cast (amount as varchar) like '" + txt_search.Text + "%'");
                 count++;
             }
             if (TextBox1.Text != "")
@@ -171,7 +171,7 @@ namespace Society2024
                 {
                     sb.Append(" AND ");
                 }
-                sb.Append(" pending_amount between cast( '" + selectedMinPriceHidden.Value + "' as decimal) and cast ('" + selectedMaxPriceHidden.Value + "' as decimal)");
+                sb.Append(" amount between cast( '" + selectedMinPriceHidden.Value + "' as decimal) and cast ('" + selectedMaxPriceHidden.Value + "' as decimal)");
                 count++;
             }
             //sb.Append(" order by date desc");
@@ -182,8 +182,8 @@ namespace Society2024
             var result = BL_Login.get_recent_Search(details);
             if (result.Rows.Count > 0)
             {
-                maxPriceHidden.Value = result.AsEnumerable().Max(row => row.Field<decimal>("pending_amount")).ToString();
-                minPriceHidden.Value = result.AsEnumerable().Min(row => row.Field<decimal>("pending_amount")).ToString();
+                maxPriceHidden.Value = result.AsEnumerable().Max(row => row.Field<decimal>("amount")).ToString();
+                minPriceHidden.Value = result.AsEnumerable().Min(row => row.Field<decimal>("amount")).ToString();
 
             }
 

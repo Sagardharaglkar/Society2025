@@ -60,6 +60,51 @@ namespace DataAccessLayer.MasterDA
             }
             return details;
         }
+
+        public Login_Details InsertPayment(Login_Details paymentDetails)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status = "";
+
+            // Add payment parameters
+            data_item.Add(st.create_array("receipt_id",0));
+            data_item.Add(st.create_array("operation", "UPDATE"));
+            data_item.Add(st.create_array("total_amount", paymentDetails.City));
+
+            data_item.Add(st.create_array("paid_amount", paymentDetails.Amount));
+            data_item.Add(st.create_array("paymode", paymentDetails.Paymode));           
+            data_item.Add(st.create_array("society_id", paymentDetails.Society_Id));
+
+            // Execute the stored procedure (you may want to update the name accordingly)
+            status = st.run_query(data_item, "Select", "sp_SocietyReceipt", ref sdr);
+            if (status == "Done")
+            {
+                paymentDetails.Sql_Result = status;
+            }
+
+            return paymentDetails;
+        }
+
+        public DataTable show_receipt(Login_Details details)
+        {
+            ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
+            SqlDataReader sdr = null;
+            string status1 = "";
+            DataTable dt = new DataTable();
+            data_item.Add(st.create_array("operation", details.Sql_Operation));
+            data_item.Add(st.create_array("Society_id", details.Society_Id));
+
+            status1 = st.run_query(data_item, "Select", "sp_SocietyReceipt", ref sdr);
+
+            if (status1 == "Done")
+                if (sdr.HasRows)
+                    dt.Load(sdr);
+            return dt;
+
+        }
+
+
         public void fill_drop(DropDownList drp_down, string sqlstring, string text, string value)
         {
             st.fill_drop(drp_down, sqlstring, text, value);

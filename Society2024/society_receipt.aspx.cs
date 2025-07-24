@@ -24,6 +24,7 @@ namespace Society2024
             if (!IsPostBack)
             {
                 showData();
+                showhistory();
             }
         }
 
@@ -36,49 +37,108 @@ namespace Society2024
             GridView1.DataSource = result;
             ViewState["dirState"] = result;
             GridView1.DataBind();
-            GridView2.DataSource = result;
-            GridView2.DataBind();
-        }
+            if (result != null && result.Rows.Count > 0 && result.Rows.Count > 0)
+            {
 
+
+                lblTotalDues.Text = result.Compute("Sum(amount)", string.Empty).ToString();
+                lblOverdueMonths.Text = result.Rows.Count.ToString();
+            }
+
+        }
+        private void showhistory()
+        {
+            details.Sql_Operation = "show_history";
+            details.Name = "";
+            details.Society_Id = Society_id.Value;
+            var result = BL_Login.show_receipt(details);
+            GridView2.DataSource = result;
+            ViewState["dirState"] = result;
+            GridView2.DataBind();
+          
+        }
         // Method to handle the payment submission
         protected void SubmitPayment(object sender, EventArgs e)
         {
-            // Capture payment details from the form
-            string paymentAmount = Request.Form["paymentAmount"];
-            string paymentMode = Request.Form["paymentMode"];
-            string paymentNotes = Request.Form["paymentNotes"];
-            string SocietyId = Society_id.Value;
+            string paymentAmount = txtPaymentAmount.Text;
+            string paymentMode = ddlPaymentMode?.SelectedValue ?? "";
 
-            // Create a PaymentDetails object to pass to the business layer
-            PaymentDetails paymentDetails = new PaymentDetails
+            if (string.IsNullOrEmpty(paymentAmount) || paymentAmount == "0" || string.IsNullOrEmpty(paymentMode))
             {
-                Amount = paymentAmount,
-                Mode = paymentMode,
-                Notes = paymentNotes,
-                SocietyId =SocietyId
-            };
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Please fill all required fields.');", true);
+                return;
+            }
+
 
             try
             {
-                // Call the InsertPayment method from BL_User_Login to insert payment data into the database
+                // Correct variable name here
+                details.Amount = Convert.ToDouble (txtPaymentAmount.Text);
+                details.Paymode = ddlPaymentMode.SelectedValue;
+                details.City = lblTotalDues.Text;
+                details.Society_Id = Society_id.Value;
                 BL_Login.InsertPayment(details);
 
-                // Provide feedback to the user (optional)
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Payment submitted successfully!');", true);
 
-                // Optionally, reload the data (e.g., refresh the GridView)
+                // Clear selections & total
+                Session["ReceiptTotal"] = 0.0;
+                TextBox1.Text = "0.00";
+
                 showData();
+                showhistory();
+                // Refresh grid
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that might occur
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", $"alert('Error: {ex.Message}');", true);
+            }
+        }
+
+
+        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                double sessionTotal = 0.0;
+                bool anyChecked = false;
+
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+                    CheckBox chk = (CheckBox)row.FindControl("CheckBox1"); // Replace "CheckBox1" with your actual CheckBox ID
+                    Label amountText = (Label)row.FindControl("amount");
+                    if (chk.Checked && chk != null)
+                        if (amountText != null && double.TryParse(amountText.Text, out double amount))
+                        {
+
+
+                            anyChecked = true;
+                            sessionTotal += amount;
+                        }
+                }
+                
+
+                // Update session and UI
+                if (anyChecked)
+                {
+                   
+                    TextBox1.Text = sessionTotal.ToString("F2");
+                }
+                else
+                {
+                   
+                    TextBox1.Text = "0.00";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Optionally log or handle the error
             }
         }
     }
 
-    // PaymentDetails class to capture payment information
-    public class PaymentDetails
+        // PaymentDetails class to capture payment information
+        public class PaymentDetails
     {
         public string Amount { get; set; }
         public string Mode { get; set; }

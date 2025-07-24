@@ -313,7 +313,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Total Flats" ItemStyle-Width="150" SortExpression="total_flats">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("total_flats")%>'></asp:Label>
+                                                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("total_unit")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Point of Contact" ItemStyle-Width="400" SortExpression="contact_no1">
@@ -329,12 +329,12 @@
 
                                                 <asp:TemplateField HeaderText="Charges Per Month" ItemStyle-Width="150" SortExpression="chargesPerMonth">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("chargesPerMonth")%>'></asp:Label>
+                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("chargesPerUnit")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pending Amount" ItemStyle-Width="150" SortExpression="pending_amount">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("pending_amount")%>'></asp:Label>
+                                                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("amount")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Pending Month" ItemStyle-Width="150" SortExpression="month">

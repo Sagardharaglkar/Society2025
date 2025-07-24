@@ -113,7 +113,9 @@ namespace Society
             society.Sql_Operation = operation;
             society.Amount = txt_amount.Text;
             society.Society_Id = society_name_id.Value;
+            society.total_unit = Convert.ToInt32(txt_flat.Text);
             bL_society.updatecharges(society);
+
         }
 
 

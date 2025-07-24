@@ -8,6 +8,8 @@ namespace Utility.DataClass
 {
     public class Login_Details
     {
+        private double amount;
+        private string paymode;
         private int userloginid;
         private int depid;
         private int usertypeid;
@@ -68,6 +70,16 @@ namespace Utility.DataClass
         private string Society_id;
 
 
+        public double Amount
+        {
+            get { return amount; }
+            set { amount = value; }
+        }
+        public string Paymode
+        {
+            get { return paymode; }
+            set { paymode = value; }
+        }
         public int UserLoginId
         {
             get { return userloginid; }

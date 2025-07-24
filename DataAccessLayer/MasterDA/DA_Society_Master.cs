@@ -143,11 +143,14 @@ namespace DataAccessLayer.MasterDA
             string status1;
             data_item.Add(st.create_array("operation", society.Sql_Operation));
             data_item.Add(st.create_array("charge_id", society.Charge_Id));
+  
             if (society.Sql_Operation == "Update")
             {
                 data_item.Add(st.create_array("society_id", society.Society_Id));
               
                 data_item.Add(st.create_array("amount", society.Amount));
+
+                data_item.Add(st.create_array("total_unit", society.total_unit));
             }
             status1 = st.run_query(data_item, "Select", "sp_society_charges", ref sdr);
             if (status1 == "Done")
