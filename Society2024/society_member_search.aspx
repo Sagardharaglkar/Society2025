@@ -215,6 +215,7 @@
                                     <ContentTemplate>
                                         
                 <asp:HiddenField ID="Designation_id" runat="server" />
+
                                         <asp:HiddenField runat="server" ID="name_id" />
                                         <div class="form-group">
                                             <div class="row ">

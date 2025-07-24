@@ -140,7 +140,10 @@ namespace Society
             member.Designation = Convert.ToInt32(Designation_id.Value);
             member.UserName = txt_username.Text;
             member.Password = txt_password.Text;
+            member.Email = txt_email.Text;
+            member.Contact_No = txt_contact_no.Text;
             member.Status = 0;
+            member.Owner_id = Convert.ToInt32(name_id.Value);
             
             var result = bL_Society.updateSocietyMemberDetails(member);
             return result.Sql_Result;
@@ -167,8 +170,9 @@ namespace Society
             txt_email.Text = result.Email.ToString();
             txt_username.Text = result.UserName.ToString();
             txt_password.Text = result.Password.ToString();
+            name_id.Value = result.Owner_id.ToString();
 
-            String str = "Select *  from UserType";
+            String str = "Select *  from UserType where type = 1";
             repeater.fill_list(categoryRepeater2, str);
 
         }

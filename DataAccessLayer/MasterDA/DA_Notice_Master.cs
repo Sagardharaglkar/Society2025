@@ -41,6 +41,7 @@ namespace DataAccessLayer.MasterDA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", notice.Sql_Operation));
             data_item.Add(st.create_array("Search", notice.Name));
+            data_item.Add(st.create_array("society_id", notice.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_notice_master", ref sdr);
 

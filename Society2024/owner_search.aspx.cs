@@ -200,7 +200,7 @@ namespace Society
             var result = bL_Owner.updateOwnerDetails(owner);
 
             owner_id.Value = result.owner_id.ToString();
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
+           
             return result.Sql_Result;
         }
 
@@ -260,8 +260,8 @@ namespace Society
 
 
         protected void btn_save_Click1(object sender, EventArgs e)
-        {
-            string str = runproc_save("Update");
+         {
+           string str = runproc_save("Update");
             if (str == "Done") 
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
              else

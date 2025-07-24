@@ -137,6 +137,7 @@ namespace DataAccessLayer.DA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", getfacility.Sql_Operation));
             data_item.Add(st.create_array("search", getfacility.Name));
+            data_item.Add(st.create_array("society_id", getfacility.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_facility", ref sdr);
 
@@ -204,6 +205,7 @@ namespace DataAccessLayer.DA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", party.Sql_Operation));
             data_item.Add(st.create_array("search", party.Name));
+            data_item.Add(st.create_array("society_id", party.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_facility_booking", ref sdr);
 

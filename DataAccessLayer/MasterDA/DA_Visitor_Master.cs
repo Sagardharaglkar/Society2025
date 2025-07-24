@@ -128,6 +128,7 @@ namespace DataAccessLayer.MasterDA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("Operation", visitor.Sql_Operation));
             data_item.Add(st.create_array("search", visitor.V_Name));
+            data_item.Add(st.create_array("society_id", visitor.Society_Id));
             if (visitor.In_Date != DateTime.MinValue)
                 data_item.Add(st.create_array("fromDate", visitor.In_Date));
             if (visitor.Out_Date != DateTime.MinValue)

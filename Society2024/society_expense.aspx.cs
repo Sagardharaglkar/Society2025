@@ -51,7 +51,7 @@ namespace Society
             String str1 = "Select vendor_id,v_name from vendor_master where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater1, str1);
 
-            String str2 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
+            String str2 = "Select build_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
             repeater.fill_list(Repeater2, str2);
 
         }

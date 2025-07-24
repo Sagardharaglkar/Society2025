@@ -285,7 +285,7 @@
                                                                             runat="server"
                                                                             CssClass="suggestion-item link-button category-link"
                                                                             Text='<%# Eval("name") %>'
-                                                                            CommandArgument='<%# Eval("wing_id") %>'
+                                                                            CommandArgument='<%# Eval("build_id") %>'
                                                                             CommandName="SelectCategory"
                                                                             OnClientClick="setCategoryBox2(this.innerText);" />
                                                                     </ItemTemplate>

@@ -160,6 +160,7 @@ namespace DataAccessLayer.DA
             DataTable dt = new DataTable();
             data_item.Add(st.create_array("operation", cash.Sql_Operation));
             data_item.Add(st.create_array("build_id", cash.build_id));
+            data_item.Add(st.create_array("society_id", cash.Society_Id));
             if (cash.Date1 != DateTime.MinValue && cash.Date2 != DateTime.MinValue)
             {
                 data_item.Add(st.create_array("date1", cash.Date1));
@@ -216,17 +217,16 @@ namespace DataAccessLayer.DA
             return dt;
         }
 
-        public DataTable receipt_search(receipt receipt)
+        public DataTable receipt_search(receipt receipt1)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();
             SqlDataReader sdr = null;
             string status1;
 
             DataTable dt = new DataTable();
-            data_item.Add(st.create_array("search", receipt.Owner_Name));
-            data_item.Add(st.create_array("operation", receipt.Sql_Operation));
-            data_item.Add(st.create_array("society_id", receipt.Society_Id));
-
+            data_item.Add(st.create_array("search", receipt1.Owner_Name));
+            data_item.Add(st.create_array("operation", "search"));
+            data_item.Add(st.create_array("society_id", receipt1.Society_Id));
 
             status1 = st.run_query(data_item, "Select", "sp_receipt", ref sdr);
 

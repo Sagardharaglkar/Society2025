@@ -83,7 +83,10 @@ namespace BusinessLogic.MasterBL
             return dA_User.Get_Recent_Search(details);
         }
 
-
+        public Login_Details InsertPayment(Login_Details details)
+        {
+            return dA_User.InsertPayment(details);
+        }
 
         public DataTable Get_Pdc_Clearing(Login_Details details)
         {
@@ -107,8 +110,18 @@ namespace BusinessLogic.MasterBL
         {
             return dA_User.Search_Admin(details);
         }
+        public DataTable society_receipt(Login_Details details)
+        {
+            return dA_User.Search_receipt(details);
+        }
 
-        public DataTable get_notification(Login_Details details)
+
+            public DataTable show_receipt(Login_Details details)
+            {
+                return dA_User.show_receipt(details);
+            }
+
+            public DataTable get_notification(Login_Details details)
         {
             return dA_User.get_notification(details);
         }

@@ -7,6 +7,7 @@ namespace DBCode.DataClass.Master_Dataclass
 {
     public class Search_Society
     {
+        private int unit;
         private int sid;
         private string name;
         private DateTime establishdate;
@@ -30,7 +31,11 @@ namespace DBCode.DataClass.Master_Dataclass
         private string Operation;
         private string Result;
 
-
+        public int total_unit
+        {
+            get { return unit; }
+            set { unit = value; }
+        }
 
         public int society_master_id
         {

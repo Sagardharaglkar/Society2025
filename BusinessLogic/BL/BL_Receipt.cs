@@ -55,9 +55,9 @@ namespace BusinessLogic.BL
             return dA_Receipt.Print_Receipt(getReceipt);
         }
 
-        public DataTable search_receipt(receipt receipt)
+        public DataTable search_receipt(receipt Receipt)
         {
-            return dA_Receipt.receipt_search(receipt);
+            return dA_Receipt.receipt_search(Receipt);
         }
 
         public DataTable Get_CashBook(Cashbook cash)
