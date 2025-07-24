@@ -133,8 +133,10 @@ namespace Society2024
             {
                 ViewState["dirState"] = result;
                 ViewState["sortdr"] = "Asc";
+                result.Compute("Sum(due)", string.Empty).ToString();
             }
-            result.Compute("Sum(due)", string.Empty).ToString();
+
+            
             GridView8.DataSource = result;
             GridView8.DataBind();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
@@ -143,7 +145,7 @@ namespace Society2024
 
         protected void due_fill(object sender, EventArgs e)
         {
-
+            lbl_due.Text = "0";
             details.Name = "";
             details.Sql_Operation = "defaulter_show";
             var result = BL_Login.search_defaulter(details);
@@ -151,8 +153,9 @@ namespace Society2024
             {
                 ViewState["dirState"] = result;
                 ViewState["sortdr"] = "Asc";
+                lbl_due.Text = result.Compute("Sum(due)", string.Empty).ToString();
             }
-            lbl_due.Text = result.Compute("Sum(due)", string.Empty).ToString();
+            
 
         }
         protected void GridView8_Sorting(object sender, GridViewSortEventArgs e)

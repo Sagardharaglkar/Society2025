@@ -84,6 +84,9 @@
 
                                             </ItemTemplate>
                                         </asp:TemplateField>   
+                                   
+
+
                                            
                                    </Columns>
                                 </asp:GridView>
@@ -97,10 +100,9 @@
     <div class="col-md-12 d-flex justify-content-end align-items-center">
         <label class="mr-2 font-weight-bold mb-0">Total:</label>
         <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control d-inline-block mr-2" Style="width: 150px;" Text="0"></asp:TextBox>
-     <asp:Button ID="pay" runat="server" Text="Pay" CssClass="btn btn-success payBtn"
-    OnClientClick="setAndShowPaymentModal(); return false;" />
 
-
+    <asp:Button ID="pay" runat="server" Text="Pay" CssClass="btn btn-success payBtn"
+    OnClientClick="return validateAndShowPaymentModal();" />
 
     </div>
 </div>
@@ -123,9 +125,9 @@
         </ItemTemplate>
     </asp:TemplateField>
 
-    <asp:TemplateField HeaderText="Pending Month" ItemStyle-Width="150" >
+    <asp:TemplateField HeaderText="Date" ItemStyle-Width="150" >
         <ItemTemplate>
-            <asp:Label ID="lblPendingAmount" runat="server" Text='<%# Bind("date")%>'></asp:Label>
+            <asp:Label ID="lblPendingAmount" runat="server" Text='<%# Bind("date","{0:dd MMMM yyyy}")%>'></asp:Label>
         </ItemTemplate>
     </asp:TemplateField>
 
@@ -139,6 +141,16 @@
             <asp:Label ID="lblPendingMonth" runat="server" Text='<%# Bind("paymode")%>'></asp:Label>
         </ItemTemplate>
     </asp:TemplateField>
+                                       <asp:TemplateField HeaderText="Receipt" ItemStyle-Width="100">
+    <ItemTemplate>
+        <asp:Button ID="btnReceipt" runat="server" Text="View Details"
+            CssClass="btn btn-sm btn-primary"
+         
+            CommandArgument='<%# Eval("receipt_id") %>' />
+    </ItemTemplate>
+</asp:TemplateField>
+
+                                        
 
 </Columns>
 
@@ -167,30 +179,49 @@
                     <asp:TextBox ID="txtPaymentAmount" runat="server" CssClass="form-control" />
                 </div>
 
-                <!-- Payment Type -->
-                <div class="form-group">
-                    <label>Payment Type</label>
-                    <asp:DropDownList ID="ddlPaymentMode" runat="server" CssClass="form-control">
-                        <asp:ListItem Text="-- Select --" Value="" />
-                        <asp:ListItem Text="UPI" Value="UPI" />
-                        <asp:ListItem Text="Cash" Value="Cash" />
-                        <asp:ListItem Text="Card" Value="Card" />
-                    </asp:DropDownList>
-                </div>
+               <!-- Payment Type -->
+<div class="form-group">
+    <label>Payment Type</label>
+    <asp:DropDownList ID="ddlPaymentMode" runat="server" CssClass="form-control">
+        <asp:ListItem Text="-- Select --" Value="" />
+        <asp:ListItem Text="UPI" Value="UPI" />
+        <asp:ListItem Text="Card" Value="Card" />
+        <asp:ListItem Text="Bank Transfer" Value="Bank Transfer" />
+        <asp:ListItem Text="Wallet" Value="Wallet" />
+        <asp:ListItem Text="Online Gateway" Value="Online Gateway" />
+    </asp:DropDownList>
+</div>
 
-                <!-- UPI ID -->
-                <div class="form-group" id="upiField" style="display:none;">
-                    <label>UPI ID</label>
-                    <asp:TextBox ID="txtUPIId" runat="server" CssClass="form-control" Placeholder="Enter UPI ID" />
-                </div>
+<!-- UPI Field -->
+<div class="form-group" id="upiField" style="display:none;">
+    <label>UPI ID</label>
+    <asp:TextBox ID="txtUPIId" runat="server" CssClass="form-control" Placeholder="Enter UPI ID" />
+</div>
 
-                <!-- Other Payment Reference -->
-                <div class="form-group" id="otherField" style="display:none;">
-                    <label>Reference Details</label>
-                    <asp:TextBox ID="txtReference" runat="server" CssClass="form-control" Placeholder="Transaction reference..." />
-                </div>
+<!-- Card Field -->
+<div class="form-group" id="cardField" style="display:none;">
+    <label>Last 4 Digits of Card</label>
+    <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control" MaxLength="4" Placeholder="e.g., 1234" />
+</div>
 
-            </div>
+<!-- Bank Transfer Field -->
+<div class="form-group" id="bankField" style="display:none;">
+    <label>Bank Transaction Reference</label>
+    <asp:TextBox ID="txtBankRef" runat="server" CssClass="form-control" Placeholder="e.g., NEFT123456" />
+</div>
+
+<!-- Wallet Field -->
+<div class="form-group" id="walletField" style="display:none;">
+    <label>Wallet Transaction ID</label>
+    <asp:TextBox ID="txtWalletTxn" runat="server" CssClass="form-control" Placeholder="e.g., Paytm/PhonePe Txn ID" />
+</div>
+
+<!-- Gateway Field -->
+<div class="form-group" id="gatewayField" style="display:none;">
+    <label>Payment Gateway Reference</label>
+    <asp:TextBox ID="txtGatewayRef" runat="server" CssClass="form-control" Placeholder="e.g., Razorpay/Stripe ID" />
+</div>
+
 
             <div class="modal-footer">
                 <asp:Button ID="btnSubmitPayment" runat="server" CssClass="btn btn-primary" Text="Submit Payment"
@@ -207,54 +238,74 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function showPaymentModal(pendingAmount) {
-        // Fill the pending amount
-        document.getElementById("modalPendingAmount").value = pendingAmount;
-
-        // Reset dropdown and inputs
-        $('#paymentType').val('');
-        $('#upiField').hide();
-        $('#otherField').hide();
-
-        // Show the modal
-        $('#paymentModal').modal('show');
-    }
-
-    // Show/hide fields based on dropdown selection
-    $(document).ready(function () {
-        var ddl = $('#<%= ddlPaymentMode.ClientID %>');  // ASP.NET server control
-       var upiField = $('#upiField');                   // plain HTML div
-       var otherField = $('#otherField');               // plain HTML div
-
-       ddl.change(function () {
-           var selected = $(this).val();
-           if (selected === "UPI") {
-               upiField.show();
-               otherField.hide();
-           } else if (selected === "Cash") {
-               upiField.hide();
-               otherField.hide();
-           } else {
-               upiField.hide();
-               otherField.show();
-           }
-       });
-   });
-
     function setAndShowPaymentModal() {
         var pendingAmount = document.getElementById('<%= TextBox1.ClientID %>').value;
         document.getElementById('<%= txtPaymentAmount.ClientID %>').value = pendingAmount;
 
-    $('#ddlPaymentMode').val('');
-    $('#<%= txtUPIId.ClientID %>').val('');
-        $('#<%= txtReference.ClientID %>').val('');
-        $('#upiField').hide();
-        $('#otherField').hide();
+        var ddl = $('#<%= ddlPaymentMode.ClientID %>');
 
+        // Reset dropdown and all payment inputs
+        ddl.val('');
+        $('#<%= txtUPIId.ClientID %>').val('');
+        $('#<%= txtCardNumber.ClientID %>').val('');
+        $('#<%= txtBankRef.ClientID %>').val('');
+        $('#<%= txtWalletTxn.ClientID %>').val('');
+        $('#<%= txtGatewayRef.ClientID %>').val('');
+
+        // Hide all payment fields
+        $('#upiField, #cardField, #bankField, #walletField, #gatewayField').hide();
+
+        // Show the modal
         $('#paymentModal').modal('show');
+
+        // Force re-trigger logic for showing/hiding fields
+        ddl.trigger('change');
+    }
+
+    $(document).ready(function () {
+        var ddl = $('#<%= ddlPaymentMode.ClientID %>');
+
+        ddl.change(function () {
+            var selected = $(this).val();
+
+            // Hide all by default
+            $('#upiField, #cardField, #bankField, #walletField, #gatewayField').hide();
+
+            // Show specific field based on selection
+            switch (selected) {
+                case "UPI":
+                    $('#upiField').show();
+                    break;
+                case "Card":
+                    $('#cardField').show();
+                    break;
+                case "Bank Transfer":
+                    $('#bankField').show();
+                    break;
+                case "Wallet":
+                    $('#walletField').show();
+                    break;
+                case "Online Gateway":
+                    $('#gatewayField').show();
+                    break;
+            }
+        });
+    });
+
+    function validateAndShowPaymentModal() {
+        var amount = parseFloat(document.getElementById('<%= TextBox1.ClientID %>').value);
+
+        if (isNaN(amount) || amount <= 0) {
+            alert('Please select at least one item to pay.');
+            return false; // Stop execution
+        }
+
+        setAndShowPaymentModal();
+        return false; // Prevent postback
     }
 
 </script>
+
 
 
 

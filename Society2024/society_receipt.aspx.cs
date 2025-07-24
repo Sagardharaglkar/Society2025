@@ -21,10 +21,12 @@ namespace Society2024
             else
                 Society_id.Value = Session["Society_id"].ToString();
 
+     
             if (!IsPostBack)
             {
                 showData();
                 showhistory();
+              
             }
         }
 
@@ -44,6 +46,10 @@ namespace Society2024
                 lblTotalDues.Text = result.Compute("Sum(amount)", string.Empty).ToString();
                 lblOverdueMonths.Text = result.Rows.Count.ToString();
             }
+            else { lblTotalDues.Text = "0";
+                lblOverdueMonths.Text = "0";
+            }
+            
 
         }
         private void showhistory()
@@ -55,7 +61,19 @@ namespace Society2024
             GridView2.DataSource = result;
             ViewState["dirState"] = result;
             GridView2.DataBind();
-          
+            if (result != null && result.Rows.Count > 0 && result.Rows.Count > 0)
+            {
+
+
+                lblPaidThisYear.Text = result.Compute("Sum(paid_amount)", string.Empty).ToString();
+                
+            }
+            else
+            {
+                lblPaidThisYear.Text = "0";
+               
+            }
+
         }
         // Method to handle the payment submission
         protected void SubmitPayment(object sender, EventArgs e)
@@ -137,12 +155,15 @@ namespace Society2024
         }
     }
 
-        // PaymentDetails class to capture payment information
-        public class PaymentDetails
+    
+
+
+    // PaymentDetails class to capture payment information
+    public class PaymentDetails
     {
         public string Amount { get; set; }
         public string Mode { get; set; }
-        public string Notes { get; set; }
+        public string Notes { get; set; } 
         public string SocietyId { get; set; }
     }
 }

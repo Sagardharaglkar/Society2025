@@ -114,13 +114,40 @@ namespace Society2024
         protected global::System.Web.UI.WebControls.TextBox txtUPIId;
 
         /// <summary>
-        /// txtReference control.
+        /// txtCardNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReference;
+        protected global::System.Web.UI.WebControls.TextBox txtCardNumber;
+
+        /// <summary>
+        /// txtBankRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBankRef;
+
+        /// <summary>
+        /// txtWalletTxn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWalletTxn;
+
+        /// <summary>
+        /// txtGatewayRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGatewayRef;
 
         /// <summary>
         /// btnSubmitPayment control.
