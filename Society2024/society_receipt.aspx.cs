@@ -21,12 +21,12 @@ namespace Society2024
             else
                 Society_id.Value = Session["Society_id"].ToString();
 
-     
+
             if (!IsPostBack)
             {
                 showData();
                 showhistory();
-              
+
             }
         }
 
@@ -46,10 +46,12 @@ namespace Society2024
                 lblTotalDues.Text = result.Compute("Sum(amount)", string.Empty).ToString();
                 lblOverdueMonths.Text = result.Rows.Count.ToString();
             }
-            else { lblTotalDues.Text = "0";
+            else
+            {
+                lblTotalDues.Text = "0";
                 lblOverdueMonths.Text = "0";
             }
-            
+
 
         }
         private void showhistory()
@@ -66,12 +68,12 @@ namespace Society2024
 
 
                 lblPaidThisYear.Text = result.Compute("Sum(paid_amount)", string.Empty).ToString();
-                
+
             }
             else
             {
                 lblPaidThisYear.Text = "0";
-               
+
             }
 
         }
@@ -91,7 +93,7 @@ namespace Society2024
             try
             {
                 // Correct variable name here
-                details.Amount = Convert.ToDouble (txtPaymentAmount.Text);
+                details.Amount = Convert.ToDouble(txtPaymentAmount.Text);
                 details.Paymode = ddlPaymentMode.SelectedValue;
                 details.City = lblTotalDues.Text;
                 details.Society_Id = Society_id.Value;
@@ -134,17 +136,17 @@ namespace Society2024
                             sessionTotal += amount;
                         }
                 }
-                
+
 
                 // Update session and UI
                 if (anyChecked)
                 {
-                   
+
                     TextBox1.Text = sessionTotal.ToString("F2");
                 }
                 else
                 {
-                   
+
                     TextBox1.Text = "0.00";
                 }
             }
@@ -153,11 +155,78 @@ namespace Society2024
                 // Optionally log or handle the error
             }
         }
+
+
+        [System.Web.Services.WebMethod]
+        public static object GetReceiptDetails(string receiptId)
+        {
+            try
+            {
+                // Example logic to fetch the receipt details based on receipt_id
+                // Replace with your actual code to fetch data from your database
+                BL_User_Login BL_Login = new BL_User_Login();
+                Login_Details details = new Login_Details();
+                details.Sql_Operation = "show_history";
+                details.Name = "";
+                details.Society_Id = "C10001";
+                var result = BL_Login.show_receipt(details);
+                //details.Sql_Operation = "show_receipt";
+                //details.Name = "";
+                //details.Branch_Id = Convert.ToInt32(receiptId);
+                //var result = BL_Login.show_receipt(details);// Fetch receipt from database
+
+                if (result != null && result.Rows.Count > 0)
+                {
+                    var receipt = new
+                    {
+                        Date = Convert.ToDateTime(result.Rows[0]["date"]).ToString("dd MMM yyyy"),
+                        Amount = result.Rows[0]["paid_amount"].ToString(),
+                        Mode = result.Rows[0]["paymode"].ToString(),
+                        TxnRef = result.Rows[0]["society_id"].ToString(),
+                        UpiId = result.Rows[0]["receipt_id"].ToString()  // Adjust based on your fields
+                    };
+
+                    return receipt;  // Return as JSON
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception if any
+                return null;
+            }
+        }
+
+        protected void btnReceipt_Command(object sender, CommandEventArgs e)
+        {
+            BL_User_Login BL_Login = new BL_User_Login();
+            Login_Details details = new Login_Details();
+            details.Sql_Operation = "show_history";
+            details.Name = "";
+            details.Society_Id = "C10001";
+            var result = BL_Login.show_receipt(details);
+            //details.Sql_Operation = "show_receipt";
+            //details.Name = "";
+            //details.Branch_Id = Convert.ToInt32(receiptId);
+            //var result = BL_Login.show_receipt(details);// Fetch receipt from database
+
+            if (result != null && result.Rows.Count > 0)
+            {
+
+                lblModalDate.Text = Convert.ToDateTime(result.Rows[0]["date"]).ToString("dd MMM yyyy").ToString();
+                lblModalAmount.Text = result.Rows[0]["paid_amount"].ToString();
+                lblModalMode.Text = result.Rows[0]["paymode"].ToString();
+                lblModalTxnRef.Text = result.Rows[0]["society_id"].ToString();
+                lblModalUpiId.Text = result.Rows[0]["receipt_id"].ToString();  // Adjust based on your fields
+                
+
+                ScriptManager.RegisterStartupScript(this,this.GetType(), "Pop", "$('#receiptModal').modal('show');", true); // Return as JSON
+            }
+        }
     }
-
-    
-
-
     // PaymentDetails class to capture payment information
     public class PaymentDetails
     {

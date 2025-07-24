@@ -138,17 +138,19 @@
     </asp:TemplateField>
                                        <asp:TemplateField HeaderText="Payment mode" ItemStyle-Width="150" >
         <ItemTemplate>
-            <asp:Label ID="lblPendingMonth" runat="server" Text='<%# Bind("paymode")%>'></asp:Label>
+            <asp:Label ID="lblPendingMonthgd" runat="server" Text='<%# Bind("paymode")%>'></asp:Label>
         </ItemTemplate>
     </asp:TemplateField>
+
                                        <asp:TemplateField HeaderText="Receipt" ItemStyle-Width="100">
     <ItemTemplate>
-        <asp:Button ID="btnReceipt" runat="server" Text="View Details"
-            CssClass="btn btn-sm btn-primary"
-         
-            CommandArgument='<%# Eval("receipt_id") %>' />
+       <asp:Button ID="btnReceipt" runat="server" Text="View Details"
+    CssClass="btn btn-sm btn-primary"
+    CommandArgument='<%# Eval("receipt_id") %>' OnCommand="btnReceipt_Command" />
+
     </ItemTemplate>
 </asp:TemplateField>
+
 
                                         
 
@@ -231,6 +233,32 @@
         </div>
     </div>
 </div>
+       </div>
+    <!-- Modal for Viewing Receipt -->
+<div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="receiptModalLabel">Payment Receipt</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Date:</strong> <asp:Label ID="lblModalDate" runat="server" /></p>
+<p><strong>Amount:</strong> ₹<asp:Label ID="lblModalAmount" runat="server" /></p>
+<p><strong>Mode:</strong> <asp:Label ID="lblModalMode" runat="server" /></p>
+<p><strong>Transaction Ref:</strong> <asp:Label ID="lblModalTxnRef" runat="server" /></p>
+<p><strong>UPI ID:</strong> <asp:Label ID="lblModalUpiId" runat="server" /></p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
     <!-- Optional: Bootstrap for styling -->
@@ -302,6 +330,37 @@
 
         setAndShowPaymentModal();
         return false; // Prevent postback
+    }
+
+    function showReceiptDetails(receiptId) {
+        // Make an AJAX request to the server to get the receipt details
+        $.ajax({
+            type: "POST",
+            url: "society_receipt.aspx/GetReceiptDetails", // The WebMethod endpoint to fetch receipt details
+            data: JSON.stringify({ receiptId: receiptId }),  // Pass the receipt_id to the server
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response.d) {
+                    var receipt = response.d;
+
+                    // Populate the modal with the receipt details
+                    $('#modalDate').text(receipt.Date);
+                    $('#modalAmount').text(receipt.Amount);
+                    $('#modalMode').text(receipt.Mode);
+                    $('#modalTxnRef').text(receipt.TxnRef);
+                    $('#modalUpiId').text(receipt.UpiId);
+
+                    // Show the modal
+                    $('#receiptModal').modal('show');
+                } else {
+                    alert('No details found for this receipt.');
+                }
+            },
+            error: function () {
+                alert('Error fetching receipt details.');
+            }
+        });
     }
 
 </script>

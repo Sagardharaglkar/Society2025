@@ -19,6 +19,13 @@ namespace BusinessLogic.MasterBL
         
         }
 
+        public DataTable get_single_receipt(Login_Details details)
+        {
+            // Implement DB call logic using ADO.NET or your DAL
+            return dA_User.single_receipt(details);
+        }
+
+
         public Login_Details Generate_Token(Login_Details details)
         {
 
