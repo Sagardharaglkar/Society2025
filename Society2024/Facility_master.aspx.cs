@@ -14,13 +14,14 @@ namespace Society2024
     public partial class Facility_master : System.Web.UI.Page
     {
         facility GetFacility = new facility();
-        BL_facility bL_Party = new BL_facility(); 
+        BL_facility bL_Party = new BL_facility();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["name"] == null)
             {
                 Response.Redirect("login1.aspx");
-            }else
+            }
+            else
                 society_id.Value = Session["society_id"].ToString();
 
 
@@ -52,7 +53,7 @@ namespace Society2024
             if (radiobtn1.Checked) GetFacility.Slot = 1; else if (radiobtn3.Checked) GetFacility.Slot = 2; else GetFacility.Slot = 3;
             GetFacility.Description = txt_desc.Text;
             GetFacility.Sql_Operation = operation;
-            var result= bL_Party.update_facility(GetFacility);
+            var result = bL_Party.update_facility(GetFacility);
             facility_id.Value = result.facility_id.ToString();
 
             return result.Sql_Result;
@@ -70,8 +71,8 @@ namespace Society2024
             society_id.Value = result.Society_Id;
             txt_facility.Text = result.Name;
             txt_cost.Text = result.Cost.ToString();
-           
-            txt_desc.Text= result.Description;
+
+            txt_desc.Text = result.Description;
             if (result.Slot == 1)
                 radiobtn1.Checked = true;
             else if (result.Slot == 2)
@@ -82,7 +83,7 @@ namespace Society2024
                 radiobtn2.Checked = true;
                 panel1.Visible = true;
             }
-           
+
         }
 
         public void runproc_slot_save(string operation)
@@ -92,7 +93,7 @@ namespace Society2024
             GetFacility.facility_id = Convert.ToInt32(facility_id.Value);
             GetFacility.Society_Id = society_id.Value;
             GetFacility.Sql_Operation = operation;
-            
+
             GetFacility.Start_Time = Convert.ToDateTime(txt_from.Text);
             GetFacility.To_Time = Convert.ToDateTime(txt_to.Text);
             bL_Party.runproc_slot(GetFacility);
@@ -135,26 +136,26 @@ namespace Society2024
         protected void btn_save_Click(object sender, EventArgs e)
         {
             var str = runproc_save("Update");
-           if (str == "Done")
+            if (str == "Done")
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
 
             else
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
 
+            }
         }
-    }
 
 
         protected void btn_delete_Click(object sender, EventArgs e)
         {
-           
-                if (facility_id.Value != "")
-                    GetFacility.facility_id = Convert.ToInt32(facility_id.Value);
-                GetFacility.Sql_Operation = "Delete";
-                bL_Party.delete(GetFacility);
-          
-                Response.Redirect("Facility_Master.aspx");
+
+            if (facility_id.Value != "")
+                GetFacility.facility_id = Convert.ToInt32(facility_id.Value);
+            GetFacility.Sql_Operation = "Delete";
+            bL_Party.delete(GetFacility);
+
+            Response.Redirect("Facility_Master.aspx");
 
         }
 
@@ -185,16 +186,16 @@ namespace Society2024
             string id = e.CommandArgument.ToString();
             facility_id.Value = id;
             runproc_facility("Select");
-            
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);
         }
 
-        public void cleardata() 
+        public void cleardata()
         {
             txt_slot.Text = "";
             txt_from.Text = "";
             txt_to.Text = "";
-        
+
         }
         protected void btn_add_Click(object sender, EventArgs e)
         {
@@ -225,15 +226,15 @@ namespace Society2024
         protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
-                GridViewRow row = (GridViewRow)GridView2.Rows[e.RowIndex];
+            GridViewRow row = (GridViewRow)GridView2.Rows[e.RowIndex];
 
-                System.Web.UI.WebControls.Label id = (System.Web.UI.WebControls.Label)row.FindControl("slot_id");
-                GetFacility.Sql_Operation = "Delete_Slot";
+            System.Web.UI.WebControls.Label id = (System.Web.UI.WebControls.Label)row.FindControl("slot_id");
+            GetFacility.Sql_Operation = "Delete_Slot";
 
-                GetFacility.Slot_Id = Convert.ToInt32(id.Text);
-                bL_Party.delete_slot(GetFacility);
-                slot_gridbind();
-           
+            GetFacility.Slot_Id = Convert.ToInt32(id.Text);
+            bL_Party.delete_slot(GetFacility);
+            slot_gridbind();
+
             ClientScript.RegisterStartupScript(this.GetType(), "Pop", "openModal();", true);
         }
 

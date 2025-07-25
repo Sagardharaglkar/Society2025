@@ -140,32 +140,29 @@
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
                                         <div class="search-container">
-                                            
+
                                             <asp:TextBox
                                                 ID="txt_search"
                                                 CssClass="aspNetTextBox"
                                                 placeHolder="Search here"
-                                                runat="server" 
-                                                TextMode="Search" 
+                                                runat="server"
+                                                TextMode="Search"
                                                 AutoPostBack="true"
                                                 OnTextChanged="btn_search_Click"
-                                                onkeyup="removeFocusAfterTyping()"/>
+                                                onkeyup="removeFocusAfterTyping()" />
 
-                                            <ajaxtoolkit:calendarextender
-                                                id="CalendarExtender1"
+<%--                                            <ajaxToolkit:CalendarExtender
+                                                ID="CalendarExtender1"
                                                 runat="server"
-                                                targetcontrolid="txt_search"
-                                                popupbuttonid="btn_calendar"
-                                                format="yyyy-MM-dd" />
+                                                TargetControlID="txt_search"
+                                                PopupButtonID="btn_calendar"
+                                                Format="yyyy-MM-dd"
+                                                BehaviorID="calendarExt" />--%>
+                                            <!-- Add BehaviorID here -->
 
                                             <!-- Calendar and Search Buttons -->
                                             <div class="input-buttons">
-                                                <img
-                                                    id="btn_calendar"
-                                                    src="img/calendar.png"
-                                                    alt="Pick Date"
-                                                    class="calendar-icon"
-                                                    style="cursor: pointer;" />
+
 
                                                 <button
                                                     id="btn_search"
@@ -178,8 +175,6 @@
                                             </div>
                                         </div>
 
-                                        &nbsp;&nbsp; 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -210,11 +205,7 @@
                                                         <asp:Label ID="name" runat="server" Text='<%# Bind("name")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Establish Date" ItemStyle-Width="150" SortExpression="establish_date">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="establish_date" runat="server" Text='<%# Bind("establish_date","{0:yyyy-MM-dd}")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
+
                                                 <asp:TemplateField HeaderText="Registration No" ItemStyle-Width="150" SortExpression="registration_no">
                                                     <ItemTemplate>
                                                         <asp:Label ID="registration_no" runat="server" Text='<%# Bind("registration_no")%>'></asp:Label>
@@ -293,20 +284,6 @@
 
 
                                                 <div class="col-sm-3">
-
-                                                    <asp:Label ID="Label1" runat="server" Text="Establish Date"></asp:Label>
-                                                    <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
-                                                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <asp:TextBox ID="txt_es_date" CssClass="form-control" TextMode="Date" runat="server" Width="200px" required></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row ">
-                                                <div class="col-sm-3">
                                                     <asp:Label ID="Label4" runat="server" Text="Registration No"></asp:Label>
                                                     <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
                                                     <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="Red" Text="*"></asp:Label>
@@ -316,10 +293,9 @@
                                                     <br />
                                                     <asp:Label ID="Label22" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                                                 </div>
-
                                             </div>
-
                                         </div>
+
 
                                         <hr />
 

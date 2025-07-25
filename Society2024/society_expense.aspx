@@ -82,7 +82,7 @@
                                         </div>
 
                                         &nbsp;&nbsp;
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                        <button id="save" runat="server" OnServerClick="Unnamed_ServerClick" type="button" class="btn btn-primary" runat="server"  data-toggle="modal" data-target="#edit_model" >Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,15 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <div style="width: 100%; overflow: auto;">
-                                        <asp:GridView AllowPaging="true" OnPageIndexChanging="GridView1_PageIndexChanging" PageSize="15" ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-hover table-striped" AllowSorting="true" HeaderStyle-BackColor="lightblue"
-                                            ShowHeaderWhenEmpty="true" EmptyDataText="No Record Found" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting" OnRowDeleting="GridView1_RowDeleting">
-
+                                        <asp:GridView ID="GridView1" runat="server"
+                                            AutoGenerateColumns="False"
+                                            CssClass="table table-striped table-bordered"
+                                            OnSorting="GridView1_Sorting"
+                                            OnRowDeleting="GridView1_RowDeleting"
+                                            OnPageIndexChanging="GridView1_PageIndexChanging"
+                                            AllowSorting="True"
+                                            AllowPaging="True"
+                                            PageSize="10">
                                             <Columns>
                                                 <asp:TemplateField HeaderText="No" ItemStyle-Width="100">
                                                     <ItemTemplate>
@@ -133,22 +139,32 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Type" SortExpression="expense_status">
                                                     <ItemTemplate>
-                                                        <asp:Label runat="server" ID="invoice" Text='<%# Bind("type")%>'></asp:Label>
+                                                        <asp:Label runat="server" ID="lbltype" Text='<%# Bind("type")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Status" SortExpression="expense_status">
                                                     <ItemTemplate>
-                                                        <asp:Label runat="server" ID="invoice" Text='<%# Bind("expense_status")%>'></asp:Label>
+                                                        <asp:Label runat="server" ID="lblstatu" Text='<%# Bind("expense_status")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
+                                                <asp:TemplateField HeaderText="Action">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="editrwr" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("expense_id")%>'><img src="Images/123.png"/></asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit551" CommandName="Delete" OnClientClick="return confirm('Are you sure want to delete?');"><img src="Images/delete_10781634.png" height="25" width="25" /> </asp:LinkButton>
+                                                        <asp:LinkButton ID="lnkEdit" runat="server"
+                                                            OnCommand="edit_Command"
+                                                            CommandArgument='<%# Eval("expense_id") %>'
+                                                            Text="Edit"
+                                                            CssClass="btn btn-primary btn-sm">
+                    <i class="fa fa-edit"></i> Edit
+                                                        </asp:LinkButton>
+
+                                                        <asp:LinkButton ID="lnkDelete" runat="server"
+                                                            CommandName="Delete"
+                                                            CommandArgument='<%# Eval("expense_id") %>'
+                                                            Text="Delete"
+                                                            CssClass="btn btn-danger btn-sm"
+                                                            OnClientClick="return confirm('Are you sure you want to delete this expense?');">
+                    <i class="fa fa-trash"></i> Delete
+                                                        </asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
@@ -160,7 +176,6 @@
                         </div>
                     </ContentTemplate>
                     <Triggers>
-
                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                     </Triggers>
                 </asp:UpdatePanel>
@@ -341,7 +356,7 @@
                                             <div class="form-group">
                                                 <div class="row ">
                                                     <div class="col-sm-6">
-                                                        <asp:CheckBox Visible="false" ID="add_chk" runat="server" Text="Adding Maintanance" Width="200px" />
+                                                        <asp:CheckBox Visible="false" ID="add_chk" runat="server" Text="Adding Maintenance" Width="200px" />
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <asp:Label ID="Label10" runat="server" Text="Tax"></asp:Label>
@@ -444,8 +459,9 @@
                                     </ContentTemplate>
 
                                     <Triggers>
-                                         <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+                                        <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
                                         <asp:AsyncPostBackTrigger ControlID="btn_confirm" EventName="Click" />
+                                        <asp:AsyncPostBackTrigger ControlID="save" EventName="ServerClick" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </div>
@@ -455,7 +471,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <center>
-                                            <asp:Button ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
+                                            <asp:Button OnClientClick="disableSaveButtonIfValid();" ID="btn_save" type="button-submit" runat="server" Text="Save" OnClick="btn_save_Click" ValidationGroup="g1" class="btn btn-primary" />
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
 

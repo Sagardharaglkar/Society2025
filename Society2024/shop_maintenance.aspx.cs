@@ -32,7 +32,7 @@ namespace Society
             {
                 //filldrop();
 
-                String str1 = "SELECT  * FROM  ledger";
+                String str1 = "SELECT  * FROM  ledger where society_id ='" + society_id.Value + "'";
                 repeater.fill_list(Repeater1, str1);
 
                 shop_maintenance_GridBind();

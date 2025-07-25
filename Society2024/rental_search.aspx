@@ -767,6 +767,9 @@
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="GridView1" EventName="RowCommand" />
+
+                                    <asp:PostBackTrigger ControlID="btn_photo_upload" />
+                                    <asp:PostBackTrigger ControlID="btnotice_id_upload" />
                                 </Triggers>
 
                             </asp:UpdatePanel>
@@ -791,7 +794,15 @@
 
         </div>
     </div>
+        <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
     <script>
 

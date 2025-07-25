@@ -121,7 +121,7 @@ namespace Society
             society.Sql_Operation = operation;
             society.Society_Id = society_id.Value;
             society.Name = txt_name.Text;
-            society.Establish_Date = Convert.ToDateTime(txt_es_date.Text.ToString());
+            //society.Establish_Date = Convert.ToDateTime(txt_es_date.Text.ToString());
             society.Registration_No = txt_registration.Text;
             society.Off_Address1 = txt_off_address1.Text;
             society.Off_Address2 = txt_off_address2.Text;
@@ -153,7 +153,7 @@ namespace Society
             (society_master_id.Value) = result.society_master_id.ToString();
             society_id.Value = result.Society_Id;
             txt_name.Text = result.Name;
-            txt_es_date.Text = result.Establish_Date.ToString("yyyy-MM-dd");
+            //txt_es_date.Text = result.Establish_Date.ToString("yyyy-MM-dd");
             txt_registration.Text = result.Registration_No;
             txt_off_address1.Text = result.Off_Address1;
             txt_off_address2.Text = result.Off_Address2;

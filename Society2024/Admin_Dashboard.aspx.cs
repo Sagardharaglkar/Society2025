@@ -183,7 +183,7 @@ namespace Society2024
             if (result.Rows.Count > 0)
             {
                 maxPriceHidden.Value = result.AsEnumerable().Max(row => row.Field<decimal>("amount")).ToString();
-                minPriceHidden.Value = result.AsEnumerable().Min(row => row.Field<decimal>("amount")).ToString();
+                minPriceHidden.Value = (0).ToString();
 
             }
 

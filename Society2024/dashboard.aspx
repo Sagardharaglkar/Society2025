@@ -653,7 +653,7 @@
                     <div class="card-body update-card">
                         <asp:GridView Width="100%" OnRowCommand="Updates_RowCommand" ID="Updates" runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="None" EmptyDataText="No Updates" SelectedRowStyle-Width="100">
                             <Columns>
-
+                              
                                 <asp:TemplateField HeaderText="Building" ItemStyle-Width="100%" SortExpression="name">
                                     <ItemTemplate>
                                         <asp:LinkButton

@@ -45,7 +45,12 @@ namespace Society
                 Allbound();
             }
         }
-
+        protected void ClearGridView2()
+        {
+            ViewState["user_data"] = null;
+            GridView3.DataSource = null;
+            GridView3.DataBind();
+        }
         protected void Allbound()
         {
             String str1 = "Select vendor_id,v_name from vendor_master where society_id='" + society_id.Value + "'";
@@ -346,9 +351,13 @@ namespace Society
 
         protected void txt_amount_TextChanged(object sender, EventArgs e)
         {
+            if (txt_amount.Text != "")
+            {
+
             txt_tax.Text = (Decimal.Parse(txt_amount.Text) / 100).ToString();
             //txt_tds.Text = (Decimal.Parse(txt_amount.Text) * 0.10m).ToString();
             txt_famount.Text = (Decimal.Parse(txt_tax.Text) + Decimal.Parse(txt_amount.Text)).ToString();
+            }
 
         }
 
@@ -647,9 +656,22 @@ namespace Society
 
         }
 
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Custom")
+            {
+                edit_Command(sender, e); // This works fine
+            }
+        }
+
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
 
+        }
+
+        protected void Unnamed_ServerClick(object sender, EventArgs e)
+        {
+            ClearGridView2();
         }
     }
 }

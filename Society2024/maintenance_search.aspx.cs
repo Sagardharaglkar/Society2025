@@ -519,6 +519,7 @@ namespace Society
                 else
                 {
                     BtnPanel.Visible = false;
+                    lblMsg.Text = "No maintanance Added!";
                 }
                     dt1 = result;
                 ViewState["expenseData"] = dt1;
@@ -542,7 +543,8 @@ namespace Society
 
                 foreach (DataRow row in dt1.Rows)
                 {
-                    row["amount"] = Convert.ToDecimal(row["f_amount"].ToString()) / flat.Flat;
+                    int count = flat.Flat == 0 ? 1 : flat.Flat;
+                    row["amount"] = Convert.ToDecimal(row["f_amount"].ToString()) / count;
 
                  
                 }

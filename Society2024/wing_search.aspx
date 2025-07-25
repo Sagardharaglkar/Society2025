@@ -190,7 +190,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="30">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandName="Update" CommandArgument='<%# Bind("wing_id")%>'>
+                                                        <asp:LinkButton runat="server" ID="edit" OnCommand="edit_Command" CommandArgument='<%# Bind("wing_id")%>'>
                                                          <img src="Images/123.png" /></asp:LinkButton>
                                                         <%-- <asp:Label ID="addr" runat="server" Text='<%# Bind("w_name")%>'></asp:Label>-  NavigateUrl='<%# "wing_search.aspx?w_id=" + Eval("w_id")%>' --%>
                                                     </ItemTemplate>

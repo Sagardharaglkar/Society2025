@@ -363,7 +363,7 @@
                                             </div>
 
                                             <asp:Button ID="btnAdd" runat="server" Text="Add New" UseSubmitBehavior="true" ValidationGroup="g1" OnClick="btnAdd_Click" />
-
+                                            <asp:Label runat="server" ID="lblMsg"></asp:Label>
 
 
                                             <div class="form-group">

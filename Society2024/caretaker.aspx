@@ -122,9 +122,6 @@
                         <asp:HiddenField ID="society_id" runat="Server"></asp:HiddenField>
                         <asp:HiddenField ID="wing_id" runat="Server"></asp:HiddenField>
 
-                        <asp:HiddenField ID="building_wing_id" runat="server" />
-                        <asp:HiddenField ID="doc_id" runat="server" />
-                        <asp:HiddenField ID="state_id" runat="server" />
 
                                 <div class="form-group">
             <div class="row">
@@ -239,7 +236,10 @@
                                 </div>
                                 <asp:UpdatePanel ID="upnlCountry" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                                        
+                        <asp:HiddenField ID="building_wing_id" runat="server" />
+                        <asp:HiddenField ID="doc_id" runat="server" />
+                        <asp:HiddenField ID="state_id" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
 

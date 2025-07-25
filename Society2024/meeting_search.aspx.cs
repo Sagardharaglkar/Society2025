@@ -204,9 +204,9 @@ namespace Society
         {
             string id = e.CommandArgument.ToString();
             meet_id.Value = id;
+            //Meeting_Gridbind();
             runproc("Select");
-            Meeting_Gridbind();
-           
+            //upnlCountry.Update();
             btn_delete.Visible = true;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "openModal();", true);

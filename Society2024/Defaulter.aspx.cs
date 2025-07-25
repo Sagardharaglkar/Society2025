@@ -133,8 +133,9 @@ namespace Society2024
             {
                 ViewState["dirState"] = result;
                 ViewState["sortdr"] = "Asc";
+                result.Compute("Sum(due)", string.Empty).ToString();
             }
-            result.Compute("Sum(due)", string.Empty).ToString();
+           
             GridView8.DataSource = result;
             GridView8.DataBind();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Refocus", "refocusAfterPostback();", true);
@@ -151,8 +152,9 @@ namespace Society2024
             {
                 ViewState["dirState"] = result;
                 ViewState["sortdr"] = "Asc";
+                lbl_due.Text = result.Compute("Sum(due)", string.Empty).ToString();
             }
-            lbl_due.Text = result.Compute("Sum(due)", string.Empty).ToString();
+            
 
         }
         protected void GridView8_Sorting(object sender, GridViewSortEventArgs e)

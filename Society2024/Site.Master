@@ -264,7 +264,7 @@
                                         <div class="collapse-inner">
                                             <a href="Admin_dashboard.aspx">Admin Dashboard</a>
                                             <a href="society_charges.aspx">Society Charges</a>
-                                            <a href="society_charges_monthwise.aspx">Society Charges Monthwise</a>
+                                            <%--<a href="society_charges_monthwise.aspx">Society Charges Monthwise</a>--%>
                                         </div>
                                     </div>
                                 </li>
@@ -632,4 +632,63 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        console.log("hello")
+        const fileInput = document.getElementById('fileInput');
+        const profileImage = document.getElementById('profileImage2');
+        const cropModal = document.getElementById('cropModal');
+        const preview = document.getElementById('preview');
+        let cropper;
+            
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                console.log("showing")
+                preview.src = reader.result;
+                cropModal.style.display = 'flex';
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(preview, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    dragMode: 'move',
+                    responsive: true,
+                    zoomable: true,
+                });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function closeModal() {
+            cropModal.style.display = 'none';
+            cropper.destroy();
+        }
+
+        function uploadCroppedImage() {
+            const canvas = cropper.getCroppedCanvas({
+                width: 150,
+                height: 150,
+            });
+
+            const dataUrl = canvas.toDataURL('image/png');
+            const ownerId = document.getElementById('<%= userID.ClientID %>').value;
+            // Update image preview
+            profileImage.src = dataUrl;
+            closeModal();
+
+            // Send to server with imageData and ownerId
+            fetch('UploadImageHandler.ashx', {
+                method: 'POST',
+                body: JSON.stringify({ imageData: dataUrl, ownerId: ownerId }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.text())
+                .then(data => console.log("Server:", data))
+                .catch(error => console.error("Upload failed:", error));
+        }
+
+    </script>
 </body>

@@ -268,10 +268,7 @@
                                             </div>
                                         </div>
 
-
                                         <asp:TextBox ID="editor1" runat="server" TextMode="MultiLine" Width="100%" CssClass="ckeditor" Rows="10"></asp:TextBox>
-
-
 
                                     </ContentTemplate>
                                     <Triggers>

@@ -204,7 +204,7 @@
 
                                         <div class=" d-flex">
                                             <!-- "Add" Button -->
-                                            <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target="#p">Add</button>
+                                            <button type="button" class="btn btn-primary me-2" data-toggle="modal" data-target="#edit_model">Add</button>
 
                                             <!-- "Print" Button -->
                                             <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />

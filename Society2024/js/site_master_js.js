@@ -1,62 +1,18 @@
-﻿
-const fileInput = document.getElementById('fileInput');
-const profileImage = document.getElementById('profileImage2');
-const cropModal = document.getElementById('cropModal');
-const preview = document.getElementById('preview');
-let cropper;
+﻿console.log("js file is attached!!!!!!!!!")
 
-fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-        console.log("showing")
-        preview.src = reader.result;
-        cropModal.style.display = 'flex';
-        if (cropper) cropper.destroy();
-        cropper = new Cropper(preview, {
-            aspectRatio: 1,
-            viewMode: 1,
-            dragMode: 'move',
-            responsive: true,
-            zoomable: true,
-        });
-    };
-    reader.readAsDataURL(file);
-});
+Sys.Application.add_load(function () {
+    document.addEventListener("click", function (event) {
+        var calendar = $find("calendarExt"); // Use the BehaviorID here
+        var calendarElement = document.getElementById("CalendarExtender1");
 
-function closeModal() {
-    cropModal.style.display = 'none';
-    cropper.destroy();
-}
-
-function uploadCroppedImage() {
-    const canvas = cropper.getCroppedCanvas({
-        width: 150,
-        height: 150,
-    });
-
-    const dataUrl = canvas.toDataURL('image/png');
-    const ownerId = document.getElementById("<%= userID.ClientID %>").value;
-
-    // Update image preview
-    profileImage.src = dataUrl;
-    closeModal();
-
-    // Send to server with imageData and ownerId
-    fetch('UploadImageHandler.ashx', {
-        method: 'POST',
-        body: JSON.stringify({ imageData: dataUrl, ownerId: ownerId }),
-        headers: {
-            'Content-Type': 'application/json'
+        // Check if click is outside the calendar and textbox
+        if (calendar && !event.target.closest("#txt_search") &&
+            !event.target.closest("#btn_calendar") &&
+            !document.querySelector(".ajax__calendar_container")?.contains(event.target)) {
+            calendar.hide();
         }
-    })
-        .then(response => response.text())
-        .then(data => console.log("Server:", data))
-        .catch(error => console.error("Upload failed:", error));
-}
-
-
+    });
+});
 {/*----------------------------------------------------------------------------------------------------------------------------------------*/ }
 const div1 = document.getElementById('userDropdown');
 const div2 = document.getElementById('userDropdown2');

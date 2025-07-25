@@ -37,13 +37,13 @@ namespace Society
         }
         protected void Allbound()
         {
-            String str1 = "Select wing_id,(name + w_name) as name from global_society_view";
+            String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id ='"+society_id.Value+"'";
             repeater.fill_list(Repeater1, str1);
 
-            String str2 = "Select *  from doc_master";
+            String str2 = "Select * from doc_master where society_id ='"+society_id.Value+"'";
             repeater.fill_list(Repeater2, str2);
 
-            String str3 = "Select *  from state";
+            String str3 = "Select *  from state ";
             repeater.fill_list(Repeater3, str3);
         }
         protected void CategoryRepeater_ItemCommand1(object source, RepeaterCommandEventArgs e)
