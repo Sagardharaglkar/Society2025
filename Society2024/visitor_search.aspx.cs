@@ -38,6 +38,7 @@ namespace Society
             }
             else
                 society_id.Value = Session["society_id"].ToString();
+            society_name.Value = Session["society_name"].ToString();
             if (!IsPostBack)
             {
 

@@ -69,22 +69,13 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField visitor_flat_id;
 
         /// <summary>
-        /// searchDateFrom control.
+        /// society_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField searchDateFrom;
-
-        /// <summary>
-        /// SearchDateTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField SearchDateTo;
+        protected global::System.Web.UI.WebControls.HiddenField society_name;
 
         /// <summary>
         /// txt_search control.
@@ -130,6 +121,24 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
+
+        /// <summary>
+        /// searchDateFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField searchDateFrom;
+
+        /// <summary>
+        /// SearchDateTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SearchDateTo;
 
         /// <summary>
         /// lbl_date control.

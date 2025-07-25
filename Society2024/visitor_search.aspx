@@ -164,8 +164,7 @@
                         <asp:HiddenField runat="server" ID="building_id" />
                         <asp:HiddenField ID="visitor_flat_id" runat="server" />
 
-                        <asp:HiddenField ID="searchDateFrom" runat="server" />
-                        <asp:HiddenField ID="SearchDateTo" runat="server" />
+                        <asp:HiddenField ID="society_name" runat="server" />
 
                         <div class="form-group">
                             <div class="row">
@@ -300,7 +299,8 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-
+                                                                <asp:HiddenField ID="searchDateFrom" runat="server" />
+                        <asp:HiddenField ID="SearchDateTo" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-3">
@@ -562,49 +562,67 @@
             </div>
             </div>
         </div>
-    
+    <!-- Add this empty container somewhere in your page, outside modal -->
+<div id="pdf-clone-container" style="position: absolute; top: -10000px; left: -10000px;"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
         async function downloadReceipt() {
-            console.log("pdf modal");
-            const element = document.querySelector("#pdfmodal .modal-body").innerHTML;
-            //const newWindow = window.open('', '', 'width=800,height=600');
-            //newWindow.document.write('<html><head><title>Receipt</title></head><body>');
-            //newWindow.document.write(printContents);
-            //newWindow.document.write('</body></html>');
-            //newWindow.document.close();
-            //newWindow.print();
             const { jsPDF } = window.jspdf;
 
-            // Get the content to convert — here we target the GridView
-            //const element = document.getElementById("   pdfmodal").innerHTML;
+            const sourceElement = document.querySelector("#pdfmodal .modal-body");
+            const cloneContainer = document.getElementById("pdf-clone-container");
 
-            if (!element) {
-                alert("No data available to download.");
+            const society = document.getElementById("<%= society_name.ClientID %>").value;
+            console.log(society);
+            if (!society) {
+                return;
+            }
+            if (!sourceElement || !cloneContainer) {
+                alert("Cannot find content to export.");
                 return;
             }
 
-            const canvas = await html2canvas(element, {
-                scale: 2,
-                useCORS: true
-            });
+            // Clone modal-body into offscreen div
+            cloneContainer.innerHTML = "";
+            const clone = sourceElement.cloneNode(true);
+            cloneContainer.appendChild(clone);
 
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'pt', 'a4');
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.getHeight();
+            try {
+                const canvas = await html2canvas(clone, {
+                    scale: 2,
+                    useCORS: true
+                });
 
-            // Calculate width and height for the image in the PDF
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfWidth = pageWidth;
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                const imgData = canvas.toDataURL("image/png");
+                const pdf = new jsPDF("p", "pt", "a4");
 
-            pdf.addImage(imgData, 'PNG', 20, 20, pdfWidth - 40, pdfHeight);
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const margin = 40;
+                const title = "Visitor Details - " + society;
 
-            pdf.save("VisitorReport.pdf");
+                // ✅ Add Centered Heading
+                pdf.setFontSize(16);
+                pdf.setFont("helvetica", "bold");
+                const textWidth = pdf.getTextWidth(title);
+                const x = (pageWidth - textWidth) / 2;
+                pdf.text(title, x, 40); // Y position = 40pt from top
+
+                // ✅ Add Image Below Heading
+                const imgWidth = pageWidth - margin * 2;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                const imageY = 60; // leave room for heading
+
+                pdf.addImage(imgData, "PNG", margin, imageY, imgWidth, imgHeight);
+                pdf.save("VisitorReport.pdf");
+            } catch (err) {
+                console.error("Error generating PDF:", err);
+                alert("Failed to generate PDF.");
+            }
         }
+
         function initDropdownEvents() {
 
             const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");
