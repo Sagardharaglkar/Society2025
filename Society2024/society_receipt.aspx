@@ -2,6 +2,25 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .modal-content {
+    border-radius: 10px;
+}
+
+.modal-body p {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+        </style>
+
     <h2>Receipt Management</h2>
     <asp:HiddenField runat="server" id="Society_id"/>
     <div>
@@ -102,7 +121,9 @@
         <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control d-inline-block mr-2" Style="width: 150px;" Text="0"></asp:TextBox>
 
     <asp:Button ID="pay" runat="server" Text="Pay" CssClass="btn btn-success payBtn"
-    OnClientClick="return validateAndShowPaymentModal();" />
+    OnClientClick="return validateAndShowPaymentModal();"
+    data-toggle="tooltip" title="Please select at least one month to pay." />
+
 
     </div>
 </div>
@@ -234,37 +255,59 @@
     </div>
 </div>
        </div>
-    <!-- Modal for Viewing Receipt -->
+    <!-- Payment Receipt Modal -->
 <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="receiptModalLabel">Payment Receipt</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg border-0">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="receiptModalLabel">
+                    <i class="fas fa-check-circle mr-2"></i>Payment Successful
+                </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-              <p><strong>Date:</strong> <asp:Label ID="lblModalDate" runat="server" /></p>
-<p><strong>Amount:</strong> ₹<asp:Label ID="lblModalAmount" runat="server" /></p>
-<p><strong>Mode:</strong> <asp:Label ID="lblModalMode" runat="server" /></p>
-<p><strong>Transaction Ref:</strong> <asp:Label ID="lblModalTxnRef" runat="server" /></p>
-<p><strong>UPI ID:</strong> <asp:Label ID="lblModalUpiId" runat="server" /></p>
 
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-receipt fa-3x text-success mb-2"></i>
+                    <h4 class="font-weight-bold">Payment Receipt</h4>
+                </div>
+                <hr>
+                <p><strong>Date:</strong> <asp:Label ID="lblModalDate" runat="server" /></p>
+                <p><strong>Amount:</strong> ₹<asp:Label ID="lblModalAmount" runat="server" /></p>
+                <p><strong>Mode:</strong> <asp:Label ID="lblModalMode" runat="server" /></p>
+                <p><strong>Transaction Ref:</strong> <asp:Label ID="lblModalTxnRef" runat="server" /></p>
+                <p><strong>UPI ID:</strong> <asp:Label ID="lblModalUpiId" runat="server" /></p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+
+            <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+    
+    <div class="d-flex gap-2">
+        <button type="button" class="btn btn-success" onclick="downloadReceipt()">
+            <i class="fas fa-download me-1"></i> Download Receipt
+        </button>
+
+        <button type="button" class="btn btn-primary" onclick="exportToExcel()">
+            <i class="fas fa-file-excel me-1"></i> Export to Excel
+        </button>
+    </div>
+</div>
+
         </div>
     </div>
 </div>
 
 
 
+
     <!-- Optional: Bootstrap for styling -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     function setAndShowPaymentModal() {
         var pendingAmount = document.getElementById('<%= TextBox1.ClientID %>').value;
@@ -291,6 +334,9 @@
     }
 
     $(document).ready(function () {
+        // Initialize tooltips once
+        $('[data-toggle="tooltip"]').tooltip();
+
         var ddl = $('#<%= ddlPaymentMode.ClientID %>');
 
         ddl.change(function () {
@@ -320,17 +366,7 @@
         });
     });
 
-    function validateAndShowPaymentModal() {
-        var amount = parseFloat(document.getElementById('<%= TextBox1.ClientID %>').value);
 
-        if (isNaN(amount) || amount <= 0) {
-            alert('Please select at least one item to pay.');
-            return false; // Stop execution
-        }
-
-        setAndShowPaymentModal();
-        return false; // Prevent postback
-    }
 
     function showReceiptDetails(receiptId) {
         // Make an AJAX request to the server to get the receipt details
@@ -363,9 +399,70 @@
         });
     }
 
+    function downloadReceipt() {
+        const printContents = document.querySelector("#receiptModal .modal-body").innerHTML;
+        const newWindow = window.open('', '', 'width=800,height=600');
+        newWindow.document.write('<html><head><title>Receipt</title></head><body>');
+        newWindow.document.write(printContents);
+        newWindow.document.write('</body></html>');
+        newWindow.document.close();
+        newWindow.print();
+    }
+
+    function exportToExcel() {
+        const data = [
+            ["Date", document.getElementById("<%= lblModalDate.ClientID %>").innerText],
+            ["Amount", document.getElementById("<%= lblModalAmount.ClientID %>").innerText],
+            ["Mode", document.getElementById("<%= lblModalMode.ClientID %>").innerText],
+            ["Transaction Ref", document.getElementById("<%= lblModalTxnRef.ClientID %>").innerText],
+            ["UPI ID", document.getElementById("<%= lblModalUpiId.ClientID %>").innerText]
+        ];
+
+        let csvContent = "data:text/csv;charset=utf-8,"
+            + data.map(e => e.join(",")).join("\n");
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Payment_Receipt.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function validateAndShowPaymentModal() {
+        var payBtn = $('#<%= pay.ClientID %>');
+        var amount = parseFloat(document.getElementById('<%= TextBox1.ClientID %>').value);
+
+        // Always hide the tooltip first
+        payBtn.tooltip('hide');
+
+        // Check if the amount is invalid (NaN or <= 0)
+        if (isNaN(amount) || amount <= 0) {
+            // Show the tooltip with an error message
+            payBtn.attr('data-original-title', 'Please select at least one month to pay.')
+                .tooltip('show');
+
+            // Auto-hide the tooltip after 2 seconds
+            setTimeout(function () {
+                payBtn.tooltip('hide');
+            }, 2000);
+
+            return false; // Prevent modal from opening
+        }
+
+        // If the amount is valid, remove the tooltip (if any)
+        payBtn.tooltip('dispose');
+
+        // Now show the payment modal
+        setAndShowPaymentModal();
+
+        return false; // Prevent postback
+    }
+
+
+
+
 </script>
-
-
-
 
 </asp:Content>

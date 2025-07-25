@@ -138,7 +138,7 @@
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Status" SortExpression="expense_status">
                                                     <ItemTemplate>
-                                                        <asp:Label runat="server" ID="invoice" Text='<%# Bind("expense_status")%>'></asp:Label>
+                                                        <asp:Label runat="server" ID="invoice2" Text='<%# Bind("expense_status")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
