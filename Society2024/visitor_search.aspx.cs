@@ -100,6 +100,8 @@ namespace Society
             visitor.Sql_Operation = "Grid_Show";
             visitor.Society_Id = society_id.Value;
             dt = BL_Visitor.getVisitorDetails(visitor);
+            GridView2.DataSource = dt;
+            GridView2.DataBind();
             GridView1.DataSource = dt;
             ViewState["dirState"] = dt;
             GridView1.DataBind();

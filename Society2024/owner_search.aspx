@@ -127,8 +127,7 @@
                         </th>
                     </tr>
                 </table>
-                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
+ 
 
 
                         <%--                        <div class="form-group">
@@ -156,6 +155,8 @@
                                 </div>
                             </div>
                         </div>--%>
+                               <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
 
                         <div class="form-group">
                             <div class="row">
@@ -188,11 +189,17 @@
 
                                         &nbsp;&nbsp;
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_model">Add</button>
+                                    <button type="button"
+        class="btn btn-success ms-2"
+        onclick="exportSelectedColumnsToExcel('<%= OwnerGrid.ClientID %>', [0,1,3],)">
+    Export to Excel
+</button>
+
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="row ">
                                 <div class="col-sm-12">
@@ -503,15 +510,6 @@
                                         </div>
 
 
-
-
-
-
-
-
-
-
-
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-3">
@@ -748,6 +746,30 @@
                                             <asp:Button ID="btn_delete" class="btn btn-primary" Visible="false" runat="server" Text="Delete" OnClientClick="return confirm('Are you sure want to delete?');" OnClick="btn_delete_Click" />
                                             <asp:Button ID="btn_close" runat="server" Text="Close" class="btn btn-primary" UseSubmitBehavior="False" OnClientClick="resetForm(); return false;" data-dismiss="modal" />
                                  
+                                            <!-- Export Modal -->
+<div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+        
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exportModalLabel">Export Owner Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        
+            <div class="modal-body">
+                <asp:GridView ID="ExportGrid" runat="server" CssClass="table table-bordered table-striped" AutoGenerateColumns="true" />
+            </div>
+
+            <div class="modal-footer">
+                <asp:Button ID="Button1" runat="server" Text="Export to Excel" CssClass="btn btn-success" OnClick="btnExportToExcel_Click" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
                                         </center>
@@ -845,9 +867,6 @@
             });
         }
 
-
-
-
         function filterSuggestions(className, value) {
             const items = document.querySelectorAll("." + className);
             let matchFound = false;
@@ -911,5 +930,58 @@
         Sys.Application.add_load(initDropdownEvents);
 
 
-    </script>
+       function exportSelectedColumnsToExcel(gridId, selectedColumns = [0, 1, 3], fileName = 'SelectedData.csv', title = "Owner Information") {
+           const table = document.getElementById(gridId);
+           if (!table) {
+               alert("Grid not found!");
+               return;
+           }
+
+           let csv = '';
+
+           // ➕ Add Title
+           csv += `${title}\n\n`;
+
+           // ➕ Get GridView Headers (row 0)
+           const headerRow = table.rows[0];
+           let headerData = [];
+
+           selectedColumns.forEach(index => {
+               if (headerRow.cells[index]) {
+                   let text = headerRow.cells[index].innerText.trim().replace(/,/g, " ");
+                   headerData.push(`"${text}"`);
+               }
+           });
+           csv += headerData.join(",") + "\n";
+
+           // ➕ Loop through data rows
+           for (let i = 1; i < table.rows.length; i++) {
+               const row = table.rows[i];
+               let rowData = [];
+
+               selectedColumns.forEach(index => {
+                   if (row.cells[index]) {
+                       let text = row.cells[index].innerText
+                           .replace(/,/g, " ")
+                           .replace(/\n/g, " ")
+                           .trim();
+                       rowData.push(`"${text}"`);
+                   }
+               });
+
+               csv += rowData.join(",") + "\n";
+           }
+
+           // ➕ Download as CSV
+           const encodedUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+           const link = document.createElement("a");
+           link.setAttribute("href", encodedUri);
+           link.setAttribute("download", fileName);
+           document.body.appendChild(link);
+           link.click();
+           document.body.removeChild(link);
+       }
+   </script>
+
+
 </asp:Content>

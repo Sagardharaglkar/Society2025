@@ -43,6 +43,11 @@ namespace DataAccessLayer.MasterDA
             return login;
         }
 
+        public DataTable single_receipt(Login_Details details)
+        {
+            throw new NotImplementedException();
+        }
+
         public Login_Details generate_token(Login_Details details)
         {
             ICollection<System.Collections.ArrayList> data_item = new List<System.Collections.ArrayList>();

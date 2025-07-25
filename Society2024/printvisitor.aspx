@@ -8,6 +8,28 @@
         <ContentTemplate>
 
             <div style="padding: 15px">
+                <style media="print">
+    #MainContent_Button1,
+    #MainContent_btnPrint,
+    .form-group,
+    .dropdown-container,
+    .suggestion-list {
+        display: none !important;
+    }
+
+    #MainContent_GridView1 {
+        font-size: 12pt;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #MainContent_GridView1 th,
+    #MainContent_GridView1 td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+</style>
+
                 <asp:HiddenField ID="society_id" runat="server" />
                 <asp:HiddenField ID="building_id" runat="server" />
 
@@ -64,6 +86,10 @@
                             </div>
                         </div>
                     </div>
+                    
+                  
+
+
                     <div class="form-group">
                         <div class="row ">
 
@@ -89,14 +115,35 @@
                 <div align="center">
                     <asp:Button ID="Button1" runat="server" Text="Load Report" OnClick="Button1_Click"
                         class="btn btn-primary" Font-Bold="True" />
-                    <br />
+                 
+                    <br /><br />
+                     <asp:Button ID="btnClientPdf" runat="server" Text="Download PDF (Client-Side)" OnClientClick="generatePDF(); return false;" CssClass="btn btn-danger" />
+
+                    <div class="mt-4">
+    <asp:GridView ID="GridView1" runat="server" CssClass="table table-bordered table-striped"
+        AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" EmptyDataText="No data found."
+        HeaderStyle-BackColor="#012970" HeaderStyle-ForeColor="White" Font-Size="Small">
+        
+        <Columns>
+            <asp:BoundField DataField="v_name" HeaderText="Visitor Name" />
+            <asp:BoundField DataField="type" HeaderText="Type" />
+            <asp:BoundField DataField="in_date" HeaderText="Visit Date" DataFormatString="{0:dd-MM-yyyy}" />
+             <asp:BoundField DataField="out_date" HeaderText="Visit Date" DataFormatString="{0:dd-MM-yyyy}" />
+            <asp:BoundField DataField="build_name" HeaderText="Building" />
+            <asp:BoundField DataField="unit" HeaderText="Flat No." />
+        </Columns>
+    </asp:GridView>
+</div>
+
                     <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="69%"></rsweb:ReportViewer>
                 </div>
             </div>
-        </ContentTemplate>
+        </ContentTemplate> 
     </asp:UpdatePanel>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 
 <script>
@@ -148,7 +195,40 @@ function filterSuggestions(className, value) {
         }
     }
 }
- 
+
+  
+    async function generatePDF() {
+        const { jsPDF } = window.jspdf;
+
+        // Get the content to convert — here we target the GridView
+        const element = document.getElementById('<%= GridView1.ClientID %>');
+
+        if (!element) {
+            alert("No data available to download.");
+            return;
+        }
+
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            useCORS: true
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'pt', 'a4');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+
+        // Calculate width and height for the image in the PDF
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pageWidth;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 20, 20, pdfWidth - 40, pdfHeight);
+
+        pdf.save("VisitorReport.pdf");
+    }
+
+
 function setTextBox1(value) {
     document.getElementById("<%= TextBox1.ClientID %>").value = value;
     document.getElementById("RepeaterContainer1").style.display = "none";

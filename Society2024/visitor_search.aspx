@@ -171,7 +171,7 @@
                             <div class="row">
                                 <!-- Search and Calendar Container -->
                                 <div class="col-12">
-                                    <div class="d-flex align-items-center" style="gap:12px;">
+                                    <div class="d-flex align-items-center" style="gap: 12px;">
                                         <div class="search-container">
 
                                             <!-- Search TextBox -->
@@ -208,8 +208,10 @@
 
                                             <!-- "Print" Button -->
                                             <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-                                        </div>
-
+                                       &nbsp;  <button type="button" class="btn btn-success" onclick="downloadReceipt()">
+            <i class="fas fa-download me-1"></i> Download Report       </button>
+                                            </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -530,14 +532,79 @@
                         </div>
                     </div>
                 </div>
+
+                <%--                PDF MODel--%>
+                <div class="modal fade bs-example-modal-sm" id="pdfmodal" role="form" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+                    <div class="modal-dialog modal-sm-4">
+                        <div class="modal-content resized-model">
+                            <div class="modal-header">
+                                <h4 class="modal-title" ><strong>Visitor Details</strong></h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <asp:GridView ID="GridView2" runat="server" CssClass="table table-bordered table-striped"
+                                    AutoGenerateColumns="false" ShowHeaderWhenEmpty="true" EmptyDataText="No data found."
+                                    HeaderStyle-BackColor="#012970" HeaderStyle-ForeColor="White" Font-Size="Small">
+
+                                    <Columns>
+                                        <asp:BoundField DataField="v_name" HeaderText="Visitor Name" />
+                                        <asp:BoundField DataField="type" HeaderText="Type" />
+                                        <asp:BoundField DataField="in_date" HeaderText="Visit Date" DataFormatString="{0:dd-MM-yyyy}" />
+                                        <asp:BoundField DataField="out_date" HeaderText="Visit Date" DataFormatString="{0:dd-MM-yyyy}" />
+                                        <asp:BoundField DataField="build_name" HeaderText="Building" />
+                                        <asp:BoundField DataField="unit" HeaderText="Flat No." />
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
-    </div>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
+        async function downloadReceipt() {
+            console.log("pdf modal");
+            const element = document.querySelector("#pdfmodal .modal-body").innerHTML;
+            //const newWindow = window.open('', '', 'width=800,height=600');
+            //newWindow.document.write('<html><head><title>Receipt</title></head><body>');
+            //newWindow.document.write(printContents);
+            //newWindow.document.write('</body></html>');
+            //newWindow.document.close();
+            //newWindow.print();
+            const { jsPDF } = window.jspdf;
 
+            // Get the content to convert — here we target the GridView
+            //const element = document.getElementById("   pdfmodal").innerHTML;
+
+            if (!element) {
+                alert("No data available to download.");
+                return;
+            }
+
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                useCORS: true
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            // Calculate width and height for the image in the PDF
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pageWidth;
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            pdf.addImage(imgData, 'PNG', 20, 20, pdfWidth - 40, pdfHeight);
+
+            pdf.save("VisitorReport.pdf");
+        }
         function initDropdownEvents() {
 
             const textBox1 = document.getElementById("<%= TextBox1.ClientID %>");

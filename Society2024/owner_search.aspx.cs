@@ -19,6 +19,7 @@ using BusinessLogic.BL;
 using Microsoft.Ajax.Utilities;
 using System.Web.UI.HtmlControls;
 using static System.Windows.Forms.LinkLabel;
+using ClosedXML.Excel;
 
 namespace Society
 {
@@ -44,7 +45,7 @@ namespace Society
                 Owner_Gridbind();
 
                 AllRepeater();
-               
+
 
             }
         }
@@ -120,7 +121,7 @@ namespace Society
             }
 
         }
- 
+
         protected void edit_Command(object sender, CommandEventArgs e)
         {
             string id = e.CommandArgument.ToString();
@@ -159,7 +160,7 @@ namespace Society
         }
         protected void btn_search_Click(object sender, EventArgs e)
         {
-            
+
             owner.Sql_Operation = "search";
             owner.Name = txt_search.Text;
             owner.Society_Id = society_id.Value;
@@ -169,7 +170,7 @@ namespace Society
             OwnerGrid.DataBind();
 
         }
-        
+
         public string runproc_save(string operation)
         {
             string type = "Owner";
@@ -196,11 +197,11 @@ namespace Society
             owner.Type = type;
             owner.Doc_Id = Convert.ToInt32(doc_id_id.Value); // Set docid  
 
-           
+
             var result = bL_Owner.updateOwnerDetails(owner);
 
             owner_id.Value = result.owner_id.ToString();
-           
+
             return result.Sql_Result;
         }
 
@@ -251,7 +252,7 @@ namespace Society
 
                 listofuploadedfiles.Text = Path.GetFileName(result.Photo_Name);
                 listofuploadedfiles1.Text = Path.GetFileName(result.Id_Proof);
-               
+
             }
             AllRepeater();
             String str1 = "Select wing_id,(name + w_name) as name from global_society_view where society_id='" + society_id.Value + "'";
@@ -260,11 +261,11 @@ namespace Society
 
 
         protected void btn_save_Click1(object sender, EventArgs e)
-         {
-           string str = runproc_save("Update");
-            if (str == "Done") 
-            ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
-             else
+        {
+            string str = runproc_save("Update");
+            if (str == "Done")
+                ClientScript.RegisterStartupScript(this.GetType(), "Pop", "SuccessEntry();", true);
+            else
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "Pop", "FailedEntry();", true);
 
@@ -272,7 +273,7 @@ namespace Society
         }
 
         protected void btn_photo_upload_Click(object sender, EventArgs e)
-        { 
+        {
             string createfolder = Server.MapPath("~/Documents") + "/" + txt_name.Text + "/";
 
 
@@ -458,7 +459,7 @@ namespace Society
             Owner_Gridbind();
         }
 
-      
+
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
 
@@ -516,6 +517,54 @@ namespace Society
             }
         }
 
+
+        protected void btnExportToExcel_Click(object sender, EventArgs e)
+        {
+            DataTable dt = ViewState["dirState"] as DataTable;
+            if (dt == null || dt.Rows.Count == 0)
+                return;
+
+            using (XLWorkbook workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Owner Report");
+
+                // Add title
+                worksheet.Cell("A1").Value = "Owner Details Report";
+                worksheet.Cell("A1").Style.Font.Bold = true;
+                worksheet.Cell("A1").Style.Font.FontSize = 16;
+                worksheet.Range("A1:E1").Merge().Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Insert table starting from A3
+                var table = worksheet.Cell(3, 1).InsertTable(dt, "OwnerData", true);
+
+                var headerRow = table.HeadersRow();
+                headerRow.Style.Font.Bold = true;
+                headerRow.Style.Fill.BackgroundColor = XLColor.LightSteelBlue;
+                headerRow.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Optional: Auto-size columns
+                worksheet.Columns().AdjustToContents();
+
+                // Prepare the response
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    stream.Position = 0;
+
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    Response.AddHeader("content-disposition", "attachment; filename=Owner_Report.xlsx");
+                    Response.BinaryWrite(stream.ToArray());
+                    Response.End();  // Finalize
+                }
+            }
+        }
+
+
+
+
+
         protected void Repeater5_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -525,6 +574,8 @@ namespace Society
                     var link = (LinkButton)e.Item.FindControl("lnkCategory");
                     if (link.CommandArgument == doc_id_id.Value)
                         TextBox5.Text = link.Text;
+
+
                 }
             }
         }
