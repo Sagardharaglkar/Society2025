@@ -51,24 +51,6 @@ namespace Society
         protected global::System.Web.UI.WebControls.HiddenField dateto;
 
         /// <summary>
-        /// building_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField building_id;
-
-        /// <summary>
-        /// visitor_flat_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField visitor_flat_id;
-
-        /// <summary>
         /// society_name control.
         /// </summary>
         /// <remarks>
@@ -121,6 +103,24 @@ namespace Society
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
+
+        /// <summary>
+        /// building_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField building_id;
+
+        /// <summary>
+        /// visitor_flat_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField visitor_flat_id;
 
         /// <summary>
         /// searchDateFrom control.

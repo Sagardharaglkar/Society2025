@@ -161,8 +161,7 @@
                         <asp:HiddenField ID="society_id" runat="server" />
                         <asp:HiddenField runat="server" ID="datefrom" />
                         <asp:HiddenField runat="server" ID="dateto" />
-                        <asp:HiddenField runat="server" ID="building_id" />
-                        <asp:HiddenField ID="visitor_flat_id" runat="server" />
+
 
                         <asp:HiddenField ID="society_name" runat="server" />
 
@@ -207,10 +206,12 @@
 
                                             <!-- "Print" Button -->
                                             <asp:Button ID="btn_print" runat="server" Text="Print" OnClick="btn_print_Click" UseSubmitBehavior="False" CssClass="btn btn-primary" />
-                                       &nbsp;  <button type="button" class="btn btn-success" onclick="downloadReceipt()">
-            <i class="fas fa-download me-1"></i> Download Report       </button>
-                                            </div>
-                                       
+                                            &nbsp; 
+                                            <button type="button" class="btn btn-success" onclick="downloadReceipt()">
+                                                <i class="fas fa-download me-1"></i>Download Report      
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -299,8 +300,10 @@
 
                                 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                                                <asp:HiddenField ID="searchDateFrom" runat="server" />
-                        <asp:HiddenField ID="SearchDateTo" runat="server" />
+                                        <asp:HiddenField runat="server" ID="building_id" />
+                                        <asp:HiddenField ID="visitor_flat_id" runat="server" />
+                                        <asp:HiddenField ID="searchDateFrom" runat="server" />
+                                        <asp:HiddenField ID="SearchDateTo" runat="server" />
                                         <div class="form-group">
                                             <div class="row ">
                                                 <div class="col-sm-3">
@@ -452,7 +455,7 @@
                                                 </div>
 
                                                 <div class="col-sm-3">
-                                                    <asp:Label ID="Label12" runat="server" Text="Vehical No"></asp:Label>
+                                                    <asp:Label ID="Label12" runat="server" Text="Vehicle No"></asp:Label>
                                                     <asp:Label ID="Label13" runat="server" Font-Bold="True" Font-Size="Medium" Text=":"></asp:Label>
 
                                                 </div>
@@ -538,7 +541,7 @@
                     <div class="modal-dialog modal-sm-4">
                         <div class="modal-content resized-model">
                             <div class="modal-header">
-                                <h4 class="modal-title" ><strong>Visitor Details</strong></h4>
+                                <h4 class="modal-title"><strong>Visitor Details</strong></h4>
                             </div>
                             <div class="modal-body">
 
@@ -560,10 +563,10 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
     <!-- Add this empty container somewhere in your page, outside modal -->
-<div id="pdf-clone-container" style="position: absolute; top: -10000px; left: -10000px;"></div>
+    <div id="pdf-clone-container" style="position: absolute; top: -10000px; left: -10000px;"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
