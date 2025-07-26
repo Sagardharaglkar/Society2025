@@ -112,16 +112,18 @@
                                 </div>
 
 
+<div class="row mt-3">
+    <div class="col-12 text-center">
+        <asp:Button ID="btn_search" runat="server" class="btn btn-primary mx-2"
+            OnClick="btn_search_Click" ValidationGroup="valid" Text="Search" />
 
-                                <div class="col-sm-1">
-                                    <%-- <i class="fas fa-search"></i>--%>
-                                    <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" ValidationGroup="valid" Text="Search" />
-                                </div>
+        <asp:Button ID="btn_print" runat="server" class="btn btn-primary mx-2"
+            OnClick="btn_print_Click" Text="Print" ValidationGroup="valid" />
 
-                                <div class="col-sm-1">
-
-                                    <asp:Button ID="btn_print" runat="server" class="btn btn-primary" OnClick="btn_print_Click" Text="Print" ValidationGroup="valid"  />
-                                </div>
+        <asp:Button ID="Button1" runat="server" class="btn btn-danger mx-2"
+            OnClick="btn_print_Click" Text="Download report" ValidationGroup="valid" />
+    </div>
+</div>
                             </div>
 
 

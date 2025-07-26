@@ -49,6 +49,9 @@
         <div align="center">
             <asp:Button ID="Button1" runat="server" Text="Load Report" OnClick="Button1_Click"
                 class="btn btn-primary" Font-Bold="True"  />
+
+            <asp:Button ID="Button2" runat="server" Text="Download report" OnClick="Button1_Click"
+                class="btn btn-danger" Font-Bold="True"  />
             <br />
             <br />
 

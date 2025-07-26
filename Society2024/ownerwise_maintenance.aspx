@@ -98,14 +98,14 @@
                             </div>
                         </div>
 
-
+                           &nbsp;&nbsp;&nbsp;&nbsp;
 
                         <center>
-                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Width="150px" Text="Search" UseSubmitBehavior="False" ValidationGroup="g1" />
-
-                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btn_search" runat="server" class="btn btn-primary" OnClick="btn_search_Click" Width="70px" Text="Search" UseSubmitBehavior="False" ValidationGroup="g1" />
                                    
-                                        <asp:Button ID="btn_print" runat="server" class="btn btn-primary" OnClick="btn_print_Click" Text="Print" Width="100px" UseSubmitBehavior="False" ValidationGroup="g1" />
+                                        <asp:Button ID="btn_print" runat="server" class="btn btn-primary" OnClick="btn_print_Click" Text="Print" Width="70px" UseSubmitBehavior="False" ValidationGroup="g1" />
+                                        <asp:Button ID="Button1" runat="server" class="btn btn-danger" OnClick="btn_print_Click" Text="Download reports" Width="150px" UseSubmitBehavior="False" ValidationGroup="g1" />
+
 
                         </center>
 
